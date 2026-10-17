@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Clients · Executive Frame</title>
+  <link rel="icon" href="/assets/brand/mark-slate-small.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/figtree-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/app.css">
+  <script type="module" src="/js/viewer.js"></script>
+  <script type="module" src="/js/preview.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#workspace">Skip to content</a>
+  <div class="viewer" data-menu="closed">
+    <nav class="sidebar" id="sidebar" aria-label="Main">
+      <a class="brand" href="/preview/clients">
+        <img class="brand-mark" src="/assets/brand/mark-slate-small.svg" alt="" width="32" height="32">
+        <span class="brand-name">Executive Frame</span>
+      </a>
+      <ul class="nav">
+        <li><a class="nav-link" href="/preview/clients" aria-current="page">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7.5" cy="7" r="2.75"/><path d="M2.5 16.5c.6-2.6 2.6-4 5-4s4.4 1.4 5 4"/><circle cx="14" cy="7.5" r="2.25"/><path d="M14 12.5c1.9 0 3.2 1.2 3.6 3.5"/></svg>
+          Clients</a></li>
+        <li><a class="nav-link" href="#review">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="12" height="14.5" rx="2"/><path d="M7.5 10.5l1.8 1.8 3.2-3.6"/></svg>
+          To review<span class="nav-count" aria-label="2 drafts to review">2</span></a></li>
+        <li><a class="nav-link" href="#codes">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="10" r="3.25"/><path d="M10.25 10H17.5M14.5 10v3M16.5 10v2"/></svg>
+          Activation codes</a></li>
+        <li><a class="nav-link" href="#library">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5h3.5v12H4zM8.5 4.5H12v12H8.5zM13 5.2l3.2-.8 2.6 11.6-3.2.8z"/></svg>
+          Questionnaire library</a></li>
+      </ul>
+      <div class="sidebar-foot">
+        <p class="t-caption">Practitioner view. Drafts are never shown to clients until you release them.</p>
+      </div>
+    </nav>
+
+    <header class="topbar">
+      <button type="button" class="menu-button" aria-controls="sidebar" aria-expanded="false" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <h1 class="topbar-title">Clients</h1>
+      <div class="topbar-actions">
+        <button type="button" class="account-button" aria-haspopup="menu">
+          <span class="avatar" aria-hidden="true">S</span>
+          <span class="account-name">Sarah</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="workspace" id="workspace" tabindex="-1">
+      <div class="workspace-inner workspace-wide stack-lg">
+        <div class="toolbar">
+          <label class="visually-hidden" for="search">Search clients</label>
+          <input class="input" id="search" type="search" placeholder="Search by name">
+          <button type="button" class="btn btn-primary btn-inline">Issue activation code</button>
+        </div>
+        <p class="t-caption">Sample data for layout review only.</p>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Client</th>
+                <th scope="col">Type</th>
+                <th scope="col">Stage</th>
+                <th scope="col">Questionnaires</th>
+                <th scope="col">Results</th>
+                <th scope="col">Last active</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="#client">Sample client one</a></td>
+                <td><span class="type-dot" data-type="neurodivergent"></span>Neurodivergent</td>
+                <td>Questionnaires</td>
+                <td>1 of 3</td>
+                <td><span class="status status-progress"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"/></svg>Waiting</span></td>
+                <td>Today</td>
+              </tr>
+              <tr>
+                <td><a href="#client">Sample client two</a></td>
+                <td><span class="type-dot" data-type="neurodivergent"></span>Neurodivergent</td>
+                <td>Book feedback</td>
+                <td>3 of 3</td>
+                <td><span class="status status-attention"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="M8 4.2v4.6" stroke="#F2E8D6" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="11.4" r="1" fill="#F2E8D6"/></svg>Draft to review</span></td>
+                <td>Yesterday</td>
+              </tr>
+              <tr>
+                <td><a href="#client">Sample client three</a></td>
+                <td><span class="type-dot" data-type="health"></span>Health</td>
+                <td>Working together</td>
+                <td>2 of 2</td>
+                <td><span class="status status-done"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" stroke="#E3ECE2" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Released</span></td>
+                <td>12 Oct</td>
+              </tr>
+              <tr>
+                <td><a href="#client">Sample client four</a></td>
+                <td><span class="type-dot" data-type="none"></span>Not set</td>
+                <td>First session</td>
+                <td>0 of 0</td>
+                <td>None yet</td>
+                <td>Code sent 16 Oct</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,42 +1,58 @@
 <!doctype html>
-<!-- Base layout for every Client Hub page. Copy this file to start a page.
-     Rules: 1 primary action per screen, placed in the action bar; no inline
-     scripts or styles (the Content Security Policy blocks them); copy in UK
-     English with no em dashes. -->
+<!-- Signed in page in the viewer shell. Copy this file to start a page.
+     Rules: 1 primary action per screen; no inline scripts or styles (the
+     Content Security Policy blocks them); copy in UK English with no em
+     dashes. For practitioner pages swap the nav and add workspace-wide to
+     workspace-inner when the page holds a table. -->
 <html lang="en-NZ">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#CFDAE8">
   <title>Page title · Executive Frame</title>
   <link rel="icon" href="/assets/brand/mark-slate-small.svg" type="image/svg+xml">
   <link rel="preload" href="/assets/fonts/figtree-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/app.css">
+  <script type="module" src="/js/viewer.js"></script>
   <script type="module" src="/js/page-name.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <div class="app">
-    <header class="app-header">
+  <a class="skip-link" href="#workspace">Skip to content</a>
+  <div class="viewer" data-menu="closed">
+    <nav class="sidebar" id="sidebar" aria-label="Main">
       <a class="brand" href="/dashboard">
         <img class="brand-mark" src="/assets/brand/mark-slate-small.svg" alt="" width="32" height="32">
         <span class="brand-name">Executive Frame</span>
       </a>
-      <a class="header-action" href="/account">Account</a>
+      <ul class="nav">
+        <li><a class="nav-link" href="/dashboard" aria-current="page">Home</a></li>
+        <li><a class="nav-link" href="/questionnaires">Questionnaires</a></li>
+        <li><a class="nav-link" href="/results">Results</a></li>
+      </ul>
+      <div class="sidebar-foot">
+        <p class="t-caption">Your information is stored securely in Sydney, Australia.</p>
+      </div>
+    </nav>
+
+    <header class="topbar">
+      <button type="button" class="menu-button" aria-controls="sidebar" aria-expanded="false" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <h1 class="topbar-title">Page title</h1>
+      <div class="topbar-actions">
+        <a class="account-button" href="/account">
+          <span class="avatar" aria-hidden="true">A</span>
+          <span class="account-name">Account</span>
+        </a>
+      </div>
     </header>
 
-    <main id="main" class="app-main stack-lg">
-      <h1>Page title</h1>
-      <p>Page content.</p>
-    </main>
-
-    <div class="action-bar">
-      <div class="action-bar-inner">
-        <a class="btn btn-primary" href="#">Primary action</a>
+    <main class="workspace" id="workspace" tabindex="-1">
+      <div class="workspace-inner stack-lg">
+        <p>Page content.</p>
       </div>
-    </div>
+    </main>
   </div>
 </body>
 </html>

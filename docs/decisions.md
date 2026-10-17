@@ -18,6 +18,14 @@
 11. The question about previous ADHD assessment is written but switched off, because it collects health information and Sarah has not decided to ask it.
 12. Firebase SDK 13.0.0 and Figtree (Latin and Latin Extended) are self hosted by `scripts/vendor.mjs`.
 
+## Decided after stage 2 (18 October 2026)
+
+13. Layout is a desktop web viewer in the manner of the Themescape viewer: a sky blue frame holding the sidebar navigation and a top bar with the account menu, around a warm white workspace (the kit's reading ground). Below 900px the sidebar becomes a menu drawer so activation and questionnaires still work on a phone. The brief's phone first wording is superseded by Charlotte's instruction; phone use remains supported.
+14. On Home, the mark's incomplete circle is the journey indicator, filling in the client type accent as stages pass. This is the 1 distinctive element; everything else stays quiet.
+15. Questionnaires open in a focus mode: the sidebar dims, 1 question sits in a centred column, and on a keyboard the number keys choose an answer.
+16. Practitioner pages use the same shell with their own navigation (Clients, To review, Activation codes, Questionnaire library) and a wider workspace for tables.
+17. Static layout previews live in `public/preview/` with sample content only. They are deleted before launch.
+
 ## Open questions
 
 1. Learning Hub access. Does activation grant clients a complimentary Learning Hub seat? Without one, results links reach a paywall. A sign in handover between the 2 subdomains also needs building, because Firebase sessions do not carry across origins.

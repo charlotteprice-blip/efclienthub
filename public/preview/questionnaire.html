@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Focus and planning · Executive Frame</title>
+  <link rel="icon" href="/assets/brand/mark-slate-small.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/figtree-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/app.css">
+  <script type="module" src="/js/viewer.js"></script>
+  <script type="module" src="/js/preview.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#workspace">Skip to content</a>
+  <div class="viewer" data-menu="closed" data-mode="focus" data-preview-type="neurodivergent">
+    <nav class="sidebar" id="sidebar" aria-label="Main">
+      <a class="brand" href="/preview/home">
+        <img class="brand-mark" src="/assets/brand/mark-slate-small.svg" alt="" width="32" height="32">
+        <span class="brand-name">Executive Frame</span>
+      </a>
+      <ul class="nav">
+        <li><a class="nav-link" href="/preview/home">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.2 10 3.5l7 5.7V16a1 1 0 0 1-1 1h-3.5v-4.5h-5V17H4a1 1 0 0 1-1-1z"/></svg>
+          Home</a></li>
+        <li><a class="nav-link" href="/preview/questionnaire" aria-current="page">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="12" height="14.5" rx="2"/><path d="M7.5 7.5h5M7.5 10.5h5M7.5 13.5h3"/></svg>
+          Questionnaires<span class="nav-count" aria-label="2 to complete">2</span></a></li>
+        <li><a class="nav-link" href="/preview/home#results">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l2.5 2.5"/></svg>
+          Results</a></li>
+      </ul>
+      <div class="sidebar-foot">
+        <p class="t-caption">Your answers save as you go.</p>
+      </div>
+    </nav>
+
+    <header class="topbar">
+      <button type="button" class="menu-button" aria-controls="sidebar" aria-expanded="false" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <h1 class="topbar-title">Focus and planning</h1>
+      <div class="topbar-actions">
+        <a class="btn btn-quiet" href="/preview/home">Save and exit</a>
+      </div>
+    </header>
+
+    <main class="workspace" id="workspace" tabindex="-1">
+      <div class="workspace-inner">
+        <form class="focus-column stack-lg" id="item-form">
+          <div class="stack">
+            <div class="progress" role="progressbar" aria-label="Question 5 of 12" aria-valuemin="1" aria-valuemax="12" aria-valuenow="5"><div class="progress-fill" data-progress="5" data-total="12"></div></div>
+            <p class="t-caption">Question 5 of 12</p>
+          </div>
+          <fieldset class="choices">
+            <legend class="t-title">Sample question text is shown here, 1 question at a time.</legend>
+            <p class="field-hint">Think about the last 2 weeks.</p>
+            <label class="choice"><input type="radio" name="answer" value="0"><span class="choice-dot"></span><span>Never</span><kbd>1</kbd></label>
+            <label class="choice"><input type="radio" name="answer" value="1"><span class="choice-dot"></span><span>Sometimes</span><kbd>2</kbd></label>
+            <label class="choice"><input type="radio" name="answer" value="2" checked><span class="choice-dot"></span><span>Often</span><kbd>3</kbd></label>
+            <label class="choice"><input type="radio" name="answer" value="3"><span class="choice-dot"></span><span>Very often</span><kbd>4</kbd></label>
+          </fieldset>
+          <div class="actions">
+            <button type="button" class="btn btn-secondary">Back</button>
+            <button type="submit" class="btn btn-primary">Next question</button>
+            <p class="t-caption key-hint">Press 1 to 4 to choose, then Enter.</p>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

@@ -11,23 +11,45 @@
   <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/app.css">
   <link rel="stylesheet" href="/css/styleguide.css">
+  <script type="module" src="/js/viewer.js"></script>
   <script type="module" src="/js/styleguide.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <div class="app">
-    <header class="app-header">
+  <div class="viewer" data-menu="closed">
+    <nav class="sidebar" id="sidebar" aria-label="Style guide sections">
       <a class="brand" href="/styleguide">
         <img class="brand-mark" src="/assets/brand/mark-slate-small.svg" alt="" width="32" height="32">
         <span class="brand-name">Executive Frame</span>
       </a>
-      <a class="header-action" href="#account">Account</a>
+      <ul class="nav">
+        <li><a class="nav-link" href="#h-type">Type</a></li>
+        <li><a class="nav-link" href="#h-colour">Colour</a></li>
+        <li><a class="nav-link" href="#h-status">Status</a></li>
+        <li><a class="nav-link" href="#h-dashboard">Home pieces</a></li>
+        <li><a class="nav-link" href="#h-measure">Questionnaire</a></li>
+        <li><a class="nav-link" href="#h-fields">Fields</a></li>
+        <li><a class="nav-link" href="#h-buttons">Buttons</a></li>
+        <li><a class="nav-link" href="#h-notice">Notices</a></li>
+        <li><a class="nav-link" href="#h-mark">Mark and loader</a></li>
+      </ul>
+      <div class="sidebar-foot">
+        <p class="t-caption">Layout previews: <a href="/preview/home">Home</a>, <a href="/preview/questionnaire">Questionnaire</a>, <a href="/preview/clients">Clients</a>.</p>
+      </div>
+    </nav>
+
+    <header class="topbar">
+      <button type="button" class="menu-button" aria-controls="sidebar" aria-expanded="false" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <h1 class="topbar-title">Style guide</h1>
     </header>
 
-    <main id="main" class="app-main stack-lg">
+    <main class="workspace" id="main" tabindex="-1">
+      <div class="workspace-inner stack-lg">
       <section class="stack">
         <p class="t-caption">Client Hub style guide · interim brand kit, 18 October 2026</p>
-        <h1 class="t-display">Style guide</h1>
+        <h2 class="t-display">Style guide</h2>
         <p>Every component the Client Hub uses, built from Levi's tokens. Body text is 17/26 at weight 400 in this app. Use the toggle to compare the kit's 300.</p>
         <button type="button" class="btn btn-secondary" id="toggle-weight" aria-pressed="false">Show body at weight 300</button>
       </section>
@@ -77,14 +99,14 @@
           <button type="button" class="btn btn-secondary btn-small" data-type="health">Type B accent</button>
           <button type="button" class="btn btn-secondary btn-small" data-type="corporate">Type C accent</button>
         </div>
-        <ol class="journey" aria-label="Your journey: step 3 of 7">
-          <li class="journey-step" data-state="done"></li>
-          <li class="journey-step" data-state="done"></li>
-          <li class="journey-step" data-state="current"></li>
-          <li class="journey-step"></li>
-          <li class="journey-step"></li>
-          <li class="journey-step"></li>
-          <li class="journey-step"></li>
+        <ol class="journey-stages" aria-label="Journey">
+          <li data-state="done">First conversation</li>
+          <li data-state="done">First session</li>
+          <li data-state="current">Questionnaires</li>
+          <li>Book feedback</li>
+          <li>Feedback</li>
+          <li>Working together</li>
+          <li>Review</li>
         </ol>
         <div class="panel panel-accent stack">
           <p class="t-caption">Step 3 of 7</p>
@@ -161,13 +183,9 @@
         </div>
         <button type="button" class="btn btn-secondary" id="replay">Replay the mark</button>
       </section>
+    </div>
     </main>
 
-    <div class="action-bar">
-      <div class="action-bar-inner">
-        <button type="button" class="btn btn-primary">Continue</button>
       </div>
-    </div>
-  </div>
 </body>
 </html>
