@@ -1,0 +1,16 @@
+{
+  "projects": {
+    "default": "executiveframe-app"
+  },
+  "targets": {
+    "executiveframe-app": {
+      "hosting": {
+        "clienthub": ["executiveframe-clienthub"]
+      },
+      "storage": {
+        "clienthub": ["executiveframe-clienthub"]
+      }
+    }
+  },
+  "etags": {}
+}

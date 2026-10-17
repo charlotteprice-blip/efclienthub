@@ -1,0 +1,142 @@
+rules_version = '2';
+
+// Executive Frame Client Hub: rules for the named database `clienthub`.
+// Deployed through the "database": "clienthub" entry in firebase.json.
+//
+// Principles
+// 1. No client or staff account writes directly. Every write goes through
+//    Cloud Functions using the Admin SDK, which bypasses these rules.
+// 2. A client reads only documents that carry their own uid.
+// 3. Clinical content (responses, scores, drafts, formulations, client type)
+//    is readable by the practitioner role only. The admin role can operate
+//    the system (codes, measure library, config, audit) without reading
+//    clinical content.
+// 4. Draft scoring lives in `scoring`, which no client can read. Released
+//    content is copied into `results` and `formulations` by releaseResults,
+//    and those documents are readable only once releasedAt is set.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------- helpers ----------
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function role() {
+      return signedIn() ? request.auth.token.get('role', '') : '';
+    }
+
+    function isPractitioner() {
+      return role() == 'practitioner';
+    }
+
+    function isStaff() {
+      return role() == 'practitioner' || role() == 'admin';
+    }
+
+    function isSelf(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function ownsExisting() {
+      return signedIn() && resource.data.uid == request.auth.uid;
+    }
+
+    function isActivatedClient() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/clients/$(request.auth.uid))
+        && get(/databases/$(database)/documents/clients/$(request.auth.uid)).data.get('activatedAt', null) != null;
+    }
+
+    function isReleased() {
+      return resource.data.get('releasedAt', null) != null;
+    }
+
+    // ---------- client records ----------
+
+    // Profile, consent record, client type, journey stage, retention date.
+    match /clients/{uid} {
+      allow read: if isSelf(uid) || isPractitioner();
+      allow write: if false;
+    }
+
+    // Intake answers given at activation.
+    match /intakeResponses/{uid} {
+      allow read: if isSelf(uid) || isPractitioner();
+      allow write: if false;
+    }
+
+    // Assignment status only: uid, measureId, status, order, assignedAt,
+    // completedAt. Responses and scores are never stored here.
+    match /assignments/{assignmentId} {
+      allow read: if ownsExisting() || isPractitioner();
+      allow write: if false;
+    }
+
+    // Responses, draft scores and draft report. Practitioner only.
+    match /scoring/{assignmentId} {
+      allow read: if isPractitioner();
+      allow write: if false;
+    }
+
+    // Released results, 1 document per client keyed by uid, written only by
+    // releaseResults. Read by document id, so no query is needed.
+    match /results/{uid} {
+      allow read: if (isSelf(uid) && isReleased()) || isPractitioner();
+      allow write: if false;
+    }
+
+    // Formulation drafts. Practitioner only.
+    match /formulationDrafts/{uid} {
+      allow read: if isPractitioner();
+      allow write: if false;
+    }
+
+    // Released formulation, keyed by client uid.
+    match /formulations/{uid} {
+      allow read: if (isSelf(uid) && isReleased()) || isPractitioner();
+      allow write: if false;
+    }
+
+    // Access and correction requests under the Health Information Privacy
+    // Code 2020, rules 6 and 7.
+    match /requests/{requestId} {
+      allow read: if ownsExisting() || isPractitioner();
+      allow write: if false;
+    }
+
+    // ---------- operational records ----------
+
+    // Activation codes. Stored by hashed code; never readable by clients.
+    match /activationCodes/{codeId} {
+      allow read: if isStaff();
+      allow write: if false;
+    }
+
+    // Measure library. Item text is needed by activated clients to complete
+    // an assigned measure; scoring rules are not sensitive to the client.
+    match /measures/{measureId} {
+      allow read: if isActivatedClient() || isStaff();
+      allow write: if false;
+    }
+
+    // Editable configuration (intake questionnaire, client type copy).
+    match /config/{docId} {
+      allow read: if signedIn();
+      allow write: if false;
+    }
+
+    // Audit trail of practitioner actions. Written by functions only.
+    match /auditLog/{entryId} {
+      allow read: if isStaff();
+      allow write: if false;
+    }
+
+    // Anything not named above is closed.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

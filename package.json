@@ -1,0 +1,18 @@
+{
+  "name": "executive-frame-client-hub",
+  "private": true,
+  "description": "Executive Frame Client Hub: in treatment web app for clients of Sarah Anticich. Static HTML, CSS and JavaScript on Firebase.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test:rules": "firebase emulators:exec --config firebase.test.json --project demo-clienthub --only firestore,storage \"node --test tests/\"",
+    "emulators": "firebase emulators:start --project demo-clienthub"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^6.0.0",
+    "firebase": "^13.0.0",
+    "firebase-tools": "^15.34.0"
+  }
+}

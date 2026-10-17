@@ -1,0 +1,17 @@
+rules_version = '2';
+
+// Executive Frame Client Hub: rules for the Client Hub bucket only
+// (storage target "clienthub" in firebase.json and .firebaserc).
+//
+// The pilot stores no client files. Any file later added (for example a
+// released report PDF) is delivered through a Cloud Function that checks
+// release status and issues a short lived signed link, so no client or
+// staff browser ever reads this bucket directly.
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
