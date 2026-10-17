@@ -38,6 +38,7 @@ npm run contrast       check every colour pairing against WCAG 2.2
 npm run test:unit      config and intake rule tests
 npm run test:rules     security rules tests in the emulators (needs Java 21+)
 npm test               all of the above checks
+npm run build:sample   build the clickable sample into dist/client-hub-sample.html
 npm run emulators      local emulators on a demo project
 ```
 

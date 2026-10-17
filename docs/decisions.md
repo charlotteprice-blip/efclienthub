@@ -26,6 +26,13 @@
 16. Practitioner pages use the same shell with their own navigation (Clients, To review, Activation codes, Questionnaire library) and a wider workspace for tables.
 17. Static layout previews live in `public/preview/` with sample content only. They are deleted before launch.
 
+## Clickable sample (18 October 2026)
+
+18. A clickable sample of the whole pilot lives in `public/sample/`, served at `/sample/` and built into 1 shareable file by `npm run build:sample`. It runs on invented data in the browser with no Firebase. `sample-store.js` mirrors each Cloud Function (redeemActivationCode, submitIntake, submitMeasure, scoreMeasure, triggerBooking, issueActivationCode, setClientType, assignMeasure, releaseResults) so it doubles as the specification for stages 3 to 5.
+19. Scoring is a pure module (`public/js/scoring.js`) that the scoreMeasure function will use unchanged: reverse scoring, mean or sum per subscale, bands, a minimum share of answers before a subscale is scored, and a draft listing strengths and areas of focus with reasons and Learning Hub topics.
+20. Clients see strengths and areas of focus with reasons once released; numeric scores are shown only to Sarah.
+21. The 2 sample questionnaires were written for the demonstration, are marked as sample in the library, and must never be used with clients.
+
 ## Open questions
 
 1. Learning Hub access. Does activation grant clients a complimentary Learning Hub seat? Without one, results links reach a paywall. A sign in handover between the 2 subdomains also needs building, because Firebase sessions do not carry across origins.

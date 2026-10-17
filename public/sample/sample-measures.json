@@ -1,0 +1,101 @@
+{
+  "_note": "Invented questionnaires for the clickable sample only. They are not validated measures, are not drawn from any published instrument, and must never be used with clients.",
+  "measures": [
+    {
+      "id": "sample-routines",
+      "name": "Daily routines",
+      "description": "Sample questionnaire about everyday routines.",
+      "licenceStatus": "sample",
+      "instructions": "Think about the last 2 weeks.",
+      "responseOptions": [
+        { "value": 0, "label": "Rarely" },
+        { "value": 1, "label": "Sometimes" },
+        { "value": 2, "label": "Often" },
+        { "value": 3, "label": "Most of the time" }
+      ],
+      "items": [
+        { "id": "r1", "text": "I start my working day at a similar time." },
+        { "id": "r2", "text": "I find it hard to get going in the morning." },
+        { "id": "r3", "text": "I have a regular way of keeping track of what I need to do." },
+        { "id": "r4", "text": "Small household tasks pile up before I get to them." },
+        { "id": "r5", "text": "I take breaks during the day before I feel worn out." },
+        { "id": "r6", "text": "My evenings run late and leave me tired the next day." }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "reverseItems": ["r1", "r3", "r5"],
+        "subscales": [
+          {
+            "id": "structure",
+            "label": "Structure in your day",
+            "items": ["r1", "r3", "r5"],
+            "method": "mean",
+            "bands": [{ "upTo": 1.0, "band": "strength" }, { "upTo": 1.9, "band": "typical" }, { "band": "focus" }],
+            "strengthReason": "You described a steady rhythm to your day that you can build on.",
+            "focusReason": "Your answers suggest your day has little fixed structure, which can make everything else harder.",
+            "topic": { "label": "Building a daily rhythm", "url": "https://app.executiveframe.co.nz/hub/routines" }
+          },
+          {
+            "id": "momentum",
+            "label": "Getting started and keeping up",
+            "items": ["r2", "r4", "r6"],
+            "method": "mean",
+            "bands": [{ "upTo": 1.0, "band": "strength" }, { "upTo": 1.9, "band": "typical" }, { "band": "focus" }],
+            "strengthReason": "You told us that getting started and keeping on top of small tasks mostly goes smoothly.",
+            "focusReason": "Starting tasks and keeping on top of small jobs came up often in your answers.",
+            "topic": { "label": "Getting started", "url": "https://app.executiveframe.co.nz/hub/starting" }
+          }
+        ]
+      }
+    },
+    {
+      "id": "sample-focus",
+      "name": "Focus and planning",
+      "description": "Sample questionnaire about focus and planning at work.",
+      "licenceStatus": "sample",
+      "instructions": "Think about your work over the last 2 weeks.",
+      "responseOptions": [
+        { "value": 0, "label": "Rarely" },
+        { "value": 1, "label": "Sometimes" },
+        { "value": 2, "label": "Often" },
+        { "value": 3, "label": "Most of the time" }
+      ],
+      "items": [
+        { "id": "f1", "text": "I break larger pieces of work into smaller steps." },
+        { "id": "f2", "text": "I lose track of what I was doing after an interruption." },
+        { "id": "f3", "text": "I underestimate how long work will take." },
+        { "id": "f4", "text": "I can stay with a task I find interesting for a long time." },
+        { "id": "f5", "text": "I leave important work until close to the deadline." },
+        { "id": "f6", "text": "I plan my week before it begins." },
+        { "id": "f7", "text": "Notifications pull me away from what I am working on." },
+        { "id": "f8", "text": "I return to a task quickly after a break." }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "reverseItems": ["f1", "f4", "f6", "f8"],
+        "subscales": [
+          {
+            "id": "planning",
+            "label": "Planning ahead",
+            "items": ["f1", "f3", "f5", "f6"],
+            "method": "mean",
+            "bands": [{ "upTo": 1.0, "band": "strength" }, { "upTo": 1.9, "band": "typical" }, { "band": "focus" }],
+            "strengthReason": "You described planning habits that already help you get work done on time.",
+            "focusReason": "Estimating time and leaving work late came up often in your answers.",
+            "topic": { "label": "Planning your week", "url": "https://app.executiveframe.co.nz/hub/planning" }
+          },
+          {
+            "id": "attention",
+            "label": "Holding your focus",
+            "items": ["f2", "f4", "f7", "f8"],
+            "method": "mean",
+            "bands": [{ "upTo": 1.0, "band": "strength" }, { "upTo": 1.9, "band": "typical" }, { "band": "focus" }],
+            "strengthReason": "You told us you can stay with your work and come back to it easily.",
+            "focusReason": "Interruptions and notifications pulling you away came up often in your answers.",
+            "topic": { "label": "Protecting your focus", "url": "https://app.executiveframe.co.nz/hub/focus" }
+          }
+        ]
+      }
+    }
+  ]
+}

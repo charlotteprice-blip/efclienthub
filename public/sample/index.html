@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Client Hub sample · Executive Frame</title>
+  <link rel="icon" href="../assets/brand/mark-slate-small.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/app.css">
+  <link rel="stylesheet" href="sample.css">
+  <script type="module" src="sample-app.js"></script>
+</head>
+<body class="sample">
+  <div id="app"></div>
+  <div class="sample-bar" id="sample-bar" role="region" aria-label="Sample controls">
+    <p class="sample-label"><strong>Sample</strong> <span class="sample-note">Invented data, nothing is sent anywhere.</span></p>
+    <div class="sample-switch" role="group" aria-label="View as">
+      <button type="button" data-role="client" aria-pressed="true">Client view</button>
+      <button type="button" data-role="practitioner" aria-pressed="false">Sarah's view</button>
+    </div>
+    <button type="button" class="sample-reset" data-action="reset">Start again</button>
+  </div>
+</body>
+</html>

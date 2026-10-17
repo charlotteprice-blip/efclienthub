@@ -1,0 +1,131 @@
+// Shared building blocks for the clickable sample: escaping, dates, icons,
+// status chips and the 2 viewer shells (client and practitioner).
+
+export const esc = (v) =>
+  String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+
+const dateFmt = new Intl.DateTimeFormat('en-NZ', { day: 'numeric', month: 'short', year: 'numeric' });
+export const fmtDate = (t) => (t ? dateFmt.format(new Date(t)) : '');
+
+export function relative(t) {
+  if (!t) return '';
+  const start = new Date();
+  start.setHours(0, 0, 0, 0);
+  if (t >= start.getTime()) return 'Today';
+  if (t >= start.getTime() - 86400000) return 'Yesterday';
+  return new Intl.DateTimeFormat('en-NZ', { day: 'numeric', month: 'short' }).format(new Date(t));
+}
+
+export const STAGE_LABELS = {
+  enquiry: 'Getting started',
+  firstSession: 'First session',
+  assessment: 'Questionnaires',
+  booking: 'Book feedback',
+  feedback: 'Feedback',
+  intervention: 'Working together',
+  review: 'Review',
+};
+
+const ICONS = {
+  home: '<path d="M3 9.2 10 3.5l7 5.7V16a1 1 0 0 1-1 1h-3.5v-4.5h-5V17H4a1 1 0 0 1-1-1z"/>',
+  list: '<rect x="4" y="3" width="12" height="14.5" rx="2"/><path d="M7.5 7.5h5M7.5 10.5h5M7.5 13.5h3"/>',
+  results: '<circle cx="10" cy="10" r="7"/><path d="M10 6v4l2.5 2.5"/>',
+  formulation: '<rect x="3" y="3" width="6" height="6" rx="1.5"/><rect x="11" y="3" width="6" height="6" rx="1.5"/><rect x="3" y="11" width="6" height="6" rx="1.5"/><rect x="11" y="11" width="6" height="6" rx="1.5"/>',
+  clients: '<circle cx="7.5" cy="7" r="2.75"/><path d="M2.5 16.5c.6-2.6 2.6-4 5-4s4.4 1.4 5 4"/><circle cx="14" cy="7.5" r="2.25"/><path d="M14 12.5c1.9 0 3.2 1.2 3.6 3.5"/>',
+  review: '<rect x="4" y="3" width="12" height="14.5" rx="2"/><path d="M7.5 10.5l1.8 1.8 3.2-3.6"/>',
+  codes: '<circle cx="7" cy="10" r="3.25"/><path d="M10.25 10H17.5M14.5 10v3M16.5 10v2"/>',
+  library: '<path d="M4 4.5h3.5v12H4zM8.5 4.5H12v12H8.5zM13 5.2l3.2-.8 2.6 11.6-3.2.8z"/>',
+};
+
+export const icon = (name) =>
+  `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name]}</svg>`;
+
+const STATUS_ICON = {
+  done: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" stroke="#E3ECE2" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  progress: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"/></svg>',
+  attention: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="M8 4.2v4.6" stroke="#F2E8D6" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="11.4" r="1" fill="#F2E8D6"/></svg>',
+};
+
+export const status = (kind, label) => `<span class="status status-${kind}">${STATUS_ICON[kind]}${esc(label)}</span>`;
+
+const MENU = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+
+function shell({ nav, title, content, foot, account, mode, wide }) {
+  return `
+  <div class="viewer" data-menu="closed"${mode ? ` data-mode="${mode}"` : ''}>
+    <nav class="sidebar" id="sidebar" aria-label="Main">
+      <a class="brand" href="${nav.home}">
+        <img class="brand-mark" src="${nav.markSrc}" alt="" width="32" height="32">
+        <span class="brand-name">Executive Frame</span>
+      </a>
+      <ul class="nav">
+        ${nav.items
+          .map(
+            (i) => `<li><a class="nav-link" href="${i.href}"${i.active ? ' aria-current="page"' : ''}>${icon(i.icon)}${esc(i.label)}${
+              i.count ? `<span class="nav-count" aria-label="${i.count} ${esc(i.countLabel)}">${i.count}</span>` : ''
+            }</a></li>`,
+          )
+          .join('')}
+      </ul>
+      <div class="sidebar-foot"><p class="t-caption">${foot}</p></div>
+    </nav>
+    <header class="topbar">
+      <button type="button" class="menu-button" data-action="menu" aria-controls="sidebar" aria-expanded="false" aria-label="Open menu">${MENU}</button>
+      <h1 class="topbar-title">${esc(title)}</h1>
+      <div class="topbar-actions">${account}</div>
+    </header>
+    <main class="workspace" id="workspace" tabindex="-1">
+      <div class="workspace-inner${wide ? ' workspace-wide' : ''} stack-lg">${content}</div>
+    </main>
+  </div>`;
+}
+
+export function clientShell({ title, active, content, client, counts, hasFormulation, mode, markSrc }) {
+  const initial = esc((client?.name ?? 'A').trim().charAt(0).toUpperCase());
+  const items = [
+    { href: '#/home', label: 'Home', icon: 'home', active: active === 'home' },
+    { href: '#/questionnaires', label: 'Questionnaires', icon: 'list', active: active === 'questionnaires', count: counts.outstanding, countLabel: 'to complete' },
+    { href: '#/results', label: 'Results', icon: 'results', active: active === 'results' },
+  ];
+  if (hasFormulation) items.push({ href: '#/formulation', label: 'Formulation', icon: 'formulation', active: active === 'formulation' });
+  return shell({
+    nav: { home: '#/home', items, markSrc },
+    title,
+    content,
+    mode,
+    foot: mode === 'focus' ? 'Your answers save as you go.' : 'Your information is stored securely in Sydney, Australia.',
+    account: mode === 'focus'
+      ? '<a class="btn btn-quiet" href="#/questionnaires">Save and exit</a>'
+      : `<a class="account-button" href="#/account"${active === 'account' ? ' aria-current="page"' : ''}><span class="avatar" aria-hidden="true">${initial}</span><span class="account-name">${esc(client?.name ?? 'Account')}</span></a>`,
+  });
+}
+
+export function practitionerShell({ title, active, content, counts, wide, markSrc }) {
+  const items = [
+    { href: '#/p/clients', label: 'Clients', icon: 'clients', active: active === 'clients' },
+    { href: '#/p/review', label: 'To review', icon: 'review', active: active === 'review', count: counts.review, countLabel: 'to review' },
+    { href: '#/p/codes', label: 'Activation codes', icon: 'codes', active: active === 'codes' },
+    { href: '#/p/library', label: 'Questionnaire library', icon: 'library', active: active === 'library' },
+  ];
+  return shell({
+    nav: { home: '#/p/clients', items, markSrc },
+    title,
+    content,
+    wide,
+    foot: 'Practitioner view. Drafts are never shown to clients until you release them.',
+    account: '<span class="account-button"><span class="avatar" aria-hidden="true">S</span><span class="account-name">Sarah</span></span>',
+  });
+}
+
+export function single(content, markSrc) {
+  return `<main class="single" id="workspace" tabindex="-1">
+    <div class="single-card stack-lg">
+      <span class="brand"><img class="brand-mark" src="${markSrc}" alt="" width="32" height="32"><span class="brand-name">Executive Frame</span></span>
+      ${content}
+    </div>
+  </main>`;
+}
+
+export function fieldError(errors, key) {
+  return errors?.[key] ? `<p class="field-error" id="err-${key}">${esc(errors[key])}</p>` : '';
+}

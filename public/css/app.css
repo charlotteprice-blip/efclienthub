@@ -185,6 +185,7 @@ a:hover {
 
 .sidebar {
   grid-area: sidebar;
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
@@ -343,6 +344,7 @@ a:hover {
 
 .workspace {
   grid-area: workspace;
+  position: relative;
   overflow-y: auto;
   background: var(--reading-ground);
   color: var(--on-reading);

@@ -13,11 +13,13 @@
     "vendor": "node scripts/vendor.mjs",
     "tokens": "node scripts/build-tokens.mjs",
     "contrast": "node scripts/check-contrast.mjs",
-    "emulators": "firebase emulators:start --project demo-clienthub"
+    "emulators": "firebase emulators:start --project demo-clienthub",
+    "build:sample": "node scripts/build-sample.mjs"
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^6.0.0",
     "@fontsource/figtree": "^5.3.0",
+    "esbuild": "^0.28.2",
     "firebase": "^13.0.0",
     "firebase-tools": "^15.34.0"
   }

@@ -10,3 +10,4 @@ ui-debug.log*
 .runtimeconfig.json
 service-account*.json
 .DS_Store
+dist/
