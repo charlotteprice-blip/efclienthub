@@ -1,0 +1,120 @@
+{
+  "_note": "Intake questionnaire shown once at activation. Draft for Sarah to approve. How it works is explained in plain language in docs/editing-the-intake.md.",
+  "version": 1,
+  "status": "draft",
+  "codeTypeTakesPriority": true,
+  "fallbackType": null,
+  "questions": [
+    {
+      "id": "reason",
+      "type": "single",
+      "enabled": true,
+      "required": true,
+      "text": "What has brought you to work with Sarah?",
+      "hint": "Choose the one that fits best.",
+      "options": [
+        {
+          "value": "focus",
+          "label": "Focus, organisation, planning or managing my time"
+        },
+        {
+          "value": "health",
+          "label": "Managing my health or energy alongside work"
+        },
+        {
+          "value": "workplace",
+          "label": "A programme arranged through my workplace"
+        },
+        {
+          "value": "team",
+          "label": "Work with my team"
+        },
+        {
+          "value": "unsure",
+          "label": "Something else, or I am not sure"
+        }
+      ]
+    },
+    {
+      "id": "arranged",
+      "type": "single",
+      "enabled": true,
+      "required": true,
+      "text": "How were your sessions arranged?",
+      "options": [
+        {
+          "value": "self",
+          "label": "I arranged them myself"
+        },
+        {
+          "value": "workplace",
+          "label": "My workplace arranged them"
+        },
+        {
+          "value": "referral",
+          "label": "A health professional referred me"
+        },
+        {
+          "value": "funder",
+          "label": "Through ACC or an insurer"
+        }
+      ]
+    },
+    {
+      "id": "previousAssessment",
+      "type": "single",
+      "enabled": false,
+      "required": false,
+      "_note": "Off until Sarah decides whether to ask this at intake. It collects health information.",
+      "text": "Have you had an assessment for ADHD or a similar condition before?",
+      "options": [
+        {
+          "value": "yes",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "label": "No"
+        },
+        {
+          "value": "preferNot",
+          "label": "I would rather not say"
+        }
+      ]
+    },
+    {
+      "id": "hope",
+      "type": "text",
+      "enabled": true,
+      "required": false,
+      "text": "In a sentence or two, what would you most like to be different?",
+      "hint": "Optional. You can type or use your phone's dictation."
+    }
+  ],
+  "rules": [
+    {
+      "when": {
+        "reason": "team"
+      },
+      "type": "team"
+    },
+    {
+      "when": {
+        "reason": "workplace"
+      },
+      "type": "corporate"
+    },
+    {
+      "when": {
+        "reason": "health"
+      },
+      "type": "health"
+    },
+    {
+      "when": {
+        "reason": "focus"
+      },
+      "type": "neurodivergent"
+    }
+  ]
+}

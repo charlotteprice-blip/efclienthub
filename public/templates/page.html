@@ -1,0 +1,42 @@
+<!doctype html>
+<!-- Base layout for every Client Hub page. Copy this file to start a page.
+     Rules: 1 primary action per screen, placed in the action bar; no inline
+     scripts or styles (the Content Security Policy blocks them); copy in UK
+     English with no em dashes. -->
+<html lang="en-NZ">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#CFDAE8">
+  <title>Page title · Executive Frame</title>
+  <link rel="icon" href="/assets/brand/mark-slate-small.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/figtree-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/app.css">
+  <script type="module" src="/js/page-name.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="app">
+    <header class="app-header">
+      <a class="brand" href="/dashboard">
+        <img class="brand-mark" src="/assets/brand/mark-slate-small.svg" alt="" width="32" height="32">
+        <span class="brand-name">Executive Frame</span>
+      </a>
+      <a class="header-action" href="/account">Account</a>
+    </header>
+
+    <main id="main" class="app-main stack-lg">
+      <h1>Page title</h1>
+      <p>Page content.</p>
+    </main>
+
+    <div class="action-bar">
+      <div class="action-bar-inner">
+        <a class="btn btn-primary" href="#">Primary action</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

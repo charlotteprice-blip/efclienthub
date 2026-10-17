@@ -1,0 +1,128 @@
+/* Executive Frame app tokens. Generated from brand/tokens.json by
+   scripts/build-tokens.mjs. Do not edit by hand. Shared with the
+   Learning Hub. Source note: Executive Frame interim app tokens, 18 Oct 2026. Provisional values: sky, error. */
+
+@font-face { font-family: "Figtree"; font-style: normal; font-display: swap; font-weight: 300; src: url("/assets/fonts/figtree-latin-300-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Figtree"; font-style: normal; font-display: swap; font-weight: 400; src: url("/assets/fonts/figtree-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Figtree"; font-style: normal; font-display: swap; font-weight: 500; src: url("/assets/fonts/figtree-latin-500-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Figtree"; font-style: normal; font-display: swap; font-weight: 300; src: url("/assets/fonts/figtree-latin-ext-300-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Figtree"; font-style: normal; font-display: swap; font-weight: 400; src: url("/assets/fonts/figtree-latin-ext-400-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Figtree"; font-style: normal; font-display: swap; font-weight: 500; src: url("/assets/fonts/figtree-latin-ext-500-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+:root {
+  /* palette */
+  --ef-sky: #CFDAE8;
+  --ef-slate: #3E5680;
+  --ef-navy: #2E4062;
+  --ef-warm-white: #F5F3EE;
+
+  /* light theme (default) */
+  --ground: #CFDAE8;
+  --ink: #3E5680;
+  --panel: #F5F3EE;
+  --on-panel: #3E5680;
+  --reading-ground: #F5F3EE;
+  --on-reading: #3E5680;
+  --hairline: rgba(62,86,128,0.25);
+  --underline: rgba(62,86,128,0.40);
+  --focus: #3E5680;
+  --error: #8A3F34;
+
+  /* inverted theme values, for reference by components */
+  --inv-ground: #2E4062;
+  --inv-ink: #F5F3EE;
+  --inv-panel: #CFDAE8;
+  --inv-on-panel: #2E4062;
+  --inv-reading-ground: #3E5680;
+  --inv-on-reading: #F5F3EE;
+  --inv-hairline: rgba(245,243,238,0.25);
+  --inv-underline: rgba(245,243,238,0.45);
+  --inv-focus: #F5F3EE;
+  --inv-error: #F2B8AD;
+
+  /* font */
+  --font-family: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* type: size / line height / weight / tracking */
+  --type-display-size: 40px;
+  --type-display-line: 42px;
+  --type-display-weight: 400;
+  --type-display-tracking: -0.02em;
+  --type-title-size: 28px;
+  --type-title-line: 32px;
+  --type-title-weight: 400;
+  --type-title-tracking: -0.01em;
+  --type-heading-size: 22px;
+  --type-heading-line: 28px;
+  --type-heading-weight: 400;
+  --type-heading-tracking: 0em;
+  --type-body-size: 17px;
+  --type-body-line: 26px;
+  --type-body-weight: 300;
+  --type-body-tracking: 0em;
+  --type-ui-size: 16px;
+  --type-ui-line: 22px;
+  --type-ui-weight: 400;
+  --type-ui-tracking: 0em;
+  --type-ui-strong-size: 16px;
+  --type-ui-strong-line: 22px;
+  --type-ui-strong-weight: 500;
+  --type-ui-strong-tracking: 0em;
+  --type-caption-size: 14px;
+  --type-caption-line: 20px;
+  --type-caption-weight: 300;
+  --type-caption-tracking: 0em;
+  --type-wordmark-size: 20px;
+  --type-wordmark-line: 20px;
+  --type-wordmark-weight: 500;
+  --type-wordmark-tracking: 0em;
+
+  /* spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* sizes */
+  --button-height: 52px;
+  --pill-height: 44px;
+  --input-height: 52px;
+  --min-touch-target: 44px;
+  --screen-margin-phone: 24px;
+  --screen-margin-tablet: 48px;
+  --focus-ring: 2px;
+  --icon-stroke: 1.5;
+
+  /* motion */
+  --motion-duration: 180ms;
+  --motion-easing: ease-out;
+  --mark-draw-on: 1200ms;
+}
+
+/* Inverted theme, used for calls to action and emphasis panels. */
+[data-theme="inverted"] {
+  --ground: #2E4062;
+  --ink: #F5F3EE;
+  --panel: #CFDAE8;
+  --on-panel: #2E4062;
+  --reading-ground: #3E5680;
+  --on-reading: #F5F3EE;
+  --hairline: rgba(245,243,238,0.25);
+  --underline: rgba(245,243,238,0.45);
+  --focus: #F5F3EE;
+  --error: #F2B8AD;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --motion-duration: 0ms; --mark-draw-on: 0ms; }
+}

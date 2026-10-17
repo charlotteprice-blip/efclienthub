@@ -1,0 +1,50 @@
+/* Style guide page only. */
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.btn-small {
+  width: auto;
+  min-height: var(--min-touch-target);
+  padding: 0 var(--space-4);
+  font-size: var(--type-caption-size);
+}
+
+.swatches {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--space-3);
+}
+
+.swatch {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--panel);
+  color: var(--on-panel);
+}
+
+.swatch-chip {
+  height: 56px;
+}
+
+.swatch-text {
+  padding: var(--space-2) var(--space-3) var(--space-3);
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line);
+}
+
+.swatch-text strong {
+  display: block;
+  font-weight: 500;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+}

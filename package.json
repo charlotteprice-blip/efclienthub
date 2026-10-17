@@ -7,11 +7,17 @@
     "node": ">=20"
   },
   "scripts": {
-    "test:rules": "firebase emulators:exec --config firebase.test.json --project demo-clienthub --only firestore,storage \"node --test tests/\"",
+    "test:unit": "node --test \"tests/unit/*.test.js\"",
+    "test:rules": "firebase emulators:exec --config firebase.test.json --project demo-clienthub --only firestore,storage \"node --test tests/rules.test.js\"",
+    "test": "npm run test:unit && node scripts/check-contrast.mjs && npm run test:rules",
+    "vendor": "node scripts/vendor.mjs",
+    "tokens": "node scripts/build-tokens.mjs",
+    "contrast": "node scripts/check-contrast.mjs",
     "emulators": "firebase emulators:start --project demo-clienthub"
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^6.0.0",
+    "@fontsource/figtree": "^5.3.0",
     "firebase": "^13.0.0",
     "firebase-tools": "^15.34.0"
   }

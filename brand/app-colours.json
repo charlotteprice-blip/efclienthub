@@ -1,0 +1,8 @@
+{
+  "_note": "Client Hub status colours, which Levi's kit does not define. Text colour passes 4.5:1 on the sky ground, the warm white panel and its own tint. Each status is always shown with an icon and a word, never by colour alone. Checked by scripts/check-contrast.mjs. Client type accents live in public/config/client-types.json.",
+  "status": {
+    "done": { "text": "#2F5D3A", "tint": "#E3ECE2", "label": "Done", "icon": "tick" },
+    "inProgress": { "text": "#2E4062", "tint": "#E4E9F1", "label": "In progress", "icon": "half filled circle" },
+    "needsAttention": { "text": "#6E4A10", "tint": "#F2E8D6", "label": "Needs attention", "icon": "exclamation mark" }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "_note": "Client type settings for the Client Hub. This is the only place type specific values live. Copy marked draft is for Sarah to approve. Type names are never shown to clients. Accents marked placeholder are awaiting Levi.",
+  "version": 1,
+  "status": "draft",
+  "stages": [
+    "enquiry",
+    "firstSession",
+    "assessment",
+    "booking",
+    "feedback",
+    "intervention",
+    "review"
+  ],
+  "defaultCopy": {
+    "enquiry": {
+      "title": "Getting started",
+      "body": "Sarah has your enquiry and will be in touch to arrange your first session.",
+      "nextAction": "none"
+    },
+    "firstSession": {
+      "title": "Your first session",
+      "body": "In your first session you and Sarah will talk through what has brought you here and what you would like to change. There is nothing you need to prepare.",
+      "nextAction": "none"
+    },
+    "assessment": {
+      "title": "Your questionnaires",
+      "body": "Sarah has asked you to complete a few questionnaires. They help her understand how things are for you day to day. There are no right or wrong answers, and you can stop and come back at any time.",
+      "nextAction": "measures",
+      "nextActionLabel": "Continue"
+    },
+    "booking": {
+      "title": "Book your feedback session",
+      "body": "Thank you for completing your questionnaires. The next step is a session where Sarah talks you through what they show.",
+      "nextAction": "booking",
+      "nextActionLabel": "Book a session"
+    },
+    "feedback": {
+      "title": "Your feedback session",
+      "body": "Sarah will go through your results with you in your session. Afterwards they will be here for you to come back to.",
+      "nextAction": "none"
+    },
+    "intervention": {
+      "title": "Working together",
+      "body": "This is the part of your work with Sarah where you put ideas into practice. Your results and areas of focus are here whenever you need them.",
+      "nextAction": "results",
+      "nextActionLabel": "See your results"
+    },
+    "review": {
+      "title": "Reviewing your progress",
+      "body": "Sarah will look back over your progress with you and agree what comes next.",
+      "nextAction": "none"
+    }
+  },
+  "types": {
+    "neurodivergent": {
+      "practitionerLabel": "Neurodivergent",
+      "accent": "#A65A1B",
+      "accentPlaceholder": true,
+      "defaultMeasures": [],
+      "copy": {
+        "assessment": {
+          "body": "Sarah has asked you to complete a few questionnaires about how attention, organisation and planning show up for you at work and at home. There are no right or wrong answers, and you can stop and come back at any time."
+        }
+      }
+    },
+    "health": {
+      "practitionerLabel": "Health",
+      "accent": "#2F6E68",
+      "accentPlaceholder": true,
+      "defaultMeasures": [],
+      "copy": {
+        "assessment": {
+          "body": "Sarah has asked you to complete a few questionnaires about how your health and energy affect your work and daily life. There are no right or wrong answers, and you can stop and come back at any time."
+        }
+      }
+    },
+    "corporate": {
+      "practitionerLabel": "Corporate",
+      "accent": "#3E5680",
+      "accentPlaceholder": true,
+      "defaultMeasures": [],
+      "copy": {
+        "assessment": {
+          "body": "Sarah has asked you to complete a few questionnaires as part of the programme arranged with your organisation. Sarah will explain what is and is not shared with your organisation before you begin."
+        }
+      }
+    },
+    "team": {
+      "practitionerLabel": "Team",
+      "accent": "#3E5680",
+      "accentPlaceholder": true,
+      "defaultMeasures": [],
+      "copy": {}
+    }
+  }
+}

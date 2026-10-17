@@ -1,0 +1,688 @@
+/* Executive Frame Client Hub styles.
+   tokens.css (shared with the Learning Hub) loads first; this file holds
+   everything specific to the Client Hub. Phone first: every primary action
+   sits within reach of a thumb in the action bar at the foot of the screen. */
+
+/* ---------- Client Hub overrides and additions ---------- */
+
+:root {
+  /* Body and caption at 400 for readability in this app. Set
+     data-weight="light" on <html> to return to the kit's 300. */
+  --type-body-weight: 400;
+  --type-caption-weight: 400;
+
+  /* Status colours: see brand/app-colours.json and docs/brand-notes.md. */
+  --status-done: #2F5D3A;
+  --status-done-tint: #E3ECE2;
+  --status-progress: #2E4062;
+  --status-progress-tint: #E4E9F1;
+  --status-attention: #6E4A10;
+  --status-attention-tint: #F2E8D6;
+
+  /* Client type accent, set at runtime from config/client-types.json.
+     Decorative and non text only; it never carries meaning on its own. */
+  --accent: var(--ink);
+
+  --content-max: 560px;
+  --input-border: 2px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+:root[data-weight="light"] {
+  --type-body-weight: 300;
+  --type-caption-weight: 300;
+}
+
+/* ---------- base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-family);
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-line);
+  font-weight: var(--type-body-weight);
+  letter-spacing: var(--type-body-tracking);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, p, ul, ol, fieldset, figure {
+  margin: 0;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--underline);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+:focus-visible {
+  outline: var(--focus-ring) solid var(--focus);
+  outline-offset: 2px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: -100px;
+  z-index: 10;
+  padding: var(--space-3) var(--space-4);
+  background: var(--panel);
+  color: var(--on-panel);
+  border-radius: var(--radius-sm);
+}
+
+.skip-link:focus {
+  top: var(--space-4);
+}
+
+/* ---------- type scale ---------- */
+
+.t-display {
+  font-size: var(--type-display-size);
+  line-height: var(--type-display-line);
+  font-weight: var(--type-display-weight);
+  letter-spacing: var(--type-display-tracking);
+}
+
+.t-title, h1 {
+  font-size: var(--type-title-size);
+  line-height: var(--type-title-line);
+  font-weight: var(--type-title-weight);
+  letter-spacing: var(--type-title-tracking);
+}
+
+.t-heading, h2 {
+  font-size: var(--type-heading-size);
+  line-height: var(--type-heading-line);
+  font-weight: var(--type-heading-weight);
+  letter-spacing: var(--type-heading-tracking);
+}
+
+.t-ui {
+  font-size: var(--type-ui-size);
+  line-height: var(--type-ui-line);
+  font-weight: var(--type-ui-weight);
+}
+
+.t-ui-strong, h3 {
+  font-size: var(--type-ui-strong-size);
+  line-height: var(--type-ui-strong-line);
+  font-weight: var(--type-ui-strong-weight);
+}
+
+.t-caption {
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line);
+  font-weight: var(--type-caption-weight);
+}
+
+/* ---------- layout ---------- */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--screen-margin-phone);
+  min-height: 64px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--min-touch-target);
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.brand-mark {
+  width: 32px;
+  height: 32px;
+  flex: none;
+}
+
+.brand-name {
+  font-size: var(--type-wordmark-size);
+  line-height: var(--type-wordmark-line);
+  font-weight: var(--type-wordmark-weight);
+  letter-spacing: var(--type-wordmark-tracking);
+}
+
+.header-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--min-touch-target);
+  min-height: var(--min-touch-target);
+  padding: 0 var(--space-3);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--type-ui-size);
+  cursor: pointer;
+}
+
+.app-main {
+  flex: 1;
+  width: 100%;
+  max-width: calc(var(--content-max) + 2 * var(--screen-margin-phone));
+  margin: 0 auto;
+  padding: var(--space-4) var(--screen-margin-phone) var(--space-7);
+}
+
+.stack > * + * {
+  margin-top: var(--space-4);
+}
+
+.stack-lg > * + * {
+  margin-top: var(--space-6);
+}
+
+/* Primary action pinned to the foot of the screen for one handed use. */
+.action-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  padding: var(--space-4) var(--screen-margin-phone) calc(var(--space-4) + var(--safe-bottom));
+  background: linear-gradient(to bottom, rgba(207, 218, 232, 0), var(--ground) 30%);
+}
+
+.action-bar-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .app-header,
+  .action-bar {
+    padding-left: var(--screen-margin-tablet);
+    padding-right: var(--screen-margin-tablet);
+  }
+
+  .app-main {
+    max-width: calc(var(--content-max) + 2 * var(--screen-margin-tablet));
+    padding-left: var(--screen-margin-tablet);
+    padding-right: var(--screen-margin-tablet);
+  }
+}
+
+/* ---------- panels ---------- */
+
+.panel {
+  background: var(--panel);
+  color: var(--on-panel);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+
+.panel-accent {
+  border-left: 4px solid var(--accent);
+}
+
+.panel-inverted {
+  background: var(--inv-ground);
+  color: var(--inv-ink);
+}
+
+.hairline {
+  height: 1px;
+  border: 0;
+  background: var(--hairline);
+  margin: var(--space-5) 0;
+}
+
+/* ---------- buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  min-height: var(--button-height);
+  padding: 0 var(--space-5);
+  border: var(--input-border) solid transparent;
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: var(--type-ui-strong-size);
+  line-height: var(--type-ui-strong-line);
+  font-weight: var(--type-ui-strong-weight);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--motion-duration) var(--motion-easing),
+              color var(--motion-duration) var(--motion-easing),
+              border-color var(--motion-duration) var(--motion-easing);
+}
+
+/* Primary uses the inverted theme, as the kit specifies for calls to action. */
+.btn-primary {
+  background: var(--inv-ground);
+  color: var(--inv-ink);
+}
+
+.btn-primary:hover {
+  background: var(--ef-slate);
+}
+
+.btn-primary:focus-visible {
+  outline-color: var(--ef-navy);
+}
+
+.btn-secondary {
+  background: var(--panel);
+  color: var(--on-panel);
+  border-color: var(--ef-slate);
+}
+
+.btn-secondary:hover {
+  background: #FFFFFF;
+}
+
+.btn-quiet {
+  width: auto;
+  min-height: var(--min-touch-target);
+  padding: 0 var(--space-3);
+  background: transparent;
+  color: var(--ink);
+  font-weight: var(--type-ui-weight);
+  text-decoration: underline;
+  text-decoration-color: var(--underline);
+  text-underline-offset: 3px;
+}
+
+.btn[disabled],
+.btn[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+@media (min-width: 768px) {
+  .btn-inline {
+    width: auto;
+  }
+}
+
+/* ---------- form fields ---------- */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.field-label {
+  font-size: var(--type-ui-strong-size);
+  line-height: var(--type-ui-strong-line);
+  font-weight: var(--type-ui-strong-weight);
+}
+
+.field-hint {
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line);
+  font-weight: var(--type-caption-weight);
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  min-height: var(--input-height);
+  padding: var(--space-3) var(--space-4);
+  border: var(--input-border) solid var(--ef-slate);
+  border-radius: var(--radius-sm);
+  background: var(--panel);
+  color: var(--on-panel);
+  font-family: inherit;
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-line);
+  font-weight: var(--type-body-weight);
+}
+
+.textarea {
+  min-height: calc(var(--input-height) * 3);
+  resize: vertical;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--ef-slate);
+  opacity: 0.75;
+}
+
+.input:focus-visible,
+.textarea:focus-visible,
+.select:focus-visible {
+  outline: var(--focus-ring) solid var(--focus);
+  outline-offset: 2px;
+}
+
+.field-invalid .input,
+.field-invalid .textarea,
+.field-invalid .select {
+  border-color: var(--error);
+}
+
+.field-error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  color: var(--error);
+  font-size: var(--type-ui-size);
+  line-height: var(--type-ui-line);
+}
+
+.field-error::before {
+  content: "!";
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  border-radius: 50%;
+  background: var(--error);
+  color: var(--panel);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* Large choice cards for one item per screen measures and the intake. */
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: 0;
+  border: 0;
+}
+
+.choice {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: var(--button-height);
+  padding: var(--space-3) var(--space-4);
+  border: var(--input-border) solid var(--ef-slate);
+  border-radius: var(--radius-md);
+  background: var(--panel);
+  color: var(--on-panel);
+  cursor: pointer;
+  transition: background-color var(--motion-duration) var(--motion-easing);
+}
+
+.choice input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.choice-dot {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border: var(--input-border) solid var(--ef-slate);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.choice-dot::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--inv-ground);
+  transform: scale(0);
+  transition: transform var(--motion-duration) var(--motion-easing);
+}
+
+.choice:has(input:checked) {
+  background: var(--inv-panel);
+  border-color: var(--inv-ground);
+}
+
+.choice:has(input:checked) .choice-dot {
+  border-color: var(--inv-ground);
+}
+
+.choice:has(input:checked) .choice-dot::after {
+  transform: scale(1);
+}
+
+.choice:has(input:focus-visible) {
+  outline: var(--focus-ring) solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* ---------- status ---------- */
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 28px;
+  padding: var(--space-1) var(--space-3) var(--space-1) var(--space-2);
+  border-radius: var(--radius-pill);
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line);
+  font-weight: var(--type-ui-strong-weight);
+  white-space: nowrap;
+}
+
+.status svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+.status-done {
+  background: var(--status-done-tint);
+  color: var(--status-done);
+}
+
+.status-progress {
+  background: var(--status-progress-tint);
+  color: var(--status-progress);
+}
+
+.status-attention {
+  background: var(--status-attention-tint);
+  color: var(--status-attention);
+}
+
+/* ---------- task list (dashboard measures) ---------- */
+
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+  color: var(--on-panel);
+  overflow: hidden;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: 64px;
+  padding: var(--space-3) var(--space-5);
+}
+
+.task + .task {
+  border-top: 1px solid var(--hairline);
+}
+
+.task a {
+  text-decoration: none;
+}
+
+/* ---------- journey stages ---------- */
+
+.journey {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: var(--space-1);
+}
+
+.journey-step {
+  flex: 1;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--hairline);
+}
+
+.journey-step[data-state="done"] {
+  background: var(--ef-slate);
+}
+
+.journey-step[data-state="current"] {
+  background: var(--accent);
+}
+
+/* ---------- progress through a measure ---------- */
+
+.progress {
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--hairline);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  border-radius: inherit;
+  transition: width var(--motion-duration) var(--motion-easing);
+}
+
+/* ---------- mark and loader ---------- */
+
+.mark-draw .mark-ring {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: mark-draw var(--mark-draw-on) var(--motion-easing) forwards;
+}
+
+.mark-draw .mark-triangle {
+  opacity: 0;
+  animation: mark-fade var(--motion-duration) var(--motion-easing) forwards;
+  animation-delay: calc(var(--mark-draw-on) * 0.7);
+}
+
+@keyframes mark-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes mark-fade {
+  to { opacity: 1; }
+}
+
+.loader {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--space-4);
+}
+
+.loader svg {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mark-draw .mark-ring {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .mark-draw .mark-triangle {
+    animation: none;
+    opacity: 1;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0ms !important;
+  }
+}
+
+/* ---------- notices ---------- */
+
+.notice {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--panel);
+  color: var(--on-panel);
+  border-left: 4px solid var(--ef-slate);
+}
+
+.notice-error {
+  border-left-color: var(--error);
+}

@@ -10,25 +10,34 @@ This app shares Firebase Authentication with the Learning Hub (app.executivefram
 firebase.json          Hosting target, clienthub database, storage target, functions codebase
 .firebaserc            project and target mapping
 firestore.rules        rules for the clienthub database
-firestore.indexes.json
 storage.rules          bucket closed to browsers
 firebase.test.json     emulator config used only by the rules tests
-tests/rules.test.js    security rules tests
+brand/                 Levi's tokens.json and the Client Hub status colours
+tests/rules.test.js    security rules tests (emulators)
+tests/unit/            config and intake rule tests (no emulators)
 functions/             Cloud Functions, codebase "clienthub" (stubs until stage 3)
-public/                the app (pages from stage 2 onwards)
-  assets/brand         mark SVGs from Levi
-  assets/fonts         self hosted Figtree
-  assets/vendor        self hosted Firebase SDK
-  config/              client type and intake questionnaire config
-scripts/               admin scripts, for example setting role claims
-docs/                  data model, client journey, decisions
+public/
+  css/tokens.css       generated from brand/tokens.json, shared with the Learning Hub
+  css/app.css          Client Hub styles and overrides
+  config/              client-types.json and intake.json
+  js/                  firebase.js, intake-rules.js, client-types.js, mark.js
+  templates/page.html  base layout to copy for each page
+  styleguide.html      every component, for checking against the brand
+  assets/              brand SVGs, self hosted Figtree and Firebase SDK
+scripts/               vendor.mjs, build-tokens.mjs, check-contrast.mjs
+docs/                  data model, client journey, decisions, brand notes, intake guide
 ```
 
 ## Commands
 
 ```
 npm install
-npm run test:rules     runs the rules tests in the emulators (needs Java 21+)
+npm run vendor         copy the Firebase SDK and Figtree into public/assets
+npm run tokens         regenerate public/css/tokens.css from brand/tokens.json
+npm run contrast       check every colour pairing against WCAG 2.2
+npm run test:unit      config and intake rule tests
+npm run test:rules     security rules tests in the emulators (needs Java 21+)
+npm test               all of the above checks
 npm run emulators      local emulators on a demo project
 ```
 

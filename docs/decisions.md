@@ -9,6 +9,15 @@
 5. No third party scripts. The Firebase SDK and Figtree will be stored in `public/assets/vendor` and `public/assets/fonts`. A Content Security Policy in firebase.json enforces this.
 6. Repository is `charlotteprice-blip/efclienthub` rather than the `executive-frame-client-hub` named in the brief.
 
+## Decided in stage 2 (18 October 2026)
+
+7. `tokens.css` is generated from Levi's `brand/tokens.json` by `scripts/build-tokens.mjs`, so the Learning Hub can produce an identical file. Client Hub values live in `app.css`. See brand-notes.md.
+8. Status colours defined and checked: done #2F5D3A, in progress navy #2E4062, needs attention #6E4A10. Each passes 4.5:1 on sky, warm white and its own tint, and is always shown with an icon and a word.
+9. Client type accents and journey copy live only in `public/config/client-types.json`. Type names are never shown to clients.
+10. The intake rules are a pure function (`public/js/intake-rules.js`) so the browser and `submitIntake` apply identical logic. A type set on the activation code takes priority. If no rule fits, the type is left for Sarah to assign.
+11. The question about previous ADHD assessment is written but switched off, because it collects health information and Sarah has not decided to ask it.
+12. Firebase SDK 13.0.0 and Figtree (Latin and Latin Extended) are self hosted by `scripts/vendor.mjs`.
+
 ## Open questions
 
 1. Learning Hub access. Does activation grant clients a complimentary Learning Hub seat? Without one, results links reach a paywall. A sign in handover between the 2 subdomains also needs building, because Firebase sessions do not carry across origins.
@@ -19,3 +28,5 @@
 6. App Check. Its reCAPTCHA provider loads a Google script, which conflicts with the no third party scripts rule. Until decided, redeemActivationCode relies on attempt limits.
 7. Accent colours for neurodivergent and health types, and their relationship to the status colours.
 8. Firebase project access. Who else holds Owner or Editor on executiveframe-app?
+9. Google and Microsoft sign in. Firebase Authentication loads `https://apis.google.com/js/api.js` into the page for the sign in window. The current Content Security Policy blocks it, so only email and password sign in would work. Options: allow that 1 Google script on the log in and sign up pages only (Google already processes the sign in), or offer email and password only in the Client Hub. Learning Hub members who signed up with Google would need the first option. To decide before stage 3.
+10. Intake wording and rules are drafts for Sarah to approve.

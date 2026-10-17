@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#CFDAE8">
+  <title>Style guide · Executive Frame Client Hub</title>
+  <link rel="icon" href="/assets/brand/mark-slate-small.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/figtree-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/styleguide.css">
+  <script type="module" src="/js/styleguide.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="app">
+    <header class="app-header">
+      <a class="brand" href="/styleguide">
+        <img class="brand-mark" src="/assets/brand/mark-slate-small.svg" alt="" width="32" height="32">
+        <span class="brand-name">Executive Frame</span>
+      </a>
+      <a class="header-action" href="#account">Account</a>
+    </header>
+
+    <main id="main" class="app-main stack-lg">
+      <section class="stack">
+        <p class="t-caption">Client Hub style guide · interim brand kit, 18 October 2026</p>
+        <h1 class="t-display">Style guide</h1>
+        <p>Every component the Client Hub uses, built from Levi's tokens. Body text is 17/26 at weight 400 in this app. Use the toggle to compare the kit's 300.</p>
+        <button type="button" class="btn btn-secondary" id="toggle-weight" aria-pressed="false">Show body at weight 300</button>
+      </section>
+
+      <section class="stack" aria-labelledby="h-type">
+        <h2 id="h-type">Type</h2>
+        <div class="panel stack">
+          <p class="t-display">Display 40/42</p>
+          <p class="t-title">Title 28/32</p>
+          <p class="t-heading">Heading 22/28</p>
+          <p>Body 17/26. Your questionnaires help Sarah understand how things are for you day to day. Ōtautahi Christchurch, Tāmaki Makaurau.</p>
+          <p class="t-ui">UI 16/22</p>
+          <p class="t-ui-strong">UI strong 16/22 at 500</p>
+          <p class="t-caption">Caption 14/20</p>
+        </div>
+      </section>
+
+      <section class="stack" aria-labelledby="h-colour">
+        <h2 id="h-colour">Colour</h2>
+        <ul class="swatches" id="swatches"></ul>
+        <p class="t-caption">Ratios are measured against the sky ground. Run <code>npm run contrast</code> for every pairing.</p>
+      </section>
+
+      <section class="stack" aria-labelledby="h-status">
+        <h2 id="h-status">Status</h2>
+        <p>Always an icon and a word together, never colour alone.</p>
+        <div class="row">
+          <span class="status status-done">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" stroke="#E3ECE2" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Done
+          </span>
+          <span class="status status-progress">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"/></svg>
+            In progress
+          </span>
+          <span class="status status-attention">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="M8 4.2v4.6" stroke="#F2E8D6" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="11.4" r="1" fill="#F2E8D6"/></svg>
+            Needs attention
+          </span>
+        </div>
+      </section>
+
+      <section class="stack" aria-labelledby="h-dashboard">
+        <h2 id="h-dashboard">Dashboard pieces</h2>
+        <div class="row" role="group" aria-label="Preview client type accent">
+          <button type="button" class="btn btn-secondary btn-small" data-type="neurodivergent">Type A accent</button>
+          <button type="button" class="btn btn-secondary btn-small" data-type="health">Type B accent</button>
+          <button type="button" class="btn btn-secondary btn-small" data-type="corporate">Type C accent</button>
+        </div>
+        <ol class="journey" aria-label="Your journey: step 3 of 7">
+          <li class="journey-step" data-state="done"></li>
+          <li class="journey-step" data-state="done"></li>
+          <li class="journey-step" data-state="current"></li>
+          <li class="journey-step"></li>
+          <li class="journey-step"></li>
+          <li class="journey-step"></li>
+          <li class="journey-step"></li>
+        </ol>
+        <div class="panel panel-accent stack">
+          <p class="t-caption">Step 3 of 7</p>
+          <h2 id="stage-title">Your questionnaires</h2>
+          <p id="stage-body">Sarah has asked you to complete a few questionnaires.</p>
+        </div>
+        <ul class="task-list">
+          <li class="task">
+            <span>Questionnaire one</span>
+            <span class="status status-done"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" stroke="#E3ECE2" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Done</span>
+          </li>
+          <li class="task">
+            <a href="#measure">Questionnaire two</a>
+            <span class="status status-progress"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"/></svg>In progress</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="stack" aria-labelledby="h-measure">
+        <h2 id="h-measure">One item per screen</h2>
+        <div class="progress" role="progressbar" aria-label="Question 4 of 12" aria-valuemin="1" aria-valuemax="12" aria-valuenow="4"><div class="progress-fill" id="progress-fill"></div></div>
+        <p class="t-caption">Question 4 of 12</p>
+        <fieldset class="choices">
+          <legend class="t-heading">Example question text appears here.</legend>
+          <label class="choice"><input type="radio" name="sample" value="0"><span class="choice-dot"></span><span>Never</span></label>
+          <label class="choice"><input type="radio" name="sample" value="1" checked><span class="choice-dot"></span><span>Sometimes</span></label>
+          <label class="choice"><input type="radio" name="sample" value="2"><span class="choice-dot"></span><span>Often</span></label>
+          <label class="choice"><input type="radio" name="sample" value="3"><span class="choice-dot"></span><span>Very often</span></label>
+        </fieldset>
+      </section>
+
+      <section class="stack" aria-labelledby="h-fields">
+        <h2 id="h-fields">Fields</h2>
+        <div class="field">
+          <label class="field-label" for="sg-code">Activation code</label>
+          <span class="field-hint" id="sg-code-hint">12 characters, from Sarah's email.</span>
+          <input class="input" id="sg-code" aria-describedby="sg-code-hint" autocomplete="one-time-code" autocapitalize="characters" spellcheck="false">
+        </div>
+        <div class="field field-invalid">
+          <label class="field-label" for="sg-email">Email</label>
+          <input class="input" id="sg-email" type="email" value="name@example" aria-invalid="true" aria-describedby="sg-email-error">
+          <p class="field-error" id="sg-email-error">Enter an email address in the format name@example.com</p>
+        </div>
+        <div class="field">
+          <label class="field-label" for="sg-text">Text answer</label>
+          <span class="field-hint" id="sg-text-hint">You can type or use your phone's dictation.</span>
+          <textarea class="textarea" id="sg-text" aria-describedby="sg-text-hint"></textarea>
+        </div>
+      </section>
+
+      <section class="stack" aria-labelledby="h-buttons">
+        <h2 id="h-buttons">Buttons</h2>
+        <button type="button" class="btn btn-primary">Primary, 1 per screen</button>
+        <button type="button" class="btn btn-secondary">Secondary</button>
+        <button type="button" class="btn btn-quiet">Quiet</button>
+        <button type="button" class="btn btn-primary" disabled>Unavailable</button>
+      </section>
+
+      <section class="stack" aria-labelledby="h-notice">
+        <h2 id="h-notice">Notices</h2>
+        <div class="notice"><p>Your results will appear here after Sarah has gone through them with you.</p></div>
+        <div class="notice notice-error" role="alert"><p>That code has expired. Ask Sarah for a new one.</p></div>
+        <div class="panel panel-inverted stack">
+          <h2>Inverted panel</h2>
+          <p>Used sparingly for emphasis, as in the kit's inverted theme.</p>
+        </div>
+      </section>
+
+      <section class="stack" aria-labelledby="h-mark">
+        <h2 id="h-mark">Mark and loader</h2>
+        <div class="loader" id="loader">
+          <span data-mark="draw" data-size="large" data-label="Executive Frame"></span>
+          <p class="t-ui">Checking your access</p>
+        </div>
+        <button type="button" class="btn btn-secondary" id="replay">Replay the mark</button>
+      </section>
+    </main>
+
+    <div class="action-bar">
+      <div class="action-bar-inner">
+        <button type="button" class="btn btn-primary">Continue</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
