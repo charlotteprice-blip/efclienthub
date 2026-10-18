@@ -93,7 +93,7 @@ function shell({ nav, title, content, foot, account, mode, wide }) {
     </nav>
     <header class="topbar">
       <button type="button" class="menu-button" data-action="menu" aria-controls="sidebar" aria-expanded="false" aria-label="Open menu">${MENU}</button>
-      <h1 class="topbar-title">${esc(title)}</h1>
+      <h1 class="topbar-title${nav.items.some((i) => i.active && i.label === title) ? ' visually-hidden' : ''}">${esc(title)}</h1>
       <div class="topbar-actions">${account}</div>
     </header>
     <main class="workspace" id="workspace" tabindex="-1">
