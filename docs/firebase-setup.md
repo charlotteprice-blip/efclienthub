@@ -98,6 +98,7 @@ Real questionnaires come from the EF Client Hub Codebook (`measures/ef-client-hu
 ## Before real clients
 
 1. `npm run test:rules` passes (needs Java 21).
+0. Charlotte's account back to admin: `npm run roles -- set hello@charlotteprice.co.nz admin` (practitioner was granted for testing).
 2. `ALLOW_SAMPLE_MEASURES=false`, functions redeployed, and the sample questionnaires replaced by cleared ones.
 3. `bookingUrl` in `public/config/app.json` set to Sarah's Splose booking page.
 4. Sarah has approved the consent, intake and journey wording.

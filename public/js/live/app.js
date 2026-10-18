@@ -509,6 +509,29 @@ document.addEventListener('click', async (event) => {
   }
 });
 
+// Library filters narrow the table in place; nothing is sent anywhere.
+function applyFilters(form) {
+  const q = form.q.value.trim().toLowerCase();
+  const domain = form.domain.value;
+  const audience = form.audience.value;
+  const licence = form.licence.value;
+  let shown = 0;
+  for (const row of app.querySelectorAll('[data-row]')) {
+    const ok = (!q || row.dataset.search.includes(q)) && (!domain || row.dataset.domain === domain) && (!audience || row.dataset.audience === audience) && (!licence || row.dataset.licence === licence);
+    row.hidden = !ok;
+    if (ok) shown += 1;
+  }
+  const count = app.querySelector('[data-filter-count]');
+  if (count) count.textContent = `${shown} questionnaire${shown === 1 ? '' : 's'}`;
+}
+document.addEventListener('input', (event) => {
+  const form = event.target.closest('[data-filters]');
+  if (form) applyFilters(form);
+});
+document.addEventListener('submit', (event) => {
+  if (event.target.closest('[data-filters]')) event.preventDefault();
+});
+
 // Answers save the moment they are chosen; formulation cards move locally.
 document.addEventListener('change', async (event) => {
   const el = event.target;
@@ -521,6 +544,7 @@ document.addEventListener('change', async (event) => {
       route();
     });
   }
+  if (el.closest('[data-filters]')) applyFilters(el.closest('[data-filters]'));
   if (el.name === 'cadence' && el.closest('[data-form="schedule"]')) {
     const form = el.closest('form');
     const dates = el.value === 'dates';

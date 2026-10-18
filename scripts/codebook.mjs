@@ -162,6 +162,7 @@ for (const lib of library) {
     code,
     name: col(lib, 'Name shown to clients') || col(sum, 'Instrument Name'),
     formalName: col(sum, 'Instrument Name'),
+    domain: col(sum, 'Domain').replace(/^\d+\.\s*/, ''),
     description: col(sum, 'Construct measured').slice(0, 300),
     licenceStatus: licence,
     licenceNote: col(lib, 'Licence note'),

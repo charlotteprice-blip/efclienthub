@@ -278,3 +278,35 @@
 .table td p + p.t-caption {
   margin-top: 2px;
 }
+
+/* ---------- library filters ---------- */
+
+.filters {
+  display: grid;
+  grid-template-columns: minmax(200px, 2fr) repeat(3, minmax(140px, 1fr));
+  gap: var(--space-4);
+  align-items: end;
+}
+
+@media (max-width: 899px) {
+  .filters {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Library table wraps so 5 columns fit the workspace */
+.table-library {
+  table-layout: fixed;
+}
+
+.table-library th,
+.table-library td {
+  white-space: normal;
+  vertical-align: top;
+}
+
+.table-library th:nth-child(1) { width: 34%; }
+.table-library th:nth-child(2) { width: 20%; }
+.table-library th:nth-child(3) { width: 11%; }
+.table-library th:nth-child(4) { width: 21%; }
+.table-library th:nth-child(5) { width: 14%; }

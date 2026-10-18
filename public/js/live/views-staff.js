@@ -229,7 +229,7 @@ export function client(s, uid) {
         c.activatedAt && assignable.length
           ? `<form class="inline-add" data-form="assign" data-uid="${esc(uid)}" novalidate>
               <label class="visually-hidden" for="assign">Questionnaire to assign</label>
-              <select class="select" id="assign" name="measureId">${assignable.map((m) => `<option value="${esc(m.id)}">${esc(m.name)}${m.licenceStatus === 'sample' ? ' (sample, testing only)' : ''}</option>`).join('')}</select>
+              <select class="select" id="assign" name="measureId">${measureOptions(assignable)}</select>
               <button type="submit" class="btn btn-secondary">Assign</button>
             </form>`
           : `<p class="t-caption">${c.activatedAt ? 'Every questionnaire in the library is assigned or in progress.' : 'Questionnaires can be assigned once the client has finished setting up.'}</p>`
@@ -244,7 +244,7 @@ export function client(s, uid) {
         c.activatedAt && schedulable.length
           ? `<form class="schedule-form stack" data-form="schedule" data-uid="${esc(uid)}" novalidate>
               <div class="split">
-                <div class="field"><label class="field-label" for="sch-measure">Questionnaire</label><select class="select" id="sch-measure" name="measureId">${schedulable.map((m) => `<option value="${esc(m.id)}">${esc(m.name)}${m.licenceStatus === 'sample' ? ' (sample, testing only)' : ''}</option>`).join('')}</select></div>
+                <div class="field"><label class="field-label" for="sch-measure">Questionnaire</label><select class="select" id="sch-measure" name="measureId">${measureOptions(schedulable)}</select></div>
                 <div class="field"><label class="field-label" for="sch-cadence">How often</label><select class="select" id="sch-cadence" name="cadence">${Object.entries(CADENCE_LABELS).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join('')}</select></div>
               </div>
               <div class="split" data-cadence-fields="interval">
@@ -357,18 +357,52 @@ export function codes(s) {
   );
 }
 
+// Options for a questionnaire select, grouped by domain and sorted by name.
+export function measureOptions(list) {
+  const groups = new Map();
+  for (const m of [...list].sort((a, b) => a.name.localeCompare(b.name))) {
+    const key = m.domain || (m.licenceStatus === 'sample' ? 'Sample questionnaires' : 'Other');
+    groups.set(key, [...(groups.get(key) ?? []), m]);
+  }
+  const option = (m) => `<option value="${esc(m.id)}">${esc(m.name)}${m.code ? ` (${esc(m.code)})` : ''}${m.licenceStatus === 'sample' ? ' (sample, testing only)' : ''}</option>`;
+  if (groups.size === 1) return [...groups.values()][0].map(option).join('');
+  return [...groups.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([domain, ms]) => `<optgroup label="${esc(domain)}">${ms.map(option).join('')}</optgroup>`)
+    .join('');
+}
+
 export function library(s) {
-  const rows = Object.values(s.ctx.measures)
-    .map((m) => `<tr><td><p class="t-ui-strong">${esc(m.name)}</p>${m.formalName ? `<p class="t-caption">${esc(m.formalName)}${m.code && !m.formalName.includes(`(${m.code})`) ? ` (${esc(m.code)})` : ''}${m.scoringRules?.clientFacing === false ? '. For you only; never summarised to the client' : ''}</p>` : ''}</td><td>${m.items?.length ?? 0}</td><td>${esc((m.scoringRules?.subscales ?? []).map((x) => x.label).join(', '))}</td><td>${m.licenceStatus === 'cleared' ? status('done', 'Cleared for clients') : status('attention', 'Sample, testing only')}</td></tr>`)
+  const measures = Object.values(s.ctx.measures).sort((a, b) => a.name.localeCompare(b.name));
+  const domains = [...new Set(measures.map((m) => m.domain).filter(Boolean))].sort();
+  const rows = measures
+    .map((m) => {
+      const staffOnly = m.scoringRules?.clientFacing === false;
+      const search = [m.name, m.formalName, m.code, m.domain, m.description, (m.scoringRules?.subscales ?? []).map((x) => x.label).join(' ')].filter(Boolean).join(' ').toLowerCase();
+      return `<tr data-row data-search="${esc(search)}" data-domain="${esc(m.domain ?? '')}" data-audience="${staffOnly ? 'staff' : 'client'}" data-licence="${esc(m.licenceStatus)}">
+        <td><p class="t-ui-strong">${esc(m.name)}</p>${m.formalName ? `<p class="t-caption">${esc(m.formalName)}${m.code && !m.formalName.includes(m.code) ? ` (${esc(m.code)})` : ''}${staffOnly ? '. For you only; never summarised to the client' : ''}</p>` : ''}</td>
+        <td>${esc(m.domain ?? '')}</td>
+        <td>${m.items?.length ?? 0}${m.minutes ? `<p class="t-caption">${m.minutes} min</p>` : ''}</td>
+        <td>${esc((m.scoringRules?.subscales ?? []).map((x) => x.label).join(', '))}</td>
+        <td>${m.licenceStatus === 'cleared' ? status('done', 'Cleared') : status('attention', 'Sample')}</td>
+      </tr>`;
+    })
     .join('');
   return shell(
     s,
     'library',
     'Questionnaire library',
     `<p class="reading">Questionnaires available to assign. They come from the EF Client Hub Codebook; Charlotte adds each one from the terminal once its licence status is cleared. Commercial instruments are never reproduced in the hub.</p>
-    <div class="table-wrap"><table class="table">
-      <thead><tr><th scope="col">Questionnaire</th><th scope="col">Questions</th><th scope="col">Subscales</th><th scope="col">Licence</th></tr></thead>
-      <tbody>${rows || '<tr><td colspan="4">The library is empty. Charlotte adds questionnaires with npm run measures.</td></tr>'}</tbody>
+    <form class="filters" data-filters="library" role="search" aria-label="Filter the library" novalidate>
+      <div class="field"><label class="field-label" for="lib-q">Search</label><input class="input" id="lib-q" name="q" type="search" placeholder="Name, code, subscale or topic" autocomplete="off"></div>
+      <div class="field"><label class="field-label" for="lib-domain">Domain</label><select class="select" id="lib-domain" name="domain"><option value="">All domains</option>${domains.map((d) => `<option value="${esc(d)}">${esc(d)}</option>`).join('')}</select></div>
+      <div class="field"><label class="field-label" for="lib-audience">Results shown to</label><select class="select" id="lib-audience" name="audience"><option value="">Anyone</option><option value="client">Client and you</option><option value="staff">You only</option></select></div>
+      <div class="field"><label class="field-label" for="lib-licence">Licence</label><select class="select" id="lib-licence" name="licence"><option value="">Any</option><option value="cleared">Cleared</option><option value="sample">Sample</option></select></div>
+    </form>
+    <p class="t-caption" data-filter-count>${measures.length} questionnaire${measures.length === 1 ? '' : 's'}</p>
+    <div class="table-wrap"><table class="table table-library">
+      <thead><tr><th scope="col">Questionnaire</th><th scope="col">Domain</th><th scope="col">Questions</th><th scope="col">Subscales</th><th scope="col">Licence</th></tr></thead>
+      <tbody>${rows || '<tr><td colspan="5">The library is empty. Charlotte adds questionnaires with npm run measures.</td></tr>'}</tbody>
     </table></div>`,
     true,
   );
