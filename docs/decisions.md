@@ -92,6 +92,10 @@
 52. The client reads the formulation and responds to each card (fits, partly, does not fit, optional comment). Responses go to Sarah on the client's record, tagged with the version answered; local drag and drop rearranging is removed.
 53. Library tags (conditions and topics) live in the Hub Library sheet and appear as filter buttons; library columns sort by heading.
 
+## Dashboard (19 October 2026)
+
+54. The practitioner landing page is a dashboard: counts by stage, needs attention (thresholds in `app.json` `attention`), check ins due in the next 7 days, and a linear tracker per client across the 7 journey stages. The client table lives at /practitioner/clients.
+
 ## Open questions
 
 Answered by Charlotte on 18 October 2026 (see decision 30): 1 (discounted seat), 2 (clinical record, 10 years), 3 (all in the hub), 5 (adults), 9 (email and password only). Still open: 4, 6, 7, 8, 10, plus the discount rate and the email sender address.

@@ -77,6 +77,127 @@ function resultsStatus(s, uid) {
   return 'None yet';
 }
 
+// ---------- dashboard ----------
+
+const STAGE_ORDER = Object.keys(STAGE_LABELS);
+const DAY = 86400000;
+
+// Working days until a due date, Monday to Friday, ignoring public holidays.
+function workingDaysUntil(ts) {
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  let days = 0;
+  while (d.getTime() < ts) {
+    d.setDate(d.getDate() + 1);
+    if (d.getDay() !== 0 && d.getDay() !== 6) days += 1;
+  }
+  return days;
+}
+
+export function attentionItems(s) {
+  const t = { codeDays: 7, intakeDays: 3, questionnaireDays: 7, requestWorkingDays: 5, ...(s.config.attention ?? {}) };
+  const now = Date.now();
+  const items = [];
+  for (const c of s.ctx.codes) {
+    if (!c.redeemedByUid && c.expiresAt > now && now - c.issuedAt > t.codeDays * DAY) {
+      items.push({ kind: 'code', who: c.forName, text: `Activation code issued ${relative(c.issuedAt)} and not yet used`, href: '/practitioner/codes' });
+    }
+  }
+  for (const c of Object.values(s.ctx.clients)) {
+    const uid = c.uid ?? c.id;
+    if (!c.codeHash) continue;
+    const href = `/practitioner/client/${uid}`;
+    if (!c.activatedAt && now - (c.createdAt ?? now) > t.intakeDays * DAY) {
+      items.push({ kind: 'intake', who: c.name || c.email, text: `Signed up ${relative(c.createdAt)} and has not finished setting up`, href });
+    }
+    const stale = assignmentsFor(s, uid).filter((a) => a.status === 'notStarted' && now - (a.assignedAt ?? now) > t.questionnaireDays * DAY);
+    if (stale.length) {
+      items.push({ kind: 'questionnaire', who: c.name || c.email, text: `${stale.length} questionnaire${stale.length === 1 ? '' : 's'} assigned ${relative(Math.min(...stale.map((a) => a.assignedAt)))} and not started`, href });
+    }
+  }
+  for (const r of s.ctx.requests) {
+    if (r.status === 'open' && workingDaysUntil(r.dueBy) <= t.requestWorkingDays) {
+      items.push({ kind: 'request', who: s.ctx.clients[r.uid]?.name ?? 'Client', text: `${r.kind === 'access' ? 'Access' : 'Correction'} request due ${fmtDate(r.dueBy)}`, href: '/practitioner/review' });
+    }
+  }
+  return items;
+}
+
+function checkInsThisWeek(s) {
+  const end = new Date();
+  end.setDate(end.getDate() + 7);
+  const limit = end.toISOString().slice(0, 10);
+  return s.ctx.schedules.filter((x) => x.status === 'active' && x.nextDue && x.nextDue <= limit).sort((a, b) => a.nextDue.localeCompare(b.nextDue));
+}
+
+// A linear tracker: 1 step per journey stage, filled to the client's stage.
+function tracker(s, c) {
+  const uid = c.uid ?? c.id;
+  const list = assignmentsFor(s, uid);
+  const done = list.filter((a) => a.status === 'complete').length;
+  const current = c.activatedAt ? STAGE_ORDER.indexOf(c.journeyStage) : -1;
+  const steps = STAGE_ORDER.map((stage, i) => {
+    const state = i < current ? 'done' : i === current ? 'current' : 'todo';
+    let detail = '';
+    if (stage === 'assessment' && list.length) detail = `${done} of ${list.length}`;
+    return `<li class="step step-${state}"><span class="step-dot" aria-hidden="true"></span><span class="step-label">${esc(STAGE_LABELS[stage])}${detail ? `<span class="step-detail">${esc(detail)}</span>` : ''}</span></li>`;
+  });
+  const label = current < 0 ? 'Setting up' : `${STAGE_LABELS[c.journeyStage]}, step ${current + 1} of ${STAGE_ORDER.length}`;
+  return `<ol class="tracker" aria-label="${esc(label)}">${steps.join('')}</ol>`;
+}
+
+export function dashboard(s) {
+  const clients = Object.values(s.ctx.clients).filter((c) => c.codeHash);
+  const counts = Object.fromEntries(STAGE_ORDER.map((k) => [k, 0]));
+  let settingUp = 0;
+  for (const c of clients) {
+    if (c.activatedAt && counts[c.journeyStage] !== undefined) counts[c.journeyStage] += 1;
+    else settingUp += 1;
+  }
+  const attention = attentionItems(s);
+  const checkIns = checkInsThisWeek(s);
+  const byStage = (a, b) => STAGE_ORDER.indexOf(a.journeyStage) - STAGE_ORDER.indexOf(b.journeyStage) || (b.lastActive ?? 0) - (a.lastActive ?? 0);
+  const rows = clients
+    .sort(byStage)
+    .map((c) => {
+      const uid = c.uid ?? c.id;
+      return `<li class="client-track">
+        <div class="client-track-head">
+          <a class="t-ui-strong" href="/practitioner/client/${esc(uid)}">${esc(c.name || c.email || 'Unnamed')}</a>
+          <span class="t-caption">${esc(typeLabel(s, c.clientType))}${c.lastActive ? `, active ${relative(c.lastActive)}` : ''}</span>
+          ${resultsStatus(s, uid)}
+        </div>
+        ${tracker(s, c)}
+      </li>`;
+    })
+    .join('');
+  const stageChips = STAGE_ORDER.map((k) => `<li class="stat"><span class="stat-n">${counts[k]}</span><span class="stat-l">${esc(STAGE_LABELS[k])}</span></li>`).join('');
+  return shell(
+    s,
+    'dashboard',
+    'Dashboard',
+    `<section class="stack" aria-labelledby="h-stages">
+      <h2 id="h-stages" class="visually-hidden">Clients by stage</h2>
+      <ul class="stats">${settingUp ? `<li class="stat"><span class="stat-n">${settingUp}</span><span class="stat-l">Setting up</span></li>` : ''}${stageChips}</ul>
+    </section>
+    <div class="split dashboard-split">
+      <section class="stack" aria-labelledby="h-att">
+        <h2 id="h-att">Needs attention</h2>
+        ${attention.length ? `<ul class="task-list">${attention.map((x) => `<li class="task"><div><p class="task-name">${esc(x.who)}</p><p class="task-meta">${esc(x.text)}</p></div>${status('attention', { code: 'Code', intake: 'Set up', questionnaire: 'Not started', request: 'Due soon' }[x.kind])}<a class="btn btn-secondary" href="${esc(x.href)}">Open</a></li>`).join('')}</ul>` : '<p>Nothing waiting on you today.</p>'}
+      </section>
+      <section class="stack" aria-labelledby="h-ci">
+        <h2 id="h-ci">Check ins due this week</h2>
+        ${checkIns.length ? `<ul class="task-list">${checkIns.map((x) => `<li class="task"><div><p class="task-name">${esc(s.ctx.clients[x.uid]?.name ?? 'Client')}</p><p class="task-meta">${esc(s.ctx.measures[x.measureId]?.name ?? x.measureId)}, ${fmtDay(x.nextDue)}</p></div><span></span><a class="btn btn-secondary" href="/practitioner/client/${esc(x.uid)}">Open</a></li>`).join('')}</ul>` : '<p>None due in the next 7 days.</p>'}
+      </section>
+    </div>
+    <section class="stack" aria-labelledby="h-prog">
+      <div class="toolbar"><h2 id="h-prog">Where each client is</h2><a class="btn btn-secondary btn-inline" href="/practitioner/clients">Client table</a></div>
+      ${rows ? `<ul class="client-tracks">${rows}</ul>` : '<p>No clients yet. <a href="/practitioner/codes">Issue an activation code</a> to invite the first one.</p>'}
+    </section>`,
+    true,
+  );
+}
+
 export function clients(s) {
   const rows = Object.values(s.ctx.clients)
     .filter((c) => c.codeHash)

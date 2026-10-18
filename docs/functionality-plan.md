@@ -28,7 +28,7 @@ Transactional email through an email API called from Cloud Functions, never from
 
 ## Stage 8: Sarah's dashboard
 
-A Dashboard page as the practitioner landing page: counts by stage; a Needs attention list (code issued but not redeemed after 7 days, intake not completed after 3 days, questionnaire assigned but not started after 7 days, privacy request due within 5 working days); and Check ins due this week. Each row links to the client page. Thresholds live in config so Sarah can adjust them.
+A Dashboard page as the practitioner landing page: counts by stage; a Needs attention list (code issued but not redeemed after 7 days, intake not completed after 3 days, questionnaire assigned but not started after 7 days, privacy request due within 5 working days); Check ins due this week; and a row per client with a linear tracker across the 7 journey stages (done, current, to come, with questionnaire completion under the Questionnaires step). Each row links to the client page. Thresholds live in `app.json` under `attention`. Built 19 October 2026; the client table moved to /practitioner/clients.
 
 ## Stage 9: Sarah edits config in the hub
 

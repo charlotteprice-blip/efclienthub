@@ -498,3 +498,148 @@ th .sort:focus-visible {
 .table-library th:nth-child(3) { width: 11%; }
 .table-library th:nth-child(4) { width: 21%; }
 .table-library th:nth-child(5) { width: 14%; }
+
+/* ---------- practitioner dashboard ---------- */
+
+.stats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  min-width: 112px;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+  color: var(--on-panel);
+}
+
+.stat-n {
+  font-size: var(--type-title-size);
+  line-height: var(--type-title-line);
+  font-weight: 500;
+}
+
+.stat-l {
+  font-size: var(--type-caption-size);
+}
+
+.dashboard-split {
+  align-items: start;
+}
+
+/* 1 row per client with a linear tracker across the 7 journey stages */
+.client-tracks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.client-track {
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+  color: var(--on-panel);
+}
+
+.client-track-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  margin-bottom: var(--space-3);
+}
+
+.client-track-head .status {
+  margin-left: auto;
+}
+
+.tracker {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-2);
+  font-size: var(--type-caption-size);
+  line-height: 1.25;
+}
+
+/* the connecting line, drawn from each step to the next */
+.step::before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: var(--hairline);
+}
+
+.step:last-child::before {
+  display: none;
+}
+
+.step-done::before {
+  background: var(--status-done);
+}
+
+.step-dot {
+  position: relative;
+  z-index: 1;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--hairline);
+  background: var(--ground);
+}
+
+.step-done .step-dot {
+  border-color: var(--status-done);
+  background: var(--status-done);
+}
+
+.step-current .step-dot {
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
+.step-todo .step-label {
+  opacity: 0.6;
+}
+
+.step-current .step-label {
+  font-weight: 500;
+}
+
+.step-detail {
+  display: block;
+  opacity: 0.8;
+}
+
+@media (max-width: 899px) {
+  .tracker {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+  .step-label {
+    font-size: 11px;
+  }
+}

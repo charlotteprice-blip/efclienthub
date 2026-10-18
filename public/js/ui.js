@@ -5,7 +5,7 @@
 
 export const HASH_ROUTES = {
   home: '#/home', questionnaires: '#/questionnaires', results: '#/results', formulation: '#/formulation', account: '#/account',
-  clients: '#/p/clients', review: '#/p/review', codes: '#/p/codes', library: '#/p/library',
+  dashboard: '#/p/clients', clients: '#/p/clients', review: '#/p/review', codes: '#/p/codes', library: '#/p/library',
 };
 
 export const esc = (v) =>
@@ -42,6 +42,7 @@ const ICONS = {
   list: '<rect x="4" y="3" width="12" height="14.5" rx="2"/><path d="M7.5 7.5h5M7.5 10.5h5M7.5 13.5h3"/>',
   results: '<circle cx="10" cy="10" r="7"/><path d="M10 6v4l2.5 2.5"/>',
   formulation: '<rect x="3" y="3" width="6" height="6" rx="1.5"/><rect x="11" y="3" width="6" height="6" rx="1.5"/><rect x="3" y="11" width="6" height="6" rx="1.5"/><rect x="11" y="11" width="6" height="6" rx="1.5"/>',
+  dashboard: '<path d="M3.5 16.5V9M8 16.5V5M12.5 16.5v-6M17 16.5V7.5"/><path d="M2.5 17h15"/>',
   clients: '<circle cx="7.5" cy="7" r="2.75"/><path d="M2.5 16.5c.6-2.6 2.6-4 5-4s4.4 1.4 5 4"/><circle cx="14" cy="7.5" r="2.25"/><path d="M14 12.5c1.9 0 3.2 1.2 3.6 3.5"/>',
   review: '<rect x="4" y="3" width="12" height="14.5" rx="2"/><path d="M7.5 10.5l1.8 1.8 3.2-3.6"/>',
   codes: '<circle cx="7" cy="10" r="3.25"/><path d="M10.25 10H17.5M14.5 10v3M16.5 10v2"/>',
@@ -113,6 +114,7 @@ export function clientShell({ title, active, content, client, counts, hasFormula
 
 export function practitionerShell({ title, active, content, counts, wide, markSrc, routes = HASH_ROUTES, role = 'practitioner', person = { name: 'Sarah' }, accountHref = null }) {
   const all = [
+    ...(routes.dashboard && routes.dashboard !== routes.clients ? [{ key: 'dashboard', href: routes.dashboard, label: 'Dashboard', icon: 'dashboard', active: active === 'dashboard', practitionerOnly: true }] : []),
     { key: 'clients', href: routes.clients, label: 'Clients', icon: 'clients', active: active === 'clients', practitionerOnly: true },
     { key: 'review', href: routes.review, label: 'To review', icon: 'review', active: active === 'review', count: counts.review, countLabel: 'to review', practitionerOnly: true },
     { key: 'codes', href: routes.codes, label: 'Activation codes', icon: 'codes', active: active === 'codes' },

@@ -136,8 +136,10 @@ async function route() {
         return paint(sv.codes(S));
       case 'library':
         return paint(sv.library(S));
-      default:
+      case 'clients':
         return paint(sv.clients(S));
+      default:
+        return paint(sv.dashboard(S));
     }
   }
 

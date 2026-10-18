@@ -4,5 +4,12 @@
   "bookingUrl": "",
   "learningHubUrl": "https://app.executiveframe.co.nz",
   "socialSignIn": false,
-  "practitionerName": "Sarah"
+  "practitionerName": "Sarah",
+  "_attentionNote": "Dashboard thresholds in days: an activation code not used, intake not finished after activation, a questionnaire not started after assignment, and a privacy request due within this many working days.",
+  "attention": {
+    "codeDays": 7,
+    "intakeDays": 3,
+    "questionnaireDays": 7,
+    "requestWorkingDays": 5
+  }
 }
