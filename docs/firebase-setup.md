@@ -25,7 +25,10 @@ npx firebase login
 gcloud auth login
 gcloud auth application-default login
 gcloud config set project ef-client-hub
+gcloud auth application-default set-quota-project ef-client-hub
 ```
+
+If `npx firebase login` says it is already logged in from earlier work but `npm run setup:check` reports that the Firebase CLI cannot list projects, the stored login has gone stale. Run `npx firebase login --reauth` and sign in again.
 
 ## 4. Create everything else
 

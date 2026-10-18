@@ -69,16 +69,38 @@ function run(cmd, list, { capture = true, input } = {}) {
     console.log(c.dim(`  would run: ${show(cmd, list)}`));
     return { ok: true, out: '', dry: true };
   }
-  const r = spawnSync(cmd, list, { encoding: 'utf8', stdio: capture ? ['pipe', 'pipe', 'pipe'] : 'inherit', input });
+  const r = spawnSync(cmd, list, { encoding: 'utf8', stdio: capture ? ['pipe', 'pipe', 'pipe'] : 'inherit', input, maxBuffer: 64 * 1024 * 1024 });
   if (r.error) return { ok: false, out: '', err: r.error.message };
   return { ok: r.status === 0, out: (r.stdout ?? '').trim(), err: (r.stderr ?? '').trim() };
 }
 
 // Read only commands still run during a dry run, so the plan is accurate.
 function look(cmd, list) {
-  const r = spawnSync(cmd, list, { encoding: 'utf8' });
+  const r = spawnSync(cmd, list, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
   if (r.error) return { ok: false, out: '', err: r.error.message };
   return { ok: r.status === 0, out: (r.stdout ?? '').trim(), err: (r.stderr ?? '').trim() };
+}
+
+// First meaningful line of a failed command, for the report.
+function why(r) {
+  const line = `${r.err}\n${r.out}`
+    .split('\n')
+    .map((l) => l.replace(/\x1b\[[0-9;]*m/g, '').trim())
+    .find((l) => l && !/^(npm (warn|notice)|\(node:\d+\))/i.test(l));
+  return line ? line.slice(0, 200) : 'no error message';
+}
+
+// The Firebase CLI stores its login locally; login:list reads it without the network.
+function firebaseLogin() {
+  const r = look(firebaseBin, ['login:list', '--json']);
+  if (!r.ok) return null;
+  try {
+    const parsed = JSON.parse(r.out);
+    const accounts = Array.isArray(parsed.result) ? parsed.result : [];
+    return accounts.map((a) => a.user?.email ?? a.email).filter(Boolean);
+  } catch {
+    return /logged in as/i.test(r.out) ? [r.out.match(/logged in as\s+(\S+)/i)?.[1] ?? 'unknown'] : [];
+  }
 }
 
 const fb = (list) => [firebaseBin, [...list, '--project', CONFIG.project]];
@@ -141,8 +163,21 @@ const steps = [
       if (!look('gcloud', ['--version']).ok) problems.push('gcloud missing; install the Google Cloud CLI (brew install --cask google-cloud-sdk)');
       const java = look('java', ['-version']);
       if (!java.ok) problems.push('Java missing (only needed for npm run test:rules); brew install openjdk@21');
-      if (existsSync(firebaseBin) && !look(firebaseBin, ['projects:list', '--json']).ok) problems.push('Firebase CLI not logged in; run npx firebase login');
-      if (look('gcloud', ['--version']).ok && !look('gcloud', ['auth', 'print-access-token']).ok) problems.push('gcloud not logged in; run gcloud auth login');
+      if (existsSync(firebaseBin)) {
+        const accounts = firebaseLogin();
+        if (!accounts || accounts.length === 0) {
+          problems.push('Firebase CLI not logged in; run npx firebase login');
+        } else {
+          const list = look(firebaseBin, ['projects:list', '--json']);
+          if (!list.ok) problems.push(`Firebase CLI is logged in as ${accounts.join(', ')} but cannot list projects (${why(list)}); try npx firebase login --reauth`);
+        }
+      }
+      if (look('gcloud', ['--version']).ok) {
+        const gcloudToken = look('gcloud', ['auth', 'print-access-token']);
+        if (!gcloudToken.ok) problems.push('gcloud not logged in; run gcloud auth login');
+        const quota = look('gcloud', ['config', 'get-value', 'project']);
+        if (quota.ok && quota.out && quota.out !== CONFIG.project) problems.push(`gcloud is pointed at project ${quota.out}; run gcloud config set project ${CONFIG.project}`);
+      }
       return problems.length ? { state: 'missing', detail: problems } : { state: 'done' };
     },
     manual: 'Fix the items listed, then run this again.',
@@ -151,10 +186,22 @@ const steps = [
     id: 'project',
     title: `Firebase project ${CONFIG.project}`,
     async check() {
-      const list = lookJson(firebaseBin, ['projects:list', '--json']);
-      if (!list) return { state: 'unknown', detail: ['Could not list projects'] };
-      const found = list.result?.some((p) => p.projectId === CONFIG.project);
-      return found ? { state: 'done' } : { state: 'missing', detail: [`${CONFIG.project} is not visible to this login`] };
+      const describe = look('gcloud', ['projects', 'describe', CONFIG.project, '--format=value(projectNumber)']);
+      if (describe.ok && describe.out) {
+        const firebase = look(firebaseBin, ['projects:list', '--json']);
+        if (!firebase.ok) return { state: 'unknown', detail: [`Project ${CONFIG.project} exists (number ${describe.out}) but the Firebase CLI cannot list projects: ${why(firebase)}`] };
+        let parsed = null;
+        try {
+          parsed = JSON.parse(firebase.out);
+        } catch {
+          parsed = null;
+        }
+        const found = parsed?.result?.some((p) => p.projectId === CONFIG.project);
+        return found
+          ? { state: 'done' }
+          : { state: 'missing', detail: [`${CONFIG.project} exists in Google Cloud but Firebase is not added to it; in the Firebase console choose Add project and pick ${CONFIG.project}`] };
+      }
+      return { state: 'missing', detail: [`${CONFIG.project} is not visible to this login (${why(describe)})`] };
     },
     manual: 'The project is created under Sarah\'s Google account with the Blaze plan, and you are added as Owner. That needs her sign in, so it stays a manual step. Then run this again.',
   },

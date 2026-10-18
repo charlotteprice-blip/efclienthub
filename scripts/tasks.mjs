@@ -6,6 +6,9 @@ const groups = [
     ['npx firebase login', 'Log the Firebase CLI in as an owner of ef-client-hub'],
     ['gcloud auth login', 'Log the Google Cloud CLI in as the same person'],
     ['gcloud auth application-default login', 'Let the role script act as you'],
+    ['gcloud config set project ef-client-hub', 'Point gcloud at the Client Hub project'],
+    ['gcloud auth application-default set-quota-project ef-client-hub', 'Bill API calls from the scripts to the Client Hub project'],
+    ['npx firebase login --reauth', 'Sign the Firebase CLI in again when a stored login has gone stale'],
   ]],
   ['Set up Firebase (replaces the console steps)', [
     ['npm run setup:check', 'Report what exists and what is missing; changes nothing'],
