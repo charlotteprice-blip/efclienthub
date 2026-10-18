@@ -13,7 +13,7 @@ const typeCell = (s, t) => `<span class="type-dot" data-type="${esc(t ?? 'none')
 const assignmentsFor = (s, uid) => s.ctx.assignments.filter((a) => a.uid === uid);
 const draftsFor = (s, uid) => assignmentsFor(s, uid).filter((a) => a.status === 'complete' && s.ctx.scoring[a.id]?.draft).map((a) => ({ assignment: a, ...s.ctx.scoring[a.id] }));
 const releasedIds = (s, uid) => new Set((s.ctx.results[uid]?.items ?? []).map((i) => i.assignmentId));
-export const unreleased = (s, uid) => draftsFor(s, uid).filter((d) => !releasedIds(s, uid).has(d.assignment.id)).length;
+export const unreleased = (s, uid) => draftsFor(s, uid).filter((d) => d.draft.clientFacing !== false && !releasedIds(s, uid).has(d.assignment.id)).length;
 const schedulesFor = (s, uid) => (s.ctx.schedules ?? []).filter((x) => x.uid === uid);
 
 function scheduleRow(s, x) {
@@ -154,14 +154,19 @@ export function client(s, uid) {
         .map((sub) => `<tr><td>${esc(sub.label)}</td><td>${sub.score ?? 'Not scored'}</td><td>${esc({ strength: 'Strength', typical: 'Typical', focus: 'Area of focus', notScored: 'Too few answers' }[sub.band])}</td><td>${sub.answered} of ${sub.of}</td></tr>`)
         .join('');
       const isReleased = released_.has(d.assignment.id);
+      const staffOnly = d.draft.clientFacing === false;
+      const flags = (d.draft.flags ?? []).length
+        ? `<div class="notice notice-error" role="alert"><p class="t-ui-strong">Answers to follow up</p><ul class="result-list">${d.draft.flags.map((f) => `<li><p>${esc(f.text)}</p><p class="t-caption">Answered ${f.value}. ${esc(f.note)}</p></li>`).join('')}</ul></div>`
+        : '';
       return `<article class="draft stack">
-        <div class="draft-head"><h3>${esc(d.draft.measureName)}</h3>${isReleased ? status('done', 'Released') : status('attention', 'Draft')}</div>
-        <p class="t-caption">Automated draft scoring for your review. Not a diagnosis. ${isReleased ? 'Shared with the client.' : 'Not visible to the client.'} Completed ${fmtDate(d.assignment.completedAt)}.</p>
+        <div class="draft-head"><h3>${esc(d.draft.measureName)}</h3>${staffOnly ? status('progress', 'For you only') : isReleased ? status('done', 'Released') : status('attention', 'Draft')}</div>
+        <p class="t-caption">Automated draft scoring for your review. Not a diagnosis. ${staffOnly ? 'This questionnaire is never summarised to the client.' : isReleased ? 'Shared with the client.' : 'Not visible to the client.'} Completed ${fmtDate(d.assignment.completedAt)}.</p>
+        ${flags}
         <div class="table-wrap"><table class="table"><thead><tr><th scope="col">Subscale</th><th scope="col">Score</th><th scope="col">Band</th><th scope="col">Answered</th></tr></thead><tbody>${rows}</tbody></table></div>
-        <div class="split">
+        ${staffOnly ? '' : `<div class="split">
           <div class="stack"><p class="t-ui-strong">Strengths the client would see</p>${d.draft.strengths.length ? `<ul class="result-list">${d.draft.strengths.map((x) => `<li><p>${esc(x.label)}</p><p class="t-caption">${esc(x.reason)}</p></li>`).join('')}</ul>` : '<p class="t-caption">None.</p>'}</div>
           <div class="stack"><p class="t-ui-strong">Areas of focus the client would see</p>${d.draft.focus.length ? `<ul class="result-list">${d.draft.focus.map((x) => `<li><p>${esc(x.label)}</p><p class="t-caption">${esc(x.reason)} Links to ${esc(x.topic?.label ?? 'no topic')}.</p></li>`).join('')}</ul>` : '<p class="t-caption">None.</p>'}</div>
-        </div>
+        </div>`}
       </article>`;
     })
     .join('');
@@ -354,13 +359,13 @@ export function codes(s) {
 
 export function library(s) {
   const rows = Object.values(s.ctx.measures)
-    .map((m) => `<tr><td>${esc(m.name)}</td><td>${m.items?.length ?? 0}</td><td>${esc((m.scoringRules?.subscales ?? []).map((x) => x.label).join(', '))}</td><td>${m.licenceStatus === 'cleared' ? status('done', 'Cleared for clients') : status('attention', 'Sample, testing only')}</td></tr>`)
+    .map((m) => `<tr><td><p>${esc(m.name)}</p>${m.formalName ? `<p class="t-caption">${esc(m.formalName)}${m.code ? ` (${esc(m.code)})` : ''}${m.scoringRules?.clientFacing === false ? '. For you only; never summarised to the client' : ''}</p>` : ''}</td><td>${m.items?.length ?? 0}</td><td>${esc((m.scoringRules?.subscales ?? []).map((x) => x.label).join(', '))}</td><td>${m.licenceStatus === 'cleared' ? status('done', 'Cleared for clients') : status('attention', 'Sample, testing only')}</td></tr>`)
     .join('');
   return shell(
     s,
     'library',
     'Questionnaire library',
-    `<p class="reading">Questionnaires available to assign. Charlotte adds them from the terminal once their licence is confirmed. Commercial instruments are never reproduced in the hub.</p>
+    `<p class="reading">Questionnaires available to assign. They come from the EF Client Hub Codebook; Charlotte adds each one from the terminal once its licence status is cleared. Commercial instruments are never reproduced in the hub.</p>
     <div class="table-wrap"><table class="table">
       <thead><tr><th scope="col">Questionnaire</th><th scope="col">Questions</th><th scope="col">Subscales</th><th scope="col">Licence</th></tr></thead>
       <tbody>${rows || '<tr><td colspan="4">The library is empty. Charlotte adds questionnaires with npm run measures.</td></tr>'}</tbody>

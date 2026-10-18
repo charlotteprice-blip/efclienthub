@@ -27,6 +27,7 @@
     "deploy": "npm test && firebase deploy --project ef-client-hub --only hosting:clienthub,firestore,storage:clienthub,functions:clienthub",
     "worklog": "node scripts/worklog.mjs",
     "measures": "node scripts/measures.mjs",
+    "codebook": "node scripts/codebook.mjs",
     "sync": "node scripts/sync-functions.mjs",
     "postinstall": "npm --prefix functions install --no-audit --no-fund",
     "harness": "node scripts/sync-functions.mjs && node tests/e2e/server.mjs"
@@ -35,6 +36,7 @@
     "@firebase/rules-unit-testing": "^6.0.0",
     "@fontsource/figtree": "^5.3.0",
     "esbuild": "^0.28.2",
+    "exceljs": "^4.4.0",
     "firebase": "^13.0.0",
     "firebase-admin": "^14.5.0",
     "firebase-tools": "^15.34.0"

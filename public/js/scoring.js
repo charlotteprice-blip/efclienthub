@@ -9,7 +9,9 @@
 // scoringRules shape:
 // {
 //   "minAnswered": 0.8,                      share of a subscale's items needed to score it
-//   "reverseItems": ["i3"],                  items scored max minus value
+//   "reverseItems": ["i3"],                  items scored min plus max minus value
+//   "flagItems": [{ "itemId": "i10", "atLeast": 2, "note": "..." }],   answers Sarah follows up
+//   "clientFacing": false,                   scored for the practitioner only; no strengths or focus
 //   "subscales": [{
 //     "id": "planning", "label": "Planning ahead",
 //     "items": ["i1", "i2"], "method": "mean" | "sum",
@@ -26,6 +28,7 @@ export function scoreMeasure(measure, responses) {
   const rules = measure.scoringRules ?? {};
   const values = measure.responseOptions.map((o) => Number(o.value));
   const maxValue = Math.max(...values);
+  const minValue = Math.min(...values);
   const minAnswered = rules.minAnswered ?? 0.8;
   const reverse = new Set(rules.reverseItems ?? []);
 
@@ -34,7 +37,7 @@ export function scoreMeasure(measure, responses) {
     if (raw === undefined || raw === null || raw === '') return null;
     const n = Number(raw);
     if (!Number.isFinite(n) || !values.includes(n)) return null;
-    return reverse.has(itemId) ? maxValue - n : n;
+    return reverse.has(itemId) ? minValue + maxValue - n : n;
   };
 
   const subscales = {};
@@ -56,6 +59,16 @@ export function scoreMeasure(measure, responses) {
     };
   }
 
+  // Flagged answers: raw (not reversed) values at or above the threshold.
+  const flags = [];
+  for (const f of rules.flagItems ?? []) {
+    const raw = Number(responses?.[f.itemId]);
+    if (Number.isFinite(raw) && raw >= Number(f.atLeast)) {
+      const item = measure.items.find((i) => i.id === f.itemId);
+      flags.push({ itemId: f.itemId, text: item?.text ?? f.itemId, value: raw, note: f.note ?? '' });
+    }
+  }
+
   const answeredItems = measure.items.filter((item) => itemValue(item.id) !== null).length;
   return {
     measureId: measure.id,
@@ -63,6 +76,7 @@ export function scoreMeasure(measure, responses) {
     answeredItems,
     totalItems: measure.items.length,
     subscales,
+    flags,
   };
 }
 
@@ -79,7 +93,8 @@ export function bandFor(bands, score) {
 export function buildDraft(measure, scores) {
   const strengths = [];
   const focus = [];
-  for (const sub of measure.scoringRules?.subscales ?? []) {
+  const clientFacing = measure.scoringRules?.clientFacing !== false;
+  for (const sub of clientFacing ? measure.scoringRules?.subscales ?? [] : []) {
     const s = scores.subscales[sub.id];
     if (!s) continue;
     if (s.band === 'strength') {
@@ -94,8 +109,10 @@ export function buildDraft(measure, scores) {
     measureName: measure.name,
     status: 'draft',
     notADiagnosis: true,
+    clientFacing,
     strengths,
     focus,
     notScored,
+    flags: scores.flags ?? [],
   };
 }

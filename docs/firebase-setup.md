@@ -82,7 +82,7 @@ npm run measures -- upload public/sample/sample-measures.json     testing only
 npm run measures -- list
 ```
 
-Real questionnaires go in the same way once their licence is confirmed, with `"licenceStatus": "cleared"`. `npm run measures -- check file.json` validates a file without saving it.
+Real questionnaires come from the EF Client Hub Codebook (`measures/ef-client-hub-codebook.xlsx`, see measures/README.md). `npm run codebook` rebuilds `measures/library.json` and `measures/cleared.json` from it, and `npm run measures -- upload measures/cleared.json` loads the cleared ones. Only questionnaires marked cleared in the workbook's Hub Library sheet can be assigned.
 
 ## 9. Test the journey
 

@@ -65,3 +65,38 @@ describe('buildDraft', () => {
     assert.equal(draft.notScored.length, 2);
   });
 });
+
+describe('scales that start at 1, flags and practitioner only measures', () => {
+  const seven = {
+    id: 'seven',
+    name: 'Seven point',
+    responseOptions: [1, 2, 3, 4, 5, 6, 7].map((v) => ({ value: v, label: String(v) })),
+    items: [{ id: 'a', text: 'A' }, { id: 'b', text: 'B' }, { id: 'c', text: 'C' }],
+    scoringRules: {
+      reverseItems: ['b'],
+      flagItems: [{ itemId: 'c', atLeast: 6, note: 'Follow up' }],
+      subscales: [{ id: 't', label: 'Total', items: ['a', 'b'], method: 'mean', bands: [{ upTo: 3, band: 'focus' }, { upTo: 5, band: 'typical' }, { band: 'strength' }], strengthReason: 's', focusReason: 'f' }],
+    },
+  };
+  test('a reversed item on a 1 to 7 scale maps 7 to 1, not 7 to 0', () => {
+    const s = scoreMeasure(seven, { a: 7, b: 7, c: 1 });
+    assert.equal(s.subscales.t.score, 4); // (7 + 1) / 2
+    assert.deepEqual(s.flags, []);
+  });
+  test('flagged answers use the raw value and carry the item text', () => {
+    const s = scoreMeasure(seven, { a: 1, b: 1, c: 6 });
+    assert.equal(s.flags.length, 1);
+    assert.equal(s.flags[0].text, 'C');
+    assert.equal(s.flags[0].value, 6);
+    assert.equal(buildDraft(seven, s).flags[0].note, 'Follow up');
+  });
+  test('a practitioner only measure produces scores but no client facing items', () => {
+    const m = { ...seven, scoringRules: { ...seven.scoringRules, clientFacing: false } };
+    const s = scoreMeasure(m, { a: 7, b: 1, c: 1 });
+    assert.equal(s.subscales.t.band, 'strength');
+    const d = buildDraft(m, s);
+    assert.equal(d.clientFacing, false);
+    assert.deepEqual(d.strengths, []);
+    assert.deepEqual(d.focus, []);
+  });
+});

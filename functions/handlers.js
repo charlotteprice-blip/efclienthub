@@ -293,7 +293,8 @@ export function makeHandlers({ db, intakeConfig, clientTypes, allowSample = () =
       const auth = practitioner(request);
       const { ref, client } = await existingClient(request.data?.uid);
       const scoring = await db.collection('scoring').where('uid', '==', ref.id).get();
-      const drafts = scoring.docs.map((d) => d.data()).filter((d) => d.draft);
+      // Practitioner only questionnaires (screeners) have drafts for Sarah but nothing for the client.
+      const drafts = scoring.docs.map((d) => d.data()).filter((d) => d.draft && d.draft.clientFacing !== false);
       if (!drafts.length) fail('failed-precondition', 'There are no draft results to release.');
       const resultsRef = db.doc(`results/${ref.id}`);
       const existing = (await resultsRef.get()).data()?.items ?? [];

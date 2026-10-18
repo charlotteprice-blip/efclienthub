@@ -29,6 +29,12 @@ const handlers = makeHandlers({
   allowSample: () => true,
 });
 for (const m of (await readJson('public/sample/sample-measures.json')).measures) await db.doc(`measures/${m.id}`).set(m);
+// The cleared questionnaires from the codebook, when they have been built.
+try {
+  for (const m of (await readJson('measures/cleared.json')).measures) await db.doc(`measures/${m.id}`).set(m);
+} catch {
+  // measures/cleared.json not built yet; the sample questionnaires are enough.
+}
 
 // Accounts: email -> { uid, email, password, displayName, role }
 const users = new Map();

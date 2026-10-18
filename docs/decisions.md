@@ -62,6 +62,14 @@
 34. Repeated scores are shown to Sarah as a table of subscale scores by completion date once a questionnaire has been completed more than once. Clients see only the released strengths and areas of focus, as before.
 35. Email on assignment waits for stage 7; the run is audited as actor `system` so the email step can be added without changing the schedule logic.
 
+## Questionnaire library (18 October 2026)
+
+36. The EF Client Hub Codebook, a copy of the CPC Psychometric Codebook with Hub Library and Hub Subscales sheets, is the single source for questionnaires. `npm run codebook` builds the library files; nothing is retyped.
+37. Licence status per instrument is Charlotte's reading of the codebook sources, to confirm with Sarah: cleared (ASRS, CSES, PES, DASS-21, PPS, IPS, GSE), review (ESQ-R, CFI, SKS, SUS, SSES, PTQ, RRS, FSCRS, PCI, SCS-SF), permission needed (BPNSFS, GCS, GADJ). Only cleared instruments can be uploaded or assigned.
+38. ASRS and DASS-21 are practitioner only: scored for Sarah, never summarised to the client, skipped by release. DASS-21 items 10, 17 and 21 at 2 or more and FSCRS item 9 at 1 or more are flagged to Sarah as answers to follow up.
+39. Default bands are thirds of the response range on the item mean, with a scoring direction per subscale; DASS-21 uses its published normal range cut offs. All client facing wording and Learning Hub topics in the Hub Subscales sheet are drafts for Sarah.
+40. Reverse scoring is minimum plus maximum minus the answer, so scales starting at 1 reverse correctly (was maximum minus the answer).
+
 ## Open questions
 
 Answered by Charlotte on 18 October 2026 (see decision 30): 1 (discounted seat), 2 (clinical record, 10 years), 3 (all in the hub), 5 (adults), 9 (email and password only). Still open: 4, 6, 7, 8, 10, plus the discount rate and the email sender address.

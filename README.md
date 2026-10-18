@@ -17,6 +17,7 @@ public/config/           app.json, client-types.json, intake.json
 public/css/              tokens.css (generated), app.css, components.css
 public/sample/           clickable sample on invented data
 brand/                   Levi's tokens.json and the status colours
+measures/                EF Client Hub Codebook workbook and the library files built from it
 scripts/                 setup, roles, measures, serve, vendor, tokens, contrast, sample build, worklog
 tests/                   unit tests, rules tests, in memory Firestore, end to end harness
 docs/                    firebase-setup.md, data model, client journey, decisions, functionality plan, brand notes, intake guide

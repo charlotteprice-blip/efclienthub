@@ -7,20 +7,25 @@
 //   npm run measures -- upload path/to/measure.json     validate, then save
 //
 // A file holds 1 measure, or { "measures": [ ... ] }. licenceStatus must be
-// "cleared" for use with clients, or "sample" for testing only.
+// "cleared" for use with clients, or "sample" for testing only. Files built
+// by npm run codebook may also hold "review" and "permission" entries;
+// check accepts them, upload refuses them.
 // Needs: gcloud auth application-default login
 
 import { readFileSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
 import { scoreMeasure } from '../public/js/scoring.js';
 
 const [command, file] = process.argv.slice(2);
+const isMain = process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href;
 const STATUSES = ['cleared', 'sample'];
+const KNOWN = [...STATUSES, 'review', 'permission'];
 
 export function problems(m) {
   const out = [];
   if (!/^[a-z0-9-]{3,60}$/.test(m.id ?? '')) out.push('id must be 3 to 60 lowercase letters, digits or hyphens');
   if (!m.name) out.push('name is missing');
-  if (!STATUSES.includes(m.licenceStatus)) out.push(`licenceStatus must be ${STATUSES.join(' or ')}`);
+  if (!KNOWN.includes(m.licenceStatus)) out.push(`licenceStatus must be ${KNOWN.join(', ')}`);
   if (!Array.isArray(m.items) || !m.items.length) out.push('items are missing');
   if (!Array.isArray(m.responseOptions) || m.responseOptions.length < 2) out.push('responseOptions need at least 2 options');
   const ids = new Set((m.items ?? []).map((i) => i.id));
@@ -31,8 +36,9 @@ export function problems(m) {
   const used = subs.flatMap((s) => s.items ?? []);
   for (const id of used) if (!ids.has(id)) out.push(`subscale refers to unknown item ${id}`);
   for (const id of m.scoringRules?.reverseItems ?? []) if (!ids.has(id)) out.push(`reverse item ${id} is unknown`);
+  for (const id of (m.scoringRules?.flagItems ?? []).map((f) => f.itemId)) if (!ids.has(id)) out.push(`flag item ${id} is unknown`);
   for (const s of subs) {
-    if (!s.bands?.length) out.push(`subscale ${s.id} has no bands`);
+    if (!Array.isArray(s.bands)) out.push(`subscale ${s.id} has no bands list (use [] for numbers only)`);
     if (s.topic?.url && !/^https:\/\/app\.executiveframe\.co\.nz\//.test(s.topic.url)) out.push(`subscale ${s.id} topic must link to the Learning Hub`);
   }
   if (!out.length) {
@@ -54,12 +60,12 @@ async function admin() {
   return getFirestore(app, 'clienthub');
 }
 
-if (!['list', 'check', 'upload'].includes(command) || (command !== 'list' && !file)) {
+if (isMain && (!['list', 'check', 'upload'].includes(command) || (command !== 'list' && !file))) {
   console.error('\nUsage:\n  npm run measures -- list\n  npm run measures -- check <file.json>\n  npm run measures -- upload <file.json>\n');
   process.exit(1);
 }
 
-if (command === 'list') {
+if (isMain && command === 'list') {
   const db = await admin();
   const snap = await db.collection('measures').get();
   if (snap.empty) console.log('\nThe library is empty.\n');
@@ -67,7 +73,7 @@ if (command === 'list') {
   process.exit(0);
 }
 
-const measures = load(file);
+const measures = isMain ? load(file) : [];
 let bad = 0;
 for (const m of measures) {
   const p = problems(m);
@@ -80,7 +86,12 @@ for (const m of measures) {
   }
 }
 if (bad) process.exit(1);
-if (command === 'upload') {
+if (isMain && command === 'upload') {
+  const held = measures.filter((m) => !STATUSES.includes(m.licenceStatus));
+  if (held.length) {
+    console.error(`\nRefusing to upload: ${held.map((m) => `${m.id} (${m.licenceStatus})`).join(', ')}. Only cleared or sample questionnaires go into the library. Upload measures/cleared.json instead.\n`);
+    process.exit(1);
+  }
   const db = await admin();
   for (const m of measures) {
     const { _note, ...doc } = m;

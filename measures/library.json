@@ -1,0 +1,3861 @@
+{
+  "generated": "2026-10-18",
+  "measures": [
+    {
+      "id": "esq-r",
+      "code": "ESQ-R",
+      "name": "Everyday executive skills",
+      "formalName": "Executive Skills Questionnaire - Revised (ESQ-R)",
+      "description": "Executive functioning skills, including plan and time management, organization, and emotional and behavioral regulation",
+      "licenceStatus": "review",
+      "licenceNote": "Strait et al. (2020) scale, free to use; NovoPsych page carries a NovoPsych copyright notice. Confirm with Dr Peg Dawson or the authors before clearing.",
+      "instructions": "Read each item and decide how often it's a problem for you.",
+      "minutes": 5,
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Never or rarely"
+        },
+        {
+          "value": 1,
+          "label": "Sometimes"
+        },
+        {
+          "value": 2,
+          "label": "Often"
+        },
+        {
+          "value": 3,
+          "label": "Very often"
+        }
+      ],
+      "items": [
+        {
+          "id": "esq-r-1",
+          "text": "I act on impulse."
+        },
+        {
+          "id": "esq-r-2",
+          "text": "I say things without thinking."
+        },
+        {
+          "id": "esq-r-3",
+          "text": "I lose things."
+        },
+        {
+          "id": "esq-r-4",
+          "text": "I have a short fuse."
+        },
+        {
+          "id": "esq-r-5",
+          "text": "I get upset when things don't go as planned."
+        },
+        {
+          "id": "esq-r-6",
+          "text": "I run out of steam before finishing a task."
+        },
+        {
+          "id": "esq-r-7",
+          "text": "It's hard for me to set priorities when I have a lot of things to do."
+        },
+        {
+          "id": "esq-r-8",
+          "text": "My desk or workspace is a mess."
+        },
+        {
+          "id": "esq-r-9",
+          "text": "I have trouble keeping my house or room clean."
+        },
+        {
+          "id": "esq-r-10",
+          "text": "I have trouble estimating how long it will take to complete a task."
+        },
+        {
+          "id": "esq-r-11",
+          "text": "I'm slow at getting ready for school, work, or appointments."
+        },
+        {
+          "id": "esq-r-12",
+          "text": "If the first solution to a problem doesn't work, I have trouble thinking of a different one."
+        },
+        {
+          "id": "esq-r-13",
+          "text": "I skip checking my work for mistakes, even when the stakes are high."
+        },
+        {
+          "id": "esq-r-14",
+          "text": "I get annoyed when tasks are too hard."
+        },
+        {
+          "id": "esq-r-15",
+          "text": "It's hard for me to put aside fun activities to start things I know I need to do."
+        },
+        {
+          "id": "esq-r-16",
+          "text": "I have trouble with tasks where I have to come up with my own ideas."
+        },
+        {
+          "id": "esq-r-17",
+          "text": "It's hard for me to tell how well I'm doing on a task."
+        },
+        {
+          "id": "esq-r-18",
+          "text": "I have trouble reaching long-term goals."
+        },
+        {
+          "id": "esq-r-19",
+          "text": "I \"go with my gut\" when making decisions."
+        },
+        {
+          "id": "esq-r-20",
+          "text": "I get so wrapped up in what I'm doing that I forget about other things I need to do."
+        },
+        {
+          "id": "esq-r-21",
+          "text": "Little things frustrate me."
+        },
+        {
+          "id": "esq-r-22",
+          "text": "I have trouble getting back on track if I'm interrupted."
+        },
+        {
+          "id": "esq-r-23",
+          "text": "I have trouble making a plan."
+        },
+        {
+          "id": "esq-r-24",
+          "text": "I miss the big picture."
+        },
+        {
+          "id": "esq-r-25",
+          "text": "I live for the moment."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "plan",
+            "label": "Planning and managing tasks",
+            "codebookName": "Plan Management",
+            "items": [
+              "esq-r-6",
+              "esq-r-7",
+              "esq-r-12",
+              "esq-r-13",
+              "esq-r-14",
+              "esq-r-16",
+              "esq-r-17",
+              "esq-r-18",
+              "esq-r-22",
+              "esq-r-23",
+              "esq-r-24"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 1,
+                "band": "strength"
+              },
+              {
+                "upTo": 2,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "You described planning and managing tasks as something that mostly goes smoothly for you.",
+            "focusReason": "Planning and keeping track of tasks came up often in your answers.",
+            "topic": {
+              "label": "Planning and prioritising",
+              "url": "https://app.executiveframe.co.nz/hub/planning"
+            }
+          },
+          {
+            "id": "time",
+            "label": "Managing time",
+            "codebookName": "Time Management",
+            "items": [
+              "esq-r-10",
+              "esq-r-11",
+              "esq-r-15",
+              "esq-r-20"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 1,
+                "band": "strength"
+              },
+              {
+                "upTo": 2,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "You told us that keeping to time mostly works for you.",
+            "focusReason": "Estimating and keeping to time came up as a difficulty in your answers.",
+            "topic": {
+              "label": "Time and estimating",
+              "url": "https://app.executiveframe.co.nz/hub/time"
+            }
+          },
+          {
+            "id": "organisation",
+            "label": "Staying organised",
+            "codebookName": "Organization",
+            "items": [
+              "esq-r-3",
+              "esq-r-8",
+              "esq-r-9"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 1,
+                "band": "strength"
+              },
+              {
+                "upTo": 2,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "Keeping things and spaces in order mostly works for you.",
+            "focusReason": "Keeping things and spaces in order came up as a difficulty in your answers.",
+            "topic": {
+              "label": "Organising your things and spaces",
+              "url": "https://app.executiveframe.co.nz/hub/organisation"
+            }
+          },
+          {
+            "id": "emotion",
+            "label": "Managing feelings",
+            "codebookName": "Emotional Regulation",
+            "items": [
+              "esq-r-4",
+              "esq-r-5",
+              "esq-r-21"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 1,
+                "band": "strength"
+              },
+              {
+                "upTo": 2,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "You described managing strong feelings as something you handle well.",
+            "focusReason": "Managing strong feelings came up as a difficulty in your answers.",
+            "topic": {
+              "label": "Managing feelings",
+              "url": "https://app.executiveframe.co.nz/hub/emotional-regulation"
+            }
+          },
+          {
+            "id": "behaviour",
+            "label": "Pausing before acting",
+            "codebookName": "Behavioral Regulation",
+            "items": [
+              "esq-r-1",
+              "esq-r-2",
+              "esq-r-19",
+              "esq-r-25"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 1,
+                "band": "strength"
+              },
+              {
+                "upTo": 2,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "Pausing before acting and sticking with a plan mostly works for you.",
+            "focusReason": "Pausing before acting and sticking with a plan came up as a difficulty in your answers.",
+            "topic": {
+              "label": "Pausing and following through",
+              "url": "https://app.executiveframe.co.nz/hub/impulse-control"
+            }
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Developed by Dr. Peg Dawson (Smart But Scattered Kids). Original citation: Strait, J. E., Dawson, P., Walther, C. A. P., Strait, G. G., Barton, A. K., & McClain, M. B. (2020). Refinement and psychometric evaluation of the Executive Skills Questionnaire-Revised. Contemporary School Psychology, 24, 378-388. https://doi.org/10.1007/s40688-018-00224-x",
+        "url": "https://novopsych.com/assessments/formulation/executive-skills-questionnaire-revised-esq-r/"
+      }
+    },
+    {
+      "id": "cfi",
+      "code": "CFI",
+      "name": "Thinking flexibly",
+      "formalName": "Cognitive Flexibility Inventory (CFI)",
+      "description": "Cognitive flexibility - the ability to perceive multiple alternative explanations for life occurrences and human behaviour, generate multiple alternative solutions to difficult situations, and perceive difficult situations as controllable",
+      "licenceStatus": "review",
+      "licenceNote": "Dennis and Vander Wal (2010); NovoPsych reproduction carries a NovoPsych copyright notice. Confirm author permission before clearing.",
+      "instructions": "Please use the scale below to indicate the extent to which you agree or disagree with the following statements.",
+      "minutes": 4,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "Strongly disagree"
+        },
+        {
+          "value": 2,
+          "label": "Disagree"
+        },
+        {
+          "value": 3,
+          "label": "Somewhat disagree"
+        },
+        {
+          "value": 4,
+          "label": "Neutral"
+        },
+        {
+          "value": 5,
+          "label": "Somewhat agree"
+        },
+        {
+          "value": 6,
+          "label": "Agree"
+        },
+        {
+          "value": 7,
+          "label": "Strongly agree"
+        }
+      ],
+      "items": [
+        {
+          "id": "cfi-1",
+          "text": "I am good at \"sizing up\" situations."
+        },
+        {
+          "id": "cfi-2",
+          "text": "I have a hard time making decisions when faced with difficult situations."
+        },
+        {
+          "id": "cfi-3",
+          "text": "I consider multiple options before making a decision."
+        },
+        {
+          "id": "cfi-4",
+          "text": "When I encounter difficult situations, I feel like I am losing control."
+        },
+        {
+          "id": "cfi-5",
+          "text": "I like to look at difficult situations from many different angles."
+        },
+        {
+          "id": "cfi-6",
+          "text": "I seek additional information not immediately available before attributing causes to behaviour."
+        },
+        {
+          "id": "cfi-7",
+          "text": "When encountering difficult situations, I become so stressed that I can not think of a way to resolve the situation."
+        },
+        {
+          "id": "cfi-8",
+          "text": "I try to think about things from another person's point of view."
+        },
+        {
+          "id": "cfi-9",
+          "text": "I find it troublesome that there are so many different ways to deal with difficult situations."
+        },
+        {
+          "id": "cfi-10",
+          "text": "I am good at putting myself in others' shoes."
+        },
+        {
+          "id": "cfi-11",
+          "text": "When I encounter difficult situations, I just don't know what to do."
+        },
+        {
+          "id": "cfi-12",
+          "text": "It is important to look at difficult situations from many angles."
+        },
+        {
+          "id": "cfi-13",
+          "text": "When in difficult situations, I consider multiple options before deciding how to behave."
+        },
+        {
+          "id": "cfi-14",
+          "text": "I often look at a situation from different view-points."
+        },
+        {
+          "id": "cfi-15",
+          "text": "I am capable of overcoming the difficulties in life that I face."
+        },
+        {
+          "id": "cfi-16",
+          "text": "I consider all the available facts and information when attributing causes to behaviour."
+        },
+        {
+          "id": "cfi-17",
+          "text": "I feel I have no power to change things in difficult situations."
+        },
+        {
+          "id": "cfi-18",
+          "text": "When I encounter difficult situations, I stop and try to think of several ways to resolve it."
+        },
+        {
+          "id": "cfi-19",
+          "text": "I can think of more than one way to resolve a difficult situation I'm confronted with."
+        },
+        {
+          "id": "cfi-20",
+          "text": "I consider multiple options before responding to difficult situations."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [
+          "cfi-2",
+          "cfi-4",
+          "cfi-7",
+          "cfi-9",
+          "cfi-11",
+          "cfi-17"
+        ],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "alternatives",
+            "label": "Seeing other options",
+            "codebookName": "Alternatives",
+            "items": [
+              "cfi-1",
+              "cfi-3",
+              "cfi-5",
+              "cfi-6",
+              "cfi-8",
+              "cfi-10",
+              "cfi-12",
+              "cfi-13",
+              "cfi-14",
+              "cfi-16",
+              "cfi-18",
+              "cfi-19",
+              "cfi-20"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 3,
+                "band": "focus"
+              },
+              {
+                "upTo": 5,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You described finding other ways of seeing a situation as something that comes readily to you.",
+            "focusReason": "Your answers suggest it can be hard to see other ways of reading a situation.",
+            "topic": {
+              "label": "Thinking flexibly",
+              "url": "https://app.executiveframe.co.nz/hub/flexible-thinking"
+            }
+          },
+          {
+            "id": "control",
+            "label": "Seeing situations as workable",
+            "codebookName": "Control",
+            "items": [
+              "cfi-2",
+              "cfi-4",
+              "cfi-7",
+              "cfi-9",
+              "cfi-11",
+              "cfi-15",
+              "cfi-17"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 3,
+                "band": "focus"
+              },
+              {
+                "upTo": 5,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You tend to see difficult situations as ones you can do something about.",
+            "focusReason": "Your answers suggest difficult situations can feel outside your control.",
+            "topic": {
+              "label": "Thinking flexibly",
+              "url": "https://app.executiveframe.co.nz/hub/flexible-thinking"
+            }
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Dennis, J. P., & Vander Wal, J. S. (2010). The cognitive flexibility inventory: Instrument development and estimates of reliability and validity. Cognitive Therapy and Research, 34(3), 241-253. https://doi.org/10.1007/s10608-009-9276-4",
+        "url": "https://novopsych.com/assessments/formulation/cognitive-flexibility-inventory-cfi/"
+      }
+    },
+    {
+      "id": "asrs",
+      "code": "ASRS",
+      "name": "Attention and activity",
+      "formalName": "Adult ADHD Self-Report Scale (ASRS v1.1)",
+      "description": "Attention Deficit Hyperactivity Disorder (ADHD) symptoms in adults, spanning inattentiveness and hyperactivity/impulsivity (including motor and verbal components)",
+      "licenceStatus": "cleared",
+      "licenceNote": "Public domain WHO instrument, freely reproducible for clinical use.",
+      "instructions": "Please answer the questions below, rating yourself on each of the criteria shown. As you answer each question, select the box that best describes how you have felt and conducted yourself over the past 6 months.",
+      "minutes": 4,
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Never"
+        },
+        {
+          "value": 1,
+          "label": "Rarely"
+        },
+        {
+          "value": 2,
+          "label": "Sometimes"
+        },
+        {
+          "value": 3,
+          "label": "Often"
+        },
+        {
+          "value": 4,
+          "label": "Very Often"
+        }
+      ],
+      "items": [
+        {
+          "id": "asrs-1",
+          "text": "How often do you have trouble wrapping up the final details of a project, once the challenging parts have been done?"
+        },
+        {
+          "id": "asrs-2",
+          "text": "How often do you have difficulty getting things in order when you have to do a task that requires organisation?"
+        },
+        {
+          "id": "asrs-3",
+          "text": "How often do you have problems remembering appointments or obligations?"
+        },
+        {
+          "id": "asrs-4",
+          "text": "When you have a task that requires a lot of thought, how often do you avoid or delay getting started?"
+        },
+        {
+          "id": "asrs-5",
+          "text": "How often do you fidget or squirm with your hands or feet when you have to sit down for a long time?"
+        },
+        {
+          "id": "asrs-6",
+          "text": "How often do you feel overly active and compelled to do things, like you were driven by a motor?"
+        },
+        {
+          "id": "asrs-7",
+          "text": "How often do you make careless mistakes when you have to work on a boring or difficult project?"
+        },
+        {
+          "id": "asrs-8",
+          "text": "How often do you have difficulty keeping your attention when you are doing boring or repetitive work?"
+        },
+        {
+          "id": "asrs-9",
+          "text": "How often do you have difficulty concentrating on what people say to you, even when they are speaking to you directly?"
+        },
+        {
+          "id": "asrs-10",
+          "text": "How often do you misplace or have difficulty finding things at home or at work?"
+        },
+        {
+          "id": "asrs-11",
+          "text": "How often are you distracted by activity or noise around you?"
+        },
+        {
+          "id": "asrs-12",
+          "text": "How often do you leave your seat in meetings or other situations in which you are expected to remain seated?"
+        },
+        {
+          "id": "asrs-13",
+          "text": "How often do you feel restless or fidgety?"
+        },
+        {
+          "id": "asrs-14",
+          "text": "How often do you have difficulty unwinding and relaxing when you have time to yourself?"
+        },
+        {
+          "id": "asrs-15",
+          "text": "How often do you find yourself talking too much when you are in social situations?"
+        },
+        {
+          "id": "asrs-16",
+          "text": "When you're in a conversation, how often do you find yourself finishing the sentences of the people you are talking to, before they can finish them themselves?"
+        },
+        {
+          "id": "asrs-17",
+          "text": "How often do you have difficulty waiting your turn in situations when turn taking is required?"
+        },
+        {
+          "id": "asrs-18",
+          "text": "How often do you interrupt others when they are busy?"
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": false,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "part-a",
+            "label": "Part A",
+            "codebookName": "Part A (Criterion / Screener)",
+            "items": [
+              "asrs-1",
+              "asrs-2",
+              "asrs-3",
+              "asrs-4",
+              "asrs-5",
+              "asrs-6"
+            ],
+            "method": "sum",
+            "direction": "none",
+            "bands": []
+          },
+          {
+            "id": "part-b",
+            "label": "Part B",
+            "codebookName": "Part B (Additional Symptoms)",
+            "items": [
+              "asrs-7",
+              "asrs-8",
+              "asrs-9",
+              "asrs-10",
+              "asrs-11",
+              "asrs-12",
+              "asrs-13",
+              "asrs-14",
+              "asrs-15",
+              "asrs-16",
+              "asrs-17",
+              "asrs-18"
+            ],
+            "method": "sum",
+            "direction": "none",
+            "bands": []
+          },
+          {
+            "id": "inattention",
+            "label": "Inattention",
+            "codebookName": "Inattentiveness",
+            "items": [
+              "asrs-1",
+              "asrs-2",
+              "asrs-3",
+              "asrs-4",
+              "asrs-7",
+              "asrs-8",
+              "asrs-9",
+              "asrs-10",
+              "asrs-11"
+            ],
+            "method": "sum",
+            "direction": "none",
+            "bands": []
+          },
+          {
+            "id": "motor",
+            "label": "Motor",
+            "codebookName": "Hyperactivity/Impulsivity - Motor",
+            "items": [
+              "asrs-5",
+              "asrs-6",
+              "asrs-12",
+              "asrs-13",
+              "asrs-14"
+            ],
+            "method": "sum",
+            "direction": "none",
+            "bands": []
+          },
+          {
+            "id": "verbal",
+            "label": "Verbal",
+            "codebookName": "Hyperactivity/Impulsivity - Verbal",
+            "items": [
+              "asrs-15",
+              "asrs-16",
+              "asrs-17",
+              "asrs-18"
+            ],
+            "method": "sum",
+            "direction": "none",
+            "bands": []
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Kessler, R. C., Adler, L., Ames, M., Demler, O., Faraone, S., Hiripi, E., Howes, M. J., Jin, R., Secnik, K., Spencer, T., Ustun, T. B., & Walters, E. E. (2005). The World Health Organization Adult ADHD Self-Report Scale (ASRS): a short screening scale for use in the general population. Psychological Medicine, 35(2), 245-256. https://doi.org/10.1017/s0033291704002892",
+        "url": "https://novopsych.com/assessments/diagnosis/adult-adhd-self-report-scale-asrs/"
+      }
+    },
+    {
+      "id": "sks",
+      "code": "SKS",
+      "name": "Knowing your strengths",
+      "formalName": "Strengths Knowledge Scale",
+      "description": "Perceived self-knowledge of one's own personal strengths, i.e. the extent to which a person is aware of what they do best.",
+      "licenceStatus": "review",
+      "licenceNote": "No explicit licence found; CAPP asserts copyright over the scales. Confirm before clearing.",
+      "instructions": "Not stated on source",
+      "minutes": 2,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "Strongly disagree"
+        },
+        {
+          "value": 2,
+          "label": "2"
+        },
+        {
+          "value": 3,
+          "label": "3"
+        },
+        {
+          "value": 4,
+          "label": "4"
+        },
+        {
+          "value": 5,
+          "label": "5"
+        },
+        {
+          "value": 6,
+          "label": "6"
+        },
+        {
+          "value": 7,
+          "label": "Strongly agree"
+        }
+      ],
+      "items": [
+        {
+          "id": "sks-1",
+          "text": "Other people see the strengths that I have"
+        },
+        {
+          "id": "sks-2",
+          "text": "I have to think hard about what my strengths are"
+        },
+        {
+          "id": "sks-3",
+          "text": "I know what I do best"
+        },
+        {
+          "id": "sks-4",
+          "text": "I am aware of my strengths"
+        },
+        {
+          "id": "sks-5",
+          "text": "I know the things I am good at doing"
+        },
+        {
+          "id": "sks-6",
+          "text": "I know my strengths well"
+        },
+        {
+          "id": "sks-7",
+          "text": "I know the things I do best"
+        },
+        {
+          "id": "sks-8",
+          "text": "I know when I am at my best"
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Knowing your strengths",
+            "codebookName": "Strengths Knowledge (total scale)",
+            "items": [
+              "sks-1",
+              "sks-2",
+              "sks-3",
+              "sks-4",
+              "sks-5",
+              "sks-6",
+              "sks-7",
+              "sks-8"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 3,
+                "band": "focus"
+              },
+              {
+                "upTo": 5,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You have a clear sense of what your strengths are.",
+            "focusReason": "Your answers suggest you are not yet sure what your strengths are, which is a good place to start.",
+            "topic": {
+              "label": "Finding your strengths",
+              "url": "https://app.executiveframe.co.nz/hub/strengths"
+            }
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Govindji, R., & Linley, P. A. (2007). Strengths use, self-concordance and well-being: Implications for strengths coaching and coaching psychologists. International Coaching Psychology Review, 2(2), 143-153.",
+        "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2023.1086510/full"
+      }
+    },
+    {
+      "id": "sus",
+      "code": "SUS",
+      "name": "Using your strengths",
+      "formalName": "Strengths Use Scale",
+      "description": "Perceived deployment of one's own personal strengths in daily life, i.e. the extent to which a person actively uses what they do best across situations.",
+      "licenceStatus": "review",
+      "licenceNote": "No explicit licence found; CAPP asserts copyright over the scales. Confirm before clearing.",
+      "instructions": "The following 14 questions ask about your strengths, that is, the things that you can do well or do best.",
+      "minutes": 3,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "Strongly disagree"
+        },
+        {
+          "value": 2,
+          "label": "2"
+        },
+        {
+          "value": 3,
+          "label": "3"
+        },
+        {
+          "value": 4,
+          "label": "4"
+        },
+        {
+          "value": 5,
+          "label": "5"
+        },
+        {
+          "value": 6,
+          "label": "6"
+        },
+        {
+          "value": 7,
+          "label": "Strongly agree"
+        }
+      ],
+      "items": [
+        {
+          "id": "sus-1",
+          "text": "I am regularly able to do what I do best."
+        },
+        {
+          "id": "sus-2",
+          "text": "I always play to my strengths."
+        },
+        {
+          "id": "sus-3",
+          "text": "I always try to use my strengths."
+        },
+        {
+          "id": "sus-4",
+          "text": "I achieve what I want by using my strengths."
+        },
+        {
+          "id": "sus-5",
+          "text": "I use my strengths every day."
+        },
+        {
+          "id": "sus-6",
+          "text": "I use my strengths to get what I want out of life."
+        },
+        {
+          "id": "sus-7",
+          "text": "My work gives me lots of opportunities to use my strengths."
+        },
+        {
+          "id": "sus-8",
+          "text": "My life presents me with lots of different ways to use my strengths."
+        },
+        {
+          "id": "sus-9",
+          "text": "Using my strengths comes naturally to me."
+        },
+        {
+          "id": "sus-10",
+          "text": "I find it easy to use my strengths in the things I do."
+        },
+        {
+          "id": "sus-11",
+          "text": "I am able to use my strengths in lots of different situations."
+        },
+        {
+          "id": "sus-12",
+          "text": "Most of my time is spent doing the things that I am good at doing."
+        },
+        {
+          "id": "sus-13",
+          "text": "Using my strengths is something I am familiar with."
+        },
+        {
+          "id": "sus-14",
+          "text": "I am able to use my strengths in lots of different ways."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Using your strengths",
+            "codebookName": "Strengths Use (total scale)",
+            "items": [
+              "sus-1",
+              "sus-2",
+              "sus-3",
+              "sus-4",
+              "sus-5",
+              "sus-6",
+              "sus-7",
+              "sus-8",
+              "sus-9",
+              "sus-10",
+              "sus-11",
+              "sus-12",
+              "sus-13",
+              "sus-14"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 3,
+                "band": "focus"
+              },
+              {
+                "upTo": 5,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You described using your strengths often, at work and beyond.",
+            "focusReason": "Your answers suggest your strengths do not get much use day to day.",
+            "topic": {
+              "label": "Using your strengths",
+              "url": "https://app.executiveframe.co.nz/hub/strengths-use"
+            }
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Govindji, R., & Linley, P. A. (2007). Strengths use, self-concordance and well-being: Implications for strengths coaching and coaching psychologists. International Coaching Psychology Review, 2(2), 143-153.",
+        "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2023.1086510/full"
+      }
+    },
+    {
+      "id": "sses",
+      "code": "SSES",
+      "name": "Confidence in your strengths",
+      "formalName": "Strengths Self-Efficacy Scale",
+      "description": "Perceived self-efficacy (confidence) in one's ability to identify, apply and use one's personal strengths across everyday situations, at work or study, and in pursuit of goals.",
+      "licenceStatus": "review",
+      "licenceNote": "Distributed free for practitioner use by PositivePsychology.com; no explicit licence from the authors. Confirm before clearing.",
+      "instructions": "First, please list your 5 signature strengths below: [space for 5 strengths]. How confident are you in your ability to ....",
+      "minutes": 3,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "Not confident at all"
+        },
+        {
+          "value": 2,
+          "label": "2"
+        },
+        {
+          "value": 3,
+          "label": "3"
+        },
+        {
+          "value": 4,
+          "label": "4"
+        },
+        {
+          "value": 5,
+          "label": "Moderately confident"
+        },
+        {
+          "value": 6,
+          "label": "6"
+        },
+        {
+          "value": 7,
+          "label": "7"
+        },
+        {
+          "value": 8,
+          "label": "8"
+        },
+        {
+          "value": 9,
+          "label": "9"
+        },
+        {
+          "value": 10,
+          "label": "Extremely confident"
+        }
+      ],
+      "items": [
+        {
+          "id": "sses-1",
+          "text": "Use your strengths at work?"
+        },
+        {
+          "id": "sses-2",
+          "text": "Use your strengths without any struggles?"
+        },
+        {
+          "id": "sses-3",
+          "text": "Find ways to apply your strengths in the things you do everyday?"
+        },
+        {
+          "id": "sses-4",
+          "text": "Accomplish a lot using your strengths?"
+        },
+        {
+          "id": "sses-5",
+          "text": "Apply your strengths at work/school?"
+        },
+        {
+          "id": "sses-6",
+          "text": "Use your strengths in many situations?"
+        },
+        {
+          "id": "sses-7",
+          "text": "Use your strengths to succeed?"
+        },
+        {
+          "id": "sses-8",
+          "text": "Find ways to use your strengths at work/school everyday?"
+        },
+        {
+          "id": "sses-9",
+          "text": "Use your strengths at any time?"
+        },
+        {
+          "id": "sses-10",
+          "text": "Use your strengths to help you achieve your goals in life?"
+        },
+        {
+          "id": "sses-11",
+          "text": "Practice your strengths in areas where you excel?"
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Confidence in your strengths",
+            "codebookName": "Strengths Self-Efficacy (total scale)",
+            "items": [
+              "sses-1",
+              "sses-2",
+              "sses-3",
+              "sses-4",
+              "sses-5",
+              "sses-6",
+              "sses-7",
+              "sses-8",
+              "sses-9",
+              "sses-10",
+              "sses-11"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 4,
+                "band": "focus"
+              },
+              {
+                "upTo": 7,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You feel confident applying your strengths when it counts.",
+            "focusReason": "Your answers suggest you are not yet confident putting your strengths to use.",
+            "topic": {
+              "label": "Using your strengths",
+              "url": "https://app.executiveframe.co.nz/hub/strengths-use"
+            }
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Tsai, C.-L., Chaichanasakul, A., Zhao, R., Flores, L. Y., & Lopez, S. J. (2014). Development and validation of the Strengths Self-Efficacy Scale (SSES). Journal of Career Assessment, 22(2), 221-232. https://doi.org/10.1177/1069072713493761",
+        "url": "https://positivepsychology.com/wp-content/uploads/The-Strengths-Self-efficacy-Scale.pdf"
+      }
+    },
+    {
+      "id": "cses",
+      "code": "CSES",
+      "name": "How you see yourself",
+      "formalName": "Core Self-Evaluations Scale",
+      "description": "Core self-evaluations: a broad, fundamental positive self-appraisal trait combining self-esteem, generalised self-efficacy, internal locus of control and low neuroticism (emotional stability).",
+      "licenceStatus": "cleared",
+      "licenceNote": "Stated non proprietary and free to use without permission.",
+      "instructions": "Not retrieved verbatim from a fetched source; the CSES PDF reproduces the item table and response scale but the source fetched did not include a printed respondent-facing preamble/instruction sentence.",
+      "minutes": 3,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "Strongly Disagree"
+        },
+        {
+          "value": 2,
+          "label": "Disagree"
+        },
+        {
+          "value": 3,
+          "label": "Neutral"
+        },
+        {
+          "value": 4,
+          "label": "Agree"
+        },
+        {
+          "value": 5,
+          "label": "Strongly Agree"
+        }
+      ],
+      "items": [
+        {
+          "id": "cses-1",
+          "text": "I am confident I get the success I deserve in life."
+        },
+        {
+          "id": "cses-2",
+          "text": "Sometimes I feel depressed."
+        },
+        {
+          "id": "cses-3",
+          "text": "When I try, I generally succeed."
+        },
+        {
+          "id": "cses-4",
+          "text": "Sometimes when I fail I feel worthless."
+        },
+        {
+          "id": "cses-5",
+          "text": "I complete tasks successfully."
+        },
+        {
+          "id": "cses-6",
+          "text": "Sometimes, I do not feel in control of my work."
+        },
+        {
+          "id": "cses-7",
+          "text": "Overall, I am satisfied with myself."
+        },
+        {
+          "id": "cses-8",
+          "text": "I am filled with doubts about my competence."
+        },
+        {
+          "id": "cses-9",
+          "text": "I determine what will happen in my life."
+        },
+        {
+          "id": "cses-10",
+          "text": "I do not feel in control of my success in my career."
+        },
+        {
+          "id": "cses-11",
+          "text": "I am capable of coping with most of my problems."
+        },
+        {
+          "id": "cses-12",
+          "text": "There are times when things look pretty bleak and hopeless to me."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [
+          "cses-2",
+          "cses-4",
+          "cses-6",
+          "cses-8",
+          "cses-10",
+          "cses-12"
+        ],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "How you see yourself",
+            "codebookName": "Core Self-Evaluations (total scale, unidimensional)",
+            "items": [
+              "cses-1",
+              "cses-2",
+              "cses-3",
+              "cses-4",
+              "cses-5",
+              "cses-6",
+              "cses-7",
+              "cses-8",
+              "cses-9",
+              "cses-10",
+              "cses-11",
+              "cses-12"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "focus"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You described a steady, positive view of yourself and what you can do.",
+            "focusReason": "Your answers suggest your view of yourself can be harsh or uncertain.",
+            "topic": {
+              "label": "How you see yourself",
+              "url": "https://app.executiveframe.co.nz/hub/self-view"
+            }
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Judge, T. A., Erez, A., Bono, J. E., & Thoresen, C. J. (2003). The Core Self-Evaluations Scale: Development of a measure. Personnel Psychology, 56(2), 303-331. https://doi.org/10.1111/j.1744-6570.2003.tb00152.x",
+        "url": "http://ionilies.com/SIOP03/Files/CSES.pdf"
+      }
+    },
+    {
+      "id": "pes",
+      "code": "PES",
+      "name": "Feeling empowered at work",
+      "formalName": "Psychological Empowerment Scale",
+      "description": "Psychological empowerment at work, a motivational construct with four cognitive dimensions: meaning, competence, self-determination and impact.",
+      "licenceStatus": "cleared",
+      "licenceNote": "Hosted freely by the author for research and practice use.",
+      "instructions": "Listed below are a number of self-orientations that people may have with regard to their work role. Using the following scale, please indicate the extent to which you agree or disagree that each one describes your self-orientation.",
+      "minutes": 3,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "Very Strongly Disagree"
+        },
+        {
+          "value": 2,
+          "label": "Strongly Disagree"
+        },
+        {
+          "value": 3,
+          "label": "Disagree"
+        },
+        {
+          "value": 4,
+          "label": "Neutral"
+        },
+        {
+          "value": 5,
+          "label": "Agree"
+        },
+        {
+          "value": 6,
+          "label": "Strongly Agree"
+        },
+        {
+          "value": 7,
+          "label": "Very Strongly Agree"
+        }
+      ],
+      "items": [
+        {
+          "id": "pes-1",
+          "text": "The work that I do is important to me."
+        },
+        {
+          "id": "pes-2",
+          "text": "My job activities are personally meaningful to me."
+        },
+        {
+          "id": "pes-3",
+          "text": "The work I do is meaningful to me."
+        },
+        {
+          "id": "pes-4",
+          "text": "I am confident about my ability to do my job."
+        },
+        {
+          "id": "pes-5",
+          "text": "I have mastered the skills necessary for my job."
+        },
+        {
+          "id": "pes-6",
+          "text": "I am self-assured about my capabilities to perform my work activities."
+        },
+        {
+          "id": "pes-7",
+          "text": "I have significant autonomy in determining how I do my job."
+        },
+        {
+          "id": "pes-8",
+          "text": "I can decide on my own how to go about doing my own work."
+        },
+        {
+          "id": "pes-9",
+          "text": "I have considerable opportunity for independence and freedom in how I do my job."
+        },
+        {
+          "id": "pes-10",
+          "text": "My impact on what happens in my department is large."
+        },
+        {
+          "id": "pes-11",
+          "text": "I have a great deal of control over what happens in my department."
+        },
+        {
+          "id": "pes-12",
+          "text": "I have significant influence over what happens in my department."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "meaning",
+            "label": "Meaning in your work",
+            "codebookName": "Meaning",
+            "items": [
+              "pes-1",
+              "pes-2",
+              "pes-3"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 3,
+                "band": "focus"
+              },
+              {
+                "upTo": 5,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "Your work feels meaningful to you.",
+            "focusReason": "Your answers suggest your work does not feel very meaningful at the moment.",
+            "topic": {
+              "label": "Meaning at work",
+              "url": "https://app.executiveframe.co.nz/hub/meaning"
+            }
+          },
+          {
+            "id": "competence",
+            "label": "Confidence in your work",
+            "codebookName": "Competence",
+            "items": [
+              "pes-4",
+              "pes-5",
+              "pes-6"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 3,
+                "band": "focus"
+              },
+              {
+                "upTo": 5,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You feel capable in your work.",
+            "focusReason": "Your answers suggest you are not feeling confident in your work right now.",
+            "topic": {
+              "label": "Confidence at work",
+              "url": "https://app.executiveframe.co.nz/hub/competence"
+            }
+          },
+          {
+            "id": "autonomy",
+            "label": "Choice in how you work",
+            "codebookName": "Self-Determination",
+            "items": [
+              "pes-7",
+              "pes-8",
+              "pes-9"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 3,
+                "band": "focus"
+              },
+              {
+                "upTo": 5,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You have a good deal of say in how you do your work.",
+            "focusReason": "Your answers suggest you have little say in how you do your work.",
+            "topic": {
+              "label": "Choice and autonomy at work",
+              "url": "https://app.executiveframe.co.nz/hub/autonomy"
+            }
+          },
+          {
+            "id": "impact",
+            "label": "Influence at work",
+            "codebookName": "Impact",
+            "items": [
+              "pes-10",
+              "pes-11",
+              "pes-12"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 3,
+                "band": "focus"
+              },
+              {
+                "upTo": 5,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You feel your work makes a difference where you are.",
+            "focusReason": "Your answers suggest you feel your work has little influence on what happens around you.",
+            "topic": {
+              "label": "Influence at work",
+              "url": "https://app.executiveframe.co.nz/hub/impact"
+            }
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Spreitzer, G. M. (1995). Psychological empowerment in the workplace: Dimensions, measurement, and validation. Academy of Management Journal, 38(5), 1442-1465. https://doi.org/10.2307/256865",
+        "url": "https://webuser.bus.umich.edu/spreitze/Pdfs/EmpowerInstrument.pdf"
+      }
+    },
+    {
+      "id": "dass-21",
+      "code": "DASS-21",
+      "name": "How you have been feeling this week",
+      "formalName": "Depression Anxiety Stress Scales, 21 item version (DASS-21)",
+      "description": "Three related negative emotional states over the past week: depression (dysphoria, hopelessness, devaluation of life, self deprecation, lack of interest or involvement, anhedonia, inertia), anxiety (autonomic arousal, skeletal muscle effects, situational anxiety, subjective experience of anxious aff",
+      "licenceStatus": "cleared",
+      "licenceNote": "Public domain per the official UNSW DASS site.",
+      "instructions": "Please read each statement and choose the answer that shows how much the statement applied to you over the past week. There are no right or wrong answers. Do not spend too much time on any statement.",
+      "minutes": 4,
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Did not apply to me at all"
+        },
+        {
+          "value": 1,
+          "label": "Applied to me to some degree, or some of the time"
+        },
+        {
+          "value": 2,
+          "label": "Applied to me to a considerable degree, or a good part of time"
+        },
+        {
+          "value": 3,
+          "label": "Applied to me very much, or most of the time"
+        }
+      ],
+      "items": [
+        {
+          "id": "dass-21-1",
+          "text": "I found it hard to wind down"
+        },
+        {
+          "id": "dass-21-2",
+          "text": "I was aware of dryness of my mouth"
+        },
+        {
+          "id": "dass-21-3",
+          "text": "I couldn't seem to experience any positive feeling at all"
+        },
+        {
+          "id": "dass-21-4",
+          "text": "I experienced breathing difficulty (eg, excessively rapid breathing, breathlessness in the absence of physical exertion)"
+        },
+        {
+          "id": "dass-21-5",
+          "text": "I found it difficult to work up the initiative to do things"
+        },
+        {
+          "id": "dass-21-6",
+          "text": "I tended to over-react to situations"
+        },
+        {
+          "id": "dass-21-7",
+          "text": "I experienced trembling (eg, in the hands)"
+        },
+        {
+          "id": "dass-21-8",
+          "text": "I felt that I was using a lot of nervous energy"
+        },
+        {
+          "id": "dass-21-9",
+          "text": "I was worried about situations in which I might panic and make a fool of myself"
+        },
+        {
+          "id": "dass-21-10",
+          "text": "I felt that I had nothing to look forward to"
+        },
+        {
+          "id": "dass-21-11",
+          "text": "I found myself getting agitated"
+        },
+        {
+          "id": "dass-21-12",
+          "text": "I found it difficult to relax"
+        },
+        {
+          "id": "dass-21-13",
+          "text": "I felt down-hearted and blue"
+        },
+        {
+          "id": "dass-21-14",
+          "text": "I was intolerant of anything that kept me from getting on with what I was doing"
+        },
+        {
+          "id": "dass-21-15",
+          "text": "I felt I was close to panic"
+        },
+        {
+          "id": "dass-21-16",
+          "text": "I was unable to become enthusiastic about anything"
+        },
+        {
+          "id": "dass-21-17",
+          "text": "I felt I wasn't worth much as a person"
+        },
+        {
+          "id": "dass-21-18",
+          "text": "I felt that I was rather touchy"
+        },
+        {
+          "id": "dass-21-19",
+          "text": "I was aware of the action of my heart in the absence of physical exertion (eg, sense of heart rate increase, heart missing a beat)"
+        },
+        {
+          "id": "dass-21-20",
+          "text": "I felt scared without any good reason"
+        },
+        {
+          "id": "dass-21-21",
+          "text": "I felt that life was meaningless"
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": false,
+        "reverseItems": [],
+        "flagItems": [
+          {
+            "itemId": "dass-21-10",
+            "atLeast": 2,
+            "note": "Follow up with the client directly."
+          },
+          {
+            "itemId": "dass-21-17",
+            "atLeast": 2,
+            "note": "Follow up with the client directly."
+          },
+          {
+            "itemId": "dass-21-21",
+            "atLeast": 2,
+            "note": "Follow up with the client directly."
+          }
+        ],
+        "subscales": [
+          {
+            "id": "depression",
+            "label": "Depression",
+            "codebookName": "Depression",
+            "items": [
+              "dass-21-3",
+              "dass-21-5",
+              "dass-21-10",
+              "dass-21-13",
+              "dass-21-16",
+              "dass-21-17",
+              "dass-21-21"
+            ],
+            "method": "sum",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 4,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ]
+          },
+          {
+            "id": "anxiety",
+            "label": "Anxiety",
+            "codebookName": "Anxiety",
+            "items": [
+              "dass-21-2",
+              "dass-21-4",
+              "dass-21-7",
+              "dass-21-9",
+              "dass-21-15",
+              "dass-21-19",
+              "dass-21-20"
+            ],
+            "method": "sum",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 3,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ]
+          },
+          {
+            "id": "stress",
+            "label": "Stress",
+            "codebookName": "Stress",
+            "items": [
+              "dass-21-1",
+              "dass-21-6",
+              "dass-21-8",
+              "dass-21-11",
+              "dass-21-12",
+              "dass-21-14",
+              "dass-21-18"
+            ],
+            "method": "sum",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 7,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ]
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Lovibond, S. H., & Lovibond, P. F. (1995). Manual for the Depression Anxiety Stress Scales (2nd ed.). Sydney: Psychology Foundation of Australia.",
+        "url": "https://www2.psy.unsw.edu.au/dass/"
+      }
+    },
+    {
+      "id": "ptq",
+      "code": "PTQ",
+      "name": "Repetitive thinking",
+      "formalName": "Perseverative Thinking Questionnaire",
+      "description": "Repetitive negative thinking (RNT), measured as a content-independent process (applies equally to worry, rumination, or any other form of repetitive negative thought about problems), rather than a specific symptom or diagnostic construct.",
+      "licenceStatus": "review",
+      "licenceNote": "Elsevier copyright on the article; no permission statement for practice use found. Confirm before clearing.",
+      "instructions": "In this questionnaire, you will be asked to describe how you typically think about negative experiences or problems. Please read the following statements and rate the extent to which they apply to you when you think about negative experiences or problems.",
+      "minutes": 4,
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "never"
+        },
+        {
+          "value": 1,
+          "label": "rarely"
+        },
+        {
+          "value": 2,
+          "label": "sometimes"
+        },
+        {
+          "value": 3,
+          "label": "often"
+        },
+        {
+          "value": 4,
+          "label": "almost always"
+        }
+      ],
+      "items": [
+        {
+          "id": "ptq-1",
+          "text": "The same thoughts keep going through my mind again and again."
+        },
+        {
+          "id": "ptq-2",
+          "text": "Thoughts intrude into my mind."
+        },
+        {
+          "id": "ptq-3",
+          "text": "I can't stop dwelling on them."
+        },
+        {
+          "id": "ptq-4",
+          "text": "I think about many problems without solving any of them."
+        },
+        {
+          "id": "ptq-5",
+          "text": "I can't do anything else while thinking about my problems."
+        },
+        {
+          "id": "ptq-6",
+          "text": "My thoughts repeat themselves."
+        },
+        {
+          "id": "ptq-7",
+          "text": "Thoughts come to my mind without me wanting them to."
+        },
+        {
+          "id": "ptq-8",
+          "text": "I get stuck on certain issues and can't move on."
+        },
+        {
+          "id": "ptq-9",
+          "text": "I keep asking myself questions without finding an answer."
+        },
+        {
+          "id": "ptq-10",
+          "text": "My thoughts prevent me from focusing on other things."
+        },
+        {
+          "id": "ptq-11",
+          "text": "I keep thinking about the same issue all the time."
+        },
+        {
+          "id": "ptq-12",
+          "text": "Thoughts just pop into my mind."
+        },
+        {
+          "id": "ptq-13",
+          "text": "I feel driven to continue dwelling on the same issue."
+        },
+        {
+          "id": "ptq-14",
+          "text": "My thoughts are not much help to me."
+        },
+        {
+          "id": "ptq-15",
+          "text": "My thoughts take up all my attention."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "core",
+            "label": "Thoughts that go round",
+            "codebookName": "Core Characteristics of Repetitive Negative Thinking",
+            "items": [
+              "ptq-1",
+              "ptq-2",
+              "ptq-3",
+              "ptq-6",
+              "ptq-7",
+              "ptq-8",
+              "ptq-11",
+              "ptq-12",
+              "ptq-13"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 1.33,
+                "band": "strength"
+              },
+              {
+                "upTo": 2.67,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "Thoughts that repeat do not seem to take hold for long with you.",
+            "focusReason": "Thoughts that go round and are hard to stop came up often in your answers.",
+            "topic": {
+              "label": "Repetitive thinking",
+              "url": "https://app.executiveframe.co.nz/hub/repetitive-thinking"
+            }
+          },
+          {
+            "id": "unproductive",
+            "label": "Thinking that goes nowhere",
+            "codebookName": "Unproductiveness",
+            "items": [
+              "ptq-4",
+              "ptq-9",
+              "ptq-14"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 1.33,
+                "band": "strength"
+              },
+              {
+                "upTo": 2.67,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "When you think things over, it tends to get you somewhere.",
+            "focusReason": "Your answers suggest a lot of thinking that does not lead anywhere useful.",
+            "topic": {
+              "label": "Repetitive thinking",
+              "url": "https://app.executiveframe.co.nz/hub/repetitive-thinking"
+            }
+          },
+          {
+            "id": "capacity",
+            "label": "Thinking that takes over",
+            "codebookName": "Capturing Mental Capacity",
+            "items": [
+              "ptq-5",
+              "ptq-10",
+              "ptq-15"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 1.33,
+                "band": "strength"
+              },
+              {
+                "upTo": 2.67,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "Your thinking leaves you room for other things.",
+            "focusReason": "Your answers suggest repetitive thinking takes up a lot of your mental space.",
+            "topic": {
+              "label": "Repetitive thinking",
+              "url": "https://app.executiveframe.co.nz/hub/repetitive-thinking"
+            }
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Ehring, T., Zetsche, U., Weidacker, K., Wahl, K., Schönfeld, S., & Ehlers, A. (2011). The Perseverative Thinking Questionnaire (PTQ): Validation of a content-independent measure of repetitive negative thinking. Journal of Behavior Therapy and Experimental Psychiatry, 42(2), 225–232. https://doi.org/10.1016/j.jbtep.2010.12.003",
+        "url": "https://oxcadatresources.com/wp-content/uploads/2020/09/EhringetalRuminationQuestionnaire.2011.pdf"
+      }
+    },
+    {
+      "id": "rrs",
+      "code": "RRS",
+      "name": "Responding to low mood",
+      "formalName": "Ruminative Responses Scale",
+      "description": "Trait rumination in response to low mood: the tendency to repetitively focus attention on the symptoms and possible causes/consequences of one's depressed mood. The Treynor et al. (2003) refinement splits this into a passive, self-critical/moody-pondering component (Brooding) and a more deliberate, ",
+      "licenceStatus": "review",
+      "licenceNote": "No explicit licence statement found. Confirm before clearing. Only Brooding and Reflection are scored.",
+      "instructions": "Please read each of the items below and indicate whether you almost never, sometimes, often, or almost always think or do each one when you feel down, sad, or depressed. Please indicate what you generally do, not what you think you should do.",
+      "minutes": 5,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "almost never"
+        },
+        {
+          "value": 2,
+          "label": "sometimes"
+        },
+        {
+          "value": 3,
+          "label": "often"
+        },
+        {
+          "value": 4,
+          "label": "almost always"
+        }
+      ],
+      "items": [
+        {
+          "id": "rrs-1",
+          "text": "Think about how alone you feel"
+        },
+        {
+          "id": "rrs-2",
+          "text": "Think \"I won't be able to do my job if I don't snap out of this\""
+        },
+        {
+          "id": "rrs-3",
+          "text": "Think about your feelings of fatigue and achiness"
+        },
+        {
+          "id": "rrs-4",
+          "text": "Think about how hard it is to concentrate"
+        },
+        {
+          "id": "rrs-5",
+          "text": "Think \"What am I doing to deserve this?\""
+        },
+        {
+          "id": "rrs-6",
+          "text": "Think about how passive and unmotivated you feel"
+        },
+        {
+          "id": "rrs-7",
+          "text": "Analyze recent events to try to understand why you are depressed"
+        },
+        {
+          "id": "rrs-8",
+          "text": "Think about how you don't seem to feel anything anymore"
+        },
+        {
+          "id": "rrs-9",
+          "text": "Think \"Why can't I get going?\""
+        },
+        {
+          "id": "rrs-10",
+          "text": "Think \"Why do I always react this way?\""
+        },
+        {
+          "id": "rrs-11",
+          "text": "Go away by yourself and think about why you feel this way"
+        },
+        {
+          "id": "rrs-12",
+          "text": "Write down what you are thinking about and analyze it"
+        },
+        {
+          "id": "rrs-13",
+          "text": "Think about a recent situation, wishing it had gone better"
+        },
+        {
+          "id": "rrs-14",
+          "text": "Think \"I won't be able to concentrate if I keep feeling this way\""
+        },
+        {
+          "id": "rrs-15",
+          "text": "Think \"Why do I have problems other people don't have?\""
+        },
+        {
+          "id": "rrs-16",
+          "text": "Think \"Why can't I handle things better?\""
+        },
+        {
+          "id": "rrs-17",
+          "text": "Think about how sad you feel"
+        },
+        {
+          "id": "rrs-18",
+          "text": "Think about all your shortcomings, failings, faults, mistakes"
+        },
+        {
+          "id": "rrs-19",
+          "text": "Think about how you don't feel up to doing anything"
+        },
+        {
+          "id": "rrs-20",
+          "text": "Analyze your personality to try to understand why you are depressed"
+        },
+        {
+          "id": "rrs-21",
+          "text": "Go someplace alone to think about your feelings"
+        },
+        {
+          "id": "rrs-22",
+          "text": "Think about how angry you are with yourself"
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "brooding",
+            "label": "Dwelling on what is wrong",
+            "codebookName": "Brooding",
+            "items": [
+              "rrs-5",
+              "rrs-10",
+              "rrs-13",
+              "rrs-15",
+              "rrs-16"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 2,
+                "band": "strength"
+              },
+              {
+                "upTo": 3,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "You do not tend to get stuck dwelling on what is wrong.",
+            "focusReason": "Dwelling on what is wrong came up often in your answers.",
+            "topic": {
+              "label": "Getting unstuck from low mood",
+              "url": "https://app.executiveframe.co.nz/hub/brooding"
+            }
+          },
+          {
+            "id": "reflection",
+            "label": "Reflecting on low mood",
+            "codebookName": "Reflection",
+            "items": [
+              "rrs-7",
+              "rrs-11",
+              "rrs-12",
+              "rrs-20",
+              "rrs-21"
+            ],
+            "method": "mean",
+            "direction": "none",
+            "bands": []
+          },
+          {
+            "id": "depressive",
+            "label": "Depression related items",
+            "codebookName": "Depression-related items (not scored as a subscale)",
+            "items": [
+              "rrs-1",
+              "rrs-2",
+              "rrs-3",
+              "rrs-4",
+              "rrs-6",
+              "rrs-8",
+              "rrs-9",
+              "rrs-14",
+              "rrs-17",
+              "rrs-18",
+              "rrs-19",
+              "rrs-22"
+            ],
+            "method": "mean",
+            "direction": "none",
+            "bands": []
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Nolen-Hoeksema, S., & Morrow, J. (1991). A prospective study of depression and posttraumatic stress symptoms after a natural disaster: The 1989 Loma Prieta earthquake. Journal of Personality and Social Psychology, 61(1), 115–121. https://doi.org/10.1037/0022-3514.61.1.115",
+        "url": "https://novopsych.com/assessments/formulation/ruminative-responses-scale-rrs/"
+      }
+    },
+    {
+      "id": "fscrs",
+      "code": "FSCRS",
+      "name": "How you talk to yourself",
+      "formalName": "Forms of Self-Criticising/Attacking and Self-Reassuring Scale",
+      "description": "Self-criticism and self-reassurance as distinct forms of self-relating that people use when things go wrong: an inadequacy-focused form of self-criticism, a more punitive, self-disgust-based (hated-self) form of self-criticism, and the capacity to be self-reassuring/self-supportive.",
+      "licenceStatus": "review",
+      "licenceNote": "Author copyright notice (Gilbert et al., 2004); no explicit practice use grant found. Confirm before clearing.",
+      "instructions": "When things go wrong in our lives or don't work out as we hoped, and we feel we could have done better, we sometimes have negative and self-critical thoughts and feelings. These may take the form of feeling worthless, useless or inferior etc. However, people can also try to be supportive of themselves. Below are a series of thoughts and feelings that people sometimes have. Read each statement carefully and choose the answer that best describes how much each statement is true for you.",
+      "minutes": 5,
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Not at all like me"
+        },
+        {
+          "value": 1,
+          "label": "A little bit like me"
+        },
+        {
+          "value": 2,
+          "label": "Moderately like me"
+        },
+        {
+          "value": 3,
+          "label": "Quite a bit like me"
+        },
+        {
+          "value": 4,
+          "label": "Extremely like me"
+        }
+      ],
+      "items": [
+        {
+          "id": "fscrs-1",
+          "text": "I am easily disappointed with myself."
+        },
+        {
+          "id": "fscrs-2",
+          "text": "There is a part of me that puts me down."
+        },
+        {
+          "id": "fscrs-3",
+          "text": "I am able to remind myself of positive things about myself."
+        },
+        {
+          "id": "fscrs-4",
+          "text": "I find it difficult to control my anger and frustration at myself."
+        },
+        {
+          "id": "fscrs-5",
+          "text": "I find it easy to forgive myself."
+        },
+        {
+          "id": "fscrs-6",
+          "text": "There is a part of me that feels I am not good enough."
+        },
+        {
+          "id": "fscrs-7",
+          "text": "I feel beaten down by my own self-critical thoughts."
+        },
+        {
+          "id": "fscrs-8",
+          "text": "I still like being me."
+        },
+        {
+          "id": "fscrs-9",
+          "text": "I have become so angry with myself that I want to hurt or injure myself."
+        },
+        {
+          "id": "fscrs-10",
+          "text": "I have a sense of disgust with myself."
+        },
+        {
+          "id": "fscrs-11",
+          "text": "I can still feel lovable and acceptable."
+        },
+        {
+          "id": "fscrs-12",
+          "text": "I stop caring about myself."
+        },
+        {
+          "id": "fscrs-13",
+          "text": "I find it easy to like myself."
+        },
+        {
+          "id": "fscrs-14",
+          "text": "I remember and dwell on my failings."
+        },
+        {
+          "id": "fscrs-15",
+          "text": "I call myself names."
+        },
+        {
+          "id": "fscrs-16",
+          "text": "I am gentle and supportive with myself."
+        },
+        {
+          "id": "fscrs-17",
+          "text": "I can't accept failures and setbacks without feeling inadequate."
+        },
+        {
+          "id": "fscrs-18",
+          "text": "I think I deserve my self-criticism."
+        },
+        {
+          "id": "fscrs-19",
+          "text": "I am able to care and look after myself."
+        },
+        {
+          "id": "fscrs-20",
+          "text": "There is a part of me that wants to get rid of the bits I don't like."
+        },
+        {
+          "id": "fscrs-21",
+          "text": "I encourage myself for the future."
+        },
+        {
+          "id": "fscrs-22",
+          "text": "I do not like being me."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [],
+        "flagItems": [
+          {
+            "itemId": "fscrs-9",
+            "atLeast": 1,
+            "note": "Follow up with the client directly."
+          }
+        ],
+        "subscales": [
+          {
+            "id": "inadequate",
+            "label": "Feeling not good enough",
+            "codebookName": "Inadequate Self",
+            "items": [
+              "fscrs-1",
+              "fscrs-2",
+              "fscrs-4",
+              "fscrs-6",
+              "fscrs-7",
+              "fscrs-14",
+              "fscrs-17",
+              "fscrs-18",
+              "fscrs-20"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 1.33,
+                "band": "strength"
+              },
+              {
+                "upTo": 2.67,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "You do not tend to come down hard on yourself when things go wrong.",
+            "focusReason": "Feeling not good enough when things go wrong came up often in your answers.",
+            "topic": {
+              "label": "Self criticism",
+              "url": "https://app.executiveframe.co.nz/hub/self-criticism"
+            }
+          },
+          {
+            "id": "hated",
+            "label": "Harsh self attack",
+            "codebookName": "Hated Self",
+            "items": [
+              "fscrs-9",
+              "fscrs-10",
+              "fscrs-12",
+              "fscrs-15",
+              "fscrs-22"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 1.33,
+                "band": "strength"
+              },
+              {
+                "upTo": 2.67,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "focusReason": "Your answers include some very harsh thoughts about yourself, which Sarah will talk through with you.",
+            "topic": {
+              "label": "Self criticism",
+              "url": "https://app.executiveframe.co.nz/hub/self-criticism"
+            }
+          },
+          {
+            "id": "reassured",
+            "label": "Reassuring yourself",
+            "codebookName": "Reassured Self",
+            "items": [
+              "fscrs-3",
+              "fscrs-5",
+              "fscrs-8",
+              "fscrs-11",
+              "fscrs-13",
+              "fscrs-16",
+              "fscrs-19",
+              "fscrs-21"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 1.33,
+                "band": "focus"
+              },
+              {
+                "upTo": 2.67,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You are able to be kind and reassuring to yourself when things go wrong.",
+            "focusReason": "Your answers suggest reassuring yourself when things go wrong does not come easily yet.",
+            "topic": {
+              "label": "Self compassion",
+              "url": "https://app.executiveframe.co.nz/hub/self-compassion"
+            }
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Gilbert, P., Clarke, M., Hempel, S., Miles, J. N. V., & Irons, C. (2004). Criticizing and reassuring oneself: An exploration of forms, styles and reasons in female students. British Journal of Clinical Psychology, 43(1), 31–50. https://doi.org/10.1348/014466504772812959",
+        "url": "https://d3n8a8pro7vhmx.cloudfront.net/portlandpsychotherapy/pages/21/attachments/original/1438799410/Forms_of_self-criticising_and_self_reassuring_scale.pdf"
+      }
+    },
+    {
+      "id": "pci",
+      "code": "PCI",
+      "name": "Perfectionistic thoughts",
+      "formalName": "Perfectionism Cognitions Inventory",
+      "description": "Frequency of perfectionism-related automatic thoughts (perfectionistic cognitions) over the preceding week, e.g. thoughts such as \"Why can't I be perfect\" or \"My work should be flawless\", as distinct from trait perfectionism itself.",
+      "licenceStatus": "review",
+      "licenceNote": "No explicit restriction found; Hewitt Lab hosts the document. Confirm before clearing.",
+      "instructions": "Listed below are a variety of thoughts about perfectionism that sometimes pop into people's heads. Please read each thought and indicate how frequently, if at all, the thoughts occurred to you over the last week.",
+      "minutes": 5,
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Not At All"
+        },
+        {
+          "value": 1,
+          "label": "Sometimes"
+        },
+        {
+          "value": 2,
+          "label": "Moderately Often"
+        },
+        {
+          "value": 3,
+          "label": "Often"
+        },
+        {
+          "value": 4,
+          "label": "All of the time"
+        }
+      ],
+      "items": [
+        {
+          "id": "pci-1",
+          "text": "Why can't I be perfect"
+        },
+        {
+          "id": "pci-2",
+          "text": "I need to do better"
+        },
+        {
+          "id": "pci-3",
+          "text": "I should be perfect"
+        },
+        {
+          "id": "pci-4",
+          "text": "I should never make the same mistake twice"
+        },
+        {
+          "id": "pci-5",
+          "text": "I've got to keep working on my goals"
+        },
+        {
+          "id": "pci-6",
+          "text": "I have to be the best"
+        },
+        {
+          "id": "pci-7",
+          "text": "I should be doing more"
+        },
+        {
+          "id": "pci-8",
+          "text": "I can't stand to make mistakes"
+        },
+        {
+          "id": "pci-9",
+          "text": "I have to work hard all the time"
+        },
+        {
+          "id": "pci-10",
+          "text": "No matter how much I do, it's never enough"
+        },
+        {
+          "id": "pci-11",
+          "text": "People expect me to be perfect"
+        },
+        {
+          "id": "pci-12",
+          "text": "I must be efficient at all times"
+        },
+        {
+          "id": "pci-13",
+          "text": "My goals are very high"
+        },
+        {
+          "id": "pci-14",
+          "text": "I can always do better, even if things are almost perfect"
+        },
+        {
+          "id": "pci-15",
+          "text": "I expect to be perfect"
+        },
+        {
+          "id": "pci-16",
+          "text": "Why can't things be perfect?"
+        },
+        {
+          "id": "pci-17",
+          "text": "My work has to be superior"
+        },
+        {
+          "id": "pci-18",
+          "text": "It would be great if everything in my life was perfect"
+        },
+        {
+          "id": "pci-19",
+          "text": "My work should be flawless"
+        },
+        {
+          "id": "pci-20",
+          "text": "Things are seldom ideal"
+        },
+        {
+          "id": "pci-21",
+          "text": "How well am I doing?"
+        },
+        {
+          "id": "pci-22",
+          "text": "I can't do this perfectly"
+        },
+        {
+          "id": "pci-23",
+          "text": "I certainly have high standards"
+        },
+        {
+          "id": "pci-24",
+          "text": "Maybe I should lower my goals"
+        },
+        {
+          "id": "pci-25",
+          "text": "I am too much of a perfectionist"
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Perfectionistic thoughts",
+            "codebookName": "Perfectionism Cognitions (total scale)",
+            "items": [
+              "pci-1",
+              "pci-2",
+              "pci-3",
+              "pci-4",
+              "pci-5",
+              "pci-6",
+              "pci-7",
+              "pci-8",
+              "pci-9",
+              "pci-10",
+              "pci-11",
+              "pci-12",
+              "pci-13",
+              "pci-14",
+              "pci-15",
+              "pci-16",
+              "pci-17",
+              "pci-18",
+              "pci-19",
+              "pci-20",
+              "pci-21",
+              "pci-22",
+              "pci-23",
+              "pci-24",
+              "pci-25"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 1.33,
+                "band": "strength"
+              },
+              {
+                "upTo": 2.67,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "Thoughts about needing to be perfect do not seem to feature much for you.",
+            "focusReason": "Thoughts about needing to be perfect came up often in your answers.",
+            "topic": {
+              "label": "Perfectionism",
+              "url": "https://app.executiveframe.co.nz/hub/perfectionism"
+            }
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Flett, G. L., Hewitt, P. L., Blankstein, K. R., & Gray, L. (1998). Psychological distress and the frequency of perfectionistic thinking. Journal of Personality and Social Psychology, 75(5), 1363–1381. https://doi.org/10.1037/0022-3514.75.5.1363",
+        "url": "https://novopsych.com/assessments/formulation/perfectionistic-cognitions-inventory-pci/"
+      }
+    },
+    {
+      "id": "scs-sf",
+      "code": "SCS-SF",
+      "name": "Self compassion",
+      "formalName": "Self-Compassion Scale – Short Form",
+      "description": "Self-compassion: treating oneself with kindness during difficult times, recognising one's experience as part shared common humanity, and holding painful thoughts/feelings in mindful awareness, versus self-judgment, isolation and over-identification with negative emotion.",
+      "licenceStatus": "review",
+      "licenceNote": "Author permits research use; practice use not addressed. Confirm with Dr Kristin Neff before clearing.",
+      "instructions": "Please read each statement carefully before answering. Indicate how often you behave in the stated manner.",
+      "minutes": 3,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "Almost never"
+        },
+        {
+          "value": 2,
+          "label": "2"
+        },
+        {
+          "value": 3,
+          "label": "3"
+        },
+        {
+          "value": 4,
+          "label": "4"
+        },
+        {
+          "value": 5,
+          "label": "Almost always"
+        }
+      ],
+      "items": [
+        {
+          "id": "scs-sf-1",
+          "text": "When I fail at something important to me I become consumed by feelings of inadequacy."
+        },
+        {
+          "id": "scs-sf-2",
+          "text": "I try to be understanding and patient towards those aspects of my personality I don't like."
+        },
+        {
+          "id": "scs-sf-3",
+          "text": "When something painful happens I try to take a balanced view of the situation."
+        },
+        {
+          "id": "scs-sf-4",
+          "text": "When I'm feeling down, I tend to feel like most other people are probably happier than I am."
+        },
+        {
+          "id": "scs-sf-5",
+          "text": "I try to see my failings as part of the human condition."
+        },
+        {
+          "id": "scs-sf-6",
+          "text": "When I'm going through a very hard time, I give myself the caring and tenderness I need."
+        },
+        {
+          "id": "scs-sf-7",
+          "text": "When something upsets me I try to keep my emotions in balance."
+        },
+        {
+          "id": "scs-sf-8",
+          "text": "When I fail at something that's important to me, I tend to feel alone in my failure."
+        },
+        {
+          "id": "scs-sf-9",
+          "text": "When I'm feeling down I tend to obsess and fixate on everything that's wrong."
+        },
+        {
+          "id": "scs-sf-10",
+          "text": "When I feel inadequate in some way, I try to remind myself that feelings of inadequacy are shared by most people."
+        },
+        {
+          "id": "scs-sf-11",
+          "text": "I'm disapproving and judgmental about my own flaws and inadequacies."
+        },
+        {
+          "id": "scs-sf-12",
+          "text": "I'm intolerant and impatient towards those aspects of my personality I don't like."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [
+          "scs-sf-1",
+          "scs-sf-4",
+          "scs-sf-8",
+          "scs-sf-9",
+          "scs-sf-11",
+          "scs-sf-12"
+        ],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "kindness",
+            "label": "Being kind to yourself",
+            "codebookName": "Self-Kindness",
+            "items": [
+              "scs-sf-2",
+              "scs-sf-6"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "focus"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You tend to treat yourself with kindness.",
+            "focusReason": "Your answers suggest being kind to yourself does not come easily.",
+            "topic": {
+              "label": "Self compassion",
+              "url": "https://app.executiveframe.co.nz/hub/self-compassion"
+            }
+          },
+          {
+            "id": "judgment",
+            "label": "Easing self judgement",
+            "codebookName": "Self-Judgment",
+            "items": [
+              "scs-sf-11",
+              "scs-sf-12"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "focus"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You tend not to judge yourself harshly.",
+            "focusReason": "Your answers suggest you judge yourself harshly.",
+            "topic": {
+              "label": "Self compassion",
+              "url": "https://app.executiveframe.co.nz/hub/self-compassion"
+            }
+          },
+          {
+            "id": "humanity",
+            "label": "Feeling you are not alone",
+            "codebookName": "Common Humanity",
+            "items": [
+              "scs-sf-5",
+              "scs-sf-10"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "focus"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You see your struggles as part of being human.",
+            "focusReason": "Your answers suggest your struggles feel like yours alone.",
+            "topic": {
+              "label": "Self compassion",
+              "url": "https://app.executiveframe.co.nz/hub/self-compassion"
+            }
+          },
+          {
+            "id": "isolation",
+            "label": "Feeling less isolated",
+            "codebookName": "Isolation",
+            "items": [
+              "scs-sf-4",
+              "scs-sf-8"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "focus"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You tend not to feel cut off from others when things are hard.",
+            "focusReason": "Your answers suggest you feel cut off from others when things are hard.",
+            "topic": {
+              "label": "Self compassion",
+              "url": "https://app.executiveframe.co.nz/hub/self-compassion"
+            }
+          },
+          {
+            "id": "mindfulness",
+            "label": "Keeping perspective",
+            "codebookName": "Mindfulness",
+            "items": [
+              "scs-sf-3",
+              "scs-sf-7"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "focus"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You tend to keep feelings in perspective.",
+            "focusReason": "Your answers suggest difficult feelings can crowd out perspective.",
+            "topic": {
+              "label": "Self compassion",
+              "url": "https://app.executiveframe.co.nz/hub/self-compassion"
+            }
+          },
+          {
+            "id": "overidentification",
+            "label": "Not getting swept up",
+            "codebookName": "Over-Identification",
+            "items": [
+              "scs-sf-1",
+              "scs-sf-9"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "focus"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You tend not to get swept up in difficult feelings.",
+            "focusReason": "Your answers suggest difficult feelings can sweep you up.",
+            "topic": {
+              "label": "Self compassion",
+              "url": "https://app.executiveframe.co.nz/hub/self-compassion"
+            }
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Raes, F., Pommier, E., Neff, K. D., & Van Gucht, D. (2011). Construction and factorial validation of a short form of the Self-Compassion Scale. Clinical Psychology & Psychotherapy, 18(3), 250–255. https://doi.org/10.1002/cpp.702",
+        "url": "https://self-compassion.org/wp-content/uploads/2015/02/ShortSCS.pdf"
+      }
+    },
+    {
+      "id": "bpnsfs",
+      "code": "BPNSFS",
+      "name": "What you need to feel at your best",
+      "formalName": "Basic Psychological Need Satisfaction and Frustration Scale (BPNSFS)",
+      "description": "The satisfaction and the frustration of the three basic psychological needs identified in self-determination theory: autonomy, competence and relatedness. The scale distinguishes need satisfaction (the needs being met) from need frustration (the needs being actively thwarted, not merely unmet), prod",
+      "licenceStatus": "permission",
+      "licenceNote": "Copyright Center for Self-Determination Theory; written permission required for commercial use.",
+      "instructions": "Below, we ask you about the kind of experiences you actually have in your life. Please read each of the following items carefully. You can choose from 1 to 5 to indicate the degree to which the statement is true for you at this point in your life.",
+      "minutes": 5,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "Not true at all"
+        },
+        {
+          "value": 2,
+          "label": "2"
+        },
+        {
+          "value": 3,
+          "label": "3"
+        },
+        {
+          "value": 4,
+          "label": "4"
+        },
+        {
+          "value": 5,
+          "label": "Completely true"
+        }
+      ],
+      "items": [
+        {
+          "id": "bpnsfs-1",
+          "text": "I feel a sense of choice and freedom in the things I undertake."
+        },
+        {
+          "id": "bpnsfs-2",
+          "text": "Most of the things I do feel like \"I have to\"."
+        },
+        {
+          "id": "bpnsfs-3",
+          "text": "I feel that the people I care about also care about me."
+        },
+        {
+          "id": "bpnsfs-4",
+          "text": "I feel excluded from the group I want to belong to."
+        },
+        {
+          "id": "bpnsfs-5",
+          "text": "I feel confident that I can do things well."
+        },
+        {
+          "id": "bpnsfs-6",
+          "text": "I have serious doubts about whether I can do things well."
+        },
+        {
+          "id": "bpnsfs-7",
+          "text": "I feel that my decisions reflect what I really want."
+        },
+        {
+          "id": "bpnsfs-8",
+          "text": "I feel forced to do many things I wouldn't choose to do."
+        },
+        {
+          "id": "bpnsfs-9",
+          "text": "I feel connected with people who care for me, and for whom I care."
+        },
+        {
+          "id": "bpnsfs-10",
+          "text": "I feel that people who are important to me are cold and distant towards me."
+        },
+        {
+          "id": "bpnsfs-11",
+          "text": "I feel capable at what I do."
+        },
+        {
+          "id": "bpnsfs-12",
+          "text": "I feel disappointed with many of my performances."
+        },
+        {
+          "id": "bpnsfs-13",
+          "text": "I feel my choices express who I really am."
+        },
+        {
+          "id": "bpnsfs-14",
+          "text": "I feel pressured to do too many things."
+        },
+        {
+          "id": "bpnsfs-15",
+          "text": "I feel close and connected with other people who are important to me."
+        },
+        {
+          "id": "bpnsfs-16",
+          "text": "I have the impression that people I spend time with dislike me."
+        },
+        {
+          "id": "bpnsfs-17",
+          "text": "I feel competent to achieve my goals."
+        },
+        {
+          "id": "bpnsfs-18",
+          "text": "I feel insecure about my abilities."
+        },
+        {
+          "id": "bpnsfs-19",
+          "text": "I feel I have been doing what really interests me."
+        },
+        {
+          "id": "bpnsfs-20",
+          "text": "My daily activities feel like a chain of obligations."
+        },
+        {
+          "id": "bpnsfs-21",
+          "text": "I experience a warm feeling with the people I spend time with."
+        },
+        {
+          "id": "bpnsfs-22",
+          "text": "I feel the relationships I have are just superficial."
+        },
+        {
+          "id": "bpnsfs-23",
+          "text": "I feel I can successfully complete difficult tasks."
+        },
+        {
+          "id": "bpnsfs-24",
+          "text": "I feel like a failure because of the mistakes I make."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "autonomy-sat",
+            "label": "Feeling free to choose",
+            "codebookName": "Autonomy satisfaction",
+            "items": [
+              "bpnsfs-1",
+              "bpnsfs-7",
+              "bpnsfs-13",
+              "bpnsfs-19"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "focus"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You feel free to choose how you live and work.",
+            "focusReason": "Your answers suggest you do not feel free to choose how you live and work.",
+            "topic": {
+              "label": "Autonomy",
+              "url": "https://app.executiveframe.co.nz/hub/autonomy"
+            }
+          },
+          {
+            "id": "autonomy-frus",
+            "label": "Feeling pushed",
+            "codebookName": "Autonomy frustration",
+            "items": [
+              "bpnsfs-2",
+              "bpnsfs-8",
+              "bpnsfs-14",
+              "bpnsfs-20"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "strength"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "You do not feel pushed into things against your wishes.",
+            "focusReason": "Feeling pushed into things came up often in your answers.",
+            "topic": {
+              "label": "Autonomy",
+              "url": "https://app.executiveframe.co.nz/hub/autonomy"
+            }
+          },
+          {
+            "id": "relatedness-sat",
+            "label": "Feeling connected",
+            "codebookName": "Relatedness satisfaction",
+            "items": [
+              "bpnsfs-3",
+              "bpnsfs-9",
+              "bpnsfs-15",
+              "bpnsfs-21"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "focus"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You feel close to the people who matter to you.",
+            "focusReason": "Your answers suggest you are not feeling close to the people who matter to you.",
+            "topic": {
+              "label": "Connection",
+              "url": "https://app.executiveframe.co.nz/hub/relatedness"
+            }
+          },
+          {
+            "id": "relatedness-frus",
+            "label": "Feeling left out",
+            "codebookName": "Relatedness frustration",
+            "items": [
+              "bpnsfs-4",
+              "bpnsfs-10",
+              "bpnsfs-16",
+              "bpnsfs-22"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "strength"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "You do not feel left out or distant from others.",
+            "focusReason": "Feeling left out or distant from others came up often in your answers.",
+            "topic": {
+              "label": "Connection",
+              "url": "https://app.executiveframe.co.nz/hub/relatedness"
+            }
+          },
+          {
+            "id": "competence-sat",
+            "label": "Feeling capable",
+            "codebookName": "Competence satisfaction",
+            "items": [
+              "bpnsfs-5",
+              "bpnsfs-11",
+              "bpnsfs-17",
+              "bpnsfs-23"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "focus"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You feel capable of what you set out to do.",
+            "focusReason": "Your answers suggest you are not feeling capable of what you set out to do.",
+            "topic": {
+              "label": "Confidence",
+              "url": "https://app.executiveframe.co.nz/hub/competence"
+            }
+          },
+          {
+            "id": "competence-frus",
+            "label": "Doubting yourself",
+            "codebookName": "Competence frustration",
+            "items": [
+              "bpnsfs-6",
+              "bpnsfs-12",
+              "bpnsfs-18",
+              "bpnsfs-24"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "strength"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "You do not doubt your ability much.",
+            "focusReason": "Doubting your ability came up often in your answers.",
+            "topic": {
+              "label": "Confidence",
+              "url": "https://app.executiveframe.co.nz/hub/competence"
+            }
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Chen, B., Vansteenkiste, M., Beyers, W., Boone, L., Deci, E. L., Van der Kaap-Deeder, J., Duriez, B., Lens, W., Matos, L., Mouratidis, A., Ryan, R. M., Sheldon, K. M., Soenens, B., Van Petegem, S., & Verstuyf, J. (2015). Basic psychological need satisfaction, need frustration, and need strength across four cultures. Motivation and Emotion, 39(2), 216-236. https://doi.org/10.1007/s11031-014-9450-1",
+        "url": "https://selfdeterminationtheory.org/basic-psychological-need-satisfaction-and-frustration-scale/"
+      }
+    },
+    {
+      "id": "pps",
+      "code": "PPS",
+      "name": "Putting things off",
+      "formalName": "Pure Procrastination Scale",
+      "description": "Trait (general) procrastination, i.e. the tendency to voluntarily delay an intended course of action despite expecting to be worse off for the delay. The PPS is a distilled, 12-item unidimensional measure combining items drawn from three earlier procrastination scales (the Decisional Procrastination",
+      "licenceStatus": "cleared",
+      "licenceNote": "Items published under CC BY (Svartdal and Steel, 2017).",
+      "instructions": "Not stated on source",
+      "minutes": 3,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "Very seldom or not true of me"
+        },
+        {
+          "value": 2,
+          "label": "2"
+        },
+        {
+          "value": 3,
+          "label": "3"
+        },
+        {
+          "value": 4,
+          "label": "4"
+        },
+        {
+          "value": 5,
+          "label": "Very often true, or true of me"
+        }
+      ],
+      "items": [
+        {
+          "id": "pps-1",
+          "text": "I delay making decision until it's too late"
+        },
+        {
+          "id": "pps-2",
+          "text": "Even after I make a decision I delay acting upon it"
+        },
+        {
+          "id": "pps-3",
+          "text": "I waste a lot of time on trivial matters before getting to final decisions"
+        },
+        {
+          "id": "pps-4",
+          "text": "In preparation for some deadlines, I often waste time by doing other things"
+        },
+        {
+          "id": "pps-5",
+          "text": "Even jobs that require little else except sitting down and doing them, I find they seldom get done for days"
+        },
+        {
+          "id": "pps-6",
+          "text": "I often find myself performing tasks that I had intended to do days before"
+        },
+        {
+          "id": "pps-7",
+          "text": "I am continually saying 'I'll do it tomorrow'"
+        },
+        {
+          "id": "pps-8",
+          "text": "I generally delay before starting on work I have to do"
+        },
+        {
+          "id": "pps-9",
+          "text": "I find myself running out of time"
+        },
+        {
+          "id": "pps-10",
+          "text": "I don't get things done on time"
+        },
+        {
+          "id": "pps-11",
+          "text": "I am not very good at meeting deadlines"
+        },
+        {
+          "id": "pps-12",
+          "text": "Putting things off till the last minute has cost me money in the past"
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Putting things off",
+            "codebookName": "Pure Procrastination (total scale)",
+            "items": [
+              "pps-1",
+              "pps-2",
+              "pps-3",
+              "pps-4",
+              "pps-5",
+              "pps-6",
+              "pps-7",
+              "pps-8",
+              "pps-9",
+              "pps-10",
+              "pps-11",
+              "pps-12"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "strength"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "Putting things off is not a big feature of how you work.",
+            "focusReason": "Putting things off came up often in your answers.",
+            "topic": {
+              "label": "Getting started",
+              "url": "https://app.executiveframe.co.nz/hub/starting"
+            }
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Svartdal, F., & Steel, P. (2017). Irrational delay revisited: Examining five procrastination scales in a global sample. Frontiers in Psychology, 8, 1927. https://doi.org/10.3389/fpsyg.2017.01927",
+        "url": "https://www.frontiersin.org/articles/10.3389/fpsyg.2017.01927/full"
+      }
+    },
+    {
+      "id": "ips",
+      "code": "IPS",
+      "name": "Delaying despite good intentions",
+      "formalName": "Irrational Procrastination Scale",
+      "description": "Irrational procrastination, i.e. the tendency to delay in a way that is knowingly counterproductive to one's own well-being or efficiency, distinguishing procrastination proper from merely intentional or strategic delay.",
+      "licenceStatus": "cleared",
+      "licenceNote": "Items published under CC BY (Svartdal and Steel, 2017).",
+      "instructions": "Not stated on source",
+      "minutes": 2,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "Very seldom or not true of me"
+        },
+        {
+          "value": 2,
+          "label": "2"
+        },
+        {
+          "value": 3,
+          "label": "3"
+        },
+        {
+          "value": 4,
+          "label": "4"
+        },
+        {
+          "value": 5,
+          "label": "Very often true, or true of me"
+        }
+      ],
+      "items": [
+        {
+          "id": "ips-1",
+          "text": "I put things off so long that my well-being or efficiency unnecessarily suffers"
+        },
+        {
+          "id": "ips-2",
+          "text": "If there is something I should do, I get to it before attending to lesser tasks"
+        },
+        {
+          "id": "ips-3",
+          "text": "My life would be better if I did some activities or tasks earlier"
+        },
+        {
+          "id": "ips-4",
+          "text": "When I should be doing one thing, I will do another"
+        },
+        {
+          "id": "ips-5",
+          "text": "At the end of the day, I know I could have spent the time better"
+        },
+        {
+          "id": "ips-6",
+          "text": "I spend my time wisely"
+        },
+        {
+          "id": "ips-7",
+          "text": "I delay tasks beyond what is reasonable"
+        },
+        {
+          "id": "ips-8",
+          "text": "I procrastinate"
+        },
+        {
+          "id": "ips-9",
+          "text": "I do everything when I believe it needs to be done"
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [
+          "ips-2",
+          "ips-6",
+          "ips-9"
+        ],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Delaying despite good intentions",
+            "codebookName": "Irrational Procrastination (total scale)",
+            "items": [
+              "ips-1",
+              "ips-2",
+              "ips-3",
+              "ips-4",
+              "ips-5",
+              "ips-6",
+              "ips-7",
+              "ips-8",
+              "ips-9"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "strength"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "You mostly do what you intend to, when you intend to.",
+            "focusReason": "Delaying things you meant to do came up often in your answers.",
+            "topic": {
+              "label": "Getting started",
+              "url": "https://app.executiveframe.co.nz/hub/starting"
+            }
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Svartdal, F., & Steel, P. (2017). Irrational delay revisited: Examining five procrastination scales in a global sample. Frontiers in Psychology, 8, 1927. https://doi.org/10.3389/fpsyg.2017.01927",
+        "url": "https://www.frontiersin.org/articles/10.3389/fpsyg.2017.01927/full"
+      }
+    },
+    {
+      "id": "gse",
+      "code": "GSE",
+      "name": "Confidence in handling challenges",
+      "formalName": "General Self-Efficacy Scale",
+      "description": "Generalized self-efficacy, i.e. a broad and stable sense of personal competence to deal effectively with a variety of stressful or difficult situations, treated as a unidimensional trait rather than task-specific self-efficacy.",
+      "licenceStatus": "cleared",
+      "licenceNote": "Authors grant permission to use and reproduce.",
+      "instructions": "Not stated on source",
+      "minutes": 2,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "Not at all true"
+        },
+        {
+          "value": 2,
+          "label": "Hardly true"
+        },
+        {
+          "value": 3,
+          "label": "Moderately true"
+        },
+        {
+          "value": 4,
+          "label": "Exactly true"
+        }
+      ],
+      "items": [
+        {
+          "id": "gse-1",
+          "text": "I can always manage to solve difficult problems if I try hard enough."
+        },
+        {
+          "id": "gse-2",
+          "text": "If someone opposes me, I can find the means and ways to get what I want."
+        },
+        {
+          "id": "gse-3",
+          "text": "It is easy for me to stick to my aims and accomplish my goals."
+        },
+        {
+          "id": "gse-4",
+          "text": "I am confident that I could deal efficiently with unexpected events."
+        },
+        {
+          "id": "gse-5",
+          "text": "Thanks to my resourcefulness, I know how to handle unforeseen situations."
+        },
+        {
+          "id": "gse-6",
+          "text": "I can solve most problems if I invest the necessary effort."
+        },
+        {
+          "id": "gse-7",
+          "text": "I can remain calm when facing difficulties because I can rely on my coping abilities."
+        },
+        {
+          "id": "gse-8",
+          "text": "When I am confronted with a problem, I can usually find several solutions."
+        },
+        {
+          "id": "gse-9",
+          "text": "If I am in trouble, I can usually think of a solution."
+        },
+        {
+          "id": "gse-10",
+          "text": "I can usually handle whatever comes my way."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Confidence in handling challenges",
+            "codebookName": "General Self-Efficacy (total scale)",
+            "items": [
+              "gse-1",
+              "gse-2",
+              "gse-3",
+              "gse-4",
+              "gse-5",
+              "gse-6",
+              "gse-7",
+              "gse-8",
+              "gse-9",
+              "gse-10"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2,
+                "band": "focus"
+              },
+              {
+                "upTo": 3,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You feel confident you can handle what comes your way.",
+            "focusReason": "Your answers suggest you are not feeling confident about handling what comes your way.",
+            "topic": {
+              "label": "Confidence",
+              "url": "https://app.executiveframe.co.nz/hub/competence"
+            }
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Schwarzer, R., & Jerusalem, M. (1995). Generalized Self-Efficacy scale. In J. Weinman, S. Wright, & M. Johnston, Measures in health psychology: A user's portfolio. Causal and control beliefs (pp. 35-37). NFER-NELSON.",
+        "url": "https://userpage.fu-berlin.de/~health/engscal.htm"
+      }
+    },
+    {
+      "id": "gcs",
+      "code": "GCS",
+      "name": "Commitment to your goal",
+      "formalName": "Goal Commitment Scale (5-item unidimensional version)",
+      "description": "Unidimensional goal commitment, i.e. the degree of attachment to, and determination to reach, a specific goal the respondent has in mind, independent of the goal's difficulty or content.",
+      "licenceStatus": "permission",
+      "licenceNote": "No licence statement found; paywalled Elsevier article. Confirm before clearing. The form must ask the client to name a goal first.",
+      "instructions": "Think of the main goal you are working on with Sarah. Answer each statement about that goal.",
+      "minutes": 2,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "Strongly Disagree"
+        },
+        {
+          "value": 2,
+          "label": "Moderately Disagree"
+        },
+        {
+          "value": 3,
+          "label": "Neutral"
+        },
+        {
+          "value": 4,
+          "label": "Moderately Agree"
+        },
+        {
+          "value": 5,
+          "label": "Strongly Agree"
+        }
+      ],
+      "items": [
+        {
+          "id": "gcs-1",
+          "text": "It's hard to take this goal seriously."
+        },
+        {
+          "id": "gcs-2",
+          "text": "Quite frankly, I don't care if I achieve this goal or not."
+        },
+        {
+          "id": "gcs-3",
+          "text": "I am strongly committed to pursuing this goal."
+        },
+        {
+          "id": "gcs-4",
+          "text": "It wouldn't take much to make me abandon this goal."
+        },
+        {
+          "id": "gcs-5",
+          "text": "I think this is a good goal to shoot for."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [
+          "gcs-1",
+          "gcs-2",
+          "gcs-4"
+        ],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Commitment to your goal",
+            "codebookName": "Goal Commitment",
+            "items": [
+              "gcs-1",
+              "gcs-2",
+              "gcs-3",
+              "gcs-4",
+              "gcs-5"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "focus"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You are firmly committed to the goal you named.",
+            "focusReason": "Your answers suggest your commitment to the goal you named is wavering.",
+            "topic": {
+              "label": "Goals",
+              "url": "https://app.executiveframe.co.nz/hub/goals"
+            }
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Klein, H. J., Wesson, M. J., Hollenbeck, J. R., Wright, P. M., & DeShon, R. P. (2001). The assessment of goal commitment: A measurement model meta-analysis. Organizational Behavior and Human Decision Processes, 85(1), 32-55.",
+        "url": "https://bearworks.missouristate.edu/cgi/viewcontent.cgi?article=4229&context=theses"
+      }
+    },
+    {
+      "id": "gadj",
+      "code": "GADJ",
+      "name": "Adjusting your goals",
+      "formalName": "Goal Adjustment Scale",
+      "description": "Adaptive self-regulation in the face of unattainable goals, comprising two related capacities: Goal Disengagement (the ability to withdraw effort and commitment from a goal that can no longer be reached) and Goal Reengagement (the ability to identify, commit to, and pursue new goals after disengagin",
+      "licenceStatus": "permission",
+      "licenceNote": "Society for Personality and Social Psychology copyright; no permission statement found. Confirm before clearing.",
+      "instructions": "\"If I have to stop pursuing an important goal in my life . . .\" This is the generic item stem used for all 10 items in Study 2 and Study 3, quoted verbatim from a footnote to Table 1 of Wrosch et al. (2003), fetched and confirmed in this session. In Study 1, the goal disengagement items only were instead presented against three separate situational stems, one of which is quoted verbatim in the article as: \"If it becomes likely that I have to stop pursuing an important goal because I no longer have the opportunity to realize it . . .\"",
+      "minutes": 3,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "Almost never true"
+        },
+        {
+          "value": 2,
+          "label": "2"
+        },
+        {
+          "value": 3,
+          "label": "3"
+        },
+        {
+          "value": 4,
+          "label": "4"
+        },
+        {
+          "value": 5,
+          "label": "Almost always true"
+        }
+      ],
+      "items": [
+        {
+          "id": "gadj-1",
+          "text": "It's easy for me to reduce my effort toward the goal."
+        },
+        {
+          "id": "gadj-2",
+          "text": "I find it difficult to stop trying to achieve the goal."
+        },
+        {
+          "id": "gadj-3",
+          "text": "I stay committed to the goal for a long time; I can't let it go."
+        },
+        {
+          "id": "gadj-4",
+          "text": "It's easy for me to stop thinking about the goal and let it go."
+        },
+        {
+          "id": "gadj-5",
+          "text": "I think about other new goals to pursue."
+        },
+        {
+          "id": "gadj-6",
+          "text": "I seek other meaningful goals."
+        },
+        {
+          "id": "gadj-7",
+          "text": "I convince myself that I have other meaningful goals to pursue."
+        },
+        {
+          "id": "gadj-8",
+          "text": "I tell myself that I have a number of other new goals to draw on."
+        },
+        {
+          "id": "gadj-9",
+          "text": "I start working on other new goals."
+        },
+        {
+          "id": "gadj-10",
+          "text": "I put effort toward other meaningful goals."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [
+          "gadj-2",
+          "gadj-3"
+        ],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "disengagement",
+            "label": "Letting go of goals",
+            "codebookName": "Goal Disengagement",
+            "items": [
+              "gadj-1",
+              "gadj-2",
+              "gadj-3",
+              "gadj-4"
+            ],
+            "method": "mean",
+            "direction": "none",
+            "bands": []
+          },
+          {
+            "id": "reengagement",
+            "label": "Finding new goals",
+            "codebookName": "Goal Reengagement",
+            "items": [
+              "gadj-5",
+              "gadj-6",
+              "gadj-7",
+              "gadj-8",
+              "gadj-9",
+              "gadj-10"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "focus"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "When a goal is out of reach you find new ones to pursue.",
+            "focusReason": "Your answers suggest it is hard to find new goals when one is out of reach.",
+            "topic": {
+              "label": "Goals",
+              "url": "https://app.executiveframe.co.nz/hub/goals"
+            }
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Wrosch, C., Scheier, M. F., Miller, G. E., Schulz, R., & Carver, C. S. (2003). Adaptive self-regulation of unattainable goals: Goal disengagement, goal reengagement, and subjective well-being. Personality and Social Psychology Bulletin, 29(12), 1494-1508.",
+        "url": "https://www.cmu.edu/dietrich/psychology/pdf/scales/GAS_article.pdf"
+      }
+    }
+  ]
+}

@@ -246,3 +246,27 @@ describe('check in schedules', () => {
     assert.equal(db.read('clients/client-1').journeyStage, 'booking');
   });
 });
+
+describe('codebook questionnaires', () => {
+  const { measures: library } = JSON.parse(readFileSync('measures/library.json', 'utf8'));
+  test('every questionnaire in the library validates and scores a full set of answers', async () => {
+    const { problems } = await import('../../scripts/measures.mjs');
+    for (const m of library) assert.deepEqual(problems(m), [], m.id);
+  });
+  test('a practitioner only questionnaire flags answers for Sarah and is never released to the client', async () => {
+    const dass = library.find((m) => m.id === 'dass-21');
+    await db.doc('measures/dass-21').set(dass);
+    await onboard();
+    await h.assignMeasure(as(sarah, { uid: 'client-1', measureId: 'dass-21' }));
+    const a = db.list('assignments').find((x) => x.uid === 'client-1');
+    for (const it of dass.items) await h.saveResponse(as(client, { assignmentId: a.id, itemId: it.id, value: it.id === 'dass-21-17' ? 3 : 0 }));
+    await h.submitMeasure(as(client, { assignmentId: a.id }));
+    const scoring = db.read(`scoring/${a.id}`);
+    assert.equal(scoring.draft.clientFacing, false);
+    assert.equal(scoring.draft.flags.length, 1);
+    assert.equal(scoring.draft.flags[0].itemId, 'dass-21-17');
+    assert.deepEqual(scoring.draft.strengths, []);
+    await rejects(h.releaseResults(as(sarah, { uid: 'client-1' })), 'failed-precondition');
+    assert.equal(db.read('results/client-1'), undefined);
+  });
+});

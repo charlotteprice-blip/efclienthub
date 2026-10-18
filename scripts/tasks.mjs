@@ -26,6 +26,7 @@ const groups = [
     ['npm run measures -- list', 'Show the questionnaire library'],
     ['npm run measures -- check <file.json>', 'Validate a questionnaire file without saving it'],
     ['npm run measures -- upload <file.json>', 'Add or update questionnaires in the library'],
+    ['npm run codebook', 'Rebuild measures/library.json and cleared.json from the EF Client Hub Codebook workbook'],
   ]],
   ['Build and look', [
     ['npm run harness', 'Run the live app at localhost:5174 with a stand in for Firebase'],

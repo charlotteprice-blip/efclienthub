@@ -88,6 +88,8 @@ export function stageAfterRelease(stage) {
 export function buildRelease(drafts, existingItems = []) {
   const byAssignment = new Map(existingItems.map((i) => [i.assignmentId, i]));
   for (const d of drafts) {
+    // Practitioner only measures (screeners) are never copied to the client.
+    if (d.draft.clientFacing === false) continue;
     byAssignment.set(d.assignmentId, {
       assignmentId: d.assignmentId,
       measureId: d.draft.measureId,
