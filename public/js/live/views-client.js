@@ -508,14 +508,17 @@ export function account(s) {
     'account',
     'Account',
     `${flashHtml(s.flash)}
-    <section class="stack reading" aria-labelledby="h-details">
-      <h2 id="h-details">Your details</h2>
-      <dl class="details">
-        <div><dt>Name</dt><dd>${esc(c.name)}</dd></div>
-        <div><dt>Email</dt><dd>${esc(c.email)}</dd></div>
-        <div><dt>Joined</dt><dd>${fmtDate(c.activatedAt)}</dd></div>
-      </dl>
-    </section>
+    <div class="toolbar toolbar-top">
+      <section class="stack reading" aria-labelledby="h-details">
+        <h2 id="h-details">Your details</h2>
+        <dl class="details">
+          <div><dt>Name</dt><dd>${esc(c.name)}</dd></div>
+          <div><dt>Email</dt><dd>${esc(c.email)}</dd></div>
+          <div><dt>Joined</dt><dd>${fmtDate(c.activatedAt)}</dd></div>
+        </dl>
+      </section>
+      <button type="button" class="btn btn-secondary btn-inline" data-action="logout">Log out</button>
+    </div>
     <section class="stack reading" aria-labelledby="h-privacy">
       <h2 id="h-privacy">Your information</h2>
       <p>Your information is stored securely in Sydney, Australia, and Sarah is responsible for it. You can ask to see it or ask for it to be corrected at any time. Sarah will reply within 20 working days.</p>
@@ -530,9 +533,6 @@ export function account(s) {
       </form>
       ${mine.length ? `<ul class="task-list">${mine.map((r) => `<li class="task"><div><p class="task-name">${r.kind === 'access' ? 'Copy of my information' : 'Correction'}</p><p class="task-meta">Sent ${fmtDate(r.createdAt)}, reply due by ${fmtDate(r.dueBy)}</p></div>${r.status === 'done' ? status('done', 'Answered') : status('progress', 'With Sarah')}<span></span></li>`).join('')}</ul>` : ''}
     </section>
-    <section class="stack" aria-labelledby="h-out">
-      <h2 id="h-out" class="visually-hidden">Log out</h2>
-      <div class="actions actions-end"><button type="button" class="btn btn-secondary btn-inline" data-action="logout">Log out</button></div>
-    </section>`,
+`,
   );
 }

@@ -799,3 +799,45 @@ th .sort:focus-visible {
 .actions-end {
   justify-content: flex-end;
 }
+
+/* Questionnaire page: actions beside the back link, details in 2 columns */
+.measure-toolbar p {
+  margin: 0;
+}
+
+.measure-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.measure-actions .inline-add {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.measure-actions .select {
+  width: auto;
+  min-width: 200px;
+}
+
+@media (min-width: 900px) {
+  .details-wide {
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--space-6);
+  }
+  .details-wide div {
+    grid-template-columns: 150px minmax(0, 1fr);
+  }
+}
+
+/* Account pages: details on the left, log out top right of the viewer */
+.toolbar-top {
+  align-items: flex-start;
+}
+
+.toolbar-top > .reading {
+  flex: 1 1 320px;
+}

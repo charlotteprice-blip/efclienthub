@@ -659,37 +659,35 @@ export function measurePage(s, id) {
     s,
     'library',
     m.name,
-    `<p><a href="/practitioner/library">Questionnaire library</a></p>
-    <div class="split">
-      <section class="panel stack" aria-labelledby="h-about">
-        <h2 id="h-about">About</h2>
-        <dl class="details">
-          <div><dt>Full name</dt><dd>${esc(m.formalName ?? m.name)}${m.code ? ` (${esc(m.code)})` : ''}</dd></div>
-          <div><dt>Domain</dt><dd>${esc(m.domain ?? '')}${m.tags?.length ? `<br><span class="t-caption">${esc(m.tags.join(', '))}</span>` : ''}</dd></div>
-          <div><dt>Length</dt><dd>${m.items.length} questions${m.minutes ? `, about ${m.minutes} minutes` : ''}</dd></div>
-          <div><dt>Results shown to</dt><dd>${staffOnly ? 'You only. Never summarised to the client.' : 'You, then the client once you release.'}</dd></div>
-          <div><dt>Licence</dt><dd>${m.licenceStatus === 'cleared' ? status('done', 'Cleared') : status('attention', esc(m.licenceStatus))}${m.licenceNote ? `<br><span class="t-caption">${esc(m.licenceNote)}</span>` : ''}</dd></div>
-          ${m.source?.citation ? `<div><dt>Source</dt><dd class="t-caption">${esc(m.source.citation)}${m.source.url ? ` <a href="${esc(m.source.url)}" target="_blank" rel="noopener">Link</a>` : ''}</dd></div>` : ''}
-        </dl>
-        ${m.description ? `<p>${esc(m.description)}</p>` : ''}
-        ${m.instructions ? `<p class="t-caption">Instruction shown with each question: "${esc(m.instructions)}"</p>` : ''}
-      </section>
-      <section class="panel stack" aria-labelledby="h-use">
-        <h2 id="h-use">Use it</h2>
-        <div class="actions"><a class="btn btn-secondary btn-inline" href="/practitioner/library/${esc(m.id)}/test/0">Test run</a></div>
-        <p class="t-caption">A test run walks through the questions as a client would and shows how the answers would score. Nothing is saved.</p>
+    `<div class="toolbar measure-toolbar">
+      <p><a href="/practitioner/library">Questionnaire library</a></p>
+      <div class="measure-actions">
+        <a class="btn btn-secondary btn-inline" href="/practitioner/library/${esc(m.id)}/test/0">Test run</a>
         ${
           canAssign
             ? `<form class="inline-add" data-form="assign-to" data-measure="${esc(m.id)}" novalidate>
-                <label class="field-label" for="assign-uid">Assign to</label>
-                <select class="select" id="assign-uid" name="uid">${assignable.length ? assignable.map((c) => `<option value="${esc(c.uid ?? c.id)}">${esc(c.name || c.email)}</option>`).join('') : '<option value="">No client is free to receive it</option>'}</select>
+                <label class="visually-hidden" for="assign-uid">Assign to</label>
+                <select class="select" id="assign-uid" name="uid">${assignable.length ? `<option value="">Assign to...</option>${assignable.map((c) => `<option value="${esc(c.uid ?? c.id)}">${esc(c.name || c.email)}</option>`).join('')}` : '<option value="">No client free to receive it</option>'}</select>
                 <button type="submit" class="btn btn-primary"${assignable.length ? '' : ' disabled'}>Assign</button>
-              </form>
-              <p class="t-caption">Clients who already have an open copy are not listed.</p>`
-            : `<p>Cannot be assigned until its licence is cleared.</p>`
+              </form>`
+            : '<span class="t-caption">Cannot be assigned until its licence is cleared.</span>'
         }
-      </section>
+      </div>
     </div>
+    <section class="panel stack" aria-labelledby="h-about">
+      <h2 id="h-about">About</h2>
+      <dl class="details details-wide">
+        <div><dt>Full name</dt><dd>${esc(m.formalName ?? m.name)}${m.code ? ` (${esc(m.code)})` : ''}</dd></div>
+        <div><dt>Domain</dt><dd>${esc(m.domain ?? '')}${m.tags?.length ? `<br><span class="t-caption">${esc(m.tags.join(', '))}</span>` : ''}</dd></div>
+        <div><dt>Length</dt><dd>${m.items.length} questions${m.minutes ? `, about ${m.minutes} minute${m.minutes === 1 ? '' : 's'}` : ''}</dd></div>
+        <div><dt>Results shown to</dt><dd>${staffOnly ? 'You only. Never summarised to the client.' : 'You, then the client once you release.'}</dd></div>
+        <div><dt>Licence</dt><dd>${m.licenceStatus === 'cleared' ? status('done', 'Cleared') : status('attention', esc(m.licenceStatus))}${m.licenceNote ? `<br><span class="t-caption">${esc(m.licenceNote)}</span>` : ''}</dd></div>
+        ${m.source?.citation ? `<div><dt>Source</dt><dd class="t-caption">${esc(m.source.citation)}${m.source.url ? ` <a href="${esc(m.source.url)}" target="_blank" rel="noopener">Link</a>` : ''}</dd></div>` : ''}
+      </dl>
+      ${m.description ? `<p>${esc(m.description)}</p>` : ''}
+      ${m.instructions ? `<p class="t-caption">Instruction shown with each question: "${esc(m.instructions)}"</p>` : ''}
+      <p class="t-caption">A test run walks through the questions as a client would and shows how the answers would score; nothing is saved. Clients who already have an open copy are not offered for assignment.</p>
+    </section>
 
     <section class="stack" aria-labelledby="h-avg">
       <h2 id="h-avg">Across your clients</h2>
@@ -786,13 +784,15 @@ export function staffAccount(s) {
     s,
     'account',
     'Account',
-    `<section class="stack reading">
-      <dl class="details">
-        <div><dt>Name</dt><dd>${esc(s.user.displayName || 'Not set')}</dd></div>
-        <div><dt>Email</dt><dd>${esc(s.user.email)}</dd></div>
-        <div><dt>Role</dt><dd>${s.role === 'practitioner' ? 'Practitioner' : 'Admin'}</dd></div>
-      </dl>
-    </section>
-    <div class="actions actions-end"><button type="button" class="btn btn-secondary btn-inline" data-action="logout">Log out</button></div>`,
+    `<div class="toolbar toolbar-top">
+      <section class="stack reading">
+        <dl class="details">
+          <div><dt>Name</dt><dd>${esc(s.user.displayName || 'Not set')}</dd></div>
+          <div><dt>Email</dt><dd>${esc(s.user.email)}</dd></div>
+          <div><dt>Role</dt><dd>${s.role === 'practitioner' ? 'Practitioner' : 'Admin'}</dd></div>
+        </dl>
+      </section>
+      <button type="button" class="btn btn-secondary btn-inline" data-action="logout">Log out</button>
+    </div>`,
   );
 }
