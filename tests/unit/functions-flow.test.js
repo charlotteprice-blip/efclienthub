@@ -148,10 +148,31 @@ describe('formulation and privacy requests', () => {
     await onboard();
     await rejects(h.releaseFormulation(as(sarah, { uid: 'client-1' })), 'failed-precondition');
     await rejects(h.saveFormulationDraft(as(sarah, { uid: 'client-1', factors: [{ zone: 'elsewhere', text: 'x' }] })), 'invalid-argument');
-    await h.saveFormulationDraft(as(sarah, { uid: 'client-1', factors: [{ id: 'a', zone: 'maintaining', text: 'Working late' }] }));
+    await h.saveFormulationDraft(as(sarah, { uid: 'client-1', factors: [{ id: 'a', zone: 'maintaining', text: 'Working late' }], summary: '  A short picture.  ' }));
     assert.equal(db.read('formulations/client-1'), undefined);
+    assert.equal(db.read('formulationDrafts/client-1').factors[0].zone, 'perpetuating', 'old zone name is mapped');
     await h.releaseFormulation(as(sarah, { uid: 'client-1' }));
-    assert.equal(db.read('formulations/client-1').factors[0].text, 'Working late');
+    const released = db.read('formulations/client-1');
+    assert.equal(released.factors[0].text, 'Working late');
+    assert.equal(released.summary, 'A short picture.');
+    assert.equal(released.version, 1);
+    await h.releaseFormulation(as(sarah, { uid: 'client-1' }));
+    assert.equal(db.read('formulations/client-1').version, 2);
+  });
+  test('the client responds to released factors only', async () => {
+    await onboard();
+    await rejects(h.respondToFormulation(as(client, { factorId: 'a', fit: 'fits' })), 'failed-precondition');
+    await h.saveFormulationDraft(as(sarah, { uid: 'client-1', factors: [{ id: 'a', zone: 'presenting', text: 'Deadlines slip' }, { id: 'b', zone: 'protective', text: 'Supportive manager' }] }));
+    await h.releaseFormulation(as(sarah, { uid: 'client-1' }));
+    await rejects(h.respondToFormulation(as(client, { factorId: 'zzz', fit: 'fits' })), 'invalid-argument');
+    await rejects(h.respondToFormulation(as(client, { factorId: 'a', fit: 'maybe' })), 'invalid-argument');
+    await h.respondToFormulation(as(client, { factorId: 'a', fit: 'partly', comment: 'Mostly at month end.' }));
+    await h.respondToFormulation(as(client, { factorId: 'b', fit: 'fits' }));
+    const r = db.read('formulationResponses/client-1');
+    assert.equal(r.responses.a.fit, 'partly');
+    assert.equal(r.responses.a.comment, 'Mostly at month end.');
+    assert.equal(r.responses.b.fit, 'fits');
+    assert.equal(r.responses.b.version, 1);
   });
   test('clients raise access and correction requests with a 20 working day due date', async () => {
     await onboard();

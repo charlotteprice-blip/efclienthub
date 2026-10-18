@@ -85,6 +85,13 @@
 48. Not built: BTQ (per event follow up questions) and WFIRS-S (needs a not applicable answer excluded from the mean). Held back for Sarah: IPIP-NEO-120, BFAS, C-SSRS Screener. Hua Oranga goes to Te Rau Ora for confirmation before use, as a courtesy as much as a licence step.
 49. Domains 4 and 5 renamed (Clinical and distress screening; Self talk, thinking patterns and personality) and domains 7 (Wellbeing and life satisfaction) and 8 (Functioning and health) added. Client names, subscale labels, bands and strength and focus wording for the new rows are drafts for Sarah; Learning Hub topics are left for Charlotte to map.
 
+## Formulation (18 October 2026)
+
+50. The formulation is 5P (presenting, predisposing, precipitating, perpetuating, protective), with a plain language summary Sarah writes above the cards. The client sees the latest release only, as before.
+51. Released areas of focus are offered as perpetuating factors and released strengths as protective factors, each carrying its source on the card; Sarah adds, edits, moves or removes cards and nothing is placed automatically.
+52. The client reads the formulation and responds to each card (fits, partly, does not fit, optional comment). Responses go to Sarah on the client's record, tagged with the version answered; local drag and drop rearranging is removed.
+53. Library tags (conditions and topics) live in the Hub Library sheet and appear as filter buttons; library columns sort by heading.
+
 ## Open questions
 
 Answered by Charlotte on 18 October 2026 (see decision 30): 1 (discounted seat), 2 (clinical record, 10 years), 3 (all in the hub), 5 (adults), 9 (email and password only). Still open: 4, 6, 7, 8, 10, plus the discount rate and the email sender address.

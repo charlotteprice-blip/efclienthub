@@ -15,6 +15,7 @@ import { validateIntake } from '../intake-rules.js';
 import { createJourneyRing } from '../journey-ring.js';
 import { createMark } from '../mark.js';
 import { esc } from '../ui.js';
+import { suggestFactors } from '../formulation.js';
 import { call, loadClient, loadStaff } from './data.js';
 import * as cv from './views-client.js';
 import * as sv from './views-staff.js';
@@ -34,9 +35,10 @@ const S = {
   flash: null,
   errors: {},
   form: {},
-  arrangement: null,
   lastIssued: null,
   draftFactors: {},
+  draftSummary: {},
+  responseDraft: {},
   ready: false,
 };
 
@@ -355,11 +357,36 @@ const handlers = {
     const uid = form.dataset.uid;
     const current = S.draftFactors[uid] ?? S.ctx.formulationDrafts[uid]?.factors ?? [];
     const factors = [...current, { id: `f${Date.now().toString(36)}`, zone: form.dataset.zone, text }];
-    await call('saveFormulationDraft', { uid, factors });
-    S.draftFactors[uid] = factors;
+    await saveFormulation(uid, factors);
+    return route();
+  },
+  async 'formulation-summary'(data, form) {
+    const uid = form.dataset.uid;
+    const current = S.draftFactors[uid] ?? S.ctx.formulationDrafts[uid]?.factors ?? [];
+    await saveFormulation(uid, current, String(data.summary ?? ''));
+    return undefined;
+  },
+  // The client's response to 1 factor on their released formulation.
+  async 'factor-response'(data, form) {
+    const factorId = form.dataset.factor;
+    const fit = String(data.fit ?? '') || null;
+    const comment = String(data.comment ?? '').trim();
+    if (!fit && !comment) return undefined;
+    await call('respondToFormulation', { factorId, fit, comment });
+    S.ctx.formulationResponses[factorId] = { fit, comment, at: Date.now() };
+    setFlash('Saved. Sarah will see this on your formulation.');
     return route();
   },
 };
+
+async function saveFormulation(uid, factors, summary) {
+  const text = summary ?? S.draftSummary[uid] ?? S.ctx.formulationDrafts[uid]?.summary ?? '';
+  await call('saveFormulationDraft', { uid, factors, summary: text });
+  S.draftFactors[uid] = factors;
+  S.draftSummary[uid] = text;
+  if (S.ctx.formulationDrafts[uid]) S.ctx.formulationDrafts[uid].updatedAt = Date.now();
+  else S.ctx.formulationDrafts[uid] = { uid, factors, summary: text, updatedAt: Date.now() };
+}
 
 async function saveAnswer(a, itemId, value) {
   a.responses = { ...(a.responses ?? {}), [itemId]: value };
@@ -432,7 +459,6 @@ const actions = {
         // Nothing more to clear.
       }
     }
-    S.arrangement = null;
     S.lastIssued = null;
     setFlash(clear ? 'Logged out and cleared from this browser.' : 'Logged out.');
     return navigate('/login');
@@ -463,8 +489,16 @@ const actions = {
     const uid = t.dataset.uid;
     const current = S.draftFactors[uid] ?? S.ctx.formulationDrafts[uid]?.factors ?? [];
     const factors = current.filter((f) => f.id !== t.dataset.factor);
-    await busy(t, () => call('saveFormulationDraft', { uid, factors }));
-    S.draftFactors[uid] = factors;
+    await busy(t, () => saveFormulation(uid, factors));
+    return route();
+  },
+  async 'add-suggestion'(t) {
+    const uid = t.dataset.uid;
+    const current = S.draftFactors[uid] ?? S.ctx.formulationDrafts[uid]?.factors ?? [];
+    const pick = suggestFactors(S.ctx.results[uid], current)[Number(t.dataset.index)];
+    if (!pick) return route();
+    const factors = [...current, { id: `f${Date.now().toString(36)}`, zone: pick.zone, text: pick.text, source: pick.source }];
+    await busy(t, () => saveFormulation(uid, factors));
     return route();
   },
   async schedule(t) {
@@ -565,7 +599,7 @@ document.addEventListener('click', (event) => {
   applyFilters(form);
 });
 
-// Answers save the moment they are chosen; formulation cards move locally.
+// Answers save the moment they are chosen.
 document.addEventListener('change', async (event) => {
   const el = event.target;
   if (el.name === 'answer') {
@@ -583,10 +617,25 @@ document.addEventListener('change', async (event) => {
     const dates = el.value === 'dates';
     for (const block of form.querySelectorAll('[data-cadence-fields]')) block.hidden = (block.dataset.cadenceFields === 'dates') !== dates;
   }
-  if (el.dataset.move && S.arrangement) {
-    const f = S.arrangement.factors.find((x) => x.id === el.dataset.move);
-    f.zone = el.value;
-    route();
+  // Sarah moves a draft factor to another zone.
+  if (el.dataset.moveFactor) {
+    const uid = el.dataset.uid;
+    const current = S.draftFactors[uid] ?? S.ctx.formulationDrafts[uid]?.factors ?? [];
+    const factors = current.map((f) => (f.id === el.dataset.moveFactor ? { ...f, zone: el.value } : f));
+    saveFormulation(uid, factors)
+      .then(route)
+      .catch((e) => {
+        setFlash(`The move was not saved. ${e.message}`, true);
+        route();
+      });
+  }
+  // The summary saves when Sarah leaves the box.
+  if (el.name === 'summary' && el.closest('[data-form="formulation-summary"]')) {
+    const form = el.closest('form');
+    handlers['formulation-summary']({ summary: el.value }, form).catch((e) => {
+      setFlash(`The summary was not saved. ${e.message}`, true);
+      route();
+    });
   }
 });
 
@@ -603,24 +652,6 @@ document.addEventListener('keydown', (event) => {
     radios[n - 1].checked = true;
     radios[n - 1].focus();
     radios[n - 1].dispatchEvent(new Event('change', { bubbles: true }));
-  }
-});
-
-document.addEventListener('dragstart', (event) => {
-  const card = event.target.closest('[data-factor]');
-  if (card && S.arrangement) event.dataTransfer.setData('text/plain', card.dataset.factor);
-});
-document.addEventListener('dragover', (event) => {
-  if (event.target.closest('[data-zone]') && S.arrangement) event.preventDefault();
-});
-document.addEventListener('drop', (event) => {
-  const zone = event.target.closest('[data-zone]');
-  if (!zone || !S.arrangement) return;
-  event.preventDefault();
-  const f = S.arrangement.factors.find((x) => x.id === event.dataTransfer.getData('text/plain'));
-  if (f) {
-    f.zone = zone.dataset.zone;
-    route();
   }
 });
 

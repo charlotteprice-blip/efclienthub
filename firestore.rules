@@ -100,6 +100,13 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // The client's responses to their released formulation (fits, partly,
+    // does not fit, comment). Written only by respondToFormulation.
+    match /formulationResponses/{uid} {
+      allow read: if isSelf(uid) || isPractitioner();
+      allow write: if false;
+    }
+
     // Access and correction requests under the Health Information Privacy
     // Code 2020, rules 6 and 7.
     match /requests/{requestId} {

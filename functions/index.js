@@ -73,6 +73,7 @@ export const assignMeasure = wrap(handlers.assignMeasure);
 export const releaseResults = wrap(handlers.releaseResults);
 export const saveFormulationDraft = wrap(handlers.saveFormulationDraft);
 export const releaseFormulation = wrap(handlers.releaseFormulation);
+export const respondToFormulation = wrap(handlers.respondToFormulation);
 export const closeRequest = wrap(handlers.closeRequest);
 export const createSchedule = wrap(handlers.createSchedule);
 export const updateSchedule = wrap(handlers.updateSchedule);

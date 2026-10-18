@@ -17,12 +17,17 @@ export const ROUTES = {
   library: '/practitioner/library',
 };
 
+// 5P formulation. Client facing titles; the hint is the clinical name.
 export const ZONES = [
+  { id: 'presenting', title: 'What we are working on', hint: 'Presenting' },
   { id: 'predisposing', title: 'What made this more likely', hint: 'Predisposing' },
   { id: 'precipitating', title: 'What set it off', hint: 'Precipitating' },
-  { id: 'maintaining', title: 'What keeps it going', hint: 'Maintaining' },
+  { id: 'perpetuating', title: 'What keeps it going', hint: 'Perpetuating' },
   { id: 'protective', title: 'What helps', hint: 'Protective' },
 ];
+export const FIT_LABELS = { fits: 'Fits', partly: 'Partly', no: 'Does not fit' };
+// Old drafts used 'maintaining' for the perpetuating zone.
+export const zoneOf = (f) => (f.zone === 'maintaining' ? 'perpetuating' : f.zone);
 
 const flashHtml = (flash) => (flash ? `<div class="notice${flash.error ? ' notice-error' : ''}" role="${flash.error ? 'alert' : 'status'}"><p>${esc(flash.text)}</p></div>` : '');
 
@@ -373,24 +378,44 @@ export function results(s) {
 export function formulation(s) {
   const f = s.ctx.formulation;
   if (!f) return results(s);
-  if (!s.arrangement || s.arrangement.releasedAt !== f.releasedAt) s.arrangement = { releasedAt: f.releasedAt, factors: f.factors.map((x) => ({ ...x })) };
-  const zones = ZONES.map(
-    (z) => `<section class="zone" data-zone="${z.id}" aria-labelledby="z-${z.id}">
+  const responses = s.ctx.formulationResponses ?? {};
+  const zones = ZONES.map((z) => {
+    const cards = f.factors.filter((x) => zoneOf(x) === z.id);
+    return `<section class="zone" data-zone="${z.id}" aria-labelledby="z-${z.id}">
       <h2 class="t-ui-strong" id="z-${z.id}">${esc(z.title)}</h2>
-      <p class="t-caption">${esc(z.hint)}${z.id === 'maintaining' ? ', what we will work on together' : ''}</p>
-      <ul class="zone-cards">${s.arrangement.factors
-        .filter((x) => x.zone === z.id)
-        .map(
-          (x) => `<li class="factor${z.id === 'maintaining' ? ' factor-target' : ''}" draggable="true" data-factor="${esc(x.id)}">
-            <span>${esc(x.text)}</span>${z.id === 'maintaining' ? '<span class="target-tag">Focus of our work</span>' : ''}
-            <label class="visually-hidden" for="mv-${esc(x.id)}">Move "${esc(x.text)}" to</label>
-            <select class="move" id="mv-${esc(x.id)}" data-move="${esc(x.id)}">${ZONES.map((o) => `<option value="${o.id}"${o.id === z.id ? ' selected' : ''}>${esc(o.title)}</option>`).join('')}</select>
-          </li>`,
-        )
-        .join('')}</ul>
-    </section>`,
-  ).join('');
-  return shell(s, 'formulation', 'Formulation', `<p class="reading">This is the picture you and Sarah built together, shared on ${fmtDate(f.releasedAt)}. You can drag the cards or use the menus to explore it. Moving them here does not change Sarah's copy.</p><div class="zones">${zones}</div><p class="t-caption">Prototype for the pilot.</p>`);
+      <p class="t-caption">${esc(z.hint)}${z.id === 'perpetuating' ? ', what we will work on together' : ''}</p>
+      ${
+        cards.length
+          ? `<ul class="zone-cards">${cards
+              .map((x) => {
+                const r = responses[x.id] ?? {};
+                return `<li class="factor${z.id === 'perpetuating' ? ' factor-target' : ''}" data-factor="${esc(x.id)}">
+            <div class="factor-body"><span>${esc(x.text)}</span>${z.id === 'perpetuating' ? '<span class="target-tag">Focus of our work</span>' : ''}</div>
+            <form class="factor-respond" data-form="factor-response" data-factor="${esc(x.id)}" novalidate>
+              <fieldset class="fit-choice"><legend class="visually-hidden">Does "${esc(x.text)}" fit?</legend>
+                ${Object.entries(FIT_LABELS).map(([v, label]) => `<label class="fit${r.fit === v ? ' fit-on' : ''}"><input type="radio" name="fit" value="${v}"${r.fit === v ? ' checked' : ''}><span>${esc(label)}</span></label>`).join('')}
+              </fieldset>
+              <label class="visually-hidden" for="cm-${esc(x.id)}">Comment for Sarah</label>
+              <input class="input input-small" id="cm-${esc(x.id)}" name="comment" maxlength="500" placeholder="Add a comment for Sarah (optional)" value="${esc(r.comment ?? '')}">
+              <button type="submit" class="btn btn-secondary btn-inline">Save</button>
+              ${r.at ? `<p class="t-caption">Saved ${fmtDate(r.at)}.</p>` : ''}
+            </form>
+          </li>`;
+              })
+              .join('')}</ul>`
+          : '<p class="t-caption">Nothing here yet.</p>'
+      }
+    </section>`;
+  }).join('');
+  return shell(
+    s,
+    'formulation',
+    'Formulation',
+    `${flashHtml(s.flash)}
+    <p class="reading">This is the picture you and Sarah built together, shared on ${fmtDate(f.releasedAt)}. For each card, tell Sarah whether it fits, partly fits or does not fit, and add a comment if you like. Sarah sees your answers and can update the picture with you.</p>
+    ${f.summary ? `<div class="reading formulation-summary">${f.summary.split('\n').filter(Boolean).map((para) => `<p>${esc(para)}</p>`).join('')}</div>` : ''}
+    <div class="zones zones-5">${zones}</div>`,
+  );
 }
 
 export function account(s) {

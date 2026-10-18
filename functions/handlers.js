@@ -309,8 +309,9 @@ export function makeHandlers({ db, intakeConfig, clientTypes, allowSample = () =
       const auth = practitioner(request);
       const { ref } = await existingClient(request.data?.uid);
       const factors = core.cleanFactors(request.data?.factors);
-      if (!factors) fail('invalid-argument', 'Each factor needs text and one of the 4 zones.');
-      await db.doc(`formulationDrafts/${ref.id}`).set({ uid: ref.id, factors, updatedAt: now(), updatedBy: auth.uid });
+      if (!factors) fail('invalid-argument', 'Each factor needs text and one of the 5 zones.');
+      const summary = core.cleanSummary(request.data?.summary);
+      await db.doc(`formulationDrafts/${ref.id}`).set({ uid: ref.id, factors, summary, updatedAt: now(), updatedBy: auth.uid });
       return { ok: true };
     },
 
@@ -319,8 +320,28 @@ export function makeHandlers({ db, intakeConfig, clientTypes, allowSample = () =
       const { ref } = await existingClient(request.data?.uid);
       const draft = (await db.doc(`formulationDrafts/${ref.id}`).get()).data();
       if (!draft?.factors?.length) fail('failed-precondition', 'Add at least 1 factor before releasing.');
-      await db.doc(`formulations/${ref.id}`).set({ uid: ref.id, factors: draft.factors, releasedAt: now(), releasedBy: auth.uid });
-      await audit(auth.uid, 'released formulation', ref.id);
+      const prior = (await db.doc(`formulations/${ref.id}`).get()).data();
+      const version = (prior?.version ?? 0) + 1;
+      await db.doc(`formulations/${ref.id}`).set({ uid: ref.id, factors: draft.factors, summary: draft.summary ?? '', version, releasedAt: now(), releasedBy: auth.uid });
+      await audit(auth.uid, 'released formulation', ref.id, { version });
+      return { ok: true };
+    },
+
+    // The client marks a released factor as fits, partly or does not fit,
+    // with an optional comment. Responses live in formulationResponses,
+    // 1 document per client, keyed by factor id; Sarah reads them on the
+    // client's record. A new release keeps earlier responses for factors
+    // that are still present.
+    respondToFormulation: async (request) => {
+      const auth = signedIn(request);
+      const formulation = (await db.doc(`formulations/${auth.uid}`).get()).data();
+      if (!formulation?.releasedAt) fail('failed-precondition', 'No formulation has been shared with you yet.');
+      const response = core.cleanResponse(request.data, formulation);
+      if (!response) fail('invalid-argument', 'Choose fits, partly or does not fit, or write a comment.');
+      const ref = db.doc(`formulationResponses/${auth.uid}`);
+      const existing = (await ref.get()).data()?.responses ?? {};
+      existing[response.factorId] = { fit: response.fit, comment: response.comment, at: now(), version: formulation.version ?? 1 };
+      await ref.set({ uid: auth.uid, responses: existing, updatedAt: now() });
       return { ok: true };
     },
 

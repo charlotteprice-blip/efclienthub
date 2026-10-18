@@ -13,6 +13,7 @@ mkdirSync(out, { recursive: true });
 for (const [from, to] of [
   ['public/js/intake-rules.js', 'intake-rules.js'],
   ['public/js/scoring.js', 'scoring.js'],
+  ['public/js/formulation.js', 'formulation.js'],
   ['public/config/intake.json', 'intake.json'],
   ['public/config/client-types.json', 'client-types.json'],
 ]) {

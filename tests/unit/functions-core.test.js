@@ -122,3 +122,21 @@ describe('check in schedules', () => {
     assert.equal(core.resumedDue({ nextDue: null }, '2026-11-10'), null);
   });
 });
+
+describe('formulation suggestions', () => {
+  const results = { items: [{ assignmentId: 'a1', measureName: 'Everyday executive skills', focus: [{ subscaleId: 'time', label: 'Managing time', reason: '' }], strengths: [{ subscaleId: 'plan', label: 'Planning', reason: '' }] }] };
+  test('areas of focus suggest perpetuating factors and strengths suggest protective ones', () => {
+    const s = core.suggestFactors(results, []);
+    assert.deepEqual(s.map((x) => [x.zone, x.text]), [['perpetuating', 'Managing time'], ['protective', 'Planning']]);
+    assert.equal(s[0].source.assignmentId, 'a1');
+  });
+  test('a suggestion already on the draft is not repeated', () => {
+    const placed = core.cleanFactors([{ id: 'f1', zone: 'perpetuating', text: 'Managing time', source: { assignmentId: 'a1', subscaleId: 'time', measureName: 'x', kind: 'focus' } }]);
+    assert.equal(core.suggestFactors(results, placed).length, 1);
+  });
+  test('factor ids are made unique and the summary is bounded', () => {
+    const f = core.cleanFactors([{ id: 'a', zone: 'presenting', text: 'x' }, { id: 'a', zone: 'presenting', text: 'y' }]);
+    assert.notEqual(f[0].id, f[1].id);
+    assert.equal(core.cleanSummary('a'.repeat(2000)).length, core.SUMMARY_MAX);
+  });
+});

@@ -85,6 +85,7 @@ async function seed() {
     await db.doc(`results/${CLIENT_A}`).set({ uid: CLIENT_A, releasedAt: ts, items: {} });
     await db.doc(`results/${CLIENT_B}`).set({ uid: CLIENT_B, releasedAt: null, items: {} });
     await db.doc(`formulations/${CLIENT_A}`).set({ uid: CLIENT_A, releasedAt: ts, factors: [] });
+    await db.doc(`formulationResponses/${CLIENT_A}`).set({ uid: CLIENT_A, responses: {} });
     await db.doc(`formulations/${CLIENT_B}`).set({ uid: CLIENT_B, releasedAt: null, factors: [] });
 
     await db.doc('activationCodes/hash-1').set({ clientTypeOverride: 'neurodivergent' });
@@ -183,6 +184,14 @@ describe('nothing reaches a client before release', () => {
   test('client cannot read own formulation draft', async () => {
     await assertFails(as.user(CLIENT_A).doc(`formulationDrafts/${CLIENT_A}`).get());
   });
+  test('client reads own formulation responses but cannot write them or read another client\'s', async () => {
+    await assertSucceeds(as.user(CLIENT_A).doc(`formulationResponses/${CLIENT_A}`).get());
+    await assertFails(as.user(CLIENT_A).doc(`formulationResponses/${CLIENT_A}`).set({ uid: CLIENT_A, responses: { x: { fit: 'fits' } } }));
+    await assertFails(as.user(CLIENT_B).doc(`formulationResponses/${CLIENT_A}`).get());
+  });
+  test('practitioner reads formulation responses', async () => {
+    await assertSucceeds(as.practitioner().doc(`formulationResponses/${CLIENT_A}`).get());
+  });
   test('client cannot read own unreleased results', async () => {
     await assertFails(as.user(CLIENT_B).doc(`results/${CLIENT_B}`).get());
   });
@@ -259,6 +268,7 @@ describe('practitioner role', () => {
     `results/${CLIENT_B}`,
     `formulationDrafts/${CLIENT_B}`,
     `formulations/${CLIENT_B}`,
+    `formulationResponses/${CLIENT_B}`,
     `requests/${CLIENT_B}-r1`,
     `schedules/${CLIENT_B}-s1`,
     'activationCodes/hash-1',

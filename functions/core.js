@@ -2,6 +2,9 @@
 // decision here is unit tested in tests/unit/functions-core.test.js.
 
 import { createHash, randomInt } from 'node:crypto';
+import { suggestFactors } from './shared/formulation.js';
+
+export { suggestFactors };
 
 export const CODE_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 export const CODE_LENGTH = 12;
@@ -9,7 +12,10 @@ export const CODE_DAYS = 30;
 export const ROLES = ['practitioner', 'admin'];
 export const STAGES = ['enquiry', 'firstSession', 'assessment', 'booking', 'feedback', 'intervention', 'review'];
 export const REQUEST_KINDS = ['access', 'correction'];
-export const ZONES = ['predisposing', 'precipitating', 'maintaining', 'protective'];
+// 5P formulation. 'maintaining' is accepted as the old name for perpetuating.
+export const ZONES = ['presenting', 'predisposing', 'precipitating', 'perpetuating', 'protective'];
+export const FITS = ['fits', 'partly', 'no'];
+export const SUMMARY_MAX = 1500;
 export const REDEEM_LIMIT = { attempts: 10, windowMs: 60 * 60 * 1000 };
 const DAY = 24 * 60 * 60 * 1000;
 
@@ -106,12 +112,40 @@ export function buildRelease(drafts, existingItems = []) {
 export function cleanFactors(factors) {
   if (!Array.isArray(factors) || factors.length > 60) return null;
   const out = [];
+  const ids = new Set();
   for (const f of factors) {
     const text = String(f?.text ?? '').trim().slice(0, 140);
-    if (!text || !ZONES.includes(f?.zone)) return null;
-    out.push({ id: String(f.id ?? '').slice(0, 40) || `f${out.length + 1}`, zone: f.zone, text });
+    const zone = f?.zone === 'maintaining' ? 'perpetuating' : f?.zone;
+    if (!text || !ZONES.includes(zone)) return null;
+    let id = String(f.id ?? '').slice(0, 40) || `f${out.length + 1}`;
+    while (ids.has(id)) id = `${id}x`;
+    ids.add(id);
+    const clean = { id, zone, text };
+    // A factor suggested from released results keeps a pointer to its source.
+    if (f.source && typeof f.source === 'object') {
+      clean.source = {
+        assignmentId: String(f.source.assignmentId ?? '').slice(0, 60),
+        measureName: String(f.source.measureName ?? '').slice(0, 120),
+        subscaleId: String(f.source.subscaleId ?? '').slice(0, 60),
+        kind: f.source.kind === 'strength' ? 'strength' : 'focus',
+      };
+    }
+    out.push(clean);
   }
   return out;
+}
+
+export function cleanSummary(summary) {
+  return String(summary ?? '').replace(/\r\n/g, '\n').trim().slice(0, SUMMARY_MAX);
+}
+
+export function cleanResponse(data, formulation) {
+  const factorId = String(data?.factorId ?? '');
+  if (!formulation?.factors?.some((f) => f.id === factorId)) return null;
+  const fit = FITS.includes(data?.fit) ? data.fit : null;
+  const comment = String(data?.comment ?? '').trim().slice(0, 500);
+  if (!fit && !comment) return null;
+  return { factorId, fit, comment };
 }
 
 export function cleanName(name) {

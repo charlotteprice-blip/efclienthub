@@ -97,10 +97,6 @@
   color: var(--ink);
 }
 
-.zone[data-zone="maintaining"] {
-  box-shadow: inset 0 0 0 2px var(--accent);
-}
-
 .zone-cards {
   list-style: none;
   margin: var(--space-2) 0 0;
@@ -229,6 +225,119 @@
 
 .dialog::backdrop {
   background: rgba(46, 64, 98, 0.45);
+}
+
+/* 5P layout: presenting spans the top, the 4 factor zones sit below in pairs */
+.zones-5 > .zone:first-child {
+  grid-column: 1 / -1;
+  min-height: 0;
+}
+
+.zone[data-zone="perpetuating"],
+.zone[data-zone="maintaining"] {
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.factor {
+  cursor: default;
+}
+
+.factor-body {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.factor-body > span:first-child {
+  flex: none;
+}
+
+.factor-response {
+  color: var(--accent);
+}
+
+.factor-suggest {
+  background: var(--ground);
+  box-shadow: inset 0 0 0 1px var(--hairline);
+}
+
+.suggestions {
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+}
+
+.select-small {
+  min-height: 36px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  width: auto;
+  font-size: var(--type-caption-size);
+}
+
+/* The client's response to a factor: 3 choices and a comment */
+.factor-respond {
+  flex: 1 1 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--hairline);
+}
+
+.fit-choice {
+  display: flex;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.fit {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 4px 12px;
+  border: 1px solid var(--ef-slate);
+  border-radius: var(--radius-pill);
+  font-size: var(--type-caption-size);
+  cursor: pointer;
+}
+
+.fit input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.fit:has(input:checked) {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #FFFFFF;
+}
+
+.fit:has(input:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.input-small {
+  flex: 1 1 220px;
+  min-height: 36px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-size: var(--type-caption-size);
+}
+
+.formulation-summary {
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
 }
 
 @media (max-width: 899px) {

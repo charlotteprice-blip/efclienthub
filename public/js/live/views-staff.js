@@ -1,7 +1,8 @@
 // Live practitioner (Sarah) and admin screens.
 
 import { CADENCE_LABELS, STAGE_LABELS, esc, fmtDate, fmtDay, practitionerShell, relative, status } from '../ui.js';
-import { MARK_SRC, ROUTES, ZONES } from './views-client.js';
+import { FIT_LABELS, MARK_SRC, ROUTES, ZONES, zoneOf } from './views-client.js';
+import { suggestFactors } from '../formulation.js';
 
 const flashHtml = (flash) => (flash ? `<div class="notice${flash.error ? ' notice-error' : ''}" role="${flash.error ? 'alert' : 'status'}"><p>${esc(flash.text)}</p></div>` : '');
 
@@ -126,8 +127,13 @@ export function client(s, uid) {
   const released = s.ctx.results[uid];
   const pending = unreleased(s, uid);
   const intake = s.ctx.intake[uid];
-  const fd = s.draftFactors?.[uid] ?? s.ctx.formulationDrafts[uid]?.factors ?? [];
+  const fdoc = s.ctx.formulationDrafts[uid];
+  const fd = s.draftFactors?.[uid] ?? fdoc?.factors ?? [];
+  const fSummary = s.draftSummary?.[uid] ?? fdoc?.summary ?? '';
   const fr = s.ctx.formulations[uid];
+  const fResponses = s.ctx.formulationResponses?.[uid]?.responses ?? {};
+  const suggestions = suggestFactors(released, fd);
+  const draftChanged = fr && fdoc?.updatedAt && fdoc.updatedAt > fr.releasedAt;
   const requests = s.ctx.requests.filter((r) => r.uid === uid);
   const measures = Object.values(s.ctx.measures);
   const assignable = measures.filter((m) => (m.licenceStatus === 'cleared' || m.licenceStatus === 'sample') && !list.some((a) => a.measureId === m.id && a.status !== 'complete'));
@@ -171,12 +177,24 @@ export function client(s, uid) {
     })
     .join('');
 
+  const responseLine = (f) => {
+    const r = fResponses[f.id];
+    if (!r) return '';
+    const stale = fr && r.version && fr.version && r.version < fr.version;
+    return `<p class="t-caption factor-response">${esc(c.name || 'Client')}: ${esc(r.fit ? FIT_LABELS[r.fit] : 'commented')}${r.comment ? ` "${esc(r.comment)}"` : ''}${stale ? ' (on an earlier version)' : ''}</p>`;
+  };
   const zones = ZONES.map(
-    (z) => `<div class="stack zone zone-edit">
+    (z) => `<div class="stack zone zone-edit" data-zone="${z.id}">
       <p class="t-ui-strong">${esc(z.hint)}</p>
+      <p class="t-caption">${esc(z.title)}${z.id === 'perpetuating' ? '. Shown to the client as the focus of your work together' : ''}.</p>
       <ul class="zone-cards">${fd
-        .filter((f) => f.zone === z.id)
-        .map((f) => `<li class="factor"><span>${esc(f.text)}</span><button type="button" class="btn btn-quiet" data-action="remove-factor" data-uid="${esc(uid)}" data-factor="${esc(f.id)}" aria-label="Remove ${esc(f.text)}">Remove</button></li>`)
+        .filter((f) => zoneOf(f) === z.id)
+        .map(
+          (f) => `<li class="factor${f.source ? ' factor-sourced' : ''}"><div class="factor-body"><span>${esc(f.text)}</span>${f.source ? `<p class="t-caption">From ${esc(f.source.measureName)}</p>` : ''}${responseLine(f)}</div>
+            <label class="visually-hidden" for="mv-${esc(f.id)}">Move "${esc(f.text)}" to</label>
+            <select class="select select-small" id="mv-${esc(f.id)}" data-move-factor="${esc(f.id)}" data-uid="${esc(uid)}">${ZONES.map((o) => `<option value="${o.id}"${o.id === z.id ? ' selected' : ''}>${esc(o.hint)}</option>`).join('')}</select>
+            <button type="button" class="btn btn-quiet" data-action="remove-factor" data-uid="${esc(uid)}" data-factor="${esc(f.id)}" aria-label="Remove ${esc(f.text)}">Remove</button></li>`,
+        )
         .join('')}</ul>
       <form class="inline-add" data-form="add-factor" data-uid="${esc(uid)}" data-zone="${z.id}" novalidate>
         <label class="visually-hidden" for="add-${z.id}">Add a ${esc(z.hint.toLowerCase())} factor</label>
@@ -185,6 +203,12 @@ export function client(s, uid) {
       </form>
     </div>`,
   ).join('');
+  const suggestionList = suggestions.length
+    ? `<div class="stack suggestions"><p class="t-ui-strong">From the released results</p><p class="t-caption">Areas of focus can be placed as perpetuating factors and strengths as protective factors. Each shows its source on the card; edit the wording after adding if you wish.</p>
+      <ul class="zone-cards">${suggestions
+        .map((x, i) => `<li class="factor factor-suggest"><div class="factor-body"><span>${esc(x.text)}</span><p class="t-caption">${x.kind === 'focus' ? 'Area of focus' : 'Strength'} in ${esc(x.source.measureName)}</p></div><button type="button" class="btn btn-secondary btn-inline" data-action="add-suggestion" data-uid="${esc(uid)}" data-index="${i}">Add as ${esc(x.zone)}</button></li>`)
+        .join('')}</ul></div>`
+    : '';
 
   return shell(
     s,
@@ -268,11 +292,19 @@ export function client(s, uid) {
 
     <section class="stack" aria-labelledby="h-form">
       <h2 id="h-form">Formulation</h2>
-      <p class="reading t-caption">Predisposing, precipitating, maintaining and protective factors. Maintaining factors show to the client as the focus of your work together. Changes save as you make them; the client sees nothing until you release.</p>
-      <div class="zones">${zones}</div>
+      <p class="t-caption">5P formulation: presenting, predisposing, precipitating, perpetuating and protective. Changes save as you make them; the client sees nothing until you release, and then sees the latest release only. The client can mark each card as fits, partly or does not fit and leave a comment, which appears under the card here.</p>
+      <form class="stack" data-form="formulation-summary" data-uid="${esc(uid)}" novalidate>
+        <div class="field">
+          <label class="field-label" for="f-summary">Summary the client reads</label>
+          <p class="field-hint">A short paragraph in plain language above the cards. Saves when you leave the box.</p>
+          <textarea class="input textarea" id="f-summary" name="summary" rows="5" maxlength="1500">${esc(fSummary)}</textarea>
+        </div>
+      </form>
+      ${suggestionList}
+      <div class="zones zones-5">${zones}</div>
       <div class="actions">
-        ${fd.length ? `<button type="button" class="btn btn-secondary" data-action="release-formulation" data-uid="${esc(uid)}">${fr ? 'Release updated formulation' : 'Release formulation'}</button>` : ''}
-        ${fr ? `<p class="t-caption">Released ${fmtDate(fr.releasedAt)}.</p>` : ''}
+        ${fd.length ? `<button type="button" class="btn ${draftChanged || !fr ? 'btn-primary' : 'btn-secondary'}" data-action="release-formulation" data-uid="${esc(uid)}">${fr ? 'Release updated formulation' : 'Release formulation'}</button>` : ''}
+        ${fr ? `<p class="t-caption">Version ${fr.version ?? 1} released ${fmtDate(fr.releasedAt)}.${draftChanged ? ' The draft has changed since.' : ''}</p>` : '<p class="t-caption">Not yet released.</p>'}
       </div>
     </section>
 

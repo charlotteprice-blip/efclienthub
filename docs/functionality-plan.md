@@ -6,7 +6,7 @@ Agreed with Charlotte on 18 October 2026, subject to Sarah's confirmation where 
 
 1. Pilot clients are adults Sarah sees 1 to 1. Workplace, team and under 18 journeys are out of scope; the client type config stays but no journey differs yet.
 2. Sarah chooses when each client sees results. The release button stays; nothing releases automatically.
-3. Between sessions the hub carries check in questionnaires on a schedule Sarah sets per client, and Sarah's formulation drafts. The client sees only the latest released formulation.
+3. Between sessions the hub carries check in questionnaires on a schedule Sarah sets per client, and Sarah's formulation drafts. The formulation is 5P with a written summary; factors can be drawn from released results; the client sees only the latest released formulation and responds to each card (fits, partly, does not fit, comment), which Sarah reads on the client's record. Built 18 October 2026.
 4. Booking is a link to Splose. The hub records that the client reached the booking step and nothing more.
 5. All questionnaires run in the hub as JSON Charlotte or Sarah loads. No external marker is needed.
 6. At completion the client's account becomes read only. Sarah closes it later; closure sets a retention date 10 years from the last service, since the hub is part of the clinical record. Nothing is deleted before that date.
