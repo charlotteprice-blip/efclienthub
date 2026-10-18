@@ -395,7 +395,12 @@ const steps = [
     title: 'Project allows public callers on its Cloud Functions (domain restricted sharing off for this project)',
     constraint: 'iam.allowedPolicyMemberDomains',
     async check() {
-      const r = look('gcloud', ['org-policies', 'describe', this.constraint, `--project=${CONFIG.project}`, '--effective', '--format=json']);
+      let r = look('gcloud', ['org-policies', 'describe', this.constraint, `--project=${CONFIG.project}`, '--effective', '--format=json']);
+      if (!r.ok && /not enabled/i.test(r.err)) {
+        // Reading policies needs its own API; switch it on and look again.
+        run('gcloud', ['services', 'enable', 'orgpolicy.googleapis.com', `--project=${CONFIG.project}`]);
+        r = look('gcloud', ['org-policies', 'describe', this.constraint, `--project=${CONFIG.project}`, '--effective', '--format=json']);
+      }
       if (!r.ok) {
         if (/NOT_FOUND|not found/i.test(r.err)) return { state: 'done' };
         return { state: 'unknown', detail: [`Could not read the policy: ${why(r)}`] };
@@ -416,7 +421,7 @@ const steps = [
       writeFileSync(file, `name: projects/${CONFIG.project}/policies/${this.constraint}\nspec:\n  rules:\n  - allowAll: true\n`);
       return run('gcloud', ['org-policies', 'set-policy', file, '--format=none']);
     },
-    manual: 'Needs the Organization Policy Administrator role on the charlotteprice.co.nz organisation. If the command is refused, grant yourself that role in the Google Cloud console under IAM for the organisation, then run this again.',
+    manual: 'Needs the Organization Policy Administrator role on the charlotteprice.co.nz organisation. If the command is refused: in the Google Cloud console pick the organisation charlotteprice.co.nz at the top, open IAM, add hello@charlotteprice.co.nz with the role Organization Policy Administrator, then run this again. Or set it by hand: IAM and admin, Organization policies, Domain restricted sharing, Manage policy, Override parent policy, Add rule, Allow all, Set policy.',
   },
   {
     // Newer Google organisations no longer hand the project's default service
