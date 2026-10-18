@@ -9,6 +9,8 @@ Item text, response options, reverse scoring and subscale membership are read fr
 
 A third sheet, NovoPsych Catalogue, lists all 150 assessments on novopsych.com (18 October 2026) with metadata only, a suggested hub relevance, and 2 columns to fill in: licence confirmed and decision. An instrument moves into the hub by being added to the codebook's own sheets (Instrument Summary, Master Item List, Structure and Subscales) and then to Hub Library and Hub Subscales; the catalogue is the shopping list, not a source of items.
 
+A fourth sheet, Other open instruments, lists 153 free or open licence instruments found beyond NovoPsych (executive functioning, work, wellbeing, the open repositories and clinical practice in New Zealand), each with the licence statement as found, whether open access items exist, NZ use where known, a hub suggestion and a caution where digital use may need its own licence. Clinical screeners and any risk measure are Sarah only in the hub.
+
 ## Workflow
 
 ```
