@@ -70,6 +70,13 @@
 39. Default bands are thirds of the response range on the item mean, with a scoring direction per subscale; DASS-21 uses its published normal range cut offs. All client facing wording and Learning Hub topics in the Hub Subscales sheet are drafts for Sarah.
 40. Reverse scoring is minimum plus maximum minus the answer, so scales starting at 1 reverse correctly (was maximum minus the answer).
 
+## Questionnaire library, continued (18 October 2026)
+
+41. Transcription scope: every instrument with an open licence (public domain or an explicit free with attribution grant) and an open access item source is transcribed into the codebook, across all domains. Free for non commercial or research only instruments are transcribed too and held at review until the authors confirm practice use. Each transcription gets a second, independent check against its source before Charlotte spot checks and Sarah approves wording.
+42. Flagged answers on clinical screeners alert Sarah on the draft only (email arrives with stage 7). No client facing message and no restriction on when a screener can be completed.
+43. Default questionnaire batteries per client type live in `client-types.json` `defaultMeasures`, mapped from the codebook Batteries sheet; only cleared questionnaires are assigned. Sarah to confirm the mapping.
+44. Clinical screeners found for New Zealand practice are Sarah only in the hub. Risk measures (C-SSRS screener and similar) are not transcribed until Sarah decides, and would never run unattended.
+
 ## Open questions
 
 Answered by Charlotte on 18 October 2026 (see decision 30): 1 (discounted seat), 2 (clinical record, 10 years), 3 (all in the hub), 5 (adults), 9 (email and password only). Still open: 4, 6, 7, 8, 10, plus the discount rate and the email sender address.

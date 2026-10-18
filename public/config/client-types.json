@@ -56,7 +56,13 @@
       "practitionerLabel": "Neurodivergent",
       "accent": "#A65A1B",
       "accentPlaceholder": true,
-      "defaultMeasures": [],
+      "defaultMeasures": [
+        "dass-21",
+        "asrs",
+        "esq-r",
+        "pps",
+        "ips"
+      ],
       "copy": {
         "assessment": {
           "body": "Sarah has asked you to complete a few questionnaires about how attention, organisation and planning show up for you at work and at home. There are no right or wrong answers, and you can stop and come back at any time."
@@ -67,7 +73,13 @@
       "practitionerLabel": "Health",
       "accent": "#2F6E68",
       "accentPlaceholder": true,
-      "defaultMeasures": [],
+      "defaultMeasures": [
+        "dass-21",
+        "esq-r",
+        "scs-sf",
+        "fscrs",
+        "gse"
+      ],
       "copy": {
         "assessment": {
           "body": "Sarah has asked you to complete a few questionnaires about how your health and energy affect your work and daily life. There are no right or wrong answers, and you can stop and come back at any time."
@@ -78,7 +90,15 @@
       "practitionerLabel": "Corporate",
       "accent": "#3E5680",
       "accentPlaceholder": true,
-      "defaultMeasures": [],
+      "defaultMeasures": [
+        "dass-21",
+        "cses",
+        "pes",
+        "sks",
+        "sus",
+        "sses",
+        "gse"
+      ],
       "copy": {
         "assessment": {
           "body": "Sarah has asked you to complete a few questionnaires as part of the programme arranged with your organisation. Sarah will explain what is and is not shared with your organisation before you begin."
@@ -89,8 +109,14 @@
       "practitionerLabel": "Team",
       "accent": "#3E5680",
       "accentPlaceholder": true,
-      "defaultMeasures": [],
+      "defaultMeasures": [
+        "sks",
+        "sus",
+        "sses",
+        "pes"
+      ],
       "copy": {}
     }
-  }
+  },
+  "_defaultMeasuresNote": "Default questionnaires assigned at intake, by client type, drawn from the codebook Batteries sheet (18 October 2026): neurodivergent = DASS-21 screen plus the Executive Function (ADHD) and Procrastination batteries; health = DASS-21 screen plus ESQ-R, Self-Appraisal and GSE; corporate = DASS-21 screen plus Work Mindset, Strengths and GSE; team = Strengths plus PES. Only questionnaires whose licence status is cleared are actually assigned; the rest wait until cleared. Sarah to confirm."
 }
