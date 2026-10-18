@@ -128,9 +128,9 @@ export function practitionerShell({ title, active, content, counts, wide, markSr
     ...(routes.dashboard && routes.dashboard !== routes.clients ? [{ key: 'dashboard', href: routes.dashboard, label: 'Dashboard', icon: 'dashboard', active: active === 'dashboard', practitionerOnly: true }] : []),
     { key: 'clients', href: routes.clients, label: 'Clients', icon: 'clients', active: active === 'clients', practitionerOnly: true },
     { key: 'review', href: routes.review, label: 'To review', icon: 'review', active: active === 'review', count: counts.review, countLabel: 'to review', practitionerOnly: true },
-    { key: 'codes', href: routes.codes, label: 'Activation codes', icon: 'codes', active: active === 'codes' },
     { key: 'library', href: routes.library, label: 'Questionnaire library', icon: 'library', active: active === 'library' },
     ...(accountHref ? [{ key: 'account', href: accountHref, label: 'Account', icon: 'account', active: active === 'account' }] : []),
+    { key: 'codes', href: routes.codes, label: 'Activation codes', icon: 'codes', active: active === 'codes' },
   ];
   const items = all.filter((i) => role === 'practitioner' || !i.practitionerOnly);
   const initial = esc(String(person.name ?? 'S').trim().charAt(0).toUpperCase() || 'S');

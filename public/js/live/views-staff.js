@@ -574,8 +574,7 @@ export function library(s) {
     s,
     'library',
     'Questionnaire library',
-    `<p class="intro-wide">Questionnaires available to assign. They come from the EF Client Hub Codebook; Charlotte adds each one from the terminal once its licence status is cleared. Commercial instruments are never reproduced in the hub. Filter with the fields and condition buttons; press a column heading to sort, and again to reverse.</p>
-    <form class="filters" data-filters="library" role="search" aria-label="Filter the library" novalidate>
+    `<form class="filters" data-filters="library" role="search" aria-label="Filter the library" novalidate>
       <div class="field"><label class="field-label" for="lib-q">Search</label><input class="input" id="lib-q" name="q" type="search" placeholder="Name, code, subscale or topic" autocomplete="off"></div>
       <div class="field"><label class="field-label" for="lib-domain">Domain</label><select class="select" id="lib-domain" name="domain"><option value="">All domains</option>${domains.map((d) => `<option value="${esc(d)}">${esc(d)}</option>`).join('')}</select></div>
       <div class="field"><label class="field-label" for="lib-audience">Results shown to</label><select class="select" id="lib-audience" name="audience"><option value="">Anyone</option><option value="client">Client and you</option><option value="staff">You only</option></select></div>
