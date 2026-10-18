@@ -375,13 +375,14 @@ export function measureOptions(list) {
 export function library(s) {
   const measures = Object.values(s.ctx.measures).sort((a, b) => a.name.localeCompare(b.name));
   const domains = [...new Set(measures.map((m) => m.domain).filter(Boolean))].sort();
+  const tags = [...new Set(measures.flatMap((m) => m.tags ?? []))].sort((a, b) => a.localeCompare(b));
   const rows = measures
     .map((m) => {
       const staffOnly = m.scoringRules?.clientFacing === false;
       const search = [m.name, m.formalName, m.code, m.domain, m.description, (m.scoringRules?.subscales ?? []).map((x) => x.label).join(' ')].filter(Boolean).join(' ').toLowerCase();
-      return `<tr data-row data-search="${esc(search)}" data-domain="${esc(m.domain ?? '')}" data-audience="${staffOnly ? 'staff' : 'client'}" data-licence="${esc(m.licenceStatus)}">
+      return `<tr data-row data-search="${esc(search)}" data-domain="${esc(m.domain ?? '')}" data-audience="${staffOnly ? 'staff' : 'client'}" data-licence="${esc(m.licenceStatus)}" data-tags="|${esc((m.tags ?? []).join('|'))}|">
         <td><p class="t-ui-strong">${esc(m.name)}</p>${m.formalName ? `<p class="t-caption">${esc(m.formalName)}${m.code && !m.formalName.includes(m.code) ? ` (${esc(m.code)})` : ''}${staffOnly ? '. For you only; never summarised to the client' : ''}</p>` : ''}</td>
-        <td>${esc(m.domain ?? '')}</td>
+        <td>${esc(m.domain ?? '')}${m.tags?.length ? `<p class="t-caption">${esc(m.tags.join(', '))}</p>` : ''}</td>
         <td>${m.items?.length ?? 0}${m.minutes ? `<p class="t-caption">${m.minutes} min</p>` : ''}</td>
         <td>${esc((m.scoringRules?.subscales ?? []).map((x) => x.label).join(', '))}</td>
         <td>${m.licenceStatus === 'cleared' ? status('done', 'Cleared') : status('attention', 'Sample')}</td>
@@ -398,6 +399,11 @@ export function library(s) {
       <div class="field"><label class="field-label" for="lib-domain">Domain</label><select class="select" id="lib-domain" name="domain"><option value="">All domains</option>${domains.map((d) => `<option value="${esc(d)}">${esc(d)}</option>`).join('')}</select></div>
       <div class="field"><label class="field-label" for="lib-audience">Results shown to</label><select class="select" id="lib-audience" name="audience"><option value="">Anyone</option><option value="client">Client and you</option><option value="staff">You only</option></select></div>
       <div class="field"><label class="field-label" for="lib-licence">Licence</label><select class="select" id="lib-licence" name="licence"><option value="">Any</option><option value="cleared">Cleared</option><option value="sample">Sample</option></select></div>
+      <input type="hidden" name="tag" value="">
+      ${tags.length ? `<div class="chips" role="group" aria-label="Condition or topic">
+        <button type="button" class="chip" data-tag="" aria-pressed="true">All</button>
+        ${tags.map((t) => `<button type="button" class="chip" data-tag="${esc(t)}" aria-pressed="false">${esc(t)}</button>`).join('')}
+      </div>` : ''}
     </form>
     <p class="t-caption" data-filter-count>${measures.length} questionnaire${measures.length === 1 ? '' : 's'}</p>
     <div class="table-wrap"><table class="table table-library">

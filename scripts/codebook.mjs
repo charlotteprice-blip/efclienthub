@@ -179,6 +179,7 @@ for (const lib of library) {
     licenceNote: col(lib, 'Licence note'),
     instructions: /^not (stated|retrieved)/i.test(col(lib, 'Instructions shown')) ? '' : col(lib, 'Instructions shown'),
     minutes: Number(col(lib, 'Minutes')) || null,
+    tags: col(lib, 'Conditions and topics').split('|').map((t) => t.trim()).filter(Boolean),
     responseOptions,
     items: measureItems,
     scoringRules: {

@@ -12,6 +12,9 @@
       "licenceNote": "Public domain WHO instrument, freely reproducible for clinical use.",
       "instructions": "Please answer the questions below, rating yourself on each of the criteria shown. As you answer each question, select the box that best describes how you have felt and conducted yourself over the past 6 months.",
       "minutes": 4,
+      "tags": [
+        "ADHD and attention"
+      ],
       "responseOptions": [
         {
           "value": 0,
@@ -219,6 +222,10 @@
       "licenceNote": "Stated non proprietary and free to use without permission.",
       "instructions": "",
       "minutes": 3,
+      "tags": [
+        "Self appraisal",
+        "Work"
+      ],
       "responseOptions": [
         {
           "value": 1,
@@ -363,6 +370,9 @@
       "licenceNote": "Hosted freely by the author for research and practice use.",
       "instructions": "Listed below are a number of self-orientations that people may have with regard to their work role. Using the following scale, please indicate the extent to which you agree or disagree that each one describes your self-orientation.",
       "minutes": 3,
+      "tags": [
+        "Work"
+      ],
       "responseOptions": [
         {
           "value": 1,
@@ -592,6 +602,11 @@
       "licenceNote": "Public domain per the official UNSW DASS site.",
       "instructions": "Please read each statement and choose the answer that shows how much the statement applied to you over the past week. There are no right or wrong answers. Do not spend too much time on any statement.",
       "minutes": 4,
+      "tags": [
+        "Depression",
+        "Anxiety",
+        "Stress"
+      ],
       "responseOptions": [
         {
           "value": 0,
@@ -812,6 +827,9 @@
       "licenceNote": "Items published under CC BY (Svartdal and Steel, 2017).",
       "instructions": "",
       "minutes": 3,
+      "tags": [
+        "Procrastination"
+      ],
       "responseOptions": [
         {
           "value": 1,
@@ -949,6 +967,9 @@
       "licenceNote": "Items published under CC BY (Svartdal and Steel, 2017).",
       "instructions": "",
       "minutes": 2,
+      "tags": [
+        "Procrastination"
+      ],
       "responseOptions": [
         {
           "value": 1,
@@ -1075,6 +1096,10 @@
       "licenceNote": "Authors grant permission to use and reproduce.",
       "instructions": "",
       "minutes": 2,
+      "tags": [
+        "Self appraisal",
+        "Motivation and goals"
+      ],
       "responseOptions": [
         {
           "value": 1,
@@ -1198,6 +1223,10 @@
       "licenceNote": "Authors state the ADEXI is freely available for both researchers and clinicians (chexi.se).",
       "instructions": "Below you will find a number of statements. Please circle a number to the right of each statement to indicate how well that statement describes how you are as a person. People that you know might feel differently about you – we want to know what you think about yourself. Try to answer as honestly as possible.",
       "minutes": 3,
+      "tags": [
+        "Executive functioning",
+        "ADHD and attention"
+      ],
       "responseOptions": [
         {
           "value": 1,
@@ -1365,6 +1394,9 @@
       "licenceNote": "Rice lab: no permission needed to use or translate the scale; cite properly. The older PDF note (research only) is superseded by the lab statement; both are quoted in the codebook.",
       "instructions": "The following items are designed to measure attitudes people have toward themselves, their performance, and toward others. There are no right or wrong answers. Please respond to all of the items. Use your first impression and do not spend too much time on individual items in responding. Respond to each of the items using the scale below to describe your degree of agreement with each item. Circle the appropriate rating for each item.",
       "minutes": 5,
+      "tags": [
+        "Perfectionism"
+      ],
       "responseOptions": [
         {
           "value": 1,
@@ -1581,6 +1613,9 @@
       "licenceNote": "Public domain (SAMHSA, WHO AUDIT).",
       "instructions": "Please choose the answer that is correct for you.",
       "minutes": 1,
+      "tags": [
+        "Substance use"
+      ],
       "responseOptions": [
         {
           "value": 0,
@@ -1707,6 +1742,9 @@
       "licenceNote": "Public domain (Ewing, 1984, encourages widespread use).",
       "instructions": "Ask your patients these four questions and use the scoring method described below to determine if substance abuse exists and needs to be addressed.",
       "minutes": 1,
+      "tags": [
+        "Substance use"
+      ],
       "responseOptions": [
         {
           "value": 0,
@@ -1782,6 +1820,11 @@
       "licenceNote": "NFA: may be used freely for non commercial and commercial purposes provided the source is cited (Borritz et al., 2006).",
       "instructions": "Please choose the answer that fits best for you.",
       "minutes": 5,
+      "tags": [
+        "Burnout",
+        "Work",
+        "Stress"
+      ],
       "responseOptions": [
         {
           "value": 100,
@@ -2146,7 +2189,7 @@
     {
       "id": "ces-d",
       "code": "CES-D",
-      "name": "How you have been feeling this week",
+      "name": "Low mood over the past week",
       "formalName": "Center for Epidemiologic Studies Depression Scale",
       "domain": "Clinical and distress screening",
       "description": "Frequency of depressive symptoms in the general population over the past week.",
@@ -2154,6 +2197,9 @@
       "licenceNote": "Public domain NIMH instrument; free to use without permission.",
       "instructions": "Below is a list of the ways you might have felt or behaved. Please tell me how often you have felt this way during the past week.",
       "minutes": 3,
+      "tags": [
+        "Depression"
+      ],
       "responseOptions": [
         {
           "value": 0,
@@ -2322,6 +2368,9 @@
       "licenceNote": "Article published under CC BY 4.0 (Ersche et al., 2017).",
       "instructions": "Please indicate how much you agree with each statement.",
       "minutes": 5,
+      "tags": [
+        "Habits and routine"
+      ],
       "responseOptions": [
         {
           "value": 1,
@@ -2526,6 +2575,10 @@
       "licenceNote": "Items published under CC BY (Lorenz et al., 2016; Dudasova et al., 2021). Confirm the 3 resilience items come from the CC BY revised article as noted in the codebook.",
       "instructions": "Please indicate how much you agree with each statement.",
       "minutes": 3,
+      "tags": [
+        "Work",
+        "Wellbeing"
+      ],
       "responseOptions": [
         {
           "value": 1,
@@ -2735,6 +2788,9 @@
       "licenceNote": "PhenX Toolkit: freely available, permission not required for use. Developed in New Zealand (Adamson et al., 2010).",
       "instructions": "If you have used any cannabis over the past six months, please answer the following questions about your cannabis use.",
       "minutes": 2,
+      "tags": [
+        "Substance use"
+      ],
       "responseOptions": [
         {
           "value": 0,
@@ -2900,6 +2956,9 @@
       "licenceNote": "Authors Carlson and Putnam permit copying, distribution and reproduction for research or clinical use.",
       "instructions": "This questionnaire asks about experiences that you may have in your daily life. We are interested in how often you have these experiences. It is important, however, that your answers show how often these experiences happen to you when you are not under the influence of alcohol or drugs. To answer the questions, please determine to what degree each experience described in the question applies to you, and circle the number to show what percentage of the time you have the experience. For example: 0% (Never) 10 20 30 40 50 60 70 80 90 100% (Always)",
       "minutes": 10,
+      "tags": [
+        "Dissociation and trauma"
+      ],
       "responseOptions": [
         {
           "value": 0,
@@ -3131,6 +3190,9 @@
       "licenceNote": "Items published in a CC BY article (Woodfin, Binder and Molde, 2020).",
       "instructions": "Please indicate how much you agree with each statement.",
       "minutes": 2,
+      "tags": [
+        "Perfectionism"
+      ],
       "responseOptions": [
         {
           "value": 1,
@@ -3254,6 +3316,9 @@
       "licenceNote": "Pfizer: no permission required to reproduce, translate, display or distribute.",
       "instructions": "Over the last 2 weeks, how often have you been bothered by the following problems?",
       "minutes": 2,
+      "tags": [
+        "Anxiety"
+      ],
       "responseOptions": [
         {
           "value": 0,
@@ -3374,6 +3439,9 @@
       "licenceNote": "Public domain US Office of Naval Research technical report (approved for public release, distribution unlimited).",
       "instructions": "Section One: This part of the questionnaire asks you to describe your job, as objectively as you can. Please do not use this part of the questionnaire to show how much you like or dislike your job. Section Two: Listed below are a number of statements which could be used to describe a job. You are to indicate whether each statement is an accurate or an inaccurate description of your job. How accurate is the statement in describing your job?",
       "minutes": 5,
+      "tags": [
+        "Work"
+      ],
       "responseOptions": [
         {
           "value": 1,
@@ -3632,6 +3700,9 @@
       "licenceNote": "IPIP items are public domain for any purpose, commercial or non commercial.",
       "instructions": "Below are phrases describing people's behaviors. Please use the rating scale below to describe how accurately each statement describes you. Describe yourself as you generally are now, not as you wish to be in the future. Describe yourself as you honestly see yourself, in relation to other people you know of the same sex as you are, and roughly your same age. Please read each statement carefully, and put a number from 1 to 5 next to it to describe how accurately the statement describes you.",
       "minutes": 3,
+      "tags": [
+        "Personality"
+      ],
       "responseOptions": [
         {
           "value": 1,
@@ -3843,6 +3914,9 @@
       "licenceNote": "Items published under CC BY (Mrazek et al., 2013).",
       "instructions": "Please indicate how often each statement applies to you.",
       "minutes": 1,
+      "tags": [
+        "ADHD and attention"
+      ],
       "responseOptions": [
         {
           "value": 1,
@@ -3945,6 +4019,9 @@
       "licenceNote": "Development article published under CC BY 4.0 (Coelho, Hanel and Wolf, 2020).",
       "instructions": "Please indicate how characteristic each statement is of you.",
       "minutes": 1,
+      "tags": [
+        "Thinking patterns"
+      ],
       "responseOptions": [
         {
           "value": 1,
@@ -4051,6 +4128,9 @@
       "licenceNote": "Pfizer: no permission required to reproduce, translate, display or distribute.",
       "instructions": "Over the last 2 weeks, how often have you been bothered by any of the following problems?",
       "minutes": 1,
+      "tags": [
+        "Depression"
+      ],
       "responseOptions": [
         {
           "value": 0,
@@ -4124,6 +4204,9 @@
       "licenceNote": "Pfizer: no permission required to reproduce, translate, display or distribute.",
       "instructions": "Over the last 2 weeks, how often have you been bothered by any of the following problems?",
       "minutes": 2,
+      "tags": [
+        "Depression"
+      ],
       "responseOptions": [
         {
           "value": 0,
@@ -4238,6 +4321,10 @@
       "licenceNote": "Public domain; permission for use confirmed by Borkovec (CamCOPS, 2015).",
       "instructions": "Rate each of the following statements on a scale of 1 (\"not at all typical of me\") to 5 (\"very typical of me\"). Please do not leave any items blank.",
       "minutes": 3,
+      "tags": [
+        "Anxiety",
+        "Worry and rumination"
+      ],
       "responseOptions": [
         {
           "value": 1,
@@ -4395,6 +4482,9 @@
       "licenceNote": "Items published under CC BY 2.0 (Eriksson, Andersen and Bejerot, 2013).",
       "instructions": "Please answer the questions according to what is true for you. Check only one column per statement!",
       "minutes": 3,
+      "tags": [
+        "Autism"
+      ],
       "responseOptions": [
         {
           "value": 3,
@@ -4574,6 +4664,9 @@
       "licenceNote": "Rice lab: no permission required to use or translate; cite properly.",
       "instructions": "The following items are designed to measure certain attitudes people have toward themselves, their performance, and toward others. It is important that your answers be true and accurate for you. In the space next to the statement, please enter a number from \"1\" (strongly disagree) to \"7\" (strongly agree) to describe your degree of agreement with each item.",
       "minutes": 2,
+      "tags": [
+        "Perfectionism"
+      ],
       "responseOptions": [
         {
           "value": 1,
@@ -4705,6 +4798,9 @@
       "licenceNote": "Dr Kristin Neff grants permission to use the Self-Compassion Scale for any purpose whatsoever.",
       "instructions": "HOW I TYPICALLY ACT TOWARDS MYSELF IN DIFFICULT TIMES. Please read each statement carefully before answering. To the left of each item, indicate how often you behave in the stated manner, using the following scale:",
       "minutes": 5,
+      "tags": [
+        "Self compassion"
+      ],
       "responseOptions": [
         {
           "value": 1,
@@ -5092,6 +5188,10 @@
       "licenceNote": "PhenX Toolkit: freely available, permission not required for use; copyright Daniel W. Russell (1994).",
       "instructions": "Instructions: The following statements describe how people sometimes feel. For each statement, please indicate how often you feel the way described by writing a number in the space provided. Here is an example: How often do you feel happy? If you never feel happy, you would respond \"never\"; if you always feel happy, you would respond \"always\".",
       "minutes": 4,
+      "tags": [
+        "Loneliness and relationships",
+        "Wellbeing"
+      ],
       "responseOptions": [
         {
           "value": 1,
@@ -5271,6 +5371,10 @@
       "licenceNote": "WHO-5 is free of charge and does not require permission to use (CORC, Te Pou).",
       "instructions": "Please respond to each item regarding how you felt in the last two weeks.",
       "minutes": 2,
+      "tags": [
+        "Wellbeing",
+        "Depression"
+      ],
       "responseOptions": [
         {
           "value": 5,

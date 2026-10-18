@@ -17,7 +17,7 @@ Roles are custom claims set with the Admin SDK: `role: "practitioner"` reads cli
 | `schedules` | generated | uid, measureId, cadence (weekly, fortnightly, fourWeekly, dates), dates, startsOn, endsOn, nextDue, status (active, paused, ended), runs, lastRunOn, pausedAt, endedAt, createdBy | own | all | none |
 | `activationCodes` | SHA 256 of code | forName, email (optional binding), clientTypeOverride, last4, issuedBy, issuedAt, expiresAt, redeemedByUid, redeemedAt | never | all | all |
 | `rateLimits` | uid | windowStart, count (code attempts) | never | never | never |
-| `measures` | measure id | id, name, items, responseOptions, scoringRules, topicMap, licenceStatus | activated clients | all | all |
+| `measures` | measure id | id, name, items, responseOptions, scoringRules, tags (conditions and topics), licenceStatus | activated clients | all | all |
 | `config` | e.g. `intake` | editable questionnaire and copy | any signed in user | all | all |
 | `auditLog` | generated | actorUid, action, targetUid, at | never | all | all |
 

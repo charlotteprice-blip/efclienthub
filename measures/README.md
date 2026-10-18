@@ -3,6 +3,7 @@
 `ef-client-hub-codebook.xlsx` is the source of every questionnaire in the Client Hub. It is a copy of the Charlotte Price Consulting Psychometric Codebook (26 September 2026) with 2 sheets added at the front:
 
 - Hub Library: 1 row per instrument. The hub id, the name clients see, whether it is included, its licence status for the hub, whether clients ever see strengths and areas of focus from it, which items Sarah is alerted to, and the instructions shown on screen.
+- Hub Library also carries a Conditions and topics column: the tags, separated by |, that appear as filter buttons in the hub's questionnaire library. Add or rename tags there and rebuild.
 - Hub Subscales: 1 row per subscale. The label clients see, the scoring direction, the method, optional band thresholds, the strength and focus wording clients read once released, and the Learning Hub topic each area of focus links to.
 
 Item text, response options, reverse scoring and subscale membership are read from the codebook's own sheets and are never retyped.

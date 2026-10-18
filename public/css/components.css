@@ -294,6 +294,42 @@
   }
 }
 
+/* Condition and topic buttons under the filters; 1 pressed at a time */
+.chips {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chip {
+  font: inherit;
+  font-size: var(--type-caption-size);
+  line-height: 1.2;
+  padding: 6px 12px;
+  min-height: 32px;
+  border: 1px solid var(--ef-slate);
+  border-radius: var(--radius-pill);
+  background: var(--panel);
+  color: var(--on-panel);
+  cursor: pointer;
+}
+
+.chip:hover {
+  background: #FFFFFF;
+}
+
+.chip[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #FFFFFF;
+}
+
+.chip:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 /* Library table wraps so 5 columns fit the workspace */
 .table-library {
   table-layout: fixed;

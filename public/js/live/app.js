@@ -515,9 +515,10 @@ function applyFilters(form) {
   const domain = form.domain.value;
   const audience = form.audience.value;
   const licence = form.licence.value;
+  const tag = form.tag ? form.tag.value : '';
   let shown = 0;
   for (const row of app.querySelectorAll('[data-row]')) {
-    const ok = (!q || row.dataset.search.includes(q)) && (!domain || row.dataset.domain === domain) && (!audience || row.dataset.audience === audience) && (!licence || row.dataset.licence === licence);
+    const ok = (!q || row.dataset.search.includes(q)) && (!domain || row.dataset.domain === domain) && (!audience || row.dataset.audience === audience) && (!licence || row.dataset.licence === licence) && (!tag || (row.dataset.tags ?? '').includes(`|${tag}|`));
     row.hidden = !ok;
     if (ok) shown += 1;
   }
@@ -530,6 +531,16 @@ document.addEventListener('input', (event) => {
 });
 document.addEventListener('submit', (event) => {
   if (event.target.closest('[data-filters]')) event.preventDefault();
+});
+// Condition and topic buttons: 1 active at a time; pressing the active one returns to All.
+document.addEventListener('click', (event) => {
+  const chip = event.target.closest('.chip[data-tag]');
+  const form = chip?.closest('[data-filters]');
+  if (!chip || !form) return;
+  const next = chip.getAttribute('aria-pressed') === 'true' && chip.dataset.tag ? '' : chip.dataset.tag;
+  for (const c of form.querySelectorAll('.chip[data-tag]')) c.setAttribute('aria-pressed', String(c.dataset.tag === next));
+  form.tag.value = next;
+  applyFilters(form);
 });
 
 // Answers save the moment they are chosen; formulation cards move locally.
