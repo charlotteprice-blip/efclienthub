@@ -273,3 +273,8 @@
     flex: 1 1 auto;
   }
 }
+
+/* Library table: client facing name over the formal name */
+.table td p + p.t-caption {
+  margin-top: 2px;
+}

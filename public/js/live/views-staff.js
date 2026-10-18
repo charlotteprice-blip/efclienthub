@@ -359,7 +359,7 @@ export function codes(s) {
 
 export function library(s) {
   const rows = Object.values(s.ctx.measures)
-    .map((m) => `<tr><td><p>${esc(m.name)}</p>${m.formalName ? `<p class="t-caption">${esc(m.formalName)}${m.code ? ` (${esc(m.code)})` : ''}${m.scoringRules?.clientFacing === false ? '. For you only; never summarised to the client' : ''}</p>` : ''}</td><td>${m.items?.length ?? 0}</td><td>${esc((m.scoringRules?.subscales ?? []).map((x) => x.label).join(', '))}</td><td>${m.licenceStatus === 'cleared' ? status('done', 'Cleared for clients') : status('attention', 'Sample, testing only')}</td></tr>`)
+    .map((m) => `<tr><td><p class="t-ui-strong">${esc(m.name)}</p>${m.formalName ? `<p class="t-caption">${esc(m.formalName)}${m.code && !m.formalName.includes(`(${m.code})`) ? ` (${esc(m.code)})` : ''}${m.scoringRules?.clientFacing === false ? '. For you only; never summarised to the client' : ''}</p>` : ''}</td><td>${m.items?.length ?? 0}</td><td>${esc((m.scoringRules?.subscales ?? []).map((x) => x.label).join(', '))}</td><td>${m.licenceStatus === 'cleared' ? status('done', 'Cleared for clients') : status('attention', 'Sample, testing only')}</td></tr>`)
     .join('');
   return shell(
     s,
