@@ -351,8 +351,8 @@ export function home(s) {
 
       <section class="stack home-report" aria-labelledby="h-rep">
         <h2 id="h-rep">${esc(reportName)}</h2>
-        <div class="progress" role="progressbar" aria-label="${esc(reportName)}: ${report.completed} of ${report.steps.length} steps" aria-valuemin="0" aria-valuemax="${report.steps.length}" aria-valuenow="${report.completed}"><div class="progress-fill" style="width:${Math.round((report.completed / report.steps.length) * 100)}%"></div></div>
-        <ol class="tracker" style="--steps:${report.steps.length}" aria-label="Report progress">${report.steps
+        <div class="progress" role="progressbar" aria-label="${esc(reportName)}: ${report.completed} of ${report.steps.length} steps" aria-valuemin="0" aria-valuemax="${report.steps.length}" aria-valuenow="${report.completed}"><div class="progress-fill" data-progress="${report.completed - 1}" data-total="${report.steps.length}"></div></div>
+        <ol class="tracker tracker-5" aria-label="Report progress">${report.steps
           .map((x, i) => `<li class="step step-${x.done ? 'done' : i === report.current ? 'current' : 'todo'}"><span class="step-dot" aria-hidden="true"></span><span class="step-label">${esc(x.label)}${x.detail ? `<span class="step-detail">${esc(x.detail)}</span>` : ''}</span></li>`)
           .join('')}</ol>
         ${ctx.results?.releasedAt ? `<p><a href="/results">See your results</a>${ctx.formulation ? ' or <a href="/formulation">your formulation</a>' : ''}.</p>` : '<p class="t-caption">Nothing is shared here until Sarah has gone through it with you. Scores are never shown on their own.</p>'}

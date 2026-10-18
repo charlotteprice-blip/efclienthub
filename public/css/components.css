@@ -604,9 +604,47 @@ th .sort:focus-visible {
 }
 
 .dash-counts {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
   margin: 0 0 var(--space-2);
-  color: var(--ink);
 }
+
+.dash-counts p {
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Stacked bar: 1 segment per stage that has clients, darker further along */
+.stage-bar {
+  display: flex;
+  flex: 1 1 320px;
+  max-width: 520px;
+  height: 22px;
+  gap: 2px;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.stage-seg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  font-size: 12px;
+  color: #FFFFFF;
+  background: var(--ef-slate);
+  cursor: default;
+}
+
+.stage-seg[data-stage="settingUp"] { background: #9AA9BF; }
+.stage-seg[data-stage="enquiry"] { background: #8497B5; }
+.stage-seg[data-stage="firstSession"] { background: #6E84A8; }
+.stage-seg[data-stage="assessment"] { background: #5B7199; }
+.stage-seg[data-stage="booking"] { background: #4D638B; }
+.stage-seg[data-stage="feedback"] { background: #3E5680; }
+.stage-seg[data-stage="intervention"] { background: #344B72; }
+.stage-seg[data-stage="review"] { background: #2E4062; }
 
 @media (max-width: 899px) {
   .client-row {
@@ -623,7 +661,11 @@ th .sort:focus-visible {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(var(--steps, 7), minmax(0, 1fr));
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.tracker-5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .step {
