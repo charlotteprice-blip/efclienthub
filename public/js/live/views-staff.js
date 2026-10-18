@@ -171,25 +171,11 @@ function clientRow(s, c) {
 
 export function dashboard(s) {
   const clients = Object.values(s.ctx.clients).filter((c) => c.codeHash);
-  const counts = Object.fromEntries(STAGE_ORDER.map((k) => [k, 0]));
-  let settingUp = 0;
-  for (const c of clients) {
-    if (c.activatedAt && counts[c.journeyStage] !== undefined) counts[c.journeyStage] += 1;
-    else settingUp += 1;
-  }
   const attention = attentionItems(s);
   const checkIns = checkInsThisWeek(s);
   const byStage = (a, b) => STAGE_ORDER.indexOf(a.journeyStage) - STAGE_ORDER.indexOf(b.journeyStage) || (b.lastActive ?? 0) - (a.lastActive ?? 0);
   const rows = clients.sort(byStage).map((c) => clientRow(s, c)).join('');
   const total = clients.length;
-  // A stacked bar of where everyone is: 1 segment per stage with clients in it,
-  // width in proportion. Stage names appear on hover and to screen readers.
-  const parts = [['settingUp', 'Setting up', settingUp], ...STAGE_ORDER.map((k, i) => [k, STAGE_LABELS[k], counts[k], i])].filter((x) => x[2] > 0);
-  const stageBar = total
-    ? `<div class="stage-bar" role="img" aria-label="${esc(parts.map(([, label, n]) => `${n} ${label.toLowerCase()}`).join(', '))}">${parts
-        .map(([k, label, n, i]) => `<span class="stage-seg" data-stage="${k}" data-grow="${n}" title="${esc(`${label}: ${n}`)}"><span class="visually-hidden">${esc(`${label}: ${n}`)}</span>${n}</span>`)
-        .join('')}</div>`
-    : '';
   const today = [
     ...attention.map((x) => ({ who: x.who, text: x.text, href: x.href, label: 'Open' })),
     ...checkIns.map((x) => ({ who: s.ctx.clients[x.uid]?.name ?? 'Client', text: `Check in: ${s.ctx.measures[x.measureId]?.name ?? x.measureId}, ${fmtDay(x.nextDue)}`, href: `/practitioner/client/${x.uid}`, label: 'Open' })),
@@ -198,13 +184,12 @@ export function dashboard(s) {
     s,
     'dashboard',
     'Dashboard',
-    `<div class="dash-counts"><p class="t-ui-strong">${total ? `${total} client${total === 1 ? '' : 's'}` : 'No clients yet'}</p>${stageBar}</div>
-    <section class="stack" aria-labelledby="h-today">
+    `<section class="stack" aria-labelledby="h-today">
       <h2 id="h-today">Today</h2>
       ${today.length ? `<ul class="task-list">${today.map((x) => `<li class="task"><div><p class="task-name">${esc(x.who)}</p><p class="task-meta">${esc(x.text)}</p></div><span></span><a class="btn btn-secondary" href="${esc(x.href)}">${esc(x.label)}</a></li>`).join('')}</ul>` : '<p class="t-caption">Nothing waiting on you, and no check ins due in the next 7 days.</p>'}
     </section>
     <section class="stack" aria-labelledby="h-prog">
-      <div class="toolbar"><h2 id="h-prog">Clients</h2><a class="btn btn-quiet" href="/practitioner/clients">Table view</a></div>
+      <div class="toolbar"><h2 id="h-prog">Clients${total ? ` <span class="t-caption">${total}</span>` : ''}</h2><a class="btn btn-quiet" href="/practitioner/clients">Table view</a></div>
       ${rows ? `<ul class="client-rows">${rows}</ul>` : '<p>No clients yet. <a href="/practitioner/codes">Issue an activation code</a> to invite the first one.</p>'}
     </section>`,
     true,
@@ -237,8 +222,8 @@ export function clients(s) {
       <p class="reading">Everyone who has used an activation code. Select a name to see their questionnaires, draft results and formulation.</p>
       <a class="btn btn-primary btn-inline" href="/practitioner/codes">Issue activation code</a>
     </div>
-    <div class="table-wrap"><table class="table">
-      <thead><tr><th scope="col">Client</th><th scope="col">Type</th><th scope="col">Stage</th><th scope="col">Questionnaires</th><th scope="col">Results</th><th scope="col">Last active</th></tr></thead>
+    <div class="table-wrap"><table class="table table-clients">
+      <thead><tr><th scope="col">Client</th><th scope="col">Type</th><th scope="col">Stage</th><th scope="col">Done</th><th scope="col">Results</th><th scope="col">Last active</th></tr></thead>
       <tbody>${rows || '<tr><td colspan="6">No clients yet. Issue an activation code to invite the first one.</td></tr>'}</tbody>
     </table></div>
     ${waiting ? `<p class="t-caption">${waiting} activation code${waiting === 1 ? '' : 's'} not yet used. <a href="/practitioner/codes">See codes</a></p>` : ''}`,

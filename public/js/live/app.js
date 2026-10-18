@@ -86,7 +86,6 @@ function afterPaint() {
   }
   for (const h of app.querySelectorAll('[data-mark]')) h.replaceWith(createMark({ draw: true, small: false, label: 'Executive Frame' }));
   for (const bar of app.querySelectorAll('[data-progress]')) bar.style.width = `${((Number(bar.dataset.progress) + 1) / Number(bar.dataset.total)) * 100}%`;
-  for (const seg of app.querySelectorAll('[data-grow]')) seg.style.flexGrow = seg.dataset.grow;
   for (const dot of app.querySelectorAll('.type-dot')) {
     const accent = clientTypes.types?.[dot.dataset.type]?.accent;
     if (accent) dot.style.background = accent;

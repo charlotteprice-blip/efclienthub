@@ -499,6 +499,27 @@ th .sort:focus-visible {
 .table-library th:nth-child(4) { width: 21%; }
 .table-library th:nth-child(5) { width: 14%; }
 
+/* Client table fits the workspace: fixed widths, wrapping cells */
+.table-clients {
+  table-layout: fixed;
+}
+
+.table-clients th,
+.table-clients td {
+  white-space: normal;
+}
+
+.table-clients th:nth-child(1) { width: 25%; }
+.table-clients th:nth-child(2) { width: 19%; }
+.table-clients th:nth-child(3) { width: 18%; }
+.table-clients th:nth-child(4) { width: 9%; }
+.table-clients th:nth-child(5) { width: 17%; }
+.table-clients th:nth-child(6) { width: 12%; }
+
+.table-clients td:nth-child(2) {
+  white-space: nowrap;
+}
+
 /* ---------- practitioner dashboard ---------- */
 
 .stats {
@@ -603,48 +624,6 @@ th .sort:focus-visible {
   align-items: center;
 }
 
-.dash-counts {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  margin: 0 0 var(--space-2);
-}
-
-.dash-counts p {
-  margin: 0;
-  white-space: nowrap;
-}
-
-/* Stacked bar: 1 segment per stage that has clients, darker further along */
-.stage-bar {
-  display: flex;
-  flex: 1 1 320px;
-  max-width: 520px;
-  height: 22px;
-  gap: 2px;
-  border-radius: var(--radius-pill);
-  overflow: hidden;
-}
-
-.stage-seg {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 22px;
-  font-size: 12px;
-  color: #FFFFFF;
-  background: var(--ef-slate);
-  cursor: default;
-}
-
-.stage-seg[data-stage="settingUp"] { background: #9AA9BF; }
-.stage-seg[data-stage="enquiry"] { background: #8497B5; }
-.stage-seg[data-stage="firstSession"] { background: #6E84A8; }
-.stage-seg[data-stage="assessment"] { background: #5B7199; }
-.stage-seg[data-stage="booking"] { background: #4D638B; }
-.stage-seg[data-stage="feedback"] { background: #3E5680; }
-.stage-seg[data-stage="intervention"] { background: #344B72; }
-.stage-seg[data-stage="review"] { background: #2E4062; }
 
 @media (max-width: 899px) {
   .client-row {
