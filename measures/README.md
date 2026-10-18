@@ -7,6 +7,8 @@
 
 Item text, response options, reverse scoring and subscale membership are read from the codebook's own sheets and are never retyped.
 
+A third sheet, NovoPsych Catalogue, lists all 150 assessments on novopsych.com (18 October 2026) with metadata only, a suggested hub relevance, and 2 columns to fill in: licence confirmed and decision. An instrument moves into the hub by being added to the codebook's own sheets (Instrument Summary, Master Item List, Structure and Subscales) and then to Hub Library and Hub Subscales; the catalogue is the shopping list, not a source of items.
+
 ## Workflow
 
 ```
