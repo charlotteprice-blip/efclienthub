@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Client row options</title>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/preview/client-rows.css">
+</head>
+<body>
+<div class="page">
+
+  <section class="option" aria-labelledby="oa">
+    <h2 id="oa">Option A: card with a summary line</h2>
+    <p>Initial, name, client type and status on 1 line; a plain sentence underneath; the 7 stages as a bar with only the current stage named in colour.</p>
+    <ul class="rows">
+      <li class="card-a">
+        <div class="head"><span class="avatar-lg">A</span><span class="name">Aroha Test</span><span class="chip-type">Type not set</span><span class="status status-attention">Setting up</span></div>
+        <div class="summary"><span>Signed up <strong>today</strong>, has not finished setting up</span><span>No questionnaires yet</span></div>
+        <div class="steps-a-wrap"><ol class="steps-a"><li><span>Getting started</span></li><li></li><li></li><li></li><li></li><li></li><li></li></ol></div>
+      </li>
+      <li class="card-a">
+        <div class="head"><span class="avatar-lg">C</span><span class="name">Chloe Test</span><span class="chip-type" data-type="health">Health</span><span class="status status-attention">4 drafts to review</span></div>
+        <div class="summary"><span>Step 4 of 7: <strong>Book feedback</strong></span><span>Questionnaires <strong>4 of 4</strong> done</span><span>Next session <strong>Fri 24 Oct, 2:00 pm</strong></span><span>Active today</span></div>
+        <div class="steps-a-wrap"><ol class="steps-a"><li class="done"></li><li class="done"></li><li class="done"></li><li class="current"><span>Book feedback</span></li><li></li><li></li><li></li></ol></div>
+      </li>
+      <li class="card-a">
+        <div class="head"><span class="avatar-lg">D</span><span class="name">Dev Test</span><span class="chip-type" data-type="corporate">Corporate</span><span class="status status-done">Results shared</span></div>
+        <div class="summary"><span>Step 6 of 7: <strong>Working together</strong></span><span>Check in due <strong>Wed 22 Oct</strong></span><span>Formulation shared, 1 of 6 cards answered</span><span>Active today</span></div>
+        <div class="steps-a-wrap"><ol class="steps-a"><li class="done"></li><li class="done"></li><li class="done"></li><li class="done"></li><li class="done"></li><li class="current"><span>Working together</span></li><li></li></ol></div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="option" aria-labelledby="ob">
+    <h2 id="ob">Option B: compact row with the next action</h2>
+    <p>Who, where they are in words with a thin 7 segment bar, and what you can do next as a button. Scans fastest with many clients.</p>
+    <ul class="rows">
+      <li class="row-b">
+        <div class="who"><span class="avatar-lg">A</span><div><div class="name">Aroha Test</div><div class="meta">Type not set, active today</div></div></div>
+        <div class="stage"><div class="stage-name">Setting up</div><div class="bar-b"><i class="current"></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="stage-meta">Signed up today, consent and intake not yet done</div></div>
+        <div class="next"><span class="status status-attention">Waiting on client</span><a class="btn btn-secondary btn-inline" href="#">Open</a></div>
+      </li>
+      <li class="row-b">
+        <div class="who"><span class="avatar-lg">C</span><div><div class="name">Chloe Test</div><div class="meta">Health, active today</div></div></div>
+        <div class="stage"><div class="stage-name">Book feedback <span class="stage-meta">(step 4 of 7)</span></div><div class="bar-b"><i class="done"></i><i class="done"></i><i class="done"></i><i class="current"></i><i></i><i></i><i></i></div><div class="stage-meta">4 of 4 questionnaires done. Next session Fri 24 Oct, 2:00 pm</div></div>
+        <div class="next"><span class="status status-attention">4 drafts</span><a class="btn btn-primary btn-inline" href="#">Review drafts</a></div>
+      </li>
+      <li class="row-b">
+        <div class="who"><span class="avatar-lg">D</span><div><div class="name">Dev Test</div><div class="meta">Corporate, active today</div></div></div>
+        <div class="stage"><div class="stage-name">Working together <span class="stage-meta">(step 6 of 7)</span></div><div class="bar-b"><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="current"></i><i></i></div><div class="stage-meta">Check in due Wed 22 Oct. Formulation shared, 1 of 6 cards answered</div></div>
+        <div class="next"><span class="status status-done">On track</span><a class="btn btn-secondary btn-inline" href="#">Open</a></div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="option" aria-labelledby="oc">
+    <h2 id="oc">Option C: where they are and what is next</h2>
+    <p>2 short columns in plain sentences, with a single progress bar. Least visual noise; reads like a case note.</p>
+    <ul class="rows">
+      <li class="card-c">
+        <div class="top"><span class="avatar-lg">A</span><span class="name">Aroha Test</span><span class="chip-type">Type not set</span><span class="status status-attention">Setting up</span></div>
+        <div><h4>Where they are</h4><p class="big">Setting up</p><p>Signed up today. Consent and intake answers not yet done.</p><div class="ring-c"><i class="w7"></i></div></div>
+        <div class="next"><h4>What is next</h4><p>Nothing for you yet. If they have not finished setting up in 3 days they will appear under Needs attention.</p><a class="btn btn-secondary btn-inline" href="#">Open record</a></div>
+      </li>
+      <li class="card-c">
+        <div class="top"><span class="avatar-lg">C</span><span class="name">Chloe Test</span><span class="chip-type" data-type="health">Health</span><span class="status status-attention">4 drafts to review</span></div>
+        <div><h4>Where they are</h4><p class="big">Book feedback, step 4 of 7</p><p>All 4 questionnaires finished. Next session Friday 24 October at 2:00 pm.</p><div class="ring-c"><i class="w50"></i></div></div>
+        <div class="next"><h4>What is next</h4><p>Review the 4 drafts before the feedback session, then release the results.</p><a class="btn btn-primary btn-inline" href="#">Review drafts</a></div>
+      </li>
+      <li class="card-c">
+        <div class="top"><span class="avatar-lg">D</span><span class="name">Dev Test</span><span class="chip-type" data-type="corporate">Corporate</span><span class="status status-done">Results shared</span></div>
+        <div><h4>Where they are</h4><p class="big">Working together, step 6 of 7</p><p>Results and formulation shared. 1 of 6 formulation cards answered so far.</p><div class="ring-c"><i class="w79"></i></div></div>
+        <div class="next"><h4>What is next</h4><p>Check in due Wednesday 22 October. Next session Tuesday 27 October at 10:00 am.</p><a class="btn btn-secondary btn-inline" href="#">Open record</a></div>
+      </li>
+    </ul>
+  </section>
+
+</div>
+</body>
+</html>
