@@ -77,3 +77,42 @@ describe('formulation and misc', () => {
     assert.equal(new Date(due).toISOString().slice(0, 10), '2026-11-16');
   });
 });
+
+describe('check in schedules', () => {
+  test('New Zealand calendar date, including across the UTC midnight', () => {
+    // 11:30pm UTC on 18 October is 12:30pm on 19 October in Auckland (NZDT).
+    assert.equal(core.nzDate(Date.UTC(2026, 9, 18, 23, 30)), '2026-10-19');
+    assert.equal(core.nzDate(Date.UTC(2026, 9, 18, 9, 0)), '2026-10-18');
+  });
+  test('dates are validated and added without time zone drift', () => {
+    assert.equal(core.validDate('2026-02-29'), false);
+    assert.equal(core.validDate('2028-02-29'), true);
+    assert.equal(core.validDate('2026-1-5'), false);
+    assert.equal(core.addDays('2026-12-30', 7), '2027-01-06');
+  });
+  test('schedule input is cleaned or refused', () => {
+    assert.equal(typeof core.scheduleProblem({ cadence: 'monthly' }), 'string');
+    assert.equal(typeof core.scheduleProblem({ cadence: 'weekly', startsOn: 'soon' }), 'string');
+    assert.equal(typeof core.scheduleProblem({ cadence: 'weekly', startsOn: '2026-11-02', endsOn: '2026-10-01' }), 'string');
+    assert.deepEqual(core.scheduleProblem({ cadence: 'fortnightly', startsOn: '2026-11-02', endsOn: '' }), { cadence: 'fortnightly', dates: null, startsOn: '2026-11-02', endsOn: null });
+    assert.deepEqual(core.scheduleProblem({ cadence: 'dates', dates: '2026-12-01, 2026-11-03 2026-11-03' }), { cadence: 'dates', dates: ['2026-11-03', '2026-12-01'], startsOn: '2026-11-03', endsOn: '2026-12-01' });
+  });
+  test('next due follows the cadence and stops at the end date', () => {
+    const weekly = { cadence: 'weekly', endsOn: '2026-11-20' };
+    assert.equal(core.nextDueAfter(weekly, '2026-11-02'), '2026-11-09');
+    assert.equal(core.nextDueAfter(weekly, '2026-11-16'), null);
+    const dates = { cadence: 'dates', dates: ['2026-11-03', '2026-12-01'] };
+    assert.equal(core.nextDueAfter(dates, '2026-11-03'), '2026-12-01');
+    assert.equal(core.nextDueAfter(dates, '2026-12-01'), null);
+  });
+  test('advancing skips dates that were missed while the scheduler was down', () => {
+    const s = { cadence: 'weekly', endsOn: null, nextDue: '2026-11-02' };
+    assert.deepEqual(core.advanceSchedule(s, '2026-11-17'), { nextDue: '2026-11-23', status: 'active' });
+    assert.deepEqual(core.advanceSchedule({ cadence: 'fourWeekly', endsOn: '2026-11-20', nextDue: '2026-11-02' }, '2026-11-02'), { nextDue: null, status: 'ended' });
+  });
+  test('a date that slipped past while paused comes due today', () => {
+    assert.equal(core.resumedDue({ nextDue: '2026-11-02' }, '2026-11-10'), '2026-11-10');
+    assert.equal(core.resumedDue({ nextDue: '2026-11-12' }, '2026-11-10'), '2026-11-12');
+    assert.equal(core.resumedDue({ nextDue: null }, '2026-11-10'), null);
+  });
+});

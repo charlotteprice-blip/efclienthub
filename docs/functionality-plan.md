@@ -16,7 +16,7 @@ Agreed with Charlotte on 18 October 2026, subject to Sarah's confirmation where 
 10. The hub sends email at key moments only: code issued, questionnaire assigned (including scheduled check ins), results released, formulation released, request answered. Sender is an Executive Frame address; DNS records for sending will be needed.
 11. Sarah can edit the intake questions and wording, the journey copy per client type, and the questionnaire library herself, from the hub.
 
-## Stage 6: check in schedules
+## Stage 6: check in schedules (built 18 October 2026)
 
 Sarah sets a schedule on a client's page: a questionnaire, an interval (weekly, fortnightly, every 4 weeks) or a list of dates, and a start date. A scheduled Cloud Function runs each morning (Pacific/Auckland), creates the assignment when a date arrives, moves the client back to the assessment stage if they were past it, and sends the assignment email. Sarah can pause or end a schedule. The client's Home shows the next check in and its date.
 

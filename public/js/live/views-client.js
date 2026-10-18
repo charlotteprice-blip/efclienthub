@@ -2,7 +2,7 @@
 // wires the forms and buttons to the Cloud Functions.
 
 import { stageCopy } from '../client-types.js';
-import { STAGE_LABELS, clientShell, esc, fieldError, fmtDate, single, status } from '../ui.js';
+import { STAGE_LABELS, clientShell, esc, fieldError, fmtDate, fmtDay, single, status } from '../ui.js';
 
 export const MARK_SRC = '/assets/brand/mark-slate-small.svg';
 export const ROUTES = {
@@ -55,7 +55,16 @@ function measureRow(s, a) {
   const m = s.ctx.measures[a.measureId];
   const chip = a.status === 'complete' ? status('done', 'Done') : a.status === 'inProgress' ? status('progress', 'In progress') : status('attention', 'Not started');
   const action = a.status === 'complete' ? '<span></span>' : `<a class="btn btn-secondary" href="/measure/${esc(a.id)}">${a.status === 'inProgress' ? 'Continue' : 'Start'}</a>`;
-  return `<li class="task"><div><p class="task-name">${esc(m?.name ?? 'Questionnaire')}</p><p class="task-meta">${measureMeta(s, a)}</p></div>${chip}${action}</li>`;
+  const kind = a.source === 'scheduled' ? 'Check in. ' : '';
+  return `<li class="task"><div><p class="task-name">${esc(m?.name ?? 'Questionnaire')}</p><p class="task-meta">${kind}${measureMeta(s, a)}</p></div>${chip}${action}</li>`;
+}
+
+// The next check in Sarah has scheduled, if any.
+function nextCheckIn(s) {
+  const next = s.ctx.schedules.find((x) => x.status === 'active' && x.nextDue);
+  if (!next) return '';
+  const m = s.ctx.measures[next.measureId];
+  return `<p class="t-caption">Next check in: ${esc(m?.name ?? 'questionnaire')} on ${esc(fmtDay(next.nextDue))}. It will appear here on the day.</p>`;
 }
 
 // ---------- signed out ----------
@@ -239,6 +248,8 @@ export function home(s) {
   if (copy.nextAction === 'measures' && next) action = `<a class="btn btn-primary" href="/measure/${esc(next.id)}">${answeredCount(next) ? 'Continue questionnaire' : 'Start questionnaire'}</a>`;
   if (copy.nextAction === 'booking') action = bookingButton(s, 'Book a session');
   if (copy.nextAction === 'results' || (released && stage === 'feedback')) action = '<a class="btn btn-primary" href="/results">See your results</a>';
+  // A check in due during treatment takes precedence over the stage's usual action.
+  if (copy.nextAction !== 'measures' && next) action = `<a class="btn btn-primary" href="/measure/${esc(next.id)}">${answeredCount(next) ? 'Continue check in' : 'Start check in'}</a>`;
   return shell(
     s,
     'home',
@@ -259,6 +270,7 @@ export function home(s) {
     <section class="stack" aria-labelledby="h-q">
       <h2 id="h-q">Questionnaires</h2>
       ${ctx.assignments.length ? `<ul class="task-list">${ctx.assignments.map((a) => measureRow(s, a)).join('')}</ul>` : '<p>Sarah has not asked you to complete any questionnaires yet.</p>'}
+      ${nextCheckIn(s)}
     </section>
     <section class="stack" aria-labelledby="h-r">
       <h2 id="h-r">Your results</h2>
@@ -281,7 +293,8 @@ export function questionnaires(s) {
     'Questionnaires',
     `${flashHtml(s.flash)}
     <p class="reading">There are no right or wrong answers. Your answers save as you go, so you can stop and come back at any time.</p>
-    ${list.length ? `<ul class="task-list">${list.map((a) => measureRow(s, a)).join('')}</ul>` : '<p>Sarah has not asked you to complete any questionnaires yet.</p>'}`,
+    ${list.length ? `<ul class="task-list">${list.map((a) => measureRow(s, a)).join('')}</ul>` : '<p>Sarah has not asked you to complete any questionnaires yet.</p>'}
+    ${nextCheckIn(s)}`,
   );
 }
 

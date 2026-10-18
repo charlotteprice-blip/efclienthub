@@ -43,19 +43,22 @@ export async function measure(id) {
 
 export async function loadClient(uid) {
   const client = await maybe(doc(db, 'clients', uid));
-  const ctx = { client, assignments: [], measures: {}, results: null, formulation: null, requests: [] };
+  const ctx = { client, assignments: [], measures: {}, results: null, formulation: null, requests: [], schedules: [] };
   if (!client?.activatedAt) return ctx;
-  const [assignments, results, formulation, requests] = await Promise.all([
+  const [assignments, results, formulation, requests, schedules] = await Promise.all([
     all(query(collection(db, 'assignments'), where('uid', '==', uid), orderBy('order'))),
     maybe(doc(db, 'results', uid)),
     maybe(doc(db, 'formulations', uid)),
     all(query(collection(db, 'requests'), where('uid', '==', uid), orderBy('createdAt', 'desc'))),
+    all(query(collection(db, 'schedules'), where('uid', '==', uid))),
   ]);
   ctx.assignments = assignments;
   ctx.results = results?.releasedAt ? results : null;
   ctx.formulation = formulation?.releasedAt ? formulation : null;
   ctx.requests = requests;
+  ctx.schedules = schedules.filter((x) => x.status === 'active' || x.status === 'paused').sort((a, b) => String(a.nextDue ?? '') > String(b.nextDue ?? '') ? 1 : -1);
   for (const a of assignments) ctx.measures[a.measureId] = await measure(a.measureId);
+  for (const x of ctx.schedules) if (!ctx.measures[x.measureId]) ctx.measures[x.measureId] = await measure(x.measureId);
   return ctx;
 }
 
@@ -65,7 +68,7 @@ export async function loadStaff(role) {
   const [codes, measures] = await Promise.all([all(collection(db, 'activationCodes')), all(collection(db, 'measures'))]);
   const ctx = { codes: codes.sort((a, b) => b.issuedAt - a.issuedAt), measures: byId(measures) };
   if (role !== 'practitioner') return ctx;
-  const [clients, assignments, scoring, results, requests, intake, drafts, formulations] = await Promise.all([
+  const [clients, assignments, scoring, results, requests, intake, drafts, formulations, schedules] = await Promise.all([
     all(collection(db, 'clients')),
     all(collection(db, 'assignments')),
     all(collection(db, 'scoring')),
@@ -74,6 +77,7 @@ export async function loadStaff(role) {
     all(collection(db, 'intakeResponses')),
     all(collection(db, 'formulationDrafts')),
     all(collection(db, 'formulations')),
+    all(collection(db, 'schedules')),
   ]);
   return {
     ...ctx,
@@ -85,5 +89,6 @@ export async function loadStaff(role) {
     intake: byId(intake),
     formulationDrafts: byId(drafts),
     formulations: byId(formulations),
+    schedules: schedules.sort((a, b) => (b.createdAt ?? 0) - (a.createdAt ?? 0)),
   };
 }

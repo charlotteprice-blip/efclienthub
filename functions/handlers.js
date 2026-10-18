@@ -190,12 +190,18 @@ export function makeHandlers({ db, intakeConfig, clientTypes, allowSample = () =
       batch.update(ref, { status: 'complete', completedAt: now(), responses: null });
       await batch.commit();
 
-      // triggerBooking: when the last assigned questionnaire is done.
+      // triggerBooking: when the last questionnaire of the initial
+      // assessment is done. A check in completed later in the journey
+      // leaves the stage where Sarah has it.
       const open = await db.collection('assignments').where('uid', '==', auth.uid).where('status', 'in', ['notStarted', 'inProgress']).get();
+      const clientRef = db.doc(`clients/${auth.uid}`);
+      const stage = (await clientRef.get()).data()?.journeyStage ?? 'assessment';
       let booking = false;
-      if (open.empty) {
-        await db.doc(`clients/${auth.uid}`).update({ journeyStage: 'booking', bookingTriggeredAt: now(), lastActive: now() });
+      if (open.empty && stage === 'assessment') {
+        await clientRef.update({ journeyStage: 'booking', bookingTriggeredAt: now(), lastActive: now() });
         booking = true;
+      } else {
+        await clientRef.update({ lastActive: now() });
       }
       await audit(auth.uid, 'completed questionnaire', auth.uid, { measureId: a.measureId, booking });
       return { ok: true, booking };
@@ -325,6 +331,106 @@ export function makeHandlers({ db, intakeConfig, clientTypes, allowSample = () =
       await ref.update({ status: 'done', closedAt: now(), closedBy: auth.uid });
       await audit(auth.uid, 'answered privacy request', snap.data().uid);
       return { ok: true };
+    },
+
+    // ---------- check in schedules ----------
+
+    createSchedule: async (request) => {
+      const auth = practitioner(request);
+      const { ref, client } = await existingClient(request.data?.uid);
+      if (!client.activatedAt) fail('failed-precondition', 'The client has not finished setting up yet.');
+      const measureId = String(request.data?.measureId ?? '');
+      const measure = (await db.doc(`measures/${measureId}`).get()).data();
+      if (!core.assignable(measure, { allowSample: allowSample() })) fail('failed-precondition', 'That questionnaire is not cleared for use with clients.');
+      const clean = core.scheduleProblem(request.data ?? {});
+      if (typeof clean === 'string') fail('invalid-argument', clean);
+      const today = core.nzDate(now());
+      if (clean.startsOn < today) fail('invalid-argument', 'The first check in date cannot be in the past.');
+      const existing = await db.collection('schedules').where('uid', '==', ref.id).where('status', 'in', ['active', 'paused']).get();
+      if (existing.docs.some((d) => d.data().measureId === measureId)) fail('failed-precondition', 'That questionnaire already has a check in schedule. End it before adding another.');
+      const doc = await db.collection('schedules').add({
+        uid: ref.id,
+        measureId,
+        cadence: clean.cadence,
+        dates: clean.dates,
+        startsOn: clean.startsOn,
+        endsOn: clean.endsOn,
+        nextDue: clean.startsOn,
+        status: 'active',
+        runs: 0,
+        lastRunOn: null,
+        pausedAt: null,
+        endedAt: null,
+        createdBy: auth.uid,
+        createdAt: now(),
+      });
+      await audit(auth.uid, `scheduled check in ${clean.cadence}`, ref.id, { measureId, scheduleId: doc.id });
+      return { ok: true, scheduleId: doc.id };
+    },
+
+    updateSchedule: async (request) => {
+      const auth = practitioner(request);
+      const action = request.data?.action;
+      if (!['pause', 'resume', 'end'].includes(action)) fail('invalid-argument', 'Unknown action.');
+      const ref = db.doc(`schedules/${String(request.data?.scheduleId)}`);
+      const snap = await ref.get();
+      if (!snap.exists) fail('not-found', 'Schedule not found.');
+      const s = snap.data();
+      if (s.status === 'ended') fail('failed-precondition', 'That schedule has already ended.');
+      const today = core.nzDate(now());
+      if (action === 'pause') {
+        if (s.status === 'paused') return { ok: true, already: true };
+        await ref.update({ status: 'paused', pausedAt: now() });
+      } else if (action === 'resume') {
+        if (s.status === 'active') return { ok: true, already: true };
+        const nextDue = core.resumedDue(s, today);
+        await ref.update(nextDue ? { status: 'active', pausedAt: null, nextDue } : { status: 'ended', endedAt: now(), endedBy: auth.uid, nextDue: null });
+      } else {
+        await ref.update({ status: 'ended', endedAt: now(), endedBy: auth.uid, nextDue: null });
+      }
+      await audit(auth.uid, `${{ pause: 'paused', resume: 'resumed', end: 'ended' }[action]} check in schedule`, s.uid, { scheduleId: ref.id });
+      return { ok: true };
+    },
+
+    // Run once a day by the scheduler (index.js), never by a browser. For
+    // each schedule due today or earlier, assigns the questionnaire unless
+    // the client already has it open, then moves the schedule on. `today`
+    // may be passed in tests.
+    runDueSchedules: async (request = {}) => {
+      const today = request.data?.today && core.validDate(request.data.today) ? request.data.today : core.nzDate(now());
+      const due = await db.collection('schedules').where('nextDue', '<=', today).get();
+      const summary = { today, assigned: 0, skipped: 0, ended: 0 };
+      for (const snap of due.docs) {
+        const s = snap.data();
+        if (s.status !== 'active') continue;
+        const clientSnap = await db.doc(`clients/${s.uid}`).get();
+        const client = clientSnap.exists ? clientSnap.data() : null;
+        const measure = (await db.doc(`measures/${s.measureId}`).get()).data();
+        const current = await db.collection('assignments').where('uid', '==', s.uid).get();
+        const open = current.docs.some((d) => d.data().measureId === s.measureId && d.data().status !== 'complete');
+        const canAssign = client?.activatedAt && !client.closedAt && core.assignable(measure, { allowSample: allowSample() }) && !open;
+        if (canAssign) {
+          await db.collection('assignments').add({
+            uid: s.uid,
+            measureId: s.measureId,
+            status: 'notStarted',
+            order: current.size + 1,
+            assignedAt: now(),
+            completedAt: null,
+            source: 'scheduled',
+            scheduleId: snap.id,
+            dueOn: s.nextDue,
+          });
+          await audit('system', 'scheduled check in assigned', s.uid, { measureId: s.measureId, scheduleId: snap.id, dueOn: s.nextDue });
+          summary.assigned += 1;
+        } else {
+          summary.skipped += 1;
+        }
+        const next = core.advanceSchedule(s, today);
+        await snap.ref.update({ ...next, runs: (s.runs ?? 0) + 1, lastRunOn: today, ...(next.status === 'ended' ? { endedAt: now(), endedBy: 'system' } : {}) });
+        if (next.status === 'ended') summary.ended += 1;
+      }
+      return summary;
     },
   };
 }

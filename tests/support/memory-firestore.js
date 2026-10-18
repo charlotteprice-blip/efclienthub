@@ -1,6 +1,8 @@
 // A small in memory stand in for the parts of the Firestore Admin SDK the
 // Client Hub functions use: doc, collection, add, where (== and in), get,
 // set (with merge), update (with dotted paths), batch and runTransaction.
+// where supports ==, in, <, <=, > and >=; a missing field never matches a
+// range, as in Firestore.
 // Used by the function tests and the end to end harness. Rules are not
 // applied here; tests/rules.test.js covers them in the real emulator.
 
@@ -65,6 +67,11 @@ export function createMemoryFirestore() {
               const v = field.split('.').reduce((o, k) => o?.[k], d);
               if (op === '==') return v === value;
               if (op === 'in') return value.includes(v);
+              if (v === undefined || v === null) return false;
+              if (op === '<') return v < value;
+              if (op === '<=') return v <= value;
+              if (op === '>') return v > value;
+              if (op === '>=') return v >= value;
               throw new Error(`Unsupported operator ${op}`);
             }),
           )

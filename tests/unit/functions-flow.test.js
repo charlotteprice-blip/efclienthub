@@ -168,3 +168,81 @@ describe('formulation and privacy requests', () => {
     assert.ok(db.list('auditLog').some((e) => e.actorUid === 'sarah' && e.action === 'set stage review'));
   });
 });
+
+describe('check in schedules', () => {
+  const measureId = 'sample-routines';
+  async function finishOpen(auth = client) {
+    const open = db.list('assignments').filter((a) => a.uid === auth.uid && a.status !== 'complete');
+    for (const a of open) {
+      const m = measures.find((x) => x.id === a.measureId);
+      for (const it of m.items) await h.saveResponse(as(auth, { assignmentId: a.id, itemId: it.id, value: 2 }));
+      await h.submitMeasure(as(auth, { assignmentId: a.id }));
+    }
+  }
+
+  test('a schedule assigns on its dates, skips an open copy, and ends', async () => {
+    await onboard();
+    await h.setStage(as(sarah, { uid: 'client-1', stage: 'intervention' }));
+    const future = '2099-01-05';
+    await rejects(h.createSchedule(as(client, { uid: 'client-1', measureId, cadence: 'weekly', startsOn: future })), 'permission-denied');
+    await rejects(h.createSchedule(as(sarah, { uid: 'client-1', measureId, cadence: 'weekly', startsOn: '2020-01-01' })), 'invalid-argument');
+    const { scheduleId } = await h.createSchedule(as(sarah, { uid: 'client-1', measureId, cadence: 'weekly', startsOn: future, endsOn: '2099-01-19' }));
+    await rejects(h.createSchedule(as(sarah, { uid: 'client-1', measureId, cadence: 'weekly', startsOn: future })), 'failed-precondition');
+
+    // Not due yet.
+    let r = await h.runDueSchedules({ data: { today: '2099-01-04' } });
+    assert.deepEqual(r, { today: '2099-01-04', assigned: 0, skipped: 0, ended: 0 });
+
+    // Due: assigned once, stage untouched, audited as the system.
+    r = await h.runDueSchedules({ data: { today: future } });
+    assert.equal(r.assigned, 1);
+    let open = db.list('assignments').filter((a) => a.uid === 'client-1' && a.status !== 'complete');
+    assert.equal(open.length, 1);
+    assert.equal(open[0].source, 'scheduled');
+    assert.equal(open[0].dueOn, future);
+    assert.equal(db.read(`schedules/${scheduleId}`).nextDue, '2099-01-12');
+    assert.equal(db.read('clients/client-1').journeyStage, 'intervention');
+    assert.ok(db.list('auditLog').some((e) => e.actorUid === 'system' && e.action === 'scheduled check in assigned'));
+
+    // Still open a week later: skipped, but the schedule moves on.
+    r = await h.runDueSchedules({ data: { today: '2099-01-12' } });
+    assert.equal(r.skipped, 1);
+    assert.equal(db.list('assignments').filter((a) => a.uid === 'client-1').length, 1);
+
+    // Finishing a check in during treatment does not trigger booking.
+    await finishOpen();
+    assert.equal(db.read('clients/client-1').journeyStage, 'intervention');
+
+    // Last date: assigned, then the schedule ends itself.
+    r = await h.runDueSchedules({ data: { today: '2099-01-19' } });
+    assert.equal(r.assigned, 1);
+    assert.equal(r.ended, 1);
+    assert.equal(db.read(`schedules/${scheduleId}`).status, 'ended');
+    r = await h.runDueSchedules({ data: { today: '2099-02-01' } });
+    assert.equal(r.assigned + r.skipped, 0);
+  });
+
+  test('pause holds a schedule, resume continues it, end stops it', async () => {
+    await onboard();
+    const { scheduleId } = await h.createSchedule(as(sarah, { uid: 'client-1', measureId, cadence: 'fortnightly', startsOn: '2099-03-01' }));
+    await h.updateSchedule(as(sarah, { scheduleId, action: 'pause' }));
+    let r = await h.runDueSchedules({ data: { today: '2099-03-01' } });
+    assert.equal(r.assigned, 0);
+    await h.updateSchedule(as(sarah, { scheduleId, action: 'resume' }));
+    assert.equal(db.read(`schedules/${scheduleId}`).nextDue, '2099-03-01');
+    await h.runDueSchedules({ data: { today: '2099-03-05' } });
+    assert.equal(db.list('assignments').filter((a) => a.uid === 'client-1').length, 1);
+    assert.equal(db.read(`schedules/${scheduleId}`).nextDue, '2099-03-15');
+    await h.updateSchedule(as(sarah, { scheduleId, action: 'end' }));
+    assert.equal(db.read(`schedules/${scheduleId}`).status, 'ended');
+    await rejects(h.updateSchedule(as(sarah, { scheduleId, action: 'resume' })), 'failed-precondition');
+    await rejects(h.updateSchedule(as(admin, { scheduleId, action: 'pause' })), 'permission-denied');
+  });
+
+  test('the initial assessment still triggers booking', async () => {
+    await onboard();
+    await h.assignMeasure(as(sarah, { uid: 'client-1', measureId }));
+    await finishOpen();
+    assert.equal(db.read('clients/client-1').journeyStage, 'booking');
+  });
+});

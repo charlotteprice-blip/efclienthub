@@ -336,6 +336,19 @@ const handlers = {
     await reload();
     return route();
   },
+  async schedule(data, form) {
+    S.form.schedule = data;
+    try {
+      await call('createSchedule', { uid: form.dataset.uid, measureId: data.measureId, cadence: data.cadence, startsOn: data.startsOn, endsOn: data.endsOn, dates: data.dates });
+    } catch (e) {
+      S.errors = { schedule: e.message };
+      return route();
+    }
+    S.form = {};
+    setFlash('Check in scheduled. The questionnaire will reach the client on each date.');
+    await reload();
+    return route();
+  },
   async 'add-factor'(data, form) {
     const text = String(data.text ?? '').trim();
     if (!text) return undefined;
@@ -454,6 +467,13 @@ const actions = {
     S.draftFactors[uid] = factors;
     return route();
   },
+  async schedule(t) {
+    const verbs = { pause: 'Schedule paused.', resume: 'Schedule resumed.', end: 'Schedule ended.' };
+    await busy(t, () => call('updateSchedule', { scheduleId: t.dataset.id, action: t.dataset.do }));
+    setFlash(verbs[t.dataset.do]);
+    await reload();
+    return route();
+  },
   async 'close-request'(t) {
     await busy(t, () => call('closeRequest', { requestId: t.dataset.id }));
     await reload();
@@ -500,6 +520,11 @@ document.addEventListener('change', async (event) => {
       setFlash(`Your answer was not saved. ${e.message}`, true);
       route();
     });
+  }
+  if (el.name === 'cadence' && el.closest('[data-form="schedule"]')) {
+    const form = el.closest('form');
+    const dates = el.value === 'dates';
+    for (const block of form.querySelectorAll('[data-cadence-fields]')) block.hidden = (block.dataset.cadenceFields === 'dates') !== dates;
   }
   if (el.dataset.move && S.arrangement) {
     const f = S.arrangement.factors.find((x) => x.id === el.dataset.move);

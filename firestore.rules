@@ -107,6 +107,13 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // Check in schedules Sarah sets. The client reads their own so Home can
+    // show the next date; the questionnaire itself arrives as an assignment.
+    match /schedules/{scheduleId} {
+      allow read: if ownsExisting() || isPractitioner();
+      allow write: if false;
+    }
+
     // ---------- operational records ----------
 
     // Activation codes. Stored by hashed code; never readable by clients.

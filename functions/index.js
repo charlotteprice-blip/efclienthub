@@ -10,7 +10,10 @@
 //                booking), createRequest
 // Practitioner:  issueActivationCode (admin too), setClientType, setStage,
 //                assignMeasure, releaseResults, saveFormulationDraft,
-//                releaseFormulation, closeRequest
+//                releaseFormulation, closeRequest, createSchedule,
+//                updateSchedule
+// Scheduled:     runCheckIns, every morning at 7am New Zealand time,
+//                assigns the check in questionnaires due that day
 
 import { readFileSync } from 'node:fs';
 import { initializeApp } from 'firebase-admin/app';
@@ -19,6 +22,7 @@ import { logger } from 'firebase-functions';
 import { defineBoolean } from 'firebase-functions/params';
 import { setGlobalOptions } from 'firebase-functions/v2';
 import { HttpsError, onCall } from 'firebase-functions/v2/https';
+import { onSchedule } from 'firebase-functions/v2/scheduler';
 import { makeHandlers } from './handlers.js';
 
 setGlobalOptions({ region: 'australia-southeast1', maxInstances: 10 });
@@ -70,3 +74,10 @@ export const releaseResults = wrap(handlers.releaseResults);
 export const saveFormulationDraft = wrap(handlers.saveFormulationDraft);
 export const releaseFormulation = wrap(handlers.releaseFormulation);
 export const closeRequest = wrap(handlers.closeRequest);
+export const createSchedule = wrap(handlers.createSchedule);
+export const updateSchedule = wrap(handlers.updateSchedule);
+
+export const runCheckIns = onSchedule({ schedule: '0 7 * * *', timeZone: 'Pacific/Auckland', retryCount: 2 }, async () => {
+  const summary = await handlers.runDueSchedules();
+  logger.info('Check in schedules run', summary);
+});

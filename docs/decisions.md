@@ -54,6 +54,14 @@
 
 30. Charlotte answered the design questions; the agreed scope and build order are in functionality-plan.md. In short: adults seen 1 to 1; Sarah chooses when results are released; check in questionnaires on a per client schedule; latest released formulation only; booking stays a Splose link; all questionnaires in the hub; read only at completion then closure with a 10 year retention date; a practitioner dashboard; email and password sign in only; Learning Hub access at a discounted rate via a code shown in the hub; email at key moments from an Executive Frame address; Sarah edits intake, journey copy and the library herself. Items for Sarah to confirm are marked in the plan.
 
+## Stage 6, check in schedules (18 October 2026)
+
+31. A schedule belongs to 1 client and 1 questionnaire, with a cadence of weekly, fortnightly, every 4 weeks, or a list of dates, a start date and an optional end date. Sarah can pause, resume and end it. 1 active schedule per questionnaire per client.
+32. The daily run is a scheduled Cloud Function at 7am New Zealand time. Dates are stored as New Zealand calendar days, not timestamps. Missed dates are skipped rather than stacked; an open copy of the questionnaire is never duplicated.
+33. Finishing a check in leaves the journey stage where Sarah has it. The booking step is triggered only by the initial assessment. On Home, a check in that is due takes precedence over the stage's usual action button.
+34. Repeated scores are shown to Sarah as a table of subscale scores by completion date once a questionnaire has been completed more than once. Clients see only the released strengths and areas of focus, as before.
+35. Email on assignment waits for stage 7; the run is audited as actor `system` so the email step can be added without changing the schedule logic.
+
 ## Open questions
 
 Answered by Charlotte on 18 October 2026 (see decision 30): 1 (discounted seat), 2 (clinical record, 10 years), 3 (all in the hub), 5 (adults), 9 (email and password only). Still open: 4, 6, 7, 8, 10, plus the discount rate and the email sender address.

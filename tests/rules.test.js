@@ -73,6 +73,7 @@ async function seed() {
       });
       await db.doc(`formulationDrafts/${uid}`).set({ uid, factors: [] });
       await db.doc(`requests/${uid}-r1`).set({ uid, kind: 'access', createdAt: ts });
+      await db.doc(`schedules/${uid}-s1`).set({ uid, measureId: 'sample-measure', cadence: 'weekly', nextDue: '2099-01-05', status: 'active' });
     }
 
     await db.doc(`clients/${NOT_ACTIVATED}`).set({
@@ -159,6 +160,12 @@ describe('a client reads only their own records', () => {
     await assertSucceeds(as.user(CLIENT_A).doc(`requests/${CLIENT_A}-r1`).get());
     await assertFails(as.user(CLIENT_A).doc(`requests/${CLIENT_B}-r1`).get());
   });
+  test('reads own check in schedules, not another client\'s, and not unfiltered', async () => {
+    await assertSucceeds(as.user(CLIENT_A).doc(`schedules/${CLIENT_A}-s1`).get());
+    await assertSucceeds(as.user(CLIENT_A).collection('schedules').where('uid', '==', CLIENT_A).get());
+    await assertFails(as.user(CLIENT_A).doc(`schedules/${CLIENT_B}-s1`).get());
+    await assertFails(as.user(CLIENT_A).collection('schedules').get());
+  });
   test('an unrecognised role claim grants nothing extra', async () => {
     await assertFails(as.spoofed(CLIENT_A).doc(`clients/${CLIENT_B}`).get());
     await assertFails(as.spoofed(CLIENT_A).doc(`scoring/${CLIENT_A}-m1`).get());
@@ -202,6 +209,7 @@ describe('clients never write directly', () => {
     [`results/${CLIENT_B}`, { releasedAt: new Date() }],
     [`formulations/${CLIENT_B}`, { releasedAt: new Date() }],
     [`requests/${CLIENT_A}-r2`, { uid: CLIENT_A, kind: 'access' }],
+    [`schedules/${CLIENT_A}-s1`, { status: 'ended' }],
     ['activationCodes/new', { clientTypeOverride: 'health' }],
     ['measures/new', { name: 'x' }],
     ['config/intake', { version: 2 }],
@@ -252,6 +260,7 @@ describe('practitioner role', () => {
     `formulationDrafts/${CLIENT_B}`,
     `formulations/${CLIENT_B}`,
     `requests/${CLIENT_B}-r1`,
+    `schedules/${CLIENT_B}-s1`,
     'activationCodes/hash-1',
     'measures/sample-measure',
     'auditLog/e1',
@@ -280,6 +289,7 @@ describe('admin role operates the system without reading clinical content', () =
     `formulationDrafts/${CLIENT_A}`,
     `formulations/${CLIENT_A}`,
     `requests/${CLIENT_A}-r1`,
+    `schedules/${CLIENT_A}-s1`,
   ];
   for (const path of clinical) {
     test(`cannot read ${path}`, async () => {

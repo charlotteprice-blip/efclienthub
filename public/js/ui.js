@@ -13,6 +13,10 @@ export const esc = (v) =>
 
 const dateFmt = new Intl.DateTimeFormat('en-NZ', { day: 'numeric', month: 'short', year: 'numeric' });
 export const fmtDate = (t) => (t ? dateFmt.format(new Date(t)) : '');
+// A calendar day stored as YYYY-MM-DD (check in dates), shown without any
+// time zone shift.
+export const fmtDay = (d) => (d ? dateFmt.format(new Date(`${d}T12:00:00`)) : '');
+export const CADENCE_LABELS = { weekly: 'Every week', fortnightly: 'Every 2 weeks', fourWeekly: 'Every 4 weeks', dates: 'On chosen dates' };
 
 export function relative(t) {
   if (!t) return '';

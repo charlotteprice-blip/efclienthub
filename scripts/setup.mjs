@@ -47,6 +47,8 @@ const APIS = [
   'artifactregistry.googleapis.com',
   'eventarc.googleapis.com',
   'secretmanager.googleapis.com',
+  'cloudscheduler.googleapis.com',
+  'pubsub.googleapis.com',
 ];
 
 const args = process.argv.slice(2);

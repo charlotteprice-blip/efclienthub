@@ -8,12 +8,13 @@ Roles are custom claims set with the Admin SDK: `role: "practitioner"` reads cli
 |---|---|---|---|---|---|
 | `clients` | uid | uid, name, email, clientType, journeyStage, activatedAt, consentAt, consentVersion, sploseClientId, retentionUntil, closedAt | own | all | none |
 | `intakeResponses` | uid | uid, answers, derivedType, overriddenBy, submittedAt | own | all | none |
-| `assignments` | generated | uid, measureId, status, order, assignedAt, completedAt, responses (only while in progress) | own (query must filter on uid) | all | none |
+| `assignments` | generated | uid, measureId, status, order, assignedAt, completedAt, responses (only while in progress), source (`scheduled` for check ins), scheduleId, dueOn | own (query must filter on uid) | all | none |
 | `scoring` | assignment id | uid, assignmentId, measureId, responses, scores, scoredAt, reportDraft | never | all | none |
 | `results` | uid | uid, releasedAt, releasedBy, items (strengths, areas of focus, reasons, Learning Hub topic links) | own, only once releasedAt is set | all | none |
 | `formulationDrafts` | uid | uid, factors, updatedAt | never | all | none |
 | `formulations` | uid | uid, factors, releasedAt, releasedBy | own, only once releasedAt is set | all | none |
 | `requests` | generated | uid, kind (access or correction), detail, createdAt, dueBy, status | own | all | none |
+| `schedules` | generated | uid, measureId, cadence (weekly, fortnightly, fourWeekly, dates), dates, startsOn, endsOn, nextDue, status (active, paused, ended), runs, lastRunOn, pausedAt, endedAt, createdBy | own | all | none |
 | `activationCodes` | SHA 256 of code | forName, email (optional binding), clientTypeOverride, last4, issuedBy, issuedAt, expiresAt, redeemedByUid, redeemedAt | never | all | all |
 | `rateLimits` | uid | windowStart, count (code attempts) | never | never | never |
 | `measures` | measure id | id, name, items, responseOptions, scoringRules, topicMap, licenceStatus | activated clients | all | all |
@@ -29,6 +30,10 @@ Results are held in 1 document per client, read by id, so the client page needs 
 `requests`, `config`, `auditLog` and `consentVersion` are additions supporting the Health Information Privacy Code 2020 obligations and Sarah's ability to edit the intake without code.
 
 Storage is closed to all browsers. Any later file is delivered through a function that checks release and issues a short lived signed link.
+
+## Check in schedules
+
+Dates on a schedule are New Zealand calendar days stored as `YYYY-MM-DD` strings, so a check in due on 3 November is due on 3 November whatever the server's clock. `runCheckIns` runs at 7am Pacific/Auckland each day and queries `schedules` where `nextDue <= today` (a single field range, so no composite index). For each active schedule it assigns the questionnaire unless the client already has an open copy, then moves `nextDue` on, skipping any dates missed while the scheduler was down. A schedule whose dates are exhausted ends itself. Completing a check in never changes the client's stage; only the initial assessment triggers booking.
 
 ## Answers in progress
 

@@ -1,6 +1,6 @@
 // Live practitioner (Sarah) and admin screens.
 
-import { STAGE_LABELS, esc, fmtDate, practitionerShell, relative, status } from '../ui.js';
+import { CADENCE_LABELS, STAGE_LABELS, esc, fmtDate, fmtDay, practitionerShell, relative, status } from '../ui.js';
 import { MARK_SRC, ROUTES, ZONES } from './views-client.js';
 
 const flashHtml = (flash) => (flash ? `<div class="notice${flash.error ? ' notice-error' : ''}" role="${flash.error ? 'alert' : 'status'}"><p>${esc(flash.text)}</p></div>` : '');
@@ -14,6 +14,40 @@ const assignmentsFor = (s, uid) => s.ctx.assignments.filter((a) => a.uid === uid
 const draftsFor = (s, uid) => assignmentsFor(s, uid).filter((a) => a.status === 'complete' && s.ctx.scoring[a.id]?.draft).map((a) => ({ assignment: a, ...s.ctx.scoring[a.id] }));
 const releasedIds = (s, uid) => new Set((s.ctx.results[uid]?.items ?? []).map((i) => i.assignmentId));
 export const unreleased = (s, uid) => draftsFor(s, uid).filter((d) => !releasedIds(s, uid).has(d.assignment.id)).length;
+const schedulesFor = (s, uid) => (s.ctx.schedules ?? []).filter((x) => x.uid === uid);
+
+function scheduleRow(s, x) {
+  const m = s.ctx.measures[x.measureId];
+  const when = x.cadence === 'dates' ? `${x.dates.length} date${x.dates.length === 1 ? '' : 's'}, ${fmtDay(x.startsOn)} to ${fmtDay(x.endsOn)}` : `${CADENCE_LABELS[x.cadence]} from ${fmtDay(x.startsOn)}${x.endsOn ? ` to ${fmtDay(x.endsOn)}` : ''}`;
+  const chip = x.status === 'ended' ? status('done', 'Ended') : x.status === 'paused' ? status('attention', 'Paused') : status('progress', `Next ${fmtDay(x.nextDue)}`);
+  const buttons =
+    x.status === 'ended'
+      ? '<span></span>'
+      : `<span class="actions-inline">${x.status === 'paused' ? `<button type="button" class="btn btn-secondary" data-action="schedule" data-do="resume" data-id="${esc(x.id)}">Resume</button>` : `<button type="button" class="btn btn-secondary" data-action="schedule" data-do="pause" data-id="${esc(x.id)}">Pause</button>`}<button type="button" class="btn btn-quiet" data-action="schedule" data-do="end" data-id="${esc(x.id)}">End</button></span>`;
+  return `<li class="task"><div><p class="task-name">${esc(m?.name ?? x.measureId)}</p><p class="task-meta">${esc(when)}. Sent ${x.runs ?? 0} time${x.runs === 1 ? '' : 's'}.</p></div>${chip}${buttons}</li>`;
+}
+
+// Subscale scores for every completed copy of a questionnaire, by date,
+// so Sarah can see change over repeated check ins. Shown only when a
+// questionnaire has been completed more than once.
+function scoresOverTime(s, uid) {
+  const done = assignmentsFor(s, uid).filter((a) => a.status === 'complete' && s.ctx.scoring[a.id]?.scores);
+  const byMeasure = new Map();
+  for (const a of done) byMeasure.set(a.measureId, [...(byMeasure.get(a.measureId) ?? []), a]);
+  const blocks = [...byMeasure.entries()]
+    .filter(([, list]) => list.length > 1)
+    .map(([measureId, list]) => {
+      const sorted = list.sort((a, b) => a.completedAt - b.completedAt);
+      const m = s.ctx.measures[measureId];
+      const subs = Object.entries(s.ctx.scoring[sorted[0].id].scores.subscales);
+      return `<article class="draft stack">
+        <h3>${esc(m?.name ?? measureId)}</h3>
+        <div class="table-wrap"><table class="table"><thead><tr><th scope="col">Subscale</th>${sorted.map((a) => `<th scope="col">${esc(fmtDate(a.completedAt))}</th>`).join('')}</tr></thead>
+        <tbody>${subs.map(([id, first]) => `<tr><td>${esc(first.label)}</td>${sorted.map((a) => `<td>${s.ctx.scoring[a.id].scores.subscales[id]?.score ?? 'Not scored'}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
+      </article>`;
+    });
+  return blocks.join('');
+}
 
 function reviewCount(s) {
   if (s.role !== 'practitioner') return 0;
@@ -98,6 +132,10 @@ export function client(s, uid) {
   const measures = Object.values(s.ctx.measures);
   const assignable = measures.filter((m) => (m.licenceStatus === 'cleared' || m.licenceStatus === 'sample') && !list.some((a) => a.measureId === m.id && a.status !== 'complete'));
   const released_ = releasedIds(s, uid);
+  const schedules = schedulesFor(s, uid);
+  const schedulable = measures.filter((m) => (m.licenceStatus === 'cleared' || m.licenceStatus === 'sample') && !schedules.some((x) => x.measureId === m.id && x.status !== 'ended'));
+  const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Pacific/Auckland', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+  const overTime = scoresOverTime(s, uid);
 
   const intakeAnswers = intake
     ? s.intakeConfig.questions
@@ -193,8 +231,32 @@ export function client(s, uid) {
       }
     </section>
 
+    <section class="stack" aria-labelledby="h-checkin">
+      <h2 id="h-checkin">Check ins</h2>
+      <p class="reading t-caption">Questionnaires sent again on a schedule during your work together. Each one arrives on the client's Home on the morning of its date, New Zealand time. Finishing a check in does not move the client's stage.</p>
+      ${schedules.length ? `<ul class="task-list">${schedules.map((x) => scheduleRow(s, x)).join('')}</ul>` : '<p>No check ins scheduled.</p>'}
+      ${
+        c.activatedAt && schedulable.length
+          ? `<form class="schedule-form stack" data-form="schedule" data-uid="${esc(uid)}" novalidate>
+              <div class="split">
+                <div class="field"><label class="field-label" for="sch-measure">Questionnaire</label><select class="select" id="sch-measure" name="measureId">${schedulable.map((m) => `<option value="${esc(m.id)}">${esc(m.name)}${m.licenceStatus === 'sample' ? ' (sample, testing only)' : ''}</option>`).join('')}</select></div>
+                <div class="field"><label class="field-label" for="sch-cadence">How often</label><select class="select" id="sch-cadence" name="cadence">${Object.entries(CADENCE_LABELS).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join('')}</select></div>
+              </div>
+              <div class="split" data-cadence-fields="interval">
+                <div class="field"><label class="field-label" for="sch-start">First check in</label><input class="input" id="sch-start" name="startsOn" type="date" min="${esc(today)}"><p class="field-hint">The client sees it on this date.</p></div>
+                <div class="field"><label class="field-label" for="sch-end">Last check in (optional)</label><input class="input" id="sch-end" name="endsOn" type="date" min="${esc(today)}"><p class="field-hint">Leave blank to continue until you end it.</p></div>
+              </div>
+              <div class="field" data-cadence-fields="dates" hidden><label class="field-label" for="sch-dates">Dates</label><input class="input" id="sch-dates" name="dates" placeholder="2026-11-03, 2026-12-01"><p class="field-hint">Year-month-day, separated by commas.</p></div>
+              ${s.errors.schedule ? `<p class="field-error">${esc(s.errors.schedule)}</p>` : ''}
+              <div class="actions"><button type="submit" class="btn btn-secondary">Schedule check in</button></div>
+            </form>`
+          : `<p class="t-caption">${c.activatedAt ? 'Every cleared questionnaire already has a schedule.' : 'Check ins can be scheduled once the client has finished setting up.'}</p>`
+      }
+    </section>
+
     <section class="stack" aria-labelledby="h-draft">
       <h2 id="h-draft">Draft results</h2>
+      ${overTime ? `<h3 class="t-ui-strong">Scores over time</h3>${overTime}` : ''}
       ${draftBlocks || '<p>Draft results appear here when the client finishes a questionnaire.</p>'}
       ${drafts.length ? `<div class="actions">${pending > 0 ? `<button type="button" class="btn btn-primary" data-action="release" data-uid="${esc(uid)}">Release results to ${esc(c.name || 'client')}</button>` : ''}${released?.releasedAt ? `<p class="t-caption">Last released ${fmtDate(released.releasedAt)}.</p>` : ''}</div>` : ''}
     </section>

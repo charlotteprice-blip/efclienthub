@@ -113,3 +113,73 @@ export function cleanFactors(factors) {
 export function cleanName(name) {
   return String(name ?? '').trim().replace(/\s+/g, ' ').slice(0, 80);
 }
+
+// ---------- check in schedules ----------
+//
+// Dates on a schedule are calendar days in New Zealand, stored as
+// YYYY-MM-DD strings, so "every 4 weeks from 3 November" means the same
+// thing whatever the server's clock zone is.
+
+export const TIME_ZONE = 'Pacific/Auckland';
+export const CADENCES = {
+  weekly: { label: 'Every week', days: 7 },
+  fortnightly: { label: 'Every 2 weeks', days: 14 },
+  fourWeekly: { label: 'Every 4 weeks', days: 28 },
+  dates: { label: 'On chosen dates', days: 0 },
+};
+export const SCHEDULE_STATUSES = ['active', 'paused', 'ended'];
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+
+const nzFormat = new Intl.DateTimeFormat('en-CA', { timeZone: TIME_ZONE, year: 'numeric', month: '2-digit', day: '2-digit' });
+
+// The calendar date in New Zealand for a moment in time.
+export function nzDate(ms) {
+  return nzFormat.format(new Date(ms));
+}
+
+export function validDate(s) {
+  if (!DATE_RE.test(String(s ?? ''))) return false;
+  const [y, m, d] = s.split('-').map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  return dt.getUTCFullYear() === y && dt.getUTCMonth() === m - 1 && dt.getUTCDate() === d;
+}
+
+export function addDays(date, days) {
+  const [y, m, d] = date.split('-').map(Number);
+  return new Date(Date.UTC(y, m - 1, d + days)).toISOString().slice(0, 10);
+}
+
+// Validates what Sarah entered and returns a clean schedule, or a message.
+export function scheduleProblem({ cadence, startsOn, endsOn, dates }) {
+  if (!CADENCES[cadence]) return 'Choose how often the check in repeats.';
+  if (cadence === 'dates') {
+    const list = [...new Set((Array.isArray(dates) ? dates : String(dates ?? '').split(/[\s,]+/)).map((x) => String(x).trim()).filter(Boolean))].sort();
+    if (!list.length || list.length > 52 || !list.every(validDate)) return 'Enter 1 or more dates as YYYY-MM-DD.';
+    return { cadence, dates: list, startsOn: list[0], endsOn: list.at(-1) };
+  }
+  if (!validDate(startsOn)) return 'Enter the first check in date as YYYY-MM-DD.';
+  if (endsOn && !validDate(endsOn)) return 'Enter the last check in date as YYYY-MM-DD, or leave it blank.';
+  if (endsOn && endsOn < startsOn) return 'The last date must be on or after the first.';
+  return { cadence, dates: null, startsOn, endsOn: endsOn || null };
+}
+
+// The due date after `due`, or null when the schedule has run its course.
+export function nextDueAfter(schedule, due) {
+  if (schedule.cadence === 'dates') return (schedule.dates ?? []).find((d) => d > due) ?? null;
+  const next = addDays(due, CADENCES[schedule.cadence].days);
+  return schedule.endsOn && next > schedule.endsOn ? null : next;
+}
+
+// Where a schedule stands after today's run: the next date still ahead of
+// today (missed dates are skipped rather than stacked up), or ended.
+export function advanceSchedule(schedule, today) {
+  let next = nextDueAfter(schedule, schedule.nextDue);
+  while (next && next <= today) next = nextDueAfter(schedule, next);
+  return next ? { nextDue: next, status: 'active' } : { nextDue: null, status: 'ended' };
+}
+
+// On resume, a date that slipped past while paused comes due today.
+export function resumedDue(schedule, today) {
+  if (!schedule.nextDue) return null;
+  return schedule.nextDue < today ? today : schedule.nextDue;
+}

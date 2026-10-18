@@ -17,3 +17,7 @@ Adapted from the Themescape member journey (Notion: Integration Lab, Themescape,
 | 11 | Sign out ends on Log in; Back stays out | Same | Firebase Hosting |
 
 Sarah's side (stage 5): issue a code for a named client, send it herself, see type and stage, correct a type, assign measures, read the draft, release results.
+
+## During treatment (stage 6)
+
+Once the first results are released and Sarah moves the client to Working together, she can schedule check in questionnaires from the client's page: a questionnaire, how often (every week, every 2 weeks, every 4 weeks, or chosen dates), a first date and an optional last date. Each morning at 7am New Zealand time the hub assigns any check in due that day. The client sees it on Home as a check in with a Start button, in place of the stage's usual action, and a line under their questionnaires says when the next one is coming. Finishing a check in returns the client to Home with a thank you; it does not move their stage or ask them to book. Sarah sees the repeated scores side by side on the client's page and can pause, resume or end the schedule at any time.
