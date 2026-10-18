@@ -1,0 +1,95 @@
+{
+ "code": "WHO-5",
+ "name": "WHO-5 Well-Being Index",
+ "domain": "Wellbeing and life satisfaction",
+ "developer": "WHO Regional Office for Europe, Psychiatric Research Unit, Hillerød (Bech) (1998)",
+ "construct": "Subjective psychological wellbeing (positive mood, vitality and interest) over the past 2 weeks.",
+ "respondent": "Self report",
+ "ageRange": "9+ (Te Pou); adults in general population",
+ "minutes": 2,
+ "availability": "public domain",
+ "licence": "CORC: \"The WHO-5 is free of charge and does not require permission to use.\" PsyToolkit 'Legal stuff': the WHO-5 can be used for research provided the authors and their research paper are acknowledged.",
+ "licenceUrl": "https://www.corc.uk.net/outcome-experience-measures/the-world-health-organisation-five-well-being-index-who-5",
+ "sourceUrl": "https://www.psytoolkit.org/survey-library/who5.html",
+ "instructions": "Please respond to each item regarding how you felt in the last two weeks.",
+ "responseOptions": [
+  {
+   "value": 5,
+   "label": "All of the time"
+  },
+  {
+   "value": 4,
+   "label": "Most of the time"
+  },
+  {
+   "value": 3,
+   "label": "More than half the time"
+  },
+  {
+   "value": 2,
+   "label": "Less than half the time"
+  },
+  {
+   "value": 1,
+   "label": "Some of the time"
+  },
+  {
+   "value": 0,
+   "label": "At no time"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "Over the past two weeks ... I have felt cheerful in good spirits.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "PsyToolkit omits 'and'; the WHO original and Te Pou read 'I have felt cheerful and in good spirits.'"
+  },
+  {
+   "n": 2,
+   "text": "Over the past two weeks ... I have felt calm and relaxed.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 3,
+   "text": "Over the past two weeks ... I have felt active and vigorous.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 4,
+   "text": "Over the past two weeks ... I woke up feeling fresh and rested.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 5,
+   "text": "Over the past two weeks ... My daily life has been filled with things that interest me.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Total",
+   "items": "1-5",
+   "count": 5,
+   "range": "0-25 raw; 0-100 percentage",
+   "description": "Unidimensional wellbeing index."
+  }
+ ],
+ "scoring": "Sum the 5 items (0 to 25) and multiply by 4 to give a percentage score from 0 (worst) to 100 (best). Higher scores indicate better wellbeing. Topp et al. (2015): a score below 51 (that is, 50 or lower) is commonly used as a screening cut off for depression and warrants further assessment; a change of 10 percentage points is considered clinically relevant. Some studies use a lower cut off depending on the population.",
+ "citation": "World Health Organization Regional Office for Europe. (1998). Wellbeing measures in primary health care/The DepCare Project: Report on a WHO meeting, Stockholm, Sweden, 12–13 February 1998. WHO Regional Office for Europe. See also Topp, C. W., Østergaard, S. D., Søndergaard, S., & Bech, P. (2015). The WHO-5 Well-Being Index: A systematic review of the literature. Psychotherapy and Psychosomatics, 84(3), 167–176. https://doi.org/10.1159/000376585",
+ "transcriptionNote": "Items, stem, instruction and response values transcribed from the PsyToolkit survey library page. Item 1 on PsyToolkit reads 'cheerful in good spirits' whereas the WHO original (quoted on tepou.co.nz) reads 'cheerful and in good spirits'; PsyToolkit wording retained verbatim with the difference flagged. CORC prints the response labels as 'More than half of the time' and 'Less than half of the time'; PsyToolkit omits 'of'. The official WHO form (psykiatri-regionh.dk) was not fetched, so its instruction wording was not compared."
+}

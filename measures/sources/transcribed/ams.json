@@ -1,0 +1,325 @@
+{
+ "code": "AMS",
+ "name": "Academic Motivation Scale (College version, AMS-C 28)",
+ "domain": "Work and motivation",
+ "developer": "Vallerand, Pelletier, Blais, Brière, Senécal and Vallières (1992)",
+ "construct": "Motivation for study along the self determination continuum, from amotivation through 3 forms of extrinsic motivation to 3 forms of intrinsic motivation.",
+ "respondent": "Self report",
+ "ageRange": "17+ (college and university students)",
+ "minutes": 7,
+ "availability": "free with attribution (CC or stated)",
+ "licence": "Form footer: \"© Robert J. Vallerand, Luc G. Pelletier, Marc R. Blais, Nathalie M. Brière, Caroline B. Senécal, Évelyne F. Vallières, 1992\" and \"Note: To use this scale you require only to mention the complete reference data.\"",
+ "licenceUrl": "https://www.lrcs.uqam.ca/wp-content/uploads/2017/08/emec_en.pdf",
+ "sourceUrl": "https://www.lrcs.uqam.ca/wp-content/uploads/2017/08/emec_en.pdf",
+ "instructions": "WHY DO YOU GO TO COLLEGE ? Using the scale below, indicate to what extent each of the following items presently corresponds to one of the reasons why you go to college.",
+ "responseOptions": [
+  {
+   "value": 1,
+   "label": "Does not correspond at all"
+  },
+  {
+   "value": 2,
+   "label": "Corresponds a little"
+  },
+  {
+   "value": 3,
+   "label": "Corresponds a little"
+  },
+  {
+   "value": 4,
+   "label": "Corresponds moderately"
+  },
+  {
+   "value": 5,
+   "label": "Corresponds a lot"
+  },
+  {
+   "value": 6,
+   "label": "Corresponds a lot"
+  },
+  {
+   "value": 7,
+   "label": "Corresponds exactly"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "Because with only a high-school degree I would not find a high-paying job later on.",
+   "subscale": "Extrinsic motivation - external regulation",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 2,
+   "text": "Because I experience pleasure and satisfaction while learning new things.",
+   "subscale": "Intrinsic motivation - to know",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 3,
+   "text": "Because I think that a college education will help me better prepare for the career I have chosen.",
+   "subscale": "Extrinsic motivation - identified",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 4,
+   "text": "For the intense feelings I experience when I am communicating my own ideas to others.",
+   "subscale": "Intrinsic motivation - to experience stimulation",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 5,
+   "text": "Honestly, I don't know; I really feel that I am wasting my time in school.",
+   "subscale": "Amotivation",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 6,
+   "text": "For the pleasure I experience while surpassing myself in my studies.",
+   "subscale": "Intrinsic motivation - toward accomplishment",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 7,
+   "text": "To prove to myself that I am capable of completing my college degree.",
+   "subscale": "Extrinsic motivation - introjected",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 8,
+   "text": "In order to obtain a more prestigious job later on.",
+   "subscale": "Extrinsic motivation - external regulation",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 9,
+   "text": "For the pleasure I experience when I discover new things never seen before.",
+   "subscale": "Intrinsic motivation - to know",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 10,
+   "text": "Because eventually it will enable me to enter the job market in a field that I like.",
+   "subscale": "Extrinsic motivation - identified",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 11,
+   "text": "For the pleasure that I experience when I read interesting authors.",
+   "subscale": "Intrinsic motivation - to experience stimulation",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 12,
+   "text": "I once had good reasons for going to college; however, now I wonder whether I should continue.",
+   "subscale": "Amotivation",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 13,
+   "text": "For the pleasure that I experience while I am surpassing myself in one of my personal accomplishments.",
+   "subscale": "Intrinsic motivation - toward accomplishment",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 14,
+   "text": "Because of the fact that when I succeed in college I feel important.",
+   "subscale": "Extrinsic motivation - introjected",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 15,
+   "text": "Because I want to have \"the good life\" later on.",
+   "subscale": "Extrinsic motivation - external regulation",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 16,
+   "text": "For the pleasure that I experience in broadening my knowledge about subjects which appeal to me.",
+   "subscale": "Intrinsic motivation - to know",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 17,
+   "text": "Because this will help me make a better choice regarding my career orientation.",
+   "subscale": "Extrinsic motivation - identified",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 18,
+   "text": "For the pleasure that I experience when I feel completely absorbed by what certain authors have written.",
+   "subscale": "Intrinsic motivation - to experience stimulation",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 19,
+   "text": "I can't see why I go to college and frankly, I couldn't care less.",
+   "subscale": "Amotivation",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 20,
+   "text": "For the satisfaction I feel when I am in the process of accomplishing difficult academic activities.",
+   "subscale": "Intrinsic motivation - toward accomplishment",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 21,
+   "text": "To show myself that I am an intelligent person.",
+   "subscale": "Extrinsic motivation - introjected",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 22,
+   "text": "In order to have a better salary later on.",
+   "subscale": "Extrinsic motivation - external regulation",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 23,
+   "text": "Because my studies allow me to continue to learn about many things that interest me.",
+   "subscale": "Intrinsic motivation - to know",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 24,
+   "text": "Because I believe that a few additional years of education will improve my competence as a worker.",
+   "subscale": "Extrinsic motivation - identified",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 25,
+   "text": "For the \"high\" feeling that I experience while reading about various interesting subjects.",
+   "subscale": "Intrinsic motivation - to experience stimulation",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 26,
+   "text": "I don't know; I can't understand what I am doing in school.",
+   "subscale": "Amotivation",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 27,
+   "text": "Because college allows me to experience a personal satisfaction in my quest for excellence in my studies.",
+   "subscale": "Intrinsic motivation - toward accomplishment",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 28,
+   "text": "Because I want to show myself that I can succeed in my studies.",
+   "subscale": "Extrinsic motivation - introjected",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Intrinsic motivation - to know",
+   "items": "2, 9, 16, 23",
+   "count": 4,
+   "range": "1-7 (mean) or 4-28 (sum)",
+   "description": ""
+  },
+  {
+   "name": "Intrinsic motivation - toward accomplishment",
+   "items": "6, 13, 20, 27",
+   "count": 4,
+   "range": "1-7 (mean) or 4-28 (sum)",
+   "description": ""
+  },
+  {
+   "name": "Intrinsic motivation - to experience stimulation",
+   "items": "4, 11, 18, 25",
+   "count": 4,
+   "range": "1-7 (mean) or 4-28 (sum)",
+   "description": ""
+  },
+  {
+   "name": "Extrinsic motivation - identified",
+   "items": "3, 10, 17, 24",
+   "count": 4,
+   "range": "1-7 (mean) or 4-28 (sum)",
+   "description": ""
+  },
+  {
+   "name": "Extrinsic motivation - introjected",
+   "items": "7, 14, 21, 28",
+   "count": 4,
+   "range": "1-7 (mean) or 4-28 (sum)",
+   "description": ""
+  },
+  {
+   "name": "Extrinsic motivation - external regulation",
+   "items": "1, 8, 15, 22",
+   "count": 4,
+   "range": "1-7 (mean) or 4-28 (sum)",
+   "description": ""
+  },
+  {
+   "name": "Amotivation",
+   "items": "5, 12, 19, 26",
+   "count": 4,
+   "range": "1-7 (mean) or 4-28 (sum)",
+   "description": ""
+  }
+ ],
+ "scoring": "Compute each of the 7 subscales as the mean (1 to 7) or sum (4 to 28) of its 4 items; higher scores indicate stronger endorsement of that type of motivation. No items are reverse scored. A self determination index can be computed by weighting the subscales (commonly intrinsic +2, identified +1, introjected and external -1, amotivation -2), although the form itself does not give this formula. No cut offs are published.",
+ "citation": "Vallerand, R. J., Pelletier, L. G., Blais, M. R., Brière, N. M., Senécal, C., & Vallières, E. F. (1992). The Academic Motivation Scale: A measure of intrinsic, extrinsic, and amotivation in education. Educational and Psychological Measurement, 52(4), 1003–1017. https://doi.org/10.1177/0013164492052004025",
+ "transcriptionNote": "The itemsUrl in the target record (HS-emes_en.pdf) is the High School version (AMS-HS 28), not the college version. The college version was transcribed from the same laboratory site at emec_en.pdf (titled \"ACADEMIC MOTIVATION SCALE (AMS-C 28)\"), which carries the same copyright footer and permission note. The 7 point scale prints 5 verbal anchors over the numbers 1 to 7: \"Does not correspond at all\" over 1, \"Corresponds a little\" over 2 and 3, \"Corresponds moderately\" over 4, \"Corresponds a lot\" over 5 and 6, and \"Corresponds exactly\" over 7. The text extraction could not confirm this alignment and it is recorded here from the standard layout of the form; values 2, 3, 5 and 6 share the adjacent anchor. Subscale membership is taken verbatim from the key printed on the form."
+}

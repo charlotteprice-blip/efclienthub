@@ -1,0 +1,111 @@
+{
+ "code": "GAD-7",
+ "name": "Generalized Anxiety Disorder 7",
+ "domain": "Clinical screening",
+ "developer": "Spitzer, Kroenke, Williams and Löwe (2006)",
+ "construct": "Frequency of core generalised anxiety symptoms over the past 2 weeks.",
+ "respondent": "Self report",
+ "ageRange": "13+ (validated in adults 18+)",
+ "minutes": 2,
+ "availability": "public domain",
+ "licence": "Pfizer statement on the PHQ screeners site: no permission is required to reproduce, translate, display or distribute the PHQ instruments, which include the GAD-7. PsyToolkit legal note: \"It seems that the GAD-7 can be used for research\" with acknowledgement of the authors and their paper.",
+ "licenceUrl": "https://www.phqscreeners.com/",
+ "sourceUrl": "https://psytoolkit.org/survey-library/anxiety-gad7.html",
+ "instructions": "Over the last 2 weeks, how often have you been bothered by the following problems?",
+ "responseOptions": [
+  {
+   "value": 0,
+   "label": "Not at all"
+  },
+  {
+   "value": 1,
+   "label": "Several days"
+  },
+  {
+   "value": 2,
+   "label": "More than half the days"
+  },
+  {
+   "value": 3,
+   "label": "Nearly every day"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "Feeling nervous, anxious or on edge",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 2,
+   "text": "Not being able to stop or control worrying",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 3,
+   "text": "Worrying too much about different things",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 4,
+   "text": "Trouble relaxing",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 5,
+   "text": "Being so restless that it is hard to sit still",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 6,
+   "text": "Becoming easily annoyed or irritable",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 7,
+   "text": "Feeling afraid as if something awful might happen",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 8,
+   "text": "How difficult have these problems made it for you to do your work, take care of things at home, or get along with other people?",
+   "subscale": "Functional impairment (unscored)",
+   "reverse": false,
+   "filler": false,
+   "note": "Supplementary difficulty question, not part of the 0 to 21 total. Response options: Not difficult at all; Somewhat difficult; Very difficult; Extremely difficult."
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Total",
+   "items": "1-7",
+   "count": 7,
+   "range": "0-21",
+   "description": "Sum of the 7 symptom items. The difficulty question (item 8 here) is not included in the total."
+  }
+ ],
+ "scoring": "Sum items 1 to 7 (0 to 3 each) for a total of 0 to 21; higher scores indicate more severe anxiety. Severity bands from Spitzer et al. (2006): 0 to 4 minimal, 5 to 9 mild, 10 to 14 moderate, 15 to 21 severe; a score of 10 or more is the recommended screening threshold for generalised anxiety disorder (PsyToolkit page: \"people with a score of 10 or greater might suffer from generlized [sic] anxiety disorder\"). NHS Talking Therapies uses 8 or more as the clinical case threshold (NHS Talking Therapies Manual).",
+ "citation": "Spitzer, R. L., Kroenke, K., Williams, J. B. W., & Löwe, B. (2006). A brief measure for assessing generalized anxiety disorder: The GAD-7. Archives of Internal Medicine, 166(10), 1092–1097. https://doi.org/10.1001/archinte.166.10.1092",
+ "transcriptionNote": "The phqscreeners.com select-screener page (itemsUrl) is blocked to automated fetching by robots.txt and the Mind toolkit PDF (sourceUrl) lists the GAD-7 by name only. Items, stem, response options and the supplementary difficulty question were transcribed from the PsyToolkit survey library page, whose response labels are printed in lower case (\"not at all\", \"several days\" and so on); sentence case is used here to match the PHQ screeners print form. The PsyToolkit page does not reproduce the Pfizer copyright footer or the print form's heading. The 5, 10 and 15 severity bands are from the 2006 article rather than the fetched page."
+}

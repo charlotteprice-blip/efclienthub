@@ -1,0 +1,11 @@
+{
+ "file": "promis-meaning-and-purpose-8a.json",
+ "sourceReached": true,
+ "sourceUsed": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7367748 (Salsman et al., 2020, Table 3)",
+ "itemsChecked": 8,
+ "itemsMatching": 8,
+ "discrepancies": [],
+ "licenceMatches": "unverified",
+ "verdict": "verified",
+ "notes": "All 8 items in the 8 item short form column of Table 3 match word for word and in the same order (the 4 item form is items 1 to 4). The article confirms the bank uses 5 point scales anchored 'strongly disagree' to 'strongly agree' and 'not at all' to 'very much' and does not say which short form items use which, so the blank intermediate labels and the transcriptionNote caveat are consistent with the source. The LOINC copyright and terms lines quoted in the licence field match the wording seen on the LOINC PROMIS panels fetched for other files. The quote 'are publicly available for use without licensing or royalty fees for individual research or individual clinical use' was not found on the licenceUrl page or in the PROMIS Terms and Conditions documents, so the licence is unverified. The sourceUrl field carries a parenthetical description after the URL."
+}

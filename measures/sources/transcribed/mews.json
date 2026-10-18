@@ -1,0 +1,174 @@
+{
+  "code": "MEWS",
+  "name": "Mind Excessively Wandering Scale",
+  "domain": "Executive functioning and attention",
+  "developer": "Mowlem, Skirrow, Reid, Maltezos, Nijjar, Merwood, Barker, Cooper, Kuntsi and Asherson (2016, King's College London)",
+  "construct": "Excessive, uncontrolled and ceaseless mental activity characteristic of adult ADHD.",
+  "respondent": "Self report",
+  "ageRange": "18+",
+  "minutes": 3,
+  "availability": "free with attribution (CC or stated)",
+  "licence": "\"The MEWS scale is copyrighted and available without charge from the corresponding author, and we welcome use of this scale in research.\" The 2019 population validation paper (Scientific Reports) is published under a Creative Commons Attribution 4.0 International License.",
+  "licenceUrl": "https://discovery-pp.ucl.ac.uk/id/eprint/1513566/1/Journal%20of%20Attention%20Disorders-2016-Mowlem-1087054716651927.pdf",
+  "sourceUrl": "https://discovery-pp.ucl.ac.uk/id/eprint/1513566/1/Journal%20of%20Attention%20Disorders-2016-Mowlem-1087054716651927.pdf",
+  "instructions": "",
+  "responseOptions": [
+    {
+      "value": 0,
+      "label": "not at all or rarely"
+    },
+    {
+      "value": 1,
+      "label": "some of the time"
+    },
+    {
+      "value": 2,
+      "label": "most of the time"
+    },
+    {
+      "value": 3,
+      "label": "nearly all of the time or constantly"
+    }
+  ],
+  "items": [
+    {
+      "n": 1,
+      "text": "I have difficulty controlling my thoughts",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 2,
+      "text": "I find it hard to switch my thoughts off",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 3,
+      "text": "I have two or more different thoughts going on at the same time",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 4,
+      "text": "My thoughts are disorganised and 'all over the place'",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 5,
+      "text": "My thoughts are 'on the go' all the time",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 6,
+      "text": "Because my mind is 'on the go' at bedtime, I have difficulty falling off to sleep",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": "Dropped in the recommended 12 item version"
+    },
+    {
+      "n": 7,
+      "text": "I experience ceaseless mental activity",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 8,
+      "text": "I find it difficult to think about one thing without another thought entering my mind",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 9,
+      "text": "I find my thoughts are distracting and prevent me from focusing on what I am doing",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 10,
+      "text": "I try to distract myself from my thoughts by doing something else or listening to music",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": "Dropped in the recommended 12 item version"
+    },
+    {
+      "n": 11,
+      "text": "I have difficulty slowing my thoughts down and focusing on one thing at a time",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 12,
+      "text": "I find it difficult to think clearly, as if my mind is in a fog",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 13,
+      "text": "I find myself flitting back and forth between different thoughts",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 14,
+      "text": "I use alcohol or other drugs to slow down my thoughts and stop constant 'mental chatter'",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": "Dropped in the recommended 12 item version"
+    },
+    {
+      "n": 15,
+      "text": "I can only focus my thoughts on one thing at a time with considerable effort",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    }
+  ],
+  "subscales": [
+    {
+      "name": "Total",
+      "items": "1-15",
+      "count": 15,
+      "range": "0-45",
+      "description": "Excessive mind wandering; unidimensional."
+    },
+    {
+      "name": "Total (12 item version)",
+      "items": "1-5, 7-9, 11-13, 15",
+      "count": 12,
+      "range": "0-36",
+      "description": "Authors' recommended version omitting items 6, 10 and 14, which describe coping with or consequences of mind wandering rather than the thought process itself."
+    }
+  ],
+  "scoring": "Sum the item ratings (0 to 45 for 15 items, 0 to 36 for 12 items); higher scores indicate more excessive mind wandering. In Mowlem et al. (2016) a total score of 15 or above gave the best balance of sensitivity and specificity for distinguishing adults with ADHD from controls (about .88 in Study 1 and .90 in Study 2); with the 12 item version sensitivity was .89 and specificity .90. The 2019 population study (Mowlem, Agnew-Blais, Pingault and Asherson) reports no cut off.",
+  "citation": "Mowlem, F. D., Skirrow, C., Reid, P., Maltezos, S., Nijjar, S. K., Merwood, A., Barker, E., Cooper, R., Kuntsi, J., & Asherson, P. (2019). Validation of the Mind Excessively Wandering Scale and the relationship of mind wandering to impairment in adult ADHD. Journal of Attention Disorders, 23(6), 624–634. https://doi.org/10.1177/1087054716651927",
+  "transcriptionNote": "Items transcribed from Figure 1 of the Journal of Attention Disorders author manuscript (UCL Discovery copy). The paper gives no written respondent instructions and no time frame, so instructions is left empty. The paper does not state the scoring formula explicitly; the cut off of 15 can only be a summed total, so sum scoring is recorded. Original UK spelling (disorganised) retained. The CC BY 2019 validation paper (sourceUrl in the target record) used the 12 item version and does not reproduce the items or response labels."
+}

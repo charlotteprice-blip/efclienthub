@@ -1,0 +1,95 @@
+{
+ "code": "WEBEXEC",
+ "name": "Webexec",
+ "domain": "Executive functioning and attention",
+ "developer": "Buchanan, Heffernan, Parrott, Ling, Rodgers and Scholey (2010)",
+ "construct": "Brief self report of everyday problems with executive function (attention, concentration, multitasking, train of thought, follow through and impulsivity) designed for online administration.",
+ "respondent": "Self report",
+ "ageRange": "18+",
+ "minutes": 1,
+ "availability": "free with attribution (CC or stated)",
+ "licence": "PsyToolkit: \"It seems that the webexec can be used for research, but you need to acknowledge the authors and their research paper when writing about it.\" No formal licence text from the authors was located.",
+ "licenceUrl": "https://psytoolkit.org/survey-library/webexec.html",
+ "sourceUrl": "https://psytoolkit.org/survey-library/webexec.html",
+ "instructions": "Please rate the extent to which you have problems in the following areas by picking the appropriate option.",
+ "responseOptions": [
+  {
+   "value": 1,
+   "label": "No problems experienced"
+  },
+  {
+   "value": 2,
+   "label": "A few problems experienced"
+  },
+  {
+   "value": 3,
+   "label": "More than a few problems experienced"
+  },
+  {
+   "value": 4,
+   "label": "A great many problems experienced"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "Do you find it difficult to keep your attention on a particular task?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 2,
+   "text": "Do you find yourself having problems concentrating on a task?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 3,
+   "text": "Do you have difficulty carrying out more than one task at a time?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 4,
+   "text": "Do you tend to \"lose\" your train of thoughts?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 5,
+   "text": "Do you have difficulty seeing through something that you have started?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 6,
+   "text": "Do you find yourself acting on \"impulse\"?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Total",
+   "items": "1-6",
+   "count": 6,
+   "range": "6-24",
+   "description": "Sum of the 6 items; no subscales are defined."
+  }
+ ],
+ "scoring": "Sum the 6 items (each scored 1 to 4) for a total of 6 to 24. Higher scores indicate more problems with executive function. Buchanan et al. (2010) report a mean of 11.25 in the original sample of 417 participants. No cut offs are published.",
+ "citation": "Buchanan, T., Heffernan, T. M., Parrott, A. C., Ling, J., Rodgers, J., & Scholey, A. B. (2010). A short self-report measure of problems with executive function suitable for administration via the Internet. Behavior Research Methods, 42(3), 709-714. https://doi.org/10.3758/BRM.42.3.709",
+ "transcriptionNote": "Items transcribed from the PsyToolkit survey library page, which reproduces the scale for online administration. The PsyToolkit instructions are written for its own online format (answers confidential, participants may stop at any time); the instruction line above is the task relevant sentence from that page and the original paper wording was not checked. The page lists the 4 response labels in order and states each item is scored 1 to 4 but does not print the numeric values beside the labels; values 1 to 4 are assigned in listed order. The response labels are in sentence case as recorded by the fetch; original capitalisation on the page was not confirmed. Second pass: instruction sentence quoted exactly from PsyToolkit; option labels are printed in lower case there and shown in sentence case here."
+}

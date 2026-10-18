@@ -1,0 +1,115 @@
+{
+ "code": "PROMIS Sleep-Related Impairment v1.0 8a",
+ "name": "PROMIS Sleep-Related Impairment Short Form 8a",
+ "domain": "Functioning and health",
+ "developer": "PROMIS Health Organization and PROMIS Cooperative Group (Buysse et al., 2010)",
+ "construct": "Daytime consequences of poor sleep, including alertness, sleepiness and tiredness, over the past 7 days.",
+ "respondent": "Self report",
+ "ageRange": "18+",
+ "minutes": 2,
+ "availability": "free with attribution (CC or stated)",
+ "licence": "HealthMeasures (Northwestern University) has made English PROMIS measures available without charge for research and individual clinical use, with the copyright line retained. Since 2024 licence fees apply to translations and to vendor platforms such as Epic and the Assessment Center API. Confirm current terms on Steps to License. Form copyright line: \"© 2008-2016 PROMIS Health Organization and PROMIS Cooperative Group\".",
+ "licenceUrl": "https://healthmeasures.net/implement/steps-to-license/",
+ "sourceUrl": "https://www.heal.nih.gov/files/CDEs/2023-09/promis-sleep-related-impairment-8a-crf.pdf",
+ "instructions": "Please respond to each item by marking one box per row. In the past 7 days...",
+ "responseOptions": [
+  {
+   "value": 1,
+   "label": "Not at all"
+  },
+  {
+   "value": 2,
+   "label": "A little bit"
+  },
+  {
+   "value": 3,
+   "label": "Somewhat"
+  },
+  {
+   "value": 4,
+   "label": "Quite a bit"
+  },
+  {
+   "value": 5,
+   "label": "Very much"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "I had a hard time getting things done because I was sleepy",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code Sleep10"
+  },
+  {
+   "n": 2,
+   "text": "I felt alert when I woke up",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": "Item code Sleep119; printed with reversed values Not at all = 5 to Very much = 1"
+  },
+  {
+   "n": 3,
+   "text": "I felt tired",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code Sleep18"
+  },
+  {
+   "n": 4,
+   "text": "I had problems during the day because of poor sleep",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code Sleep25"
+  },
+  {
+   "n": 5,
+   "text": "I had a hard time concentrating because of poor sleep",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code Sleep27"
+  },
+  {
+   "n": 6,
+   "text": "I felt irritable because of poor sleep.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code Sleep30"
+  },
+  {
+   "n": 7,
+   "text": "I was sleepy during the daytime.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code Sleep6"
+  },
+  {
+   "n": 8,
+   "text": "I had trouble staying awake during the day.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code Sleep7"
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Total",
+   "items": "1-8",
+   "count": 8,
+   "range": "8-40 (raw)",
+   "description": "Raw sum converted to a T score."
+  }
+ ],
+ "scoring": "Score each item 1 (Not at all) to 5 (Very much); item 2 (Sleep119) is scored in reverse (Not at all = 5, Very much = 1) as printed on the form. Sum the 8 items for a raw score of 8 to 40 and convert to a T score (mean 50, SD 10, US general population) using the HealthMeasures conversion table or the HealthMeasures Scoring Service. Higher T scores indicate greater sleep related impairment. HealthMeasures descriptive bands: below 55 within normal limits, 55 to 59.9 mild, 60 to 69.9 moderate, 70 and above severe (band source: HealthMeasures score interpretation guidance; not printed on the form).",
+ "citation": "Buysse, D. J., Yu, L., Moul, D. E., Germain, A., Stover, A., Dodds, N. E., Johnston, K. L., Shablesky-Cade, M. A., & Pilkonis, P. A. (2010). Development and validation of patient-reported outcome measures for sleep disturbance and sleep-related impairments. Sleep, 33(6), 781-792. https://doi.org/10.1093/sleep/33.6.781",
+ "transcriptionNote": "The HealthMeasures search page (itemsUrl) is a form driven search and returned no measure entries, so the items were transcribed from the NIH HEAL Initiative case report form copy of \"PROMIS Item Bank v. 1.0 – Sleep-Related Impairment – Short Form 8a\" (sourceUrl). Item codes and order follow that form. Punctuation follows the form: items 6, 7 and 8 end with a full stop, items 1 to 5 do not. The form carries no T score conversion table; the T score method and bands in scoring are from HealthMeasures guidance and should be checked against the current scoring manual."
+}

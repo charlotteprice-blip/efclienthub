@@ -1,0 +1,95 @@
+{
+ "code": "MWQ",
+ "name": "Mind Wandering Questionnaire",
+ "domain": "Executive functioning and attention",
+ "developer": "Mrazek, Phillips, Franklin, Broadway and Schooler (2013)",
+ "construct": "Trait level frequency of mind wandering during everyday tasks such as reading, listening and repetitive work.",
+ "respondent": "Self report",
+ "ageRange": "Validated in adolescents (12 to 17) and adults (college sample)",
+ "minutes": 1,
+ "availability": "free with attribution (CC or stated)",
+ "licence": "This is an open-access article distributed under the terms of the Creative Commons Attribution License (CC BY). Copyright 2013 Mrazek, Phillips, Franklin, Broadway and Schooler.",
+ "licenceUrl": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2013.00560/full",
+ "sourceUrl": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2013.00560/full",
+ "instructions": "",
+ "responseOptions": [
+  {
+   "value": 1,
+   "label": "almost never"
+  },
+  {
+   "value": 2,
+   "label": "very infrequently"
+  },
+  {
+   "value": 3,
+   "label": "somewhat infrequently"
+  },
+  {
+   "value": 4,
+   "label": "somewhat frequently"
+  },
+  {
+   "value": 5,
+   "label": "very frequently"
+  },
+  {
+   "value": 6,
+   "label": "almost always"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "I have difficulty maintaining focus on simple or repetitive work",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 2,
+   "text": "While reading, I find I haven't been thinking about the text and must therefore read it again",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 3,
+   "text": "I do things without paying full attention",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 4,
+   "text": "I find myself listening with one ear, thinking about something else at the same time",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 5,
+   "text": "I mind-wander during lectures or presentations",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "Article body text reads 'or'; Table 1 prints 'of', which appears to be a typesetting error."
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Total",
+   "items": "1-5",
+   "count": 5,
+   "range": "5-30",
+   "description": "Unidimensional; single component with eigenvalue 3.58 explaining 63.16 percent of variance (Study 1)."
+  }
+ ],
+ "scoring": "Sum the 5 items (5 to 30) or take the item mean (1 to 6). No reverse scoring. Higher scores indicate more frequent mind wandering. The article reports no cut offs and reports only descriptive statistics; Cronbach's alpha 0.850 in the college sample (Mrazek et al., 2013).",
+ "citation": "Mrazek, M. D., Phillips, D. T., Franklin, M. S., Broadway, J. M., & Schooler, J. W. (2013). Young and restless: Validation of the Mind-Wandering Questionnaire (MWQ) reveals disruptive impact of mind-wandering for youth. Frontiers in Psychology, 4, 560. https://doi.org/10.3389/fpsyg.2013.00560",
+ "transcriptionNote": "Items transcribed from Table 1 of the open access article. The article does not print respondent instructions, so the instructions field is empty. Response labels are quoted from the Methods (1 almost never to 6 almost always). Item 5 wording: 'or' used, following the article text; Table 1 prints 'of'."
+}

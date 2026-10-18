@@ -1,0 +1,18 @@
+{
+ "file": "promis-general-self-efficacy-4a.json",
+ "sourceReached": true,
+ "sourceUsed": "https://cdn.clinicaltrials.gov/large-docs/37/NCT04059237/Prot_SAP_001.pdf (Appendix K, page 40)",
+ "itemsChecked": 4,
+ "itemsMatching": 4,
+ "discrepancies": [
+  {
+   "item": 0,
+   "transcribed": "For the next set of questions, please read each sentence and rate your level of confidence in managing various situations, problems, and events. Rate your level of confidence.",
+   "source": "Please respond to each item by marking one box per row. For the next set of questions, please read each sentence and rate your level of confidence in managing various situations, problems, and events. Rate your level of confidence.",
+   "kind": "missing"
+  }
+ ],
+ "licenceMatches": "unverified",
+ "verdict": "verified with corrections",
+ "notes": "All 4 items match the appendix word for word and in order. The 5 response labels and their printed values (1 to 5) match. The instructions field omits the first printed line of the appendix, 'Please respond to each item by marking one box per row.', which does appear on page 40 directly under the 'General Self Efficacy' heading; the transcriptionNote states this wording could not be confirmed from the source, but it is present. The appendix has no version number and no PROMIS copyright line, as the note says. The licence field is a paraphrase; the licenceUrl page does not contain the quoted terms, and the suggested copyright line '© 2008-2015 PROMIS Health Organization' is flagged in the file itself as not reproduced in the source."
+}

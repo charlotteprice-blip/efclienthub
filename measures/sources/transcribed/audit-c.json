@@ -1,0 +1,75 @@
+{
+  "code": "AUDIT-C",
+  "name": "AUDIT Consumption",
+  "domain": "Clinical screening",
+  "developer": "Bush, Kivlahan, McDonell, Fihn and Bradley (1998), VA Ambulatory Care Quality Improvement Project; items from the WHO AUDIT (Saunders et al., 1993; Babor et al., 2001)",
+  "construct": "Brief screen for hazardous drinking using the 3 AUDIT alcohol consumption items.",
+  "respondent": "Self report or clinician administered",
+  "ageRange": "18+",
+  "minutes": 1,
+  "availability": "public domain",
+  "licence": "\"AUDIT-C is available for use in the public domain.\" (SAMHSA tool sheet, quoted by CamCOPS and reproduced on the deploymentpsych.org and ANTHC forms). The parent WHO AUDIT document \"may, however, be freely reviewed, abstracted, reproduced, and translated, in part or in whole, but not for sale or for use in conjunction with commercial purposes.\"",
+  "licenceUrl": "https://camcops.readthedocs.io/en/latest/tasks/audit.html",
+  "sourceUrl": "https://integrationacademy.ahrq.gov/sites/default/files/2020-07/AUDIT-C.pdf",
+  "instructions": "Please circle the answer that is correct for you.",
+  "responseOptions": [
+    {
+      "value": 0,
+      "label": "Never / 1 or 2"
+    },
+    {
+      "value": 1,
+      "label": "Monthly or less / 3 or 4 / Less than monthly"
+    },
+    {
+      "value": 2,
+      "label": "2 to 4 times a month / 5 or 6 / Monthly"
+    },
+    {
+      "value": 3,
+      "label": "2 to 3 times a week / 7 to 9 / Weekly"
+    },
+    {
+      "value": 4,
+      "label": "4 or more times a week / 10 or more / Daily or almost daily"
+    }
+  ],
+  "items": [
+    {
+      "n": 1,
+      "text": "How often do you have a drink containing alcohol?",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": "Options: Never (0), Monthly or less (1), Two to four times a month (2), Two to three times per week (3), Four or more times a week (4). WHO form prints these as 2 to 4 times a month, 2 to 3 times a week, 4 or more times a week."
+    },
+    {
+      "n": 2,
+      "text": "How many drinks containing alcohol do you have on a typical day when you are drinking?",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": "Options: 1 or 2 (0), 3 or 4 (1), 5 or 6 (2), 7 to 9 (3), 10 or more (4). Some forms say standard drinks."
+    },
+    {
+      "n": 3,
+      "text": "How often do you have six or more drinks on one occasion?",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": "Options (WHO wording): Never (0), Less than monthly (1), Monthly (2), Weekly (3), Daily or almost daily (4). The AHRQ copy prints Two to three times per week and Four or more times a week for options 3 and 4 instead; US adaptations change six to five drinks."
+    }
+  ],
+  "subscales": [
+    {
+      "name": "Total",
+      "items": "1-3",
+      "count": 3,
+      "range": "0-12",
+      "description": "Alcohol consumption; positive screen for hazardous drinking."
+    }
+  ],
+  "scoring": "Sum the 3 item scores (0 to 12); higher scores indicate heavier consumption. Bush et al. (1998) and the AHRQ sheet: a score of 4 or more identifies 86 percent of men who report drinking above recommended levels or meet criteria for alcohol use disorders, and a score of 3 or more identifies 84 percent of women who report hazardous drinking or alcohol use disorders (US primary care). A threshold of 5 or more is commonly used in NZ and UK settings. In the full AUDIT a total of 0 on items 2 and 3 allows skipping to items 9 and 10. Positive screens proceed to the full 10 item AUDIT.",
+  "citation": "Bush, K., Kivlahan, D. R., McDonell, M. B., Fihn, S. D., & Bradley, K. A. (1998). The AUDIT alcohol consumption questions (AUDIT-C): An effective brief screening test for problem drinking. Archives of Internal Medicine, 158(16), 1789–1795. https://doi.org/10.1001/archinte.158.16.1789",
+  "transcriptionNote": "The WHO AUDIT manual PDF (itemsUrl, iris.who.int and apps.who.int) could not be fetched, so item text was transcribed from the AHRQ Academy AUDIT-C sheet, whose questions 1 and 2 match the WHO manual wording; response options for question 3 follow the WHO wording as reproduced in the NIH reprint of the WHO questionnaire (uspreventiveservicestaskforce.org, GetFileByID/221) and the ANTHC and deploymentpsych.org forms, because the AHRQ copy prints non standard labels for options 3 and 4 of question 3. The AHRQ sheet writes the scoring thresholds as \"> 4\" for men and \"> 2\" for women, which other sources render as 4 or more and 3 or more. Copies differ in minor wording (standard drinks vs drinks; 2-4 times a month vs Two to four times a month; six vs five drinks in US adaptations; past year framing on the ANTHC form); differences are recorded in the item notes. The responseOptions field combines the 3 item specific option sets by scored value."
+}

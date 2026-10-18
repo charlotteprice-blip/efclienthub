@@ -1,0 +1,123 @@
+{
+  "code": "IPS",
+  "name": "Irrational Procrastination Scale",
+  "domain": "Procrastination, time and habits",
+  "developer": "Steel (2010)",
+  "construct": "Voluntary delay of intended action despite expecting to be worse off for the delay.",
+  "respondent": "Self report",
+  "ageRange": "18+",
+  "minutes": 2,
+  "availability": "free with attribution (CC or stated)",
+  "licence": "Items published in full in Svartdal and Steel (2017), Frontiers in Psychology: \"This is an open-access article distributed under the terms of the Creative Commons Attribution License (CC BY).\" Copyright line: © 2017 Svartdal and Steel.",
+  "licenceUrl": "https://www.frontiersin.org/articles/10.3389/fpsyg.2017.01927/full",
+  "sourceUrl": "https://www.frontiersin.org/articles/10.3389/fpsyg.2017.01927/full",
+  "instructions": "",
+  "responseOptions": [
+    {
+      "value": 1,
+      "label": "Very seldom or not true of me"
+    },
+    {
+      "value": 2,
+      "label": ""
+    },
+    {
+      "value": 3,
+      "label": ""
+    },
+    {
+      "value": 4,
+      "label": ""
+    },
+    {
+      "value": 5,
+      "label": "Very often true, or true with me"
+    }
+  ],
+  "items": [
+    {
+      "n": 1,
+      "text": "I put things off so long that my well-being or efficiency unnecessarily suffers",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 2,
+      "text": "If there is something I should do, I get to it before attending to lesser tasks",
+      "subscale": "Total",
+      "reverse": true,
+      "filler": false,
+      "note": "Marked (R) in Table 1 of the source"
+    },
+    {
+      "n": 3,
+      "text": "My life would be better if I did some activities or tasks earlier",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 4,
+      "text": "When I should be doing one thing, I will do another",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 5,
+      "text": "At the end of the day, I know I could have spent the time better",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 6,
+      "text": "I spend my time wisely",
+      "subscale": "Total",
+      "reverse": true,
+      "filler": false,
+      "note": "Marked (R) in Table 1 of the source"
+    },
+    {
+      "n": 7,
+      "text": "I delay tasks beyond what is reasonable",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 8,
+      "text": "I procrastinate",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 9,
+      "text": "I do everything when I believe it needs to be done",
+      "subscale": "Total",
+      "reverse": true,
+      "filler": false,
+      "note": "Marked (R) in Table 1 of the source"
+    }
+  ],
+  "subscales": [
+    {
+      "name": "Total",
+      "items": "1-9",
+      "count": 9,
+      "range": "9-45 (sum) or 1-5 (mean)",
+      "description": "Irrational procrastination; unidimensional."
+    }
+  ],
+  "scoring": "Reverse score items 2, 6 and 9, then sum (9 to 45) or average (1 to 5) the 9 items; higher scores indicate more irrational procrastination. The 2017 article reports a Norwegian sample mean of about 3.62 per item and notes that omitting the 3 reversed items \"improves fit indices and provides an instrument that is more easily administered and scored\". No published cut offs.",
+  "citation": "Steel, P. (2010). Arousal, avoidant and decisional procrastinators: Do they exist? Personality and Individual Differences, 48(8), 926–934. https://doi.org/10.1016/j.paid.2010.02.025",
+  "transcriptionNote": "Items transcribed from Table 1 of Svartdal and Steel (2017), which prints the English IPS; the (R) markers after items 2, 6 and 9 are removed from the item text and recorded in the reverse field. The article gives no respondent instructions and labels only the scale endpoints (\"1 = Very seldom or not true of me, 5 = Very often true, or true with me\"), so points 2 to 4 are unlabelled here. Sum versus mean scoring is not specified in the article; both are recorded."
+}

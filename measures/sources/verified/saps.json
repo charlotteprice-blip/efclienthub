@@ -1,0 +1,11 @@
+{
+ "file": "saps.json",
+ "sourceReached": true,
+ "sourceUsed": "https://kennethwang.com/apsr/scales/SAPS-English.pdf; licence at https://sites.gsu.edu/cpyricelab/?p=264",
+ "itemsChecked": 8,
+ "itemsMatching": 8,
+ "discrepancies": [],
+ "licenceMatches": true,
+ "verdict": "verified",
+ "notes": "All 8 items match the PDF word for word and in order. The instruction paragraph matches verbatim. The 7 anchor labels match in wording and capitalisation (STRONGLY DISAGREE to STRONGLY AGREE, 1 to 7). The scoring key 'Standards = 1, 3, 5, 7' and 'Discrepancy = 2, 4, 6, 8' matches and the subscale membership in the file follows it. The PDF carries the Rice, Richardson and Tueller (2014) citation and no copyright line, as the file states. The Rice lab page states 'There is no permission needed to use or translate the scale, as it is a subset of the APS-R.' and asks for proper citation, which the paraphrased licence field reflects accurately."
+}

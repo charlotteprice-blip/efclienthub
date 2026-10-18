@@ -1,0 +1,257 @@
+{
+ "code": "APS-R",
+ "name": "Almost Perfect Scale Revised",
+ "domain": "Self talk, thinking patterns and personality",
+ "developer": "Slaney, Rice, Mobley, Trippi and Ashby (2001)",
+ "construct": "Perfectionism as high personal standards, a preference for order, and the discrepancy perceived between one's standards and one's performance.",
+ "respondent": "Self report",
+ "ageRange": "18+",
+ "minutes": 5,
+ "availability": "free with attribution (CC or stated)",
+ "licence": "Rice lab page (licenceUrl): \"There is no permission needed to use or translate the scale. It should be cited properly as shown above.\" The scale PDF itself carries an older note: \"NOTE: You have my permission to use the APS-R for research only. Such use indicates agreement with the stated terms, is limited to one year from today’s date, and involves appropriate citations in the event of publication. I would also like to be informed of any data gathered and findings on the scale.\"",
+ "licenceUrl": "https://sites.gsu.edu/cpyricelab/?p=264",
+ "sourceUrl": "https://www.kennethwang.com/apsr/scales/APSR-English.pdf",
+ "instructions": "The following items are designed to measure attitudes people have toward themselves, their performance, and toward others. There are no right or wrong answers. Please respond to all of the items. Use your first impression and do not spend too much time on individual items in responding. Respond to each of the items using the scale below to describe your degree of agreement with each item. Circle the appropriate rating for each item.",
+ "responseOptions": [
+  {
+   "value": 1,
+   "label": "Strongly Disagree"
+  },
+  {
+   "value": 2,
+   "label": "Disagree"
+  },
+  {
+   "value": 3,
+   "label": "Slightly Disagree"
+  },
+  {
+   "value": 4,
+   "label": "Neutral"
+  },
+  {
+   "value": 5,
+   "label": "Slightly Agree"
+  },
+  {
+   "value": 6,
+   "label": "Agree"
+  },
+  {
+   "value": 7,
+   "label": "Strongly Agree"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "I have high standards for my performance at work or at school.",
+   "subscale": "Standards",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 2,
+   "text": "I am an orderly person.",
+   "subscale": "Order",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 3,
+   "text": "I often feel frustrated because I can’t meet my goals.",
+   "subscale": "Discrepancy",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 4,
+   "text": "Neatness is important to me.",
+   "subscale": "Order",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 5,
+   "text": "If you don’t expect much out of yourself, you will never succeed.",
+   "subscale": "Standards",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 6,
+   "text": "My best just never seems to be good enough for me.",
+   "subscale": "Discrepancy",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 7,
+   "text": "I think things should be put away in their place",
+   "subscale": "Order",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 8,
+   "text": "I have high expectations for myself.",
+   "subscale": "Standards",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 9,
+   "text": "I rarely live up to my high standards.",
+   "subscale": "Discrepancy",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 10,
+   "text": "I like to always be organized and disciplined.",
+   "subscale": "Order",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 11,
+   "text": "Doing my best never seems to be enough.",
+   "subscale": "Discrepancy",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 12,
+   "text": "I set very high standards for myself.",
+   "subscale": "Standards",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 13,
+   "text": "I am never satisfied with my accomplishments.",
+   "subscale": "Discrepancy",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 14,
+   "text": "I expect the best from myself.",
+   "subscale": "Standards",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 15,
+   "text": "I often worry about not measuring up to my own expectations.",
+   "subscale": "Discrepancy",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 16,
+   "text": "My performance rarely measures up to my standards.",
+   "subscale": "Discrepancy",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 17,
+   "text": "I am not satisfied even when I know I have done my best.",
+   "subscale": "Discrepancy",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 18,
+   "text": "I try to do my best at everything I do.",
+   "subscale": "Standards",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 19,
+   "text": "I am seldom able to meet my own high standards of performance.",
+   "subscale": "Discrepancy",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 20,
+   "text": "I am hardly ever satisfied with my performance.",
+   "subscale": "Discrepancy",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 21,
+   "text": "I hardly ever feel that what I’ve done is good enough.",
+   "subscale": "Discrepancy",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 22,
+   "text": "I have a strong need to strive for excellence.",
+   "subscale": "Standards",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 23,
+   "text": "I often feel disappointment after completing a task because I know I could have done better.",
+   "subscale": "Discrepancy",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Standards",
+   "items": "1, 5, 8, 12, 14, 18, 22",
+   "count": 7,
+   "range": "7-49",
+   "description": "High personal standards for performance."
+  },
+  {
+   "name": "Order",
+   "items": "2, 4, 7, 10",
+   "count": 4,
+   "range": "4-28",
+   "description": "Preference for neatness and organisation."
+  },
+  {
+   "name": "Discrepancy",
+   "items": "3, 6, 9, 11, 13, 15, 16, 17, 19, 20, 21, 23",
+   "count": 12,
+   "range": "12-84",
+   "description": "Perceived gap between standards and performance; the maladaptive component."
+  }
+ ],
+ "scoring": "Sum the item ratings within each subscale to obtain Standards, Order and Discrepancy scores; no items are reverse scored and no total score is used. Higher scores indicate more of each attribute. Classification rule (Rice and Ashby, 2007, as reproduced on the scale PDF): Standards below 42, non perfectionist; Standards 42 or above with Discrepancy 42 or above, maladaptive perfectionist; Standards 42 or above with Discrepancy below 42, adaptive perfectionist.",
+ "citation": "Slaney, R. B., Rice, K. G., Mobley, M., Trippi, J., & Ashby, J. S. (2001). The revised Almost Perfect Scale. Measurement and Evaluation in Counseling and Development, 34(3), 130–145. https://doi.org/10.1080/07481756.2002.12069030",
+ "transcriptionNote": "Items transcribed from the English APS-R PDF on kennethwang.com. Item 7 has no closing full stop in the source. Curly apostrophes retained as printed. The permission note on the PDF (research only, one year) conflicts with the current Rice lab statement that no permission is needed; both are quoted in the licence field and the Rice lab page is the licenceUrl. Second pass (18 October 2026): subscale renamed Standards to match the scoring key printed on the form; Rice lab quote corrected to \"It should be cited properly as shown above.\""
+}

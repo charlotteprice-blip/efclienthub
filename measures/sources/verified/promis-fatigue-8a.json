@@ -1,0 +1,11 @@
+{
+ "file": "promis-fatigue-8a.json",
+ "sourceReached": true,
+ "sourceUsed": "https://psytests.org/diag/promF8en-bl.html (reached); https://heal.nih.gov/files/CDEs/2023-07/promis-fatigue-8a-crf.pdf unreachable (302 redirect to https://www.nih.gov/heal, which could not be fetched); alternative: LOINC 62338-9 panel (PROMIS item bank - 57 profile, fatigue block) and LOINC 61809-0",
+ "itemsChecked": 8,
+ "itemsMatching": 8,
+ "discrepancies": [],
+ "licenceMatches": "unverified",
+ "verdict": "verified",
+ "notes": "All 8 items match the psytests.org reproduction word for word and in order, and all 8 also match the LOINC survey question text (61878-5, 61882-7, 61865-2, 61864-5, 61861-1, 61836-3, 61798-5, 61809-0). LOINC confirms the response values: items 1 to 6 use LL1017-4 (Not at all 1 to Very much 5) and items 7 and 8 use LL1016-6 (Never 1, Rarely 2, Sometimes 3, Often 4, Always 5), matching the per item notes. The stems 'During the past 7 days' (items 1, 2) and 'In the past 7 days' (items 3 to 8) are confirmed by LOINC and psytests. The NIH HEAL CRF cited for the PROMIS item codes (HI7, AN3, FATEXP41, FATEXP40, FATEXP35, FATIMP49, FATIMP3, FATIMP16), the instruction sentence and the copyright line '© 2008-2012 PROMIS Health Organization and PROMIS Cooperative Group' redirected to a landing page on both the bare and www hosts, so those details remain unverified. The licence quote 'are publicly available for use without licensing or royalty fees for individual research or individual clinical use' was not found on the licenceUrl page (Steps to License), on the PROMIS Terms and Conditions at assessmentcenter.net, or in the PROMIS Terms and Conditions v8.1 PDF, so it is unverified. The sourceUrl field lists 2 URLs with commentary rather than a single URL."
+}

@@ -1,0 +1,115 @@
+{
+ "code": "PROMIS Cog Function v2.0 8a",
+ "name": "PROMIS Cognitive Function Short Form 8a",
+ "domain": "Executive functioning and attention",
+ "developer": "PROMIS Health Organization / HealthMeasures (Northwestern University, NIH funded) (2012; v2.0 2017)",
+ "construct": "Perceived everyday cognitive difficulties in concentration, memory, mental speed and multitasking over the past 7 days.",
+ "respondent": "Self report",
+ "ageRange": "18+",
+ "minutes": 2,
+ "availability": "free with attribution (CC or stated)",
+ "licence": "LOINC panel copyright line: \"Copyright © 2010 PROMIS Health Organization or other individuals/entities that have contributed information and materials to Assessment Center, and are being used with the permission of the copyright holders.\" HealthMeasures Terms of Use: English PROMIS measures available without charge for research and individual clinical use with the copyright line retained; licence fees apply to translations and vendor platforms since 2024. Confirm current terms on Steps to License.",
+ "licenceUrl": "https://healthmeasures.net/implement/steps-to-license/",
+ "sourceUrl": "https://loinc.org/81530-8/panel",
+ "instructions": "In the past 7 days (item stem as recorded in the LOINC panel). The HealthMeasures form instruction \"Please respond to each question or statement by marking one box per row\" could not be confirmed from the fetched source.",
+ "responseOptions": [
+  {
+   "value": 5,
+   "label": "Never"
+  },
+  {
+   "value": 4,
+   "label": "Rarely (once)"
+  },
+  {
+   "value": 3,
+   "label": "Sometimes (2-3 times)"
+  },
+  {
+   "value": 2,
+   "label": "Often (once a day)"
+  },
+  {
+   "value": 1,
+   "label": "Very often (Several times a day)"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "My thinking has been slow",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 81461-6"
+  },
+  {
+   "n": 2,
+   "text": "It has seemed like my brain was not working as well as usual",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 81478-0"
+  },
+  {
+   "n": 3,
+   "text": "I have had to work harder than usual to keep track of what I was doing",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 81479-8"
+  },
+  {
+   "n": 4,
+   "text": "I have had trouble shifting back and forth between different activities that require thinking",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 81485-5"
+  },
+  {
+   "n": 5,
+   "text": "I have had trouble concentrating",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 81465-7"
+  },
+  {
+   "n": 6,
+   "text": "I have had to work really hard to pay attention or I would make a mistake",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 81474-9"
+  },
+  {
+   "n": 7,
+   "text": "I have had trouble forming thoughts",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 81460-8"
+  },
+  {
+   "n": 8,
+   "text": "I have had trouble adding or subtracting numbers in my head",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 81463-2"
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Total",
+   "items": "1-8",
+   "count": 8,
+   "range": "8-40 (raw); T score mean 50, SD 10",
+   "description": "Raw score is the sum of the 8 items, converted to a T score using the HealthMeasures scoring table."
+  }
+ ],
+ "scoring": "Sum the 8 items (each 1 to 5, with Never scored 5) for a raw score of 8 to 40, then convert to a T score (mean 50, SD 10, referenced to the US general population) using the HealthMeasures Cognitive Function v2.0 scoring manual. Higher T scores indicate better perceived cognitive function. HealthMeasures suggests descriptive bands of within normal limits (T above 45), mild (40 to 45), moderate (30 to 40) and severe impairment (below 30) for symptom measures scored in the function direction; confirm against the current scoring manual.",
+ "citation": "Lai, J.-S., Wagner, L. I., Jacobsen, P. B., & Cella, D. (2014). Self-reported cognitive concerns and abilities: Two sides of one coin? Psycho-Oncology, 23(10), 1133–1141. https://doi.org/10.1002/pon.3522 (PROMIS Cognitive Function item bank). Instrument: PROMIS Health Organization. (2017). PROMIS Item Bank v2.0 – Cognitive Function – Short Form 8a. HealthMeasures.",
+ "transcriptionNote": "The HealthMeasures search page (itemsUrl) is a form driven library with no readable PDF link, so the items were transcribed from the LOINC panel 81530-8 (\"PROMIS short form - cognitive function 8a - version 2.0\"), which records each item's text and answer list. LOINC stores the stem \"In the past 7 days\" as a prefix on each item; it is recorded once as the instructions here. LOINC item text omits terminal punctuation and the HealthMeasures form may print the items with full stops; wording is otherwise as given. Item order follows the LOINC panel order and may differ from the HealthMeasures PDF order. The response option values follow the LOINC answer list (Never = 5 through Very often = 1)."
+}

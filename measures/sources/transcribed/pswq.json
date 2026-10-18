@@ -1,0 +1,179 @@
+{
+ "code": "PSWQ",
+ "name": "Penn State Worry Questionnaire",
+ "domain": "Clinical screening",
+ "developer": "Meyer, Miller, Metzger and Borkovec (1990)",
+ "construct": "Trait pathological worry, in particular its excessiveness, generality and uncontrollability.",
+ "respondent": "Self report",
+ "ageRange": "18+",
+ "minutes": 3,
+ "availability": "public domain",
+ "licence": "CamCOPS: \"In the public domain.\" \"Reproduced in full in Meyer et al. (1990).\" Confirmed as being in the public domain, with explicit permission given for use, by Thomas D. Borkovec (personal communication to Rudolf Cardinal, 23 July 2015).",
+ "licenceUrl": "https://camcops.readthedocs.io/en/latest/tasks/pswq.html",
+ "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK571032/bin/ch9.p265.pdf (NIHR Journals Library open access appendix reproducing the PSWQ)",
+ "instructions": "Rate each of the following statements on a scale of 1 (\"not at all typical of me\") to 5 (\"very typical of me\"). Please do not leave any items blank.",
+ "responseOptions": [
+  {
+   "value": 1,
+   "label": "Not at all typical of me"
+  },
+  {
+   "value": 2,
+   "label": ""
+  },
+  {
+   "value": 3,
+   "label": ""
+  },
+  {
+   "value": 4,
+   "label": ""
+  },
+  {
+   "value": 5,
+   "label": "Very typical of me"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "If I don't have enough time to do everything, I don't worry about it.",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": "NIHR appendix prints the expanded form: If I do not have enough time to do everything, I do not worry about it."
+  },
+  {
+   "n": 2,
+   "text": "My worries overwhelm me.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 3,
+   "text": "I don't tend to worry about things.",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": "NIHR appendix prints the expanded form: I do not tend to worry about things."
+  },
+  {
+   "n": 4,
+   "text": "Many situations make me worry.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 5,
+   "text": "I know I shouldn't worry about things, but I just can't help it.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "NIHR appendix prints the expanded form: I know I should not worry about things, but I just cannot help it."
+  },
+  {
+   "n": 6,
+   "text": "When I'm under pressure I worry a lot.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "NIHR appendix prints the expanded form: When I am under pressure I worry a lot."
+  },
+  {
+   "n": 7,
+   "text": "I'm always worrying about something.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "NIHR appendix prints the expanded form: I am always worrying about something."
+  },
+  {
+   "n": 8,
+   "text": "I find it easy to dismiss worrisome thoughts.",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 9,
+   "text": "As soon as I finish one task, I start to worry about everything else I have to do.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 10,
+   "text": "I never worry about anything.",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 11,
+   "text": "When there is nothing more I can do about a concern, I don't worry about it anymore.",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": "NIHR appendix prints the expanded form: When there is nothing more I can do about a concern, I do not worry about it anymore."
+  },
+  {
+   "n": 12,
+   "text": "I've been a worrier all my life.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "NIHR appendix prints the expanded form: I have been a worrier all my life."
+  },
+  {
+   "n": 13,
+   "text": "I notice that I have been worrying about things.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 14,
+   "text": "Once I start worrying, I can't stop.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "NIHR appendix prints the expanded form: Once I start worrying, I cannot stop."
+  },
+  {
+   "n": 15,
+   "text": "I worry all the time.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 16,
+   "text": "I worry about projects until they are all done.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Total",
+   "items": "1-16",
+   "count": 16,
+   "range": "16-80",
+   "description": "Trait worry."
+  }
+ ],
+ "scoring": "Reverse score items 1, 3, 8, 10 and 11 (1=5, 2=4, 3=3, 4=2, 5=1), then sum all 16 items (16 to 80); higher scores indicate more pathological worry. Commonly used bands: 16 to 39 low worry, 40 to 59 moderate worry, 60 to 80 high worry (as reproduced on the Carepatron form). A score of 45 or more is often taken to suggest worry is a significant problem and is about the GAD screening cut off in treatment seeking samples; community screening cut offs of 62 to 65 have also been reported (target record).",
+ "citation": "Meyer, T. J., Miller, M. L., Metzger, R. L., & Borkovec, T. D. (1990). Development and validation of the Penn State Worry Questionnaire. Behaviour Research and Therapy, 28(6), 487–495. https://doi.org/10.1016/0005-7967(90)90135-6",
+ "transcriptionNote": "The ARC Wisconsin page (itemsUrl) and the CamCOPS page (sourceUrl) describe the PSWQ without printing the items, and psytoolkit.org could not be fetched. Items were transcribed from the NIHR Journals Library open access reproduction (NBK571032 appendix), cross checked against the Carepatron and Hachette reproductions, which match it word for word apart from contraction and spacing variants. Text extraction of the NIHR PDF dropped the fi ligature in items 8 and 9 (\"fnd\", \"fnish\"); these are restored as \"find\" and \"finish\". Variants between sources: the NovoPsych form uses contractions (\"donʼt\", \"shouldnʼt\", \"Iʼve\", \"canʼt\") and \"until they are done\" in item 16; Carepatron and Hachette print \"any more\" in item 11 where the NIHR copy prints \"anymore\". Only the 2 anchor labels are given in the NIHR and Hachette sources; the NovoPsych and Carepatron forms add intermediate labels (Rarely, Somewhat, Often typical of me) that differ between them, so intermediate labels are left blank. Reverse keyed items are from the Hachette reproduction, which marks them with asterisks, and agree with the ARC scoring note that 5 bold items are reversed. Second pass (18 October 2026): the NIHR appendix expands the contractions of the published PSWQ (Meyer et al., 1990); the 8 affected items now follow the standard contracted wording as reproduced in the Hachette and Carepatron copies, with the expanded form kept in each item note. Response labels 3 Somewhat typical is printed on some forms; the hub labels the endpoints only."
+}

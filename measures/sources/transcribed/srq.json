@@ -1,0 +1,604 @@
+{
+  "code": "SRQ",
+  "name": "Self-Regulation Questionnaire",
+  "domain": "Executive functioning and attention",
+  "developer": "Brown, Miller and Lawendowski (1999)",
+  "construct": "Generalised capacity for self regulation across the 7 stages of the Miller and Brown model, from receiving relevant information to assessing the effectiveness of a plan.",
+  "respondent": "Self report",
+  "ageRange": "18+",
+  "minutes": 12,
+  "availability": "public domain",
+  "licence": "\"The SRQ is in the public domain and may be freely used, adapted, and reproduced without special permission.\" The source adds that acknowledgment of the origin is appreciated.",
+  "licenceUrl": "https://casaa.unm.edu/assets/inst/selfregulation-questionnaire-srq.pdf",
+  "sourceUrl": "https://casaa.unm.edu/assets/inst/selfregulation-questionnaire-srq.pdf",
+  "instructions": "Please answer the following questions by circling the response that best describes how you are. If you STRONGLY DISAGREE with a statement, circle 1. If you DISAGREE circle 2. If you are UNCERTAIN or UNSURE circle 3. If you AGREE circle 4, and if you STRONGLY AGREE circle 5. There are no right or wrong answers. Work quickly and don't think too long about your answers.",
+  "responseOptions": [
+    {
+      "value": 1,
+      "label": "Strongly Disagree"
+    },
+    {
+      "value": 2,
+      "label": "Disagree"
+    },
+    {
+      "value": 3,
+      "label": "Uncertain or Unsure"
+    },
+    {
+      "value": 4,
+      "label": "Agree"
+    },
+    {
+      "value": 5,
+      "label": "Strongly Agree"
+    }
+  ],
+  "items": [
+    {
+      "n": 1,
+      "text": "I usually keep track of my progress toward my goals.",
+      "subscale": "Receiving",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 2,
+      "text": "My behavior is not that different from other people's.",
+      "subscale": "Evaluating",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 3,
+      "text": "Others tell me that I keep on with things too long.",
+      "subscale": "Triggering",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 4,
+      "text": "I doubt I could change even if I wanted to.",
+      "subscale": "Searching",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 5,
+      "text": "I have trouble making up my mind about things.",
+      "subscale": "Planning",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 6,
+      "text": "I get easily distracted from my plans.",
+      "subscale": "Implementing",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 7,
+      "text": "I reward myself for progress toward my goals.",
+      "subscale": "Assessing",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 8,
+      "text": "I don't notice the effects of my actions until it's too late.",
+      "subscale": "Receiving",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 9,
+      "text": "My behavior is similar to that of my friends.",
+      "subscale": "Evaluating",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 10,
+      "text": "It's hard for me to see anything helpful about changing my ways.",
+      "subscale": "Triggering",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 11,
+      "text": "I am able to accomplish goals I set for myself.",
+      "subscale": "Searching",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 12,
+      "text": "I put off making decisions.",
+      "subscale": "Planning",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 13,
+      "text": "I have so many plans that it's hard for me to focus on any one of them.",
+      "subscale": "Implementing",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 14,
+      "text": "I change the way I do things when I see a problem with how things are going.",
+      "subscale": "Assessing",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 15,
+      "text": "It's hard for me to notice when I've \"had enough\" (alcohol, food, sweets).",
+      "subscale": "Receiving",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 16,
+      "text": "I think a lot about what other people think of me.",
+      "subscale": "Evaluating",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 17,
+      "text": "I am willing to consider other ways of doing things.",
+      "subscale": "Triggering",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 18,
+      "text": "If I wanted to change, I am confident that I could do it.",
+      "subscale": "Searching",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 19,
+      "text": "When it comes to deciding about a change, I feel overwhelmed by the choices.",
+      "subscale": "Planning",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 20,
+      "text": "I have trouble following through with things once I've made up my mind to do something.",
+      "subscale": "Implementing",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 21,
+      "text": "I don't seem to learn from my mistakes.",
+      "subscale": "Assessing",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 22,
+      "text": "I'm usually careful not to overdo it when working, eating, drinking.",
+      "subscale": "Receiving",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 23,
+      "text": "I tend to compare myself with other people.",
+      "subscale": "Evaluating",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 24,
+      "text": "I enjoy a routine, and like things to stay the same.",
+      "subscale": "Triggering",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 25,
+      "text": "I have sought out advice or information about changing.",
+      "subscale": "Searching",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 26,
+      "text": "I can come up with lots of ways to change, but it's hard for me to decide which one to use.",
+      "subscale": "Planning",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 27,
+      "text": "I can stick to a plan that's working well.",
+      "subscale": "Implementing",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 28,
+      "text": "I usually only have to make a mistake one time in order to learn from it.",
+      "subscale": "Assessing",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 29,
+      "text": "I don't learn well from punishment.",
+      "subscale": "Receiving",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 30,
+      "text": "I have personal standards, and try to live up to them.",
+      "subscale": "Evaluating",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 31,
+      "text": "I am set in my ways.",
+      "subscale": "Triggering",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 32,
+      "text": "As soon as I see a problem or challenge, I start looking for possible solutions.",
+      "subscale": "Searching",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 33,
+      "text": "I have a hard time setting goals for myself.",
+      "subscale": "Planning",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 34,
+      "text": "I have a lot of willpower.",
+      "subscale": "Implementing",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 35,
+      "text": "When I'm trying to change something, I pay a lot of attention to how I'm doing.",
+      "subscale": "Assessing",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 36,
+      "text": "I usually judge what I'm doing by the consequences of my actions.",
+      "subscale": "Receiving",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 37,
+      "text": "I don't care if I'm different from most people.",
+      "subscale": "Evaluating",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 38,
+      "text": "As soon as I see things aren't going right I want to do something about it.",
+      "subscale": "Triggering",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 39,
+      "text": "There is usually more than one way to accomplish something.",
+      "subscale": "Searching",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 40,
+      "text": "I have trouble making plans to help me reach my goals.",
+      "subscale": "Planning",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 41,
+      "text": "I am able to resist temptation.",
+      "subscale": "Implementing",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 42,
+      "text": "I set goals for myself and keep track of my progress.",
+      "subscale": "Assessing",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 43,
+      "text": "Most of the time I don't pay attention to what I'm doing.",
+      "subscale": "Receiving",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 44,
+      "text": "I try to be like people around me.",
+      "subscale": "Evaluating",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 45,
+      "text": "I tend to keep doing the same thing, even when it doesn't work.",
+      "subscale": "Triggering",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 46,
+      "text": "I can usually find several different possibilities when I want to change something.",
+      "subscale": "Searching",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 47,
+      "text": "Once I have a goal, I can usually plan how to reach it.",
+      "subscale": "Planning",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 48,
+      "text": "I have rules that I stick by no matter what.",
+      "subscale": "Implementing",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 49,
+      "text": "If I make a resolution to change something, I pay a lot of attention to how I'm doing.",
+      "subscale": "Assessing",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 50,
+      "text": "Often I don't notice what I'm doing until someone calls it to my attention.",
+      "subscale": "Receiving",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 51,
+      "text": "I think a lot about how I'm doing.",
+      "subscale": "Evaluating",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 52,
+      "text": "Usually I see the need to change before others do.",
+      "subscale": "Triggering",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 53,
+      "text": "I'm good at finding different ways to get what I want.",
+      "subscale": "Searching",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 54,
+      "text": "I usually think before I act.",
+      "subscale": "Planning",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 55,
+      "text": "Little problems or distractions throw me off course.",
+      "subscale": "Implementing",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 56,
+      "text": "I feel bad when I don't meet my goals.",
+      "subscale": "Assessing",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 57,
+      "text": "I learn from my mistakes.",
+      "subscale": "Receiving",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 58,
+      "text": "I know how I want to be.",
+      "subscale": "Evaluating",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 59,
+      "text": "It bothers me when things aren't the way I want them.",
+      "subscale": "Triggering",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 60,
+      "text": "I call in others for help when I need it.",
+      "subscale": "Searching",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 61,
+      "text": "Before making a decision, I consider what is likely to happen if I do one thing or another.",
+      "subscale": "Planning",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 62,
+      "text": "I give up quickly.",
+      "subscale": "Implementing",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 63,
+      "text": "I usually decide to change and hope for the best.",
+      "subscale": "Assessing",
+      "reverse": true,
+      "filler": false,
+      "note": ""
+    }
+  ],
+  "subscales": [
+    {
+      "name": "Receiving",
+      "items": "1, 8, 15, 22, 29, 36, 43, 50, 57",
+      "count": 9,
+      "range": "9-45",
+      "description": "Receiving relevant information."
+    },
+    {
+      "name": "Evaluating",
+      "items": "2, 9, 16, 23, 30, 37, 44, 51, 58",
+      "count": 9,
+      "range": "9-45",
+      "description": "Evaluating the information and comparing it to norms."
+    },
+    {
+      "name": "Triggering",
+      "items": "3, 10, 17, 24, 31, 38, 45, 52, 59",
+      "count": 9,
+      "range": "9-45",
+      "description": "Triggering change."
+    },
+    {
+      "name": "Searching",
+      "items": "4, 11, 18, 25, 32, 39, 46, 53, 60",
+      "count": 9,
+      "range": "9-45",
+      "description": "Searching for options."
+    },
+    {
+      "name": "Planning",
+      "items": "5, 12, 19, 26, 33, 40, 47, 54, 61",
+      "count": 9,
+      "range": "9-45",
+      "description": "Formulating a plan."
+    },
+    {
+      "name": "Implementing",
+      "items": "6, 13, 20, 27, 34, 41, 48, 55, 62",
+      "count": 9,
+      "range": "9-45",
+      "description": "Implementing the plan."
+    },
+    {
+      "name": "Assessing",
+      "items": "7, 14, 21, 28, 35, 42, 49, 56, 63",
+      "count": 9,
+      "range": "9-45",
+      "description": "Assessing the plan's effectiveness."
+    },
+    {
+      "name": "Total",
+      "items": "1-63",
+      "count": 63,
+      "range": "63-315",
+      "description": "Overall self regulation capacity."
+    }
+  ],
+  "scoring": "Reverse score items 2, 3, 4, 5, 6, 8, 10, 12, 13, 15, 19, 20, 21, 24, 26, 29, 31, 33, 37, 40, 43, 45, 50, 55, 62 and 63 (1=5, 2=4, 3=3, 4=2, 5=1), then sum all 63 items (range 63 to 315). Higher scores indicate greater self regulation capacity. Tentative bands from the source: above 239 high (intact) self regulation capacity (top quartile); 214 to 238 intermediate (moderate) capacity (middle quartiles); below 213 low (impaired) capacity (bottom quartile). The source does not assign 213 itself to a band. The authors do not recommend clinical decision making with the SRQ and recommend the 7 subscales be used for research only, not for individual interpretation.",
+  "citation": "Brown, J. M., Miller, W. R., & Lawendowski, L. A. (1999). The Self-Regulation Questionnaire. In L. VandeCreek & T. L. Jackson (Eds.), Innovations in clinical practice: A source book (Vol. 17, pp. 281–292). Professional Resource Press.",
+  "transcriptionNote": "All 63 items transcribed from the CASAA PDF in 3 passes. The instructions in the extracted text omitted the circled numbers (\"circle .\"); the numbers 1 to 5 have been restored from the response scale, which is the only edit. The printed column headers are split across lines in the PDF; the labels above are taken from the Scoring section of the same document. Subscale membership follows the 7 item cycle given in the source (item n belongs to the subscale in position n mod 7)."
+}

@@ -1,0 +1,11 @@
+{
+ "file": "mews.json",
+ "sourceReached": true,
+ "sourceUsed": "https://discovery-pp.ucl.ac.uk/id/eprint/1513566/1/Journal%20of%20Attention%20Disorders-2016-Mowlem-1087054716651927.pdf",
+ "itemsChecked": 15,
+ "itemsMatching": 15,
+ "discrepancies": [],
+ "licenceMatches": true,
+ "verdict": "verified",
+ "notes": "All 15 items match Figure 1 of the author manuscript word for word, including UK spelling and single quotation marks. Response labels and values 0 to 3 match. Items 6, 10 and 14 are confirmed as the 3 items dropped for the 12 item version, for the reason given. Cut off of 15 with sensitivity and specificity .88 (Study 1) and .90 (Study 2), and 12 item sensitivity .89 and specificity .90, all confirmed. Licence sentence matches verbatim including the clause 'and we welcome use of this scale in research'. No instructions or time frame are printed in the source, so the empty instructions field is correct. The manuscript is the 2016 online first version; the print citation (2019, 23(6), 624-634) is not shown on it and was not checked."
+}

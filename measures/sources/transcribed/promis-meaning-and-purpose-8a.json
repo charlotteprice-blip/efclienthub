@@ -1,0 +1,115 @@
+{
+  "code": "PROMIS Meaning and Purpose v1.0 8a",
+  "name": "PROMIS Meaning and Purpose Short Form 8a",
+  "domain": "Wellbeing and life satisfaction",
+  "developer": "PROMIS Health Organization (Salsman et al., 2020)",
+  "construct": "Sense that one's life has meaning, direction and purpose.",
+  "respondent": "Self report",
+  "ageRange": "18+",
+  "minutes": 2,
+  "availability": "free with attribution (CC or stated)",
+  "licence": "HealthMeasures Terms of Use: all English and Spanish versions of PROMIS and Neuro-QoL \"are publicly available for use without licensing or royalty fees for individual research or individual clinical use.\" LOINC panels carry the line \"Copyright © 2010 PROMIS Health Organization or other individuals/entities that have contributed information and materials\" and state that use of PROMIS instruments is subject to the PROMIS Terms and Conditions. Since 2024 licence fees apply to translations and to vendor platforms; confirm current terms on Steps to License.",
+  "licenceUrl": "https://healthmeasures.net/implement/steps-to-license/",
+  "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7367748 (Salsman et al., 2020, Table 3, 8 item short form column)",
+  "instructions": "",
+  "responseOptions": [
+    {
+      "value": 1,
+      "label": "Strongly disagree"
+    },
+    {
+      "value": 2,
+      "label": ""
+    },
+    {
+      "value": 3,
+      "label": ""
+    },
+    {
+      "value": 4,
+      "label": ""
+    },
+    {
+      "value": 5,
+      "label": "Strongly agree"
+    }
+  ],
+  "items": [
+    {
+      "n": 1,
+      "text": "My life has meaning.",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 2,
+      "text": "I have a clear sense of direction in life.",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 3,
+      "text": "I experience deep fulfillment in my life.",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 4,
+      "text": "My life has purpose.",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 5,
+      "text": "I have a good sense of what makes my life meaningful.",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 6,
+      "text": "I have very clear goals and aims for my life.",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 7,
+      "text": "I generally feel that what I do in my life is valuable and worthwhile.",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 8,
+      "text": "My life has significance.",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    }
+  ],
+  "subscales": [
+    {
+      "name": "Total",
+      "items": "1-8",
+      "count": 8,
+      "range": "8-40 raw; T score",
+      "description": "Meaning and purpose."
+    }
+  ],
+  "scoring": "Each item is rated on a 5 point scale scored 1 to 5. Sum the 8 responses (8 to 40) and convert to a T score (mean 50, SD 10 in the US general population) using the HealthMeasures scoring table or Scoring Service; higher T scores indicate a stronger sense of meaning and purpose. No clinical cut offs are published; HealthMeasures reports T scores relative to the general population mean.",
+  "citation": "Salsman, J. M., Schalet, B. D., Park, C. L., George, L., Steger, M. F., Hahn, E. A., Snyder, M. A., & Cella, D. (2020). Assessing meaning & purpose in life: Development and validation of an item bank and short forms for the NIH PROMIS®. Quality of Life Research, 29(8), 2299–2310. https://doi.org/10.1007/s11136-020-02489-3",
+  "transcriptionNote": "The HealthMeasures measure library (itemsUrl) returned no measure pages or PDF links to WebFetch, and the only LOINC panels reachable were the pediatric and parent proxy forms. The 8 adult items were transcribed from the 8 item short form column of Table 3 in the open access development article (Salsman et al., 2020, PMC7367748). That article gives no item codes, no instructions and no numeric values; it states the bank uses 5 point scales from \"strongly disagree\" to \"strongly agree\" and from \"not at all\" to \"very much\", and does not say which format each short form item uses. The response options above assume the agreement format named in the target record with values 1 to 5 and leave the 3 intermediate labels blank. Verify item order, response labels and instructions against the official HealthMeasures PDF before clinical use."
+}

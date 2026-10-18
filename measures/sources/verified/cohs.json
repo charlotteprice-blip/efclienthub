@@ -1,0 +1,11 @@
+{
+  "file": "cohs.json",
+  "sourceReached": true,
+  "sourceUsed": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5473478/",
+  "itemsChecked": 27,
+  "itemsMatching": 27,
+  "discrepancies": [],
+  "licenceMatches": true,
+  "verdict": "verified",
+  "notes": "All 27 items match Table 2 of the PMC article word for word and in table order, with the source pool labels (COHS-n, COHSF-n) correctly recorded in each note. Subscale membership (16 Routine, 11 Automaticity) matches the table. No reverse keyed items, consistent with the source. Response options: the article gives only the endpoints strongly disagree (1) and strongly agree (5), as transcribed; intermediate labels unconfirmed as the file states. The CC BY licence sentence matches the article verbatim and the Cambridge repository record does show Attribution-NonCommercial-NoDerivatives 4.0 International as stated. The 1 to 27 numbering is the transcriber's own convention and is declared; the administered form order in Appendix B remains unverified because it is image only."
+}

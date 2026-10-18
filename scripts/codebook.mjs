@@ -177,7 +177,7 @@ for (const lib of library) {
     description: col(sum, 'Construct measured').slice(0, 300),
     licenceStatus: licence,
     licenceNote: col(lib, 'Licence note'),
-    instructions: col(lib, 'Instructions shown'),
+    instructions: /^not (stated|retrieved)/i.test(col(lib, 'Instructions shown')) ? '' : col(lib, 'Instructions shown'),
     minutes: Number(col(lib, 'Minutes')) || null,
     responseOptions,
     items: measureItems,

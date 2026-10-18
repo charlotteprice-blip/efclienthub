@@ -1,0 +1,11 @@
+{
+  "file": "gad-7.json",
+  "sourceReached": true,
+  "sourceUsed": "https://psytoolkit.org/survey-library/anxiety-gad7.html",
+  "itemsChecked": 8,
+  "itemsMatching": 8,
+  "discrepancies": [],
+  "licenceMatches": "unverified",
+  "verdict": "verified",
+  "notes": "All 7 scored items, the stem, the 4 response labels and values, and the supplementary difficulty question with its 4 options match the PsyToolkit page word for word. The only difference is case: PsyToolkit prints the response labels in lower case (not at all, several days, more than half the days, nearly every day) and the file uses sentence case, which the transcriptionNote declares and justifies by reference to the PHQ screeners print form. The PsyToolkit Legal stuff sentence and the score of 10 sentence (including the generlized typo) are quoted accurately. Licence: the PsyToolkit portion of the licence field is verified, but the Pfizer permission statement is a paraphrase without quotation marks and the licenceUrl (phqscreeners.com home page) carries no permission or copyright text; the select-screener page is blocked by robots.txt. The Pfizer statement therefore could not be matched to the cited URL and is marked unverified. No subscales or reverse items in source or file. Severity bands of 5, 10 and 15 are from the 2006 article, not the fetched page, as declared."
+}

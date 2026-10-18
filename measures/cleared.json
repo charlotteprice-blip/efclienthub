@@ -217,7 +217,7 @@
       "description": "Core self-evaluations: a broad, fundamental positive self-appraisal trait combining self-esteem, generalised self-efficacy, internal locus of control and low neuroticism (emotional stability).",
       "licenceStatus": "cleared",
       "licenceNote": "Stated non proprietary and free to use without permission.",
-      "instructions": "Not retrieved verbatim from a fetched source; the CSES PDF reproduces the item table and response scale but the source fetched did not include a printed respondent-facing preamble/instruction sentence.",
+      "instructions": "",
       "minutes": 3,
       "responseOptions": [
         {
@@ -586,7 +586,7 @@
       "code": "DASS-21",
       "name": "How you have been feeling this week",
       "formalName": "Depression Anxiety Stress Scales, 21 item version (DASS-21)",
-      "domain": "Psychological distress screening",
+      "domain": "Clinical and distress screening",
       "description": "Three related negative emotional states over the past week: depression (dysphoria, hopelessness, devaluation of life, self deprecation, lack of interest or involvement, anhedonia, inertia), anxiety (autonomic arousal, skeletal muscle effects, situational anxiety, subjective experience of anxious aff",
       "licenceStatus": "cleared",
       "licenceNote": "Public domain per the official UNSW DASS site.",
@@ -810,7 +810,7 @@
       "description": "Trait (general) procrastination, i.e. the tendency to voluntarily delay an intended course of action despite expecting to be worse off for the delay. The PPS is a distilled, 12-item unidimensional measure combining items drawn from three earlier procrastination scales (the Decisional Procrastination",
       "licenceStatus": "cleared",
       "licenceNote": "Items published under CC BY (Svartdal and Steel, 2017).",
-      "instructions": "Not stated on source",
+      "instructions": "",
       "minutes": 3,
       "responseOptions": [
         {
@@ -947,7 +947,7 @@
       "description": "Irrational procrastination, i.e. the tendency to delay in a way that is knowingly counterproductive to one's own well-being or efficiency, distinguishing procrastination proper from merely intentional or strategic delay.",
       "licenceStatus": "cleared",
       "licenceNote": "Items published under CC BY (Svartdal and Steel, 2017).",
-      "instructions": "Not stated on source",
+      "instructions": "",
       "minutes": 2,
       "responseOptions": [
         {
@@ -1073,7 +1073,7 @@
       "description": "Generalized self-efficacy, i.e. a broad and stable sense of personal competence to deal effectively with a variety of stressful or difficult situations, treated as a unidimensional trait rather than task-specific self-efficacy.",
       "licenceStatus": "cleared",
       "licenceNote": "Authors grant permission to use and reproduce.",
-      "instructions": "Not stated on source",
+      "instructions": "",
       "minutes": 2,
       "responseOptions": [
         {
@@ -1185,6 +1185,4181 @@
         "codebook": "EF Client Hub Codebook",
         "citation": "Schwarzer, R., & Jerusalem, M. (1995). Generalized Self-Efficacy scale. In J. Weinman, S. Wright, & M. Johnston, Measures in health psychology: A user's portfolio. Causal and control beliefs (pp. 35-37). NFER-NELSON.",
         "url": "https://userpage.fu-berlin.de/~health/engscal.htm"
+      }
+    },
+    {
+      "id": "adexi",
+      "code": "ADEXI",
+      "name": "Working memory and self control day to day",
+      "formalName": "Adult Executive Functioning Inventory",
+      "domain": "Executive functioning and ADHD",
+      "description": "Everyday executive functioning deficits in adults in the areas of working memory and inhibition, as the adult counterpart of the CHEXI.",
+      "licenceStatus": "cleared",
+      "licenceNote": "Authors state the ADEXI is freely available for both researchers and clinicians (chexi.se).",
+      "instructions": "Below you will find a number of statements. Please circle a number to the right of each statement to indicate how well that statement describes how you are as a person. People that you know might feel differently about you – we want to know what you think about yourself. Try to answer as honestly as possible.",
+      "minutes": 3,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "Definitely not true"
+        },
+        {
+          "value": 2,
+          "label": "Not true"
+        },
+        {
+          "value": 3,
+          "label": "Partially true"
+        },
+        {
+          "value": 4,
+          "label": "True"
+        },
+        {
+          "value": 5,
+          "label": "Definitely true"
+        }
+      ],
+      "items": [
+        {
+          "id": "adexi-1",
+          "text": "I have difficulty remembering lengthy instructions"
+        },
+        {
+          "id": "adexi-2",
+          "text": "I have difficulty remembering what I am doing in the middle of an activity"
+        },
+        {
+          "id": "adexi-3",
+          "text": "I have a tendency to do things without first thinking about what could happen"
+        },
+        {
+          "id": "adexi-4",
+          "text": "I have difficulty stopping myself from doing something that I like even though someone tells me that it is not allowed."
+        },
+        {
+          "id": "adexi-5",
+          "text": "When someone asks me to do several things, I remember only the first or last"
+        },
+        {
+          "id": "adexi-6",
+          "text": "I have difficulty refraining for smiling or laughing in situations where it is inappropriate"
+        },
+        {
+          "id": "adexi-7",
+          "text": "I have difficulty coming up with a different way of solving a problem when I get stuck"
+        },
+        {
+          "id": "adexi-8",
+          "text": "When someone asks me to fetch something, I forget what I am supposed to fetch"
+        },
+        {
+          "id": "adexi-9",
+          "text": "I have difficulty planning for an activity (e.g., remembering to bring everything necessary when going on a trip/to work/to school)"
+        },
+        {
+          "id": "adexi-10",
+          "text": "I have difficulty stopping an activity that I like (e.g., I watch TV or sit in front of the computer in the evening even though it is time to go to bed)"
+        },
+        {
+          "id": "adexi-11",
+          "text": "I have difficulty understanding verbal instructions unless I am also shown how to do something"
+        },
+        {
+          "id": "adexi-12",
+          "text": "I have difficulties with tasks or activities that involve several steps"
+        },
+        {
+          "id": "adexi-13",
+          "text": "I have difficulty thinking ahead or learning from experience"
+        },
+        {
+          "id": "adexi-14",
+          "text": "People that I meet seem to think that I am more lively/wilder compared to other people my age"
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "working-memory",
+            "label": "Holding things in mind",
+            "codebookName": "Working Memory",
+            "items": [
+              "adexi-1",
+              "adexi-2",
+              "adexi-5",
+              "adexi-7",
+              "adexi-8",
+              "adexi-9",
+              "adexi-11",
+              "adexi-12",
+              "adexi-13"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "strength"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "Keeping instructions and plans in mind mostly works for you.",
+            "focusReason": "Holding instructions and plans in mind came up as a difficulty in your answers."
+          },
+          {
+            "id": "inhibition",
+            "label": "Pausing before acting",
+            "codebookName": "Inhibition",
+            "items": [
+              "adexi-3",
+              "adexi-4",
+              "adexi-6",
+              "adexi-10",
+              "adexi-14"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "strength"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "Pausing before you act is something you described handling well.",
+            "focusReason": "Pausing before you act came up as a difficulty in your answers."
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Holst, Y., & Thorell, L. B. (2018). Adult executive functioning inventory (ADEXI): Validity, reliability, and relations to ADHD. International Journal of Methods in Psychiatric Research, 27(1), e1567. https://doi.org/10.1002/mpr.1567",
+        "url": "https://chexi.se/onewebmedia/English%20ADEXI%20self-report.pdf"
+      }
+    },
+    {
+      "id": "aps-r",
+      "code": "APS-R",
+      "name": "Standards and self judgement",
+      "formalName": "Almost Perfect Scale Revised",
+      "domain": "Self talk, thinking patterns and personality",
+      "description": "Perfectionism as high personal standards, a preference for order, and the discrepancy perceived between one's standards and one's performance.",
+      "licenceStatus": "cleared",
+      "licenceNote": "Rice lab: no permission needed to use or translate the scale; cite properly. The older PDF note (research only) is superseded by the lab statement; both are quoted in the codebook.",
+      "instructions": "The following items are designed to measure attitudes people have toward themselves, their performance, and toward others. There are no right or wrong answers. Please respond to all of the items. Use your first impression and do not spend too much time on individual items in responding. Respond to each of the items using the scale below to describe your degree of agreement with each item. Circle the appropriate rating for each item.",
+      "minutes": 5,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "Strongly Disagree"
+        },
+        {
+          "value": 2,
+          "label": "Disagree"
+        },
+        {
+          "value": 3,
+          "label": "Slightly Disagree"
+        },
+        {
+          "value": 4,
+          "label": "Neutral"
+        },
+        {
+          "value": 5,
+          "label": "Slightly Agree"
+        },
+        {
+          "value": 6,
+          "label": "Agree"
+        },
+        {
+          "value": 7,
+          "label": "Strongly Agree"
+        }
+      ],
+      "items": [
+        {
+          "id": "aps-r-1",
+          "text": "I have high standards for my performance at work or at school."
+        },
+        {
+          "id": "aps-r-2",
+          "text": "I am an orderly person."
+        },
+        {
+          "id": "aps-r-3",
+          "text": "I often feel frustrated because I can’t meet my goals."
+        },
+        {
+          "id": "aps-r-4",
+          "text": "Neatness is important to me."
+        },
+        {
+          "id": "aps-r-5",
+          "text": "If you don’t expect much out of yourself, you will never succeed."
+        },
+        {
+          "id": "aps-r-6",
+          "text": "My best just never seems to be good enough for me."
+        },
+        {
+          "id": "aps-r-7",
+          "text": "I think things should be put away in their place"
+        },
+        {
+          "id": "aps-r-8",
+          "text": "I have high expectations for myself."
+        },
+        {
+          "id": "aps-r-9",
+          "text": "I rarely live up to my high standards."
+        },
+        {
+          "id": "aps-r-10",
+          "text": "I like to always be organized and disciplined."
+        },
+        {
+          "id": "aps-r-11",
+          "text": "Doing my best never seems to be enough."
+        },
+        {
+          "id": "aps-r-12",
+          "text": "I set very high standards for myself."
+        },
+        {
+          "id": "aps-r-13",
+          "text": "I am never satisfied with my accomplishments."
+        },
+        {
+          "id": "aps-r-14",
+          "text": "I expect the best from myself."
+        },
+        {
+          "id": "aps-r-15",
+          "text": "I often worry about not measuring up to my own expectations."
+        },
+        {
+          "id": "aps-r-16",
+          "text": "My performance rarely measures up to my standards."
+        },
+        {
+          "id": "aps-r-17",
+          "text": "I am not satisfied even when I know I have done my best."
+        },
+        {
+          "id": "aps-r-18",
+          "text": "I try to do my best at everything I do."
+        },
+        {
+          "id": "aps-r-19",
+          "text": "I am seldom able to meet my own high standards of performance."
+        },
+        {
+          "id": "aps-r-20",
+          "text": "I am hardly ever satisfied with my performance."
+        },
+        {
+          "id": "aps-r-21",
+          "text": "I hardly ever feel that what I’ve done is good enough."
+        },
+        {
+          "id": "aps-r-22",
+          "text": "I have a strong need to strive for excellence."
+        },
+        {
+          "id": "aps-r-23",
+          "text": "I often feel disappointment after completing a task because I know I could have done better."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "standards",
+            "label": "High standards",
+            "codebookName": "Standards",
+            "items": [
+              "aps-r-1",
+              "aps-r-5",
+              "aps-r-8",
+              "aps-r-12",
+              "aps-r-14",
+              "aps-r-18",
+              "aps-r-22"
+            ],
+            "method": "mean",
+            "direction": "none",
+            "bands": []
+          },
+          {
+            "id": "order",
+            "label": "Preference for order",
+            "codebookName": "Order",
+            "items": [
+              "aps-r-2",
+              "aps-r-4",
+              "aps-r-7",
+              "aps-r-10"
+            ],
+            "method": "mean",
+            "direction": "none",
+            "bands": []
+          },
+          {
+            "id": "discrepancy",
+            "label": "Falling short of your standards",
+            "codebookName": "Discrepancy",
+            "items": [
+              "aps-r-3",
+              "aps-r-6",
+              "aps-r-9",
+              "aps-r-11",
+              "aps-r-13",
+              "aps-r-15",
+              "aps-r-16",
+              "aps-r-17",
+              "aps-r-19",
+              "aps-r-20",
+              "aps-r-21",
+              "aps-r-23"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 3,
+                "band": "strength"
+              },
+              {
+                "upTo": 5,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "You described mostly feeling that you meet the standards you set.",
+            "focusReason": "A sense of falling short of your own standards came up often in your answers."
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Slaney, R. B., Rice, K. G., Mobley, M., Trippi, J., & Ashby, J. S. (2001). The revised Almost Perfect Scale. Measurement and Evaluation in Counseling and Development, 34(3), 130–145. https://doi.org/10.1080/07481756.2002.12069030",
+        "url": "https://www.kennethwang.com/apsr/scales/APSR-English.pdf"
+      }
+    },
+    {
+      "id": "audit-c",
+      "code": "AUDIT-C",
+      "name": "Alcohol use",
+      "formalName": "AUDIT Consumption",
+      "domain": "Clinical and distress screening",
+      "description": "Brief screen for hazardous drinking using the 3 AUDIT alcohol consumption items.",
+      "licenceStatus": "cleared",
+      "licenceNote": "Public domain (SAMHSA, WHO AUDIT).",
+      "instructions": "Please choose the answer that is correct for you.",
+      "minutes": 1,
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Never"
+        },
+        {
+          "value": 1,
+          "label": "Monthly or less"
+        },
+        {
+          "value": 2,
+          "label": "2 to 4 times a month"
+        },
+        {
+          "value": 3,
+          "label": "2 to 3 times a week"
+        },
+        {
+          "value": 4,
+          "label": "4 or more times a week"
+        }
+      ],
+      "items": [
+        {
+          "id": "audit-c-1",
+          "text": "How often do you have a drink containing alcohol?"
+        },
+        {
+          "id": "audit-c-2",
+          "text": "How many drinks containing alcohol do you have on a typical day when you are drinking?",
+          "responseOptions": [
+            {
+              "value": 0,
+              "label": "1 or 2"
+            },
+            {
+              "value": 1,
+              "label": "3 or 4"
+            },
+            {
+              "value": 2,
+              "label": "5 or 6"
+            },
+            {
+              "value": 3,
+              "label": "7 to 9"
+            },
+            {
+              "value": 4,
+              "label": "10 or more"
+            }
+          ]
+        },
+        {
+          "id": "audit-c-3",
+          "text": "How often do you have six or more drinks on one occasion?",
+          "responseOptions": [
+            {
+              "value": 0,
+              "label": "Never"
+            },
+            {
+              "value": 1,
+              "label": "Less than monthly"
+            },
+            {
+              "value": 2,
+              "label": "Monthly"
+            },
+            {
+              "value": 3,
+              "label": "Weekly"
+            },
+            {
+              "value": 4,
+              "label": "Daily or almost daily"
+            }
+          ]
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": false,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Alcohol use",
+            "codebookName": "Total",
+            "items": [
+              "audit-c-1",
+              "audit-c-2",
+              "audit-c-3"
+            ],
+            "method": "sum",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 3,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ]
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Bush, K., Kivlahan, D. R., McDonell, M. B., Fihn, S. D., & Bradley, K. A. (1998). The AUDIT alcohol consumption questions (AUDIT-C): An effective brief screening test for problem drinking. Archives of Internal Medicine, 158(16), 1789–1795. https://doi.org/10.1001/archinte.158.16.1789",
+        "url": "https://integrationacademy.ahrq.gov/sites/default/files/2020-07/AUDIT-C.pdf"
+      }
+    },
+    {
+      "id": "cage",
+      "code": "CAGE",
+      "name": "Alcohol use (4 questions)",
+      "formalName": "CAGE Questionnaire",
+      "domain": "Clinical and distress screening",
+      "description": "Lifetime screen for problem drinking through 4 questions: cut down, annoyed, guilty, eye opener.",
+      "licenceStatus": "cleared",
+      "licenceNote": "Public domain (Ewing, 1984, encourages widespread use).",
+      "instructions": "Ask your patients these four questions and use the scoring method described below to determine if substance abuse exists and needs to be addressed.",
+      "minutes": 1,
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "No"
+        },
+        {
+          "value": 1,
+          "label": "Yes"
+        }
+      ],
+      "items": [
+        {
+          "id": "cage-1",
+          "text": "Have you ever felt you should cut down on your drinking?"
+        },
+        {
+          "id": "cage-2",
+          "text": "Have people annoyed you by criticizing your drinking?"
+        },
+        {
+          "id": "cage-3",
+          "text": "Have you ever felt bad or guilty about your drinking?"
+        },
+        {
+          "id": "cage-4",
+          "text": "Have you ever had a drink first thing in the morning to steady your nerves or to get rid of a hangover (eye-opener)?"
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": false,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Alcohol use",
+            "codebookName": "Total",
+            "items": [
+              "cage-1",
+              "cage-2",
+              "cage-3",
+              "cage-4"
+            ],
+            "method": "sum",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 1,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ]
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Ewing, J. A. (1984). Detecting alcoholism: The CAGE questionnaire. JAMA, 252(14), 1905-1907. https://doi.org/10.1001/jama.1984.03350140051025",
+        "url": "https://scireproject.com/wp-content/uploads/2022/04/CAGE-Substance-Screening-Tool.pdf"
+      }
+    },
+    {
+      "id": "cbi",
+      "code": "CBI",
+      "name": "Burnout",
+      "formalName": "Copenhagen Burnout Inventory",
+      "domain": "Adjacent occupational and wellbeing",
+      "description": "Burnout as fatigue and exhaustion attributed to three domains: life in general, work, and work with clients.",
+      "licenceStatus": "cleared",
+      "licenceNote": "NFA: may be used freely for non commercial and commercial purposes provided the source is cited (Borritz et al., 2006).",
+      "instructions": "Please choose the answer that fits best for you.",
+      "minutes": 5,
+      "responseOptions": [
+        {
+          "value": 100,
+          "label": "Always"
+        },
+        {
+          "value": 75,
+          "label": "Often"
+        },
+        {
+          "value": 50,
+          "label": "Sometimes"
+        },
+        {
+          "value": 25,
+          "label": "Seldom"
+        },
+        {
+          "value": 0,
+          "label": "Never/almost never"
+        }
+      ],
+      "items": [
+        {
+          "id": "cbi-1",
+          "text": "How often do you feel tired?"
+        },
+        {
+          "id": "cbi-2",
+          "text": "How often are you physically exhausted?"
+        },
+        {
+          "id": "cbi-3",
+          "text": "How often are you emotionally exhausted?"
+        },
+        {
+          "id": "cbi-4",
+          "text": "How often do you think: ”I can’t take it anymore”?"
+        },
+        {
+          "id": "cbi-5",
+          "text": "How often do you feel worn out?"
+        },
+        {
+          "id": "cbi-6",
+          "text": "How often do you feel weak and susceptible to illness?"
+        },
+        {
+          "id": "cbi-7",
+          "text": "Is your work emotionally exhausting?",
+          "responseOptions": [
+            {
+              "value": 100,
+              "label": "To a very high degree"
+            },
+            {
+              "value": 75,
+              "label": "To a high degree"
+            },
+            {
+              "value": 50,
+              "label": "Somewhat"
+            },
+            {
+              "value": 25,
+              "label": "To a low degree"
+            },
+            {
+              "value": 0,
+              "label": "To a very low degree"
+            }
+          ]
+        },
+        {
+          "id": "cbi-8",
+          "text": "Do you feel burnt out because of your work?",
+          "responseOptions": [
+            {
+              "value": 100,
+              "label": "To a very high degree"
+            },
+            {
+              "value": 75,
+              "label": "To a high degree"
+            },
+            {
+              "value": 50,
+              "label": "Somewhat"
+            },
+            {
+              "value": 25,
+              "label": "To a low degree"
+            },
+            {
+              "value": 0,
+              "label": "To a very low degree"
+            }
+          ]
+        },
+        {
+          "id": "cbi-9",
+          "text": "Does your work frustrate you?",
+          "responseOptions": [
+            {
+              "value": 100,
+              "label": "To a very high degree"
+            },
+            {
+              "value": 75,
+              "label": "To a high degree"
+            },
+            {
+              "value": 50,
+              "label": "Somewhat"
+            },
+            {
+              "value": 25,
+              "label": "To a low degree"
+            },
+            {
+              "value": 0,
+              "label": "To a very low degree"
+            }
+          ]
+        },
+        {
+          "id": "cbi-10",
+          "text": "Do you feel worn out at the end of the working day?"
+        },
+        {
+          "id": "cbi-11",
+          "text": "Are you exhausted in the morning at the thought of another day at work?"
+        },
+        {
+          "id": "cbi-12",
+          "text": "Do you feel that every working hour is tiring for you?"
+        },
+        {
+          "id": "cbi-13",
+          "text": "Do you have enough energy for family and friends during leisure time?"
+        },
+        {
+          "id": "cbi-14",
+          "text": "Do you find it hard to work with clients?",
+          "responseOptions": [
+            {
+              "value": 100,
+              "label": "To a very high degree"
+            },
+            {
+              "value": 75,
+              "label": "To a high degree"
+            },
+            {
+              "value": 50,
+              "label": "Somewhat"
+            },
+            {
+              "value": 25,
+              "label": "To a low degree"
+            },
+            {
+              "value": 0,
+              "label": "To a very low degree"
+            }
+          ]
+        },
+        {
+          "id": "cbi-15",
+          "text": "Do you find it frustrating to work with clients?",
+          "responseOptions": [
+            {
+              "value": 100,
+              "label": "To a very high degree"
+            },
+            {
+              "value": 75,
+              "label": "To a high degree"
+            },
+            {
+              "value": 50,
+              "label": "Somewhat"
+            },
+            {
+              "value": 25,
+              "label": "To a low degree"
+            },
+            {
+              "value": 0,
+              "label": "To a very low degree"
+            }
+          ]
+        },
+        {
+          "id": "cbi-16",
+          "text": "Does it drain your energy to work with clients?",
+          "responseOptions": [
+            {
+              "value": 100,
+              "label": "To a very high degree"
+            },
+            {
+              "value": 75,
+              "label": "To a high degree"
+            },
+            {
+              "value": 50,
+              "label": "Somewhat"
+            },
+            {
+              "value": 25,
+              "label": "To a low degree"
+            },
+            {
+              "value": 0,
+              "label": "To a very low degree"
+            }
+          ]
+        },
+        {
+          "id": "cbi-17",
+          "text": "Do you feel that you give more than you get back when you work with clients?",
+          "responseOptions": [
+            {
+              "value": 100,
+              "label": "To a very high degree"
+            },
+            {
+              "value": 75,
+              "label": "To a high degree"
+            },
+            {
+              "value": 50,
+              "label": "Somewhat"
+            },
+            {
+              "value": 25,
+              "label": "To a low degree"
+            },
+            {
+              "value": 0,
+              "label": "To a very low degree"
+            }
+          ]
+        },
+        {
+          "id": "cbi-18",
+          "text": "Are you tired of working with clients?"
+        },
+        {
+          "id": "cbi-19",
+          "text": "Do you sometimes wonder how long you will be able to continue working with clients?"
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [
+          "cbi-13"
+        ],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "personal",
+            "label": "Overall exhaustion",
+            "codebookName": "Personal burnout",
+            "items": [
+              "cbi-1",
+              "cbi-2",
+              "cbi-3",
+              "cbi-4",
+              "cbi-5",
+              "cbi-6"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 25,
+                "band": "strength"
+              },
+              {
+                "upTo": 49,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "You described your energy as holding up well.",
+            "focusReason": "Feeling exhausted came up often in your answers."
+          },
+          {
+            "id": "work",
+            "label": "Exhaustion from work",
+            "codebookName": "Work related burnout",
+            "items": [
+              "cbi-7",
+              "cbi-8",
+              "cbi-9",
+              "cbi-10",
+              "cbi-11",
+              "cbi-12",
+              "cbi-13"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 25,
+                "band": "strength"
+              },
+              {
+                "upTo": 49,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "Your work does not seem to be wearing you down.",
+            "focusReason": "Your answers suggest work is wearing you down."
+          },
+          {
+            "id": "client",
+            "label": "Exhaustion from working with people",
+            "codebookName": "Client related burnout",
+            "items": [
+              "cbi-14",
+              "cbi-15",
+              "cbi-16",
+              "cbi-17",
+              "cbi-18",
+              "cbi-19"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 25,
+                "band": "strength"
+              },
+              {
+                "upTo": 49,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "Working with the people you serve does not seem to drain you.",
+            "focusReason": "Working with the people you serve came up as draining in your answers."
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Kristensen, T. S., Borritz, M., Villadsen, E., & Christensen, K. B. (2005). The Copenhagen Burnout Inventory: A new tool for the assessment of burnout. Work & Stress, 19(3), 192–207. https://doi.org/10.1080/02678370500297720",
+        "url": "https://nfa.dk/media/hl5nbers/cbi-first-edition.pdf"
+      }
+    },
+    {
+      "id": "ces-d",
+      "code": "CES-D",
+      "name": "How you have been feeling this week",
+      "formalName": "Center for Epidemiologic Studies Depression Scale",
+      "domain": "Clinical and distress screening",
+      "description": "Frequency of depressive symptoms in the general population over the past week.",
+      "licenceStatus": "cleared",
+      "licenceNote": "Public domain NIMH instrument; free to use without permission.",
+      "instructions": "Below is a list of the ways you might have felt or behaved. Please tell me how often you have felt this way during the past week.",
+      "minutes": 3,
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Rarely or none of the time (less than 1 day)"
+        },
+        {
+          "value": 1,
+          "label": "Some or a little of the time (1-2 days)"
+        },
+        {
+          "value": 2,
+          "label": "Occasionally or a moderate amount of time (3-4 days)"
+        },
+        {
+          "value": 3,
+          "label": "Most or all of the time (5-7 days)"
+        }
+      ],
+      "items": [
+        {
+          "id": "ces-d-1",
+          "text": "I was bothered by things that usually don't bother me."
+        },
+        {
+          "id": "ces-d-2",
+          "text": "I did not feel like eating; my appetite was poor."
+        },
+        {
+          "id": "ces-d-3",
+          "text": "I felt that I could not shake off the blues even with help from my family or friends."
+        },
+        {
+          "id": "ces-d-4",
+          "text": "I felt I was just as good as other people."
+        },
+        {
+          "id": "ces-d-5",
+          "text": "I had trouble keeping my mind on what I was doing."
+        },
+        {
+          "id": "ces-d-6",
+          "text": "I felt depressed."
+        },
+        {
+          "id": "ces-d-7",
+          "text": "I felt that everything I did was an effort."
+        },
+        {
+          "id": "ces-d-8",
+          "text": "I felt hopeful about the future."
+        },
+        {
+          "id": "ces-d-9",
+          "text": "I thought my life had been a failure."
+        },
+        {
+          "id": "ces-d-10",
+          "text": "I felt fearful."
+        },
+        {
+          "id": "ces-d-11",
+          "text": "My sleep was restless."
+        },
+        {
+          "id": "ces-d-12",
+          "text": "I was happy."
+        },
+        {
+          "id": "ces-d-13",
+          "text": "I talked less than usual."
+        },
+        {
+          "id": "ces-d-14",
+          "text": "I felt lonely."
+        },
+        {
+          "id": "ces-d-15",
+          "text": "People were unfriendly."
+        },
+        {
+          "id": "ces-d-16",
+          "text": "I enjoyed life."
+        },
+        {
+          "id": "ces-d-17",
+          "text": "I had crying spells."
+        },
+        {
+          "id": "ces-d-18",
+          "text": "I felt sad."
+        },
+        {
+          "id": "ces-d-19",
+          "text": "I felt that people dislike me."
+        },
+        {
+          "id": "ces-d-20",
+          "text": "I could not get “going.”"
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": false,
+        "reverseItems": [
+          "ces-d-4",
+          "ces-d-8",
+          "ces-d-12",
+          "ces-d-16"
+        ],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Depressive symptoms",
+            "codebookName": "Total",
+            "items": [
+              "ces-d-1",
+              "ces-d-2",
+              "ces-d-3",
+              "ces-d-4",
+              "ces-d-5",
+              "ces-d-6",
+              "ces-d-7",
+              "ces-d-8",
+              "ces-d-9",
+              "ces-d-10",
+              "ces-d-11",
+              "ces-d-12",
+              "ces-d-13",
+              "ces-d-14",
+              "ces-d-15",
+              "ces-d-16",
+              "ces-d-17",
+              "ces-d-18",
+              "ces-d-19",
+              "ces-d-20"
+            ],
+            "method": "sum",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 15,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ]
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Radloff, L. S. (1977). The CES-D Scale: A self-report depression scale for research in the general population. Applied Psychological Measurement, 1(3), 385–401. https://doi.org/10.1177/014662167700100306",
+        "url": "https://www.apa.org/depression-guideline/epidemiologic-studies-scale.pdf"
+      }
+    },
+    {
+      "id": "cohs",
+      "code": "COHS",
+      "name": "Habits and routines",
+      "formalName": "Creature of Habit Scale",
+      "domain": "Motivation, self determination and goal pursuit",
+      "description": "Individual differences in habitual tendencies in daily life: preference for routine and automatic, cue driven responding.",
+      "licenceStatus": "cleared",
+      "licenceNote": "Article published under CC BY 4.0 (Ersche et al., 2017).",
+      "instructions": "Please indicate how much you agree with each statement.",
+      "minutes": 5,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "strongly disagree"
+        },
+        {
+          "value": 2,
+          "label": "2"
+        },
+        {
+          "value": 3,
+          "label": "3"
+        },
+        {
+          "value": 4,
+          "label": "4"
+        },
+        {
+          "value": 5,
+          "label": "strongly agree"
+        }
+      ],
+      "items": [
+        {
+          "id": "cohs-1",
+          "text": "I tend to like routine."
+        },
+        {
+          "id": "cohs-2",
+          "text": "I find comfort in regularity."
+        },
+        {
+          "id": "cohs-3",
+          "text": "I rely on what is tried and tested rather than exploring something new."
+        },
+        {
+          "id": "cohs-4",
+          "text": "I quite happily work within my comfort zone rather than challenging myself."
+        },
+        {
+          "id": "cohs-5",
+          "text": "I tend to stick with the version of the software package that I am familiar with for as long as I can."
+        },
+        {
+          "id": "cohs-6",
+          "text": "I generally cook with the same spices/flavourings."
+        },
+        {
+          "id": "cohs-7",
+          "text": "I normally buy the same foods from the same grocery store."
+        },
+        {
+          "id": "cohs-8",
+          "text": "In a restaurant, I tend to order dishes that I am familiar with."
+        },
+        {
+          "id": "cohs-9",
+          "text": "I tend to do things in the same order every morning (e.g. get up, go to the bathroom, have a coffee…)."
+        },
+        {
+          "id": "cohs-10",
+          "text": "I always try to get the same seat in places such as on the bus, in the cinema, or in church."
+        },
+        {
+          "id": "cohs-11",
+          "text": "I usually sit at the same place at the dinner table."
+        },
+        {
+          "id": "cohs-12",
+          "text": "I like to park my car or bike always in the same place."
+        },
+        {
+          "id": "cohs-13",
+          "text": "I always follow a certain order when preparing a meal."
+        },
+        {
+          "id": "cohs-14",
+          "text": "I am one of those people who get really annoyed by last minute cancellations."
+        },
+        {
+          "id": "cohs-15",
+          "text": "I tend to go to bed at roughly the same time every night."
+        },
+        {
+          "id": "cohs-16",
+          "text": "I generally eat the same things for breakfast every day."
+        },
+        {
+          "id": "cohs-17",
+          "text": "I often find myself finishing off a packet of biscuits just because it is lying there."
+        },
+        {
+          "id": "cohs-18",
+          "text": "I often find myself opening up the cabinet to take a snack."
+        },
+        {
+          "id": "cohs-19",
+          "text": "When walking past a plate of sweets or biscuits, I can't resist taking one."
+        },
+        {
+          "id": "cohs-20",
+          "text": "Television makes me particularly prone to uncontrolled eating."
+        },
+        {
+          "id": "cohs-21",
+          "text": "I often find myself eating without being aware of it."
+        },
+        {
+          "id": "cohs-22",
+          "text": "I am prone to eating more when I feel stressed."
+        },
+        {
+          "id": "cohs-23",
+          "text": "Eating crisps or biscuits straight out of the packet is typical of me."
+        },
+        {
+          "id": "cohs-24",
+          "text": "Whenever I go into the kitchen, I typically look in the fridge."
+        },
+        {
+          "id": "cohs-25",
+          "text": "I usually treat myself to a snack at the end of the workday."
+        },
+        {
+          "id": "cohs-26",
+          "text": "I often take a snack while on the go (e.g. when driving, walking down the street, or surfing the web)."
+        },
+        {
+          "id": "cohs-27",
+          "text": "I often find myself running on 'autopilot', and then wonder why I ended up in a particular place or doing something that I did not intend to do."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "routine",
+            "label": "Preference for routine",
+            "codebookName": "Routine",
+            "items": [
+              "cohs-1",
+              "cohs-2",
+              "cohs-3",
+              "cohs-4",
+              "cohs-5",
+              "cohs-6",
+              "cohs-7",
+              "cohs-8",
+              "cohs-9",
+              "cohs-10",
+              "cohs-11",
+              "cohs-12",
+              "cohs-13",
+              "cohs-14",
+              "cohs-15",
+              "cohs-16"
+            ],
+            "method": "mean",
+            "direction": "none",
+            "bands": []
+          },
+          {
+            "id": "automaticity",
+            "label": "Acting automatically",
+            "codebookName": "Automaticity",
+            "items": [
+              "cohs-17",
+              "cohs-18",
+              "cohs-19",
+              "cohs-20",
+              "cohs-21",
+              "cohs-22",
+              "cohs-23",
+              "cohs-24",
+              "cohs-25",
+              "cohs-26",
+              "cohs-27"
+            ],
+            "method": "mean",
+            "direction": "none",
+            "bands": []
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Ersche, K. D., Lim, T.-V., Ward, L. H. E., Robbins, T. W., & Stochl, J. (2017). Creature of Habit: A self-report measure of habitual routines and automatic tendencies in everyday life. Personality and Individual Differences, 116, 73–85. https://doi.org/10.1016/j.paid.2017.04.024",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5473478/"
+      }
+    },
+    {
+      "id": "cpc-12",
+      "code": "CPC-12",
+      "name": "Psychological capital",
+      "formalName": "Compound PsyCap Scale",
+      "domain": "Adjacent occupational and wellbeing",
+      "description": "Psychological capital as a higher order construct composed of hope, optimism, resilience and self efficacy, built from open items as a free alternative to the commercial PCQ.",
+      "licenceStatus": "cleared",
+      "licenceNote": "Items published under CC BY (Lorenz et al., 2016; Dudasova et al., 2021). Confirm the 3 resilience items come from the CC BY revised article as noted in the codebook.",
+      "instructions": "Please indicate how much you agree with each statement.",
+      "minutes": 3,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "strongly disagree"
+        },
+        {
+          "value": 2,
+          "label": "2"
+        },
+        {
+          "value": 3,
+          "label": "3"
+        },
+        {
+          "value": 4,
+          "label": "4"
+        },
+        {
+          "value": 5,
+          "label": "5"
+        },
+        {
+          "value": 6,
+          "label": "strongly agree"
+        }
+      ],
+      "items": [
+        {
+          "id": "cpc-12-1",
+          "text": "If I should find myself in a jam, I could think of many ways to get out of it."
+        },
+        {
+          "id": "cpc-12-2",
+          "text": "Right now, I see myself as being pretty successful."
+        },
+        {
+          "id": "cpc-12-3",
+          "text": "I can think of many ways to reach my current goals."
+        },
+        {
+          "id": "cpc-12-4",
+          "text": "I am looking forward to the life ahead of me."
+        },
+        {
+          "id": "cpc-12-5",
+          "text": "The future holds a lot of good in store for me."
+        },
+        {
+          "id": "cpc-12-6",
+          "text": "Overall, I expect more good things to happen to me than bad."
+        },
+        {
+          "id": "cpc-12-7",
+          "text": "Sometimes I make myself do things whether I want to or not."
+        },
+        {
+          "id": "cpc-12-8",
+          "text": "When I’m in a difficult situation, I can usually find my way out of it."
+        },
+        {
+          "id": "cpc-12-9",
+          "text": "It’s okay if there are people who don’t like me."
+        },
+        {
+          "id": "cpc-12-10",
+          "text": "I am confident that I could deal efficiently with unexpected events."
+        },
+        {
+          "id": "cpc-12-11",
+          "text": "I can solve most problems if I invest the necessary effort."
+        },
+        {
+          "id": "cpc-12-12",
+          "text": "I can remain calm when facing difficulties because I can rely on my coping abilities."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "hope",
+            "label": "Hope",
+            "codebookName": "Hope",
+            "items": [
+              "cpc-12-1",
+              "cpc-12-2",
+              "cpc-12-3"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.67,
+                "band": "focus"
+              },
+              {
+                "upTo": 4.33,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You described a strong sense that your goals are reachable.",
+            "focusReason": "A sense that your goals are reachable came through less strongly in your answers."
+          },
+          {
+            "id": "optimism",
+            "label": "Optimism",
+            "codebookName": "Optimism",
+            "items": [
+              "cpc-12-4",
+              "cpc-12-5",
+              "cpc-12-6"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.67,
+                "band": "focus"
+              },
+              {
+                "upTo": 4.33,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You tend to expect things to work out.",
+            "focusReason": "Expecting things to work out came through less strongly in your answers."
+          },
+          {
+            "id": "resilience",
+            "label": "Bouncing back",
+            "codebookName": "Resilience",
+            "items": [
+              "cpc-12-7",
+              "cpc-12-8",
+              "cpc-12-9"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.67,
+                "band": "focus"
+              },
+              {
+                "upTo": 4.33,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You described bouncing back from setbacks as something you do well.",
+            "focusReason": "Bouncing back from setbacks came through less strongly in your answers."
+          },
+          {
+            "id": "self-efficacy",
+            "label": "Confidence in your abilities",
+            "codebookName": "Self-efficacy",
+            "items": [
+              "cpc-12-10",
+              "cpc-12-11",
+              "cpc-12-12"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.67,
+                "band": "focus"
+              },
+              {
+                "upTo": 4.33,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You have confidence in your ability to handle what comes up at work.",
+            "focusReason": "Confidence in handling what comes up at work came through less strongly in your answers."
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Lorenz, T., Beer, C., Pütz, J., & Heinitz, K. (2016). Measuring psychological capital: Construction and validation of the Compound PsyCap Scale (CPC-12). PLOS ONE, 11(4), e0152892. https://doi.org/10.1371/journal.pone.0152892",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9896786/table/tab2 (hope, optimism and self efficacy items) and https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0247114 (original resilience items 7 to 9)"
+      }
+    },
+    {
+      "id": "cudit-r",
+      "code": "CUDIT-R",
+      "name": "Cannabis use",
+      "formalName": "Cannabis Use Disorders Identification Test, Revised",
+      "domain": "Clinical and distress screening",
+      "description": "Hazardous cannabis use and possible cannabis use disorder over the past 6 months.",
+      "licenceStatus": "cleared",
+      "licenceNote": "PhenX Toolkit: freely available, permission not required for use. Developed in New Zealand (Adamson et al., 2010).",
+      "instructions": "If you have used any cannabis over the past six months, please answer the following questions about your cannabis use.",
+      "minutes": 2,
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Never"
+        },
+        {
+          "value": 1,
+          "label": "Less than monthly"
+        },
+        {
+          "value": 2,
+          "label": "Monthly"
+        },
+        {
+          "value": 3,
+          "label": "Weekly"
+        },
+        {
+          "value": 4,
+          "label": "Daily or almost daily"
+        }
+      ],
+      "items": [
+        {
+          "id": "cudit-r-1",
+          "text": "How often do you use cannabis?",
+          "responseOptions": [
+            {
+              "value": 0,
+              "label": "Never"
+            },
+            {
+              "value": 1,
+              "label": "Monthly or less"
+            },
+            {
+              "value": 2,
+              "label": "2-4 times a month"
+            },
+            {
+              "value": 3,
+              "label": "2-3 times a week"
+            },
+            {
+              "value": 4,
+              "label": "4 or more times a week"
+            }
+          ]
+        },
+        {
+          "id": "cudit-r-2",
+          "text": "How many hours were you \"stoned\" on a typical day when you had been using cannabis?",
+          "responseOptions": [
+            {
+              "value": 0,
+              "label": "Less than 1"
+            },
+            {
+              "value": 1,
+              "label": "1 or 2"
+            },
+            {
+              "value": 2,
+              "label": "3 or 4"
+            },
+            {
+              "value": 3,
+              "label": "5 or 6"
+            },
+            {
+              "value": 4,
+              "label": "7 or more"
+            }
+          ]
+        },
+        {
+          "id": "cudit-r-3",
+          "text": "How often during the past 6 months did you find that you were not able to stop using cannabis once you had started?"
+        },
+        {
+          "id": "cudit-r-4",
+          "text": "How often during the past 6 months did you fail to do what was normally expected from you because of using cannabis?"
+        },
+        {
+          "id": "cudit-r-5",
+          "text": "How often in the past 6 months have you devoted a great deal of your time to getting, using, or recovering from cannabis?"
+        },
+        {
+          "id": "cudit-r-6",
+          "text": "How often in the past 6 months have you had a problem with your memory or concentration after using cannabis?"
+        },
+        {
+          "id": "cudit-r-7",
+          "text": "How often do you use cannabis in situations that could be physically hazardous, such as driving, operating machinery, or caring for children:"
+        },
+        {
+          "id": "cudit-r-8",
+          "text": "Have you ever thought about cutting down, or stopping, your use of cannabis?",
+          "responseOptions": [
+            {
+              "value": 0,
+              "label": "Never"
+            },
+            {
+              "value": 2,
+              "label": "Yes, but not in the past 6 months"
+            },
+            {
+              "value": 4,
+              "label": "Yes, during the past 6 months"
+            }
+          ]
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": false,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Cannabis use",
+            "codebookName": "Total",
+            "items": [
+              "cudit-r-1",
+              "cudit-r-2",
+              "cudit-r-3",
+              "cudit-r-4",
+              "cudit-r-5",
+              "cudit-r-6",
+              "cudit-r-7",
+              "cudit-r-8"
+            ],
+            "method": "sum",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 7,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ]
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Adamson, S. J., Kay-Lambkin, F. J., Baker, A. L., Lewin, T. J., Thornton, L., Kelly, B. J., & Sellman, J. D. (2010). An improved brief measure of cannabis misuse: The Cannabis Use Disorders Identification Test-Revised (CUDIT-R). Drug and Alcohol Dependence, 110(1–2), 137–143. https://doi.org/10.1016/j.drugalcdep.2010.02.017",
+        "url": "https://phenxtoolkit.org/protocols/view/510310"
+      }
+    },
+    {
+      "id": "des-ii",
+      "code": "DES-II",
+      "name": "Everyday experiences of attention and memory",
+      "formalName": "Dissociative Experiences Scale II",
+      "domain": "Clinical and distress screening",
+      "description": "Frequency of dissociative experiences in daily life, spanning amnesia, depersonalisation and derealisation, and absorption.",
+      "licenceStatus": "cleared",
+      "licenceNote": "Authors Carlson and Putnam permit copying, distribution and reproduction for research or clinical use.",
+      "instructions": "This questionnaire asks about experiences that you may have in your daily life. We are interested in how often you have these experiences. It is important, however, that your answers show how often these experiences happen to you when you are not under the influence of alcohol or drugs. To answer the questions, please determine to what degree each experience described in the question applies to you, and circle the number to show what percentage of the time you have the experience. For example: 0% (Never) 10 20 30 40 50 60 70 80 90 100% (Always)",
+      "minutes": 10,
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "0% (Never)"
+        },
+        {
+          "value": 10,
+          "label": "10"
+        },
+        {
+          "value": 20,
+          "label": "20"
+        },
+        {
+          "value": 30,
+          "label": "30"
+        },
+        {
+          "value": 40,
+          "label": "40"
+        },
+        {
+          "value": 50,
+          "label": "50"
+        },
+        {
+          "value": 60,
+          "label": "60"
+        },
+        {
+          "value": 70,
+          "label": "70"
+        },
+        {
+          "value": 80,
+          "label": "80"
+        },
+        {
+          "value": 90,
+          "label": "90"
+        },
+        {
+          "value": 100,
+          "label": "100% (Always)"
+        }
+      ],
+      "items": [
+        {
+          "id": "des-ii-1",
+          "text": "Some people have the experience of driving or riding in a car or bus or subway and suddenly realizing that they don’t remember what has happened during all or part of the trip."
+        },
+        {
+          "id": "des-ii-2",
+          "text": "Some people find that sometimes they are listening to someone talk and they suddenly realize that they did not hear part or all of what was said."
+        },
+        {
+          "id": "des-ii-3",
+          "text": "Some people have the experience of finding themselves in a place and have no idea how they got there."
+        },
+        {
+          "id": "des-ii-4",
+          "text": "Some people have the experience of finding themselves dressed in clothes that they don’t remember putting on."
+        },
+        {
+          "id": "des-ii-5",
+          "text": "Some people have the experience of finding new things among their belongings that they do not remember buying."
+        },
+        {
+          "id": "des-ii-6",
+          "text": "Some people sometimes find that they are approached by people that they do not know, who call them by another name or insist that they have met them before."
+        },
+        {
+          "id": "des-ii-7",
+          "text": "Some people sometimes have the experience of feeling as though they are standing next to themselves or watching themselves do something and they actually see themselves as if they were looking at another person."
+        },
+        {
+          "id": "des-ii-8",
+          "text": "Some people are told that they sometimes do not recognize friends of family members."
+        },
+        {
+          "id": "des-ii-9",
+          "text": "Some people find that they have no memory for some important events in their lives (for example, a wedding or graduation)."
+        },
+        {
+          "id": "des-ii-10",
+          "text": "Some people have the experience of being accused of lying when they do not think that they have lied."
+        },
+        {
+          "id": "des-ii-11",
+          "text": "Some people have the experience of looking in a mirror and not recognizing themselves."
+        },
+        {
+          "id": "des-ii-12",
+          "text": "Some people have the experience of feeling that other people, objects, and the world around them are not real."
+        },
+        {
+          "id": "des-ii-13",
+          "text": "Some people have the experience of feeling that their body does not seem to belong to them."
+        },
+        {
+          "id": "des-ii-14",
+          "text": "Some people have the experience of sometimes remembering a past event so vividly that they feel as if they were reliving that event."
+        },
+        {
+          "id": "des-ii-15",
+          "text": "Some people have the experience of not being sure whether things that they remember happening really did happen or whether they just dreamed them."
+        },
+        {
+          "id": "des-ii-16",
+          "text": "Some people have the experience of being in a familiar place but finding it strange and unfamiliar."
+        },
+        {
+          "id": "des-ii-17",
+          "text": "Some people find that when they are watching television or a movie they become so absorbed in the story that they are unaware of other events happening around them."
+        },
+        {
+          "id": "des-ii-18",
+          "text": "Some people find that they become so involved in a fantasy or daydream that it feels as though it were really happening to them."
+        },
+        {
+          "id": "des-ii-19",
+          "text": "Some people find that they sometimes are able to ignore pain."
+        },
+        {
+          "id": "des-ii-20",
+          "text": "Some people find that they sometimes sit staring off into space, thinking of nothing, and are not aware of the passage of time."
+        },
+        {
+          "id": "des-ii-21",
+          "text": "Some people sometimes find that when they are alone they talk out loud to themselves."
+        },
+        {
+          "id": "des-ii-22",
+          "text": "Some people find that in one situation they may act so differently compared with another situation that they feel almost as if they were two different people."
+        },
+        {
+          "id": "des-ii-23",
+          "text": "Some people sometimes find that in certain situations they are able to do things with amazing ease and spontaneity that would usually be difficult for them (for example, sports, work, social situations, etc.)."
+        },
+        {
+          "id": "des-ii-24",
+          "text": "Some people sometimes find that they cannot remember whether they have done something or have just thought about doing that thing (for example, not knowing whether they have just mailed a letter or have just thought about mailing it)."
+        },
+        {
+          "id": "des-ii-25",
+          "text": "Some people find evidence that they have done things that they do not remember doing."
+        },
+        {
+          "id": "des-ii-26",
+          "text": "Some people sometimes find writings, drawings, or notes among their belongings that they must have done but cannot remember doing."
+        },
+        {
+          "id": "des-ii-27",
+          "text": "Some people sometimes find that they hear voices inside their head that tell them to do things or comment on things that they are doing."
+        },
+        {
+          "id": "des-ii-28",
+          "text": "Some people sometimes feel as if they are looking at the world through a fog, so that people and objects appear far away or unclear."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": false,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Dissociative experiences",
+            "codebookName": "Total",
+            "items": [
+              "des-ii-1",
+              "des-ii-2",
+              "des-ii-3",
+              "des-ii-4",
+              "des-ii-5",
+              "des-ii-6",
+              "des-ii-7",
+              "des-ii-8",
+              "des-ii-9",
+              "des-ii-10",
+              "des-ii-11",
+              "des-ii-12",
+              "des-ii-13",
+              "des-ii-14",
+              "des-ii-15",
+              "des-ii-16",
+              "des-ii-17",
+              "des-ii-18",
+              "des-ii-19",
+              "des-ii-20",
+              "des-ii-21",
+              "des-ii-22",
+              "des-ii-23",
+              "des-ii-24",
+              "des-ii-25",
+              "des-ii-26",
+              "des-ii-27",
+              "des-ii-28"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 29,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ]
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Carlson, E. B., & Putnam, F. W. (1993). An update on the Dissociative Experiences Scale. Dissociation, 6(1), 16–27.",
+        "url": "https://www.psychdb.com/_media/dissociative-disorders/des-ii.pdf"
+      }
+    },
+    {
+      "id": "fmps-b",
+      "code": "FMPS-B",
+      "name": "Perfectionism (short)",
+      "formalName": "Frost Multidimensional Perfectionism Scale, Brief",
+      "domain": "Self talk, thinking patterns and personality",
+      "description": "Perfectionism as 2 dimensions, evaluative concerns and perfectionistic strivings.",
+      "licenceStatus": "cleared",
+      "licenceNote": "Items published in a CC BY article (Woodfin, Binder and Molde, 2020).",
+      "instructions": "Please indicate how much you agree with each statement.",
+      "minutes": 2,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "Strongly disagree"
+        },
+        {
+          "value": 2,
+          "label": "Disagree"
+        },
+        {
+          "value": 3,
+          "label": "Neither agree nor disagree"
+        },
+        {
+          "value": 4,
+          "label": "Agree"
+        },
+        {
+          "value": 5,
+          "label": "Strongly agree"
+        }
+      ],
+      "items": [
+        {
+          "id": "fmps-b-1",
+          "text": "If I fail at work/school, I am a failure as a person"
+        },
+        {
+          "id": "fmps-b-2",
+          "text": "I set higher goals for myself than most people"
+        },
+        {
+          "id": "fmps-b-3",
+          "text": "If someone does a task at work/school better than me, then I feel like I failed at the whole task"
+        },
+        {
+          "id": "fmps-b-4",
+          "text": "I have extremely high goals"
+        },
+        {
+          "id": "fmps-b-5",
+          "text": "Other people seem to accept lower standards from themselves than I do"
+        },
+        {
+          "id": "fmps-b-6",
+          "text": "If I do not do well all the time, people will not respect me"
+        },
+        {
+          "id": "fmps-b-7",
+          "text": "I expect higher performance in my daily tasks than most people"
+        },
+        {
+          "id": "fmps-b-8",
+          "text": "The fewer mistakes I make, the more people will like me"
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "concerns",
+            "label": "Worry about mistakes and judgement",
+            "codebookName": "Evaluative Concerns",
+            "items": [
+              "fmps-b-1",
+              "fmps-b-3",
+              "fmps-b-6",
+              "fmps-b-8"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "strength"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "Worry about mistakes and what others think is not a big feature of your answers.",
+            "focusReason": "Worry about mistakes and what others think came up often in your answers."
+          },
+          {
+            "id": "strivings",
+            "label": "High personal standards",
+            "codebookName": "Strivings",
+            "items": [
+              "fmps-b-2",
+              "fmps-b-4",
+              "fmps-b-5",
+              "fmps-b-7"
+            ],
+            "method": "mean",
+            "direction": "none",
+            "bands": []
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Burgess, A. M., Frost, R. O., & DiBartolo, P. M. (2016). Development and validation of the Frost Multidimensional Perfectionism Scale-Brief. Journal of Psychoeducational Assessment, 34(7), 620-633. https://doi.org/10.1177/0734282916651359; Woodfin, V., Binder, P.-E., & Molde, H. (2020). The psychometric properties of the Frost Multidimensional Perfectionism Scale - Brief. Frontiers in Psychology, ",
+        "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2020.01860/full"
+      }
+    },
+    {
+      "id": "gad-7",
+      "code": "GAD-7",
+      "name": "Worry and anxiety over the last 2 weeks",
+      "formalName": "Generalized Anxiety Disorder 7",
+      "domain": "Clinical and distress screening",
+      "description": "Frequency of core generalised anxiety symptoms over the past 2 weeks.",
+      "licenceStatus": "cleared",
+      "licenceNote": "Pfizer: no permission required to reproduce, translate, display or distribute.",
+      "instructions": "Over the last 2 weeks, how often have you been bothered by the following problems?",
+      "minutes": 2,
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Not at all"
+        },
+        {
+          "value": 1,
+          "label": "Several days"
+        },
+        {
+          "value": 2,
+          "label": "More than half the days"
+        },
+        {
+          "value": 3,
+          "label": "Nearly every day"
+        }
+      ],
+      "items": [
+        {
+          "id": "gad-7-1",
+          "text": "Feeling nervous, anxious or on edge"
+        },
+        {
+          "id": "gad-7-2",
+          "text": "Not being able to stop or control worrying"
+        },
+        {
+          "id": "gad-7-3",
+          "text": "Worrying too much about different things"
+        },
+        {
+          "id": "gad-7-4",
+          "text": "Trouble relaxing"
+        },
+        {
+          "id": "gad-7-5",
+          "text": "Being so restless that it is hard to sit still"
+        },
+        {
+          "id": "gad-7-6",
+          "text": "Becoming easily annoyed or irritable"
+        },
+        {
+          "id": "gad-7-7",
+          "text": "Feeling afraid as if something awful might happen"
+        },
+        {
+          "id": "gad-7-8",
+          "text": "How difficult have these problems made it for you to do your work, take care of things at home, or get along with other people?",
+          "responseOptions": [
+            {
+              "value": 0,
+              "label": "Not difficult at all"
+            },
+            {
+              "value": 1,
+              "label": "Somewhat difficult"
+            },
+            {
+              "value": 2,
+              "label": "Very difficult"
+            },
+            {
+              "value": 3,
+              "label": "Extremely difficult"
+            }
+          ]
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": false,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Anxiety",
+            "codebookName": "Total",
+            "items": [
+              "gad-7-1",
+              "gad-7-2",
+              "gad-7-3",
+              "gad-7-4",
+              "gad-7-5",
+              "gad-7-6",
+              "gad-7-7"
+            ],
+            "method": "sum",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 9,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ]
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Spitzer, R. L., Kroenke, K., Williams, J. B. W., & Löwe, B. (2006). A brief measure for assessing generalized anxiety disorder: The GAD-7. Archives of Internal Medicine, 166(10), 1092–1097. https://doi.org/10.1001/archinte.166.10.1092",
+        "url": "https://psytoolkit.org/survey-library/anxiety-gad7.html"
+      }
+    },
+    {
+      "id": "jds",
+      "code": "JDS",
+      "name": "What your job gives you",
+      "formalName": "Job Diagnostic Survey (revised 15 item core job characteristics form)",
+      "domain": "Adjacent occupational and wellbeing",
+      "description": "Core job characteristics from the Job Characteristics Model: skill variety, task identity, task significance, autonomy and feedback from the job.",
+      "licenceStatus": "cleared",
+      "licenceNote": "Public domain US Office of Naval Research technical report (approved for public release, distribution unlimited).",
+      "instructions": "Section One: This part of the questionnaire asks you to describe your job, as objectively as you can. Please do not use this part of the questionnaire to show how much you like or dislike your job. Section Two: Listed below are a number of statements which could be used to describe a job. You are to indicate whether each statement is an accurate or an inaccurate description of your job. How accurate is the statement in describing your job?",
+      "minutes": 5,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "Very Inaccurate"
+        },
+        {
+          "value": 2,
+          "label": "Mostly Inaccurate"
+        },
+        {
+          "value": 3,
+          "label": "Slightly Inaccurate"
+        },
+        {
+          "value": 4,
+          "label": "Uncertain"
+        },
+        {
+          "value": 5,
+          "label": "Slightly Accurate"
+        },
+        {
+          "value": 6,
+          "label": "Mostly Accurate"
+        },
+        {
+          "value": 7,
+          "label": "Very Accurate"
+        }
+      ],
+      "items": [
+        {
+          "id": "jds-1",
+          "text": "How much variety is there in your job? That is, to what extent does the job require you to do many different things at work, using a variety of your skills and talents?"
+        },
+        {
+          "id": "jds-2",
+          "text": "To what extent does your job involve doing a \"whole\" and identifiable piece of work? That is, is the job a complete piece of work that has an obvious beginning and end? Or is it only a small part of the overall piece of work, which is finished by other people or by automatic machines?"
+        },
+        {
+          "id": "jds-3",
+          "text": "In general, how significant or important is your job? That is, are the results of your work likely to significantly affect the lives or well-being of other people?"
+        },
+        {
+          "id": "jds-4",
+          "text": "How much autonomy is there in your job? That is, to what extent does your job permit you to decide on your own how to go about doing the work?"
+        },
+        {
+          "id": "jds-5",
+          "text": "To what extent does doing the job itself provide you with information about your work performance? That is, does the actual work itself provide clues about how well you are doing aside from any \"feedback\" co-workers or supervisors may provide?"
+        },
+        {
+          "id": "jds-6",
+          "text": "The job requires me to use a number of complex or high-level skills."
+        },
+        {
+          "id": "jds-7",
+          "text": "The job is quite simple and repetitive."
+        },
+        {
+          "id": "jds-8",
+          "text": "The job provides me the chance to completely finish the pieces of work I begin."
+        },
+        {
+          "id": "jds-9",
+          "text": "The job is arranged so that I do not have the chance to do an entire piece of work from beginning to end."
+        },
+        {
+          "id": "jds-10",
+          "text": "This job is one where a lot of other people can be affected by how well the work gets done."
+        },
+        {
+          "id": "jds-11",
+          "text": "The job itself is not very significant or important in the broader scheme of things."
+        },
+        {
+          "id": "jds-12",
+          "text": "The job gives me considerable opportunity for independence and freedom in how I do the work."
+        },
+        {
+          "id": "jds-13",
+          "text": "The job denies me any chance to use my personal initiative or judgment in carrying out the work."
+        },
+        {
+          "id": "jds-14",
+          "text": "Just doing the work required by the job provides many chances for me to figure out how well I am doing."
+        },
+        {
+          "id": "jds-15",
+          "text": "The job itself provides very few clues about whether or not I am performing well."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [
+          "jds-7",
+          "jds-9",
+          "jds-11",
+          "jds-13",
+          "jds-15"
+        ],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "variety",
+            "label": "Variety in your work",
+            "codebookName": "Skill variety",
+            "items": [
+              "jds-1",
+              "jds-6",
+              "jds-7"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 3,
+                "band": "focus"
+              },
+              {
+                "upTo": 5,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "Your work gives you plenty of variety.",
+            "focusReason": "Variety in your work came through as limited in your answers."
+          },
+          {
+            "id": "identity",
+            "label": "Seeing a piece of work through",
+            "codebookName": "Task identity",
+            "items": [
+              "jds-2",
+              "jds-8",
+              "jds-9"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 3,
+                "band": "focus"
+              },
+              {
+                "upTo": 5,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You get to see pieces of work through from start to finish.",
+            "focusReason": "Seeing pieces of work through from start to finish came through as limited in your answers."
+          },
+          {
+            "id": "significance",
+            "label": "Work that matters to others",
+            "codebookName": "Task significance",
+            "items": [
+              "jds-3",
+              "jds-10",
+              "jds-11"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 3,
+                "band": "focus"
+              },
+              {
+                "upTo": 5,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You see your work as mattering to other people.",
+            "focusReason": "A sense that your work matters to other people came through less strongly in your answers."
+          },
+          {
+            "id": "autonomy",
+            "label": "Freedom in how you work",
+            "codebookName": "Autonomy",
+            "items": [
+              "jds-4",
+              "jds-12",
+              "jds-13"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 3,
+                "band": "focus"
+              },
+              {
+                "upTo": 5,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You have real freedom in how you do your work.",
+            "focusReason": "Freedom in how you do your work came through as limited in your answers."
+          },
+          {
+            "id": "feedback",
+            "label": "Knowing how you are doing",
+            "codebookName": "Feedback from the job",
+            "items": [
+              "jds-5",
+              "jds-14",
+              "jds-15"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 3,
+                "band": "focus"
+              },
+              {
+                "upTo": 5,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "Your work itself tells you how you are doing.",
+            "focusReason": "Knowing how you are doing from the work itself came through as limited in your answers."
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Hackman, J. R., & Oldham, G. R. (1975). Development of the Job Diagnostic Survey. Journal of Applied Psychology, 60(2), 159-170. https://doi.org/10.1037/h0076546; Idaszak, J. R., & Drasgow, F. (1987). A revision of the Job Diagnostic Survey: Elimination of a measurement artifact. Journal of Applied Psychology, 72(1), 69-74. https://doi.org/10.1037/0021-9010.72.1.69",
+        "url": "https://paulspector.com/assessment-files/other/jds-report.pdf"
+      }
+    },
+    {
+      "id": "mini-ipip",
+      "code": "MINI-IPIP",
+      "name": "Your personality in brief",
+      "formalName": "Mini International Personality Item Pool",
+      "domain": "Self talk, thinking patterns and personality",
+      "description": "Big Five personality factors measured with 20 public domain IPIP items, 4 per factor.",
+      "licenceStatus": "cleared",
+      "licenceNote": "IPIP items are public domain for any purpose, commercial or non commercial.",
+      "instructions": "Below are phrases describing people's behaviors. Please use the rating scale below to describe how accurately each statement describes you. Describe yourself as you generally are now, not as you wish to be in the future. Describe yourself as you honestly see yourself, in relation to other people you know of the same sex as you are, and roughly your same age. Please read each statement carefully, and put a number from 1 to 5 next to it to describe how accurately the statement describes you.",
+      "minutes": 3,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "Very inaccurate"
+        },
+        {
+          "value": 2,
+          "label": "Moderately inaccurate"
+        },
+        {
+          "value": 3,
+          "label": "Neither inaccurate nor accurate"
+        },
+        {
+          "value": 4,
+          "label": "Moderately accurate"
+        },
+        {
+          "value": 5,
+          "label": "Very accurate"
+        }
+      ],
+      "items": [
+        {
+          "id": "mini-ipip-1",
+          "text": "Am the life of the party."
+        },
+        {
+          "id": "mini-ipip-2",
+          "text": "Sympathize with others' feelings."
+        },
+        {
+          "id": "mini-ipip-3",
+          "text": "Get chores done right away."
+        },
+        {
+          "id": "mini-ipip-4",
+          "text": "Have frequent mood swings."
+        },
+        {
+          "id": "mini-ipip-5",
+          "text": "Have a vivid imagination."
+        },
+        {
+          "id": "mini-ipip-6",
+          "text": "Don't talk a lot."
+        },
+        {
+          "id": "mini-ipip-7",
+          "text": "Am not interested in other people's problems."
+        },
+        {
+          "id": "mini-ipip-8",
+          "text": "Often forget to put things back in their proper place."
+        },
+        {
+          "id": "mini-ipip-9",
+          "text": "Am relaxed most of the time."
+        },
+        {
+          "id": "mini-ipip-10",
+          "text": "Am not interested in abstract ideas."
+        },
+        {
+          "id": "mini-ipip-11",
+          "text": "Talk to a lot of different people at parties."
+        },
+        {
+          "id": "mini-ipip-12",
+          "text": "Feel others' emotions."
+        },
+        {
+          "id": "mini-ipip-13",
+          "text": "Like order."
+        },
+        {
+          "id": "mini-ipip-14",
+          "text": "Get upset easily."
+        },
+        {
+          "id": "mini-ipip-15",
+          "text": "Have difficulty understanding abstract ideas."
+        },
+        {
+          "id": "mini-ipip-16",
+          "text": "Keep in the background."
+        },
+        {
+          "id": "mini-ipip-17",
+          "text": "Am not really interested in others."
+        },
+        {
+          "id": "mini-ipip-18",
+          "text": "Make a mess of things."
+        },
+        {
+          "id": "mini-ipip-19",
+          "text": "Seldom feel blue."
+        },
+        {
+          "id": "mini-ipip-20",
+          "text": "Do not have a good imagination."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [
+          "mini-ipip-6",
+          "mini-ipip-7",
+          "mini-ipip-8",
+          "mini-ipip-9",
+          "mini-ipip-10",
+          "mini-ipip-15",
+          "mini-ipip-16",
+          "mini-ipip-17",
+          "mini-ipip-18",
+          "mini-ipip-19",
+          "mini-ipip-20"
+        ],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "extraversion",
+            "label": "Extraversion",
+            "codebookName": "Extraversion",
+            "items": [
+              "mini-ipip-1",
+              "mini-ipip-6",
+              "mini-ipip-11",
+              "mini-ipip-16"
+            ],
+            "method": "sum",
+            "direction": "none",
+            "bands": []
+          },
+          {
+            "id": "agreeableness",
+            "label": "Agreeableness",
+            "codebookName": "Agreeableness",
+            "items": [
+              "mini-ipip-2",
+              "mini-ipip-7",
+              "mini-ipip-12",
+              "mini-ipip-17"
+            ],
+            "method": "sum",
+            "direction": "none",
+            "bands": []
+          },
+          {
+            "id": "conscientiousness",
+            "label": "Conscientiousness",
+            "codebookName": "Conscientiousness",
+            "items": [
+              "mini-ipip-3",
+              "mini-ipip-8",
+              "mini-ipip-13",
+              "mini-ipip-18"
+            ],
+            "method": "sum",
+            "direction": "none",
+            "bands": []
+          },
+          {
+            "id": "neuroticism",
+            "label": "Emotional reactivity",
+            "codebookName": "Neuroticism",
+            "items": [
+              "mini-ipip-4",
+              "mini-ipip-9",
+              "mini-ipip-14",
+              "mini-ipip-19"
+            ],
+            "method": "sum",
+            "direction": "none",
+            "bands": []
+          },
+          {
+            "id": "intellect",
+            "label": "Openness",
+            "codebookName": "Intellect or Imagination",
+            "items": [
+              "mini-ipip-5",
+              "mini-ipip-10",
+              "mini-ipip-15",
+              "mini-ipip-20"
+            ],
+            "method": "sum",
+            "direction": "none",
+            "bands": []
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Donnellan, M. B., Oswald, F. L., Baird, B. M., & Lucas, R. E. (2006). The Mini-IPIP scales: Tiny-yet-effective measures of the Big Five factors of personality. Psychological Assessment, 18(2), 192–203. https://doi.org/10.1037/1040-3590.18.2.192",
+        "url": "https://ipip.ori.org/MiniIPIPKey.htm"
+      }
+    },
+    {
+      "id": "mwq",
+      "code": "MWQ",
+      "name": "Mind wandering (5 questions)",
+      "formalName": "Mind Wandering Questionnaire",
+      "domain": "Executive functioning and ADHD",
+      "description": "Trait level frequency of mind wandering during everyday tasks such as reading, listening and repetitive work.",
+      "licenceStatus": "cleared",
+      "licenceNote": "Items published under CC BY (Mrazek et al., 2013).",
+      "instructions": "Please indicate how often each statement applies to you.",
+      "minutes": 1,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "almost never"
+        },
+        {
+          "value": 2,
+          "label": "very infrequently"
+        },
+        {
+          "value": 3,
+          "label": "somewhat infrequently"
+        },
+        {
+          "value": 4,
+          "label": "somewhat frequently"
+        },
+        {
+          "value": 5,
+          "label": "very frequently"
+        },
+        {
+          "value": 6,
+          "label": "almost always"
+        }
+      ],
+      "items": [
+        {
+          "id": "mwq-1",
+          "text": "I have difficulty maintaining focus on simple or repetitive work"
+        },
+        {
+          "id": "mwq-2",
+          "text": "While reading, I find I haven't been thinking about the text and must therefore read it again"
+        },
+        {
+          "id": "mwq-3",
+          "text": "I do things without paying full attention"
+        },
+        {
+          "id": "mwq-4",
+          "text": "I find myself listening with one ear, thinking about something else at the same time"
+        },
+        {
+          "id": "mwq-5",
+          "text": "I mind-wander during lectures or presentations"
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Mind wandering",
+            "codebookName": "Total",
+            "items": [
+              "mwq-1",
+              "mwq-2",
+              "mwq-3",
+              "mwq-4",
+              "mwq-5"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 2.67,
+                "band": "strength"
+              },
+              {
+                "upTo": 4.33,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "A wandering mind is not a big feature of your answers.",
+            "focusReason": "A wandering mind came up often in your answers."
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Mrazek, M. D., Phillips, D. T., Franklin, M. S., Broadway, J. M., & Schooler, J. W. (2013). Young and restless: Validation of the Mind-Wandering Questionnaire (MWQ) reveals disruptive impact of mind-wandering for youth. Frontiers in Psychology, 4, 560. https://doi.org/10.3389/fpsyg.2013.00560",
+        "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2013.00560/full"
+      }
+    },
+    {
+      "id": "ncs-6",
+      "code": "NCS-6",
+      "name": "Enjoying effortful thinking",
+      "formalName": "Need for Cognition Scale, 6 item",
+      "domain": "Self talk, thinking patterns and personality",
+      "description": "Tendency to engage in and enjoy effortful thinking.",
+      "licenceStatus": "cleared",
+      "licenceNote": "Development article published under CC BY 4.0 (Coelho, Hanel and Wolf, 2020).",
+      "instructions": "Please indicate how characteristic each statement is of you.",
+      "minutes": 1,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "extremely uncharacteristic of me"
+        },
+        {
+          "value": 2,
+          "label": "2"
+        },
+        {
+          "value": 3,
+          "label": "3"
+        },
+        {
+          "value": 4,
+          "label": "4"
+        },
+        {
+          "value": 5,
+          "label": "extremely characteristic of me"
+        }
+      ],
+      "items": [
+        {
+          "id": "ncs-6-1",
+          "text": "I would prefer complex to simple problems."
+        },
+        {
+          "id": "ncs-6-2",
+          "text": "I like to have the responsibility of handling a situation that requires a lot of thinking."
+        },
+        {
+          "id": "ncs-6-3",
+          "text": "Thinking is not my idea of fun."
+        },
+        {
+          "id": "ncs-6-4",
+          "text": "I would rather do something that requires little thought than something that is sure to challenge my thinking abilities."
+        },
+        {
+          "id": "ncs-6-5",
+          "text": "I really enjoy a task that involves coming up with new solutions to problems."
+        },
+        {
+          "id": "ncs-6-6",
+          "text": "I would prefer a task that is intellectual, difficult, and important to one that is somewhat important but does not require much thought."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [
+          "ncs-6-3",
+          "ncs-6-4"
+        ],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Enjoying effortful thinking",
+            "codebookName": "Total",
+            "items": [
+              "ncs-6-1",
+              "ncs-6-2",
+              "ncs-6-3",
+              "ncs-6-4",
+              "ncs-6-5",
+              "ncs-6-6"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "focus"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You described enjoying problems that take real thought.",
+            "focusReason": "Enjoying problems that take real thought came through less strongly in your answers."
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Coelho, G. L. de H., Hanel, P. H. P., & Wolf, L. J. (2020). The very efficient assessment of need for cognition: Developing a six-item version. Assessment, 27(8), 1870–1885. https://doi.org/10.1177/1073191118793208",
+        "url": "https://www.psytoolkit.org/survey-library/need-for-cognition-ncs6.html"
+      }
+    },
+    {
+      "id": "phq-2",
+      "code": "PHQ-2",
+      "name": "Mood over the last 2 weeks (2 questions)",
+      "formalName": "Patient Health Questionnaire 2",
+      "domain": "Clinical and distress screening",
+      "description": "Ultra brief depression screen covering depressed mood and anhedonia over the past 2 weeks.",
+      "licenceStatus": "cleared",
+      "licenceNote": "Pfizer: no permission required to reproduce, translate, display or distribute.",
+      "instructions": "Over the last 2 weeks, how often have you been bothered by any of the following problems?",
+      "minutes": 1,
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Not at all"
+        },
+        {
+          "value": 1,
+          "label": "Several days"
+        },
+        {
+          "value": 2,
+          "label": "More than half the days"
+        },
+        {
+          "value": 3,
+          "label": "Nearly every day"
+        }
+      ],
+      "items": [
+        {
+          "id": "phq-2-1",
+          "text": "Little interest or pleasure in doing things"
+        },
+        {
+          "id": "phq-2-2",
+          "text": "Feeling down, depressed, or hopeless"
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": false,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Mood",
+            "codebookName": "Total",
+            "items": [
+              "phq-2-1",
+              "phq-2-2"
+            ],
+            "method": "sum",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 2,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ]
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Kroenke, K., Spitzer, R. L., & Williams, J. B. W. (2003). The Patient Health Questionnaire-2: Validity of a two-item depression screener. Medical Care, 41(11), 1284-1292. https://doi.org/10.1097/01.MLR.0000093487.78664.3C",
+        "url": "https://psytoolkit.org/survey-library/depression-phq.html"
+      }
+    },
+    {
+      "id": "phq-9",
+      "code": "PHQ-9",
+      "name": "Mood over the last 2 weeks",
+      "formalName": "Patient Health Questionnaire 9",
+      "domain": "Clinical and distress screening",
+      "description": "Frequency of the 9 DSM depression symptoms over the past 2 weeks, with a follow up item on functional difficulty.",
+      "licenceStatus": "cleared",
+      "licenceNote": "Pfizer: no permission required to reproduce, translate, display or distribute.",
+      "instructions": "Over the last 2 weeks, how often have you been bothered by any of the following problems?",
+      "minutes": 2,
+      "responseOptions": [
+        {
+          "value": 0,
+          "label": "Not at all"
+        },
+        {
+          "value": 1,
+          "label": "Several days"
+        },
+        {
+          "value": 2,
+          "label": "More than half the days"
+        },
+        {
+          "value": 3,
+          "label": "Nearly every day"
+        }
+      ],
+      "items": [
+        {
+          "id": "phq-9-1",
+          "text": "Little interest or pleasure in doing things"
+        },
+        {
+          "id": "phq-9-2",
+          "text": "Feeling down, depressed, or hopeless"
+        },
+        {
+          "id": "phq-9-3",
+          "text": "Trouble falling or staying asleep, or sleeping too much"
+        },
+        {
+          "id": "phq-9-4",
+          "text": "Feeling tired or having little energy"
+        },
+        {
+          "id": "phq-9-5",
+          "text": "Poor appetite or overeating"
+        },
+        {
+          "id": "phq-9-6",
+          "text": "Feeling bad about yourself - or that you are a failure or have let yourself or your family down"
+        },
+        {
+          "id": "phq-9-7",
+          "text": "Trouble concentrating on things, such as reading the newspaper or watching television"
+        },
+        {
+          "id": "phq-9-8",
+          "text": "Moving or speaking so slowly that other people could have noticed? Or the opposite - being so fidgety or restless that you have been moving around a lot more than usual"
+        },
+        {
+          "id": "phq-9-9",
+          "text": "Thoughts that you would be better off dead or of hurting yourself in some way"
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": false,
+        "reverseItems": [],
+        "flagItems": [
+          {
+            "itemId": "phq-9-9",
+            "atLeast": 1,
+            "note": "Follow up with the client directly."
+          }
+        ],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Depressive symptoms",
+            "codebookName": "Total",
+            "items": [
+              "phq-9-1",
+              "phq-9-2",
+              "phq-9-3",
+              "phq-9-4",
+              "phq-9-5",
+              "phq-9-6",
+              "phq-9-7",
+              "phq-9-8",
+              "phq-9-9"
+            ],
+            "method": "sum",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 9,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ]
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Kroenke, K., Spitzer, R. L., & Williams, J. B. W. (2001). The PHQ-9: Validity of a brief depression severity measure. Journal of General Internal Medicine, 16(9), 606–613. https://doi.org/10.1046/j.1525-1497.2001.016009606.x",
+        "url": "https://cde.nida.nih.gov/system/files/PatientHealthQuestionnaire-9_2014Mar19.pdf"
+      }
+    },
+    {
+      "id": "pswq",
+      "code": "PSWQ",
+      "name": "Worry",
+      "formalName": "Penn State Worry Questionnaire",
+      "domain": "Clinical and distress screening",
+      "description": "Trait pathological worry, in particular its excessiveness, generality and uncontrollability.",
+      "licenceStatus": "cleared",
+      "licenceNote": "Public domain; permission for use confirmed by Borkovec (CamCOPS, 2015).",
+      "instructions": "Rate each of the following statements on a scale of 1 (\"not at all typical of me\") to 5 (\"very typical of me\"). Please do not leave any items blank.",
+      "minutes": 3,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "Not at all typical of me"
+        },
+        {
+          "value": 2,
+          "label": "2"
+        },
+        {
+          "value": 3,
+          "label": "3"
+        },
+        {
+          "value": 4,
+          "label": "4"
+        },
+        {
+          "value": 5,
+          "label": "Very typical of me"
+        }
+      ],
+      "items": [
+        {
+          "id": "pswq-1",
+          "text": "If I don't have enough time to do everything, I don't worry about it."
+        },
+        {
+          "id": "pswq-2",
+          "text": "My worries overwhelm me."
+        },
+        {
+          "id": "pswq-3",
+          "text": "I don't tend to worry about things."
+        },
+        {
+          "id": "pswq-4",
+          "text": "Many situations make me worry."
+        },
+        {
+          "id": "pswq-5",
+          "text": "I know I shouldn't worry about things, but I just can't help it."
+        },
+        {
+          "id": "pswq-6",
+          "text": "When I'm under pressure I worry a lot."
+        },
+        {
+          "id": "pswq-7",
+          "text": "I'm always worrying about something."
+        },
+        {
+          "id": "pswq-8",
+          "text": "I find it easy to dismiss worrisome thoughts."
+        },
+        {
+          "id": "pswq-9",
+          "text": "As soon as I finish one task, I start to worry about everything else I have to do."
+        },
+        {
+          "id": "pswq-10",
+          "text": "I never worry about anything."
+        },
+        {
+          "id": "pswq-11",
+          "text": "When there is nothing more I can do about a concern, I don't worry about it anymore."
+        },
+        {
+          "id": "pswq-12",
+          "text": "I've been a worrier all my life."
+        },
+        {
+          "id": "pswq-13",
+          "text": "I notice that I have been worrying about things."
+        },
+        {
+          "id": "pswq-14",
+          "text": "Once I start worrying, I can't stop."
+        },
+        {
+          "id": "pswq-15",
+          "text": "I worry all the time."
+        },
+        {
+          "id": "pswq-16",
+          "text": "I worry about projects until they are all done."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": false,
+        "reverseItems": [
+          "pswq-1",
+          "pswq-3",
+          "pswq-8",
+          "pswq-10",
+          "pswq-11"
+        ],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Worry",
+            "codebookName": "Total",
+            "items": [
+              "pswq-1",
+              "pswq-2",
+              "pswq-3",
+              "pswq-4",
+              "pswq-5",
+              "pswq-6",
+              "pswq-7",
+              "pswq-8",
+              "pswq-9",
+              "pswq-10",
+              "pswq-11",
+              "pswq-12",
+              "pswq-13",
+              "pswq-14",
+              "pswq-15",
+              "pswq-16"
+            ],
+            "method": "sum",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 39,
+                "band": "strength"
+              },
+              {
+                "upTo": 59,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ]
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Meyer, T. J., Miller, M. L., Metzger, R. L., & Borkovec, T. D. (1990). Development and validation of the Penn State Worry Questionnaire. Behaviour Research and Therapy, 28(6), 487–495. https://doi.org/10.1016/0005-7967(90)90135-6",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK571032/bin/ch9.p265.pdf (NIHR Journals Library open access appendix reproducing the PSWQ)"
+      }
+    },
+    {
+      "id": "raads-14",
+      "code": "RAADS-14",
+      "name": "Social and sensory experiences",
+      "formalName": "Ritvo Autism Asperger Diagnostic Scale, 14 item Screen",
+      "domain": "Clinical and distress screening",
+      "description": "Autistic traits in adults, covering mentalizing deficits, social anxiety and sensory reactivity, with developmental timing captured in the response format.",
+      "licenceStatus": "cleared",
+      "licenceNote": "Items published under CC BY 2.0 (Eriksson, Andersen and Bejerot, 2013).",
+      "instructions": "Please answer the questions according to what is true for you. Check only one column per statement!",
+      "minutes": 3,
+      "responseOptions": [
+        {
+          "value": 3,
+          "label": "True now and when I was young"
+        },
+        {
+          "value": 2,
+          "label": "True only now"
+        },
+        {
+          "value": 1,
+          "label": "True only when I was younger than 16"
+        },
+        {
+          "value": 0,
+          "label": "Never true"
+        }
+      ],
+      "items": [
+        {
+          "id": "raads-14-1",
+          "text": "It is difficult for me to understand how other people are feeling when we are talking"
+        },
+        {
+          "id": "raads-14-2",
+          "text": "Some ordinary textures that do not bother others feel very offensive when they touch my skin"
+        },
+        {
+          "id": "raads-14-3",
+          "text": "It is very difficult for me to work and function in groups"
+        },
+        {
+          "id": "raads-14-4",
+          "text": "It is difficult to figure out what other people expect of me"
+        },
+        {
+          "id": "raads-14-5",
+          "text": "I often don't know how to act in social situations"
+        },
+        {
+          "id": "raads-14-6",
+          "text": "I can chat and make small talk with people"
+        },
+        {
+          "id": "raads-14-7",
+          "text": "When I feel overwhelmed by my senses, I have to isolate myself to shut them down"
+        },
+        {
+          "id": "raads-14-8",
+          "text": "How to make friends and socialize is a mystery to me"
+        },
+        {
+          "id": "raads-14-9",
+          "text": "When talking to someone, I have a hard time telling when it is my turn to talk or to listen"
+        },
+        {
+          "id": "raads-14-10",
+          "text": "Sometimes I have to cover my ears to block out painful noises (like vacuum cleaners or people talking too much or too loudly)"
+        },
+        {
+          "id": "raads-14-11",
+          "text": "It can be very hard to read someone's face, hand, and body movements when we are talking"
+        },
+        {
+          "id": "raads-14-12",
+          "text": "I focus on details rather than the overall idea"
+        },
+        {
+          "id": "raads-14-13",
+          "text": "I take things too literally, so I often miss what people are trying to say"
+        },
+        {
+          "id": "raads-14-14",
+          "text": "I get extremely upset when the way I like to do things is suddenly changed"
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": false,
+        "reverseItems": [
+          "raads-14-6"
+        ],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Autistic traits",
+            "codebookName": "Total",
+            "items": [
+              "raads-14-1",
+              "raads-14-2",
+              "raads-14-3",
+              "raads-14-4",
+              "raads-14-5",
+              "raads-14-6",
+              "raads-14-7",
+              "raads-14-8",
+              "raads-14-9",
+              "raads-14-10",
+              "raads-14-11",
+              "raads-14-12",
+              "raads-14-13",
+              "raads-14-14"
+            ],
+            "method": "sum",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 13,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ]
+          },
+          {
+            "id": "mentalizing",
+            "label": "Reading other people",
+            "codebookName": "Mentalizing deficits",
+            "items": [
+              "raads-14-1",
+              "raads-14-4",
+              "raads-14-9",
+              "raads-14-11",
+              "raads-14-12",
+              "raads-14-13",
+              "raads-14-14"
+            ],
+            "method": "sum",
+            "direction": "none",
+            "bands": []
+          },
+          {
+            "id": "social-anxiety",
+            "label": "Social anxiety",
+            "codebookName": "Social anxiety",
+            "items": [
+              "raads-14-3",
+              "raads-14-5",
+              "raads-14-6",
+              "raads-14-8"
+            ],
+            "method": "sum",
+            "direction": "none",
+            "bands": []
+          },
+          {
+            "id": "sensory",
+            "label": "Sensory reactivity",
+            "codebookName": "Sensory reactivity",
+            "items": [
+              "raads-14-2",
+              "raads-14-7",
+              "raads-14-10"
+            ],
+            "method": "sum",
+            "direction": "none",
+            "bands": []
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Eriksson, J. M., Andersen, L. M., & Bejerot, S. (2013). RAADS-14 Screen: Validity of a screening tool for autism spectrum disorder in an adult psychiatric population. Molecular Autism, 4(1), 49. https://doi.org/10.1186/2040-2392-4-49",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3907126"
+      }
+    },
+    {
+      "id": "saps",
+      "code": "SAPS",
+      "name": "Standards and self judgement (short)",
+      "formalName": "Short Almost Perfect Scale",
+      "domain": "Self talk, thinking patterns and personality",
+      "description": "Perfectionistic high personal standards and the perceived discrepancy between performance and those standards.",
+      "licenceStatus": "cleared",
+      "licenceNote": "Rice lab: no permission required to use or translate; cite properly.",
+      "instructions": "The following items are designed to measure certain attitudes people have toward themselves, their performance, and toward others. It is important that your answers be true and accurate for you. In the space next to the statement, please enter a number from \"1\" (strongly disagree) to \"7\" (strongly agree) to describe your degree of agreement with each item.",
+      "minutes": 2,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "STRONGLY DISAGREE"
+        },
+        {
+          "value": 2,
+          "label": "DISAGREE"
+        },
+        {
+          "value": 3,
+          "label": "SLIGHTLY DISAGREE"
+        },
+        {
+          "value": 4,
+          "label": "NEUTRAL"
+        },
+        {
+          "value": 5,
+          "label": "SLIGHTLY AGREE"
+        },
+        {
+          "value": 6,
+          "label": "AGREE"
+        },
+        {
+          "value": 7,
+          "label": "STRONGLY AGREE"
+        }
+      ],
+      "items": [
+        {
+          "id": "saps-1",
+          "text": "I have high expectations for myself."
+        },
+        {
+          "id": "saps-2",
+          "text": "Doing my best never seems to be enough."
+        },
+        {
+          "id": "saps-3",
+          "text": "I set very high standards for myself."
+        },
+        {
+          "id": "saps-4",
+          "text": "I often feel disappointment after completing a task because I know I could have done better."
+        },
+        {
+          "id": "saps-5",
+          "text": "I have a strong need to strive for excellence."
+        },
+        {
+          "id": "saps-6",
+          "text": "My performance rarely measures up to my standards."
+        },
+        {
+          "id": "saps-7",
+          "text": "I expect the best from myself."
+        },
+        {
+          "id": "saps-8",
+          "text": "I am hardly ever satisfied with my performance."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "standards",
+            "label": "High standards",
+            "codebookName": "Standards",
+            "items": [
+              "saps-1",
+              "saps-3",
+              "saps-5",
+              "saps-7"
+            ],
+            "method": "mean",
+            "direction": "none",
+            "bands": []
+          },
+          {
+            "id": "discrepancy",
+            "label": "Falling short of your standards",
+            "codebookName": "Discrepancy",
+            "items": [
+              "saps-2",
+              "saps-4",
+              "saps-6",
+              "saps-8"
+            ],
+            "method": "mean",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 3,
+                "band": "strength"
+              },
+              {
+                "upTo": 5,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "You described mostly feeling that you meet the standards you set.",
+            "focusReason": "A sense of falling short of your own standards came up often in your answers."
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Rice, K. G., Richardson, C. M. E., & Tueller, S. (2014). The Short Form of the Revised Almost Perfect Scale. Journal of Personality Assessment, 96(3), 368–379. https://doi.org/10.1080/00223891.2013.838172",
+        "url": "https://kennethwang.com/apsr/scales/SAPS-English.pdf"
+      }
+    },
+    {
+      "id": "scs",
+      "code": "SCS",
+      "name": "Self compassion (full)",
+      "formalName": "Self-Compassion Scale, long form",
+      "domain": "Self talk, thinking patterns and personality",
+      "description": "Self compassion as self kindness, common humanity and mindfulness versus self judgement, isolation and over identification in difficult times.",
+      "licenceStatus": "cleared",
+      "licenceNote": "Dr Kristin Neff grants permission to use the Self-Compassion Scale for any purpose whatsoever.",
+      "instructions": "HOW I TYPICALLY ACT TOWARDS MYSELF IN DIFFICULT TIMES. Please read each statement carefully before answering. To the left of each item, indicate how often you behave in the stated manner, using the following scale:",
+      "minutes": 5,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "Almost never"
+        },
+        {
+          "value": 2,
+          "label": "2"
+        },
+        {
+          "value": 3,
+          "label": "3"
+        },
+        {
+          "value": 4,
+          "label": "4"
+        },
+        {
+          "value": 5,
+          "label": "Almost always"
+        }
+      ],
+      "items": [
+        {
+          "id": "scs-1",
+          "text": "I'm disapproving and judgmental about my own flaws and inadequacies."
+        },
+        {
+          "id": "scs-2",
+          "text": "When I'm feeling down I tend to obsess and fixate on everything that's wrong."
+        },
+        {
+          "id": "scs-3",
+          "text": "When things are going badly for me, I see the difficulties as part of life that everyone goes through."
+        },
+        {
+          "id": "scs-4",
+          "text": "When I think about my inadequacies, it tends to make me feel more separate and cut off from the rest of the world."
+        },
+        {
+          "id": "scs-5",
+          "text": "I try to be loving towards myself when I'm feeling emotional pain."
+        },
+        {
+          "id": "scs-6",
+          "text": "When I fail at something important to me I become consumed by feelings of inadequacy."
+        },
+        {
+          "id": "scs-7",
+          "text": "When I'm down and out, I remind myself that there are lots of other people in the world feeling like I am."
+        },
+        {
+          "id": "scs-8",
+          "text": "When times are really difficult, I tend to be tough on myself."
+        },
+        {
+          "id": "scs-9",
+          "text": "When something upsets me I try to keep my emotions in balance."
+        },
+        {
+          "id": "scs-10",
+          "text": "When I feel inadequate in some way, I try to remind myself that feelings of inadequacy are shared by most people."
+        },
+        {
+          "id": "scs-11",
+          "text": "I'm intolerant and impatient towards those aspects of my personality I don't like."
+        },
+        {
+          "id": "scs-12",
+          "text": "When I'm going through a very hard time, I give myself the caring and tenderness I need."
+        },
+        {
+          "id": "scs-13",
+          "text": "When I'm feeling down, I tend to feel like most other people are probably happier than I am."
+        },
+        {
+          "id": "scs-14",
+          "text": "When something painful happens I try to take a balanced view of the situation."
+        },
+        {
+          "id": "scs-15",
+          "text": "I try to see my failings as part of the human condition."
+        },
+        {
+          "id": "scs-16",
+          "text": "When I see aspects of myself that I don't like, I get down on myself."
+        },
+        {
+          "id": "scs-17",
+          "text": "When I fail at something important to me I try to keep things in perspective."
+        },
+        {
+          "id": "scs-18",
+          "text": "When I'm really struggling, I tend to feel like other people must be having an easier time of it."
+        },
+        {
+          "id": "scs-19",
+          "text": "I'm kind to myself when I'm experiencing suffering."
+        },
+        {
+          "id": "scs-20",
+          "text": "When something upsets me I get carried away with my feelings."
+        },
+        {
+          "id": "scs-21",
+          "text": "I can be a bit cold-hearted towards myself when I'm experiencing suffering."
+        },
+        {
+          "id": "scs-22",
+          "text": "When I'm feeling down I try to approach my feelings with curiosity and openness."
+        },
+        {
+          "id": "scs-23",
+          "text": "I'm tolerant of my own flaws and inadequacies."
+        },
+        {
+          "id": "scs-24",
+          "text": "When something painful happens I tend to blow the incident out of proportion."
+        },
+        {
+          "id": "scs-25",
+          "text": "When I fail at something that's important to me, I tend to feel alone in my failure."
+        },
+        {
+          "id": "scs-26",
+          "text": "I try to be understanding and patient towards those aspects of my personality I don't like."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [
+          "scs-1",
+          "scs-2",
+          "scs-4",
+          "scs-6",
+          "scs-8",
+          "scs-11",
+          "scs-13",
+          "scs-16",
+          "scs-18",
+          "scs-20",
+          "scs-21",
+          "scs-24",
+          "scs-25"
+        ],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Self compassion",
+            "codebookName": "Total",
+            "items": [
+              "scs-1",
+              "scs-2",
+              "scs-3",
+              "scs-4",
+              "scs-5",
+              "scs-6",
+              "scs-7",
+              "scs-8",
+              "scs-9",
+              "scs-10",
+              "scs-11",
+              "scs-12",
+              "scs-13",
+              "scs-14",
+              "scs-15",
+              "scs-16",
+              "scs-17",
+              "scs-18",
+              "scs-19",
+              "scs-20",
+              "scs-21",
+              "scs-22",
+              "scs-23",
+              "scs-24",
+              "scs-25",
+              "scs-26"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "focus"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You described treating yourself with kindness and perspective when things go wrong.",
+            "focusReason": "Treating yourself with kindness when things go wrong came through as an area to work on."
+          },
+          {
+            "id": "kindness",
+            "label": "Kindness towards yourself",
+            "codebookName": "Self-Kindness",
+            "items": [
+              "scs-5",
+              "scs-12",
+              "scs-19",
+              "scs-23",
+              "scs-26"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "focus"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You tend to be kind to yourself when things are hard.",
+            "focusReason": "Being kind to yourself when things are hard came through as an area to work on."
+          },
+          {
+            "id": "judgment",
+            "label": "Easing off self judgement",
+            "codebookName": "Self-Judgment",
+            "items": [
+              "scs-1",
+              "scs-8",
+              "scs-11",
+              "scs-16",
+              "scs-21"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "focus"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "Harsh self judgement is not a big feature of your answers.",
+            "focusReason": "Harsh self judgement came up often in your answers."
+          },
+          {
+            "id": "humanity",
+            "label": "Remembering you are not alone",
+            "codebookName": "Common Humanity",
+            "items": [
+              "scs-3",
+              "scs-7",
+              "scs-10",
+              "scs-15"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "focus"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You remember that struggle is part of being human.",
+            "focusReason": "Remembering that struggle is part of being human came through as an area to work on."
+          },
+          {
+            "id": "isolation",
+            "label": "Feeling less alone in struggle",
+            "codebookName": "Isolation",
+            "items": [
+              "scs-4",
+              "scs-13",
+              "scs-18",
+              "scs-25"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "focus"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "Feeling alone in your struggles is not a big feature of your answers.",
+            "focusReason": "Feeling alone in your struggles came up often in your answers."
+          },
+          {
+            "id": "mindfulness",
+            "label": "Keeping perspective",
+            "codebookName": "Mindfulness",
+            "items": [
+              "scs-9",
+              "scs-14",
+              "scs-17",
+              "scs-22"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "focus"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You tend to keep painful feelings in perspective.",
+            "focusReason": "Keeping painful feelings in perspective came through as an area to work on."
+          },
+          {
+            "id": "over-identified",
+            "label": "Not getting swept up",
+            "codebookName": "Over-identified",
+            "items": [
+              "scs-2",
+              "scs-6",
+              "scs-20",
+              "scs-24"
+            ],
+            "method": "mean",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 2.33,
+                "band": "focus"
+              },
+              {
+                "upTo": 3.67,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "Getting swept up in difficult feelings is not a big feature of your answers.",
+            "focusReason": "Getting swept up in difficult feelings came up often in your answers."
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Neff, K. D. (2003). The development and validation of a scale to measure self-compassion. Self and Identity, 2(3), 223–250. https://doi.org/10.1080/15298860309027",
+        "url": "https://self-compassion.org/wptest/wp-content/uploads/Self_Compassion_Scale_for_researchers.pdf"
+      }
+    },
+    {
+      "id": "ucla-ls-3",
+      "code": "UCLA-LS-3",
+      "name": "Connection and loneliness",
+      "formalName": "UCLA Loneliness Scale, Version 3 (PhenX Social Isolation)",
+      "domain": "Wellbeing and life satisfaction",
+      "description": "Subjective feelings of loneliness and social isolation.",
+      "licenceStatus": "cleared",
+      "licenceNote": "PhenX Toolkit: freely available, permission not required for use; copyright Daniel W. Russell (1994).",
+      "instructions": "Instructions: The following statements describe how people sometimes feel. For each statement, please indicate how often you feel the way described by writing a number in the space provided. Here is an example: How often do you feel happy? If you never feel happy, you would respond \"never\"; if you always feel happy, you would respond \"always\".",
+      "minutes": 4,
+      "responseOptions": [
+        {
+          "value": 1,
+          "label": "NEVER"
+        },
+        {
+          "value": 2,
+          "label": "RARELY"
+        },
+        {
+          "value": 3,
+          "label": "SOMETIMES"
+        },
+        {
+          "value": 4,
+          "label": "ALWAYS"
+        }
+      ],
+      "items": [
+        {
+          "id": "ucla-ls-3-1",
+          "text": "How often do you feel that you are in tune with the people around you?"
+        },
+        {
+          "id": "ucla-ls-3-2",
+          "text": "How often do you feel that you lack companionship?"
+        },
+        {
+          "id": "ucla-ls-3-3",
+          "text": "How often do you feel that there is no one you can turn to?"
+        },
+        {
+          "id": "ucla-ls-3-4",
+          "text": "How often do you feel alone?"
+        },
+        {
+          "id": "ucla-ls-3-5",
+          "text": "How often do you feel part of a group of friends?"
+        },
+        {
+          "id": "ucla-ls-3-6",
+          "text": "How often do you feel that you have a lot in common with the people around you?"
+        },
+        {
+          "id": "ucla-ls-3-7",
+          "text": "How often do you feel that you are no longer close to anyone?"
+        },
+        {
+          "id": "ucla-ls-3-8",
+          "text": "How often do you feel that your interests and ideas are not shared by those around you?"
+        },
+        {
+          "id": "ucla-ls-3-9",
+          "text": "How often do you feel outgoing and friendly?"
+        },
+        {
+          "id": "ucla-ls-3-10",
+          "text": "How often do you feel close to people?"
+        },
+        {
+          "id": "ucla-ls-3-11",
+          "text": "How often do you feel left out?"
+        },
+        {
+          "id": "ucla-ls-3-12",
+          "text": "How often do you feel that your relationships with others are not meaningful?"
+        },
+        {
+          "id": "ucla-ls-3-13",
+          "text": "How often do you feel that no one really knows you well?"
+        },
+        {
+          "id": "ucla-ls-3-14",
+          "text": "How often do you feel isolated from others?"
+        },
+        {
+          "id": "ucla-ls-3-15",
+          "text": "How often do you feel you can find companionship when you want it?"
+        },
+        {
+          "id": "ucla-ls-3-16",
+          "text": "How often do you feel that there are people who really understand you?"
+        },
+        {
+          "id": "ucla-ls-3-17",
+          "text": "How often do you feel shy?"
+        },
+        {
+          "id": "ucla-ls-3-18",
+          "text": "How often do you feel that people are around you but not with you?"
+        },
+        {
+          "id": "ucla-ls-3-19",
+          "text": "How often do you feel that there are people you can talk to?"
+        },
+        {
+          "id": "ucla-ls-3-20",
+          "text": "How often do you feel that there are people you can turn to?"
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [
+          "ucla-ls-3-1",
+          "ucla-ls-3-5",
+          "ucla-ls-3-6",
+          "ucla-ls-3-9",
+          "ucla-ls-3-10",
+          "ucla-ls-3-15",
+          "ucla-ls-3-16",
+          "ucla-ls-3-19",
+          "ucla-ls-3-20"
+        ],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Loneliness",
+            "codebookName": "Total",
+            "items": [
+              "ucla-ls-3-1",
+              "ucla-ls-3-2",
+              "ucla-ls-3-3",
+              "ucla-ls-3-4",
+              "ucla-ls-3-5",
+              "ucla-ls-3-6",
+              "ucla-ls-3-7",
+              "ucla-ls-3-8",
+              "ucla-ls-3-9",
+              "ucla-ls-3-10",
+              "ucla-ls-3-11",
+              "ucla-ls-3-12",
+              "ucla-ls-3-13",
+              "ucla-ls-3-14",
+              "ucla-ls-3-15",
+              "ucla-ls-3-16",
+              "ucla-ls-3-17",
+              "ucla-ls-3-18",
+              "ucla-ls-3-19",
+              "ucla-ls-3-20"
+            ],
+            "method": "sum",
+            "direction": "difficulty",
+            "bands": [
+              {
+                "upTo": 40,
+                "band": "strength"
+              },
+              {
+                "upTo": 60,
+                "band": "typical"
+              },
+              {
+                "band": "focus"
+              }
+            ],
+            "strengthReason": "You described feeling connected to the people around you.",
+            "focusReason": "Feeling disconnected from the people around you came up often in your answers."
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "Russell, D. W. (1996). UCLA Loneliness Scale (Version 3): Reliability, validity, and factor structure. Journal of Personality Assessment, 66(1), 20–40. https://doi.org/10.1207/s15327752jpa6601_2",
+        "url": "https://www.phenxtoolkit.org/protocols/view/181001"
+      }
+    },
+    {
+      "id": "who-5",
+      "code": "WHO-5",
+      "name": "Wellbeing over the last 2 weeks",
+      "formalName": "WHO-5 Well-Being Index",
+      "domain": "Wellbeing and life satisfaction",
+      "description": "Subjective psychological wellbeing (positive mood, vitality and interest) over the past 2 weeks.",
+      "licenceStatus": "cleared",
+      "licenceNote": "WHO-5 is free of charge and does not require permission to use (CORC, Te Pou).",
+      "instructions": "Please respond to each item regarding how you felt in the last two weeks.",
+      "minutes": 2,
+      "responseOptions": [
+        {
+          "value": 5,
+          "label": "All of the time"
+        },
+        {
+          "value": 4,
+          "label": "Most of the time"
+        },
+        {
+          "value": 3,
+          "label": "More than half the time"
+        },
+        {
+          "value": 2,
+          "label": "Less than half the time"
+        },
+        {
+          "value": 1,
+          "label": "Some of the time"
+        },
+        {
+          "value": 0,
+          "label": "At no time"
+        }
+      ],
+      "items": [
+        {
+          "id": "who-5-1",
+          "text": "Over the past two weeks ... I have felt cheerful in good spirits."
+        },
+        {
+          "id": "who-5-2",
+          "text": "Over the past two weeks ... I have felt calm and relaxed."
+        },
+        {
+          "id": "who-5-3",
+          "text": "Over the past two weeks ... I have felt active and vigorous."
+        },
+        {
+          "id": "who-5-4",
+          "text": "Over the past two weeks ... I woke up feeling fresh and rested."
+        },
+        {
+          "id": "who-5-5",
+          "text": "Over the past two weeks ... My daily life has been filled with things that interest me."
+        }
+      ],
+      "scoringRules": {
+        "minAnswered": 0.8,
+        "clientFacing": true,
+        "reverseItems": [],
+        "flagItems": [],
+        "subscales": [
+          {
+            "id": "total",
+            "label": "Wellbeing",
+            "codebookName": "Total",
+            "items": [
+              "who-5-1",
+              "who-5-2",
+              "who-5-3",
+              "who-5-4",
+              "who-5-5"
+            ],
+            "method": "sum",
+            "direction": "positive",
+            "bands": [
+              {
+                "upTo": 12,
+                "band": "focus"
+              },
+              {
+                "upTo": 17,
+                "band": "typical"
+              },
+              {
+                "band": "strength"
+              }
+            ],
+            "strengthReason": "You described feeling well, rested and interested in life over the past 2 weeks.",
+            "focusReason": "Your wellbeing over the past 2 weeks came through as an area to look after."
+          }
+        ]
+      },
+      "source": {
+        "codebook": "EF Client Hub Codebook",
+        "citation": "World Health Organization Regional Office for Europe. (1998). Wellbeing measures in primary health care/The DepCare Project: Report on a WHO meeting, Stockholm, Sweden, 12–13 February 1998. WHO Regional Office for Europe. See also Topp, C. W., Østergaard, S. D., Søndergaard, S., & Bech, P. (2015). The WHO-5 Well-Being Index: A systematic review of the literature. Psychotherapy and Psychosomatics, ",
+        "url": "https://www.psytoolkit.org/survey-library/who5.html"
       }
     }
   ]

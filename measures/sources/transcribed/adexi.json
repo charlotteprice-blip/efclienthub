@@ -1,0 +1,177 @@
+{
+  "code": "ADEXI",
+  "name": "Adult Executive Functioning Inventory",
+  "domain": "Executive functioning and attention",
+  "developer": "Holst and Thorell (2018)",
+  "construct": "Everyday executive functioning deficits in adults in the areas of working memory and inhibition, as the adult counterpart of the CHEXI.",
+  "respondent": "Self report",
+  "ageRange": "18+",
+  "minutes": 3,
+  "availability": "free with attribution (CC or stated)",
+  "licence": "\"All three instruments are freely available for both researchers and clinicians.\" \"The CHEXI, ADEXI, and TEXI are freely available in several different languages.\" No formal licence text is given on the site or the PDF.",
+  "licenceUrl": "https://chexi.se/",
+  "sourceUrl": "https://chexi.se/onewebmedia/English%20ADEXI%20self-report.pdf",
+  "instructions": "Below you will find a number of statements. Please circle a number to the right of each statement to indicate how well that statement describes how you are as a person. People that you know might feel differently about you – we want to know what you think about yourself. Try to answer as honestly as possible.",
+  "responseOptions": [
+    {
+      "value": 1,
+      "label": "Definitely not true"
+    },
+    {
+      "value": 2,
+      "label": "Not true"
+    },
+    {
+      "value": 3,
+      "label": "Partially true"
+    },
+    {
+      "value": 4,
+      "label": "True"
+    },
+    {
+      "value": 5,
+      "label": "Definitely true"
+    }
+  ],
+  "items": [
+    {
+      "n": 1,
+      "text": "I have difficulty remembering lengthy instructions",
+      "subscale": "Working Memory",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 2,
+      "text": "I have difficulty remembering what I am doing in the middle of an activity",
+      "subscale": "Working Memory",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 3,
+      "text": "I have a tendency to do things without first thinking about what could happen",
+      "subscale": "Inhibition",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 4,
+      "text": "I have difficulty stopping myself from doing something that I like even though someone tells me that it is not allowed.",
+      "subscale": "Inhibition",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 5,
+      "text": "When someone asks me to do several things, I remember only the first or last",
+      "subscale": "Working Memory",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 6,
+      "text": "I have difficulty refraining for smiling or laughing in situations where it is inappropriate",
+      "subscale": "Inhibition",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 7,
+      "text": "I have difficulty coming up with a different way of solving a problem when I get stuck",
+      "subscale": "Working Memory",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 8,
+      "text": "When someone asks me to fetch something, I forget what I am supposed to fetch",
+      "subscale": "Working Memory",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 9,
+      "text": "I have difficulty planning for an activity (e.g., remembering to bring everything necessary when going on a trip/to work/to school)",
+      "subscale": "Working Memory",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 10,
+      "text": "I have difficulty stopping an activity that I like (e.g., I watch TV or sit in front of the computer in the evening even though it is time to go to bed)",
+      "subscale": "Inhibition",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 11,
+      "text": "I have difficulty understanding verbal instructions unless I am also shown how to do something",
+      "subscale": "Working Memory",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 12,
+      "text": "I have difficulties with tasks or activities that involve several steps",
+      "subscale": "Working Memory",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 13,
+      "text": "I have difficulty thinking ahead or learning from experience",
+      "subscale": "Working Memory",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 14,
+      "text": "People that I meet seem to think that I am more lively/wilder compared to other people my age",
+      "subscale": "Inhibition",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    }
+  ],
+  "subscales": [
+    {
+      "name": "Working Memory",
+      "items": "1, 2, 5, 7, 8, 9, 11, 12, 13",
+      "count": 9,
+      "range": "1-5 (mean) or 9-45 (sum)",
+      "description": "Working memory and planning difficulties."
+    },
+    {
+      "name": "Inhibition",
+      "items": "3, 4, 6, 10, 14",
+      "count": 5,
+      "range": "1-5 (mean) or 5-25 (sum)",
+      "description": "Inhibition and impulse control difficulties."
+    },
+    {
+      "name": "Total",
+      "items": "1-14",
+      "count": 14,
+      "range": "1-5 (mean) or 14-70 (sum)",
+      "description": "Overall executive functioning deficits."
+    }
+  ],
+  "scoring": "The author subscale sheet (https://chexi.se/onewebmedia/ADEXI%20subscales.pdf) gives each subscale as the mean of its items: Working Memory, mean of items 1, 2, 5, 7, 8, 9, 11, 12, 13; Inhibition, mean of items 3, 4, 6, 10 and 14. The self report form has a field for the total score for each factor and an ADEXI total score. Higher scores indicate greater executive difficulties. No cut offs are published; the site states that normative data for these instruments are not yet available.",
+  "citation": "Holst, Y., & Thorell, L. B. (2018). Adult executive functioning inventory (ADEXI): Validity, reliability, and relations to ADHD. International Journal of Methods in Psychiatric Research, 27(1), e1567. https://doi.org/10.1002/mpr.1567",
+  "transcriptionNote": "Items transcribed from the English ADEXI self-report PDF on chexi.se. Item 6 reads \"refraining for smiling\" in the source (sic). Item 4 ends with a full stop in the source; the other items do not. Subscale membership taken from the ADEXI subscales PDF on chexi.se (colour coding in the colour coded PDF could not be read as text). The PDF carries no copyright line, only a translator credit to Lisa B. Thorell, Karolinska Institutet."
+}

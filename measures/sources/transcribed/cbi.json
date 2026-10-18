@@ -1,0 +1,217 @@
+{
+ "code": "CBI",
+ "name": "Copenhagen Burnout Inventory",
+ "domain": "Work and motivation",
+ "developer": "Kristensen, Borritz, Villadsen and Christensen (2005), National Research Centre for the Working Environment, Denmark",
+ "construct": "Burnout as fatigue and exhaustion attributed to three domains: life in general, work, and work with clients.",
+ "respondent": "Self report",
+ "ageRange": "Working adults",
+ "minutes": 5,
+ "availability": "free with attribution (CC or stated)",
+ "licence": "NFA (National Research Centre for the Working Environment): the CBI \"may be used freely for non-commercial and commercial purposes, provided that the following source is clearly cited\" (Borritz et al., 2006, Scandinavian Journal of Public Health). The first edition PDF itself carries no copyright statement.",
+ "licenceUrl": "https://www.nfa.dk/vaerktoejer/spoergeskemaer/spoergeskema-til-maaling-af-udbraendthed-cbi/copenhagen-burnout-inventory-cbi",
+ "sourceUrl": "https://nfa.dk/media/hl5nbers/cbi-first-edition.pdf",
+ "instructions": "",
+ "responseOptions": [
+  {
+   "value": 100,
+   "label": "Always / To a very high degree"
+  },
+  {
+   "value": 75,
+   "label": "Often / To a high degree"
+  },
+  {
+   "value": 50,
+   "label": "Sometimes / Somewhat"
+  },
+  {
+   "value": 25,
+   "label": "Seldom / To a low degree"
+  },
+  {
+   "value": 0,
+   "label": "Never/almost never / To a very low degree"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "How often do you feel tired?",
+   "subscale": "Personal burnout",
+   "reverse": false,
+   "filler": false,
+   "note": "Frequency scale: Always (100), Often (75), Sometimes (50), Seldom (25), Never/almost never (0)"
+  },
+  {
+   "n": 2,
+   "text": "How often are you physically exhausted?",
+   "subscale": "Personal burnout",
+   "reverse": false,
+   "filler": false,
+   "note": "Frequency scale: Always (100), Often (75), Sometimes (50), Seldom (25), Never/almost never (0)"
+  },
+  {
+   "n": 3,
+   "text": "How often are you emotionally exhausted?",
+   "subscale": "Personal burnout",
+   "reverse": false,
+   "filler": false,
+   "note": "Frequency scale: Always (100), Often (75), Sometimes (50), Seldom (25), Never/almost never (0)"
+  },
+  {
+   "n": 4,
+   "text": "How often do you think: ”I can’t take it anymore”?",
+   "subscale": "Personal burnout",
+   "reverse": false,
+   "filler": false,
+   "note": "Frequency scale: Always (100), Often (75), Sometimes (50), Seldom (25), Never/almost never (0)"
+  },
+  {
+   "n": 5,
+   "text": "How often do you feel worn out?",
+   "subscale": "Personal burnout",
+   "reverse": false,
+   "filler": false,
+   "note": "Frequency scale: Always (100), Often (75), Sometimes (50), Seldom (25), Never/almost never (0)"
+  },
+  {
+   "n": 6,
+   "text": "How often do you feel weak and susceptible to illness?",
+   "subscale": "Personal burnout",
+   "reverse": false,
+   "filler": false,
+   "note": "Frequency scale: Always (100), Often (75), Sometimes (50), Seldom (25), Never/almost never (0)"
+  },
+  {
+   "n": 7,
+   "text": "Is your work emotionally exhausting?",
+   "subscale": "Work related burnout",
+   "reverse": false,
+   "filler": false,
+   "note": "Degree scale: To a very high degree (100), To a high degree (75), Somewhat (50), To a low degree (25), To a very low degree (0)"
+  },
+  {
+   "n": 8,
+   "text": "Do you feel burnt out because of your work?",
+   "subscale": "Work related burnout",
+   "reverse": false,
+   "filler": false,
+   "note": "Degree scale: To a very high degree (100), To a high degree (75), Somewhat (50), To a low degree (25), To a very low degree (0)"
+  },
+  {
+   "n": 9,
+   "text": "Does your work frustrate you?",
+   "subscale": "Work related burnout",
+   "reverse": false,
+   "filler": false,
+   "note": "Degree scale: To a very high degree (100), To a high degree (75), Somewhat (50), To a low degree (25), To a very low degree (0)"
+  },
+  {
+   "n": 10,
+   "text": "Do you feel worn out at the end of the working day?",
+   "subscale": "Work related burnout",
+   "reverse": false,
+   "filler": false,
+   "note": "Frequency scale: Always (100), Often (75), Sometimes (50), Seldom (25), Never/almost never (0)"
+  },
+  {
+   "n": 11,
+   "text": "Are you exhausted in the morning at the thought of another day at work?",
+   "subscale": "Work related burnout",
+   "reverse": false,
+   "filler": false,
+   "note": "Frequency scale: Always (100), Often (75), Sometimes (50), Seldom (25), Never/almost never (0)"
+  },
+  {
+   "n": 12,
+   "text": "Do you feel that every working hour is tiring for you?",
+   "subscale": "Work related burnout",
+   "reverse": false,
+   "filler": false,
+   "note": "Frequency scale: Always (100), Often (75), Sometimes (50), Seldom (25), Never/almost never (0)"
+  },
+  {
+   "n": 13,
+   "text": "Do you have enough energy for family and friends during leisure time?",
+   "subscale": "Work related burnout",
+   "reverse": true,
+   "filler": false,
+   "note": "Frequency scale: Always (100), Often (75), Sometimes (50), Seldom (25), Never/almost never (0); reversed: Always (0) to Never/almost never (100)"
+  },
+  {
+   "n": 14,
+   "text": "Do you find it hard to work with clients?",
+   "subscale": "Client related burnout",
+   "reverse": false,
+   "filler": false,
+   "note": "Degree scale: To a very high degree (100), To a high degree (75), Somewhat (50), To a low degree (25), To a very low degree (0)"
+  },
+  {
+   "n": 15,
+   "text": "Do you find it frustrating to work with clients?",
+   "subscale": "Client related burnout",
+   "reverse": false,
+   "filler": false,
+   "note": "Degree scale: To a very high degree (100), To a high degree (75), Somewhat (50), To a low degree (25), To a very low degree (0)"
+  },
+  {
+   "n": 16,
+   "text": "Does it drain your energy to work with clients?",
+   "subscale": "Client related burnout",
+   "reverse": false,
+   "filler": false,
+   "note": "Degree scale: To a very high degree (100), To a high degree (75), Somewhat (50), To a low degree (25), To a very low degree (0)"
+  },
+  {
+   "n": 17,
+   "text": "Do you feel that you give more than you get back when you work with clients?",
+   "subscale": "Client related burnout",
+   "reverse": false,
+   "filler": false,
+   "note": "Degree scale: To a very high degree (100), To a high degree (75), Somewhat (50), To a low degree (25), To a very low degree (0)"
+  },
+  {
+   "n": 18,
+   "text": "Are you tired of working with clients?",
+   "subscale": "Client related burnout",
+   "reverse": false,
+   "filler": false,
+   "note": "Frequency scale: Always (100), Often (75), Sometimes (50), Seldom (25), Never/almost never (0)"
+  },
+  {
+   "n": 19,
+   "text": "Do you sometimes wonder how long you will be able to continue working with clients?",
+   "subscale": "Client related burnout",
+   "reverse": false,
+   "filler": false,
+   "note": "Frequency scale: Always (100), Often (75), Sometimes (50), Seldom (25), Never/almost never (0)"
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Personal burnout",
+   "items": "1-6",
+   "count": 6,
+   "range": "0-100",
+   "description": "\"Personal burnout is a state of prolonged physical and psychological exhaustion.\" Scale is valid if at least 3 of 6 items answered."
+  },
+  {
+   "name": "Work related burnout",
+   "items": "7-13",
+   "count": 7,
+   "range": "0-100",
+   "description": "\"Work burnout is a state of prolonged physical and psychological exhaustion, which is perceived as related to the person's work.\" Item 13 reversed. Scale is valid if at least 4 of 7 items answered."
+  },
+  {
+   "name": "Client related burnout",
+   "items": "14-19",
+   "count": 6,
+   "range": "0-100",
+   "description": "\"Client burnout is a state of prolonged physical and psychological exhaustion, which is perceived as related to the person's work with clients.\" Scale is valid if at least 3 of 6 items answered. The word clients is replaced by the relevant term (patients, students, inmates and so on)."
+  }
+ ],
+ "scoring": "Score each response Always or To a very high degree = 100, Often or To a high degree = 75, Sometimes or Somewhat = 50, Seldom or To a low degree = 25, Never/almost never or To a very low degree = 0, with item 13 reversed. Each subscale score is the mean of its items (0 to 100); higher scores indicate more burnout. A respondent is treated as a non responder on a scale if fewer than 3 personal items, fewer than 4 work items or fewer than 3 client items are answered. The NFA source gives no formal cut off; the PUMA study treated 50 or more as high burnout, and later studies commonly use 50 to 74 moderate, 75 to 99 high and 100 severe. The source recommends not presenting items in the order printed and mixing them with items on other topics.",
+ "citation": "Kristensen, T. S., Borritz, M., Villadsen, E., & Christensen, K. B. (2005). The Copenhagen Burnout Inventory: A new tool for the assessment of burnout. Work & Stress, 19(3), 192–207. https://doi.org/10.1080/02678370500297720",
+ "transcriptionNote": "Items transcribed from the NFA first edition PDF (Borritz and Kristensen, February 2004). The PDF prints the items grouped by scale without consecutive numbering; numbers 1 to 19 here follow the printed order (personal, work, client). The PDF gives no respondent instructions, only the 3 scale definitions quoted in the subscale descriptions. The PDF lists numeric values (100, 75, 50, 25, 0) only for the frequency scale and says the degree scale is scored \"as for the first scale\", so the same values are applied to the degree labels. Each item's response scale type is given in its note field because the two scales are used for different items. Second pass: item 4 quotation characters corrected to the PDF."
+}

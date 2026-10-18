@@ -1,0 +1,207 @@
+{
+ "code": "Hua Oranga",
+ "name": "Hua Oranga",
+ "domain": "Wellbeing and life satisfaction",
+ "developer": "Kingi and Durie (2000), Massey University for the Ministry of Health; revised by McLachlan (2022) for Te Rau Ora",
+ "construct": "Māori wellbeing outcome across the 4 taha of Te Whare Tapa Whā (tinana, wairua, whānau, hinengaro), rated at the present point in time.",
+ "respondent": "Self report (tangata whaiora form); parallel whānau and practitioner forms",
+ "ageRange": "Adults and rangatahi",
+ "minutes": 5,
+ "availability": "free with attribution (CC or stated)",
+ "licence": "Te Rau Ora: the outcome measure tool is \"available and free to use.\" The Hua Oranga manual (McLachlan, 2022) is licensed under Creative Commons Attribution (CC BY) 4.0 International and may be reprinted and distributed in whole or in part for non-commercial use with attribution to Te Rau Ora; logos, emblems, trademarks and imagery are excluded.",
+ "licenceUrl": "https://terauora.com/hua-oranga/",
+ "sourceUrl": "https://www.oradatabase.co.nz/files/appendix_1_tangata_whaiora_questionnaire.pdf",
+ "instructions": "These questions are about taha tinana or your physical health. At this point in time do you feel: [items]. These questions are about taha wairua or your spiritual health. At this point in time do you feel: [items]. These questions are about taha whānau or your family health. At this point in time do you feel: [items]. These questions are about taha hinengaro or your mental health. At this point in time do you feel: [items].",
+ "responseOptions": [
+  {
+   "value": 1,
+   "label": "Strongly disagree"
+  },
+  {
+   "value": 2,
+   "label": ""
+  },
+  {
+   "value": 3,
+   "label": ""
+  },
+  {
+   "value": 4,
+   "label": ""
+  },
+  {
+   "value": 5,
+   "label": "Strongly agree"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "Able to move about without pain or distress",
+   "subscale": "Taha Tinana",
+   "reverse": false,
+   "filler": false,
+   "note": "Factor label from the manual (te reo Māori, English gloss): Herekore (Mobility and pain)"
+  },
+  {
+   "n": 2,
+   "text": "I have goals to maintain or improve my physical wellbeing",
+   "subscale": "Taha Tinana",
+   "reverse": false,
+   "filler": false,
+   "note": "Factor label from the manual (te reo Māori, English gloss): Whakapiki Oranga (Opportunity for enhanced health)"
+  },
+  {
+   "n": 3,
+   "text": "I believe physical health improves my general wellbeing, including mental wellbeing",
+   "subscale": "Taha Tinana",
+   "reverse": false,
+   "filler": false,
+   "note": "Factor label from the manual (te reo Māori, English gloss): Te whanaungatanga o te hinengaro ki te tinana (Mind and body links)"
+  },
+  {
+   "n": 4,
+   "text": "Physically healthy",
+   "subscale": "Taha Tinana",
+   "reverse": false,
+   "filler": false,
+   "note": "Factor label from the manual (te reo Māori, English gloss): Hauora Tinana (Physical health status)"
+  },
+  {
+   "n": 5,
+   "text": "My mana is intact and acknowledged/respected",
+   "subscale": "Taha Wairua",
+   "reverse": false,
+   "filler": false,
+   "note": "Factor label from the manual (te reo Māori, English gloss): Whakarangatira (Dignity and respect)"
+  },
+  {
+   "n": 6,
+   "text": "Strong in my cultural identity",
+   "subscale": "Taha Wairua",
+   "reverse": false,
+   "filler": false,
+   "note": "Factor label from the manual (te reo Māori, English gloss): Tuakiri (Cultural identity)"
+  },
+  {
+   "n": 7,
+   "text": "Content within yourself",
+   "subscale": "Taha Wairua",
+   "reverse": false,
+   "filler": false,
+   "note": "Factor label from the manual (te reo Māori, English gloss): Tino Rangatiratanga (Personal contentment). Appendix 2 reflection tool prints this item as \"Content within myself\"."
+  },
+  {
+   "n": 8,
+   "text": "Connected and healthy from a spiritual (Wairua and Mauri) perspective",
+   "subscale": "Taha Wairua",
+   "reverse": false,
+   "filler": false,
+   "note": "Factor label from the manual (te reo Māori, English gloss): Mauri Ora (Spirituality)"
+  },
+  {
+   "n": 9,
+   "text": "Able to talk with my whānau and others",
+   "subscale": "Taha Whānau",
+   "reverse": false,
+   "filler": false,
+   "note": "Factor label from the manual (te reo Māori, English gloss): Whakawhitiwhiti whakaaro (Communication)"
+  },
+  {
+   "n": 10,
+   "text": "My relationships with whānau and others are healthy",
+   "subscale": "Taha Whānau",
+   "reverse": false,
+   "filler": false,
+   "note": "Factor label from the manual (te reo Māori, English gloss): Whanaungatanga (Relationships)"
+  },
+  {
+   "n": 11,
+   "text": "Clear about my roles within my whānau/family, and how to fulfil them.",
+   "subscale": "Taha Whānau",
+   "reverse": false,
+   "filler": false,
+   "note": "Factor label from the manual (te reo Māori, English gloss): Tauawhiawhi (Mutuality)"
+  },
+  {
+   "n": 12,
+   "text": "Able to participate in community, or hapū and iwi activities.",
+   "subscale": "Taha Whānau",
+   "reverse": false,
+   "filler": false,
+   "note": "Factor label from the manual (te reo Māori, English gloss): Tūhono-ā-hapori (Social participation)"
+  },
+  {
+   "n": 13,
+   "text": "I want to make changes in my life that contribute to my wellbeing",
+   "subscale": "Taha Hinengaro",
+   "reverse": false,
+   "filler": false,
+   "note": "Factor label from the manual (te reo Māori, English gloss): Whakahihiko (Motivation)"
+  },
+  {
+   "n": 14,
+   "text": "Able to think, feel and act in a positive manner",
+   "subscale": "Taha Hinengaro",
+   "reverse": false,
+   "filler": false,
+   "note": "Factor label from the manual (te reo Māori, English gloss): Whai Whakaaro, Whai Whanonga (Cognition and behaviour)"
+  },
+  {
+   "n": 15,
+   "text": "Able to manage unwelcome thoughts and feelings",
+   "subscale": "Taha Hinengaro",
+   "reverse": false,
+   "filler": false,
+   "note": "Factor label from the manual (te reo Māori, English gloss): Aro ki ngā kare-ā-roto (Management of thoughts and feelings)"
+  },
+  {
+   "n": 16,
+   "text": "I understand what contributes to my concerns and how to address these.",
+   "subscale": "Taha Hinengaro",
+   "reverse": false,
+   "filler": false,
+   "note": "Factor label from the manual (te reo Māori, English gloss): Kia Mōhio, Kia Mārama (Knowledge and understanding)"
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Taha Tinana",
+   "items": "1-4",
+   "count": 4,
+   "range": "4-20",
+   "description": "Physical wellbeing."
+  },
+  {
+   "name": "Taha Wairua",
+   "items": "5-8",
+   "count": 4,
+   "range": "4-20",
+   "description": "Spiritual wellbeing."
+  },
+  {
+   "name": "Taha Whānau",
+   "items": "9-12",
+   "count": 4,
+   "range": "4-20",
+   "description": "Family and social wellbeing."
+  },
+  {
+   "name": "Taha Hinengaro",
+   "items": "13-16",
+   "count": 4,
+   "range": "4-20",
+   "description": "Mental and emotional wellbeing."
+  },
+  {
+   "name": "Total",
+   "items": "1-16",
+   "count": 16,
+   "range": "16-80",
+   "description": "Sum of the 4 taha."
+  }
+ ],
+ "scoring": "Each item is rated 1 (strongly disagree) to 5 (strongly agree). Sum the 4 items in each taha (4 to 20) and sum the 4 taha for a total (16 to 80). Higher scores indicate better wellbeing. Manual bands per taha: very low 4-8, low 9-12, high 13-16, very high 17-20; overall: very low 16-32, low 33-48, high 49-64, very high 65-80 (labelled very poor, poor, good, very good). Compare taha and total scores across administrations and plot each taha; re-administer at first and last session for brief interventions or every 6 to 12 weeks for longer work. Where whaiora, whānau and practitioner forms are all completed within a week, average the 3 respondents' taha and total scores (sum and divide by 3). The 1997 original scored responses from -2 to +2 (range -32 to +32); the manual replaced this with the 1 to 5 scale. Source: McLachlan (2022) Hua Oranga manual.",
+ "citation": "Kingi, T. K. R., & Durie, M. H. (2000). \"Hua Oranga\": A Māori measure of mental health outcome (Research Report TPH 00/01). Te Pūmanawa Hauora, School of Māori Studies, Massey University; McLachlan, A. (2022). Whāngaihia te hua o oranga ki ō tātou whānui: Ko te tikanga o te whakamahinga o Hua Oranga [Hua Oranga manual]. Te Rau Ora.",
+ "transcriptionNote": "Items transcribed from the official Tangata Whaiora Questionnaire (Appendix 1, oradatabase.co.nz), in form order (tinana, wairua, whānau, hinengaro); the form prints no item numbers, so items are numbered 1 to 16 in codebook order. Punctuation follows the form: items 11, 12 and 16 end with a full stop, the others do not. The companion Outcome Measure reflection tool (Appendix 2) prints item 7 as \"Content within myself\" where Appendix 1 has \"Content within yourself\"; Appendix 1 wording is used. The form labels only the 2 scale endpoints (1 Strongly disagree, 5 Strongly agree); points 2 to 4 are unlabelled. The item text is given in English only on the form and in the manual; te reo Māori appears in the taha headings and in the manual's 16 factor labels, which are recorded in each item's note field. The HQSC sourceUrl document contains only a citation for Kingi and Durie (2000) and no items. The whānau and practitioner forms (Appendices 3 and 4) were not transcribed. The manual's suggested citation is reproduced as returned by the fetch; macron placement in the Māori title should be checked against the manual."
+}

@@ -1,0 +1,99 @@
+{
+  "code": "NCS-6",
+  "name": "Need for Cognition Scale, 6 item",
+  "domain": "Self talk, thinking patterns and personality",
+  "developer": "Coelho, Hanel and Wolf (2020); parent 18 item scale by Cacioppo, Petty and Kao (1984)",
+  "construct": "Tendency to engage in and enjoy effortful thinking.",
+  "respondent": "Self report",
+  "ageRange": "18+",
+  "minutes": 1,
+  "availability": "free with attribution (CC or stated)",
+  "licence": "Development paper (Assessment, 2020) is open access under a Creative Commons Attribution 4.0 licence (CC BY 4.0), copyright © The Author(s) 2018. PsyToolkit notes the scale may be used for research and that users \"need to acknowledge the authors and their research paper when writing about it.\"",
+  "licenceUrl": "https://journals.sagepub.com/doi/10.1177/1073191118793208",
+  "sourceUrl": "https://www.psytoolkit.org/survey-library/need-for-cognition-ncs6.html",
+  "instructions": "For each sentence below, please select how uncharacteristic or characteristic (5-point scale) this is for you personally.",
+  "responseOptions": [
+    {
+      "value": 1,
+      "label": "extremely uncharacteristic of me"
+    },
+    {
+      "value": 2,
+      "label": ""
+    },
+    {
+      "value": 3,
+      "label": ""
+    },
+    {
+      "value": 4,
+      "label": ""
+    },
+    {
+      "value": 5,
+      "label": "extremely characteristic of me"
+    }
+  ],
+  "items": [
+    {
+      "n": 1,
+      "text": "I would prefer complex to simple problems.",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 2,
+      "text": "I like to have the responsibility of handling a situation that requires a lot of thinking.",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 3,
+      "text": "Thinking is not my idea of fun.",
+      "subscale": "Total",
+      "reverse": true,
+      "filler": false,
+      "note": "Marked reverse in both sources"
+    },
+    {
+      "n": 4,
+      "text": "I would rather do something that requires little thought than something that is sure to challenge my thinking abilities.",
+      "subscale": "Total",
+      "reverse": true,
+      "filler": false,
+      "note": "Marked reverse in both sources"
+    },
+    {
+      "n": 5,
+      "text": "I really enjoy a task that involves coming up with new solutions to problems.",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 6,
+      "text": "I would prefer a task that is intellectual, difficult, and important to one that is somewhat important but does not require much thought.",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    }
+  ],
+  "subscales": [
+    {
+      "name": "Total",
+      "items": "1-6",
+      "count": 6,
+      "range": "1-5 (mean)",
+      "description": "Need for cognition; unidimensional."
+    }
+  ],
+  "scoring": "Reverse score items 3 and 4 (1 = 5, 2 = 4, 3 = 3, 4 = 2, 5 = 1), then take the mean of the 6 items (1 to 5); higher scores indicate a greater need for cognition. PsyToolkit: \"The score can range from 1 (you do not like deep thinking) to 5 (you like effortful thinking).\" Reported sample means around 3.6 in UK and US samples (Coelho et al., 2020). No cut offs.",
+  "citation": "Coelho, G. L. de H., Hanel, P. H. P., & Wolf, L. J. (2020). The very efficient assessment of need for cognition: Developing a six-item version. Assessment, 27(8), 1870–1885. https://doi.org/10.1177/1073191118793208",
+  "transcriptionNote": "Items transcribed from the PsyToolkit survey library page and checked against the Appendix of the Sage article; wording was identical in both. Item 6 was returned in 2 segments by the fetch tool and is joined here. Only the endpoint labels are given in either source (PsyToolkit prints the middle points as dots; the article gives 1 = extremely uncharacteristic of me, 5 = extremely characteristic of me), so points 2 to 4 are unlabelled. The PubMed Central copy (licenceUrl in the target record) could not be fetched because of a browser check, so the Sage page was used for the licence. Page numbers 1870–1885 in the citation were not visible on the Sage page and should be verified."
+}

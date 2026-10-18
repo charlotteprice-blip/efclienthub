@@ -1,0 +1,180 @@
+{
+ "code": "RAADS-14",
+ "name": "Ritvo Autism Asperger Diagnostic Scale, 14 item Screen",
+ "domain": "Clinical screening",
+ "developer": "Eriksson, Andersen and Bejerot (2013), Karolinska Institutet; derived from the RAADS-R (Ritvo et al., 2011)",
+ "construct": "Autistic traits in adults, covering mentalizing deficits, social anxiety and sensory reactivity, with developmental timing captured in the response format.",
+ "respondent": "Self report",
+ "ageRange": "18+ (adult psychiatric and general populations)",
+ "minutes": 3,
+ "availability": "free with attribution (CC or stated)",
+ "licence": "This article is published under license to BioMed Central Ltd. This is an open access article distributed under the terms of the Creative Commons Attribution License (http://creativecommons.org/licenses/by/2.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly cited.",
+ "licenceUrl": "https://molecularautism.biomedcentral.com/articles/10.1186/2040-2392-4-49",
+ "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3907126",
+ "instructions": "Please answer the questions according to what is true for you. Check only one column per statement!",
+ "responseOptions": [
+  {
+   "value": 3,
+   "label": "True now and when I was young"
+  },
+  {
+   "value": 2,
+   "label": "True only now"
+  },
+  {
+   "value": 1,
+   "label": "True only when I was younger than 16"
+  },
+  {
+   "value": 0,
+   "label": "Never true"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "It is difficult for me to understand how other people are feeling when we are talking",
+   "subscale": "Mentalizing deficits",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 2,
+   "text": "Some ordinary textures that do not bother others feel very offensive when they touch my skin",
+   "subscale": "Sensory reactivity",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 3,
+   "text": "It is very difficult for me to work and function in groups",
+   "subscale": "Social anxiety",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 4,
+   "text": "It is difficult to figure out what other people expect of me",
+   "subscale": "Mentalizing deficits",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 5,
+   "text": "I often don't know how to act in social situations",
+   "subscale": "Social anxiety",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 6,
+   "text": "I can chat and make small talk with people",
+   "subscale": "Social anxiety",
+   "reverse": true,
+   "filler": false,
+   "note": "Reversed item: scored 0 for True now and when I was young through 3 for Never true"
+  },
+  {
+   "n": 7,
+   "text": "When I feel overwhelmed by my senses, I have to isolate myself to shut them down",
+   "subscale": "Sensory reactivity",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 8,
+   "text": "How to make friends and socialize is a mystery to me",
+   "subscale": "Social anxiety",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 9,
+   "text": "When talking to someone, I have a hard time telling when it is my turn to talk or to listen",
+   "subscale": "Mentalizing deficits",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 10,
+   "text": "Sometimes I have to cover my ears to block out painful noises (like vacuum cleaners or people talking too much or too loudly)",
+   "subscale": "Sensory reactivity",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 11,
+   "text": "It can be very hard to read someone's face, hand, and body movements when we are talking",
+   "subscale": "Mentalizing deficits",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 12,
+   "text": "I focus on details rather than the overall idea",
+   "subscale": "Mentalizing deficits",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 13,
+   "text": "I take things too literally, so I often miss what people are trying to say",
+   "subscale": "Mentalizing deficits",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 14,
+   "text": "I get extremely upset when the way I like to do things is suddenly changed",
+   "subscale": "Mentalizing deficits",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Total",
+   "items": "1-14",
+   "count": 14,
+   "range": "0-42",
+   "description": "Screening total."
+  },
+  {
+   "name": "Mentalizing deficits",
+   "items": "1, 4, 9, 11, 12, 13, 14",
+   "count": 7,
+   "range": "0-21",
+   "description": "Table 3 and 4 assignment."
+  },
+  {
+   "name": "Social anxiety",
+   "items": "3, 5, 6, 8",
+   "count": 4,
+   "range": "0-12",
+   "description": "Table 3 and 4 assignment; item 6 reversed."
+  },
+  {
+   "name": "Sensory reactivity",
+   "items": "2, 7, 10",
+   "count": 3,
+   "range": "0-9",
+   "description": "Table 3 and 4 assignment."
+  }
+ ],
+ "scoring": "Score each item 3 (true now and when I was young), 2 (true only now), 1 (true only when I was younger than 16) or 0 (never true); item 6 is reversed (0, 1, 2, 3). Sum for a total of 0 to 42; higher scores indicate more autistic traits. Eriksson et al. (2013): a cut off score of 14 or above gives sensitivity 0.97 and specificity 0.46 against ADHD, 0.64 against other psychiatric disorders and 0.95 against non psychiatric controls. A 5 item short form with cut off 4 or above out of 15 had sensitivity 0.93 and specificity 0.45 to 0.49 in the psychiatric samples. Screening tool only, not diagnostic.",
+ "citation": "Eriksson, J. M., Andersen, L. M., & Bejerot, S. (2013). RAADS-14 Screen: Validity of a screening tool for autism spectrum disorder in an adult psychiatric population. Molecular Autism, 4(1), 49. https://doi.org/10.1186/2040-2392-4-49",
+ "transcriptionNote": "Items transcribed from Table 2 ('The RAADS-14 Screen') of the PMC copy of the open access article (PMC3907126), with subscale membership from Tables 3 and 4 and item 6 marked as the only reversed item; item 10 was returned in two fragments and rejoined. The BMC article page itself returned only 2 item texts to WebFetch and the Additional file 1 (print version with clinician instructions) URL was not exposed. Response labels are quoted from the Methods description of the RAADS-R 4 point scale; Table 2's own label wording was not quoted and may differ slightly (the Swedish Region Kronoberg form phrases them as 'True for me now and when I was young', 'True only for me now', 'True only when I was young (before age 16)', 'Never true for me'). Normative medians by population were not transcribed. Second pass: response labels confirmed against Table 2 headers."
+}

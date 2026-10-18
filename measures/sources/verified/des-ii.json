@@ -1,0 +1,11 @@
+{
+  "file": "des-ii.json",
+  "sourceReached": true,
+  "sourceUsed": "https://www.psychdb.com/_media/dissociative-disorders/des-ii.pdf",
+  "itemsChecked": 28,
+  "itemsMatching": 28,
+  "discrepancies": [],
+  "licenceMatches": true,
+  "verdict": "verified",
+  "notes": "All 28 items match the psychdb DES-II form word for word (checked in 3 batches of 9 to 10; curly apostrophes in items 1 and 4 are present in both). Item 8's 'friends of family members' is indeed what the form prints and is correctly flagged. Directions match verbatim, including the For example row. Response row under each item prints 0% 10 20 ... 90 100% with Never and Always labels only in the Directions example, consistent with the responseOptions. The scoring field paraphrases the form's method (drop the zero, sum, multiply by 10, divide by 28) as adding percentages and dividing by 28, which is arithmetically identical; the 30 cut off and the normal versus pathological sentence match. Permission statement matches verbatim. The form itself prints no subscales, so the Amnesia, Depersonalisation and derealisation, Absorption and DES-Taxon memberships could not be checked against the source; they agree with the conventional Carlson et al. (1991) and Waller et al. (1996) sets as the file declares, and the item level subscale fields are sensibly left as Total."
+}

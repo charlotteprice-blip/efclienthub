@@ -1,0 +1,11 @@
+{
+  "file": "cfc-14.json",
+  "sourceReached": true,
+  "sourceUsed": "https://digfir-published.macmillanusa.com/myers_pel_assess_your_strengths2/myers_ays_ch6a.html",
+  "itemsChecked": 14,
+  "itemsMatching": 14,
+  "discrepancies": [],
+  "licenceMatches": "unverified",
+  "verdict": "verified",
+  "notes": "All 14 items and the instructions match the Macmillan page word for word. The page's scoring formula treats items 3, 4, 5, 9, 10, 11 and 12 as reversed, which matches the file's reverse flags and CFC Immediate membership; items 1, 2, 6, 7, 8, 13, 14 unreversed match CFC Future. Response options: the page gives no labels or values (its 14 to 70 range implies 5 points); the file's 1 extremely uncharacteristic to 7 extremely characteristic endpoints come from the target record, not the source, as the transcriptionNote declares. Licence: the file's licence field is a characterisation rather than a quotation, and the SOBC measures page it links to carries no licensing or terms text, so the licence cannot be matched against anything; marked unverified rather than wrong. Citation on page matches Joireman, Shaffer, Balliet and Strathman (2012), PSPB 38, 1272-1287."
+}

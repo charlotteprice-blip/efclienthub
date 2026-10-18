@@ -1,0 +1,301 @@
+{
+  "code": "SCS",
+  "name": "Self-Compassion Scale, long form",
+  "domain": "Self talk, thinking patterns and personality",
+  "developer": "Kristin D. Neff (2003), University of Texas at Austin",
+  "construct": "Self compassion as self kindness, common humanity and mindfulness versus self judgement, isolation and over identification in difficult times.",
+  "respondent": "Self report",
+  "ageRange": "18+ (14+ with the youth form)",
+  "minutes": 5,
+  "availability": "free with attribution (CC or stated)",
+  "licence": "\"Dr. Kristin Neff grants permission to use the Self-Compassion Scale (Neff, 2003) for any purpose whatsoever,\" with permission also given to translate the scale provided the factor structure is validated (SCS-information.pdf).",
+  "licenceUrl": "https://self-compassion.org/wp-content/uploads/2021/03/SCS-information.pdf",
+  "sourceUrl": "https://self-compassion.org/wptest/wp-content/uploads/Self_Compassion_Scale_for_researchers.pdf",
+  "instructions": "HOW I TYPICALLY ACT TOWARDS MYSELF IN DIFFICULT TIMES. Please read each statement carefully before answering. To the left of each item, indicate how often you behave in the stated manner, using the following scale:",
+  "responseOptions": [
+    {
+      "value": 1,
+      "label": "Almost never"
+    },
+    {
+      "value": 2,
+      "label": ""
+    },
+    {
+      "value": 3,
+      "label": ""
+    },
+    {
+      "value": 4,
+      "label": ""
+    },
+    {
+      "value": 5,
+      "label": "Almost always"
+    }
+  ],
+  "items": [
+    {
+      "n": 1,
+      "text": "I'm disapproving and judgmental about my own flaws and inadequacies.",
+      "subscale": "Self-Judgment",
+      "reverse": true,
+      "filler": false,
+      "note": "Reverse scored before computing the total"
+    },
+    {
+      "n": 2,
+      "text": "When I'm feeling down I tend to obsess and fixate on everything that's wrong.",
+      "subscale": "Over-identified",
+      "reverse": true,
+      "filler": false,
+      "note": "Reverse scored before computing the total"
+    },
+    {
+      "n": 3,
+      "text": "When things are going badly for me, I see the difficulties as part of life that everyone goes through.",
+      "subscale": "Common Humanity",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 4,
+      "text": "When I think about my inadequacies, it tends to make me feel more separate and cut off from the rest of the world.",
+      "subscale": "Isolation",
+      "reverse": true,
+      "filler": false,
+      "note": "Reverse scored before computing the total"
+    },
+    {
+      "n": 5,
+      "text": "I try to be loving towards myself when I'm feeling emotional pain.",
+      "subscale": "Self-Kindness",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 6,
+      "text": "When I fail at something important to me I become consumed by feelings of inadequacy.",
+      "subscale": "Over-identified",
+      "reverse": true,
+      "filler": false,
+      "note": "Reverse scored before computing the total"
+    },
+    {
+      "n": 7,
+      "text": "When I'm down and out, I remind myself that there are lots of other people in the world feeling like I am.",
+      "subscale": "Common Humanity",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 8,
+      "text": "When times are really difficult, I tend to be tough on myself.",
+      "subscale": "Self-Judgment",
+      "reverse": true,
+      "filler": false,
+      "note": "Reverse scored before computing the total"
+    },
+    {
+      "n": 9,
+      "text": "When something upsets me I try to keep my emotions in balance.",
+      "subscale": "Mindfulness",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 10,
+      "text": "When I feel inadequate in some way, I try to remind myself that feelings of inadequacy are shared by most people.",
+      "subscale": "Common Humanity",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 11,
+      "text": "I'm intolerant and impatient towards those aspects of my personality I don't like.",
+      "subscale": "Self-Judgment",
+      "reverse": true,
+      "filler": false,
+      "note": "Reverse scored before computing the total"
+    },
+    {
+      "n": 12,
+      "text": "When I'm going through a very hard time, I give myself the caring and tenderness I need.",
+      "subscale": "Self-Kindness",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 13,
+      "text": "When I'm feeling down, I tend to feel like most other people are probably happier than I am.",
+      "subscale": "Isolation",
+      "reverse": true,
+      "filler": false,
+      "note": "Reverse scored before computing the total"
+    },
+    {
+      "n": 14,
+      "text": "When something painful happens I try to take a balanced view of the situation.",
+      "subscale": "Mindfulness",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 15,
+      "text": "I try to see my failings as part of the human condition.",
+      "subscale": "Common Humanity",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 16,
+      "text": "When I see aspects of myself that I don't like, I get down on myself.",
+      "subscale": "Self-Judgment",
+      "reverse": true,
+      "filler": false,
+      "note": "Reverse scored before computing the total"
+    },
+    {
+      "n": 17,
+      "text": "When I fail at something important to me I try to keep things in perspective.",
+      "subscale": "Mindfulness",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 18,
+      "text": "When I'm really struggling, I tend to feel like other people must be having an easier time of it.",
+      "subscale": "Isolation",
+      "reverse": true,
+      "filler": false,
+      "note": "Reverse scored before computing the total"
+    },
+    {
+      "n": 19,
+      "text": "I'm kind to myself when I'm experiencing suffering.",
+      "subscale": "Self-Kindness",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 20,
+      "text": "When something upsets me I get carried away with my feelings.",
+      "subscale": "Over-identified",
+      "reverse": true,
+      "filler": false,
+      "note": "Reverse scored before computing the total"
+    },
+    {
+      "n": 21,
+      "text": "I can be a bit cold-hearted towards myself when I'm experiencing suffering.",
+      "subscale": "Self-Judgment",
+      "reverse": true,
+      "filler": false,
+      "note": "Reverse scored before computing the total"
+    },
+    {
+      "n": 22,
+      "text": "When I'm feeling down I try to approach my feelings with curiosity and openness.",
+      "subscale": "Mindfulness",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 23,
+      "text": "I'm tolerant of my own flaws and inadequacies.",
+      "subscale": "Self-Kindness",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 24,
+      "text": "When something painful happens I tend to blow the incident out of proportion.",
+      "subscale": "Over-identified",
+      "reverse": true,
+      "filler": false,
+      "note": "Reverse scored before computing the total"
+    },
+    {
+      "n": 25,
+      "text": "When I fail at something that's important to me, I tend to feel alone in my failure.",
+      "subscale": "Isolation",
+      "reverse": true,
+      "filler": false,
+      "note": "Reverse scored before computing the total"
+    },
+    {
+      "n": 26,
+      "text": "I try to be understanding and patient towards those aspects of my personality I don't like.",
+      "subscale": "Self-Kindness",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    }
+  ],
+  "subscales": [
+    {
+      "name": "Self-Kindness",
+      "items": "5, 12, 19, 23, 26",
+      "count": 5,
+      "range": "1-5 (mean)",
+      "description": "Positive subscale."
+    },
+    {
+      "name": "Self-Judgment",
+      "items": "1, 8, 11, 16, 21",
+      "count": 5,
+      "range": "1-5 (mean)",
+      "description": "Negative subscale; reverse scored for the total."
+    },
+    {
+      "name": "Common Humanity",
+      "items": "3, 7, 10, 15",
+      "count": 4,
+      "range": "1-5 (mean)",
+      "description": "Positive subscale."
+    },
+    {
+      "name": "Isolation",
+      "items": "4, 13, 18, 25",
+      "count": 4,
+      "range": "1-5 (mean)",
+      "description": "Negative subscale; reverse scored for the total."
+    },
+    {
+      "name": "Mindfulness",
+      "items": "9, 14, 17, 22",
+      "count": 4,
+      "range": "1-5 (mean)",
+      "description": "Positive subscale."
+    },
+    {
+      "name": "Over-identified",
+      "items": "2, 6, 20, 24",
+      "count": 4,
+      "range": "1-5 (mean)",
+      "description": "Negative subscale (Over-identification); reverse scored for the total."
+    },
+    {
+      "name": "Total",
+      "items": "1-26",
+      "count": 26,
+      "range": "1-5 (mean)",
+      "description": "Overall self compassion."
+    }
+  ],
+  "scoring": "Reverse score the Self-Judgment, Isolation and Over-identified items (1 = 5, 2 = 4, 3 = 3, 4 = 2, 5 = 1), compute the mean of each of the 6 subscales, then take the total as the grand mean (the researcher PDF gives the mean of all 26 items; SCS-information.pdf gives the mean of the 6 subscale means, which are equal only when subscales have equal length, so the two documents differ slightly). Higher scores indicate greater self compassion. Neff states there are no clinical norms; her ad hoc rubric is 1.0 to 2.49 low, 2.5 to 3.5 moderate, 3.51 to 5.0 high. Negative subscales may be reported with or without reverse coding but must be reverse coded before the total is computed.",
+  "citation": "Neff, K. D. (2003). The development and validation of a scale to measure self-compassion. Self and Identity, 2(3), 223–250. https://doi.org/10.1080/15298860309027",
+  "transcriptionNote": "Items transcribed from the researcher PDF on self-compassion.org; US spelling (judgmental) retained. The response scale labels only the endpoints 1 Almost never and 5 Almost always, so points 2 to 4 are unlabelled. Subscale names follow the PDF's coding key (Self-Kindness, Self-Judgment, Common Humanity, Isolation, Mindfulness, Over-identified). Total score method: the researcher PDF says to take the mean of all 26 items after reverse coding, while SCS-information.pdf (licence source) says to average the 6 subscale means; both are recorded in scoring. The instruction text was confirmed sentence by sentence against the PDF, where the scale line is printed as \"Almost never 1 2 3 4 5 Almost always\"."
+}

@@ -1,0 +1,11 @@
+{
+ "file": "mwq.json",
+ "sourceReached": true,
+ "sourceUsed": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2013.00560/full",
+ "itemsChecked": 5,
+ "itemsMatching": 5,
+ "discrepancies": [],
+ "licenceMatches": true,
+ "verdict": "verified",
+ "notes": "Items 1 to 4 match Table 1 and the Methods text exactly. Item 5 is printed as 'lectures of presentations' in Table 1 and 'lectures or presentations' in the Methods text; the transcription uses 'or' and discloses the difference in its note, which is the sensible choice. The 6 response labels (almost never to almost always) match the Methods sentence. Eigenvalue 3.58, 63.16 percent of variance and alpha 0.850 confirmed. The licence quotation matches apart from the copyright symbol being written out as the word Copyright. No instructions are printed in the article."
+}

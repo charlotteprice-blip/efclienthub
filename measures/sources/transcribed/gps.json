@@ -1,0 +1,211 @@
+{
+ "code": "GPS",
+ "name": "General Procrastination Scale",
+ "domain": "Procrastination, time and habits",
+ "developer": "Lay (1986)",
+ "construct": "Trait procrastination across everyday tasks such as bills, appointments, shopping and correspondence.",
+ "respondent": "Self report",
+ "ageRange": "18+",
+ "minutes": 5,
+ "availability": "free with attribution (CC or stated)",
+ "licence": "Salford PsyTech questionnaire battery, Copyright restrictions field: \"No restrictions.\" No author licence text appears on the York University PDF.",
+ "licenceUrl": "https://hub.salford.ac.uk/psytech/equipment-resources/questionnaire-battery/procrastination-scale/",
+ "sourceUrl": "https://www.yorku.ca/rokada/psyctest/procrast.pdf",
+ "instructions": "People may use the following statements to describe themselves. For each statement, decide whether the statement is uncharacteristic or characteristic of you using the following 5 point scale. Note that the 3 on the scale is Neutral – the statement is neither characteristic nor uncharacteristic of you. In the box to the right of each statement, fill in the number on the 5 point scale that best describes you.",
+ "responseOptions": [
+  {
+   "value": 1,
+   "label": "Extremely Uncharacteristic"
+  },
+  {
+   "value": 2,
+   "label": "Moderately Uncharacteristic"
+  },
+  {
+   "value": 3,
+   "label": "Neutral"
+  },
+  {
+   "value": 4,
+   "label": "Moderately Characteristic"
+  },
+  {
+   "value": 5,
+   "label": "Extremely Characteristic"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "I often find myself performing tasks that I had intended to do days before.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 2,
+   "text": "I often miss concerts, sporting events, or the like because I don't around to buying tickets on time.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "Asterisked in source (differs between student and non-student forms). Source text reads \"don't around\"; likely a typographical omission of \"get\". Transcribed as printed."
+  },
+  {
+   "n": 3,
+   "text": "When planning a party, I make the necessary arrangements well in advance.",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": "Asterisked in source (differs between student and non-student forms)."
+  },
+  {
+   "n": 4,
+   "text": "When it is time to get up in the morning, I most often get right out of bed.",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 5,
+   "text": "A letter may sit for days after I write it before mailing it.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 6,
+   "text": "I generally return phone calls promptly.",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 7,
+   "text": "Even with jobs that require little else except sitting down and doing them, I find they seldom get done for days.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 8,
+   "text": "I usually make decisions as soon as possible.",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 9,
+   "text": "I generally delay before starting on work I have to do.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 10,
+   "text": "When travelling, I usually have to rush in preparing to arrive at the airport or station at the appropriate time.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "Asterisked in source (differs between student and non-student forms)."
+  },
+  {
+   "n": 11,
+   "text": "When preparing to go out, I am seldom caught having to do something at the last minute.",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 12,
+   "text": "In preparing for some deadline, I often waste time by doing other things.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 13,
+   "text": "If a bill for a small amount comes, I pay it right away.",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": "Asterisked in source (differs between student and non-student forms)."
+  },
+  {
+   "n": 14,
+   "text": "I usually return an RVSP request very shortly after receiving the invitation.",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": "Asterisked in source (differs between student and non-student forms). Source spells \"RVSP\" as printed."
+  },
+  {
+   "n": 15,
+   "text": "I often have a task finished sooner than necessary.",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 16,
+   "text": "I always seem to end up shopping for birthday or Christmas gifts at the last minute.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 17,
+   "text": "I usually buy even an essential item at the last minute.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 18,
+   "text": "I usually accomplish all the things I plan to do in a day.",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 19,
+   "text": "I am continually saying \"I'll do it tomorrow\".",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "Source PDF renders the quotation marks and apostrophe as encoding artefacts (\"AI=ll do it tomorrow@\"); the intended wording is as given here."
+  },
+  {
+   "n": 20,
+   "text": "I usually take care of all the tasks I have to do before I settle down and relax for the evening.",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": ""
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Total",
+   "items": "1-20",
+   "count": 20,
+   "range": "20-100",
+   "description": "Sum of all 20 items after reverse scoring items 3, 4, 6, 8, 11, 13, 14, 15, 18 and 20."
+  }
+ ],
+ "scoring": "Reverse score items 3, 4, 6, 8, 11, 13, 14, 15, 18 and 20 (6 minus raw score) and sum all 20 items for a total of 20 to 100; higher scores indicate greater trait procrastination. Source footer: \"Note: Reversed-keyed items: 3,4,6,8,11,13,14,15,18,20\" and \"Note: * indicates items that differ from student to non-student forms\". No clinical cut offs are published.",
+ "citation": "Lay, C. H. (1986). At last, my research article on procrastination. Journal of Research in Personality, 20(4), 474–495. https://doi.org/10.1016/0092-6566(86)90127-3",
+ "transcriptionNote": "Transcribed from the York University PDF titled \"Procrastination Scale (Lay, 1986)\". Items 2, 3, 10, 13 and 14 are asterisked as differing between the student and non-student forms; the PDF does not state which form it reproduces. Item 2 contains an apparent typographical omission (\"don't around\") that has been kept as printed. Item 19 contains encoding artefacts in the PDF for the quotation marks and apostrophe; the wording given here resolves those artefacts and is the only departure from the printed text."
+}

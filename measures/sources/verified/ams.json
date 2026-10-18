@@ -1,0 +1,11 @@
+{
+  "file": "ams.json",
+  "sourceReached": true,
+  "sourceUsed": "https://www.lrcs.uqam.ca/wp-content/uploads/2017/08/emec_en.pdf",
+  "itemsChecked": 28,
+  "itemsMatching": 28,
+  "discrepancies": [],
+  "licenceMatches": true,
+  "verdict": "verified",
+  "notes": "All 28 items match the AMS-C 28 form word for word, including punctuation and the quoted phrases in items 15 and 25. The 7 subscale assignments match the KEY FOR AMS-28 printed on the form exactly, including the subscale names. The copyright footer (Vallerand, Pelletier, Blais, Briere, Senecal, Vallieres, 1992) and the note 'To use this scale you require only to mention the complete reference data.' are quoted correctly. The response scale prints 5 verbal anchors over 7 numbers; the text layer cannot confirm which numbers the shared anchors sit above, so the value to label alignment for 2, 3, 5 and 6 remains as the transcription note describes, taken from the standard layout and not independently verified here."
+}

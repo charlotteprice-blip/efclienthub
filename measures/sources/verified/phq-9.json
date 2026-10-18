@@ -1,0 +1,11 @@
+{
+ "file": "phq-9.json",
+ "sourceReached": true,
+ "sourceUsed": "https://cde.nida.nih.gov/system/files/PatientHealthQuestionnaire-9_2014Mar19.pdf",
+ "itemsChecked": 9,
+ "itemsMatching": 9,
+ "discrepancies": [],
+ "licenceMatches": true,
+ "verdict": "verified",
+ "notes": "All 9 items match the NIDA form word for word, including the hyphens in items 6 and 8 and the question mark inside item 8. Response labels and values 0 to 3 match. The follow up difficulty question and its 4 options match. The developer and permission footer matches verbatim. The form's instruction block also contains 'Please respond to each question.' and 'Give answers as 0 to 3, using this scale:' around the standard stem; the transcription keeps only the standard stem, which is the wording common to all PHQ-9 forms. The scoring sentence on the form ('Clinic personnel will follow standard scoring') is correctly reported. Severity bands were not checked against the 2001 article."
+}

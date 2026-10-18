@@ -1,0 +1,11 @@
+{
+ "file": "promis-ability-to-participate-v2-0-8a.json",
+ "sourceReached": true,
+ "sourceUsed": "https://loinc.org/76731-9/panel (7 items, answer list, score codes); https://loinc.org/76710-3/ (8th item text); https://www.findacode.com/loinc/76731-9--promis-short-form-ability-to-participate-in-social-roles-and-activities-8a-version-20.html (confirms 76710-3 is the 8th panel member in that order)",
+ "itemsChecked": 8,
+ "itemsMatching": 8,
+ "discrepancies": [],
+ "licenceMatches": "unverified",
+ "verdict": "verified",
+ "notes": "The LOINC panel page lists 7 item members whose text matches items 1 to 7 word for word and in the same order; the findacode mirror of the panel lists 76710-3 as the 8th member, and its LOINC page gives the text 'I have trouble doing all of the work that is really important to me (include work at home)', matching item 8. Answer list LL3003-2 (Never 5, Rarely 4, Sometimes 3, Usually 2, Always 1) matches. Raw score code 77814-2 and T score code 77854-8 confirmed. No instructions are on the panel, so the empty field is correct. The official HealthMeasures PDF and the NIH HEAL CRF (which redirects to a landing page) were not reachable, so item order against the official form remains unconfirmed, as the transcriptionNote says. The licence field is a summary flagged as such; the Steps to License page does not state free use terms or a 2024 date, so it is unverified. LOINC itself carries 'Copyright (c) 2010 PROMIS Health Organization...' and refers to the PROMIS Terms and Conditions, which could be quoted instead."
+}

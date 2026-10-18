@@ -1,0 +1,327 @@
+{
+ "code": "DES-II",
+ "name": "Dissociative Experiences Scale II",
+ "domain": "Clinical screening",
+ "developer": "Carlson and Putnam (1993); original Bernstein and Putnam (1986)",
+ "construct": "Frequency of dissociative experiences in daily life, spanning amnesia, depersonalisation and derealisation, and absorption.",
+ "respondent": "Self report",
+ "ageRange": "18+ (adolescents should use the A-DES)",
+ "minutes": 10,
+ "availability": "public domain",
+ "licence": "Authors E.B. Carlson & F.W. Putnam have given permission for the Dissociative Experiences Scale to be copied, distributed or reproduced for research or clinical use.",
+ "licenceUrl": "https://www.psychdb.com/_media/dissociative-disorders/des-ii.pdf",
+ "sourceUrl": "https://www.psychdb.com/_media/dissociative-disorders/des-ii.pdf",
+ "instructions": "This questionnaire asks about experiences that you may have in your daily life. We are interested in how often you have these experiences. It is important, however, that your answers show how often these experiences happen to you when you are not under the influence of alcohol or drugs. To answer the questions, please determine to what degree each experience described in the question applies to you, and circle the number to show what percentage of the time you have the experience. For example: 0% (Never) 10 20 30 40 50 60 70 80 90 100% (Always)",
+ "responseOptions": [
+  {
+   "value": 0,
+   "label": "0% (Never)"
+  },
+  {
+   "value": 10,
+   "label": "10"
+  },
+  {
+   "value": 20,
+   "label": "20"
+  },
+  {
+   "value": 30,
+   "label": "30"
+  },
+  {
+   "value": 40,
+   "label": "40"
+  },
+  {
+   "value": 50,
+   "label": "50"
+  },
+  {
+   "value": 60,
+   "label": "60"
+  },
+  {
+   "value": 70,
+   "label": "70"
+  },
+  {
+   "value": 80,
+   "label": "80"
+  },
+  {
+   "value": 90,
+   "label": "90"
+  },
+  {
+   "value": 100,
+   "label": "100% (Always)"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "Some people have the experience of driving or riding in a car or bus or subway and suddenly realizing that they don’t remember what has happened during all or part of the trip.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 2,
+   "text": "Some people find that sometimes they are listening to someone talk and they suddenly realize that they did not hear part or all of what was said.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 3,
+   "text": "Some people have the experience of finding themselves in a place and have no idea how they got there.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 4,
+   "text": "Some people have the experience of finding themselves dressed in clothes that they don’t remember putting on.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 5,
+   "text": "Some people have the experience of finding new things among their belongings that they do not remember buying.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 6,
+   "text": "Some people sometimes find that they are approached by people that they do not know, who call them by another name or insist that they have met them before.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 7,
+   "text": "Some people sometimes have the experience of feeling as though they are standing next to themselves or watching themselves do something and they actually see themselves as if they were looking at another person.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 8,
+   "text": "Some people are told that they sometimes do not recognize friends of family members.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "'friends of family members' as printed on the psychdb form; the original reads 'friends or family members'."
+  },
+  {
+   "n": 9,
+   "text": "Some people find that they have no memory for some important events in their lives (for example, a wedding or graduation).",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 10,
+   "text": "Some people have the experience of being accused of lying when they do not think that they have lied.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 11,
+   "text": "Some people have the experience of looking in a mirror and not recognizing themselves.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 12,
+   "text": "Some people have the experience of feeling that other people, objects, and the world around them are not real.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 13,
+   "text": "Some people have the experience of feeling that their body does not seem to belong to them.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 14,
+   "text": "Some people have the experience of sometimes remembering a past event so vividly that they feel as if they were reliving that event.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 15,
+   "text": "Some people have the experience of not being sure whether things that they remember happening really did happen or whether they just dreamed them.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 16,
+   "text": "Some people have the experience of being in a familiar place but finding it strange and unfamiliar.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 17,
+   "text": "Some people find that when they are watching television or a movie they become so absorbed in the story that they are unaware of other events happening around them.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 18,
+   "text": "Some people find that they become so involved in a fantasy or daydream that it feels as though it were really happening to them.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 19,
+   "text": "Some people find that they sometimes are able to ignore pain.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 20,
+   "text": "Some people find that they sometimes sit staring off into space, thinking of nothing, and are not aware of the passage of time.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 21,
+   "text": "Some people sometimes find that when they are alone they talk out loud to themselves.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 22,
+   "text": "Some people find that in one situation they may act so differently compared with another situation that they feel almost as if they were two different people.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 23,
+   "text": "Some people sometimes find that in certain situations they are able to do things with amazing ease and spontaneity that would usually be difficult for them (for example, sports, work, social situations, etc.).",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 24,
+   "text": "Some people sometimes find that they cannot remember whether they have done something or have just thought about doing that thing (for example, not knowing whether they have just mailed a letter or have just thought about mailing it).",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 25,
+   "text": "Some people find evidence that they have done things that they do not remember doing.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 26,
+   "text": "Some people sometimes find writings, drawings, or notes among their belongings that they must have done but cannot remember doing.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 27,
+   "text": "Some people sometimes find that they hear voices inside their head that tell them to do things or comment on things that they are doing.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 28,
+   "text": "Some people sometimes feel as if they are looking at the world through a fog, so that people and objects appear far away or unclear.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Total",
+   "items": "1-28",
+   "count": 28,
+   "range": "0-100 (mean percentage)",
+   "description": "Mean of the 28 item percentages."
+  },
+  {
+   "name": "Amnesia",
+   "items": "3, 4, 5, 6, 8, 10, 25, 26",
+   "count": 8,
+   "range": "0-100 (mean)",
+   "description": "Carlson et al. (1991) factor; membership from the literature, not printed on the source form."
+  },
+  {
+   "name": "Depersonalisation and derealisation",
+   "items": "7, 11, 12, 13, 27, 28",
+   "count": 6,
+   "range": "0-100 (mean)",
+   "description": "Carlson et al. (1991) factor; membership from the literature, not printed on the source form."
+  },
+  {
+   "name": "Absorption",
+   "items": "2, 14, 15, 17, 18, 20, 22, 23",
+   "count": 8,
+   "range": "0-100 (mean)",
+   "description": "Carlson et al. (1991) factor; membership from the literature, not printed on the source form."
+  },
+  {
+   "name": "DES-Taxon",
+   "items": "3, 5, 7, 8, 12, 13, 22, 27",
+   "count": 8,
+   "range": "0-100 (mean)",
+   "description": "Waller, Putnam and Carlson (1996) pathological dissociation taxon items; membership from the literature, not printed on the source form."
+  }
+ ],
+ "scoring": "Add the percentage values for all 28 items and divide by 28 to obtain the DES score (0 to 100). Higher scores indicate more frequent dissociative experiences. The form states that scores of 30 or higher indicate high levels of dissociation and scores below 30 indicate low levels, and that a high score alone does not indicate a more severe disorder because the scale measures both normal and pathological dissociation; Carlson and Putnam (1993) recommend 30 as the screening threshold for possible dissociative disorder warranting further assessment. The DES-Taxon mean flags pathological dissociation. The University of Coimbra page reports a Portuguese four factor solution (depersonalisation-derealisation 7, 11, 12, 13, 16, 27, 28; absorption 14, 17, 18, 19, 20, 22, 23; distractibility 1, 2, 15, 21, 24, 25, 26; memory disturbances 3, 4, 5, 6, 8, 9) and confirms the cut off of 30.",
+ "citation": "Carlson, E. B., & Putnam, F. W. (1993). An update on the Dissociative Experiences Scale. Dissociation, 6(1), 16–27.",
+ "transcriptionNote": "The target itemsUrl (uc.pt CINEICC page) does not reproduce the items, so the 28 items, directions and permission statement were transcribed from the psychdb.com DES-II PDF, in 3 batches with long items returned as consecutive fragments and rejoined. Each item on the form is followed by a repeated 'Circle the number...' line and a 0 to 100 row, which are not included in the item text. Item 8 reads 'friends of family members' on this form, probably a typo for 'friends or family members'. The three factor and DES-Taxon subscale memberships are taken from the published literature (Carlson et al., 1991; Waller et al., 1996) rather than from the source form, and item subscale fields are therefore set to Total; verify before use. Curly apostrophes in items 1 and 4 are as extracted."
+}

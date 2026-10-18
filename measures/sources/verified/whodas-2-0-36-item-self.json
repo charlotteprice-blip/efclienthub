@@ -1,0 +1,18 @@
+{
+  "file": "whodas-2-0-36-item-self.json",
+  "sourceReached": true,
+  "sourceUsed": "https://www.psychiatry.org/getmedia/5f4794de-8d66-4434-99f3-784a3fd1e567/APA-DSM5TR-WHODAS2SelfAdministered.pdf (items, instructions, quoted copyright lines); https://www.who.int/standards/classifications/international-classification-of-functioning-disability-and-health/who-disability-assessment-schedule (licence summary)",
+  "itemsChecked": 36,
+  "itemsMatching": 36,
+  "discrepancies": [
+    {
+      "item": 0,
+      "transcribed": "licence: \"WHO's own WHODAS 2.0 page states the instrument is freely available for use; translation or adaptation requires WHO permission.\"",
+      "source": "The WHO WHODAS 2.0 page does not use the phrases 'freely available' or 'permission' and says nothing about adaptation. It says: \"To license WHODAS 2.0, such as for including WHODAS 2.0 in an electronic records or data capture system or reproducing it in any way, please go to Licensing WHO Classifications.\" and that translations \"are made available as a courtesy for use.\"",
+      "kind": "wording"
+    }
+  ],
+  "licenceMatches": false,
+  "verdict": "verified with corrections",
+  "notes": "The WebFetch model declined to reproduce the APA PDF verbatim on copyright grounds, so every item, the domain 6 stem, all 5 instruction sentences and the 3 quoted copyright lines were checked by presenting the transcribed text and asking for MATCH or DIFFERS; all 36 items and all 8 sentences returned MATCH. Response options 1 None, 2 Mild, 3 Moderate, 4 Severe, 5 Extreme or cannot do confirmed; D6.4's alternative labels (None, Some, Moderate, A Lot, Extreme or cannot do) confirmed. Domain headings and the Life activities Household / School-Work split confirmed; absence of H1 to H3 items confirmed. Subscale membership (6, 5, 4, 5, 8, 8) matches the item codes. The 3 quoted licence sentences from the APA PDF match verbatim; the unquoted summary of the WHO page is not supported by that page, which directs all licensing and reproduction requests to WHO's Licensing WHO Classifications process rather than stating the instrument is freely available. Recommend deleting or rewording that final licence sentence."
+}

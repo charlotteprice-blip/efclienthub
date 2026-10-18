@@ -1,0 +1,115 @@
+{
+ "code": "PROMIS Cog Abilities v2.0 8a",
+ "name": "PROMIS Cognitive Function Abilities Short Form 8a",
+ "domain": "Executive functioning and attention",
+ "developer": "PROMIS Health Organization / HealthMeasures, Northwestern University (2012; v2.0 2017)",
+ "construct": "Self rated cognitive abilities (concentration, memory, mental sharpness, keeping track of tasks) over the past 7 days.",
+ "respondent": "Self report",
+ "ageRange": "18+",
+ "minutes": 2,
+ "availability": "free with attribution (CC or stated)",
+ "licence": "HealthMeasures (Northwestern University) has made English PROMIS measures available without charge for research and individual clinical use, with the copyright line retained. Since 2024 licence fees apply to translations and to vendor platforms such as Epic and the Assessment Center API. Confirm current terms on Steps to License. (Target record summary; the HealthMeasures copyright line on the form was not retrieved.)",
+ "licenceUrl": "https://healthmeasures.net/implement/steps-to-license/",
+ "sourceUrl": "https://cdn.loinc.org/81527-4/panel",
+ "instructions": "",
+ "responseOptions": [
+  {
+   "value": 1,
+   "label": "Not at all"
+  },
+  {
+   "value": 2,
+   "label": "A little bit"
+  },
+  {
+   "value": 3,
+   "label": "Somewhat"
+  },
+  {
+   "value": 4,
+   "label": "Quite a bit"
+  },
+  {
+   "value": 5,
+   "label": "Very much"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "In the past 7 days - My mind has been as sharp as usual",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 81497-0"
+  },
+  {
+   "n": 2,
+   "text": "In the past 7 days - My memory has been as good as usual",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 81498-8"
+  },
+  {
+   "n": 3,
+   "text": "In the past 7 days - My thinking has been as fast as usual",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 81499-6"
+  },
+  {
+   "n": 4,
+   "text": "In the past 7 days - I have been able to keep track of what I am doing, even if I am interrupted",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 81501-9"
+  },
+  {
+   "n": 5,
+   "text": "In the past 7 days - I have been able to concentrate",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 81502-7"
+  },
+  {
+   "n": 6,
+   "text": "In the past 7 days - I have been able to think as clearly as usual without extra effort",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 81507-6"
+  },
+  {
+   "n": 7,
+   "text": "In the past 7 days - I have been able to pay attention and keep track of what I am doing without extra effort",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 81495-4"
+  },
+  {
+   "n": 8,
+   "text": "In the past 7 days - I have been able to remember things as easily as usual without extra effort",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 81508-4"
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Total",
+   "items": "1-8",
+   "count": 8,
+   "range": "8-40 raw; T score",
+   "description": "Single domain short form from the PROMIS Cognitive Function Abilities item bank v2.0."
+  }
+ ],
+ "scoring": "Sum the 8 item responses (raw 8 to 40) and convert the raw score to a T score (mean 50, SD 10, US general population reference) using the HealthMeasures scoring table for Cognitive Function Abilities Short Form 8a v2.0, or score with the HealthMeasures Scoring Service when any item is missing. Higher T scores indicate greater perceived cognitive ability. HealthMeasures does not publish diagnostic cut offs; the LOINC panel lists a raw score code (81536-5) but no conversion table, so the raw to T conversion must be taken from the official HealthMeasures scoring manual.",
+ "citation": "Lai, J.-S., Wagner, L. I., Jacobsen, P. B., & Cella, D. (2014). Self-reported cognitive concerns and abilities: Two sides of one coin? Psycho-Oncology, 23(10), 1133–1141. https://doi.org/10.1002/pon.3522. Instrument: HealthMeasures. (2017). PROMIS Item Bank v2.0 – Cognitive Function – Abilities Subset – Short Form 8a. Northwestern University.",
+ "transcriptionNote": "The HealthMeasures search-view-measures page is behind a form and its PDF could not be fetched. Items, the 'In the past 7 days' time frame and the answer list with scores were transcribed from the LOINC panel for 81527-4 (PROMIS short form cognitive function abilities subset 8a v2.0), which reproduces the item text. Item order follows the LOINC panel listing and may not match the order on the HealthMeasures PDF. The official form's instruction line (Please respond to each question or statement by marking one box per row) and the HealthMeasures copyright line were not retrieved, so the instructions field is empty. The raw to T score conversion table was not retrieved."
+}

@@ -1,0 +1,115 @@
+{
+  "code": "PROMIS Satisfaction with Social Roles v2.0 8a",
+  "name": "PROMIS Satisfaction with Social Roles and Activities Short Form 8a",
+  "domain": "Functioning and health",
+  "developer": "PROMIS Health Organization and PROMIS Cooperative Group; social health item banks by Hahn, DeWalt, Bode and colleagues (2014); distributed by HealthMeasures (Northwestern University)",
+  "construct": "Satisfaction with performance of usual social roles and activities, including work, family and leisure responsibilities.",
+  "respondent": "Self report",
+  "ageRange": "18+",
+  "minutes": 2,
+  "availability": "free with attribution (CC or stated)",
+  "licence": "\"Copyright © 2010 PROMIS Health Organization or other individuals/entities that have contributed information\"; \"Use of PROMIS instruments (e.g., item banks, short forms, profile measures) are subject to the PROMIS Terms and Conditions\". HealthMeasures makes English PROMIS measures available without charge for research and individual clinical use with the copyright line retained; since 2024 licence fees apply to translations and to vendor platforms. Confirm current terms on Steps to License.",
+  "licenceUrl": "https://healthmeasures.net/implement/steps-to-license/",
+  "sourceUrl": "https://loinc.org/76800-2/panel",
+  "instructions": "",
+  "responseOptions": [
+    {
+      "value": 1,
+      "label": "Not at all"
+    },
+    {
+      "value": 2,
+      "label": "A little bit"
+    },
+    {
+      "value": 3,
+      "label": "Somewhat"
+    },
+    {
+      "value": 4,
+      "label": "Quite a bit"
+    },
+    {
+      "value": 5,
+      "label": "Very much"
+    }
+  ],
+  "items": [
+    {
+      "n": 1,
+      "text": "I am satisfied with my ability to do things for my family",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": "LOINC 76737-6"
+    },
+    {
+      "n": 2,
+      "text": "I am satisfied with my ability to do things for fun with others",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": "LOINC 76740-0"
+    },
+    {
+      "n": 3,
+      "text": "I feel good about my ability to do things for my friends",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": "LOINC 76741-8"
+    },
+    {
+      "n": 4,
+      "text": "I am satisfied with my ability to perform my daily routines",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": "LOINC 76744-2"
+    },
+    {
+      "n": 5,
+      "text": "I am satisfied with my ability to do things for fun outside my home",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": "LOINC 76739-2"
+    },
+    {
+      "n": 6,
+      "text": "I am satisfied with my ability to meet the needs of my friends",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": "LOINC 76743-4"
+    },
+    {
+      "n": 7,
+      "text": "I am satisfied with my ability to do the work that is really important to me (include work at home)",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": "LOINC 76738-4"
+    },
+    {
+      "n": 8,
+      "text": "I am satisfied with my ability to meet the needs of my family",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": "LOINC 76742-6"
+    }
+  ],
+  "subscales": [
+    {
+      "name": "Total",
+      "items": "1-8",
+      "count": 8,
+      "range": "8-40 (raw); T score",
+      "description": "Satisfaction with social roles and activities; unidimensional item bank short form."
+    }
+  ],
+  "scoring": "Score each item 1 (Not at all) to 5 (Very much), no reverse keying, sum to a raw score of 8 to 40 (all items answered), then convert to a T score (mean 50, SD 10 in the US general population) with the HealthMeasures conversion table for Satisfaction with Social Roles and Activities 8a v2.0; higher T scores indicate greater satisfaction. HealthMeasures bands for positively keyed measures: 40 to 45 mild impairment, 30 to 40 moderate, below 30 severe (approximate; confirm in the current scoring manual). The raw to T conversion table could not be retrieved and is not reproduced here.",
+  "citation": "Hahn, E. A., DeWalt, D. A., Bode, R. K., Garcia, S. F., DeVellis, R. F., Correia, H., & Cella, D. (2014). New English and Spanish social health measures will facilitate evaluating health determinants. Health Psychology, 33(5), 490–499. https://doi.org/10.1037/hea0000055",
+  "transcriptionNote": "healthmeasures.net search pages are behind a form, the NIH HEAL CRF PDF redirected to a landing page and the HealthMeasures scoring manual URL failed, so no official PDF could be read. Items (text and order) and the normative answer list LL1017-4 (Not at all 1 to Very much 5) were transcribed from the LOINC panel 76800-2 (PROMIS short form - satisfaction with social roles and activities 8a - version 2.0). LOINC does not show PROMIS item IDs (SRPSAT codes) or respondent instructions for this panel, so instructions is left empty; the standard PROMIS instruction for this bank is a single line asking the respondent to mark one box per row with no recall period, but it was not seen in a fetched source. The T score conversion table was not retrievable from an open source and the interpretive bands in scoring are HealthMeasures' general guidance rather than text from a fetched document."
+}

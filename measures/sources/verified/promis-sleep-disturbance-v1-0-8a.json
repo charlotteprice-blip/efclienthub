@@ -1,0 +1,11 @@
+{
+ "file": "promis-sleep-disturbance-v1-0-8a.json",
+ "sourceReached": true,
+ "sourceUsed": "https://loinc.org/76703-8/panel (items 1-6); https://psytests.org/diag/promS8en-bl.html (items 7-8 and order); LOINC 62001-3 and 61985-8 (items 7 and 8 keying)",
+ "itemsChecked": 8,
+ "itemsMatching": 8,
+ "discrepancies": [],
+ "licenceMatches": true,
+ "verdict": "verified",
+ "notes": "Items 1 to 6 match the LOINC 6a panel word for word (61987-4, 61986-6, 61998-1, 61999-9, 61996-5, 62006-2) and the per item answer lists in the item notes match LOINC: item 1 LL1023-2 (Very poor 5 to Very Good 1), item 2 LL3325-9 (Not at all 5 to Very much 1), items 3 to 6 LL1017-4 (Not at all 1 to Very much 5). The only surface difference is LOINC's capitalisation 'Very Good' against 'Very good' in the item 1 note. Items 7 and 8 and the 8 item order match the psytests.org rendering. Item 7 ('I worried about not being able to fall asleep', LOINC 62001-3) is confirmed forward keyed (Not at all 1 to Very much 5), so the file's 'direction inferred from wording, not confirmed' caveat can be removed. Item 8 ('I was satisfied with my sleep', LOINC 61985-8) is confirmed reverse keyed (Not at all 5 to Very much 1). The quoted LOINC copyright and terms fragments match the LOINC page. The HealthMeasures summary sentences in the licence field are paraphrase not found on the licenceUrl page. The T score table and the LOINC item ID mapping (Sleep109 etc.) were not re-verified."
+}

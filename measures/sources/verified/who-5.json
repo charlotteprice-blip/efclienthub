@@ -1,0 +1,11 @@
+{
+  "file": "who-5.json",
+  "sourceReached": true,
+  "sourceUsed": "https://www.psytoolkit.org/survey-library/who5.html (items, options); https://www.corc.uk.net/outcome-experience-measures/the-world-health-organisation-five-well-being-index-who-5 (licence)",
+  "itemsChecked": 5,
+  "itemsMatching": 5,
+  "discrepancies": [],
+  "licenceMatches": true,
+  "verdict": "verified",
+  "notes": "All 5 items match the PsyToolkit page word for word, including item 1 'cheerful in good spirits' without 'and', which the file already flags as differing from the WHO original ('cheerful and in good spirits'). Instruction sentence and stem 'Over the past two weeks ...' match. Response options 5 All of the time, 4 Most of the time, 3 More than half the time, 2 Less than half the time, 1 Some of the time, 0 At no time match PsyToolkit exactly in label, value and order; CORC prints 'More than half of the time' and 'Less than half of the time', as the file's note states. Scoring (sum x 4, 0 to 100, higher = better wellbeing, cut off 50 or below) consistent with the page. CORC licence wording 'is free of charge and does not require permission to use' confirmed; the file's quote begins 'The WHO-5 is free of charge', which is a trivial subject restatement. PsyToolkit Legal stuff statement confirmed. For administration, the item 1 wording should be corrected to the WHO original, since PsyToolkit's omission of 'and' is a transcription error on their side rather than a WHO variant."
+}

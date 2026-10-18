@@ -77,6 +77,14 @@
 43. Default questionnaire batteries per client type live in `client-types.json` `defaultMeasures`, mapped from the codebook Batteries sheet; only cleared questionnaires are assigned. Sarah to confirm the mapping.
 44. Clinical screeners found for New Zealand practice are Sarah only in the hub. Risk measures (C-SSRS screener and similar) are not transcribed until Sarah decides, and would never run unattended.
 
+## Open licence instruments merged (18 October 2026)
+
+45. 50 open licence instruments are merged into the codebook from open access sources, each transcribed verbatim and then checked item by item by an independent second pass (829 items across 53 transcriptions; every item matched its source apart from punctuation, and the CAPE-42 dimension memberships were resolved from the CamCOPS source). Transcriptions and check reports live in `measures/sources/`.
+46. Licence status for the new rows: cleared only where the source is public domain or the rights holder grants practice use in writing (ADEXI, APS-R, SAPS, AUDIT-C, CAGE, CBI, CES-D, COHS, CPC-12, CUDIT-R, DES-II, FMPS-B, GAD-7, PHQ-2, PHQ-9, JDS, Mini-IPIP, MWQ, NCS-6, PSWQ, RAADS-14, SCS, UCLA-LS-3, WHO-5, and the to decide AMS-C, CAPE-42 and SRQ-63); review where use is research or non commercial only, second hand, or needs the author's word (BIS-11, BIS-Brief, CFC-14, CFQ, GPS, Hua Oranga, MEWS, SWLS, WEBEXEC, WSAS, WHODAS 2.0 and all 10 PROMIS forms). Only rows marked Include = Yes and cleared reach `cleared.json`.
+47. Clinical screeners are practitioner only with the published threshold as the upper band; PHQ-9 item 9 at 1 or more alerts Sarah on the draft. An item may carry its own response options (AUDIT-C, CUDIT-R, CBI, PROMIS Global Health, GAD-7 difficulty item), scored on its own range.
+48. Not built: BTQ (per event follow up questions) and WFIRS-S (needs a not applicable answer excluded from the mean). Held back for Sarah: IPIP-NEO-120, BFAS, C-SSRS Screener. Hua Oranga goes to Te Rau Ora for confirmation before use, as a courtesy as much as a licence step.
+49. Domains 4 and 5 renamed (Clinical and distress screening; Self talk, thinking patterns and personality) and domains 7 (Wellbeing and life satisfaction) and 8 (Functioning and health) added. Client names, subscale labels, bands and strength and focus wording for the new rows are drafts for Sarah; Learning Hub topics are left for Charlotte to map.
+
 ## Open questions
 
 Answered by Charlotte on 18 October 2026 (see decision 30): 1 (discounted seat), 2 (clinical record, 10 years), 3 (all in the hub), 5 (adults), 9 (email and password only). Still open: 4, 6, 7, 8, 10, plus the discount rate and the email sender address.

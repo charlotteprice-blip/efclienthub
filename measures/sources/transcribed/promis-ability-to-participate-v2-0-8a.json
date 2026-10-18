@@ -1,0 +1,115 @@
+{
+ "code": "PROMIS Ability to Participate v2.0 8a",
+ "name": "PROMIS Ability to Participate in Social Roles and Activities Short Form 8a",
+ "domain": "Functioning and health",
+ "developer": "PROMIS Health Organization / HealthMeasures, Northwestern University (2012)",
+ "construct": "Perceived ability to carry out usual social roles and activities, including work, family and leisure activities with others.",
+ "respondent": "Self report",
+ "ageRange": "18+",
+ "minutes": 2,
+ "availability": "free with attribution (CC or stated)",
+ "licence": "HealthMeasures (Northwestern University) has made English PROMIS measures available without charge for research and individual clinical use, with the copyright line retained. Since 2024 licence fees apply to translations and to vendor platforms such as Epic and the Assessment Center API. Confirm current terms on Steps to License. (Target record summary; the HealthMeasures copyright line on the form was not retrieved.)",
+ "licenceUrl": "https://healthmeasures.net/implement/steps-to-license/",
+ "sourceUrl": "https://loinc.org/76731-9/panel",
+ "instructions": "",
+ "responseOptions": [
+  {
+   "value": 5,
+   "label": "Never"
+  },
+  {
+   "value": 4,
+   "label": "Rarely"
+  },
+  {
+   "value": 3,
+   "label": "Sometimes"
+  },
+  {
+   "value": 2,
+   "label": "Usually"
+  },
+  {
+   "value": 1,
+   "label": "Always"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "I have trouble doing all of my regular leisure activities with others",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 75417-6"
+  },
+  {
+   "n": 2,
+   "text": "I have trouble doing all of the family activities that I want to do",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 76708-7"
+  },
+  {
+   "n": 3,
+   "text": "I have trouble doing all of my usual work (include work at home)",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 76709-5"
+  },
+  {
+   "n": 4,
+   "text": "I have trouble doing all of the activities with friends that I want to do",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 76712-9"
+  },
+  {
+   "n": 5,
+   "text": "I have to limit the things I do for fun with others",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 76707-9"
+  },
+  {
+   "n": 6,
+   "text": "I have to limit my regular activities with friends",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 76711-1"
+  },
+  {
+   "n": 7,
+   "text": "I have to limit my regular family activities",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 76706-1"
+  },
+  {
+   "n": 8,
+   "text": "I have trouble doing all of the work that is really important to me (include work at home)",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "LOINC 76710-3"
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Total",
+   "items": "1-8",
+   "count": 8,
+   "range": "8-40 raw; T score",
+   "description": "Single domain short form from the PROMIS Ability to Participate in Social Roles and Activities item bank v2.0. No time frame is specified for these items."
+  }
+ ],
+ "scoring": "Items are negatively worded and scored Never 5 to Always 1, so a higher raw score indicates better participation. Sum the 8 responses (raw 8 to 40) and convert to a T score (mean 50, SD 10, US general population reference) using the HealthMeasures scoring table for Ability to Participate in Social Roles and Activities Short Form 8a v2.0, or the HealthMeasures Scoring Service when items are missing. Higher T scores indicate greater ability to participate. No diagnostic cut offs are published by HealthMeasures. LOINC lists a raw score code (77814-2) and T score code (77854-8) but no conversion table.",
+ "citation": "Hahn, E. A., DeVellis, R. F., Bode, R. K., Garcia, S. F., Castel, L. D., Eisen, S. V., Bosworth, H. B., Heinemann, A. W., Rothrock, N., Cella, D., & PROMIS Cooperative Group. (2010). Measuring social health in the Patient-Reported Outcomes Measurement Information System (PROMIS): Item bank development and testing. Quality of Life Research, 19(7), 1035–1044. https://doi.org/10.1007/s11136-010-9654-0. Instrument: HealthMeasures. (2012). PROMIS Item Bank v2.0 – Ability to Participate in Social Roles and Activities – Short Form 8a. Northwestern University.",
+ "transcriptionNote": "The HealthMeasures page is behind a form and the NIH HEAL CRF PDF redirected to a landing page, so the official PDF was not read. Items and the answer list with scores were transcribed from the LOINC panel for 76731-9 (7 items listed on the panel page plus the eighth panel member 76710-3, whose text was taken from its own LOINC page and confirmed in a LOINC based value set). Item order follows the LOINC panel listing and may not match the HealthMeasures PDF. The official form's instruction line and copyright line were not retrieved, so the instructions field is empty. The raw to T score conversion table was not retrieved."
+}

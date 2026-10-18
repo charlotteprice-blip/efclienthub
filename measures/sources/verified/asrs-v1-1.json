@@ -1,0 +1,11 @@
+{
+  "file": "asrs-v1-1.json",
+  "sourceReached": true,
+  "sourceUsed": "https://www.phenxtoolkit.org/toolkit_content/PDF/PX121501.pdf (items); https://www.phenxtoolkit.org/protocols/view/121501 (availability statement); https://www.phenxtoolkit.org/help/guidance (CC BY 4.0)",
+  "itemsChecked": 18,
+  "itemsMatching": 18,
+  "discrepancies": [],
+  "licenceMatches": true,
+  "verdict": "verified",
+  "notes": "All 18 questions match the PhenX PDF word for word, including the curly apostrophe in item 16. The respondent instructions and the 5 column labels (Never, Rarely, Sometimes, Often, Very Often) match; the form prints no numeric values, as the transcription note says. The PDF text layer places the 'Part A' label after item 6 and 'Part B' after item 18, and the scoring text confirms Part A is the first 6 questions, so the Part A (1-6) and Part B (7-18) split is correct. The PDF text does not show which boxes are shaded, so the shading rule remains unverified from this source, as already flagged. The availability quote is a fragment of the protocol page sentence 'This protocol is freely available; permission not required for use.' and the copyright line '© World Health Organization' appears on the PDF. The guidance page confirms the CC BY 4.0 statement but does not itself contain the availability quote; the licence field correctly attributes that quote to the protocol page. Inattention and Hyperactivity domain assignments are not printed on the form and were not checked against a source."
+}

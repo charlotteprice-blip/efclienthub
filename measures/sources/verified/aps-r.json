@@ -1,0 +1,24 @@
+{
+  "file": "aps-r.json",
+  "sourceReached": true,
+  "sourceUsed": "https://www.kennethwang.com/apsr/scales/APSR-English.pdf (items); https://sites.gsu.edu/cpyricelab/?p=264 (licence)",
+  "itemsChecked": 23,
+  "itemsMatching": 23,
+  "discrepancies": [
+    {
+      "item": 0,
+      "transcribed": "Subscale name 'High Standards'",
+      "source": "Scoring key on the form reads 'Standards = 1, 5, 8, 12, 14, 18, 22'",
+      "kind": "subscale"
+    },
+    {
+      "item": 0,
+      "transcribed": "Licence quote: 'There is no permission needed to use or translate the scale. The scale should be cited properly.'",
+      "source": "Rice lab FAQ reads: 'There is no permission needed to use or translate the scale. It should be cited properly as shown above.'",
+      "kind": "wording"
+    }
+  ],
+  "licenceMatches": false,
+  "verdict": "verified with corrections",
+  "notes": "All 23 items match the PDF word for word, including curly apostrophes in items 3, 5 and 21 and the missing full stop on item 7. The 7 response labels match. Item membership for the 3 subscales matches the scoring key on the form exactly; the form labels the first subscale 'Standards' rather than 'High Standards' (the latter is the name used in the literature, so this is a naming choice rather than an error, but it is not what the source prints). The research only, one year permission NOTE on the PDF is quoted accurately. The second sentence of the Rice lab licence quote is paraphrased rather than verbatim and should be corrected to 'It should be cited properly as shown above.'"
+}

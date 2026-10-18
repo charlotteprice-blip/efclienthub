@@ -1,0 +1,129 @@
+{
+ "code": "FMPS-B",
+ "name": "Frost Multidimensional Perfectionism Scale, Brief",
+ "domain": "Self talk, thinking patterns and personality",
+ "developer": "Burgess, Frost and DiBartolo (2016)",
+ "construct": "Perfectionism as 2 dimensions, evaluative concerns and perfectionistic strivings.",
+ "respondent": "Self report",
+ "ageRange": "18+",
+ "minutes": 2,
+ "availability": "free with attribution (CC or stated)",
+ "licence": "Validation article (Woodfin, Binder and Molde, 2020) is open access under the Creative Commons Attribution License (CC BY) and reproduces all 8 items; the parent FMPS is used freely in research with citation.",
+ "licenceUrl": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2020.01860/full",
+ "sourceUrl": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2020.01860/full",
+ "instructions": "",
+ "responseOptions": [
+  {
+   "value": 1,
+   "label": "Strongly disagree"
+  },
+  {
+   "value": 2,
+   "label": "Disagree"
+  },
+  {
+   "value": 3,
+   "label": "Neither agree nor disagree"
+  },
+  {
+   "value": 4,
+   "label": "Agree"
+  },
+  {
+   "value": 5,
+   "label": "Strongly agree"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "If I fail at work/school, I am a failure as a person",
+   "subscale": "Evaluative Concerns",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 2,
+   "text": "I set higher goals for myself than most people",
+   "subscale": "Strivings",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 3,
+   "text": "If someone does a task at work/school better than me, then I feel like I failed at the whole task",
+   "subscale": "Evaluative Concerns",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 4,
+   "text": "I have extremely high goals",
+   "subscale": "Strivings",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 5,
+   "text": "Other people seem to accept lower standards from themselves than I do",
+   "subscale": "Strivings",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 6,
+   "text": "If I do not do well all the time, people will not respect me",
+   "subscale": "Evaluative Concerns",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 7,
+   "text": "I expect higher performance in my daily tasks than most people",
+   "subscale": "Strivings",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 8,
+   "text": "The fewer mistakes I make, the more people will like me",
+   "subscale": "Evaluative Concerns",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Evaluative Concerns",
+   "items": "1, 3, 6, 8",
+   "count": 4,
+   "range": "4-20",
+   "description": "Concern over mistakes and doubts about actions; self critical, fear of negative evaluation."
+  },
+  {
+   "name": "Strivings",
+   "items": "2, 4, 5, 7",
+   "count": 4,
+   "range": "4-20",
+   "description": "Personal standards; setting and expecting high performance."
+  },
+  {
+   "name": "Total",
+   "items": "1-8",
+   "count": 8,
+   "range": "8-40",
+   "description": "Sum of all 8 items."
+  }
+ ],
+ "scoring": "Sum each subscale (4 to 20) and the total (8 to 40). Higher scores indicate more perfectionistic tendencies. No cut offs are published. Woodfin et al. (2020) report Cronbach's alpha of 0.83 for the full scale.",
+ "citation": "Burgess, A. M., Frost, R. O., & DiBartolo, P. M. (2016). Development and validation of the Frost Multidimensional Perfectionism Scale-Brief. Journal of Psychoeducational Assessment, 34(7), 620-633. https://doi.org/10.1177/0734282916651359; Woodfin, V., Binder, P.-E., & Molde, H. (2020). The psychometric properties of the Frost Multidimensional Perfectionism Scale - Brief. Frontiers in Psychology, 11, 1860. https://doi.org/10.3389/fpsyg.2020.01860",
+ "transcriptionNote": "Items transcribed from Table 1 of Woodfin, Binder and Molde (2020), numbered as in that table. The article gives no respondent instructions beyond the response scale, so instructions is empty; the parent FMPS instruction is not reproduced. Only the endpoints 1 (strongly disagree) and 5 (strongly agree) are stated in the article; the 3 intermediate labels above are the standard FMPS labels and were not confirmed from this source. The article says the 8 items derive from FMPS items 9, 12, 13, 19, 24, 25, 30 and 34 but does not map each FMPS-B item to its original number. Items are printed without terminal full stops in the table."
+}

@@ -1,0 +1,30 @@
+{
+  "file": "audit-c.json",
+  "sourceReached": true,
+  "sourceUsed": "https://integrationacademy.ahrq.gov/sites/default/files/2020-07/AUDIT-C.pdf (items); https://www.uspreventiveservicestaskforce.org/home/getfilebyid/221 (WHO option wording); https://camcops.readthedocs.io/en/latest/tasks/audit.html (licence)",
+  "itemsChecked": 3,
+  "itemsMatching": 3,
+  "discrepancies": [
+    {
+      "item": 1,
+      "transcribed": "responseOptions value 2 label '2 to 4 times a month', value 3 '2 to 3 times a week', value 4 '4 or more times a week'",
+      "source": "AHRQ sheet (sourceUrl) prints 'Two to four times a month', 'Two to three times per week', 'Four or more times a week'; the WHO wording used in the file is confirmed by the NIH/USPSTF reprint",
+      "kind": "option"
+    },
+    {
+      "item": 3,
+      "transcribed": "responseOptions value 3 'Weekly', value 4 'Daily or almost daily'",
+      "source": "AHRQ sheet (sourceUrl) prints 'Two to three times per week (3)' and 'Four or more times a week (4)'; WHO wording confirmed by the NIH/USPSTF reprint",
+      "kind": "option"
+    },
+    {
+      "item": 3,
+      "transcribed": "'Less than monthly'",
+      "source": "AHRQ sheet prints 'Less than Monthly' (capital M)",
+      "kind": "option"
+    }
+  ],
+  "licenceMatches": true,
+  "verdict": "verified with corrections",
+  "notes": "The 3 question stems match the AHRQ sheet word for word, and the instruction 'Please circle the answer that is correct for you.' matches. The responseOptions field deliberately uses the WHO wording for questions 1 and 3 rather than the wording printed on the sourceUrl; this is documented in the transcription note and item notes and the WHO wording is confirmed by the NIH reprint, but anyone reading sourceUrl alone will find different labels for question 1 options 2 to 4 and question 3 options 3 and 4. The item 1 note correctly records the AHRQ labels. The AHRQ sheet threshold text ('> 4' men, '> 2' women, 86% and 84%) is quoted accurately in scoring. The licence quotes ('AUDIT-C is available for use in the public domain' and the WHO reproduction clause) match CamCOPS; the WHO clause may differ by one comma ('in part or in whole but not for sale') which could not be settled from the rendered page. No copyright or source line appears on the AHRQ sheet."
+}

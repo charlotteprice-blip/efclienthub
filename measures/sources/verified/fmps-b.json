@@ -1,0 +1,11 @@
+{
+  "file": "fmps-b.json",
+  "sourceReached": true,
+  "sourceUsed": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2020.01860/full",
+  "itemsChecked": 8,
+  "itemsMatching": 8,
+  "discrepancies": [],
+  "licenceMatches": true,
+  "verdict": "verified",
+  "notes": "All 8 items match Table 1 of Woodfin, Binder and Molde (2020) word for word and in the table's numbering; subscale membership (Evaluative Concerns 1, 3, 6, 8; Strivings 2, 4, 5, 7) matches the table grouping. No reverse keyed items in source or file. Response scale: the article states only 1 (strongly disagree) to 5 (strongly agree); the 3 intermediate labels in the file are not from this source, as the transcriptionNote correctly declares. The original FMPS item list (9, 12, 13, 19, 24, 25, 30, 34) and alpha 0.83 are confirmed. The licence field paraphrases rather than quotes the article's statement, which reads This is an open-access article distributed under the terms of the Creative Commons Attribution License (CC BY); the substance matches. No respondent instructions in the source, consistent with the empty instructions field."
+}

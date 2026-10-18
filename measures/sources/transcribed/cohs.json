@@ -1,0 +1,274 @@
+{
+ "code": "COHS",
+ "name": "Creature of Habit Scale",
+ "domain": "Procrastination, time and habits",
+ "developer": "Ersche, Lim, Ward, Robbins and Stochl (2017)",
+ "construct": "Individual differences in habitual tendencies in daily life: preference for routine and automatic, cue driven responding.",
+ "respondent": "Self report",
+ "ageRange": "18+",
+ "minutes": 5,
+ "availability": "free with attribution (CC or stated)",
+ "licence": "Article statement: \"This is an open access article under the CC BY license (http://creativecommons.org/licenses/by/4.0/).\" The Cambridge repository copy is listed as Attribution-NonCommercial-NoDerivatives 4.0 International.",
+ "licenceUrl": "https://www.repository.cam.ac.uk/handle/1810/266049",
+ "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5473478/",
+ "instructions": "Not available as respondent facing text. Methods (Section 2.1): \"Participants were required to indicate for each statement their level of agreement on a 5-point Likert scale, ranging from strongly disagree (1) to strongly agree (5).\" The administered form in Appendix B is image only.",
+ "responseOptions": [
+  {
+   "value": 1,
+   "label": "strongly disagree"
+  },
+  {
+   "value": 2,
+   "label": ""
+  },
+  {
+   "value": 3,
+   "label": ""
+  },
+  {
+   "value": 4,
+   "label": ""
+  },
+  {
+   "value": 5,
+   "label": "strongly agree"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "I tend to like routine.",
+   "subscale": "Routine",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHS-16"
+  },
+  {
+   "n": 2,
+   "text": "I find comfort in regularity.",
+   "subscale": "Routine",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHS-27"
+  },
+  {
+   "n": 3,
+   "text": "I rely on what is tried and tested rather than exploring something new.",
+   "subscale": "Routine",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHS-13"
+  },
+  {
+   "n": 4,
+   "text": "I quite happily work within my comfort zone rather than challenging myself.",
+   "subscale": "Routine",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHS-25"
+  },
+  {
+   "n": 5,
+   "text": "I tend to stick with the version of the software package that I am familiar with for as long as I can.",
+   "subscale": "Routine",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHS-24"
+  },
+  {
+   "n": 6,
+   "text": "I generally cook with the same spices/flavourings.",
+   "subscale": "Routine",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHSF-16"
+  },
+  {
+   "n": 7,
+   "text": "I normally buy the same foods from the same grocery store.",
+   "subscale": "Routine",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHSF-28"
+  },
+  {
+   "n": 8,
+   "text": "In a restaurant, I tend to order dishes that I am familiar with.",
+   "subscale": "Routine",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHSF-3"
+  },
+  {
+   "n": 9,
+   "text": "I tend to do things in the same order every morning (e.g. get up, go to the bathroom, have a coffee…).",
+   "subscale": "Routine",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHS-7"
+  },
+  {
+   "n": 10,
+   "text": "I always try to get the same seat in places such as on the bus, in the cinema, or in church.",
+   "subscale": "Routine",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHS-9"
+  },
+  {
+   "n": 11,
+   "text": "I usually sit at the same place at the dinner table.",
+   "subscale": "Routine",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHSF-14"
+  },
+  {
+   "n": 12,
+   "text": "I like to park my car or bike always in the same place.",
+   "subscale": "Routine",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHS-1"
+  },
+  {
+   "n": 13,
+   "text": "I always follow a certain order when preparing a meal.",
+   "subscale": "Routine",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHSF-17"
+  },
+  {
+   "n": 14,
+   "text": "I am one of those people who get really annoyed by last minute cancellations.",
+   "subscale": "Routine",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHS-20"
+  },
+  {
+   "n": 15,
+   "text": "I tend to go to bed at roughly the same time every night.",
+   "subscale": "Routine",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHS-3"
+  },
+  {
+   "n": 16,
+   "text": "I generally eat the same things for breakfast every day.",
+   "subscale": "Routine",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHS-2"
+  },
+  {
+   "n": 17,
+   "text": "I often find myself finishing off a packet of biscuits just because it is lying there.",
+   "subscale": "Automaticity",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHSF-9"
+  },
+  {
+   "n": 18,
+   "text": "I often find myself opening up the cabinet to take a snack.",
+   "subscale": "Automaticity",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHSF-11"
+  },
+  {
+   "n": 19,
+   "text": "When walking past a plate of sweets or biscuits, I can't resist taking one.",
+   "subscale": "Automaticity",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHSF-12"
+  },
+  {
+   "n": 20,
+   "text": "Television makes me particularly prone to uncontrolled eating.",
+   "subscale": "Automaticity",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHSF-26"
+  },
+  {
+   "n": 21,
+   "text": "I often find myself eating without being aware of it.",
+   "subscale": "Automaticity",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHSF-27"
+  },
+  {
+   "n": 22,
+   "text": "I am prone to eating more when I feel stressed.",
+   "subscale": "Automaticity",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHSF-1"
+  },
+  {
+   "n": 23,
+   "text": "Eating crisps or biscuits straight out of the packet is typical of me.",
+   "subscale": "Automaticity",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHSF-24"
+  },
+  {
+   "n": 24,
+   "text": "Whenever I go into the kitchen, I typically look in the fridge.",
+   "subscale": "Automaticity",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHSF-18"
+  },
+  {
+   "n": 25,
+   "text": "I usually treat myself to a snack at the end of the workday.",
+   "subscale": "Automaticity",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHSF-15"
+  },
+  {
+   "n": 26,
+   "text": "I often take a snack while on the go (e.g. when driving, walking down the street, or surfing the web).",
+   "subscale": "Automaticity",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHSF-30"
+  },
+  {
+   "n": 27,
+   "text": "I often find myself running on 'autopilot', and then wonder why I ended up in a particular place or doing something that I did not intend to do.",
+   "subscale": "Automaticity",
+   "reverse": false,
+   "filler": false,
+   "note": "Source item label COHS-8"
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Routine",
+   "items": "1-16",
+   "count": 16,
+   "range": "16-80",
+   "description": "Preference for routine and familiarity. Sum of the 16 Routine items."
+  },
+  {
+   "name": "Automaticity",
+   "items": "17-27",
+   "count": 11,
+   "range": "11-55",
+   "description": "Automatic, cue driven responding, largely food related. Sum of the 11 Automaticity items."
+  }
+ ],
+ "scoring": "Score each subscale separately; higher scores indicate stronger routine preference or greater automaticity. The authors state that \"individuals should be assessed on the basis of the score of each scale separately, rather than by an overall score of both scales\" because the subscales correlate only weakly (r = 0.14). No reverse scored items remain in the final 27 item scale. No cut offs are published.",
+ "citation": "Ersche, K. D., Lim, T.-V., Ward, L. H. E., Robbins, T. W., & Stochl, J. (2017). Creature of Habit: A self-report measure of habitual routines and automatic tendencies in everyday life. Personality and Individual Differences, 116, 73–85. https://doi.org/10.1016/j.paid.2017.04.024",
+ "transcriptionNote": "Items transcribed from Table 2 of the PMC article (the final 27 item scale), listed in table order with Routine items first and Automaticity items second. The numbering 1 to 27 is assigned here for codebook convenience; the source identifies items by pool labels (COHS-n and COHSF-n), recorded in each item note. The administered questionnaire layout and respondent instructions in Appendix B are image only and could not be read, so the item order on the published form and the intermediate anchor labels (values 2 to 4) are not confirmed. The article names only the endpoints strongly disagree (1) and strongly agree (5)."
+}

@@ -1,0 +1,18 @@
+{
+ "file": "ncs-6.json",
+ "sourceReached": true,
+ "sourceUsed": "https://www.psytoolkit.org/survey-library/need-for-cognition-ncs6.html (items, instructions); https://journals.sagepub.com/doi/10.1177/1073191118793208 (Appendix items, anchors, licence)",
+ "itemsChecked": 6,
+ "itemsMatching": 6,
+ "discrepancies": [
+  {
+   "item": 0,
+   "transcribed": "responseOptions 1 = 'extremely uncharacteristic of me', 5 = 'extremely characteristic of me'",
+   "source": "PsyToolkit (sourceUrl) prints 'extremely uncharacteristic' and 'extremely characteristic' without 'of me'; the Sage article prints '1 = extremely uncharacteristic of me' and '5 = extremely characteristic of me'",
+   "kind": "option"
+  }
+ ],
+ "licenceMatches": true,
+ "verdict": "verified",
+ "notes": "All 6 items match both PsyToolkit and the article Appendix word for word; items 3 and 4 are reverse scored in both. The instructions sentence matches PsyToolkit verbatim. The endpoint labels follow the article rather than the PsyToolkit page, which the transcriptionNote states, so this is a source choice rather than an error; middle points are unlabelled in both sources. CC BY 4.0 and '(c) The Author(s) 2018' confirmed on the Sage page, and the PsyToolkit acknowledgement sentence matches. Volume 27, issue 8 confirmed; page numbers 1870-1885 remain unconfirmed as the Sage page did not show them. The article does not report a composite NCS-6 mean, only item means around 3.3 to 3.9, so the 'around 3.6' statement in scoring is an approximation."
+}

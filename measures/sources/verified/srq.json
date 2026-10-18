@@ -1,0 +1,11 @@
+{
+  "file": "srq.json",
+  "sourceReached": true,
+  "sourceUsed": "https://casaa.unm.edu/assets/inst/selfregulation-questionnaire-srq.pdf",
+  "itemsChecked": 63,
+  "itemsMatching": 63,
+  "discrepancies": [],
+  "licenceMatches": true,
+  "verdict": "verified",
+  "notes": "All 63 items match the CASAA PDF word for word (checked in 6 batches). Instructions match; the source prints blank circle placeholders where the file has restored the digits 1 to 5, as the transcriptionNote already discloses. Response labels 1 Strongly Disagree, 2 Disagree, 3 Uncertain or Unsure, 4 Agree, 5 Strongly Agree confirmed from the Scoring section. The 26 reverse scored items listed in the source Scoring section (2,3,4,5,6,8,10,12,13,15,19,20,21,24,26,29,31,33,37,40,43,45,50,55,62,63) match the file's reverse flags exactly. The 7 subscale assignments match the source exactly. Licence sentence confirmed verbatim; the source's acknowledgment wording is 'Proper acknowledgment of the source is appreciated', which the file paraphrases outside the quotation marks."
+}

@@ -1,0 +1,11 @@
+{
+ "file": "raads-14.json",
+ "sourceReached": true,
+ "sourceUsed": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3907126 (Table 2, Table 3, Table 4, Methods); licence at https://molecularautism.biomedcentral.com/articles/10.1186/2040-2392-4-49",
+ "itemsChecked": 14,
+ "itemsMatching": 14,
+ "discrepancies": [],
+ "licenceMatches": true,
+ "verdict": "verified",
+ "notes": "All 14 items match Table 2 word for word and in order, including the rejoined item 10 and the absence of terminal punctuation. Subscale membership matches Tables 3 and 4 exactly (Mentalizing deficits 1, 4, 9, 11, 12, 13, 14; Social anxiety 3, 5, 6, 8; Sensory reactivity 2, 7, 10). Item 6 is the only reverse scored item, marked with an asterisk in Table 2. The response option labels in the file match the Table 2 column headers exactly ('True now and when I was young', 'True only now', 'True only when I was younger than 16', 'Never true'), so the transcriptionNote's caveat that Table 2's wording was not quoted and may differ can be removed. The values 3, 2, 1, 0 match the Methods description. The instructions match the second instruction line printed with Table 2; the table also prints 'Please choose one of the following alternatives:' followed by 4 longer response descriptions (for example 'This is true or describes me now and when I was young.') that the file does not record. The licence statement matches the BMC article's open access notice word for word."
+}

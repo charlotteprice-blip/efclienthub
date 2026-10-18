@@ -1,0 +1,24 @@
+{
+  "file": "webexec.json",
+  "sourceReached": true,
+  "sourceUsed": "https://psytoolkit.org/survey-library/webexec.html",
+  "itemsChecked": 6,
+  "itemsMatching": 6,
+  "discrepancies": [
+    {
+      "item": 0,
+      "transcribed": "instructions: \"Rate the extent of your problems in each area by choosing the appropriate option.\"",
+      "source": "\"Please rate the extent to which you have problems in the following areas by picking the appropriate option.\" (preceded on the page by: \"Please answer all the questions below as best you can.\" \"Your answers will be confidential, and no information about your identity will be requested or recorded.\" \"If you change your mind about taking part in this research, please feel free to stop at any time.\")",
+      "kind": "wording"
+    },
+    {
+      "item": 0,
+      "transcribed": "response option labels in sentence case: \"No problems experienced\", \"A few problems experienced\", \"More than a few problems experienced\", \"A great many problems experienced\"",
+      "source": "printed in lower case: \"no problems experienced\", \"a few problems experienced\", \"more than a few problems experienced\", \"a great many problems experienced\"; no numeric values printed beside them",
+      "kind": "option"
+    }
+  ],
+  "licenceMatches": true,
+  "verdict": "verified with corrections",
+  "notes": "All 6 items match the PsyToolkit page word for word, including the quotation marks around lose and impulse. Response option order matches and the values 1 to 4 are a reasonable assignment given the page's statement that each item is scored 1 to 4, but the labels are printed in lower case on the page, not sentence case, and the page does not print numbers beside them (the file's transcriptionNote already flags both points). The instruction sentence is not verbatim: the file paraphrases the page's final instruction sentence rather than quoting it. Scoring (sum, range 6 to 24, higher = more problems, original sample mean 11.25) consistent with page. Licence quote matches the 'Legal stuff' text verbatim apart from the trailing Buchanan et al. (2010) citation."
+}

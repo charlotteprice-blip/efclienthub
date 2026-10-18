@@ -1,0 +1,381 @@
+{
+ "code": "WHODAS 2.0 (36 item, self)",
+ "name": "WHO Disability Assessment Schedule 2.0, 36 item self administered",
+ "domain": "Functioning and health",
+ "developer": "World Health Organization (Üstün, Kostanjsek, Chatterji and Rehm, 2010)",
+ "construct": "Functioning and disability over the past 30 days across 6 life domains aligned with the International Classification of Functioning, Disability and Health.",
+ "respondent": "Self report",
+ "ageRange": "18+",
+ "minutes": 8,
+ "availability": "free with attribution (CC or stated)",
+ "licence": "\"© World Health Organization, 2012. All rights reserved.\" \"The World Health Organization has granted the Publisher permission for the reproduction of this instrument.\" \"This material can be reproduced without permission by clinicians for use with their own patients. Any other use, including electronic use, requires written permission from WHO.\" WHO WHODAS 2.0 page: \"To license WHODAS 2.0, such as for including WHODAS 2.0 in an electronic records or data capture system or reproducing it in any way, please go to Licensing WHO Classifications.\"",
+ "licenceUrl": "https://www.who.int/standards/classifications/international-classification-of-functioning-disability-and-health/who-disability-assessment-schedule",
+ "sourceUrl": "https://www.psychiatry.org/getmedia/5f4794de-8d66-4434-99f3-784a3fd1e567/APA-DSM5TR-WHODAS2SelfAdministered.pdf",
+ "instructions": "This questionnaire asks about difficulties due to health/mental health conditions. Health conditions include diseases or illnesses, other health problems that may be short or long lasting, injuries, mental or emotional problems, and problems with alcohol or drugs. Think back over the past 30 days and answer these questions thinking about how much difficulty you had doing the following activities. For each question, please circle only one response. In the last 30 days, how much difficulty did you have in:",
+ "responseOptions": [
+  {
+   "value": 1,
+   "label": "None"
+  },
+  {
+   "value": 2,
+   "label": "Mild"
+  },
+  {
+   "value": 3,
+   "label": "Moderate"
+  },
+  {
+   "value": 4,
+   "label": "Severe"
+  },
+  {
+   "value": 5,
+   "label": "Extreme or cannot do"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "Concentrating on doing something for ten minutes?",
+   "subscale": "Understanding and communicating",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D1.1"
+  },
+  {
+   "n": 2,
+   "text": "Remembering to do important things?",
+   "subscale": "Understanding and communicating",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D1.2"
+  },
+  {
+   "n": 3,
+   "text": "Analyzing and finding solutions to problems in day-to-day life?",
+   "subscale": "Understanding and communicating",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D1.3"
+  },
+  {
+   "n": 4,
+   "text": "Learning a new task, for example, learning how to get to a new place?",
+   "subscale": "Understanding and communicating",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D1.4"
+  },
+  {
+   "n": 5,
+   "text": "Generally understanding what people say?",
+   "subscale": "Understanding and communicating",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D1.5"
+  },
+  {
+   "n": 6,
+   "text": "Starting and maintaining a conversation?",
+   "subscale": "Understanding and communicating",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D1.6"
+  },
+  {
+   "n": 7,
+   "text": "Standing for long periods, such as 30 minutes?",
+   "subscale": "Getting around",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D2.1"
+  },
+  {
+   "n": 8,
+   "text": "Standing up from sitting down?",
+   "subscale": "Getting around",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D2.2"
+  },
+  {
+   "n": 9,
+   "text": "Moving around inside your home?",
+   "subscale": "Getting around",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D2.3"
+  },
+  {
+   "n": 10,
+   "text": "Getting out of your home?",
+   "subscale": "Getting around",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D2.4"
+  },
+  {
+   "n": 11,
+   "text": "Walking a long distance, such as a kilometer (or equivalent)?",
+   "subscale": "Getting around",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D2.5"
+  },
+  {
+   "n": 12,
+   "text": "Washing your whole body?",
+   "subscale": "Self-care",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D3.1"
+  },
+  {
+   "n": 13,
+   "text": "Getting dressed?",
+   "subscale": "Self-care",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D3.2"
+  },
+  {
+   "n": 14,
+   "text": "Eating?",
+   "subscale": "Self-care",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D3.3"
+  },
+  {
+   "n": 15,
+   "text": "Staying by yourself for a few days?",
+   "subscale": "Self-care",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D3.4"
+  },
+  {
+   "n": 16,
+   "text": "Dealing with people you do not know?",
+   "subscale": "Getting along with people",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D4.1"
+  },
+  {
+   "n": 17,
+   "text": "Maintaining a friendship?",
+   "subscale": "Getting along with people",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D4.2"
+  },
+  {
+   "n": 18,
+   "text": "Getting along with people who are close to you?",
+   "subscale": "Getting along with people",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D4.3"
+  },
+  {
+   "n": 19,
+   "text": "Making new friends?",
+   "subscale": "Getting along with people",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D4.4"
+  },
+  {
+   "n": 20,
+   "text": "Sexual activities?",
+   "subscale": "Getting along with people",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D4.5"
+  },
+  {
+   "n": 21,
+   "text": "Taking care of your household responsibilities?",
+   "subscale": "Life activities",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D5.1; Life activities—Household"
+  },
+  {
+   "n": 22,
+   "text": "Doing most important household tasks well?",
+   "subscale": "Life activities",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D5.2; Life activities—Household"
+  },
+  {
+   "n": 23,
+   "text": "Getting all of the household work done that you needed to do?",
+   "subscale": "Life activities",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D5.3; Life activities—Household"
+  },
+  {
+   "n": 24,
+   "text": "Getting your household work done as quickly as needed?",
+   "subscale": "Life activities",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D5.4; Life activities—Household"
+  },
+  {
+   "n": 25,
+   "text": "Your day-to-day work/school?",
+   "subscale": "Life activities",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D5.5; Life activities—School/Work"
+  },
+  {
+   "n": 26,
+   "text": "Doing your most important work/school tasks well?",
+   "subscale": "Life activities",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D5.6; Life activities—School/Work"
+  },
+  {
+   "n": 27,
+   "text": "Getting all of the work done that you need to do?",
+   "subscale": "Life activities",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D5.7; Life activities—School/Work"
+  },
+  {
+   "n": 28,
+   "text": "Getting your work done as quickly as needed?",
+   "subscale": "Life activities",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D5.8; Life activities—School/Work"
+  },
+  {
+   "n": 29,
+   "text": "How much of a problem did you have in joining in community activities (for example, festivities, religious, or other activities) in the same way as anyone else can?",
+   "subscale": "Participation in society",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D6.1; stem for domain 6 is \"In the past 30 days:\""
+  },
+  {
+   "n": 30,
+   "text": "How much of a problem did you have because of barriers or hindrances around you?",
+   "subscale": "Participation in society",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D6.2; stem for domain 6 is \"In the past 30 days:\""
+  },
+  {
+   "n": 31,
+   "text": "How much of a problem did you have living with dignity because of the attitudes and actions of others?",
+   "subscale": "Participation in society",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D6.3; stem for domain 6 is \"In the past 30 days:\""
+  },
+  {
+   "n": 32,
+   "text": "How much time did you spend on your health condition or its consequences?",
+   "subscale": "Participation in society",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D6.4; response labels for this item are None, Some, Moderate, A Lot, Extreme or cannot do (1 to 5); stem for domain 6 is \"In the past 30 days:\""
+  },
+  {
+   "n": 33,
+   "text": "How much have you been emotionally affected by your health condition?",
+   "subscale": "Participation in society",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D6.5; stem for domain 6 is \"In the past 30 days:\""
+  },
+  {
+   "n": 34,
+   "text": "How much has your health been a drain on the financial resources of you or your family?",
+   "subscale": "Participation in society",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D6.6; stem for domain 6 is \"In the past 30 days:\""
+  },
+  {
+   "n": 35,
+   "text": "How much of a problem did your family have because of your health problems?",
+   "subscale": "Participation in society",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D6.7; stem for domain 6 is \"In the past 30 days:\""
+  },
+  {
+   "n": 36,
+   "text": "How much of a problem did you have in doing things by yourself for relaxation or pleasure?",
+   "subscale": "Participation in society",
+   "reverse": false,
+   "filler": false,
+   "note": "Item code D6.8; stem for domain 6 is \"In the past 30 days:\""
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Understanding and communicating",
+   "items": "1-6 (D1.1-D1.6)",
+   "count": 6,
+   "range": "6-30",
+   "description": "Cognition."
+  },
+  {
+   "name": "Getting around",
+   "items": "7-11 (D2.1-D2.5)",
+   "count": 5,
+   "range": "5-25",
+   "description": "Mobility."
+  },
+  {
+   "name": "Self-care",
+   "items": "12-15 (D3.1-D3.4)",
+   "count": 4,
+   "range": "4-20",
+   "description": "Self care."
+  },
+  {
+   "name": "Getting along with people",
+   "items": "16-20 (D4.1-D4.5)",
+   "count": 5,
+   "range": "5-25",
+   "description": "Getting along."
+  },
+  {
+   "name": "Life activities",
+   "items": "21-28 (D5.1-D5.8)",
+   "count": 8,
+   "range": "8-40",
+   "description": "Household (D5.1-D5.4) and work or school (D5.5-D5.8)."
+  },
+  {
+   "name": "Participation in society",
+   "items": "29-36 (D6.1-D6.8)",
+   "count": 8,
+   "range": "8-40",
+   "description": "Participation."
+  },
+  {
+   "name": "Total",
+   "items": "1-36",
+   "count": 36,
+   "range": "36-180",
+   "description": "General disability score."
+  }
+ ],
+ "scoring": "Simple scoring: Step 1, sum the item scores within each domain to give 6 domain scores; Step 2, sum all 6 domain scores to give the general disability score (36 to 180). The DSM-5-TR version also reports average scores: the average domain score is the raw domain score divided by the number of items in the domain, and the average general disability score is the raw overall score divided by 36, both on the 1 to 5 scale. Higher scores indicate more disability. WHO's complex (item response theory based) scoring applies item weights and converts to a 0 to 100 scale via the WHO SPSS syntax. Missing data: if 10 or more items are unanswered (more than 25 percent of the 36 items) the simple and average general disability scores may not be helpful, but domain scores may be used for domains that are 75 to 100 percent complete. No cut offs are published in the APA document.",
+ "citation": "Üstün, T. B., Kostanjsek, N., Chatterji, S., & Rehm, J. (Eds.). (2010). Measuring health and disability: Manual for WHO Disability Assessment Schedule (WHODAS 2.0). World Health Organization.",
+ "transcriptionNote": "Items transcribed from the APA DSM-5-TR reproduction of the WHODAS 2.0 36 item self administered version, retrieved domain by domain. Items are numbered 1 to 36 here with the WHO item code (D1.1 to D6.8) in each note. Domain 6 items are full questions under the stem \"In the past 30 days:\" rather than completions of \"how much difficulty did you have in:\". Item D6.4 uses different response labels (None, Some, Moderate, A Lot, Extreme or cannot do). The H1 to H3 items (days affected) in the WHO interviewer version are not present in the APA self administered version. The APA page itself carries no permission statement beyond the lines quoted from the PDF. Second pass: WHO page quoted exactly; electronic use requires a WHO licence."
+}

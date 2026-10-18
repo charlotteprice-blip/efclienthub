@@ -1,0 +1,11 @@
+{
+  "file": "cudit-r.json",
+  "sourceReached": true,
+  "sourceUsed": "https://phenxtoolkit.org/protocols/view/510310 (and the linked protocol PDF https://phenxtoolkit.org/toolkit_content/PDF/PX510310.pdf)",
+  "itemsChecked": 8,
+  "itemsMatching": 8,
+  "discrepancies": [],
+  "licenceMatches": true,
+  "verdict": "verified",
+  "notes": "All 8 items, the screening question, the respondent instructions and every item specific response option label and score match the PhenX protocol word for word (the fetch tool confirmed each item individually as MATCH; it declined to transcribe the whole instrument verbatim in one pass, so the comparison was done item by item). Item 7 does end with a colon in the source. Item 2 has curly quotes around stoned in the source where the file uses straight quotes, a typographic difference only. Scoring sentences and the 8 and 12 cut offs match verbatim; the permission statement This protocol is freely available; permission not required for use. matches verbatim. No subscales or reverse items in the source, consistent with the file."
+}

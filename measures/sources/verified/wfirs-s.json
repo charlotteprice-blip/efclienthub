@@ -1,0 +1,11 @@
+{
+  "file": "wfirs-s.json",
+  "sourceReached": true,
+  "sourceUsed": "https://www.ucc.ie/en/media/support/studenthealthservice/docs/ADHD-WeissFunctionalImpairmentScale.pdf",
+  "itemsChecked": 69,
+  "itemsMatching": 69,
+  "discrepancies": [],
+  "licenceMatches": true,
+  "verdict": "verified",
+  "notes": "All 69 items match the UCC PDF word for word across the 7 lettered domains (checked in 3 batches: A and B, C and D, E to G). Title, instruction sentence and the 4 response labels plus n/a confirmed; the PDF prints no numerals beside the labels, so the 0 to 3 values are inferred from the scoring box ('Number of Items Scored 2 or 3') exactly as the transcriptionNote states. Domain membership and counts (Family 8, Work 11, School 10, Life Skills 12, Self-Concept 5, Social 9, Risk 14) match. The source labels the summary box for domain G as 'Risky' while the section heading is 'RISK'; the file's subscale name 'Risk' follows the section heading. No reverse keyed items in source or file. Copyright and permission statement confirmed verbatim, including the email address. Spelling (behavioural, neighbours) matches the form."
+}

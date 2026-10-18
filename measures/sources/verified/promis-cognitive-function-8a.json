@@ -1,0 +1,11 @@
+{
+ "file": "promis-cognitive-function-8a.json",
+ "sourceReached": true,
+ "sourceUsed": "https://loinc.org/81530-8/panel",
+ "itemsChecked": 8,
+ "itemsMatching": 8,
+ "discrepancies": [],
+ "licenceMatches": true,
+ "verdict": "verified",
+ "notes": "All 8 items match the LOINC panel word for word and in order once the 'In the past 7 days - ' prefix (recorded once in instructions) is removed; LOINC codes match. Answer list LL1882-1 matches exactly, including the reversed values (Never 5 to Very often (Several times a day) 1). The quoted LOINC copyright line matches the LOINC page text exactly. The remainder of the licence field (HealthMeasures Terms of Use summary, 2024 fee change) is a paraphrase that the licenceUrl page does not contain and could not be confirmed."
+}

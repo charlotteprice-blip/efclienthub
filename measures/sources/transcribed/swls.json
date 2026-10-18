@@ -1,0 +1,99 @@
+{
+ "code": "SWLS",
+ "name": "Satisfaction with Life Scale",
+ "domain": "Wellbeing and life satisfaction",
+ "developer": "Diener, Emmons, Larsen and Griffin (1985)",
+ "construct": "Global cognitive judgement of satisfaction with one's life.",
+ "respondent": "Self report",
+ "ageRange": "18+ (also used with adolescents)",
+ "minutes": 1,
+ "availability": "public domain",
+ "licence": "eddiener.com SWLS page: \"The scale is copyrighted but is free to use without permission or charge by researchers as long as credit is given to the authors of the scale\" and \"The use of this scale is permitted for non-commercial purposes only.\" PsyToolkit, attributing \"The SWLS website\": \"free to use ... by all professionals (researchers and practitioners) as long as you give credit to the authors of the scale.\"",
+ "licenceUrl": "https://eddiener.com/scales/7",
+ "sourceUrl": "https://psytoolkit.org/survey-library/satisfaction-with-life.html",
+ "instructions": "Below are five statements that you may agree or disagree with. Using the 1 - 7 scale below, indicate your agreement with each item by placing the appropriate number on the line preceding that item. Please be open and honest in your responding.",
+ "responseOptions": [
+  {
+   "value": 7,
+   "label": "Strongly agree"
+  },
+  {
+   "value": 6,
+   "label": "Agree"
+  },
+  {
+   "value": 5,
+   "label": "Slightly agree"
+  },
+  {
+   "value": 4,
+   "label": "Neither agree nor disagree"
+  },
+  {
+   "value": 3,
+   "label": "Slightly disagree"
+  },
+  {
+   "value": 2,
+   "label": "Disagree"
+  },
+  {
+   "value": 1,
+   "label": "Strongly disagree"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "In most ways my life is close to my ideal.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 2,
+   "text": "The conditions of my life are excellent.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 3,
+   "text": "I am satisfied with my life.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 4,
+   "text": "So far I have gotten the important things I want in life.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 5,
+   "text": "If I could live my life over, I would change almost nothing.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Total",
+   "items": "1-5",
+   "count": 5,
+   "range": "5-35",
+   "description": "Sum of the 5 items."
+  }
+ ],
+ "scoring": "Sum the 5 items for a total of 5 to 35; higher scores indicate greater life satisfaction. Diener's interpretation bands: 31-35 extremely satisfied, 26-30 satisfied, 21-25 slightly satisfied, 20 neutral, 15-19 slightly dissatisfied, 10-14 dissatisfied, 5-9 extremely dissatisfied (Diener, Understanding SWLS Scores, eddiener.com).",
+ "citation": "Diener, E., Emmons, R. A., Larsen, R. J., & Griffin, S. (1985). The Satisfaction with Life Scale. Journal of Personality Assessment, 49(1), 71-75. https://doi.org/10.1207/s15327752jpa4901_13",
+ "transcriptionNote": "The eddiener.com pages (itemsUrl and the SWLS page) link to the scale PDF but do not print the items in HTML, and the PDF could not be read through WebFetch, so the items, response options and score bands were transcribed from the PsyToolkit survey library page, which reproduces the scale and its permission statement. The PsyToolkit instructions are adapted for online completion (\"by clicking the appropriate selection\"); the instructions recorded above are the standard paper form wording (\"placing the appropriate number on the line preceding that item\") as reproduced by Diener and were not verified against the eddiener.com PDF in this pass. The target record states Diener places the SWLS in the public domain; the eddiener.com wording is \"copyrighted but ... free to use\", quoted in licence. Second pass: licence quotes re-attributed; the practitioner wording is on PsyToolkit, not the current eddiener.com page, which limits use to non commercial purposes."
+}

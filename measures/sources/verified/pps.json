@@ -1,0 +1,18 @@
+{
+ "file": "pps.json",
+ "sourceReached": true,
+ "sourceUsed": "https://www.frontiersin.org/articles/10.3389/fpsyg.2017.01927/full",
+ "itemsChecked": 12,
+ "itemsMatching": 11,
+ "discrepancies": [
+  {
+   "item": 7,
+   "transcribed": "I am continually saying 'I'll do it tomorrow.'",
+   "source": "I am continually saying “I’ll do it tomorrow.”",
+   "kind": "wording"
+  }
+ ],
+ "licenceMatches": true,
+ "verdict": "verified with corrections",
+ "notes": "Items 1 to 12 match Table 1 of Svartdal and Steel (2017), including the 'making decision' wording in item 1 and the two row split of item 5 (the full stop after 'them' is as printed). The only difference is punctuation in item 7, where the source uses double quotation marks around I'll do it tomorrow and the transcription uses single quotation marks. Factor membership matches the article (decisional delay items 1 to 3, implemental delay 4 to 8, timeliness/lateness 9 to 12). The item 9 deletion recommendation and the 5 item short form are confirmed in the article. No reverse keyed items in the source. Endpoint labels and the CC BY licence statement match verbatim."
+}

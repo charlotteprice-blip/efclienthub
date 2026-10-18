@@ -1,0 +1,11 @@
+{
+  "file": "cpc-12.json",
+  "sourceReached": true,
+  "sourceUsed": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9896786/table/tab2 and https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0247114",
+  "itemsChecked": 12,
+  "itemsMatching": 12,
+  "discrepancies": [],
+  "licenceMatches": true,
+  "verdict": "verified",
+  "notes": "Items 1 to 6 and 10 to 12 match Table 2 of Ikeda et al. (PMC9896786) word for word, and the subscale assignment (Hope, Optimism, Self-efficacy) matches the factor columns. Items 7 to 9 match the three original CPC-12 resilience items quoted in Study 3 of Dudasova et al. (2021) word for word; the source prints them without terminal full stops and the file adds them, which is within the stated tolerance. The 6 point scale with endpoints 1 strongly disagree and 6 strongly agree is confirmed in both the Dudasova article and the original Lorenz et al. (2016) PLOS ONE article. The CC BY licence sentence matches the PLOS ONE article (the fetch tool returned it truncated at the 125 character limit but the visible portion matches exactly). Caveats already declared in the file remain: the original article does not print full item wording, numbering within subscales is the transcriber's own, there are no respondent instructions in any source, and the Lorenz article only implies rather than states the absence of norms (it says standardisation will have to be addressed to create up-to-date norms), so the scoring field slightly overstates that point."
+}

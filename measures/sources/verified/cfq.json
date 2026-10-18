@@ -1,0 +1,11 @@
+{
+  "file": "cfq.json",
+  "sourceReached": true,
+  "sourceUsed": "https://www.psytoolkit.org/survey-library/cognitive-failures-cfq.html",
+  "itemsChecked": 25,
+  "itemsMatching": 25,
+  "discrepancies": [],
+  "licenceMatches": true,
+  "verdict": "verified",
+  "notes": "All 25 items and the instructions match the PsyToolkit page word for word, including the en dash in item 18 and the parentheses in items 13 and 21. The PsyToolkit page lists response values 4 to 0 only, with no labels; the labels Never, Very rarely, Occasionally, Quite often, Very often come from the NITRC page as the transcriptionNote declares and were not re-checked here (NITRC not fetched). Reverse keying: none claimed, none on source. Subscales: Total only, consistent with the source which gives no factor membership; the published 3 factor structures are not represented, which the file acknowledges. Licence quotes verified: Salford copyright field reads exactly No restrictions. and the PsyToolkit Legal stuff sentence matches verbatim. Sample means 35.02, 36.65 and 52.48 appear in the page's table (note the page row reads Car factor skilled men, a typo on the page; file's Car factory skilled men is a sensible correction)."
+}

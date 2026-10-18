@@ -1,0 +1,11 @@
+{
+ "file": "mini-ipip.json",
+ "sourceReached": true,
+ "sourceUsed": "https://ipip.ori.org/MiniIPIPKey.htm (item text and keying); https://socialsci.libretexts.org/Bookshelves/Psychology/Introductory_Psychology/General_Psychology_for_Honors_Students_(Votaw)/31%3A_Personality_Traits/31.06%3A_Appendix (item order and response labels); https://ipip.ori.org/newPermission.htm (licence)",
+ "itemsChecked": 20,
+ "itemsMatching": 20,
+ "discrepancies": [],
+ "licenceMatches": true,
+ "verdict": "verified",
+ "notes": "All 20 items match the IPIP key word for word, and every plus or minus key sign matches the reverse flag and factor assignment. Alpha values per factor (.77, .70, .69, .68, .65) match the key page. The 1 to 20 ordering, the 5 response labels and the reverse scored list (6, 7, 8, 9, 10, 15, 16, 17, 18, 19, 20) match the LibreTexts reproduction. The licence sentence matches the IPIP permission page verbatim. The LibreTexts fetch returned the instructions only in summary, so the instructions paragraph was not checked word for word."
+}

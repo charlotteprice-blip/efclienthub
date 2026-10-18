@@ -1,0 +1,11 @@
+{
+  "file": "ces-d.json",
+  "sourceReached": true,
+  "sourceUsed": "https://www.apa.org/depression-guideline/epidemiologic-studies-scale.pdf",
+  "itemsChecked": 20,
+  "itemsMatching": 20,
+  "discrepancies": [],
+  "licenceMatches": true,
+  "verdict": "verified",
+  "notes": "All 20 items, the instructions, the 4 response option labels and the scoring sentence (range 0 to 60, positive items reversed) match the APA PDF word for word. Only typographic difference: the PDF prints a curly apostrophe in item 1 (don’t) where the file has a straight apostrophe; item 20 curly quotes are reproduced. The PDF does not list which items are reversed or any subscales; the reverse keyed set (4, 8, 12, 16) is correct by wording and the 4 factor membership matches Radloff (1977) as conventionally reported, but could not be checked against the source document itself. Licence quotes (bmedreport.com and cesd-r.com statements) match the CamCOPS page verbatim; the 16 or greater cut off also appears there."
+}

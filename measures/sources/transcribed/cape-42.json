@@ -1,0 +1,397 @@
+{
+ "code": "CAPE-42 (CAPE-P15)",
+ "name": "Community Assessment of Psychic Experiences",
+ "domain": "Clinical screening",
+ "developer": "Stefanis, Hanssen, Smirnis, Avramopoulos, Evdokimidis, Stefanis, Verdoux and van Os (2002)",
+ "construct": "Lifetime frequency of, and distress from, psychotic like experiences in the community across positive, negative and depressive dimensions.",
+ "respondent": "Self report",
+ "ageRange": "16+",
+ "minutes": 15,
+ "availability": "public domain",
+ "licence": "CamCOPS: Intellectual property \"Public domain/freeware\"; \"totally freeware\" (personal communication, Jim van Os to Rudolf Cardinal, 2014-10-16).",
+ "licenceUrl": "https://camcops.readthedocs.io/en/latest/tasks/cape.html",
+ "sourceUrl": "https://camcops.readthedocs.io/en/latest/autodoc/server/camcops_server/extra_strings/cape42.xml.html",
+ "instructions": "Not reproduced in the CamCOPS string file beyond the distress stem \"Please indicate how distressed you are by this experience:\". The printed CAPE-42 asks respondents to rate how often they have had each experience, then, if the experience occurs at least sometimes, how distressed they are by it.",
+ "responseOptions": [
+  {
+   "value": 1,
+   "label": "Never"
+  },
+  {
+   "value": 2,
+   "label": "Sometimes"
+  },
+  {
+   "value": 3,
+   "label": "Often"
+  },
+  {
+   "value": 4,
+   "label": "Nearly always"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "Do you ever feel sad?",
+   "subscale": "Depressive",
+   "reverse": false,
+   "filler": false,
+   "note": "Depressive dimension membership from the CamCOPS cape42.py task source. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 2,
+   "text": "Do you ever feel as if people seem to drop hints about you or say things with a double meaning?",
+   "subscale": "Positive",
+   "reverse": false,
+   "filler": false,
+   "note": "Positive dimension membership confirmed from the Cambridge supplementary table of the 20 CAPE-42 positive items. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 3,
+   "text": "Do you ever feel that you are not a very animated person?",
+   "subscale": "Negative",
+   "reverse": false,
+   "filler": false,
+   "note": "Negative dimension membership from the CamCOPS cape42.py task source. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 4,
+   "text": "Do you ever feel that you are not much of a talker when you are conversing with other people?",
+   "subscale": "Negative",
+   "reverse": false,
+   "filler": false,
+   "note": "Negative dimension membership from the CamCOPS cape42.py task source. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 5,
+   "text": "Do you ever feel as if things in magazines or on TV were written especially for you?",
+   "subscale": "Positive",
+   "reverse": false,
+   "filler": false,
+   "note": "Positive dimension membership confirmed from the Cambridge supplementary table of the 20 CAPE-42 positive items. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 6,
+   "text": "Do you ever feel as if some people are not what they seem to be?",
+   "subscale": "Positive",
+   "reverse": false,
+   "filler": false,
+   "note": "Positive dimension membership confirmed from the Cambridge supplementary table of the 20 CAPE-42 positive items. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 7,
+   "text": "Do you ever feel as if you are being persecuted in some way?",
+   "subscale": "Positive",
+   "reverse": false,
+   "filler": false,
+   "note": "Positive dimension membership confirmed from the Cambridge supplementary table of the 20 CAPE-42 positive items. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 8,
+   "text": "Do you ever feel that you experience few or no emotions at important events?",
+   "subscale": "Negative",
+   "reverse": false,
+   "filler": false,
+   "note": "Negative dimension membership from the CamCOPS cape42.py task source. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 9,
+   "text": "Do you ever feel pessimistic about everything?",
+   "subscale": "Depressive",
+   "reverse": false,
+   "filler": false,
+   "note": "Depressive dimension membership from the CamCOPS cape42.py task source. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 10,
+   "text": "Do you ever feel as if there is a conspiracy against you?",
+   "subscale": "Positive",
+   "reverse": false,
+   "filler": false,
+   "note": "Positive dimension membership confirmed from the Cambridge supplementary table of the 20 CAPE-42 positive items. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 11,
+   "text": "Do you ever feel as if you are destined to be someone very important?",
+   "subscale": "Positive",
+   "reverse": false,
+   "filler": false,
+   "note": "Positive dimension membership confirmed from the Cambridge supplementary table of the 20 CAPE-42 positive items. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 12,
+   "text": "Do you ever feel as if there is no future for you?",
+   "subscale": "Depressive",
+   "reverse": false,
+   "filler": false,
+   "note": "Depressive dimension membership from the CamCOPS cape42.py task source. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 13,
+   "text": "Do you ever feel that you are a very special or unusual person?",
+   "subscale": "Positive",
+   "reverse": false,
+   "filler": false,
+   "note": "Positive dimension membership confirmed from the Cambridge supplementary table of the 20 CAPE-42 positive items. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 14,
+   "text": "Do you ever feel as if you do not want to live anymore?",
+   "subscale": "Depressive",
+   "reverse": false,
+   "filler": false,
+   "note": "Depressive dimension membership from the CamCOPS cape42.py task source. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 15,
+   "text": "Do you ever think that people can communicate telepathically?",
+   "subscale": "Positive",
+   "reverse": false,
+   "filler": false,
+   "note": "Positive dimension membership confirmed from the Cambridge supplementary table of the 20 CAPE-42 positive items. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 16,
+   "text": "Do you ever feel that you have no interest to be with other people?",
+   "subscale": "Negative",
+   "reverse": false,
+   "filler": false,
+   "note": "Negative dimension membership from the CamCOPS cape42.py task source. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 17,
+   "text": "Do you ever feel as if electrical devices such as computers can influence the way you think?",
+   "subscale": "Positive",
+   "reverse": false,
+   "filler": false,
+   "note": "Positive dimension membership confirmed from the Cambridge supplementary table of the 20 CAPE-42 positive items. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 18,
+   "text": "Do you ever feel that you are lacking in motivation to do things?",
+   "subscale": "Negative",
+   "reverse": false,
+   "filler": false,
+   "note": "Negative dimension membership from the CamCOPS cape42.py task source. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 19,
+   "text": "Do you ever cry about nothing?",
+   "subscale": "Depressive",
+   "reverse": false,
+   "filler": false,
+   "note": "Depressive dimension membership from the CamCOPS cape42.py task source. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 20,
+   "text": "Do you believe in the power of witchcraft, voodoo or the occult?",
+   "subscale": "Positive",
+   "reverse": false,
+   "filler": false,
+   "note": "Positive dimension membership confirmed from the Cambridge supplementary table of the 20 CAPE-42 positive items. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 21,
+   "text": "Do you ever feel that you are lacking in energy?",
+   "subscale": "Negative",
+   "reverse": false,
+   "filler": false,
+   "note": "Negative dimension membership from the CamCOPS cape42.py task source. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 22,
+   "text": "Do you ever feel that people look at you oddly because of your appearance?",
+   "subscale": "Positive",
+   "reverse": false,
+   "filler": false,
+   "note": "Positive dimension membership confirmed from the Cambridge supplementary table of the 20 CAPE-42 positive items. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 23,
+   "text": "Do you ever feel that your mind is empty?",
+   "subscale": "Negative",
+   "reverse": false,
+   "filler": false,
+   "note": "Negative dimension membership from the CamCOPS cape42.py task source. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 24,
+   "text": "Do you ever feel as if the thoughts in your head are being taken away from you?",
+   "subscale": "Positive",
+   "reverse": false,
+   "filler": false,
+   "note": "Positive dimension membership confirmed from the Cambridge supplementary table of the 20 CAPE-42 positive items. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 25,
+   "text": "Do you ever feel that you are spending all your days doing nothing?",
+   "subscale": "Negative",
+   "reverse": false,
+   "filler": false,
+   "note": "Negative dimension membership from the CamCOPS cape42.py task source. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 26,
+   "text": "Do you ever feel as if the thoughts in your head are not your own?",
+   "subscale": "Positive",
+   "reverse": false,
+   "filler": false,
+   "note": "Positive dimension membership confirmed from the Cambridge supplementary table of the 20 CAPE-42 positive items. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 27,
+   "text": "Do you ever feel that your feelings are lacking in intensity?",
+   "subscale": "Negative",
+   "reverse": false,
+   "filler": false,
+   "note": "Negative dimension membership from the CamCOPS cape42.py task source. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 28,
+   "text": "Have your thoughts ever been so vivid that you were worried other people would hear them?",
+   "subscale": "Positive",
+   "reverse": false,
+   "filler": false,
+   "note": "Positive dimension membership confirmed from the Cambridge supplementary table of the 20 CAPE-42 positive items. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 29,
+   "text": "Do you ever feel that you are lacking in spontaneity?",
+   "subscale": "Negative",
+   "reverse": false,
+   "filler": false,
+   "note": "Negative dimension membership from the CamCOPS cape42.py task source. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 30,
+   "text": "Do you ever hear your own thoughts being echoed back to you?",
+   "subscale": "Positive",
+   "reverse": false,
+   "filler": false,
+   "note": "Positive dimension membership confirmed from the Cambridge supplementary table of the 20 CAPE-42 positive items. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 31,
+   "text": "Do you ever feel as if you are under the control of some force or power other than yourself?",
+   "subscale": "Positive",
+   "reverse": false,
+   "filler": false,
+   "note": "Positive dimension membership confirmed from the Cambridge supplementary table of the 20 CAPE-42 positive items. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 32,
+   "text": "Do you ever feel that your emotions are blunted?",
+   "subscale": "Negative",
+   "reverse": false,
+   "filler": false,
+   "note": "Negative dimension membership from the CamCOPS cape42.py task source. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 33,
+   "text": "Do you ever hear voices when you are alone?",
+   "subscale": "Positive",
+   "reverse": false,
+   "filler": false,
+   "note": "Positive dimension membership confirmed from the Cambridge supplementary table of the 20 CAPE-42 positive items. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 34,
+   "text": "Do you ever hear voices talking to each other when you are alone?",
+   "subscale": "Positive",
+   "reverse": false,
+   "filler": false,
+   "note": "Positive dimension membership confirmed from the Cambridge supplementary table of the 20 CAPE-42 positive items. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 35,
+   "text": "Do you ever feel that you are neglecting your appearance or personal hygiene?",
+   "subscale": "Negative",
+   "reverse": false,
+   "filler": false,
+   "note": "Negative dimension membership from the CamCOPS cape42.py task source. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 36,
+   "text": "Do you ever feel that you can never get things done?",
+   "subscale": "Negative",
+   "reverse": false,
+   "filler": false,
+   "note": "Negative dimension membership from the CamCOPS cape42.py task source. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 37,
+   "text": "Do you ever feel that you have only few hobbies or interests?",
+   "subscale": "Negative",
+   "reverse": false,
+   "filler": false,
+   "note": "Negative dimension membership from the CamCOPS cape42.py task source. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 38,
+   "text": "Do you ever feel guilty?",
+   "subscale": "Depressive",
+   "reverse": false,
+   "filler": false,
+   "note": "Depressive dimension membership from the CamCOPS cape42.py task source. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 39,
+   "text": "Do you ever feel like a failure?",
+   "subscale": "Depressive",
+   "reverse": false,
+   "filler": false,
+   "note": "Depressive dimension membership from the CamCOPS cape42.py task source. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 40,
+   "text": "Do you ever feel tense?",
+   "subscale": "Depressive",
+   "reverse": false,
+   "filler": false,
+   "note": "Depressive dimension membership from the CamCOPS cape42.py task source. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 41,
+   "text": "Do you ever feel as if a double has taken the place of a family member, friend or acquaintance?",
+   "subscale": "Positive",
+   "reverse": false,
+   "filler": false,
+   "note": "Positive dimension membership confirmed from the Cambridge supplementary table of the 20 CAPE-42 positive items. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  },
+  {
+   "n": 42,
+   "text": "Do you ever see objects, people or animals that other people cannot see?",
+   "subscale": "Positive",
+   "reverse": false,
+   "filler": false,
+   "note": "Positive dimension membership confirmed from the Cambridge supplementary table of the 20 CAPE-42 positive items. Paired distress item: \"Please indicate how distressed you are by this experience:\" rated 1 Not distressed to 4 Very distressed, answered only when frequency is Sometimes or above."
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Positive",
+   "items": "2, 5, 6, 7, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 30, 31, 33, 34, 41, 42",
+   "count": 20,
+   "range": "20-80 frequency; 20-80 distress; weighted mean 1-4",
+   "description": "Delusional ideation, paranoia, grandiosity, thought interference and hallucinations. Membership confirmed from the Cambridge supplementary table."
+  },
+  {
+   "name": "Negative",
+   "items": "3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37",
+   "count": 14,
+   "range": "14-56 (sum) or 1-4 (mean)",
+   "description": "Avolition, social withdrawal, affective flattening and anergia."
+  },
+  {
+   "name": "Depressive",
+   "items": "1, 9, 12, 14, 19, 38, 39, 40",
+   "count": 8,
+   "range": "8-32 (sum) or 1-4 (mean)",
+   "description": "Sadness, pessimism, guilt, tension and suicidal ideation."
+  }
+ ],
+ "scoring": "Each item is rated for frequency 1 (Never) to 4 (Nearly always); items rated Sometimes or higher are also rated for distress 1 (Not distressed) to 4 (Very distressed), with Never frequency recorded as Not distressed (1). For each dimension compute a frequency sum and a distress sum, usually reported as weighted means (sum divided by the number of items answered) so that scores range 1 to 4. A weighted severity score can also be computed by multiplying each item's frequency by its distress. Higher scores indicate more frequent or more distressing experiences. No diagnostic cut off; the CAPE-P15 positive short form uses a weighted mean of 1.47 as a risk threshold in some studies, and a weighted severity positive score above 1.75 has been proposed as a detector of at risk status.",
+ "citation": "Stefanis, N. C., Hanssen, M., Smirnis, N. K., Avramopoulos, D. A., Evdokimidis, I. K., Stefanis, C. N., Verdoux, H., & van Os, J. (2002). Evidence that three dimensions of psychosis have a distribution in the general population. Psychological Medicine, 32(2), 347–358. https://doi.org/10.1017/S0033291701005141",
+ "transcriptionNote": "The itemsUrl cape42.homestead.com now returns \"Sorry, the site you requested has been disabled\". The 42 frequency items were transcribed from the CamCOPS cape42.xml string file (q1 to q42), which matches the item order on psytests.org. Each frequency item has a matching distress item with the stem \"Please indicate how distressed you are by this experience:\" and options Not distressed, A bit distressed, Quite distressed, Very distressed (1 to 4); these 42 distress items are recorded in each item note rather than as separate item objects. Respondent instructions for the frequency scale were not reproduced in any fetched source. The 20 Positive items were matched by wording to the Cambridge supplementary table (S0924933800015510sup004.pdf), which lists them without numbers. No open source reachable with WebFetch gave the item numbers for the Negative and Depressive dimensions (PMC pages were blocked by a browser check), so the remaining 22 items are coded \"Negative or Depressive (dimension not confirmed from source)\" and should be assigned from the original scoring key before use. Second pass: Negative and Depressive memberships resolved from the CamCOPS cape42.py task source (https://camcops.readthedocs.io/en/latest/_modules/camcops_server/tasks/cape42.html)."
+}

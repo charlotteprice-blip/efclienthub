@@ -1,0 +1,18 @@
+{
+  "file": "bis-brief.json",
+  "sourceReached": true,
+  "sourceUsed": "https://www.uh.edu/class/psychology/clinical-psych/research/dpl/_files/publications/steinberg-sharp-stanford-tharp-2013.pdf",
+  "itemsChecked": 8,
+  "itemsMatching": 8,
+  "discrepancies": [
+    {
+      "item": 0,
+      "transcribed": "responseOptions labels 'Rarely/Never', 'Occasionally', 'Often', 'Almost Always/Always'",
+      "source": "Article text: '(1 = rarely/never, 2 = occasionally, 3 = often, 4 = almost always/always)' in lower case",
+      "kind": "option"
+    }
+  ],
+  "licenceMatches": true,
+  "verdict": "verified with corrections",
+  "notes": "All 8 item texts match Table 3 of the article word for word, including the typographic quotation marks and curly apostrophe in item 3 (BIS-11 item 5) and the hyphen in 'self-controlled' (item 4). The BIS-11 item numbers in the notes (1, 2, 5, 8, 9, 12, 14, 19) match the table. The 1 to 4 values match the article; the labels are printed in lower case in the article while the file capitalises them in the BIS-11 house style, which is a case only difference. The article gives no instructions, no reverse scoring information and no permission statement, so the empty instructions field and the licence description are accurate; the reverse keyed items (1, 4, 5, 6 here, i.e. BIS-11 items 1, 8, 9, 12) agree with the impulsivity.org BIS-11 key. The corresponding author details (Lynne Steinberg, lsteinberg@uh.edu) match."
+}

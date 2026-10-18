@@ -1,0 +1,11 @@
+{
+  "file": "adexi.json",
+  "sourceReached": true,
+  "sourceUsed": "https://chexi.se/onewebmedia/English%20ADEXI%20self-report.pdf (items, instructions, options); https://chexi.se/onewebmedia/ADEXI%20subscales.pdf (subscale key); https://chexi.se/ (licence)",
+  "itemsChecked": 14,
+  "itemsMatching": 14,
+  "discrepancies": [],
+  "licenceMatches": true,
+  "verdict": "verified",
+  "notes": "All 14 items, the instruction paragraph and the 5 response labels match the PDF word for word, including the misprint 'refraining for smiling' in item 6 and the full stop that closes item 4 only. Working Memory (1, 2, 5, 7, 8, 9, 11, 12, 13) and Inhibition (3, 4, 6, 10, 14) match the ADEXI subscales PDF, which scores each subscale as a mean; the PDF lists a Total score line without a formula, so the transcribed sum ranges are a reasonable addition rather than a source statement. Both licence sentences appear verbatim on chexi.se and the site gives no formal licence text. No copyright line on the form, only the Thorell translator credit, as the transcription note says."
+}

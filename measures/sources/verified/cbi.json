@@ -1,0 +1,18 @@
+{
+  "file": "cbi.json",
+  "sourceReached": true,
+  "sourceUsed": "https://nfa.dk/media/hl5nbers/cbi-first-edition.pdf (items); https://www.nfa.dk/vaerktoejer/spoergeskemaer/spoergeskema-til-maaling-af-udbraendthed-cbi/copenhagen-burnout-inventory-cbi (licence)",
+  "itemsChecked": 19,
+  "itemsMatching": 18,
+  "discrepancies": [
+    {
+      "item": 4,
+      "transcribed": "How often do you think: 'I can't take it anymore'?",
+      "source": "How often do you think: ”I can’t take it anymore”? (double typographic quotation marks and curly apostrophe in the PDF)",
+      "kind": "wording"
+    }
+  ],
+  "licenceMatches": true,
+  "verdict": "verified with corrections",
+  "notes": "18 of 19 items match the NFA first edition PDF word for word in the printed order (6 personal, 7 work, 6 client). Item 4 differs only in quotation characters: the PDF uses double typographic quotes and a curly apostrophe, the file uses single straight quotes and a straight apostrophe. The PDF numbers items within each part (1-6, 1-7, 1-6) rather than 1 to 19, as the transcription note says. Per item scale assignment matches: personal 1-6 frequency; work 1-3 degree, 4-7 frequency; client 1-4 degree, 5-6 frequency. Frequency values (100, 75, 50, 25, 0) are printed; the degree scale is scored 'as for the first scale' with no values printed, as stated. Item 13 (work item 7) is the only reversed item, matching. Non responder rules (fewer than 3, 4 and 3 items) and the recommendation against printing items in the order shown match. The 3 definition sentences match (the PDF uses a curly apostrophe in person’s). The PDF carries no copyright statement. The NFA licence sentence appears verbatim on the licenceUrl with the Borritz et al. 2006 citation."
+}

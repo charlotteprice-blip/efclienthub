@@ -1,0 +1,11 @@
+{
+  "file": "hua-oranga.json",
+  "sourceReached": true,
+  "sourceUsed": "https://www.oradatabase.co.nz/files/appendix_1_tangata_whaiora_questionnaire.pdf (licence and scoring checked against https://www.oradatabase.co.nz/files/hua_oranga_manual_low_res.pdf and https://terauora.com/hua-oranga/)",
+  "itemsChecked": 16,
+  "itemsMatching": 16,
+  "discrepancies": [],
+  "licenceMatches": true,
+  "verdict": "verified",
+  "notes": "All 16 items match the Tangata Whaiora Questionnaire word for word and in form order, including the full stops on items 11, 12 and 16 only, the macrons in whānau and hapū, and 'Content within yourself' in item 7. The 4 section introductions and the 'At this point in time do you feel:' stem match. Response scale on the form is Strongly disagree, 1 2 3 4 5, Strongly agree with no intermediate labels, as transcribed. Subscale membership of 4 items per taha matches the form sections; the form prints no item numbers so the 1 to 16 numbering is the transcriber's declared convention. No reverse items. Licence: 'available and free to use' is on the Te Rau Ora page verbatim; the Creative Commons wording is in the manual (p. 2), which reads 'licensed for re-use under Creative Commons Attribution (CC-BY) 4.0 International Licence' and is paraphrased accurately in the file, including the non-commercial, attribution and logo exclusion conditions; note the licenceUrl itself carries only the free to use sentence. Scoring bands per taha (4-8, 9-12, 13-16, 17-20) and overall (16-32, 33-48, 49-64, 65-80, labelled very poor to very good) and the averaging rule match the manual. The te reo Māori factor labels in the item notes were not re-checked against the manual."
+}

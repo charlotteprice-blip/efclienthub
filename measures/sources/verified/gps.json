@@ -1,0 +1,11 @@
+{
+  "file": "gps.json",
+  "sourceReached": true,
+  "sourceUsed": "https://www.yorku.ca/rokada/psyctest/procrast.pdf",
+  "itemsChecked": 20,
+  "itemsMatching": 20,
+  "discrepancies": [],
+  "licenceMatches": true,
+  "verdict": "verified",
+  "notes": "All 20 items match the York University PDF word for word, including the preserved typos don't around (item 2) and RVSP (item 14). Item 19 is the one declared departure: the PDF prints encoding artefacts (AI=ll do it tomorrow@) and the file resolves them to the evident intended wording with quotation marks and apostrophe; this is a deliberate, disclosed correction rather than an undisclosed discrepancy, so it is not counted. Asterisked items 2, 3, 10, 13 and 14 match. The 5 response labels and their numbers match exactly, the instructions paragraph matches sentence by sentence, and the reverse keyed set 3, 4, 6, 8, 11, 13, 14, 15, 18, 20 matches the PDF footer verbatim. Total only, consistent with the source. Licence: the Salford page copyright field reads exactly No restrictions. as quoted."
+}

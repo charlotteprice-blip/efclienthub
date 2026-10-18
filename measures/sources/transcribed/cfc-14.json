@@ -1,0 +1,185 @@
+{
+  "code": "CFC-14",
+  "name": "Consideration of Future Consequences Scale, 14 item",
+  "domain": "Procrastination, time and habits",
+  "developer": "Joireman, Shaffer, Balliet and Strathman (2012); original 12 item scale by Strathman, Gleicher, Boninger and Edwards (1994)",
+  "construct": "Extent to which people consider distant versus immediate consequences of their behaviour and are influenced by them.",
+  "respondent": "Self report",
+  "ageRange": "18+",
+  "minutes": 3,
+  "availability": "free with attribution (CC or stated)",
+  "licence": "No blanket licence. The NIH SOBC repository catalogues measures with metadata and links to the source; copyright stays with the original authors and their terms apply. Items are published in the source articles and used freely in research with citation.",
+  "licenceUrl": "https://scienceofbehaviorchange.org/measures/",
+  "sourceUrl": "https://digfir-published.macmillanusa.com/myers_pel_assess_your_strengths2/myers_ays_ch6a.html",
+  "instructions": "For each statement, indicate whether or not the statement is characteristic of you.",
+  "responseOptions": [
+    {
+      "value": 1,
+      "label": "extremely uncharacteristic"
+    },
+    {
+      "value": 2,
+      "label": ""
+    },
+    {
+      "value": 3,
+      "label": ""
+    },
+    {
+      "value": 4,
+      "label": ""
+    },
+    {
+      "value": 5,
+      "label": ""
+    },
+    {
+      "value": 6,
+      "label": ""
+    },
+    {
+      "value": 7,
+      "label": "extremely characteristic"
+    }
+  ],
+  "items": [
+    {
+      "n": 1,
+      "text": "I consider how things might be in the future, and try to influence those things with my day-to-day behavior.",
+      "subscale": "CFC Future",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 2,
+      "text": "Often I engage in a particular behavior in order to achieve outcomes that may not result for many years.",
+      "subscale": "CFC Future",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 3,
+      "text": "I only act to satisfy immediate concerns, figuring the future will take care of itself.",
+      "subscale": "CFC Immediate",
+      "reverse": true,
+      "filler": false,
+      "note": "Reverse scored for the total; CFC-Immediate item"
+    },
+    {
+      "n": 4,
+      "text": "My behavior is only influenced by the immediate (i.e., a matter of days or weeks) outcomes of my actions.",
+      "subscale": "CFC Immediate",
+      "reverse": true,
+      "filler": false,
+      "note": "Reverse scored for the total; CFC-Immediate item"
+    },
+    {
+      "n": 5,
+      "text": "My convenience is a big factor in the decisions I make or the actions I take.",
+      "subscale": "CFC Immediate",
+      "reverse": true,
+      "filler": false,
+      "note": "Reverse scored for the total; CFC-Immediate item"
+    },
+    {
+      "n": 6,
+      "text": "I am willing to sacrifice my immediate happiness or well-being in order to achieve future outcomes.",
+      "subscale": "CFC Future",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 7,
+      "text": "I think it is important to take warnings about negative outcomes seriously even if the negative outcome will not occur for many years.",
+      "subscale": "CFC Future",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 8,
+      "text": "I think it is more important to perform a behavior with important distant consequences than a behavior with less important immediate consequences.",
+      "subscale": "CFC Future",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 9,
+      "text": "I generally ignore warnings about possible future problems because I think the problems will be resolved before they reach crisis level.",
+      "subscale": "CFC Immediate",
+      "reverse": true,
+      "filler": false,
+      "note": "Reverse scored for the total; CFC-Immediate item"
+    },
+    {
+      "n": 10,
+      "text": "I think that sacrificing now is usually unnecessary since future outcomes can be dealt with at a later time.",
+      "subscale": "CFC Immediate",
+      "reverse": true,
+      "filler": false,
+      "note": "Reverse scored for the total; CFC-Immediate item"
+    },
+    {
+      "n": 11,
+      "text": "I only act to satisfy immediate concerns, figuring that I will take care of future problems that may occur at a later date.",
+      "subscale": "CFC Immediate",
+      "reverse": true,
+      "filler": false,
+      "note": "Reverse scored for the total; CFC-Immediate item"
+    },
+    {
+      "n": 12,
+      "text": "Since my day-to-day work has specific outcomes, it is more important to me than behavior that has distant outcomes.",
+      "subscale": "CFC Immediate",
+      "reverse": true,
+      "filler": false,
+      "note": "Reverse scored for the total; CFC-Immediate item"
+    },
+    {
+      "n": 13,
+      "text": "When I make a decision, I think about how it might affect me in the future.",
+      "subscale": "CFC Future",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 14,
+      "text": "My behavior is generally influenced by future consequences.",
+      "subscale": "CFC Future",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    }
+  ],
+  "subscales": [
+    {
+      "name": "CFC Future",
+      "items": "1, 2, 6, 7, 8, 13, 14",
+      "count": 7,
+      "range": "7-49 (sum) or 1-7 (mean)",
+      "description": "Consideration of future consequences; positively worded items."
+    },
+    {
+      "name": "CFC Immediate",
+      "items": "3, 4, 5, 9, 10, 11, 12",
+      "count": 7,
+      "range": "7-49 (sum) or 1-7 (mean)",
+      "description": "Consideration of immediate consequences; negatively worded items, reverse scored for the total."
+    },
+    {
+      "name": "Total",
+      "items": "1-14",
+      "count": 14,
+      "range": "14-98 (sum on 7 point scale) or 1-7 (mean)",
+      "description": "Overall future orientation after reversing the Immediate items."
+    }
+  ],
+  "scoring": "Compute CFC-Future and CFC-Immediate as the sum or mean of their 7 items; for a total score reverse the 7 Immediate items and sum or average all 14 (McKay et al., 2018, describing Joireman et al., 2012). Higher total scores indicate greater consideration of future consequences. The two factor scoring is recommended by Joireman et al. (2012). No published cut offs. Note that the Macmillan source scores on a 5 point scale giving a 14 to 70 range; on the 7 point scale of Joireman et al. the total ranges 14 to 98.",
+  "citation": "Joireman, J., Shaffer, M. J., Balliet, D., & Strathman, A. (2012). Promotion orientation explains why future-oriented people exercise and eat healthy: Evidence from the two-factor consideration of future consequences-14 scale. Personality and Social Psychology Bulletin, 38(10), 1272–1287. https://doi.org/10.1177/0146167212449362",
+  "transcriptionNote": "The SOBC repository page (itemsUrl) catalogues the measure without item text, and the Joireman et al. (2012) article is paywalled, so the 14 items were transcribed from the publicly accessible Macmillan Learning self assessment page that reproduces the CFC-14 with citation to Joireman et al. (2012). Items 7, 8, 9 and 11 were returned in 2 segments each by the fetch tool and are joined here at the split point. The psytests.org form (https://psytests.org/emvol/cfc14en-bl.html) independently confirmed the wording of items 1 and 3, with one spelling difference (day to day vs day-to-day in item 1; the hyphenated Macmillan form is kept). Response scale: the Macmillan page gives no labels, the psytests form uses 1 Not at all like me to 7 Very much like me, and the target record gives 1 extremely uncharacteristic to 7 extremely characteristic (Joireman et al. 2012); the latter endpoints are recorded with points 2 to 6 unlabelled. Factor membership from McKay, Perry, Percy and Cole (2018, CC BY-NC-ND, Hull repository) and matching the reverse keyed items on the Macmillan page."
+}

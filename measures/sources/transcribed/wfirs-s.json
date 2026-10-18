@@ -1,0 +1,652 @@
+{
+ "code": "WFIRS-S",
+ "name": "Weiss Functional Impairment Rating Scale, Self Report",
+ "domain": "Functioning and health",
+ "developer": "Weiss (2000)",
+ "construct": "Functional impairment attributable to emotional or behavioural problems (ADHD) across 7 life domains over the past month.",
+ "respondent": "Self report",
+ "ageRange": "18+",
+ "minutes": 10,
+ "availability": "free with attribution (CC or stated)",
+ "licence": "This scale is copyrighted by Margaret Danielle Weiss, MD PhD. The scale can be used by clinicians and researchers free of charge and can be posted on the Internet or replicated as needed. Please contact Dr. Weiss at margaret.weiss@icloud.com if you wish to post the scale on the Internet, use it in research or plan to create a translation.",
+ "licenceUrl": "https://www.ucc.ie/en/media/support/studenthealthservice/docs/ADHD-WeissFunctionalImpairmentScale.pdf",
+ "sourceUrl": "https://www.ucc.ie/en/media/support/studenthealthservice/docs/ADHD-WeissFunctionalImpairmentScale.pdf",
+ "instructions": "Circle the number for the rating that best describes how your emotional or behavioural problems have affected each item in the last month.",
+ "responseOptions": [
+  {
+   "value": 0,
+   "label": "Never or not at all"
+  },
+  {
+   "value": 1,
+   "label": "Sometimes or somewhat"
+  },
+  {
+   "value": 2,
+   "label": "Often or much"
+  },
+  {
+   "value": 3,
+   "label": "Very often or very much"
+  },
+  {
+   "value": null,
+   "label": "n/a"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "Having problems with family",
+   "subscale": "Family",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label A1"
+  },
+  {
+   "n": 2,
+   "text": "Having problems with spouse/partner",
+   "subscale": "Family",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label A2"
+  },
+  {
+   "n": 3,
+   "text": "Relying on others to do things for you",
+   "subscale": "Family",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label A3"
+  },
+  {
+   "n": 4,
+   "text": "Causing fighting in the family",
+   "subscale": "Family",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label A4"
+  },
+  {
+   "n": 5,
+   "text": "Makes it hard for the family to have fun together",
+   "subscale": "Family",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label A5"
+  },
+  {
+   "n": 6,
+   "text": "Problems taking care of your family",
+   "subscale": "Family",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label A6"
+  },
+  {
+   "n": 7,
+   "text": "Problems balancing your needs against those of your family",
+   "subscale": "Family",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label A7"
+  },
+  {
+   "n": 8,
+   "text": "Problems losing control with family",
+   "subscale": "Family",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label A8"
+  },
+  {
+   "n": 9,
+   "text": "Problems performing required duties",
+   "subscale": "Work",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label B1"
+  },
+  {
+   "n": 10,
+   "text": "Problems with getting your work done efficiently",
+   "subscale": "Work",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label B2"
+  },
+  {
+   "n": 11,
+   "text": "Problems with your supervisor",
+   "subscale": "Work",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label B3"
+  },
+  {
+   "n": 12,
+   "text": "Problems keeping a job",
+   "subscale": "Work",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label B4"
+  },
+  {
+   "n": 13,
+   "text": "Getting fired from work",
+   "subscale": "Work",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label B5"
+  },
+  {
+   "n": 14,
+   "text": "Problems working in a team",
+   "subscale": "Work",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label B6"
+  },
+  {
+   "n": 15,
+   "text": "Problems with your attendance",
+   "subscale": "Work",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label B7"
+  },
+  {
+   "n": 16,
+   "text": "Problems with being late",
+   "subscale": "Work",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label B8"
+  },
+  {
+   "n": 17,
+   "text": "Problems taking on new tasks",
+   "subscale": "Work",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label B9"
+  },
+  {
+   "n": 18,
+   "text": "Problems working to your potential",
+   "subscale": "Work",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label B10"
+  },
+  {
+   "n": 19,
+   "text": "Poor performance evaluations",
+   "subscale": "Work",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label B11"
+  },
+  {
+   "n": 20,
+   "text": "Problems taking notes",
+   "subscale": "School",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label C1"
+  },
+  {
+   "n": 21,
+   "text": "Problems completing assignments",
+   "subscale": "School",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label C2"
+  },
+  {
+   "n": 22,
+   "text": "Problems getting your work done efficiently",
+   "subscale": "School",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label C3"
+  },
+  {
+   "n": 23,
+   "text": "Problems with teachers",
+   "subscale": "School",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label C4"
+  },
+  {
+   "n": 24,
+   "text": "Problems with school administrators",
+   "subscale": "School",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label C5"
+  },
+  {
+   "n": 25,
+   "text": "Problems meeting minimum requirements to stay in school",
+   "subscale": "School",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label C6"
+  },
+  {
+   "n": 26,
+   "text": "Problems with attendance",
+   "subscale": "School",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label C7"
+  },
+  {
+   "n": 27,
+   "text": "Problems with being late",
+   "subscale": "School",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label C8"
+  },
+  {
+   "n": 28,
+   "text": "Problems with working to your potential",
+   "subscale": "School",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label C9"
+  },
+  {
+   "n": 29,
+   "text": "Problems with inconsistent grades",
+   "subscale": "School",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label C10"
+  },
+  {
+   "n": 30,
+   "text": "Excessive or inappropriate use of internet, video games or TV",
+   "subscale": "Life Skills",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label D1"
+  },
+  {
+   "n": 31,
+   "text": "Problems keeping an acceptable appearance",
+   "subscale": "Life Skills",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label D2"
+  },
+  {
+   "n": 32,
+   "text": "Problems getting ready to leave the house",
+   "subscale": "Life Skills",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label D3"
+  },
+  {
+   "n": 33,
+   "text": "Problems getting to bed",
+   "subscale": "Life Skills",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label D4"
+  },
+  {
+   "n": 34,
+   "text": "Problems with nutrition",
+   "subscale": "Life Skills",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label D5"
+  },
+  {
+   "n": 35,
+   "text": "Problems with sex",
+   "subscale": "Life Skills",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label D6"
+  },
+  {
+   "n": 36,
+   "text": "Problems with sleeping",
+   "subscale": "Life Skills",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label D7"
+  },
+  {
+   "n": 37,
+   "text": "Getting hurt or injured",
+   "subscale": "Life Skills",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label D8"
+  },
+  {
+   "n": 38,
+   "text": "Avoiding exercise",
+   "subscale": "Life Skills",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label D9"
+  },
+  {
+   "n": 39,
+   "text": "Problems keeping regular appointments with doctor/dentist",
+   "subscale": "Life Skills",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label D10"
+  },
+  {
+   "n": 40,
+   "text": "Problems keeping up with household chores",
+   "subscale": "Life Skills",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label D11"
+  },
+  {
+   "n": 41,
+   "text": "Problems managing money",
+   "subscale": "Life Skills",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label D12"
+  },
+  {
+   "n": 42,
+   "text": "Feeling bad about yourself",
+   "subscale": "Self-Concept",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label E1"
+  },
+  {
+   "n": 43,
+   "text": "Feeling frustrated with yourself",
+   "subscale": "Self-Concept",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label E2"
+  },
+  {
+   "n": 44,
+   "text": "Feeling discouraged",
+   "subscale": "Self-Concept",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label E3"
+  },
+  {
+   "n": 45,
+   "text": "Not feeling happy with your life",
+   "subscale": "Self-Concept",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label E4"
+  },
+  {
+   "n": 46,
+   "text": "Feeling incompetent",
+   "subscale": "Self-Concept",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label E5"
+  },
+  {
+   "n": 47,
+   "text": "Getting into arguments",
+   "subscale": "Social",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label F1"
+  },
+  {
+   "n": 48,
+   "text": "Trouble cooperating",
+   "subscale": "Social",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label F2"
+  },
+  {
+   "n": 49,
+   "text": "Trouble getting along with people",
+   "subscale": "Social",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label F3"
+  },
+  {
+   "n": 50,
+   "text": "Problems having fun with other people",
+   "subscale": "Social",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label F4"
+  },
+  {
+   "n": 51,
+   "text": "Problems participating in hobbies",
+   "subscale": "Social",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label F5"
+  },
+  {
+   "n": 52,
+   "text": "Problems making friends",
+   "subscale": "Social",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label F6"
+  },
+  {
+   "n": 53,
+   "text": "Problems keeping friends",
+   "subscale": "Social",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label F7"
+  },
+  {
+   "n": 54,
+   "text": "Saying inappropriate things",
+   "subscale": "Social",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label F8"
+  },
+  {
+   "n": 55,
+   "text": "Complaints from neighbours",
+   "subscale": "Social",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label F9"
+  },
+  {
+   "n": 56,
+   "text": "Aggressive driving",
+   "subscale": "Risk",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label G1"
+  },
+  {
+   "n": 57,
+   "text": "Doing other things while driving",
+   "subscale": "Risk",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label G2"
+  },
+  {
+   "n": 58,
+   "text": "Road rage",
+   "subscale": "Risk",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label G3"
+  },
+  {
+   "n": 59,
+   "text": "Breaking or damaging things",
+   "subscale": "Risk",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label G4"
+  },
+  {
+   "n": 60,
+   "text": "Doing things that are illegal",
+   "subscale": "Risk",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label G5"
+  },
+  {
+   "n": 61,
+   "text": "Being involved with the police",
+   "subscale": "Risk",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label G6"
+  },
+  {
+   "n": 62,
+   "text": "Smoking cigarettes",
+   "subscale": "Risk",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label G7"
+  },
+  {
+   "n": 63,
+   "text": "Smoking marijuana",
+   "subscale": "Risk",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label G8"
+  },
+  {
+   "n": 64,
+   "text": "Drinking alcohol",
+   "subscale": "Risk",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label G9"
+  },
+  {
+   "n": 65,
+   "text": "Taking \"street\" drugs",
+   "subscale": "Risk",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label G10"
+  },
+  {
+   "n": 66,
+   "text": "Sex without protection (birth control, condom)",
+   "subscale": "Risk",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label G11"
+  },
+  {
+   "n": 67,
+   "text": "Sexually inappropriate behaviour",
+   "subscale": "Risk",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label G12"
+  },
+  {
+   "n": 68,
+   "text": "Being physically aggressive",
+   "subscale": "Risk",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label G13"
+  },
+  {
+   "n": 69,
+   "text": "Being verbally aggressive",
+   "subscale": "Risk",
+   "reverse": false,
+   "filler": false,
+   "note": "Source label G14"
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Family",
+   "items": "1-8",
+   "count": 8,
+   "range": "0-24",
+   "description": "Source section A."
+  },
+  {
+   "name": "Work",
+   "items": "9-19",
+   "count": 11,
+   "range": "0-33",
+   "description": "Source section B."
+  },
+  {
+   "name": "School",
+   "items": "20-29",
+   "count": 10,
+   "range": "0-30",
+   "description": "Source section C."
+  },
+  {
+   "name": "Life Skills",
+   "items": "30-41",
+   "count": 12,
+   "range": "0-36",
+   "description": "Source section D."
+  },
+  {
+   "name": "Self-Concept",
+   "items": "42-46",
+   "count": 5,
+   "range": "0-15",
+   "description": "Source section E."
+  },
+  {
+   "name": "Social",
+   "items": "47-55",
+   "count": 9,
+   "range": "0-27",
+   "description": "Source section F."
+  },
+  {
+   "name": "Risk",
+   "items": "56-69",
+   "count": 14,
+   "range": "0-42",
+   "description": "Source section G."
+  },
+  {
+   "name": "Total",
+   "items": "1-69",
+   "count": 69,
+   "range": "0-207",
+   "description": "All domains; mean score excludes n/a items."
+  }
+ ],
+ "scoring": "The form's scoring box records, for each domain and overall: Number of Items Scored '2' or '3'; Total Score; Mean Score (N/A items not included in calculation); and the number of answered questions the mean is calculated from. Higher scores indicate greater impairment. The form itself prints no cut offs. Weiss's scoring guidance, as summarised in the target record and the WFIRS literature, treats a domain mean of 1.5 or above, or 2 items scored 2 or 1 item scored 3 within a domain, as clinically significant impairment; this threshold is not printed on the UCC copy and should be verified against Weiss's published scoring instructions.",
+ "citation": "Weiss, M. D. (2000). Weiss Functional Impairment Rating Scale – Self Report (WFIRS-S) [Measurement instrument]. University of British Columbia.",
+ "transcriptionNote": "All 69 items transcribed from the UCC Student Health Service PDF, title 'WEISS FUNCTIONAL IMPAIRMENT RATING SCALE – SELF REPORT (WFIRS-S)'. Items are numbered 1 to 69 sequentially here; the source numbers items within each lettered domain (A1 to G14) and the source label is given in each item note. The form prints the 4 response labels plus n/a but does not print the numbers 0 to 3; the 0 to 3 values are inferred from the scoring box, which refers to items scored '2' or '3'. Spelling follows the form (behavioural, neighbours). WebFetch returned the items in 3 domain batches; the instruction and copyright statement were returned in consecutive fragments and rejoined."
+}

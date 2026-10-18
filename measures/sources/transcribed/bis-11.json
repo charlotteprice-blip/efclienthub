@@ -1,0 +1,350 @@
+{
+ "code": "BIS-11",
+ "name": "Barratt Impulsiveness Scale, version 11",
+ "domain": "Executive functioning and attention",
+ "developer": "Patton, Stanford and Barratt (1995)",
+ "construct": "Trait impulsiveness across attentional, motor and non planning domains.",
+ "respondent": "Self report",
+ "ageRange": "18+",
+ "minutes": 10,
+ "availability": "free with attribution (CC or stated)",
+ "licence": "Secondary sources state: \"The BIS-11 is distributed free of charge for research and clinical use with proper attribution to the original authors.\" Shirley Ryan AbilityLab lists cost as free. No publisher licence applies. Note that the official scale page (impulsivity.org) carries the footer \"Copyright International Society for Research on Impulsivity and it's licensor's. All Rights Reserved.\" and directs clinical or research users to contact Dr Matthew S. Stanford; it does not print an explicit grant of permission.",
+ "licenceUrl": "https://www.testable.org/scale/bis-11-barratt-impulsiveness-scale",
+ "sourceUrl": "https://psytoolkit.org/survey-library/impulsiveness-barratt.html",
+ "instructions": "People differ in the ways they act and think in different situations. This is a test to measure some of the ways in which you act and think. Read each statement and select how often this applies to you. Do not spend too much time on any statement. Answer quickly and honestly.",
+ "responseOptions": [
+  {
+   "value": 1,
+   "label": "Rarely/Never"
+  },
+  {
+   "value": 2,
+   "label": "Occasionally"
+  },
+  {
+   "value": 3,
+   "label": "Often"
+  },
+  {
+   "value": 4,
+   "label": "Almost Always/Always"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "I plan tasks carefully.",
+   "subscale": "Self-Control",
+   "reverse": true,
+   "filler": false,
+   "note": "Second order factor: Nonplanning"
+  },
+  {
+   "n": 2,
+   "text": "I do things without thinking.",
+   "subscale": "Motor",
+   "reverse": false,
+   "filler": false,
+   "note": "Second order factor: Motor"
+  },
+  {
+   "n": 3,
+   "text": "I make-up my mind quickly.",
+   "subscale": "Motor",
+   "reverse": false,
+   "filler": false,
+   "note": "Second order factor: Motor"
+  },
+  {
+   "n": 4,
+   "text": "I am happy-go-lucky.",
+   "subscale": "Motor",
+   "reverse": false,
+   "filler": false,
+   "note": "Second order factor: Motor"
+  },
+  {
+   "n": 5,
+   "text": "I don't \"pay attention.\"",
+   "subscale": "Attention",
+   "reverse": false,
+   "filler": false,
+   "note": "Second order factor: Attentional"
+  },
+  {
+   "n": 6,
+   "text": "I have \"racing\" thoughts.",
+   "subscale": "Cognitive Instability",
+   "reverse": false,
+   "filler": false,
+   "note": "Second order factor: Attentional"
+  },
+  {
+   "n": 7,
+   "text": "I plan trips well ahead of time.",
+   "subscale": "Self-Control",
+   "reverse": true,
+   "filler": false,
+   "note": "Second order factor: Nonplanning"
+  },
+  {
+   "n": 8,
+   "text": "I am self controlled.",
+   "subscale": "Self-Control",
+   "reverse": true,
+   "filler": false,
+   "note": "Second order factor: Nonplanning"
+  },
+  {
+   "n": 9,
+   "text": "I concentrate easily.",
+   "subscale": "Attention",
+   "reverse": true,
+   "filler": false,
+   "note": "Second order factor: Attentional"
+  },
+  {
+   "n": 10,
+   "text": "I save regularly.",
+   "subscale": "Cognitive Complexity",
+   "reverse": true,
+   "filler": false,
+   "note": "Second order factor: Nonplanning"
+  },
+  {
+   "n": 11,
+   "text": "I \"squirm\" at plays or lectures.",
+   "subscale": "Attention",
+   "reverse": false,
+   "filler": false,
+   "note": "Second order factor: Attentional"
+  },
+  {
+   "n": 12,
+   "text": "I am a careful thinker.",
+   "subscale": "Self-Control",
+   "reverse": true,
+   "filler": false,
+   "note": "Second order factor: Nonplanning"
+  },
+  {
+   "n": 13,
+   "text": "I plan for job security.",
+   "subscale": "Self-Control",
+   "reverse": true,
+   "filler": false,
+   "note": "Second order factor: Nonplanning"
+  },
+  {
+   "n": 14,
+   "text": "I say things without thinking.",
+   "subscale": "Self-Control",
+   "reverse": false,
+   "filler": false,
+   "note": "Second order factor: Nonplanning"
+  },
+  {
+   "n": 15,
+   "text": "I like to think about complex problems.",
+   "subscale": "Cognitive Complexity",
+   "reverse": true,
+   "filler": false,
+   "note": "Second order factor: Nonplanning"
+  },
+  {
+   "n": 16,
+   "text": "I change jobs.",
+   "subscale": "Perseverance",
+   "reverse": false,
+   "filler": false,
+   "note": "Second order factor: Motor"
+  },
+  {
+   "n": 17,
+   "text": "I act \"on impulse\".",
+   "subscale": "Motor",
+   "reverse": false,
+   "filler": false,
+   "note": "Second order factor: Motor"
+  },
+  {
+   "n": 18,
+   "text": "I get easily bored when solving thought problems.",
+   "subscale": "Cognitive Complexity",
+   "reverse": false,
+   "filler": false,
+   "note": "Second order factor: Nonplanning"
+  },
+  {
+   "n": 19,
+   "text": "I act on the spur of the moment.",
+   "subscale": "Motor",
+   "reverse": false,
+   "filler": false,
+   "note": "Second order factor: Motor"
+  },
+  {
+   "n": 20,
+   "text": "I am a steady thinker.",
+   "subscale": "Attention",
+   "reverse": true,
+   "filler": false,
+   "note": "Second order factor: Attentional"
+  },
+  {
+   "n": 21,
+   "text": "I change residences.",
+   "subscale": "Perseverance",
+   "reverse": false,
+   "filler": false,
+   "note": "Second order factor: Motor"
+  },
+  {
+   "n": 22,
+   "text": "I buy things on impulse.",
+   "subscale": "Motor",
+   "reverse": false,
+   "filler": false,
+   "note": "Second order factor: Motor"
+  },
+  {
+   "n": 23,
+   "text": "I can only think about one thing at a time.",
+   "subscale": "Perseverance",
+   "reverse": false,
+   "filler": false,
+   "note": "Second order factor: Motor"
+  },
+  {
+   "n": 24,
+   "text": "I change hobbies.",
+   "subscale": "Cognitive Instability",
+   "reverse": false,
+   "filler": false,
+   "note": "Second order factor: Attentional"
+  },
+  {
+   "n": 25,
+   "text": "I spend or charge more than I earn.",
+   "subscale": "Motor",
+   "reverse": false,
+   "filler": false,
+   "note": "Second order factor: Motor"
+  },
+  {
+   "n": 26,
+   "text": "I often have extraneous thoughts when thinking.",
+   "subscale": "Cognitive Instability",
+   "reverse": false,
+   "filler": false,
+   "note": "Second order factor: Attentional"
+  },
+  {
+   "n": 27,
+   "text": "I am more interested in the present than the future.",
+   "subscale": "Cognitive Complexity",
+   "reverse": false,
+   "filler": false,
+   "note": "Second order factor: Nonplanning"
+  },
+  {
+   "n": 28,
+   "text": "I am restless at the theater or lectures.",
+   "subscale": "Attention",
+   "reverse": false,
+   "filler": false,
+   "note": "Second order factor: Attentional"
+  },
+  {
+   "n": 29,
+   "text": "I like puzzles.",
+   "subscale": "Cognitive Complexity",
+   "reverse": true,
+   "filler": false,
+   "note": "Second order factor: Nonplanning"
+  },
+  {
+   "n": 30,
+   "text": "I am future oriented.",
+   "subscale": "Perseverance",
+   "reverse": true,
+   "filler": false,
+   "note": "Second order factor: Motor"
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Attention",
+   "items": "5, 9R, 11, 20R, 28",
+   "count": 5,
+   "range": "5-20",
+   "description": "First order factor; loads on Attentional."
+  },
+  {
+   "name": "Cognitive Instability",
+   "items": "6, 24, 26",
+   "count": 3,
+   "range": "3-12",
+   "description": "First order factor; loads on Attentional."
+  },
+  {
+   "name": "Motor",
+   "items": "2, 3, 4, 17, 19, 22, 25",
+   "count": 7,
+   "range": "7-28",
+   "description": "First order factor; loads on Motor."
+  },
+  {
+   "name": "Perseverance",
+   "items": "16, 21, 23, 30R",
+   "count": 4,
+   "range": "4-16",
+   "description": "First order factor; loads on Motor."
+  },
+  {
+   "name": "Self-Control",
+   "items": "1R, 7R, 8R, 12R, 13R, 14",
+   "count": 6,
+   "range": "6-24",
+   "description": "First order factor; loads on Non-planning."
+  },
+  {
+   "name": "Cognitive Complexity",
+   "items": "10R, 15R, 18, 27, 29R",
+   "count": 5,
+   "range": "5-20",
+   "description": "First order factor; loads on Non-planning."
+  },
+  {
+   "name": "Attentional",
+   "items": "5, 6, 9R, 11, 20R, 24, 26, 28",
+   "count": 8,
+   "range": "8-32",
+   "description": "Second order factor: Attention plus Cognitive Instability."
+  },
+  {
+   "name": "Motor (second order)",
+   "items": "2, 3, 4, 16, 17, 19, 21, 22, 23, 25, 30R",
+   "count": 11,
+   "range": "11-44",
+   "description": "Second order factor: Motor plus Perseverance."
+  },
+  {
+   "name": "Nonplanning",
+   "items": "1R, 7R, 8R, 10R, 12R, 13R, 14, 15R, 18, 27, 29R",
+   "count": 11,
+   "range": "11-44",
+   "description": "Second order factor: Self-Control plus Cognitive Complexity."
+  },
+  {
+   "name": "Total",
+   "items": "1-30",
+   "count": 30,
+   "range": "30-120",
+   "description": "Sum of all 30 items after reverse scoring 11 items."
+  }
+ ],
+ "scoring": "Score each item 1 (Rarely/Never) to 4 (Almost Always/Always). Reverse score items 1, 7, 8, 9, 10, 12, 13, 15, 20, 29 and 30 (4 becomes 1, 3 becomes 2, 2 becomes 3, 1 becomes 4). Sum all items for a total of 30 to 120; sum the item sets above for the 6 first order and 3 second order factor scores. Higher scores indicate greater impulsiveness. Stanford et al. (2009) describe total scores of 72 and above as highly impulsive, 52 to 71 as within normal limits, and below 52 as over controlled or possibly invalid responding (the impulsivity.org page refers to Stanford et al. 2009 but does not itself print the cut offs).",
+ "citation": "Patton, J. H., Stanford, M. S., & Barratt, E. S. (1995). Factor structure of the Barratt Impulsiveness Scale. Journal of Clinical Psychology, 51(6), 768-774. https://doi.org/10.1002/1097-4679(199511)51:6<768::AID-JCLP2270510607>3.0.CO;2-1",
+ "transcriptionNote": "The NIDA Data Share page (itemsUrl) carries only a summary and no items, so the item text was transcribed from the PsyToolkit survey library page, which reproduces the BIS-11 for online use and marks the 11 reverse scored items. Factor membership and the 1 to 4 response values were taken from the official scale page https://www.impulsivity.org/measurement/bis11 (which links the English PDF at https://www.impulsivity.org/files/wp-content/uploads/2021/09/bis11english.pdf; that PDF was not fetched). PsyToolkit prints the response labels without numeric values; the 30 to 120 range and the impulsivity.org page confirm 1 to 4. Punctuation of items 5 and 17 (closing quotation marks around a full stop) follows the PsyToolkit rendering; items 3 and 8 retain the source spelling \"make-up\" and \"self controlled\". US spelling (theater) retained. The Stanford et al. (2009) cut offs are carried from the target record and were not verified against the article in this pass. Second pass: item 17 punctuation, full instructions and the factor name Nonplanning corrected to match the sources."
+}

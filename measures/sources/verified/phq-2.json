@@ -1,0 +1,11 @@
+{
+ "file": "phq-2.json",
+ "sourceReached": true,
+ "sourceUsed": "https://psytoolkit.org/survey-library/depression-phq.html (items); https://cde.nida.nih.gov/node/22 (licence, scoring)",
+ "itemsChecked": 2,
+ "itemsMatching": 2,
+ "discrepancies": [],
+ "licenceMatches": true,
+ "verdict": "verified",
+ "notes": "Both items match PHQ-9 items 1 and 2 on the PsyToolkit page word for word, and the NIDA CDE page confirms the PHQ-2 is the first 2 items of the PHQ-9. The instruction stem matches. Response labels match with values 0 to 3; PsyToolkit prints them in lower case and the transcription uses sentence case, which is disclosed in the note. The permission sentence 'No permission required to reproduce, translate, display or distribute.' matches the NIDA page verbatim. Range 0 to 6, cut off of 3 and the note that a cut point of 2 enhances sensitivity are confirmed on the NIDA page."
+}

@@ -1,0 +1,11 @@
+{
+ "file": "promis-satisfaction-with-social-roles-v2-0-8a.json",
+ "sourceReached": true,
+ "sourceUsed": "https://loinc.org/76800-2/panel",
+ "itemsChecked": 8,
+ "itemsMatching": 8,
+ "discrepancies": [],
+ "licenceMatches": true,
+ "verdict": "verified",
+ "notes": "All 8 items match the LOINC panel word for word and in order with matching LOINC codes. Answer list LL1017-4 (Not at all 1 to Very much 5) matches. Both quoted licence fragments match the LOINC page text exactly ('Copyright © 2010 PROMIS Health Organization or other individuals/entities that have contributed information and materials to Assessment Center, and are being used with the permission of the copyright holders.' and 'Use of PROMIS instruments (e.g., item banks, short forms, profile measures) are subject to the PROMIS Terms and Conditions available at: http://www.assessmentcenter.net/TandC.aspx'). The HealthMeasures summary sentences in the licence field are paraphrase not present on the licenceUrl page. No instructions are printed on the LOINC panel, consistent with the empty field."
+}

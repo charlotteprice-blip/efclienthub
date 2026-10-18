@@ -1,0 +1,30 @@
+{
+  "file": "bis-11.json",
+  "sourceReached": true,
+  "sourceUsed": "https://psytoolkit.org/survey-library/impulsiveness-barratt.html (items, options, instructions); https://www.impulsivity.org/measurement/bis11 (factors, values, reverse items); https://www.testable.org/scale/bis-11-barratt-impulsiveness-scale (licence)",
+  "itemsChecked": 30,
+  "itemsMatching": 29,
+  "discrepancies": [
+    {
+      "item": 17,
+      "transcribed": "I act \"on impulse.\"",
+      "source": "I act \"on impulse\".  (full stop outside the closing quotation mark on PsyToolkit)",
+      "kind": "wording"
+    },
+    {
+      "item": 0,
+      "transcribed": "instructions: 'People differ in the ways they act and think in different situations. Read each statement and select how often this applies to you. Answer quickly and honestly.'",
+      "source": "'DIRECTIONS: People differ in the ways they act and think in different situations. This is a test to measure some of the ways in which you act and think. Read each statement and select how often this applies to you. Do not spend too much time on any statement. Answer quickly and honestly.' (2 sentences omitted)",
+      "kind": "missing"
+    },
+    {
+      "item": 0,
+      "transcribed": "Second order factor name 'Non-planning'",
+      "source": "impulsivity.org prints 'Nonplanning'",
+      "kind": "subscale"
+    }
+  ],
+  "licenceMatches": true,
+  "verdict": "verified with corrections",
+  "notes": "29 of 30 items match PsyToolkit word for word, including 'make-up', 'self controlled', 'theater' and the full stop inside the quotation marks in item 5. Item 17 places the full stop outside the closing quotation mark on PsyToolkit; the transcription places it inside. The instructions field drops 2 of the 5 sentences PsyToolkit shows ('This is a test to measure some of the ways in which you act and think.' and 'Do not spend too much time on any statement.') and the 'DIRECTIONS:' label. Response labels match; PsyToolkit shows no numeric values and impulsivity.org confirms 1 to 4. The 11 reverse keyed items (1, 7, 8, 9, 10, 12, 13, 15, 20, 29, 30) match both PsyToolkit and impulsivity.org. All 6 first order factor item lists match impulsivity.org exactly; the second order grouping (Attentional = Attention + Cognitive Instability, Motor = Motor + Perseverance, Nonplanning = Self-Control + Cognitive Complexity) matches. The testable.org licence sentence appears verbatim and the impulsivity.org copyright footer ('Copyright International Society for Research on Impulsivity and it's licensor's. All Rights Reserved.') and contact direction are quoted accurately. Note that testable.org places 'I am a careful thinker' under Attentional in its illustrative list, which conflicts with impulsivity.org and Patton et al.; the transcription follows impulsivity.org, which is the authoritative key."
+}

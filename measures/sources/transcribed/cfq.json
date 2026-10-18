@@ -1,0 +1,251 @@
+{
+ "code": "CFQ",
+ "name": "Cognitive Failures Questionnaire",
+ "domain": "Executive functioning and attention",
+ "developer": "Broadbent, Cooper, FitzGerald and Parkes (1982)",
+ "construct": "Frequency of everyday slips and lapses in perception, memory and motor function over the past 6 months.",
+ "respondent": "Self report",
+ "ageRange": "16+",
+ "minutes": 5,
+ "availability": "free with attribution (CC or stated)",
+ "licence": "Salford PsyTech questionnaire battery, Copyright restrictions field: \"No restrictions.\" PsyToolkit legal note: \"It seems that the CFQ can be used for research, but you need to acknowledge the authors and their research paper when writing about it.\" The 1982 article carries publisher copyright.",
+ "licenceUrl": "https://hub.salford.ac.uk/psytech/equipment-resources/questionnaire-battery/the-cognitive-failures-questionnaire/",
+ "sourceUrl": "https://www.psytoolkit.org/survey-library/cognitive-failures-cfq.html",
+ "instructions": "The following questions are about minor mistakes which everyone makes from time to time, but some of which happen more often than others. We want to know how often these things have happened to you in the last six months.",
+ "responseOptions": [
+  {
+   "value": 0,
+   "label": "Never"
+  },
+  {
+   "value": 1,
+   "label": "Very rarely"
+  },
+  {
+   "value": 2,
+   "label": "Occasionally"
+  },
+  {
+   "value": 3,
+   "label": "Quite often"
+  },
+  {
+   "value": 4,
+   "label": "Very often"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "Do you read something and find you haven’t been thinking about it and must read it again?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 2,
+   "text": "Do you find you forget why you went from one part of the house to the other?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 3,
+   "text": "Do you fail to notice signposts on the road?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 4,
+   "text": "Do you find you confuse right and left when giving directions?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 5,
+   "text": "Do you bump into people?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 6,
+   "text": "Do you find you forget whether you’ve turned off a light or a fire or locked the door?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 7,
+   "text": "Do you fail to listen to people’s names when you are meeting them?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 8,
+   "text": "Do you say something and realize afterwards that it might be taken as insulting?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 9,
+   "text": "Do you fail to hear people speaking to you when you are doing something else?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 10,
+   "text": "Do you lose your temper and regret it?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 11,
+   "text": "Do you leave important letters unanswered for days?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 12,
+   "text": "Do you find you forget which way to turn on a road you know well but rarely use?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 13,
+   "text": "Do you fail to see what you want in a supermarket (although it’s there)?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 14,
+   "text": "Do you find yourself suddenly wondering whether you’ve used a word correctly?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 15,
+   "text": "Do you have trouble making up your mind?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 16,
+   "text": "Do you find you forget appointments?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 17,
+   "text": "Do you forget where you put something like a newspaper or a book?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 18,
+   "text": "Do you find you accidentally throw away the thing you want and keep what you meant to throw away – as in the example of throwing away the matchbox and putting the used match in your pocket?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 19,
+   "text": "Do you daydream when you ought to be listening to something?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 20,
+   "text": "Do you find you forget people’s names?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 21,
+   "text": "Do you start doing one thing at home and get distracted into doing something else (unintentionally)?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 22,
+   "text": "Do you find you can’t quite remember something although it’s “on the tip of your tongue”?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 23,
+   "text": "Do you find you forget what you came to the shops to buy?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 24,
+   "text": "Do you drop things?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 25,
+   "text": "Do you find you can’t think of anything to say?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Total",
+   "items": "1-25",
+   "count": 25,
+   "range": "0-100",
+   "description": "Sum of all 25 items. Higher scores indicate more frequent cognitive failures."
+  }
+ ],
+ "scoring": "Sum all 25 items (each scored 0 to 4) for a total of 0 to 100; higher scores indicate more cognitive failures. No formal clinical cut offs. Broadbent et al. (1982) sample means reported on the PsyToolkit page: 35.02 (car factory production workers), 36.65 (car factory skilled men), 52.48 (student nurses). Factor derived subscales (for example Forgetfulness, Distractibility and False triggering, Rast et al. 2009) are reported in the secondary literature but no item membership was available from the sources transcribed here.",
+ "citation": "Broadbent, D. E., Cooper, P. F., FitzGerald, P., & Parkes, K. R. (1982). The Cognitive Failures Questionnaire (CFQ) and its correlates. British Journal of Clinical Psychology, 21(1), 1–16. https://doi.org/10.1111/j.2044-8260.1982.tb01421.x",
+ "transcriptionNote": "The itemsUrl (NITRC enhanced NKI assessment page) and the Salford source page describe the CFQ but do not list the items; the Salford page links a SharePoint Word document that WebFetch cannot read. Items and instructions were transcribed from the PsyToolkit survey library page. Response option labels come from the NITRC page (0 Never, 1 Very rarely, 2 Ocassionally [sic on that page, corrected to Occasionally here], 3 Quite often, 4 Very often); the PsyToolkit page lists the values 4 to 0 without labels. Item text uses curly apostrophes and quotation marks as rendered on the PsyToolkit page; item 18 uses an en dash in the source. Subscale membership for Forgetfulness, Distractibility and False triggering was not available from any fetched source, so every item is coded to Total only."
+}

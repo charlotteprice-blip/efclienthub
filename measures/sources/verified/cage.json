@@ -1,0 +1,18 @@
+{
+  "file": "cage.json",
+  "sourceReached": true,
+  "sourceUsed": "https://scireproject.com/wp-content/uploads/2022/04/CAGE-Substance-Screening-Tool.pdf (items); https://camcops.readthedocs.io/en/latest/tasks/cage.html (licence)",
+  "itemsChecked": 4,
+  "itemsMatching": 4,
+  "discrepancies": [
+    {
+      "item": 0,
+      "transcribed": "instructions: 'Ask your patients these four questions and use the scoring method described below to determine if substance abuse exists and needs to be addressed.'",
+      "source": "'Directions: Ask your patients these four questions and use the scoring method described below to determine if substance abuse exists and needs to be addressed.' (leading 'Directions:' label omitted)",
+      "kind": "wording"
+    }
+  ],
+  "licenceMatches": true,
+  "verdict": "verified",
+  "notes": "All 4 CAGE questions match the SCIRE PDF word for word, including 'criticizing' and '(eye-opener)' at the end of item 4. The PDF also prints the CAGE-AID variant, which the file correctly does not include. The clinician instruction matches apart from the omitted 'Directions:' label, which is a heading rather than part of the sentence. The PDF gives no separate response list beyond no (0) and yes (1), and cites 'CAGE Source: Ewing 1984'. The CamCOPS statement 'Believed to be in the public domain (based on Mayfield et al. 1974, Ewing 1984, O'Brien 2008)' and the note that Ewing encourages widespread use are quoted accurately. The 2 or more threshold in the PDF is consistent with the file."
+}

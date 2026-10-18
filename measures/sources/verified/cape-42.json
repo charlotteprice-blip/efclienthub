@@ -1,0 +1,144 @@
+{
+  "file": "cape-42.json",
+  "sourceReached": true,
+  "sourceUsed": "https://camcops.readthedocs.io/en/latest/autodoc/server/camcops_server/extra_strings/cape42.xml.html (items, options); https://camcops.readthedocs.io/en/latest/_modules/camcops_server/tasks/cape42.html (dimension key); https://camcops.readthedocs.io/en/latest/tasks/cape.html (licence)",
+  "itemsChecked": 42,
+  "itemsMatching": 42,
+  "discrepancies": [
+    {
+      "item": 1,
+      "transcribed": "Negative or Depressive (dimension not confirmed from source)",
+      "source": "Depressive (CamCOPS cape42.py: NEGATIVE = [3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37]; DEPRESSIVE = [1, 9, 12, 14, 19, 38, 39, 40])",
+      "kind": "subscale"
+    },
+    {
+      "item": 3,
+      "transcribed": "Negative or Depressive (dimension not confirmed from source)",
+      "source": "Negative (CamCOPS cape42.py: NEGATIVE = [3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37]; DEPRESSIVE = [1, 9, 12, 14, 19, 38, 39, 40])",
+      "kind": "subscale"
+    },
+    {
+      "item": 4,
+      "transcribed": "Negative or Depressive (dimension not confirmed from source)",
+      "source": "Negative (CamCOPS cape42.py: NEGATIVE = [3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37]; DEPRESSIVE = [1, 9, 12, 14, 19, 38, 39, 40])",
+      "kind": "subscale"
+    },
+    {
+      "item": 8,
+      "transcribed": "Negative or Depressive (dimension not confirmed from source)",
+      "source": "Negative (CamCOPS cape42.py: NEGATIVE = [3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37]; DEPRESSIVE = [1, 9, 12, 14, 19, 38, 39, 40])",
+      "kind": "subscale"
+    },
+    {
+      "item": 9,
+      "transcribed": "Negative or Depressive (dimension not confirmed from source)",
+      "source": "Depressive (CamCOPS cape42.py: NEGATIVE = [3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37]; DEPRESSIVE = [1, 9, 12, 14, 19, 38, 39, 40])",
+      "kind": "subscale"
+    },
+    {
+      "item": 12,
+      "transcribed": "Negative or Depressive (dimension not confirmed from source)",
+      "source": "Depressive (CamCOPS cape42.py: NEGATIVE = [3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37]; DEPRESSIVE = [1, 9, 12, 14, 19, 38, 39, 40])",
+      "kind": "subscale"
+    },
+    {
+      "item": 14,
+      "transcribed": "Negative or Depressive (dimension not confirmed from source)",
+      "source": "Depressive (CamCOPS cape42.py: NEGATIVE = [3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37]; DEPRESSIVE = [1, 9, 12, 14, 19, 38, 39, 40])",
+      "kind": "subscale"
+    },
+    {
+      "item": 16,
+      "transcribed": "Negative or Depressive (dimension not confirmed from source)",
+      "source": "Negative (CamCOPS cape42.py: NEGATIVE = [3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37]; DEPRESSIVE = [1, 9, 12, 14, 19, 38, 39, 40])",
+      "kind": "subscale"
+    },
+    {
+      "item": 18,
+      "transcribed": "Negative or Depressive (dimension not confirmed from source)",
+      "source": "Negative (CamCOPS cape42.py: NEGATIVE = [3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37]; DEPRESSIVE = [1, 9, 12, 14, 19, 38, 39, 40])",
+      "kind": "subscale"
+    },
+    {
+      "item": 19,
+      "transcribed": "Negative or Depressive (dimension not confirmed from source)",
+      "source": "Depressive (CamCOPS cape42.py: NEGATIVE = [3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37]; DEPRESSIVE = [1, 9, 12, 14, 19, 38, 39, 40])",
+      "kind": "subscale"
+    },
+    {
+      "item": 21,
+      "transcribed": "Negative or Depressive (dimension not confirmed from source)",
+      "source": "Negative (CamCOPS cape42.py: NEGATIVE = [3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37]; DEPRESSIVE = [1, 9, 12, 14, 19, 38, 39, 40])",
+      "kind": "subscale"
+    },
+    {
+      "item": 23,
+      "transcribed": "Negative or Depressive (dimension not confirmed from source)",
+      "source": "Negative (CamCOPS cape42.py: NEGATIVE = [3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37]; DEPRESSIVE = [1, 9, 12, 14, 19, 38, 39, 40])",
+      "kind": "subscale"
+    },
+    {
+      "item": 25,
+      "transcribed": "Negative or Depressive (dimension not confirmed from source)",
+      "source": "Negative (CamCOPS cape42.py: NEGATIVE = [3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37]; DEPRESSIVE = [1, 9, 12, 14, 19, 38, 39, 40])",
+      "kind": "subscale"
+    },
+    {
+      "item": 27,
+      "transcribed": "Negative or Depressive (dimension not confirmed from source)",
+      "source": "Negative (CamCOPS cape42.py: NEGATIVE = [3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37]; DEPRESSIVE = [1, 9, 12, 14, 19, 38, 39, 40])",
+      "kind": "subscale"
+    },
+    {
+      "item": 29,
+      "transcribed": "Negative or Depressive (dimension not confirmed from source)",
+      "source": "Negative (CamCOPS cape42.py: NEGATIVE = [3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37]; DEPRESSIVE = [1, 9, 12, 14, 19, 38, 39, 40])",
+      "kind": "subscale"
+    },
+    {
+      "item": 32,
+      "transcribed": "Negative or Depressive (dimension not confirmed from source)",
+      "source": "Negative (CamCOPS cape42.py: NEGATIVE = [3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37]; DEPRESSIVE = [1, 9, 12, 14, 19, 38, 39, 40])",
+      "kind": "subscale"
+    },
+    {
+      "item": 35,
+      "transcribed": "Negative or Depressive (dimension not confirmed from source)",
+      "source": "Negative (CamCOPS cape42.py: NEGATIVE = [3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37]; DEPRESSIVE = [1, 9, 12, 14, 19, 38, 39, 40])",
+      "kind": "subscale"
+    },
+    {
+      "item": 36,
+      "transcribed": "Negative or Depressive (dimension not confirmed from source)",
+      "source": "Negative (CamCOPS cape42.py: NEGATIVE = [3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37]; DEPRESSIVE = [1, 9, 12, 14, 19, 38, 39, 40])",
+      "kind": "subscale"
+    },
+    {
+      "item": 37,
+      "transcribed": "Negative or Depressive (dimension not confirmed from source)",
+      "source": "Negative (CamCOPS cape42.py: NEGATIVE = [3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37]; DEPRESSIVE = [1, 9, 12, 14, 19, 38, 39, 40])",
+      "kind": "subscale"
+    },
+    {
+      "item": 38,
+      "transcribed": "Negative or Depressive (dimension not confirmed from source)",
+      "source": "Depressive (CamCOPS cape42.py: NEGATIVE = [3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37]; DEPRESSIVE = [1, 9, 12, 14, 19, 38, 39, 40])",
+      "kind": "subscale"
+    },
+    {
+      "item": 39,
+      "transcribed": "Negative or Depressive (dimension not confirmed from source)",
+      "source": "Depressive (CamCOPS cape42.py: NEGATIVE = [3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37]; DEPRESSIVE = [1, 9, 12, 14, 19, 38, 39, 40])",
+      "kind": "subscale"
+    },
+    {
+      "item": 40,
+      "transcribed": "Negative or Depressive (dimension not confirmed from source)",
+      "source": "Depressive (CamCOPS cape42.py: NEGATIVE = [3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37]; DEPRESSIVE = [1, 9, 12, 14, 19, 38, 39, 40])",
+      "kind": "subscale"
+    }
+  ],
+  "licenceMatches": true,
+  "verdict": "verified with corrections",
+  "notes": "All 42 frequency item texts match the CamCOPS string file q1 to q42 word for word. Frequency options (Never, Sometimes, Often, Nearly always), distress options (Not distressed, A bit distressed, Quite distressed, Very distressed) and the distress stem match. The 20 Positive items match the POSITIVE list in the CamCOPS task source exactly. The transcription left 22 items coded 'Negative or Depressive (dimension not confirmed from source)'; the CamCOPS task source (an open, reachable page) gives the key: Negative = 3, 4, 8, 16, 18, 21, 23, 25, 27, 29, 32, 35, 36, 37 (14 items) and Depressive = 1, 9, 12, 14, 19, 38, 39, 40 (8 items). These 22 subscale fields and the 2 subscale entries can be corrected from that source. The CamCOPS source also describes scoring: frequency score = sum of frequency responses per dimension; distress coerced to 1 when frequency is 1; weighted scores = sum divided by number of completed items. The licence quotes ('Public domain/freeware'; 'totally freeware' personal communication Jim van Os to Rudolf Cardinal 2014-10-16) match the CamCOPS task page. Respondent instructions for the frequency scale are not in the string file, as the file states."
+}

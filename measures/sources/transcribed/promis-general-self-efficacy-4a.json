@@ -1,0 +1,83 @@
+{
+ "code": "PROMIS General Self-Efficacy v1.0 4a",
+ "name": "PROMIS General Self-Efficacy Short Form 4a",
+ "domain": "Work and motivation",
+ "developer": "PROMIS Health Organization / HealthMeasures (Northwestern University, NIH funded) (2015)",
+ "construct": "Confidence in one's ability to handle problems, unexpected events and whatever arises.",
+ "respondent": "Self report",
+ "ageRange": "18+",
+ "minutes": 1,
+ "availability": "free with attribution (CC or stated)",
+ "licence": "HealthMeasures Terms of Use: English PROMIS measures available without charge for research and individual clinical use with the copyright line retained; licence fees apply to translations and vendor platforms since 2024. Confirm current terms on Steps to License. The PROMIS copyright line reads \"© 2008-2015 PROMIS Health Organization\" or similar on the official form and was not reproduced in the source used.",
+ "licenceUrl": "https://healthmeasures.net/implement/steps-to-license/",
+ "sourceUrl": "https://cdn.clinicaltrials.gov/large-docs/37/NCT04059237/Prot_SAP_001.pdf",
+ "instructions": "Please respond to each item by marking one box per row. For the next set of questions, please read each sentence and rate your level of confidence in managing various situations, problems, and events. Rate your level of confidence.",
+ "responseOptions": [
+  {
+   "value": 1,
+   "label": "I am not at all confident"
+  },
+  {
+   "value": 2,
+   "label": "I am a little confident"
+  },
+  {
+   "value": 3,
+   "label": "I am somewhat confident"
+  },
+  {
+   "value": 4,
+   "label": "I am quite confident"
+  },
+  {
+   "value": 5,
+   "label": "I am very confident"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "I can manage to solve difficult problems if I try hard enough.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 2,
+   "text": "I am confident that I could deal efficiently with unexpected events.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 3,
+   "text": "If I am in trouble, I can think of a solution.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 4,
+   "text": "I can handle whatever comes my way.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Total",
+   "items": "1-4",
+   "count": 4,
+   "range": "4-20 (raw); T score mean 50, SD 10",
+   "description": "Raw score is the sum of the 4 items, converted to a T score using the HealthMeasures scoring table."
+  }
+ ],
+ "scoring": "Sum the 4 items (1 to 5) for a raw score of 4 to 20, then convert to a T score (mean 50, SD 10) using the HealthMeasures General Self-Efficacy v1.0 scoring manual. Higher scores indicate greater general self efficacy. No clinical cut offs are published.",
+ "citation": "Gruber-Baldini, A. L., Velozo, C., Romero, S., & Shulman, L. M. (2017). Validation of the PROMIS® measures of self-efficacy for managing chronic conditions. Quality of Life Research, 26(7), 1915–1924. https://doi.org/10.1007/s11136-017-1527-3. Instrument: PROMIS Health Organization. (2015). PROMIS Item Bank v1.0 – General Self-Efficacy – Short Form 4a. HealthMeasures.",
+ "transcriptionNote": "The HealthMeasures search page (itemsUrl) exposes no readable PDF, the NIH HEAL CRF PDF redirected to a landing page, and no LOINC panel for the general self efficacy 4a form was located. The items, instructions and response options were transcribed from Appendix K (\"PROMIS Self Efficacy, General Self Efficacy\") of a ClinicalTrials.gov protocol (NCT04059237) that reproduces the form. The official HealthMeasures form instruction may read differently (the standard PROMIS wording is \"Please respond to each item by marking one box per row\" followed by \"CURRENT level of confidence\"), the version number and the PROMIS copyright line were not reproduced in that appendix, and the item order should be checked against the official PDF before clinical use. The PhenX protocol 180606 at the same name is the 10 item NIH Toolbox Self-Efficacy fixed form, not this PROMIS short form, and was not used. Second pass: first instruction line restored from the ClinicalTrials.gov appendix."
+}

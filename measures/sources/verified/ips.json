@@ -1,0 +1,11 @@
+{
+ "file": "ips.json",
+ "sourceReached": true,
+ "sourceUsed": "https://www.frontiersin.org/articles/10.3389/fpsyg.2017.01927/full",
+ "itemsChecked": 9,
+ "itemsMatching": 9,
+ "discrepancies": [],
+ "licenceMatches": true,
+ "verdict": "verified",
+ "notes": "All 9 items match Table 1 of Svartdal and Steel (2017) word for word; (R) markers on items 2, 6 and 9 match the reverse flags. Endpoint labels match the article (1 = Very seldom or not true of me, 5 = Very often true, or true with me) and the article gives no labels for points 2 to 4, so the blank labels are correct. CC BY statement and copyright line match verbatim. The article confirms the IPS mean of 3.62 and the quoted passage about omitting reversed items, and does not specify sum versus mean scoring, as the transcriptionNote says."
+}

@@ -1,0 +1,119 @@
+{
+  "code": "PHQ-9",
+  "name": "Patient Health Questionnaire 9",
+  "domain": "Clinical screening",
+  "developer": "Kroenke, Spitzer and Williams (2001)",
+  "construct": "Frequency of the 9 DSM depression symptoms over the past 2 weeks, with a follow up item on functional difficulty.",
+  "respondent": "Self report",
+  "ageRange": "18+ (also validated from 12 in adolescents)",
+  "minutes": 2,
+  "availability": "public domain",
+  "licence": "\"Developed by Drs. R.L. Spitzer, J.B. Williams, K. Kroenke and colleagues with an educational grant from Pfizer, Inc. No permission required to reproduce, translate, display or distribute.\"",
+  "licenceUrl": "https://www.phqscreeners.com/",
+  "sourceUrl": "https://cde.nida.nih.gov/system/files/PatientHealthQuestionnaire-9_2014Mar19.pdf",
+  "instructions": "Over the last 2 weeks, how often have you been bothered by any of the following problems?",
+  "responseOptions": [
+    {
+      "value": 0,
+      "label": "Not at all"
+    },
+    {
+      "value": 1,
+      "label": "Several days"
+    },
+    {
+      "value": 2,
+      "label": "More than half the days"
+    },
+    {
+      "value": 3,
+      "label": "Nearly every day"
+    }
+  ],
+  "items": [
+    {
+      "n": 1,
+      "text": "Little interest or pleasure in doing things",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 2,
+      "text": "Feeling down, depressed, or hopeless",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 3,
+      "text": "Trouble falling or staying asleep, or sleeping too much",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 4,
+      "text": "Feeling tired or having little energy",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 5,
+      "text": "Poor appetite or overeating",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 6,
+      "text": "Feeling bad about yourself - or that you are a failure or have let yourself or your family down",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 7,
+      "text": "Trouble concentrating on things, such as reading the newspaper or watching television",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 8,
+      "text": "Moving or speaking so slowly that other people could have noticed? Or the opposite - being so fidgety or restless that you have been moving around a lot more than usual",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 9,
+      "text": "Thoughts that you would be better off dead or of hurting yourself in some way",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": "Asks about self harm; a response protocol is needed before use"
+    }
+  ],
+  "subscales": [
+    {
+      "name": "Total",
+      "items": "1-9",
+      "count": 9,
+      "range": "0-27",
+      "description": "Depression symptom severity."
+    }
+  ],
+  "scoring": "Sum the 9 items (0 to 27); higher scores indicate more severe depressive symptoms. Severity bands (Kroenke, Spitzer and Williams, 2001): 0 to 4 minimal, 5 to 9 mild, 10 to 14 moderate, 15 to 19 moderately severe, 20 to 27 severe. A score of 10 or more is the usual case threshold (sensitivity and specificity 88 percent for major depression in the 2001 validation) and is the caseness threshold used in NHS Talking Therapies. The unscored follow up item (\"If you checked off any problems, how difficult have these problems made it for you to do your work, take care of things at home, or get along with other people?\" with options Not difficult at all, Somewhat difficult, Very difficult, Extremely difficult) indexes functional impairment and is not added to the total.",
+  "citation": "Kroenke, K., Spitzer, R. L., & Williams, J. B. W. (2001). The PHQ-9: Validity of a brief depression severity measure. Journal of General Internal Medicine, 16(9), 606–613. https://doi.org/10.1046/j.1525-1497.2001.016009606.x",
+  "transcriptionNote": "phqscreeners.com (itemsUrl) disallows automated fetching and the Mind toolkit PDF (sourceUrl) lists the PHQ-9 by name only, so the items were transcribed from the NIDA Clinical Trials Network copy of the standard Pfizer form. Item 8 is printed across 2 lines in the source and is joined here with the original question mark and hyphen retained. The hyphens in items 6 and 8 are the source's own punctuation. The source form itself gives only \"Clinic personnel will follow standard scoring\"; the severity bands come from the developer citation."
+}

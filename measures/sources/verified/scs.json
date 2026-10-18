@@ -1,0 +1,11 @@
+{
+  "file": "scs.json",
+  "sourceReached": true,
+  "sourceUsed": "https://self-compassion.org/wptest/wp-content/uploads/Self_Compassion_Scale_for_researchers.pdf",
+  "itemsChecked": 26,
+  "itemsMatching": 26,
+  "discrepancies": [],
+  "licenceMatches": true,
+  "verdict": "verified",
+  "notes": "All 26 items match the researcher PDF word for word (checked in 3 batches: 1-9, 10-18, 19-26). Title line, both instruction sentences, anchor labels (1 Almost never, 5 Almost always, points 2-4 unlabelled) confirmed. Coding key confirmed: Self-Kindness 5,12,19,23,26; Self-Judgment 1,8,11,16,21; Common Humanity 3,7,10,15; Isolation 4,13,18,25; Mindfulness 9,14,17,22; Over-identified 2,6,20,24; the 13 negative subscale items are reverse scored, matching the file. Researcher PDF computes total as grand mean of all 26 items after reverse coding; SCS-information.pdf computes it as the mean of the 6 subscale means; the file records both, which is correct. Licence sentence confirmed verbatim in SCS-information.pdf. One nuance: the file paraphrases the translation clause as 'provided the factor structure is validated', whereas the source says permission is given to translate the scale and validate its factor structure using the Neff et al. (2019) approach (bifactor ESEM strongly recommended); this is a paraphrase, not a misquote, since only the first clause is in quotation marks. The transcriptionNote's claim that the scale line is printed as 'Almost never 1 2 3 4 5 Almost always' is a simplification: in the PDF the anchor words are split across 2 lines around the numbers, though the content is the same."
+}

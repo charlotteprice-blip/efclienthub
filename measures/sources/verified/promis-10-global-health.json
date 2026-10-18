@@ -1,0 +1,11 @@
+{
+ "file": "promis-10-global-health.json",
+ "sourceReached": true,
+ "sourceUsed": "https://curesicklecell.rti.org/Forms/Global_Health_Scale_v1.2_13Apr2018.pdf",
+ "itemsChecked": 10,
+ "itemsMatching": 10,
+ "discrepancies": [],
+ "licenceMatches": true,
+ "verdict": "verified",
+ "notes": "All 10 items match the form word for word in the printed order (Global01, 02, 03, 04, 05, 09r, 06, 10r, 08r, 07r), including the parenthetical in Global09r. The per item response labels and values in each note match the form exactly, including the 'In the past 7 days' stem on Global10r and Global08r and the 0 to 10 pain scale with 'No pain' and 'Worst pain imaginable'. The instruction line and the copyright footer '(c) 2010-2018 PROMIS Health Organization (PHO)' match verbatim. The form has no scoring text, so component membership, pain recoding and T scores could not be checked against it. The reverse flags on items 6, 8, 9 and 10 reflect the 'r' item codes, not a reversal of the printed values, which already run 5 to 1 in the favourable direction. The remainder of the licence field (free English use, fees since 2024 for translations and vendors) is a summary; the Steps to License page confirms that translation and platform licensing (Epic, API) carry fees but does not state the free use terms or a 2024 date, so that part is unconfirmed."
+}

@@ -1,0 +1,11 @@
+{
+ "file": "promis-sleep-related-impairment-v1-0-8a.json",
+ "sourceReached": true,
+ "sourceUsed": "https://www.heal.nih.gov/files/CDEs/2023-09/promis-sleep-related-impairment-8a-crf.pdf; cross checked against LOINC 62198-7 panel",
+ "itemsChecked": 8,
+ "itemsMatching": 8,
+ "discrepancies": [],
+ "licenceMatches": true,
+ "verdict": "verified",
+ "notes": "All 8 items match the HEAL case report form word for word, in order, with matching item codes (Sleep10, Sleep119, Sleep18, Sleep25, Sleep27, Sleep30, Sleep6, Sleep7), and the punctuation pattern is confirmed: only items 6, 7 and 8 end with a full stop. The instruction sentence 'Please respond to each item by marking one box per row.' and the stem 'In the past 7 days...' match. Sleep119 is confirmed as the only item printed with reversed values (Not at all 5 to Very much 1); all others run 1 to 5. The copyright line '© 2008-2016 PROMIS Health Organization and PROMIS Cooperative Group' matches the form. The LOINC panel 62198-7 reproduces the same 8 item texts (different order, LOINC lists LL1017-4 for all items without the reversal). The HealthMeasures summary sentences in the licence field are paraphrase not present on the licenceUrl page."
+}

@@ -1,0 +1,216 @@
+{
+ "code": "ASRS-v1.1 / PhenX 121501",
+ "name": "Adult ADHD Self-Report Scale v1.1 Symptom Checklist (PhenX Attention Deficit Hyperactivity Disorder Symptoms, Adult)",
+ "domain": "Executive functioning and attention",
+ "developer": "World Health Organization, with Kessler, Adler and colleagues (2005)",
+ "construct": "Frequency of the 18 DSM-IV adult ADHD symptoms of inattention and hyperactivity impulsivity over the past 6 months.",
+ "respondent": "Self report",
+ "ageRange": "18+",
+ "minutes": 5,
+ "availability": "free with attribution (CC or stated)",
+ "licence": "PhenX protocol page: \"freely available; permission not required for use\"; instrument credited \"© World Health Organization\". PhenX documentation is CC BY 4.0.",
+ "licenceUrl": "https://www.phenxtoolkit.org/help/guidance",
+ "sourceUrl": "https://www.phenxtoolkit.org/toolkit_content/PDF/PX121501.pdf",
+ "instructions": "Please answer the questions below, rating yourself on each of the criteria shown using the scale on the right side of the page. As you answer each question, place an X in the box that best describes how you have felt and conducted yourself over the past 6 months.",
+ "responseOptions": [
+  {
+   "value": 0,
+   "label": "Never"
+  },
+  {
+   "value": 1,
+   "label": "Rarely"
+  },
+  {
+   "value": 2,
+   "label": "Sometimes"
+  },
+  {
+   "value": 3,
+   "label": "Often"
+  },
+  {
+   "value": 4,
+   "label": "Very Often"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "How often do you have trouble wrapping up the final details of a project, once the challenging parts have been done?",
+   "subscale": "Part A screener",
+   "reverse": false,
+   "filler": false,
+   "note": "DSM-IV symptom domain: Inattention"
+  },
+  {
+   "n": 2,
+   "text": "How often do you have difficulty getting things in order when you have to do a task that requires organization?",
+   "subscale": "Part A screener",
+   "reverse": false,
+   "filler": false,
+   "note": "DSM-IV symptom domain: Inattention"
+  },
+  {
+   "n": 3,
+   "text": "How often do you have problems remembering appointments or obligations?",
+   "subscale": "Part A screener",
+   "reverse": false,
+   "filler": false,
+   "note": "DSM-IV symptom domain: Inattention"
+  },
+  {
+   "n": 4,
+   "text": "When you have a task that requires a lot of thought, how often do you avoid or delay getting started?",
+   "subscale": "Part A screener",
+   "reverse": false,
+   "filler": false,
+   "note": "DSM-IV symptom domain: Inattention"
+  },
+  {
+   "n": 5,
+   "text": "How often do you fidget or squirm with your hands or feet when you have to sit down for a long time?",
+   "subscale": "Part A screener",
+   "reverse": false,
+   "filler": false,
+   "note": "DSM-IV symptom domain: Hyperactivity impulsivity"
+  },
+  {
+   "n": 6,
+   "text": "How often do you feel overly active and compelled to do things, like you were driven by a motor?",
+   "subscale": "Part A screener",
+   "reverse": false,
+   "filler": false,
+   "note": "DSM-IV symptom domain: Hyperactivity impulsivity"
+  },
+  {
+   "n": 7,
+   "text": "How often do you make careless mistakes when you have to work on a boring or difficult project?",
+   "subscale": "Part B",
+   "reverse": false,
+   "filler": false,
+   "note": "DSM-IV symptom domain: Inattention"
+  },
+  {
+   "n": 8,
+   "text": "How often do you have difficulty keeping your attention when you are doing boring or repetitive work?",
+   "subscale": "Part B",
+   "reverse": false,
+   "filler": false,
+   "note": "DSM-IV symptom domain: Inattention"
+  },
+  {
+   "n": 9,
+   "text": "How often do you have difficulty concentrating on what people say to you, even when they are speaking to you directly?",
+   "subscale": "Part B",
+   "reverse": false,
+   "filler": false,
+   "note": "DSM-IV symptom domain: Inattention"
+  },
+  {
+   "n": 10,
+   "text": "How often do you misplace or have difficulty finding things at home or at work?",
+   "subscale": "Part B",
+   "reverse": false,
+   "filler": false,
+   "note": "DSM-IV symptom domain: Inattention"
+  },
+  {
+   "n": 11,
+   "text": "How often are you distracted by activity or noise around you?",
+   "subscale": "Part B",
+   "reverse": false,
+   "filler": false,
+   "note": "DSM-IV symptom domain: Inattention"
+  },
+  {
+   "n": 12,
+   "text": "How often do you leave your seat in meetings or other situations in which you are expected to remain seated?",
+   "subscale": "Part B",
+   "reverse": false,
+   "filler": false,
+   "note": "DSM-IV symptom domain: Hyperactivity impulsivity"
+  },
+  {
+   "n": 13,
+   "text": "How often do you feel restless or fidgety?",
+   "subscale": "Part B",
+   "reverse": false,
+   "filler": false,
+   "note": "DSM-IV symptom domain: Hyperactivity impulsivity"
+  },
+  {
+   "n": 14,
+   "text": "How often do you have difficulty unwinding and relaxing when you have time to yourself?",
+   "subscale": "Part B",
+   "reverse": false,
+   "filler": false,
+   "note": "DSM-IV symptom domain: Hyperactivity impulsivity"
+  },
+  {
+   "n": 15,
+   "text": "How often do you find yourself talking too much when you are in social situations?",
+   "subscale": "Part B",
+   "reverse": false,
+   "filler": false,
+   "note": "DSM-IV symptom domain: Hyperactivity impulsivity"
+  },
+  {
+   "n": 16,
+   "text": "When you’re in a conversation, how often do you find yourself finishing the sentences of the people you are talking to, before they can finish them themselves?",
+   "subscale": "Part B",
+   "reverse": false,
+   "filler": false,
+   "note": "DSM-IV symptom domain: Hyperactivity impulsivity"
+  },
+  {
+   "n": 17,
+   "text": "How often do you have difficulty waiting your turn in situations when turn taking is required?",
+   "subscale": "Part B",
+   "reverse": false,
+   "filler": false,
+   "note": "DSM-IV symptom domain: Hyperactivity impulsivity"
+  },
+  {
+   "n": 18,
+   "text": "How often do you interrupt others when they are busy?",
+   "subscale": "Part B",
+   "reverse": false,
+   "filler": false,
+   "note": "DSM-IV symptom domain: Hyperactivity impulsivity"
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Part A screener",
+   "items": "1-6",
+   "count": 6,
+   "range": "0-6 shaded responses (or 0-24 summed)",
+   "description": "6 item screener; 4 or more responses in the shaded boxes indicates symptoms highly consistent with adult ADHD."
+  },
+  {
+   "name": "Part B",
+   "items": "7-18",
+   "count": 12,
+   "range": "0-48 summed",
+   "description": "Additional symptom probes; no total score is used in the original scoring."
+  },
+  {
+   "name": "Inattention",
+   "items": "1-4, 7-11",
+   "count": 9,
+   "range": "0-36 summed",
+   "description": "DSM-IV inattention symptoms (research scoring)."
+  },
+  {
+   "name": "Hyperactivity impulsivity",
+   "items": "5, 6, 12-18",
+   "count": 9,
+   "range": "0-36 summed",
+   "description": "DSM-IV hyperactivity and impulsivity symptoms (research scoring)."
+  }
+ ],
+ "scoring": "Original WHO scoring: \"If four or more marks appear in the darkly shaded boxes within Part A, then the patient has symptoms highly consistent with ADHD in adults, and further investigation is warranted.\" \"The frequency scores on Part B provide additional cues and can serve as further probes\"; \"No total score or diagnostic likelihood is utilized for the twelve questions.\" \"The shading in the instrument is provided as a guide for scoring.\" In the published form the shaded boxes are Sometimes, Often and Very Often for items 1 to 3 and Often and Very Often for items 4 to 6; this could not be read from the PDF text and should be checked against the printed form. Research scoring alternatively sums responses 0 (Never) to 4 (Very Often) across the 18 items or the 2 DSM-IV domains; higher scores indicate more frequent symptoms.",
+ "citation": "Kessler, R. C., Adler, L., Ames, M., Demler, O., Faraone, S., Hiripi, E., Howes, M. J., Jin, R., Secnik, K., Spencer, T., Ustun, T. B., & Walters, E. E. (2005). The World Health Organization Adult ADHD Self-Report Scale (ASRS): A short screening scale for use in the general population. Psychological Medicine, 35(2), 245–256. https://doi.org/10.1017/S0033291704002892",
+ "transcriptionNote": "Items and instructions were transcribed from the PhenX Toolkit PDF PX121501 and protocol page. The PDF text does not indicate which boxes are shaded for each Part A item, so the shading rule given in scoring is recorded from the published ASRS-v1.1 layout and flagged for verification. The PhenX HTML page places the \"Part A\" heading before item 7, which appears to be a formatting error; the scoring text defines Part A as the 6 item screener (items 1 to 6), and that structure is used here. The 0 to 4 numeric values are a research convention; the original form has no printed values. Inattention and Hyperactivity impulsivity domain assignments follow the DSM-IV symptom each item maps to and are recorded in the item notes; they are not printed on the form. Item 16 uses a curly apostrophe as rendered in the source."
+}

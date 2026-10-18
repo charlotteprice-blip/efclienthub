@@ -1,0 +1,119 @@
+{
+ "code": "BTQ",
+ "name": "Brief Trauma Questionnaire",
+ "domain": "Clinical screening",
+ "developer": "Schnurr, Vielhauer, Weathers and Findler (1999), US National Center for PTSD",
+ "construct": "Lifetime exposure to 10 categories of potentially traumatic events and whether each involved perceived life threat or serious injury (DSM-IV Criterion A).",
+ "respondent": "Self report",
+ "ageRange": "18+",
+ "minutes": 5,
+ "availability": "public domain",
+ "licence": "Created by National Center for PTSD staff; available as a direct download for qualified mental health professionals and researchers with no fee or permission step. The PDF carries no copyright notice, only the citation footer \"Schnurr, P., Vielhauer, M., Weathers, F., & Findler, M. (1999). The Brief Trauma Questionnaire (BTQ) [Measurement instrument]. Available from http://www.ptsd.va.gov\".",
+ "licenceUrl": "https://ptsd.va.gov/PTSD/professional/assessment/te-measures/brief_trauma_questionnaire_btq.asp",
+ "sourceUrl": "https://www.ptsd.va.gov/professional/assessment/documents/BTQ.pdf",
+ "instructions": "The following questions ask about events that may be extraordinarily stressful or disturbing for almost everyone. Please circle \"Yes\" or \"No\" to report what has happened to you. If you answer \"Yes\" for an event, please answer any additional questions that are listed on the right side of the page to report: (1) whether you thought your life was in danger or you might be seriously injured; and (2) whether you were seriously injured. If you answer \"No\" for an event, go on to the next event.",
+ "responseOptions": [
+  {
+   "value": 0,
+   "label": "No"
+  },
+  {
+   "value": 1,
+   "label": "Yes"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "Have you ever served in a war zone, or have you ever served in a noncombat job that exposed you to war-related casualties (for example, as a medic or on graves registration duty?)",
+   "subscale": "Trauma exposure",
+   "reverse": false,
+   "filler": false,
+   "note": "Follow up columns: life threat (No/Yes) and serious injury (No/Yes)."
+  },
+  {
+   "n": 2,
+   "text": "Have you ever been in a serious car accident, or a serious accident at work or somewhere else?",
+   "subscale": "Trauma exposure",
+   "reverse": false,
+   "filler": false,
+   "note": "Follow up columns: life threat (No/Yes) and serious injury (No/Yes)."
+  },
+  {
+   "n": 3,
+   "text": "Have you ever been in a major natural or technological disaster, such as a fire, tornado, hurricane, flood, earthquake, or chemical spill?",
+   "subscale": "Trauma exposure",
+   "reverse": false,
+   "filler": false,
+   "note": "Follow up columns: life threat (No/Yes) and serious injury (No/Yes)."
+  },
+  {
+   "n": 4,
+   "text": "Have you ever had a life-threatening illness such as cancer, a heart attack, leukemia, AIDS, multiple sclerosis, etc.?",
+   "subscale": "Trauma exposure",
+   "reverse": false,
+   "filler": false,
+   "note": "Follow up column: life threat (No/Yes). Serious injury column is N/A."
+  },
+  {
+   "n": 5,
+   "text": "Before age 18, were you ever physically punished or beaten by a parent, caretaker, or teacher so that: you were very frightened; or you thought you would be injured; or you received bruises, cuts, welts, lumps or other injuries?",
+   "subscale": "Trauma exposure",
+   "reverse": false,
+   "filler": false,
+   "note": "Follow up columns: life threat (No/Yes) and serious injury (No/Yes)."
+  },
+  {
+   "n": 6,
+   "text": "Not including any punishments or beatings you already reported in Question 5, have you ever been attacked, beaten, or mugged by anyone, including friends, family members or strangers?",
+   "subscale": "Trauma exposure",
+   "reverse": false,
+   "filler": false,
+   "note": "Follow up columns: life threat (No/Yes) and serious injury (No/Yes)."
+  },
+  {
+   "n": 7,
+   "text": "Has anyone ever made or pressured you into having some type of unwanted sexual contact? Note: By sexual contact we mean any contact between someone else and your private parts or between you and some else's private parts",
+   "subscale": "Trauma exposure",
+   "reverse": false,
+   "filler": false,
+   "note": "Follow up columns: life threat (No/Yes) and serious injury (No/Yes). Source reads \"some else's\" as printed."
+  },
+  {
+   "n": 8,
+   "text": "Have you ever been in any other situation in which you were seriously injured, or have you ever been in any other situation in which you feared you might be seriously injured or killed?",
+   "subscale": "Trauma exposure",
+   "reverse": false,
+   "filler": false,
+   "note": "Follow up column: serious injury (No/Yes). Life threat column is N/A."
+  },
+  {
+   "n": 9,
+   "text": "Has a close family member or friend died violently, for example, in a serious car crash, mugging, or attack?",
+   "subscale": "Trauma exposure",
+   "reverse": false,
+   "filler": false,
+   "note": "Follow up columns: life threat N/A; serious injury (No/Yes)."
+  },
+  {
+   "n": 10,
+   "text": "Have you ever witnessed a situation in which someone was seriously injured or killed, or have you ever witnessed a situation in which you feared someone would be seriously injured or killed? Note: Do not answer \"yes\" for any event you already reported in Questions 1-9",
+   "subscale": "Trauma exposure",
+   "reverse": false,
+   "filler": false,
+   "note": "No follow up columns apply (both N/A); scored on the event question alone."
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Trauma exposure",
+   "items": "1-10",
+   "count": 10,
+   "range": "0-10 events meeting Criterion A",
+   "description": "Each event has 3 columns: \"Has this ever happened to you?\" (No/Yes); \"If the event happened, did you think your life was in danger or you might be seriously injured?\" (No/Yes); \"If the event happened, were you seriously injured?\" (No/Yes). N/A columns vary by item as noted."
+  }
+ ],
+ "scoring": "No total score. From the BTQ scoring note: \"exposure to an event should be scored as positive if a respondent says yes to either: life threat or serious injury for events 1-3 and 5-7; life threat for event 4; serious injury for event 8, or; 'Has this ever happened to you?' for events 9 and 10.\" The count of positive events can be reported; the instrument is typically used to establish an index trauma before administering the PCL-5.",
+ "citation": "Schnurr, P. P., Vielhauer, M. J., Weathers, F. W., & Findler, M. (1999). The Brief Trauma Questionnaire (BTQ) [Measurement instrument]. National Center for PTSD. https://www.ptsd.va.gov",
+ "transcriptionNote": "Transcribed in full from the National Center for PTSD PDF. Each item has 1 event question plus up to 2 follow up questions (life threat and serious injury) answered No or Yes; which follow ups apply per item is recorded in the item notes. Item 7 contains the printed error \"some else's\" and item 1 has the closing parenthesis after the question mark, both kept as printed. The response values 0 and 1 are assigned here for coding; the form prints only No and Yes. Second pass: item 9 follow up columns corrected (life threat N/A, serious injury No/Yes)."
+}

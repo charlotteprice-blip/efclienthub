@@ -1,0 +1,18 @@
+{
+  "file": "wsas.json",
+  "sourceReached": true,
+  "sourceUsed": "https://www.ciusss-capitalenationale.gouv.qc.ca/sites/d8/files/docs/ProfSante/SanteMentale/DSMDI_Form-questionnaire-WSAS_EN.pdf (items, instructions, form copyright line); https://www.cambridge.org/core/journals/the-british-journal-of-psychiatry/article/work-and-social-adjustment-scale-a-simple-measure-of-impairment-in-functioning/A23DD5A7256D13707859AC164B0A073C (Mundt et al. 2002 copyright and permission statements)",
+  "itemsChecked": 5,
+  "itemsMatching": 5,
+  "discrepancies": [
+    {
+      "item": 0,
+      "transcribed": "responseOptions lists values 0 to 8 only",
+      "source": "the form's response row prints \"0 1 2 3 4 5 6 7 8 N/A\"; N/A is a printed response option (applicable to item 1, where the form explains it means retired or choosing not to have a job)",
+      "kind": "option"
+    }
+  ],
+  "licenceMatches": true,
+  "verdict": "verified with corrections",
+  "notes": "All 5 items match the MSSS English form word for word, including the 2 explanatory sentences printed with item 1. Title on the form is 'WSAS Assessment Questionnaire'. Instruction paragraph matches sentence by sentence. The 5 anchor labels (Not at all impaired, Slightly impaired, Definitely impaired, Markedly impaired, Very severely impaired) are printed beneath the 0 to 8 row; as the file's transcriptionNote says, text extraction cannot confirm alignment, so placement at 0, 2, 4, 6, 8 remains an inference consistent with the standard WSAS layout. The only omission is N/A, which the form prints as part of the response row; it is covered in the item 1 note but not in responseOptions (the WFIRS-S file in this set includes n/a as an option, so adding it here would be consistent). Licence: 'The copyright in WSAS is owned by I. M. M.' confirmed verbatim in the Cambridge Core footnotes (Declaration of interest); the Appendix confirms permission for research use without charge is obtained from Dr Marks; the form's copyright and 'Adapted by the MSSS with permission from the authors' line confirmed verbatim. The Cambridge appendix confirms the original stem 'Because of my [disorder], my ability to work is impaired.' and endpoints 0 not at all impaired, 8 very severely impaired, so the file's note about the adapted stem is accurate. The NHS Talking Therapies manual (licenceUrl) was not fetched in this pass; the claim that it lists the WSAS as a required measure is consistent with the manual but is unverified here."
+}

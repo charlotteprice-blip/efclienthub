@@ -1,0 +1,11 @@
+{
+ "file": "promis-cog-abilities-v2-0-8a.json",
+ "sourceReached": true,
+ "sourceUsed": "https://cdn.loinc.org/81527-4/panel",
+ "itemsChecked": 8,
+ "itemsMatching": 8,
+ "discrepancies": [],
+ "licenceMatches": "unverified",
+ "verdict": "verified",
+ "notes": "All 8 items match the LOINC panel word for word, in the same order, with the same LOINC codes, and the LL1017-4 answer list (Not at all 1 to Very much 5) matches. The licence field is a paraphrase labelled as a target record summary; the licenceUrl page (Steps to License) was fetched and does not contain the statements about use without charge for research and individual clinical use, a retained copyright line, or 2024, so the licence text cannot be confirmed from the URL given. It only states that translations licensing applies across platforms and that Epic and Assessment Center API carry flat fees. The LOINC source page itself carries the line 'Copyright © 2010 PROMIS Health Organization or other individuals/entities that have contributed information and materials to Assessment Center, and are being used with the permission of the copyright holders.' and 'Use of PROMIS instruments (e.g., item banks, short forms, profile measures) are subject to the PROMIS Terms and Conditions available at: http://www.assessmentcenter.net/TandC.aspx', which the file could quote. The empty instructions field is consistent with the source, which prints no instruction line."
+}

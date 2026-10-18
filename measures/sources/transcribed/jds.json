@@ -1,0 +1,207 @@
+{
+ "code": "JDS",
+ "name": "Job Diagnostic Survey (revised 15 item core job characteristics form)",
+ "domain": "Work and motivation",
+ "developer": "Hackman and Oldham (1974, 1975); revision by Idaszak and Drasgow (1987)",
+ "construct": "Core job characteristics from the Job Characteristics Model: skill variety, task identity, task significance, autonomy and feedback from the job.",
+ "respondent": "Self report",
+ "ageRange": "Working adults",
+ "minutes": 5,
+ "availability": "public domain",
+ "licence": "Developed under US Office of Naval Research funding; DTIC technical report AD0779828 is marked \"Approved For Public Release; Distribution Is Unlimited.\"",
+ "licenceUrl": "https://apps.dtic.mil/sti/html/tr/AD0779828/index.html",
+ "sourceUrl": "https://paulspector.com/assessment-files/other/jds-report.pdf",
+ "instructions": "Section One: This part of the questionnaire asks you to describe your job, as objectively as you can. Please do not use this part of the questionnaire to show how much you like or dislike your job. Section Two: Listed below are a number of statements which could be used to describe a job. You are to indicate whether each statement is an accurate or an inaccurate description of your job. How accurate is the statement in describing your job?",
+ "responseOptions": [
+  {
+   "value": 1,
+   "label": "Very Inaccurate"
+  },
+  {
+   "value": 2,
+   "label": "Mostly Inaccurate"
+  },
+  {
+   "value": 3,
+   "label": "Slightly Inaccurate"
+  },
+  {
+   "value": 4,
+   "label": "Uncertain"
+  },
+  {
+   "value": 5,
+   "label": "Slightly Accurate"
+  },
+  {
+   "value": 6,
+   "label": "Mostly Accurate"
+  },
+  {
+   "value": 7,
+   "label": "Very Accurate"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "How much variety is there in your job? That is, to what extent does the job require you to do many different things at work, using a variety of your skills and talents?",
+   "subscale": "Skill variety",
+   "reverse": false,
+   "filler": false,
+   "note": "Section One, question 4. 7 point scale with anchors: 1 \"Very little; the job requires me to do the same routine things over and over again.\" 4 \"Moderate variety.\" 7 \"Very much; the job requires me to do many different things, using a number of different skills and talents.\""
+  },
+  {
+   "n": 2,
+   "text": "To what extent does your job involve doing a \"whole\" and identifiable piece of work? That is, is the job a complete piece of work that has an obvious beginning and end? Or is it only a small part of the overall piece of work, which is finished by other people or by automatic machines?",
+   "subscale": "Task identity",
+   "reverse": false,
+   "filler": false,
+   "note": "Section One, question 3. Anchors: 1 \"My job is only a tiny part of the overall piece of work; the results of my activities cannot be seen in the final product or service.\" 4 \"My job is a moderate-sized 'chunk' of the overall piece of work; my own contribution can be seen in the final outcome.\" 7 \"My job involves doing the whole piece of work, from start to finish; the results of my activities are easily seen in the final product or service.\""
+  },
+  {
+   "n": 3,
+   "text": "In general, how significant or important is your job? That is, are the results of your work likely to significantly affect the lives or well-being of other people?",
+   "subscale": "Task significance",
+   "reverse": false,
+   "filler": false,
+   "note": "Section One, question 5. Anchors: 1 \"Not very significant; the outcomes of my work are not likely to have important effects on other people.\" 4 \"Moderately significant.\" 7 \"Highly significant; the outcomes of my work can affect other people in very important ways.\""
+  },
+  {
+   "n": 4,
+   "text": "How much autonomy is there in your job? That is, to what extent does your job permit you to decide on your own how to go about doing the work?",
+   "subscale": "Autonomy",
+   "reverse": false,
+   "filler": false,
+   "note": "Section One, question 2. Anchors: 1 \"Very little; the job gives me almost no personal 'say' about how and when the work is done.\" 4 \"Moderate autonomy; many things are standardized and not under my control, but I can make some decisions about the work.\" 7 \"Very much; the job gives me almost complete responsibility for deciding how and when the work is done.\""
+  },
+  {
+   "n": 5,
+   "text": "To what extent does doing the job itself provide you with information about your work performance? That is, does the actual work itself provide clues about how well you are doing aside from any \"feedback\" co-workers or supervisors may provide?",
+   "subscale": "Feedback from the job",
+   "reverse": false,
+   "filler": false,
+   "note": "Section One, question 7. Anchors: 1 \"Very little; the job itself is set up so I could work forever without finding out how well I am doing.\" 4 \"Moderately; sometimes doing the job provides 'feedback' to me; sometimes it does not.\" 7 \"Very much; the job is set up so I get almost constant 'feedback' as I work about how well I am doing.\""
+  },
+  {
+   "n": 6,
+   "text": "The job requires me to use a number of complex or high-level skills.",
+   "subscale": "Skill variety",
+   "reverse": false,
+   "filler": false,
+   "note": "Section Two, statement 1."
+  },
+  {
+   "n": 7,
+   "text": "The job is quite simple and repetitive.",
+   "subscale": "Skill variety",
+   "reverse": true,
+   "filler": false,
+   "note": "Section Two, statement 5. Original 1974 wording; Idaszak and Drasgow (1987) replaced this with a positively worded statement that could not be retrieved."
+  },
+  {
+   "n": 8,
+   "text": "The job provides me the chance to completely finish the pieces of work I begin.",
+   "subscale": "Task identity",
+   "reverse": false,
+   "filler": false,
+   "note": "Section Two, statement 11."
+  },
+  {
+   "n": 9,
+   "text": "The job is arranged so that I do not have the chance to do an entire piece of work from beginning to end.",
+   "subscale": "Task identity",
+   "reverse": true,
+   "filler": false,
+   "note": "Section Two, statement 3. Original 1974 wording; revised positively worded replacement not retrieved."
+  },
+  {
+   "n": 10,
+   "text": "This job is one where a lot of other people can be affected by how well the work gets done.",
+   "subscale": "Task significance",
+   "reverse": false,
+   "filler": false,
+   "note": "Section Two, statement 8."
+  },
+  {
+   "n": 11,
+   "text": "The job itself is not very significant or important in the broader scheme of things.",
+   "subscale": "Task significance",
+   "reverse": true,
+   "filler": false,
+   "note": "Section Two, statement 14. Original 1974 wording; revised positively worded replacement not retrieved."
+  },
+  {
+   "n": 12,
+   "text": "The job gives me considerable opportunity for independence and freedom in how I do the work.",
+   "subscale": "Autonomy",
+   "reverse": false,
+   "filler": false,
+   "note": "Section Two, statement 13."
+  },
+  {
+   "n": 13,
+   "text": "The job denies me any chance to use my personal initiative or judgment in carrying out the work.",
+   "subscale": "Autonomy",
+   "reverse": true,
+   "filler": false,
+   "note": "Section Two, statement 9. Original 1974 wording; revised positively worded replacement not retrieved."
+  },
+  {
+   "n": 14,
+   "text": "Just doing the work required by the job provides many chances for me to figure out how well I am doing.",
+   "subscale": "Feedback from the job",
+   "reverse": false,
+   "filler": false,
+   "note": "Section Two, statement 4."
+  },
+  {
+   "n": 15,
+   "text": "The job itself provides very few clues about whether or not I am performing well.",
+   "subscale": "Feedback from the job",
+   "reverse": true,
+   "filler": false,
+   "note": "Section Two, statement 12. Original 1974 wording; revised positively worded replacement not retrieved."
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Skill variety",
+   "items": "1, 6, 7R",
+   "count": 3,
+   "range": "1-7 (mean)",
+   "description": "Section One question 4; Section Two statements 1 and 5R."
+  },
+  {
+   "name": "Task identity",
+   "items": "2, 8, 9R",
+   "count": 3,
+   "range": "1-7 (mean)",
+   "description": "Section One question 3; Section Two statements 11 and 3R."
+  },
+  {
+   "name": "Task significance",
+   "items": "3, 10, 11R",
+   "count": 3,
+   "range": "1-7 (mean)",
+   "description": "Section One question 5; Section Two statements 8 and 14R."
+  },
+  {
+   "name": "Autonomy",
+   "items": "4, 12, 13R",
+   "count": 3,
+   "range": "1-7 (mean)",
+   "description": "Section One question 2; Section Two statements 13 and 9R."
+  },
+  {
+   "name": "Feedback from the job",
+   "items": "5, 14, 15R",
+   "count": 3,
+   "range": "1-7 (mean)",
+   "description": "Section One question 7; Section Two statements 4 and 12R."
+  }
+ ],
+ "scoring": "Each core dimension score is the mean of its 3 items on the 1 to 7 scale. For reverse scored Section Two items (original form) subtract the rating from 8. Higher scores indicate more of the characteristic. Motivating Potential Score (MPS) = ((skill variety + task identity + task significance) / 3) x autonomy x feedback from the job, range 1 to 343. Hackman and Oldham (1974) advise against using the JDS for selection or placement or for diagnosing a single individual's job; no cut offs are published.",
+ "citation": "Hackman, J. R., & Oldham, G. R. (1975). Development of the Job Diagnostic Survey. Journal of Applied Psychology, 60(2), 159-170. https://doi.org/10.1037/h0076546; Idaszak, J. R., & Drasgow, F. (1987). A revision of the Job Diagnostic Survey: Elimination of a measurement artifact. Journal of Applied Psychology, 72(1), 69-74. https://doi.org/10.1037/0021-9010.72.1.69",
+ "transcriptionNote": "The 15 core job characteristics items (Section One questions 2, 3, 4, 5 and 7 and the 10 Section Two statements for the 5 core dimensions) were transcribed from the public domain 1974 technical report (Yale Technical Report No. 4, Appendix A) via the copy hosted at paulspector.com; the DTIC copy of the same report is itemsUrl. The fetch returned the Section One question stems and anchors and the Section Two statements in full; the source is an OCR scan, so quotation marks around 'whole' and 'feedback' were inconsistent in the returned text and are normalised to double quotation marks here, and the absence of a comma before 'aside' in item 5 follows the returned text. The Idaszak and Drasgow (1987) revision rewrote the 5 negatively worded Section Two statements (items 7, 9, 11, 13 and 15 here) in positive form; that revised wording could not be retrieved from any reachable open access source (the paulspector.com DOCX of the revised 15 item measure is binary and unreadable through WebFetch, the Journal of Applied Psychology article is paywalled, and the Buys, Olckers and Schaap 2007 article reports item numbers only). The original 1974 wording with reverse scoring is therefore recorded, which yields the same 5 scale structure as the revised form. Items here are numbered 1 to 15 in codebook order; the source numbering is given in each note. Section One items use a 7 point scale with descriptive anchors at 1, 4 and 7 (in each note); Section Two items use the 7 point accuracy scale in responseOptions. Section Two items 2, 6, 7 and 10 (dealing with others, feedback from agents) are not core dimensions and are omitted. Source wording uses US spelling and double hyphens retained where present; Section One anchors use single quotation marks as rendered by the fetch. Second pass: DTIC release line quoted exactly."
+}

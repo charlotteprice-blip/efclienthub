@@ -1,0 +1,18 @@
+{
+  "file": "btq.json",
+  "sourceReached": true,
+  "sourceUsed": "https://www.ptsd.va.gov/professional/assessment/documents/BTQ.pdf",
+  "itemsChecked": 10,
+  "itemsMatching": 10,
+  "discrepancies": [
+    {
+      "item": 9,
+      "transcribed": "note: 'No follow up columns apply (both N/A); scored on the event question alone.'",
+      "source": "Raw row text reads 'No Yes N/A No Yes', i.e. life threat column N/A and serious injury column answered No/Yes (same pattern as item 8); only item 10 shows 'N/A N/A'",
+      "kind": "option"
+    }
+  ],
+  "licenceMatches": true,
+  "verdict": "verified with corrections",
+  "notes": "All 10 event questions match the PDF word for word, including the misprint 'some else's' in item 7, the parenthesis after the question mark in item 1 and the embedded 'Note:' sentences in items 7 and 10 (the text layer renders 'orchemical' in item 3, which is a line break artefact rather than a printed error). The instruction paragraph matches. No/Yes are the only printed responses, as stated. The scoring note is quoted accurately (life threat or serious injury for events 1-3 and 5-7; life threat for event 4; serious injury for event 8; the event question alone for events 9 and 10). The follow up column pattern recorded in the item notes matches the PDF text for items 1 to 8 and 10, but for item 9 the text layer shows N/A in the life threat column and No/Yes in the serious injury column, not N/A in both; this is derived from the PDF text order and should be confirmed visually, although it does not affect scoring because event 9 is scored on the event question alone. The Reference line (Schnurr, Vielhauer, Weathers and Findler, 1999) appears on page 1 as quoted and there is no copyright notice; the page footer is 'BTQ (1999) National Center for PTSD'."
+}

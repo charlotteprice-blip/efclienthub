@@ -1,0 +1,111 @@
+{
+  "code": "BIS-Brief",
+  "name": "Barratt Impulsiveness Scale, Brief",
+  "domain": "Executive functioning and attention",
+  "developer": "Steinberg, Sharp, Stanford and Tharp (2013)",
+  "construct": "General trait impulsiveness measured as a unidimensional 8 item short form of the BIS-11 derived by item response theory.",
+  "respondent": "Self report",
+  "ageRange": "18+",
+  "minutes": 2,
+  "availability": "free with attribution (CC or stated)",
+  "licence": "The article makes no availability or permission statement. The items are a subset of the freely distributed BIS-11 (Patton, Stanford and Barratt, 1995) and are listed in Table 3 of the article. The corresponding author is Lynne Steinberg (lsteinberg@uh.edu).",
+  "licenceUrl": "https://www.uh.edu/class/psychology/clinical-psych/research/dpl/_files/publications/steinberg-sharp-stanford-tharp-2013.pdf",
+  "sourceUrl": "https://www.uh.edu/class/psychology/clinical-psych/research/dpl/_files/publications/steinberg-sharp-stanford-tharp-2013.pdf",
+  "instructions": "",
+  "responseOptions": [
+    {
+      "value": 1,
+      "label": "Rarely/Never"
+    },
+    {
+      "value": 2,
+      "label": "Occasionally"
+    },
+    {
+      "value": 3,
+      "label": "Often"
+    },
+    {
+      "value": 4,
+      "label": "Almost Always/Always"
+    }
+  ],
+  "items": [
+    {
+      "n": 1,
+      "text": "I plan tasks carefully.",
+      "subscale": "Total",
+      "reverse": true,
+      "filler": false,
+      "note": "BIS-11 item 1"
+    },
+    {
+      "n": 2,
+      "text": "I do things without thinking.",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": "BIS-11 item 2"
+    },
+    {
+      "n": 3,
+      "text": "I don’t “pay attention.”",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": "BIS-11 item 5"
+    },
+    {
+      "n": 4,
+      "text": "I am self-controlled.",
+      "subscale": "Total",
+      "reverse": true,
+      "filler": false,
+      "note": "BIS-11 item 8"
+    },
+    {
+      "n": 5,
+      "text": "I concentrate easily.",
+      "subscale": "Total",
+      "reverse": true,
+      "filler": false,
+      "note": "BIS-11 item 9"
+    },
+    {
+      "n": 6,
+      "text": "I am a careful thinker.",
+      "subscale": "Total",
+      "reverse": true,
+      "filler": false,
+      "note": "BIS-11 item 12"
+    },
+    {
+      "n": 7,
+      "text": "I say things without thinking.",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": "BIS-11 item 14"
+    },
+    {
+      "n": 8,
+      "text": "I act on the spur of the moment.",
+      "subscale": "Total",
+      "reverse": false,
+      "filler": false,
+      "note": "BIS-11 item 19"
+    }
+  ],
+  "subscales": [
+    {
+      "name": "Total",
+      "items": "1-8",
+      "count": 8,
+      "range": "8-32",
+      "description": "Unidimensional impulsiveness score."
+    }
+  ],
+  "scoring": "\"The items are scored on a 4-point scale\" and \"total scores can be calculated by summing up the responses to the eight items\" (range 8 to 32). Higher scores indicate greater impulsiveness. The article does not itself list reverse keyed items; the BIS-11 keying (impulsivity.org, Patton et al., 1995) reverse scores BIS-11 items 1, 7, 8, 9, 10, 12, 13, 15, 20, 29 and 30, which within the BIS-Brief are BIS-11 items 1, 8, 9 and 12 (BIS-Brief items 1, 4, 5 and 6 here). Items 5 and 9 (BIS-11 numbering) were treated as a testlet in the IRT analysis but both contribute to the summed score. No published cut offs.",
+  "citation": "Steinberg, L., Sharp, C., Stanford, M. S., & Tharp, A. T. (2013). New tricks for an old measure: The development of the Barratt Impulsiveness Scale–Brief (BIS-Brief). Psychological Assessment, 25(1), 216–226. https://doi.org/10.1037/a0030550",
+  "transcriptionNote": "Item text transcribed from Table 3 of the article (Graded Model Item Parameter Estimates for the Eight BIS-11 Items); the table gives BIS-11 item numbers only, so items are renumbered 1 to 8 here with the original BIS-11 number in each item note. Item 3 keeps the article's typographic quotation marks around \"pay attention.\" The article gives no respondent instructions, so the instructions field is empty; the BIS-11 instructions were not retrieved. Response option labels and values are from the article; reverse keying is from the BIS-11 scoring key at https://www.impulsivity.org/measurement/bis11, not from the BIS-Brief article."
+}

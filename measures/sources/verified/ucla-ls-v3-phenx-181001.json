@@ -1,0 +1,11 @@
+{
+  "file": "ucla-ls-v3-phenx-181001.json",
+  "sourceReached": true,
+  "sourceUsed": "https://www.phenxtoolkit.org/protocols/view/181001",
+  "itemsChecked": 20,
+  "itemsMatching": 20,
+  "discrepancies": [],
+  "licenceMatches": true,
+  "verdict": "verified",
+  "notes": "All 20 items match the PhenX protocol page word for word (checked in 2 batches of 10). Instructions match, including the example about feeling happy. Response options 1 NEVER, 2 RARELY, 3 SOMETIMES, 4 ALWAYS confirmed exactly as the page prints them; the file's transcriptionNote correctly flags that Russell (1996) labels point 4 as Often, and that caution stands. Reverse scored items on the page (1, 5, 6, 9, 10, 15, 16, 19, 20) match the 9 items flagged reverse in the file. Scoring direction (sum, higher = lonelier) matches. Both copyright and permission sentences confirmed verbatim. The page does not itself state a score range, so the 20 to 80 range in the file is a derivation rather than a quotation, which is acceptable."
+}

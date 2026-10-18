@@ -1,0 +1,235 @@
+{
+  "code": "CES-D",
+  "name": "Center for Epidemiologic Studies Depression Scale",
+  "domain": "Clinical screening",
+  "developer": "Radloff (1977), National Institute of Mental Health",
+  "construct": "Frequency of depressive symptoms in the general population over the past week.",
+  "respondent": "Self report",
+  "ageRange": "18+ (also used with adolescents)",
+  "minutes": 3,
+  "availability": "public domain",
+  "licence": "CES-D: \"This scale is free to use without permission\" (as quoted by CamCOPS from bmedreport.com; the scale was developed at NIMH, a US federal agency, and is treated as public domain). CESD-R: \"The CESD-R is in the public domain so it is free to use in your research.\" (cesd-r.com)",
+  "licenceUrl": "https://camcops.readthedocs.io/en/latest/tasks/cesd.html",
+  "sourceUrl": "https://www.apa.org/depression-guideline/epidemiologic-studies-scale.pdf",
+  "instructions": "Below is a list of the ways you might have felt or behaved. Please tell me how often you have felt this way during the past week.",
+  "responseOptions": [
+    {
+      "value": 0,
+      "label": "Rarely or none of the time (less than 1 day)"
+    },
+    {
+      "value": 1,
+      "label": "Some or a little of the time (1-2 days)"
+    },
+    {
+      "value": 2,
+      "label": "Occasionally or a moderate amount of time (3-4 days)"
+    },
+    {
+      "value": 3,
+      "label": "Most or all of the time (5-7 days)"
+    }
+  ],
+  "items": [
+    {
+      "n": 1,
+      "text": "I was bothered by things that usually don't bother me.",
+      "subscale": "Somatic and retarded activity",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 2,
+      "text": "I did not feel like eating; my appetite was poor.",
+      "subscale": "Somatic and retarded activity",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 3,
+      "text": "I felt that I could not shake off the blues even with help from my family or friends.",
+      "subscale": "Depressed affect",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 4,
+      "text": "I felt I was just as good as other people.",
+      "subscale": "Positive affect",
+      "reverse": true,
+      "filler": false,
+      "note": "Positively worded; scoring reversed (3, 2, 1, 0)"
+    },
+    {
+      "n": 5,
+      "text": "I had trouble keeping my mind on what I was doing.",
+      "subscale": "Somatic and retarded activity",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 6,
+      "text": "I felt depressed.",
+      "subscale": "Depressed affect",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 7,
+      "text": "I felt that everything I did was an effort.",
+      "subscale": "Somatic and retarded activity",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 8,
+      "text": "I felt hopeful about the future.",
+      "subscale": "Positive affect",
+      "reverse": true,
+      "filler": false,
+      "note": "Positively worded; scoring reversed (3, 2, 1, 0)"
+    },
+    {
+      "n": 9,
+      "text": "I thought my life had been a failure.",
+      "subscale": "Depressed affect",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 10,
+      "text": "I felt fearful.",
+      "subscale": "Depressed affect",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 11,
+      "text": "My sleep was restless.",
+      "subscale": "Somatic and retarded activity",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 12,
+      "text": "I was happy.",
+      "subscale": "Positive affect",
+      "reverse": true,
+      "filler": false,
+      "note": "Positively worded; scoring reversed (3, 2, 1, 0)"
+    },
+    {
+      "n": 13,
+      "text": "I talked less than usual.",
+      "subscale": "Somatic and retarded activity",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 14,
+      "text": "I felt lonely.",
+      "subscale": "Depressed affect",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 15,
+      "text": "People were unfriendly.",
+      "subscale": "Interpersonal",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 16,
+      "text": "I enjoyed life.",
+      "subscale": "Positive affect",
+      "reverse": true,
+      "filler": false,
+      "note": "Positively worded; scoring reversed (3, 2, 1, 0)"
+    },
+    {
+      "n": 17,
+      "text": "I had crying spells.",
+      "subscale": "Depressed affect",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 18,
+      "text": "I felt sad.",
+      "subscale": "Depressed affect",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 19,
+      "text": "I felt that people dislike me.",
+      "subscale": "Interpersonal",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    },
+    {
+      "n": 20,
+      "text": "I could not get “going.”",
+      "subscale": "Somatic and retarded activity",
+      "reverse": false,
+      "filler": false,
+      "note": ""
+    }
+  ],
+  "subscales": [
+    {
+      "name": "Total",
+      "items": "1-20",
+      "count": 20,
+      "range": "0-60",
+      "description": "Depressive symptom frequency over the past week."
+    },
+    {
+      "name": "Depressed affect",
+      "items": "3, 6, 9, 10, 14, 17, 18",
+      "count": 7,
+      "range": "0-21",
+      "description": "Radloff (1977) factor."
+    },
+    {
+      "name": "Positive affect",
+      "items": "4, 8, 12, 16",
+      "count": 4,
+      "range": "0-12",
+      "description": "Radloff (1977) factor; items reverse scored."
+    },
+    {
+      "name": "Somatic and retarded activity",
+      "items": "1, 2, 5, 7, 11, 13, 20",
+      "count": 7,
+      "range": "0-21",
+      "description": "Radloff (1977) factor."
+    },
+    {
+      "name": "Interpersonal",
+      "items": "15, 19",
+      "count": 2,
+      "range": "0-6",
+      "description": "Radloff (1977) factor."
+    }
+  ],
+  "scoring": "Score each item 0 to 3 by frequency, reversing the 4 positive items (4, 8, 12 and 16) so that 0 = Most or all of the time and 3 = Rarely or none of the time, then sum. \"Possible range of scores is zero to 60, with the higher scores indicating the presence of more symptomatology.\" The conventional cut off of 16 or more indicates clinically significant depressive symptoms (Radloff, 1977; cited by CamCOPS via Lewinsohn et al., 1997); some studies use 20 or more to reduce false positives. Screening only, not diagnostic.",
+  "citation": "Radloff, L. S. (1977). The CES-D Scale: A self-report depression scale for research in the general population. Applied Psychological Measurement, 1(3), 385–401. https://doi.org/10.1177/014662167700100306",
+  "transcriptionNote": "The original 20 item CES-D was transcribed from the APA Clinical Practice Guideline copy of the NIMH form (apa.org PDF); the itemsUrl in the target record (cesd-r.com) carries the revised CESD-R, whose items differ (its first item is \"My appetite was poor\" and it uses a 5 option past 2 weeks response set with 0 to 4 scoring), so the CESD-R is deliberately not transcribed here. The APA PDF states that positive items are reverse scored without listing them; items 4, 8, 12 and 16 are identified by their wording and match standard practice. Subscale membership follows Radloff's 4 factor solution and is not printed on the APA form. The curly quotation marks around going in item 20 are reproduced from the source. The APA PDF gives no cut off; the 16 point threshold comes from the CamCOPS page and the original article."
+}

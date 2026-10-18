@@ -11,6 +11,12 @@ A third sheet, NovoPsych Catalogue, lists all 150 assessments on novopsych.com (
 
 A fourth sheet, Other open instruments, lists 153 free or open licence instruments found beyond NovoPsych (executive functioning, work, wellbeing, the open repositories and clinical practice in New Zealand), each with the licence statement as found, whether open access items exist, NZ use where known, a hub suggestion and a caution where digital use may need its own licence. Clinical screeners and any risk measure are Sarah only in the hub.
 
+## Open licence instruments (18 October 2026)
+
+50 instruments were transcribed from open access sources and merged into the codebook sheets, each with its own tab: 8 domains now, 70 instruments, 1,018 items (the BTQ and WFIRS-S are in the codebook but not built, see their Hub Library notes). Every item was transcribed word for word from the source named in References and then checked by an independent second pass; the verdict for each instrument is on its tab and in the References sheet. The transcriptions and the check reports are kept in `sources/transcribed/` and `sources/verified/` as provenance; the workbook is still the only input to `npm run codebook`. 3 transcriptions duplicated instruments already in the codebook (ASRS, PPS, IPS) and were used to confirm the existing items rather than merged. Held back for Sarah: IPIP-NEO-120, BFAS and the C-SSRS Screener.
+
+An item whose answer scale differs from the rest of its questionnaire (AUDIT-C, CUDIT-R, CBI, PROMIS Global Health, GAD-7 item 8) carries its own options in the Master Item List Response Options column, and the hub shows and scores that item on its own scale.
+
 ## Workflow
 
 ```
@@ -31,6 +37,6 @@ The statuses in the workbook are Charlotte's reading of the sources in the codeb
 
 Scoring direction difficulty means a higher score is more difficulty, so low scores become strengths and high scores areas of focus. positive is the reverse. none means the subscale is scored for Sarah only. Bands default to thirds of the response range on the item mean; set the 2 thresholds in the sheet to use published cut offs (DASS-21 uses the raw sums below which the doubled score is in the normal range).
 
-Questionnaires marked "Client sees strengths and focus: No" (ASRS, DASS-21) are screeners. Sarah sees their scores and flagged answers; nothing from them is ever released to the client, and release skips them.
+Questionnaires marked "Client sees strengths and focus: No" (ASRS, DASS-21, PHQ-2, PHQ-9, GAD-7, CES-D, PSWQ, AUDIT-C, CAGE, CUDIT-R, DES-II, RAADS-14, CAPE-42) are screeners. Sarah sees their scores and flagged answers; nothing from them is ever released to the client, and release skips them.
 
 Reverse scored items are reversed as minimum plus maximum minus the answer, so scales that start at 1 reverse correctly.

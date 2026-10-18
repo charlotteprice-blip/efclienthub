@@ -1,0 +1,107 @@
+{
+ "code": "WSAS",
+ "name": "Work and Social Adjustment Scale",
+ "domain": "Functioning and health",
+ "developer": "Marks (1986); Mundt, Marks, Shear and Greist (2002)",
+ "construct": "Functional impairment attributable to an identified problem across work, home management, social leisure, private leisure and close relationships.",
+ "respondent": "Self report",
+ "ageRange": "18+",
+ "minutes": 2,
+ "availability": "free with attribution (CC or stated)",
+ "licence": "Mundt et al. (2002): \"The copyright in WSAS is owned by I. M. M.\" Permission for use in research without charge is obtained from Dr Marks. Form reproduced here: \"Work and Social Adjustment Scale – WSAS © James C. Mundt and Isaac M. Marks, 2002. Adapted by the MSSS with permission from the authors.\" The NHS Talking Therapies manual lists the WSAS as a free required outcome measure.",
+ "licenceUrl": "https://www.england.nhs.uk/publication/the-improving-access-to-psychological-therapies-manual/",
+ "sourceUrl": "https://www.ciusss-capitalenationale.gouv.qc.ca/sites/d8/files/docs/ProfSante/SanteMentale/DSMDI_Form-questionnaire-WSAS_EN.pdf",
+ "instructions": "Over the last two weeks, or since your last consultation if more recent, please rate how much the ways you think, feel, or behave impair your ability to do each of the everyday activities described in the following items? Use the following scale:",
+ "responseOptions": [
+  {
+   "value": 0,
+   "label": "Not at all impaired"
+  },
+  {
+   "value": 1,
+   "label": ""
+  },
+  {
+   "value": 2,
+   "label": "Slightly impaired"
+  },
+  {
+   "value": 3,
+   "label": ""
+  },
+  {
+   "value": 4,
+   "label": "Definitely impaired"
+  },
+  {
+   "value": 5,
+   "label": ""
+  },
+  {
+   "value": 6,
+   "label": "Markedly impaired"
+  },
+  {
+   "value": 7,
+   "label": ""
+  },
+  {
+   "value": 8,
+   "label": "Very severely impaired"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "Because of the ways I think, feel, or behave, my ability to work is impaired. 8 means very severely impaired to the point I cannot work. N/A (not applicable) means I am retired or choose not to have a job.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": "Item 1 also offers N/A for respondents who are retired or choose not to work."
+  },
+  {
+   "n": 2,
+   "text": "Because of the ways I think, feel, or behave, my home management (cleaning, tidying, shopping, cooking, looking after home or children, paying bills) is impaired.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 3,
+   "text": "Because of the ways I think, feel, or behave, my social leisure activities (with other people, such as parties, bars, clubs, outings, visits, dating, home entertaining) are impaired.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 4,
+   "text": "Because of the ways I think, feel, or behave, my private leisure activities (done alone, such as reading, gardening, collecting, sewing, walking alone) are impaired.",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 5,
+   "text": "Because of the ways I think, feel, or behave, my ability to form and maintain close relationships with others, including those I live with, is impaired",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Total",
+   "items": "1-5",
+   "count": 5,
+   "range": "0-40",
+   "description": "Sum of the 5 impairment ratings."
+  }
+ ],
+ "scoring": "Sum the 5 items for a total of 0 to 40; higher scores indicate greater impairment. Mundt et al. (2002): scores above 20 suggest moderately severe or worse psychopathology; 10 to 20 is associated with significant functional impairment but less severe symptomatology; below 10 is associated with subclinical populations. If item 1 is N/A, NHS Talking Therapies practice is to score the remaining items and interpret the total with caution or prorate.",
+ "citation": "Mundt, J. C., Marks, I. M., Shear, M. K., & Greist, J. M. (2002). The Work and Social Adjustment Scale: A simple measure of impairment in functioning. British Journal of Psychiatry, 180(5), 461–464. https://doi.org/10.1192/bjp.180.5.461",
+ "transcriptionNote": "Items and instructions transcribed from the English MSSS (Quebec) form hosted by CIUSSS de la Capitale-Nationale, which is an adaptation with permission: the stem reads 'Because of the ways I think, feel, or behave' where the Mundt et al. (2002) original reads 'Because of my [disorder]', and the instruction references the last two weeks or last consultation. The Cambridge Core article page was fetched but the WebFetch model would not reproduce the appendix verbatim; the Mind toolkit PDF (target sourceUrl) does not contain the WSAS. The response labels Not at all, Slightly, Definitely, Markedly and Very severely impaired are printed beneath the 0 to 8 row; text extraction did not confirm column alignment, so their placement at 0, 2, 4, 6 and 8 follows the standard WSAS layout and points 1, 3, 5 and 7 are left unlabelled. Item 1 text includes the two explanatory sentences printed with it on the form. Second pass: the form also prints N/A as a response (item 1, retired or choosing not to have a job); not offered in the hub, where item 1 may be left unanswered."
+}

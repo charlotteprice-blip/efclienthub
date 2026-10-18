@@ -1,0 +1,207 @@
+{
+ "code": "UCLA-LS v3 / PhenX 181001",
+ "name": "UCLA Loneliness Scale, Version 3 (PhenX Social Isolation)",
+ "domain": "Wellbeing and life satisfaction",
+ "developer": "Russell (1996)",
+ "construct": "Subjective feelings of loneliness and social isolation.",
+ "respondent": "Self report",
+ "ageRange": "18+ (validated in students, nurses, teachers and older adults)",
+ "minutes": 4,
+ "availability": "free with attribution (CC or stated)",
+ "licence": "PhenX protocol page: \"Copyright © 1994 by Daniel W. Russell\" and \"This protocol is freely available; permission not required for use.\" PhenX Toolkit documentation is CC BY 4.0.",
+ "licenceUrl": "https://www.phenxtoolkit.org/protocols/view/181001",
+ "sourceUrl": "https://www.phenxtoolkit.org/protocols/view/181001",
+ "instructions": "Instructions: The following statements describe how people sometimes feel. For each statement, please indicate how often you feel the way described by writing a number in the space provided. Here is an example: How often do you feel happy? If you never feel happy, you would respond \"never\"; if you always feel happy, you would respond \"always\".",
+ "responseOptions": [
+  {
+   "value": 1,
+   "label": "NEVER"
+  },
+  {
+   "value": 2,
+   "label": "RARELY"
+  },
+  {
+   "value": 3,
+   "label": "SOMETIMES"
+  },
+  {
+   "value": 4,
+   "label": "ALWAYS"
+  }
+ ],
+ "items": [
+  {
+   "n": 1,
+   "text": "How often do you feel that you are in tune with the people around you?",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": "Positively worded, reverse scored"
+  },
+  {
+   "n": 2,
+   "text": "How often do you feel that you lack companionship?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 3,
+   "text": "How often do you feel that there is no one you can turn to?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 4,
+   "text": "How often do you feel alone?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 5,
+   "text": "How often do you feel part of a group of friends?",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": "Positively worded, reverse scored"
+  },
+  {
+   "n": 6,
+   "text": "How often do you feel that you have a lot in common with the people around you?",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": "Positively worded, reverse scored"
+  },
+  {
+   "n": 7,
+   "text": "How often do you feel that you are no longer close to anyone?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 8,
+   "text": "How often do you feel that your interests and ideas are not shared by those around you?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 9,
+   "text": "How often do you feel outgoing and friendly?",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": "Positively worded, reverse scored"
+  },
+  {
+   "n": 10,
+   "text": "How often do you feel close to people?",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": "Positively worded, reverse scored"
+  },
+  {
+   "n": 11,
+   "text": "How often do you feel left out?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 12,
+   "text": "How often do you feel that your relationships with others are not meaningful?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 13,
+   "text": "How often do you feel that no one really knows you well?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 14,
+   "text": "How often do you feel isolated from others?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 15,
+   "text": "How often do you feel you can find companionship when you want it?",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": "Positively worded, reverse scored"
+  },
+  {
+   "n": 16,
+   "text": "How often do you feel that there are people who really understand you?",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": "Positively worded, reverse scored"
+  },
+  {
+   "n": 17,
+   "text": "How often do you feel shy?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 18,
+   "text": "How often do you feel that people are around you but not with you?",
+   "subscale": "Total",
+   "reverse": false,
+   "filler": false,
+   "note": ""
+  },
+  {
+   "n": 19,
+   "text": "How often do you feel that there are people you can talk to?",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": "Positively worded, reverse scored"
+  },
+  {
+   "n": 20,
+   "text": "How often do you feel that there are people you can turn to?",
+   "subscale": "Total",
+   "reverse": true,
+   "filler": false,
+   "note": "Positively worded, reverse scored"
+  }
+ ],
+ "subscales": [
+  {
+   "name": "Total",
+   "items": "1-20",
+   "count": 20,
+   "range": "20-80",
+   "description": "Unidimensional loneliness score; 9 positively worded items reverse scored."
+  }
+ ],
+ "scoring": "Items 1, 5, 6, 9, 10, 15, 16, 19, and 20 should be reversed (1 to 4, 2 to 3, 3 to 2, 4 to 1). Sum the total of all items. Higher scores indicate greater degrees of loneliness. Range 20 to 80. Russell (1996) reports no formal cut offs; sample means of about 40 in students and 32 in older adults are reported in the validation article. 3 item (Hughes et al., 2004) and 8 item (ULS-8) short forms exist.",
+ "citation": "Russell, D. W. (1996). UCLA Loneliness Scale (Version 3): Reliability, validity, and factor structure. Journal of Personality Assessment, 66(1), 20–40. https://doi.org/10.1207/s15327752jpa6601_2",
+ "transcriptionNote": "All 20 items, instructions, response labels and scoring text transcribed from the PhenX Toolkit protocol 181001 page. The PhenX page prints the fourth response label as ALWAYS; Russell's (1996) published version labels point 4 as Often. PhenX wording is retained verbatim and this difference should be checked before administration. Sample means quoted in the scoring field are from general knowledge of Russell (1996) and were not read from the PhenX page."
+}

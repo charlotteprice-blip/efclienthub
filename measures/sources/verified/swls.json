@@ -1,0 +1,18 @@
+{
+  "file": "swls.json",
+  "sourceReached": true,
+  "sourceUsed": "https://psytoolkit.org/survey-library/satisfaction-with-life.html (items, options); https://eddiener.com/wp-content/uploads/2024/09/SWLS-Scale.pdf (items, options, paper instructions); https://eddiener.com/satisfaction-with-life-scale-swls/ and https://eddiener.com/scales/7 (licence)",
+  "itemsChecked": 5,
+  "itemsMatching": 5,
+  "discrepancies": [
+    {
+      "item": 0,
+      "transcribed": "eddiener.com: \"The scale is copyrighted but you are free to use it without permission or charge by all professionals (researchers and practitioners) as long as you give credit to the authors of the scale.\"",
+      "source": "eddiener.com SWLS page currently reads: \"The scale is copyrighted but is free to use without permission or charge by researchers as long as credit is given to the authors of the scale\" and \"The use of this scale is permitted for non-commercial purposes only.\" The sentence quoted in the file appears on the PsyToolkit page (attributed there to 'The SWLS website'), not on eddiener.com.",
+      "kind": "wording"
+    }
+  ],
+  "licenceMatches": false,
+  "verdict": "verified with corrections",
+  "notes": "All 5 items match both the PsyToolkit page and the eddiener.com SWLS-Scale.pdf word for word. Response options 7 Strongly agree down to 1 Strongly disagree match both sources in label and value. The paper instructions recorded in the file ('Using the 1 - 7 scale below ... placing the appropriate number on the line preceding that item') were confirmed sentence by sentence against the eddiener.com SWLS-Scale.pdf, so the transcriptionNote's statement that they were not verified against the eddiener.com PDF can now be superseded. Score bands on both sources match the standard 31-35 to 5-9 bands. Licence: the first quoted sentence is misattributed; it is PsyToolkit's reproduction of older SWLS website wording, and eddiener.com's current text is narrower ('by researchers', 'credit is given') and adds 'non-commercial purposes only'. The scales index quote 'The use of these scales is permitted for non-commercial purposes only.' is confirmed. The Authentic Happiness footer sentence could not be checked and is not relevant to the eddiener.com licence. Recommend replacing the first licence quote with the current eddiener.com wording and citing https://eddiener.com/satisfaction-with-life-scale-swls/ as the licenceUrl."
+}

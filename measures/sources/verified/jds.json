@@ -1,0 +1,18 @@
+{
+ "file": "jds.json",
+ "sourceReached": true,
+ "sourceUsed": "https://paulspector.com/assessment-files/other/jds-report.pdf (items); https://apps.dtic.mil/sti/html/tr/AD0779828/index.html (licence)",
+ "itemsChecked": 15,
+ "itemsMatching": 15,
+ "discrepancies": [
+  {
+   "item": 0,
+   "transcribed": "Approved for public release; distribution unlimited.",
+   "source": "Approved For Public Release; Distribution Is Unlimited.",
+   "kind": "wording"
+  }
+ ],
+ "licenceMatches": false,
+ "verdict": "verified with corrections",
+ "notes": "All 15 item stems match Appendix A of the 1974 report word for word (Section One questions 2, 3, 4, 5, 7 and Section Two statements 1, 3, 4, 5, 8, 9, 11, 12, 13, 14), and the source numbering in each note is correct. Section Two scale labels 1 to 7 match. Reverse keying of the 5 negatively worded statements is consistent with their wording; the report does not print a key in the fetched portion. Section One anchors match apart from OCR level punctuation: the source renders the item 1 anchors as 'Very little- the job requires...' and 'Moderate variety' (no full stop) where the transcription has a semicolon and a full stop, and the item 5 anchor 1 as 'Very little:' where the transcription has 'Very little;'. The licence quotation differs from the DTIC page, which reads 'Approved For Public Release; Distribution Is Unlimited.' (the word Is is missing in the transcription). The DTIC page does not name the Office of Naval Research, so the funding statement is unconfirmed there. The Section Two instructions in the transcription omit the sentence 'Once again, please try to be as objective as you can in deciding how accurately each statement describes your job-regardless of whether you like or dislike your job.' and append the column heading 'How accurate is the statement in describing your job?'."
+}
