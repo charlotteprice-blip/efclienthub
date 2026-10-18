@@ -345,6 +345,29 @@ export function makeHandlers({ db, intakeConfig, clientTypes, allowSample = () =
       return { ok: true };
     },
 
+    // The next session Sarah has booked with the client, shown on their Home.
+    setNextSession: async (request) => {
+      const auth = practitioner(request);
+      const { ref } = await existingClient(request.data?.uid);
+      const session = core.cleanSession(request.data);
+      if (!session) fail('invalid-argument', 'Enter a date and time for the session, or clear it.');
+      await ref.update({ nextSessionAt: session.at, nextSessionNote: session.note });
+      await audit(auth.uid, session.at ? 'set next session' : 'cleared next session', ref.id);
+      return { ok: true };
+    },
+
+    // Links and notes Sarah pins for the client (Learning Hub pages, handouts
+    // hosted elsewhere, recordings). Files are never stored in the hub.
+    setResources: async (request) => {
+      const auth = practitioner(request);
+      const { ref } = await existingClient(request.data?.uid);
+      const resources = core.cleanResources(request.data?.resources);
+      if (!resources) fail('invalid-argument', 'Each resource needs a title and an https link.');
+      await ref.update({ resources });
+      await audit(auth.uid, 'set resources', ref.id, { count: resources.length });
+      return { ok: true };
+    },
+
     closeRequest: async (request) => {
       const auth = practitioner(request);
       const ref = db.doc(`requests/${String(request.data?.requestId)}`);

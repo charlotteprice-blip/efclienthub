@@ -174,6 +174,19 @@ describe('formulation and privacy requests', () => {
     assert.equal(r.responses.b.fit, 'fits');
     assert.equal(r.responses.b.version, 1);
   });
+  test('Sarah sets the next session and pins resources; the client reads them on their record', async () => {
+    await onboard();
+    await rejects(h.setNextSession(as(sarah, { uid: 'client-1', at: 'soon' })), 'invalid-argument');
+    const at = Date.UTC(2026, 10, 3, 1, 0);
+    await h.setNextSession(as(sarah, { uid: 'client-1', at, note: 'Online, link by email' }));
+    assert.equal(db.read('clients/client-1').nextSessionAt, at);
+    await h.setNextSession(as(sarah, { uid: 'client-1', at: null }));
+    assert.equal(db.read('clients/client-1').nextSessionAt, null);
+    await rejects(h.setResources(as(sarah, { uid: 'client-1', resources: [{ title: 'Bad', url: 'http://insecure.example' }] })), 'invalid-argument');
+    await h.setResources(as(sarah, { uid: 'client-1', resources: [{ title: 'Planning', url: 'https://app.executiveframe.co.nz/hub/planning', note: 'Start here' }] }));
+    assert.equal(db.read('clients/client-1').resources[0].title, 'Planning');
+    await rejects(h.setResources(as(client, { uid: 'client-1', resources: [] })), 'permission-denied');
+  });
   test('clients raise access and correction requests with a 20 working day due date', async () => {
     await onboard();
     await h.createRequest(as(client, { kind: 'access' }));

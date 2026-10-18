@@ -67,7 +67,8 @@
         "assessment": {
           "body": "Sarah has asked you to complete a few questionnaires about how attention, organisation and planning show up for you at work and at home. There are no right or wrong answers, and you can stop and come back at any time."
         }
-      }
+      },
+      "reportName": "Your executive functioning report"
     },
     "health": {
       "practitionerLabel": "Health",
@@ -84,7 +85,8 @@
         "assessment": {
           "body": "Sarah has asked you to complete a few questionnaires about how your health and energy affect your work and daily life. There are no right or wrong answers, and you can stop and come back at any time."
         }
-      }
+      },
+      "reportName": "Your wellbeing and functioning report"
     },
     "corporate": {
       "practitionerLabel": "Corporate",
@@ -103,7 +105,8 @@
         "assessment": {
           "body": "Sarah has asked you to complete a few questionnaires as part of the programme arranged with your organisation. Sarah will explain what is and is not shared with your organisation before you begin."
         }
-      }
+      },
+      "reportName": "Your work and strengths report"
     },
     "team": {
       "practitionerLabel": "Team",
@@ -115,8 +118,10 @@
         "sses",
         "pes"
       ],
-      "copy": {}
+      "copy": {},
+      "reportName": "Your team strengths report"
     }
   },
-  "_defaultMeasuresNote": "Default questionnaires assigned at intake, by client type, drawn from the codebook Batteries sheet (18 October 2026): neurodivergent = DASS-21 screen plus the Executive Function (ADHD) and Procrastination batteries; health = DASS-21 screen plus ESQ-R, Self-Appraisal and GSE; corporate = DASS-21 screen plus Work Mindset, Strengths and GSE; team = Strengths plus PES. Only questionnaires whose licence status is cleared are actually assigned; the rest wait until cleared. Sarah to confirm."
+  "_defaultMeasuresNote": "Default questionnaires assigned at intake, by client type, drawn from the codebook Batteries sheet (18 October 2026): neurodivergent = DASS-21 screen plus the Executive Function (ADHD) and Procrastination batteries; health = DASS-21 screen plus ESQ-R, Self-Appraisal and GSE; corporate = DASS-21 screen plus Work Mindset, Strengths and GSE; team = Strengths plus PES. Only questionnaires whose licence status is cleared are actually assigned; the rest wait until cleared. Sarah to confirm.",
+  "_reportNameNote": "reportName per type is the heading of the report progress block on the client Home."
 }

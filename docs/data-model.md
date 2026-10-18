@@ -6,7 +6,7 @@ Roles are custom claims set with the Admin SDK: `role: "practitioner"` reads cli
 
 | Collection | Document id | Fields | Client reads | Practitioner | Admin |
 |---|---|---|---|---|---|
-| `clients` | uid | uid, name, email, clientType, journeyStage, activatedAt, consentAt, consentVersion, sploseClientId, retentionUntil, closedAt | own | all | none |
+| `clients` | uid | uid, name, email, clientType, journeyStage, activatedAt, consentAt, consentVersion, sploseClientId, retentionUntil, nextSessionAt, nextSessionNote, resources (title, url, note), closedAt | own | all | none |
 | `intakeResponses` | uid | uid, answers, derivedType, overriddenBy, submittedAt | own | all | none |
 | `assignments` | generated | uid, measureId, status, order, assignedAt, completedAt, responses (only while in progress), source (`scheduled` for check ins), scheduleId, dueOn | own (query must filter on uid) | all | none |
 | `scoring` | assignment id | uid, assignmentId, measureId, responses, scores, scoredAt, reportDraft | never | all | none |
@@ -35,6 +35,10 @@ Storage is closed to all browsers. Any later file is delivered through a functio
 ## Check in schedules
 
 Dates on a schedule are New Zealand calendar days stored as `YYYY-MM-DD` strings, so a check in due on 3 November is due on 3 November whatever the server's clock. `runCheckIns` runs at 7am Pacific/Auckland each day and queries `schedules` where `nextDue <= today` (a single field range, so no composite index). For each active schedule it assigns the questionnaire unless the client already has an open copy, then moves `nextDue` on, skipping any dates missed while the scheduler was down. A schedule whose dates are exhausted ends itself. Completing a check in never changes the client's stage; only the initial assessment triggers booking.
+
+## Home: next session and resources
+
+`nextSessionAt` (ms) and `nextSessionNote` are set by Sarah through `setNextSession`; sessions are still booked in Splose and this is the reminder the client sees. `resources` is a list of up to 20 links (title, https url, note) set through `setResources`; the hub stores links only, never files. Both sit on the client document, which the client already reads.
 
 ## Formulation
 

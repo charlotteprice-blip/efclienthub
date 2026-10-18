@@ -1,6 +1,6 @@
 // Live practitioner (Sarah) and admin screens.
 
-import { CADENCE_LABELS, STAGE_LABELS, esc, fmtDate, fmtDay, practitionerShell, relative, status } from '../ui.js';
+import { CADENCE_LABELS, STAGE_LABELS, esc, fmtDate, fmtDateTime, fmtDay, practitionerShell, relative, status, toLocalInput } from '../ui.js';
 import { FIT_LABELS, MARK_SRC, ROUTES, ZONES, zoneOf } from './views-client.js';
 import { suggestFactors } from '../formulation.js';
 
@@ -360,6 +360,36 @@ export function client(s, uid) {
       <section class="panel stack" aria-labelledby="h-intake">
         <h2 id="h-intake">Intake answers</h2>
         ${intakeAnswers ? `<dl class="details">${intakeAnswers}</dl>` : '<p>Not completed yet.</p>'}
+      </section>
+    </div>
+
+    <div class="split">
+      <section class="panel stack" aria-labelledby="h-session">
+        <h2 id="h-session">Next session</h2>
+        <p class="t-caption">Shown on the client's Home. Sessions are still booked in Splose; this is the reminder.</p>
+        ${c.nextSessionAt ? `<p class="t-ui-strong">${esc(fmtDateTime(c.nextSessionAt))}</p>${c.nextSessionNote ? `<p class="t-caption">${esc(c.nextSessionNote)}</p>` : ''}` : '<p>No session recorded.</p>'}
+        <form class="stack" data-form="next-session" data-uid="${esc(uid)}" novalidate>
+          <div class="split">
+            <div class="field"><label class="field-label" for="ns-at">Date and time</label><input class="input" id="ns-at" name="at" type="datetime-local" value="${esc(toLocalInput(c.nextSessionAt))}"></div>
+            <div class="field"><label class="field-label" for="ns-note">Note (optional)</label><input class="input" id="ns-note" name="note" maxlength="160" placeholder="Online, link by email" value="${esc(c.nextSessionNote ?? '')}"></div>
+          </div>
+          ${s.errors.session ? `<p class="field-error">${esc(s.errors.session)}</p>` : ''}
+          <div class="actions-inline"><button type="submit" class="btn btn-secondary">Save session</button>${c.nextSessionAt ? `<button type="button" class="btn btn-quiet" data-action="clear-session" data-uid="${esc(uid)}">Clear</button>` : ''}</div>
+        </form>
+      </section>
+      <section class="panel stack" aria-labelledby="h-res">
+        <h2 id="h-res">Resources for ${esc(c.name || 'the client')}</h2>
+        <p class="t-caption">Links the client sees under Your resources: Learning Hub pages, handouts hosted elsewhere, recordings. Areas of focus from released results link to their Learning Hub topics automatically.</p>
+        ${(c.resources ?? []).length ? `<ul class="task-list">${c.resources.map((r) => `<li class="task"><div><p class="task-name"><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.title)}</a></p>${r.note ? `<p class="task-meta">${esc(r.note)}</p>` : ''}</div><span></span><button type="button" class="btn btn-quiet" data-action="remove-resource" data-uid="${esc(uid)}" data-resource="${esc(r.id)}">Remove</button></li>`).join('')}</ul>` : '<p>None yet.</p>'}
+        <form class="stack" data-form="add-resource" data-uid="${esc(uid)}" novalidate>
+          <div class="split">
+            <div class="field"><label class="field-label" for="rs-title">Title</label><input class="input" id="rs-title" name="title" maxlength="80"></div>
+            <div class="field"><label class="field-label" for="rs-url">Link (https)</label><input class="input" id="rs-url" name="url" type="url" maxlength="300" placeholder="https://"></div>
+          </div>
+          <div class="field"><label class="field-label" for="rs-note">Note (optional)</label><input class="input" id="rs-note" name="note" maxlength="200" placeholder="Why this one, or what to look at first"></div>
+          ${s.errors.resource ? `<p class="field-error">${esc(s.errors.resource)}</p>` : ''}
+          <div class="actions-inline"><button type="submit" class="btn btn-secondary">Add resource</button></div>
+        </form>
       </section>
     </div>
 

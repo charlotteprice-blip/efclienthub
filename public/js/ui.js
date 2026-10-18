@@ -16,6 +16,15 @@ export const fmtDate = (t) => (t ? dateFmt.format(new Date(t)) : '');
 // A calendar day stored as YYYY-MM-DD (check in dates), shown without any
 // time zone shift.
 export const fmtDay = (d) => (d ? dateFmt.format(new Date(`${d}T12:00:00`)) : '');
+const dateTimeFmt = new Intl.DateTimeFormat('en-NZ', { weekday: 'long', day: 'numeric', month: 'long', hour: 'numeric', minute: '2-digit', timeZone: 'Pacific/Auckland' });
+export const fmtDateTime = (t) => (t ? dateTimeFmt.format(new Date(t)) : '');
+// Value for a datetime-local input, in the browser's own time zone.
+export const toLocalInput = (t) => {
+  if (!t) return '';
+  const d = new Date(t);
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+};
 export const CADENCE_LABELS = { weekly: 'Every week', fortnightly: 'Every 2 weeks', fourWeekly: 'Every 4 weeks', dates: 'On chosen dates' };
 
 export function relative(t) {

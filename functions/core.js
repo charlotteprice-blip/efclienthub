@@ -135,6 +135,27 @@ export function cleanFactors(factors) {
   return out;
 }
 
+// Resources Sarah pins for a client: title, https link, optional note.
+export function cleanResources(list) {
+  if (!Array.isArray(list) || list.length > 20) return null;
+  const out = [];
+  for (const r of list) {
+    const title = String(r?.title ?? '').trim().slice(0, 80);
+    const url = String(r?.url ?? '').trim().slice(0, 300);
+    const note = String(r?.note ?? '').trim().slice(0, 200);
+    if (!title || !/^https:\/\/[^\s]+$/.test(url)) return null;
+    out.push({ id: String(r.id ?? '').slice(0, 40) || `r${out.length + 1}`, title, url, note });
+  }
+  return out;
+}
+
+export function cleanSession(data) {
+  if (data?.at === null || data?.at === undefined || data?.at === '') return { at: null, note: '' };
+  const at = Number(data.at);
+  if (!Number.isFinite(at) || at < Date.UTC(2020, 0, 1) || at > Date.UTC(2100, 0, 1)) return null;
+  return { at, note: String(data.note ?? '').trim().slice(0, 160) };
+}
+
 export function cleanSummary(summary) {
   return String(summary ?? '').replace(/\r\n/g, '\n').trim().slice(0, SUMMARY_MAX);
 }

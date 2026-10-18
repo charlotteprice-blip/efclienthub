@@ -2,7 +2,7 @@
 // wires the forms and buttons to the Cloud Functions.
 
 import { stageCopy } from '../client-types.js';
-import { STAGE_LABELS, clientShell, esc, fieldError, fmtDate, fmtDay, single, status } from '../ui.js';
+import { STAGE_LABELS, clientShell, esc, fieldError, fmtDate, fmtDateTime, fmtDay, single, status } from '../ui.js';
 
 export const MARK_SRC = '/assets/brand/mark-slate-small.svg';
 export const ROUTES = {
@@ -241,47 +241,128 @@ export function loader(text = 'Checking your access') {
 
 // ---------- signed in ----------
 
+// ---------- Home: what to do, report progress, next session, resources ----------
+
+// The 5 steps of a client's report, derived from what has happened so far.
+function reportSteps(s) {
+  const { ctx } = s;
+  const stages = s.clientTypes.stages;
+  const stageIndex = Math.max(0, stages.indexOf(ctx.client.journeyStage ?? 'assessment'));
+  const initial = ctx.assignments.filter((a) => a.source !== 'scheduled');
+  const done = initial.filter((a) => a.status === 'complete').length;
+  const qDone = initial.length > 0 && done === initial.length;
+  const resultsOut = Boolean(ctx.results?.releasedAt);
+  const feedbackDone = resultsOut || stageIndex > stages.indexOf('feedback');
+  const steps = [
+    { label: 'Questionnaires', detail: initial.length ? `${done} of ${initial.length}` : 'None yet', done: qDone },
+    { label: 'Sarah reviews', detail: '', done: resultsOut || stageIndex > stages.indexOf('booking') },
+    { label: 'Feedback session', detail: '', done: feedbackDone },
+    { label: 'Results shared', detail: resultsOut ? fmtDate(ctx.results.releasedAt) : '', done: resultsOut },
+    { label: 'Formulation shared', detail: ctx.formulation ? fmtDate(ctx.formulation.releasedAt) : '', done: Boolean(ctx.formulation) },
+  ];
+  const current = steps.findIndex((x) => !x.done);
+  return { steps, current, completed: steps.filter((x) => x.done).length };
+}
+
+function tasks(s) {
+  const { ctx, clientTypes } = s;
+  const c = ctx.client;
+  const stage = c.journeyStage ?? 'assessment';
+  const list = [];
+  for (const a of ctx.assignments.filter((x) => x.status !== 'complete')) {
+    const m = ctx.measures[a.measureId];
+    const label = a.status === 'inProgress' ? 'Continue' : 'Start';
+    list.push({ name: `${a.source === 'scheduled' ? 'Check in: ' : ''}${m?.name ?? 'Questionnaire'}`, meta: measureMeta(s, a), chip: a.status === 'inProgress' ? status('progress', 'In progress') : status('attention', 'To do'), action: `<a class="btn btn-primary" href="/measure/${esc(a.id)}">${label}</a>` });
+  }
+  if (stage === 'booking' && !c.nextSessionAt) {
+    list.push({ name: 'Book your feedback session', meta: 'Sarah goes through your results with you before anything is shared here.', chip: status('attention', 'To do'), action: bookingButton(s, 'Book a session') });
+  }
+  if (ctx.formulation) {
+    const waiting = ctx.formulation.factors.filter((f) => !ctx.formulationResponses?.[f.id]).length;
+    if (waiting) list.push({ name: 'Tell Sarah whether your formulation fits', meta: `${waiting} card${waiting === 1 ? '' : 's'} still to answer`, chip: status('attention', 'To do'), action: '<a class="btn btn-primary" href="/formulation">Open</a>' });
+  }
+  if (ctx.results?.releasedAt && Date.now() - ctx.results.releasedAt < 14 * 86400000) {
+    list.push({ name: 'Read your results', meta: `Shared by Sarah on ${fmtDate(ctx.results.releasedAt)}.`, chip: status('done', 'New'), action: '<a class="btn btn-secondary" href="/results">Open</a>' });
+  }
+  const copy = stageCopy(clientTypes, c.clientType, stage);
+  return { list, copy };
+}
+
+function resources(s) {
+  const { ctx } = s;
+  const hub = s.config.learningHubUrl;
+  const seen = new Set();
+  const out = [];
+  for (const r of ctx.client.resources ?? []) {
+    if (seen.has(r.url)) continue;
+    seen.add(r.url);
+    out.push({ title: r.title, url: r.url, note: r.note, from: 'Sarah' });
+  }
+  for (const item of ctx.results?.items ?? []) {
+    for (const f of item.focus ?? []) {
+      if (!f.topic?.url?.startsWith(hub) || seen.has(f.topic.url)) continue;
+      seen.add(f.topic.url);
+      out.push({ title: f.topic.label, url: f.topic.url, note: `Learning Hub topic for ${f.label.toLowerCase()}, an area of focus in ${item.measureName}.`, from: 'results' });
+    }
+  }
+  return out;
+}
+
 export function home(s) {
   const { ctx, clientTypes } = s;
   const c = ctx.client;
   const stage = c.journeyStage ?? 'assessment';
   const stages = clientTypes.stages;
   const index = Math.max(0, stages.indexOf(stage));
-  const copy = stageCopy(clientTypes, c.clientType, stage);
-  const next = ctx.assignments.find((a) => a.status !== 'complete');
-  const released = ctx.results?.releasedAt;
-  let action = '';
-  if (copy.nextAction === 'measures' && next) action = `<a class="btn btn-primary" href="/measure/${esc(next.id)}">${answeredCount(next) ? 'Continue questionnaire' : 'Start questionnaire'}</a>`;
-  if (copy.nextAction === 'booking') action = bookingButton(s, 'Book a session');
-  if (copy.nextAction === 'results' || (released && stage === 'feedback')) action = '<a class="btn btn-primary" href="/results">See your results</a>';
-  // A check in due during treatment takes precedence over the stage's usual action.
-  if (copy.nextAction !== 'measures' && next) action = `<a class="btn btn-primary" href="/measure/${esc(next.id)}">${answeredCount(next) ? 'Continue check in' : 'Start check in'}</a>`;
+  const { list, copy } = tasks(s);
+  const report = reportSteps(s);
+  const reportName = clientTypes.types?.[c.clientType]?.reportName ?? 'Your report';
+  const res = resources(s);
+  const nextCheck = ctx.schedules.find((x) => x.status === 'active' && x.nextDue);
   return shell(
     s,
     'home',
     'Home',
     `${flashHtml(s.flash)}
-    <section class="journey-hero" aria-labelledby="stage-title">
+    <section class="journey-hero journey-hero-compact" aria-labelledby="stage-title">
       <div data-ring data-stage="${index}" data-stages="${stages.length}" data-label="Step ${index + 1} of ${stages.length}: ${esc(STAGE_LABELS[stage])}"></div>
       <div class="stack">
-        <p class="journey-stage">Step ${index + 1} of ${stages.length}</p>
+        <p class="journey-stage">Step ${index + 1} of ${stages.length}: ${esc(STAGE_LABELS[stage])}</p>
         <h2 class="t-title" id="stage-title">${esc(copy.title)}</h2>
         <p class="reading">${esc(copy.body)}</p>
-        ${action ? `<div class="actions">${action}</div>` : ''}
-        <ol class="journey-stages" aria-label="Your journey">
-          ${stages.map((st, i) => `<li data-state="${i < index ? 'done' : i === index ? 'current' : ''}"${i === index ? ' aria-current="step"' : ''}>${esc(STAGE_LABELS[st])}</li>`).join('')}
-        </ol>
       </div>
     </section>
-    <section class="stack" aria-labelledby="h-q">
-      <h2 id="h-q">Questionnaires</h2>
-      ${ctx.assignments.length ? `<ul class="task-list">${ctx.assignments.map((a) => measureRow(s, a)).join('')}</ul>` : '<p>Sarah has not asked you to complete any questionnaires yet.</p>'}
-      ${nextCheckIn(s)}
-    </section>
-    <section class="stack" aria-labelledby="h-r">
-      <h2 id="h-r">Your results</h2>
-      ${released ? `<div class="notice reading"><p>Sarah shared your results on ${fmtDate(released)}. <a href="/results">See your results</a></p></div>` : '<div class="notice reading"><p>Your results will appear here after Sarah has gone through them with you in your feedback session.</p></div>'}
-    </section>`,
+
+    <div class="home-grid">
+      <section class="stack home-tasks" aria-labelledby="h-todo">
+        <h2 id="h-todo">To do</h2>
+        ${list.length ? `<ul class="task-list">${list.map((t) => `<li class="task"><div><p class="task-name">${esc(t.name)}</p><p class="task-meta">${esc(t.meta)}</p></div>${t.chip}${t.action}</li>`).join('')}</ul>` : '<p>Nothing to do right now. Anything Sarah asks of you will appear here.</p>'}
+        ${nextCheck ? `<p class="t-caption">Next check in: ${esc(ctx.measures[nextCheck.measureId]?.name ?? 'questionnaire')} on ${esc(fmtDay(nextCheck.nextDue))}. It will appear here on the day.</p>` : ''}
+      </section>
+
+      <section class="stack home-session" aria-labelledby="h-next">
+        <h2 id="h-next">Next session</h2>
+        ${
+          c.nextSessionAt
+            ? `<p class="session-when">${esc(fmtDateTime(c.nextSessionAt))}</p>${c.nextSessionNote ? `<p>${esc(c.nextSessionNote)}</p>` : ''}`
+            : `<p>No session booked yet.</p>${s.config.bookingUrl ? `<div class="actions">${bookingButton(s, 'Book a session')}</div>` : '<p class="t-caption">Sarah will add your next session here once it is arranged.</p>'}`
+        }
+      </section>
+
+      <section class="stack home-report" aria-labelledby="h-rep">
+        <h2 id="h-rep">${esc(reportName)}</h2>
+        <div class="progress" role="progressbar" aria-label="${esc(reportName)}: ${report.completed} of ${report.steps.length} steps" aria-valuemin="0" aria-valuemax="${report.steps.length}" aria-valuenow="${report.completed}"><div class="progress-fill" style="width:${Math.round((report.completed / report.steps.length) * 100)}%"></div></div>
+        <ol class="tracker" style="--steps:${report.steps.length}" aria-label="Report progress">${report.steps
+          .map((x, i) => `<li class="step step-${x.done ? 'done' : i === report.current ? 'current' : 'todo'}"><span class="step-dot" aria-hidden="true"></span><span class="step-label">${esc(x.label)}${x.detail ? `<span class="step-detail">${esc(x.detail)}</span>` : ''}</span></li>`)
+          .join('')}</ol>
+        ${ctx.results?.releasedAt ? `<p><a href="/results">See your results</a>${ctx.formulation ? ' or <a href="/formulation">your formulation</a>' : ''}.</p>` : '<p class="t-caption">Nothing is shared here until Sarah has gone through it with you. Scores are never shown on their own.</p>'}
+      </section>
+
+      <section class="stack home-resources" aria-labelledby="h-res">
+        <h2 id="h-res">Your resources</h2>
+        ${res.length ? `<ul class="resource-list">${res.map((r) => `<li><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.title)}</a>${r.note ? `<p class="t-caption">${esc(r.note)}</p>` : ''}</li>`).join('')}</ul>` : '<p>Sarah will add links and resources here as you work together.</p>'}
+      </section>
+    </div>`,
   );
 }
 

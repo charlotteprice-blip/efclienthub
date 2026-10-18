@@ -568,7 +568,7 @@ th .sort:focus-visible {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--steps, 7), minmax(0, 1fr));
 }
 
 .step {
@@ -636,10 +636,78 @@ th .sort:focus-visible {
 }
 
 @media (max-width: 899px) {
-  .tracker {
-    grid-template-columns: repeat(7, minmax(0, 1fr));
-  }
   .step-label {
     font-size: 11px;
+  }
+}
+
+/* ---------- client Home ---------- */
+
+.journey-hero-compact {
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: var(--space-5);
+  padding: var(--space-5);
+}
+
+.journey-hero-compact .journey-ring {
+  width: 140px;
+  height: 140px;
+}
+
+.home-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: var(--space-5);
+  margin-top: var(--space-5);
+}
+
+.home-grid > section {
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+  color: var(--on-panel);
+}
+
+.home-report {
+  grid-column: 1 / -1;
+}
+
+.home-report .progress {
+  margin-bottom: var(--space-3);
+}
+
+.session-when {
+  font-size: 1.25rem;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+.resource-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.resource-list li {
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.resource-list li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+@media (max-width: 899px) {
+  .home-grid {
+    grid-template-columns: 1fr;
+  }
+  .journey-hero-compact {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
   }
 }

@@ -322,6 +322,32 @@ const handlers = {
     await reload();
     return route();
   },
+  async 'next-session'(data, form) {
+    const uid = form.dataset.uid;
+    const at = data.at ? new Date(data.at).getTime() : null;
+    if (data.at && !Number.isFinite(at)) {
+      S.errors.session = 'Enter a date and time.';
+      return route();
+    }
+    await call('setNextSession', { uid, at, note: data.note ?? '' });
+    setFlash(at ? 'Next session saved. The client sees it on their Home.' : 'Next session cleared.');
+    await reload();
+    return route();
+  },
+  async 'add-resource'(data, form) {
+    const uid = form.dataset.uid;
+    const title = String(data.title ?? '').trim();
+    const url = String(data.url ?? '').trim();
+    if (!title || !/^https:\/\/\S+$/.test(url)) {
+      S.errors.resource = 'A title and an https link are needed.';
+      return route();
+    }
+    const current = S.ctx.clients[uid]?.resources ?? [];
+    await call('setResources', { uid, resources: [...current, { id: `r${Date.now().toString(36)}`, title, url, note: data.note ?? '' }] });
+    setFlash('Resource added.');
+    await reload();
+    return route();
+  },
   async 'set-type'(data, form) {
     await call('setClientType', { uid: form.dataset.uid, type: data.type });
     setFlash('Client type saved. The client now sees the matching wording and accent.');
@@ -492,6 +518,19 @@ const actions = {
     const current = S.draftFactors[uid] ?? S.ctx.formulationDrafts[uid]?.factors ?? [];
     const factors = current.filter((f) => f.id !== t.dataset.factor);
     await busy(t, () => saveFormulation(uid, factors));
+    return route();
+  },
+  async 'clear-session'(t) {
+    await busy(t, () => call('setNextSession', { uid: t.dataset.uid, at: null }));
+    setFlash('Next session cleared.');
+    await reload();
+    return route();
+  },
+  async 'remove-resource'(t) {
+    const uid = t.dataset.uid;
+    const current = (S.ctx.clients[uid]?.resources ?? []).filter((r) => r.id !== t.dataset.resource);
+    await busy(t, () => call('setResources', { uid, resources: current }));
+    await reload();
     return route();
   },
   async 'add-suggestion'(t) {
