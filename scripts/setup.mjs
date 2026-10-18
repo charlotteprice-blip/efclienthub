@@ -165,7 +165,7 @@ const steps = [
       if (!existsSync(firebaseBin)) problems.push('Firebase CLI missing; run npm install');
       if (!look('gcloud', ['--version']).ok) problems.push('gcloud missing; install the Google Cloud CLI (brew install --cask google-cloud-sdk)');
       const java = look('java', ['-version']);
-      if (!java.ok) problems.push('Java missing (only needed for npm run test:rules); brew install openjdk@21');
+      if (!java.ok) console.log(c.dim('         Java not found in this terminal; only npm run test:rules needs it (brew install openjdk@21, or open a new terminal window).'));
       if (existsSync(firebaseBin)) {
         const accounts = firebaseLogin();
         if (!accounts || accounts.length === 0) {
