@@ -5,12 +5,13 @@
 // console, Project settings, Your apps, for the Client Hub web app.
 
 export const firebaseConfig = {
-  apiKey: 'REPLACE_ME',
-  authDomain: 'clients.executiveframe.co.nz',
+  apiKey: 'AIzaSyDDzJ4W5VliWxKjRYxvfMEkLsTNrOYkr1U',
+  // Switch to 'clients.executiveframe.co.nz' once the custom domain is live.
+  authDomain: 'executiveframe-clienthub.web.app',
   projectId: 'ef-client-hub',
-  storageBucket: 'REPLACE_ME',
-  messagingSenderId: 'REPLACE_ME',
-  appId: 'REPLACE_ME',
+  storageBucket: 'executiveframe-clienthub',
+  messagingSenderId: '311513487129',
+  appId: '1:311513487129:web:b99595a1248a80a2429788',
 };
 
 export const FIRESTORE_DATABASE = 'clienthub';
