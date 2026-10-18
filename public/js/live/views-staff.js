@@ -150,14 +150,9 @@ function clientRow(s, c) {
   if (schedule) facts.push(`Check in due ${fmtDay(schedule.nextDue)}`);
   if (formulation?.releasedAt) facts.push(`Formulation shared, ${formulation.factors.filter((f) => responses[f.id]).length} of ${formulation.factors.length} cards answered`);
   else if (results?.releasedAt) facts.push(`Results shared ${fmtDate(results.releasedAt)}`);
-  let chip;
-  let button = `<a class="btn btn-secondary btn-inline" href="/practitioner/client/${esc(uid)}">Open</a>`;
-  if (drafts > 0) {
-    chip = status('attention', `${drafts} draft${drafts === 1 ? '' : 's'}`);
-    button = `<a class="btn btn-primary btn-inline" href="/practitioner/client/${esc(uid)}">Review drafts</a>`;
-  } else if (!c.activatedAt || initial.some((a) => a.status !== 'complete')) chip = status('attention', 'Waiting on client');
-  else if (results?.releasedAt) chip = status('done', 'On track');
-  else chip = status('progress', 'Ready for you');
+  const button = drafts > 0
+    ? `<a class="btn btn-primary btn-inline" href="/practitioner/client/${esc(uid)}">Review ${drafts} draft${drafts === 1 ? '' : 's'}</a>`
+    : `<a class="btn btn-secondary btn-inline" href="/practitioner/client/${esc(uid)}">Open</a>`;
   const segments = STAGE_ORDER.map((_, i) => `<i class="${i < current ? 'done' : i === current ? 'current' : ''}"></i>`).join('');
   const stageName = current < 0 ? 'Setting up' : `${STAGE_LABELS[c.journeyStage]} <span class="t-caption">(step ${current + 1} of ${STAGE_ORDER.length})</span>`;
   return `<li class="client-row">
@@ -170,7 +165,7 @@ function clientRow(s, c) {
       <div class="segments" role="img" aria-label="${esc(current < 0 ? 'Setting up' : `Step ${current + 1} of ${STAGE_ORDER.length}`)}">${segments}</div>
       <p class="t-caption">${esc(facts.join('. '))}${facts.length ? '.' : ''}</p>
     </div>
-    <div class="client-next">${chip}${button}</div>
+    <div class="client-next">${button}</div>
   </li>`;
 }
 
@@ -186,27 +181,23 @@ export function dashboard(s) {
   const checkIns = checkInsThisWeek(s);
   const byStage = (a, b) => STAGE_ORDER.indexOf(a.journeyStage) - STAGE_ORDER.indexOf(b.journeyStage) || (b.lastActive ?? 0) - (a.lastActive ?? 0);
   const rows = clients.sort(byStage).map((c) => clientRow(s, c)).join('');
-  const stageChips = STAGE_ORDER.map((k) => `<li class="stat"><span class="stat-n">${counts[k]}</span><span class="stat-l">${esc(STAGE_LABELS[k])}</span></li>`).join('');
+  const total = clients.length;
+  const countLine = [settingUp ? `${settingUp} setting up` : '', ...STAGE_ORDER.filter((k) => counts[k]).map((k) => `${counts[k]} ${STAGE_LABELS[k].toLowerCase()}`)].filter(Boolean);
+  const today = [
+    ...attention.map((x) => ({ who: x.who, text: x.text, href: x.href, label: 'Open' })),
+    ...checkIns.map((x) => ({ who: s.ctx.clients[x.uid]?.name ?? 'Client', text: `Check in: ${s.ctx.measures[x.measureId]?.name ?? x.measureId}, ${fmtDay(x.nextDue)}`, href: `/practitioner/client/${x.uid}`, label: 'Open' })),
+  ];
   return shell(
     s,
     'dashboard',
     'Dashboard',
-    `<section class="stack" aria-labelledby="h-stages">
-      <h2 id="h-stages" class="visually-hidden">Clients by stage</h2>
-      <ul class="stats">${settingUp ? `<li class="stat"><span class="stat-n">${settingUp}</span><span class="stat-l">Setting up</span></li>` : ''}${stageChips}</ul>
+    `<p class="dash-counts">${total ? `<strong>${total} client${total === 1 ? '' : 's'}</strong>${countLine.length ? `: ${esc(countLine.join(', '))}` : ''}` : 'No clients yet'}</p>
+    <section class="stack" aria-labelledby="h-today">
+      <h2 id="h-today">Today</h2>
+      ${today.length ? `<ul class="task-list">${today.map((x) => `<li class="task"><div><p class="task-name">${esc(x.who)}</p><p class="task-meta">${esc(x.text)}</p></div><span></span><a class="btn btn-secondary" href="${esc(x.href)}">${esc(x.label)}</a></li>`).join('')}</ul>` : '<p class="t-caption">Nothing waiting on you, and no check ins due in the next 7 days.</p>'}
     </section>
-    <div class="split dashboard-split">
-      <section class="stack" aria-labelledby="h-att">
-        <h2 id="h-att">Needs attention</h2>
-        ${attention.length ? `<ul class="task-list">${attention.map((x) => `<li class="task"><div><p class="task-name">${esc(x.who)}</p><p class="task-meta">${esc(x.text)}</p></div>${status('attention', { code: 'Code', intake: 'Set up', questionnaire: 'Not started', request: 'Due soon' }[x.kind])}<a class="btn btn-secondary" href="${esc(x.href)}">Open</a></li>`).join('')}</ul>` : '<p>Nothing waiting on you today.</p>'}
-      </section>
-      <section class="stack" aria-labelledby="h-ci">
-        <h2 id="h-ci">Check ins due this week</h2>
-        ${checkIns.length ? `<ul class="task-list">${checkIns.map((x) => `<li class="task"><div><p class="task-name">${esc(s.ctx.clients[x.uid]?.name ?? 'Client')}</p><p class="task-meta">${esc(s.ctx.measures[x.measureId]?.name ?? x.measureId)}, ${fmtDay(x.nextDue)}</p></div><span></span><a class="btn btn-secondary" href="/practitioner/client/${esc(x.uid)}">Open</a></li>`).join('')}</ul>` : '<p>None due in the next 7 days.</p>'}
-      </section>
-    </div>
     <section class="stack" aria-labelledby="h-prog">
-      <div class="toolbar"><h2 id="h-prog">Where each client is</h2><a class="btn btn-secondary btn-inline" href="/practitioner/clients">Client table</a></div>
+      <div class="toolbar"><h2 id="h-prog">Clients</h2><a class="btn btn-quiet" href="/practitioner/clients">Table view</a></div>
       ${rows ? `<ul class="client-rows">${rows}</ul>` : '<p>No clients yet. <a href="/practitioner/codes">Issue an activation code</a> to invite the first one.</p>'}
     </section>`,
     true,
