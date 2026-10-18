@@ -50,7 +50,14 @@
 
 29. The Client Hub runs in its own Firebase project, `ef-client-hub`, created under the charlotteprice.co.nz Google organisation. Health information, accounts and deployments are fully separate from the Learning Hub, which closes earlier concerns about shared console access. Clients have a separate login from the Learning Hub, and results links open the Learning Hub with its own sign in. Ownership: Sarah should be added as Owner and billing should sit with her business, since she is responsible for the health information; to confirm with Sarah.
 
+## Functionality after the pilot (18 October 2026)
+
+30. Charlotte answered the design questions; the agreed scope and build order are in functionality-plan.md. In short: adults seen 1 to 1; Sarah chooses when results are released; check in questionnaires on a per client schedule; latest released formulation only; booking stays a Splose link; all questionnaires in the hub; read only at completion then closure with a 10 year retention date; a practitioner dashboard; email and password sign in only; Learning Hub access at a discounted rate via a code shown in the hub; email at key moments from an Executive Frame address; Sarah edits intake, journey copy and the library herself. Items for Sarah to confirm are marked in the plan.
+
 ## Open questions
+
+Answered by Charlotte on 18 October 2026 (see decision 30): 1 (discounted seat), 2 (clinical record, 10 years), 3 (all in the hub), 5 (adults), 9 (email and password only). Still open: 4, 6, 7, 8, 10, plus the discount rate and the email sender address.
+
 
 1. Learning Hub access. Does activation grant clients a complimentary Learning Hub seat? Without one, results links reach a paywall. With separate projects, clients hold a separate Learning Hub login.
 2. Retention. Is the Client Hub part of Sarah's clinical record, or a working copy summarised into Splose? This sets retentionUntil, which the regulations require to run at least 10 years from the last service.

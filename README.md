@@ -19,7 +19,7 @@ public/sample/           clickable sample on invented data
 brand/                   Levi's tokens.json and the status colours
 scripts/                 setup, roles, measures, serve, vendor, tokens, contrast, sample build, worklog
 tests/                   unit tests, rules tests, in memory Firestore, end to end harness
-docs/                    firebase-setup.md, data model, client journey, decisions, brand notes, intake guide
+docs/                    firebase-setup.md, data model, client journey, decisions, functionality plan, brand notes, intake guide
 ```
 
 Start with docs/firebase-setup.md.
