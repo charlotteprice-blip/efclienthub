@@ -130,20 +130,48 @@ function checkInsThisWeek(s) {
   return s.ctx.schedules.filter((x) => x.status === 'active' && x.nextDue && x.nextDue <= limit).sort((a, b) => a.nextDue.localeCompare(b.nextDue));
 }
 
-// A linear tracker: 1 step per journey stage, filled to the client's stage.
-function tracker(s, c) {
+// 1 compact row per client: who, where they are in words with a 7 segment
+// bar, and what Sarah can do next.
+function clientRow(s, c) {
   const uid = c.uid ?? c.id;
   const list = assignmentsFor(s, uid);
-  const done = list.filter((a) => a.status === 'complete').length;
+  const initial = list.filter((a) => a.source !== 'scheduled');
+  const done = initial.filter((a) => a.status === 'complete').length;
   const current = c.activatedAt ? STAGE_ORDER.indexOf(c.journeyStage) : -1;
-  const steps = STAGE_ORDER.map((stage, i) => {
-    const state = i < current ? 'done' : i === current ? 'current' : 'todo';
-    let detail = '';
-    if (stage === 'assessment' && list.length) detail = `${done} of ${list.length}`;
-    return `<li class="step step-${state}"><span class="step-dot" aria-hidden="true"></span><span class="step-label">${esc(STAGE_LABELS[stage])}${detail ? `<span class="step-detail">${esc(detail)}</span>` : ''}</span></li>`;
-  });
-  const label = current < 0 ? 'Setting up' : `${STAGE_LABELS[c.journeyStage]}, step ${current + 1} of ${STAGE_ORDER.length}`;
-  return `<ol class="tracker" aria-label="${esc(label)}">${steps.join('')}</ol>`;
+  const drafts = unreleased(s, uid);
+  const results = s.ctx.results[uid];
+  const formulation = s.ctx.formulations[uid];
+  const responses = s.ctx.formulationResponses?.[uid]?.responses ?? {};
+  const schedule = schedulesFor(s, uid).find((x) => x.status === 'active' && x.nextDue);
+  const facts = [];
+  if (!c.activatedAt) facts.push(`Signed up ${relative(c.createdAt).toLowerCase()}, consent and intake not yet done`);
+  if (initial.length) facts.push(`${done} of ${initial.length} questionnaire${initial.length === 1 ? '' : 's'} done`);
+  if (c.nextSessionAt) facts.push(`Next session ${fmtDateTime(c.nextSessionAt)}`);
+  if (schedule) facts.push(`Check in due ${fmtDay(schedule.nextDue)}`);
+  if (formulation?.releasedAt) facts.push(`Formulation shared, ${formulation.factors.filter((f) => responses[f.id]).length} of ${formulation.factors.length} cards answered`);
+  else if (results?.releasedAt) facts.push(`Results shared ${fmtDate(results.releasedAt)}`);
+  let chip;
+  let button = `<a class="btn btn-secondary btn-inline" href="/practitioner/client/${esc(uid)}">Open</a>`;
+  if (drafts > 0) {
+    chip = status('attention', `${drafts} draft${drafts === 1 ? '' : 's'}`);
+    button = `<a class="btn btn-primary btn-inline" href="/practitioner/client/${esc(uid)}">Review drafts</a>`;
+  } else if (!c.activatedAt || initial.some((a) => a.status !== 'complete')) chip = status('attention', 'Waiting on client');
+  else if (results?.releasedAt) chip = status('done', 'On track');
+  else chip = status('progress', 'Ready for you');
+  const segments = STAGE_ORDER.map((_, i) => `<i class="${i < current ? 'done' : i === current ? 'current' : ''}"></i>`).join('');
+  const stageName = current < 0 ? 'Setting up' : `${STAGE_LABELS[c.journeyStage]} <span class="t-caption">(step ${current + 1} of ${STAGE_ORDER.length})</span>`;
+  return `<li class="client-row">
+    <div class="client-who">
+      <span class="avatar avatar-lg" aria-hidden="true">${esc(String(c.name || c.email || 'C').trim().charAt(0).toUpperCase())}</span>
+      <div><a class="t-ui-strong" href="/practitioner/client/${esc(uid)}">${esc(c.name || c.email || 'Unnamed')}</a><p class="t-caption">${c.clientType ? esc(typeLabel(s, c.clientType)) : 'Type not set'}</p><p class="t-caption">${c.lastActive ? `Active ${esc(relative(c.lastActive).toLowerCase())}` : 'Not yet active'}</p></div>
+    </div>
+    <div class="client-stage">
+      <p class="t-ui-strong">${stageName}</p>
+      <div class="segments" role="img" aria-label="${esc(current < 0 ? 'Setting up' : `Step ${current + 1} of ${STAGE_ORDER.length}`)}">${segments}</div>
+      <p class="t-caption">${esc(facts.join('. '))}${facts.length ? '.' : ''}</p>
+    </div>
+    <div class="client-next">${chip}${button}</div>
+  </li>`;
 }
 
 export function dashboard(s) {
@@ -157,20 +185,7 @@ export function dashboard(s) {
   const attention = attentionItems(s);
   const checkIns = checkInsThisWeek(s);
   const byStage = (a, b) => STAGE_ORDER.indexOf(a.journeyStage) - STAGE_ORDER.indexOf(b.journeyStage) || (b.lastActive ?? 0) - (a.lastActive ?? 0);
-  const rows = clients
-    .sort(byStage)
-    .map((c) => {
-      const uid = c.uid ?? c.id;
-      return `<li class="client-track">
-        <div class="client-track-head">
-          <a class="t-ui-strong" href="/practitioner/client/${esc(uid)}">${esc(c.name || c.email || 'Unnamed')}</a>
-          <span class="t-caption">${esc(typeLabel(s, c.clientType))}${c.lastActive ? `, active ${relative(c.lastActive)}` : ''}</span>
-          ${resultsStatus(s, uid)}
-        </div>
-        ${tracker(s, c)}
-      </li>`;
-    })
-    .join('');
+  const rows = clients.sort(byStage).map((c) => clientRow(s, c)).join('');
   const stageChips = STAGE_ORDER.map((k) => `<li class="stat"><span class="stat-n">${counts[k]}</span><span class="stat-l">${esc(STAGE_LABELS[k])}</span></li>`).join('');
   return shell(
     s,
@@ -192,7 +207,7 @@ export function dashboard(s) {
     </div>
     <section class="stack" aria-labelledby="h-prog">
       <div class="toolbar"><h2 id="h-prog">Where each client is</h2><a class="btn btn-secondary btn-inline" href="/practitioner/clients">Client table</a></div>
-      ${rows ? `<ul class="client-tracks">${rows}</ul>` : '<p>No clients yet. <a href="/practitioner/codes">Issue an activation code</a> to invite the first one.</p>'}
+      ${rows ? `<ul class="client-rows">${rows}</ul>` : '<p>No clients yet. <a href="/practitioner/codes">Issue an activation code</a> to invite the first one.</p>'}
     </section>`,
     true,
   );

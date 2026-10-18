@@ -534,8 +534,8 @@ th .sort:focus-visible {
   align-items: start;
 }
 
-/* 1 row per client with a linear tracker across the 7 journey stages */
-.client-tracks {
+/* 1 compact row per client: who, where they are, what is next */
+.client-rows {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -544,25 +544,79 @@ th .sort:focus-visible {
   gap: var(--space-3);
 }
 
-.client-track {
+.client-row {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-5);
   padding: var(--space-4) var(--space-5);
   border-radius: var(--radius-lg);
   background: var(--panel);
   color: var(--on-panel);
 }
 
-.client-track-head {
+.client-who {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-2) var(--space-4);
-  margin-bottom: var(--space-3);
+  gap: var(--space-3);
+  min-width: 0;
 }
 
-.client-track-head .status {
-  margin-left: auto;
+.client-who p {
+  margin: 0;
 }
 
+.avatar-lg {
+  width: 40px;
+  height: 40px;
+  font-size: 1rem;
+  flex: none;
+}
+
+.client-stage p {
+  margin: 0;
+}
+
+.segments {
+  display: flex;
+  gap: 3px;
+  margin: 6px 0 4px;
+}
+
+.segments i {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--hairline);
+}
+
+.segments i.done {
+  background: var(--status-done);
+}
+
+.segments i.current {
+  background: var(--accent);
+}
+
+.client-next {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-2);
+}
+
+@media (max-width: 899px) {
+  .client-row {
+    grid-template-columns: 1fr;
+  }
+  .client-next {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+/* Linear tracker used by the client Home report block */
 .tracker {
   list-style: none;
   margin: 0;
