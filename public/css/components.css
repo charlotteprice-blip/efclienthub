@@ -792,3 +792,8 @@ th .sort:focus-visible {
 .nav-link-muted:not([aria-current]) {
   opacity: 0.6;
 }
+
+/* Actions pushed to the right edge of their section */
+.actions-end {
+  justify-content: flex-end;
+}

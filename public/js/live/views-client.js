@@ -530,9 +530,9 @@ export function account(s) {
       </form>
       ${mine.length ? `<ul class="task-list">${mine.map((r) => `<li class="task"><div><p class="task-name">${r.kind === 'access' ? 'Copy of my information' : 'Correction'}</p><p class="task-meta">Sent ${fmtDate(r.createdAt)}, reply due by ${fmtDate(r.dueBy)}</p></div>${r.status === 'done' ? status('done', 'Answered') : status('progress', 'With Sarah')}<span></span></li>`).join('')}</ul>` : ''}
     </section>
-    <section class="stack reading" aria-labelledby="h-out">
-      <h2 id="h-out">Log out</h2>
-      <div class="actions"><button type="button" class="btn btn-secondary" data-action="logout">Log out</button></div>
+    <section class="stack" aria-labelledby="h-out">
+      <h2 id="h-out" class="visually-hidden">Log out</h2>
+      <div class="actions actions-end"><button type="button" class="btn btn-secondary btn-inline" data-action="logout">Log out</button></div>
     </section>`,
   );
 }

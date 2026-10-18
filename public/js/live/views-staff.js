@@ -784,7 +784,7 @@ export function measureTestResult(s, id) {
 export function staffAccount(s) {
   return shell(
     s,
-    '',
+    'account',
     'Account',
     `<section class="stack reading">
       <dl class="details">
@@ -792,7 +792,7 @@ export function staffAccount(s) {
         <div><dt>Email</dt><dd>${esc(s.user.email)}</dd></div>
         <div><dt>Role</dt><dd>${s.role === 'practitioner' ? 'Practitioner' : 'Admin'}</dd></div>
       </dl>
-      <div class="actions"><button type="button" class="btn btn-secondary" data-action="logout">Log out</button></div>
-    </section>`,
+    </section>
+    <div class="actions actions-end"><button type="button" class="btn btn-secondary btn-inline" data-action="logout">Log out</button></div>`,
   );
 }
