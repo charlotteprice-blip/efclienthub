@@ -65,8 +65,10 @@ export function addWorkingDays(start, days) {
 }
 
 export function validResponse(measure, itemId, value) {
-  if (!measure?.items?.some((i) => i.id === itemId)) return false;
-  return measure.responseOptions.some((o) => Number(o.value) === Number(value));
+  const item = measure?.items?.find((i) => i.id === itemId);
+  if (!item) return false;
+  const options = Array.isArray(item.responseOptions) && item.responseOptions.length ? item.responseOptions : measure.responseOptions;
+  return options.some((o) => Number(o.value) === Number(value));
 }
 
 // Who may assign a measure. Commercial or unlicensed instruments are never

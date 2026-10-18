@@ -100,3 +100,27 @@ describe('scales that start at 1, flags and practitioner only measures', () => {
     assert.deepEqual(d.focus, []);
   });
 });
+
+describe('items with their own response options', () => {
+  const measure = {
+    id: 'mixed',
+    name: 'Mixed',
+    responseOptions: [0, 1, 2, 3, 4].map((v) => ({ value: v, label: String(v) })),
+    items: [
+      { id: 'mixed-1', text: 'a' },
+      { id: 'mixed-2', text: 'b', responseOptions: [{ value: 0, label: 'None' }, { value: 2, label: 'Some' }, { value: 4, label: 'Lots' }] },
+      { id: 'mixed-3', text: 'c', responseOptions: [{ value: 1, label: 'Low' }, { value: 5, label: 'High' }] },
+    ],
+    scoringRules: { reverseItems: ['mixed-3'], subscales: [{ id: 'total', label: 'Total', items: ['mixed-1', 'mixed-2', 'mixed-3'], method: 'sum', bands: [] }] },
+  };
+  test('each item is read and reversed on its own scale', () => {
+    const scores = scoreMeasure(measure, { 'mixed-1': 3, 'mixed-2': 4, 'mixed-3': 5 });
+    assert.equal(scores.complete, true);
+    assert.equal(scores.subscales.total.score, 3 + 4 + 1);
+  });
+  test('a value outside the item scale does not count', () => {
+    const scores = scoreMeasure(measure, { 'mixed-1': 3, 'mixed-2': 1, 'mixed-3': 5 });
+    assert.equal(scores.answeredItems, 2);
+    assert.equal(scores.complete, false);
+  });
+});

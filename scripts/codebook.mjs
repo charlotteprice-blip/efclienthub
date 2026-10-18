@@ -115,10 +115,21 @@ for (const lib of library) {
   const id = col(lib, 'Hub id');
   const itemRows = items.filter((r) => col(r, 'Code') === code).sort((a, b) => Number(col(a, 'Item Number')) - Number(col(b, 'Item Number')));
   const itemId = (n) => `${id}-${n}`;
-  const measureItems = itemRows.map((r) => ({ id: itemId(col(r, 'Item Number')), text: col(r, 'Item Text') }));
+  const responseOptions = options(col(sum, 'Response options'));
+  const sameOptions = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+  const measureItems = itemRows.map((r) => {
+    const item = { id: itemId(col(r, 'Item Number')), text: col(r, 'Item Text') };
+    // An item whose Response Options cell differs from the instrument's own
+    // scale carries those options itself (AUDIT-C, CUDIT-R, PROMIS Global Health).
+    const own = col(r, 'Response Options');
+    if (own && own.includes('=')) {
+      const parsed = options(own);
+      if (!sameOptions(parsed, responseOptions)) item.responseOptions = parsed;
+    }
+    return item;
+  });
   const reverseItems = itemRows.filter((r) => col(r, 'Reverse Scored').toUpperCase() === 'TRUE').map((r) => itemId(col(r, 'Item Number')));
   const fillers = new Set(itemRows.filter((r) => col(r, 'Filler').toUpperCase() === 'TRUE').map((r) => itemId(col(r, 'Item Number'))));
-  const responseOptions = options(col(sum, 'Response options'));
   const values = responseOptions.map((o) => o.value);
   const range = [Math.min(...values), Math.max(...values)];
 
@@ -197,7 +208,10 @@ if (bad) {
 
 mkdirSync(join(root, 'measures'), { recursive: true });
 writeFileSync(join(root, 'measures/library.json'), `${JSON.stringify({ generated: new Date().toISOString().slice(0, 10), measures }, null, 2)}\n`);
-const cleared = measures.filter((m) => m.licenceStatus === 'cleared');
+// Only instruments Charlotte has marked Include = Yes AND cleared are uploadable;
+// a row still marked Decide stays in library.json for review.
+const included = new Set(library.filter((l) => col(l, 'Include in hub').toLowerCase() === 'yes').map((l) => col(l, 'Code')));
+const cleared = measures.filter((m) => m.licenceStatus === 'cleared' && included.has(m.code));
 writeFileSync(join(root, 'measures/cleared.json'), `${JSON.stringify({ generated: new Date().toISOString().slice(0, 10), measures: cleared }, null, 2)}\n`);
 
 const byStatus = {};

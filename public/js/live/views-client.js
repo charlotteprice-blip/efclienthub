@@ -309,6 +309,7 @@ export function item(s, assignmentId, n) {
   if (index < 0) index = total - 1;
   index = Math.min(Math.max(index, 0), total - 1);
   const it = m.items[index];
+  const options = Array.isArray(it.responseOptions) && it.responseOptions.length ? it.responseOptions : m.responseOptions;
   const last = index === total - 1;
   const current = responses[it.id];
   return shell(
@@ -324,13 +325,13 @@ export function item(s, assignmentId, n) {
       <fieldset class="choices">
         <legend class="t-title">${esc(it.text)}</legend>
         ${m.instructions ? `<p class="field-hint">${esc(m.instructions)}</p>` : ''}
-        ${m.responseOptions.map((o, i) => `<label class="choice"><input type="radio" name="answer" value="${esc(o.value)}"${String(current) === String(o.value) ? ' checked' : ''}><span class="choice-dot"></span><span>${esc(o.label)}</span><kbd>${i + 1}</kbd></label>`).join('')}
+        ${options.map((o, i) => `<label class="choice"><input type="radio" name="answer" value="${esc(o.value)}"${String(current) === String(o.value) ? ' checked' : ''}><span class="choice-dot"></span><span>${esc(o.label)}</span><kbd>${i + 1}</kbd></label>`).join('')}
       </fieldset>
       ${s.errors.item ? `<p class="field-error">${esc(s.errors.item)}</p>` : ''}
       <div class="actions">
         ${index > 0 ? `<a class="btn btn-secondary" href="/measure/${esc(a.id)}/${index - 1}">Back</a>` : ''}
         <button type="submit" class="btn btn-primary">${last ? 'Finish questionnaire' : 'Next question'}</button>
-        <p class="t-caption key-hint">Press 1 to ${m.responseOptions.length} to choose, then Enter.</p>
+        <p class="t-caption key-hint">Press 1 to ${options.length} to choose, then Enter.</p>
       </div>
     </form>`,
     'focus',

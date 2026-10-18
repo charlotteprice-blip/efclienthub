@@ -35,6 +35,10 @@ Storage is closed to all browsers. Any later file is delivered through a functio
 
 Dates on a schedule are New Zealand calendar days stored as `YYYY-MM-DD` strings, so a check in due on 3 November is due on 3 November whatever the server's clock. `runCheckIns` runs at 7am Pacific/Auckland each day and queries `schedules` where `nextDue <= today` (a single field range, so no composite index). For each active schedule it assigns the questionnaire unless the client already has an open copy, then moves `nextDue` on, skipping any dates missed while the scheduler was down. A schedule whose dates are exhausted ends itself. Completing a check in never changes the client's stage; only the initial assessment triggers booking.
 
+## Items with their own scale
+
+`responseOptions` on a measure is the scale every item uses unless an item carries its own `responseOptions` array. The AUDIT-C, CUDIT-R and PROMIS Global Health each mix scales within one questionnaire, so those items hold their own options, and scoring reverses an item on its own range. The codebook builder sets this from the Master Item List whenever an item's Response Options cell differs from the instrument's.
+
 ## Answers in progress
 
 While a client works through a questionnaire, each answer is saved on their assignment so they can stop and resume. When they finish, submitMeasure copies the answers into `scoring` with the draft and clears them from the assignment, so a finished questionnaire's answers are visible only to Sarah.

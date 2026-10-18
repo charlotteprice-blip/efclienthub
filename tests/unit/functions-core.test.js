@@ -49,6 +49,12 @@ describe('questionnaires and release', () => {
     assert.equal(core.validResponse(measure, 'i1', 5), false);
     assert.equal(core.validResponse(measure, 'i9', 1), false);
   });
+  test('an item with its own response options is checked against those', () => {
+    const mixed = { items: [{ id: 'i1' }, { id: 'i2', responseOptions: [{ value: 0 }, { value: 2 }, { value: 4 }] }], responseOptions: [{ value: 0 }, { value: 1 }] };
+    assert.equal(core.validResponse(mixed, 'i2', 4), true);
+    assert.equal(core.validResponse(mixed, 'i2', 1), false);
+    assert.equal(core.validResponse(mixed, 'i1', 4), false);
+  });
   test('only cleared measures are assignable, sample ones only in test mode', () => {
     assert.equal(core.assignable({ licenceStatus: 'cleared' }, { allowSample: false }), true);
     assert.equal(core.assignable({ licenceStatus: 'sample' }, { allowSample: false }), false);

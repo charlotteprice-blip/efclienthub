@@ -30,7 +30,10 @@ export function problems(m) {
   if (!Array.isArray(m.responseOptions) || m.responseOptions.length < 2) out.push('responseOptions need at least 2 options');
   const ids = new Set((m.items ?? []).map((i) => i.id));
   if (ids.size !== (m.items ?? []).length) out.push('item ids must be unique');
-  for (const i of m.items ?? []) if (!i.text) out.push(`item ${i.id} has no text`);
+  for (const i of m.items ?? []) {
+    if (!i.text) out.push(`item ${i.id} has no text`);
+    if (i.responseOptions !== undefined && (!Array.isArray(i.responseOptions) || i.responseOptions.length < 2 || i.responseOptions.some((o) => !Number.isFinite(Number(o.value)) || !o.label))) out.push(`item ${i.id} has unusable responseOptions`);
+  }
   const subs = m.scoringRules?.subscales ?? [];
   if (!subs.length) out.push('scoringRules.subscales are missing');
   const used = subs.flatMap((s) => s.items ?? []);
@@ -42,7 +45,7 @@ export function problems(m) {
     if (s.topic?.url && !/^https:\/\/app\.executiveframe\.co\.nz\//.test(s.topic.url)) out.push(`subscale ${s.id} topic must link to the Learning Hub`);
   }
   if (!out.length) {
-    const all = Object.fromEntries(m.items.map((i) => [i.id, m.responseOptions[0].value]));
+    const all = Object.fromEntries(m.items.map((i) => [i.id, (i.responseOptions ?? m.responseOptions)[0].value]));
     if (!scoreMeasure(m, all).complete) out.push('a full set of answers does not score as complete');
   }
   return out;

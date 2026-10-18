@@ -9,6 +9,10 @@
 // scoringRules shape:
 // {
 //   "minAnswered": 0.8,                      share of a subscale's items needed to score it
+//
+// An item may carry its own "responseOptions" when its scale differs from the
+// rest of the questionnaire (AUDIT-C, CUDIT-R, PROMIS Global Health); otherwise
+// the measure's responseOptions apply. Reversal uses that item's own range.
 //   "reverseItems": ["i3"],                  items scored min plus max minus value
 //   "flagItems": [{ "itemId": "i10", "atLeast": 2, "note": "..." }],   answers Sarah follows up
 //   "clientFacing": false,                   scored for the practitioner only; no strengths or focus
@@ -24,20 +28,23 @@
 //   }]
 // }
 
+export function optionsFor(measure, item) {
+  return Array.isArray(item?.responseOptions) && item.responseOptions.length ? item.responseOptions : measure.responseOptions;
+}
+
 export function scoreMeasure(measure, responses) {
   const rules = measure.scoringRules ?? {};
-  const values = measure.responseOptions.map((o) => Number(o.value));
-  const maxValue = Math.max(...values);
-  const minValue = Math.min(...values);
   const minAnswered = rules.minAnswered ?? 0.8;
   const reverse = new Set(rules.reverseItems ?? []);
+  const byId = new Map(measure.items.map((i) => [i.id, i]));
 
   const itemValue = (itemId) => {
     const raw = responses?.[itemId];
     if (raw === undefined || raw === null || raw === '') return null;
     const n = Number(raw);
+    const values = optionsFor(measure, byId.get(itemId)).map((o) => Number(o.value));
     if (!Number.isFinite(n) || !values.includes(n)) return null;
-    return reverse.has(itemId) ? minValue + maxValue - n : n;
+    return reverse.has(itemId) ? Math.min(...values) + Math.max(...values) - n : n;
   };
 
   const subscales = {};
