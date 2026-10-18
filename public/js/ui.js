@@ -52,6 +52,7 @@ const ICONS = {
   results: '<circle cx="10" cy="10" r="7"/><path d="M10 6v4l2.5 2.5"/>',
   formulation: '<rect x="3" y="3" width="6" height="6" rx="1.5"/><rect x="11" y="3" width="6" height="6" rx="1.5"/><rect x="3" y="11" width="6" height="6" rx="1.5"/><rect x="11" y="11" width="6" height="6" rx="1.5"/>',
   dashboard: '<path d="M3.5 16.5V9M8 16.5V5M12.5 16.5v-6M17 16.5V7.5"/><path d="M2.5 17h15"/>',
+  account: '<circle cx="10" cy="7" r="3.25"/><path d="M4 17c.7-3 3-4.75 6-4.75S15.3 14 16 17"/>',
   clients: '<circle cx="7.5" cy="7" r="2.75"/><path d="M2.5 16.5c.6-2.6 2.6-4 5-4s4.4 1.4 5 4"/><circle cx="14" cy="7.5" r="2.25"/><path d="M14 12.5c1.9 0 3.2 1.2 3.6 3.5"/>',
   review: '<rect x="4" y="3" width="12" height="14.5" rx="2"/><path d="M7.5 10.5l1.8 1.8 3.2-3.6"/>',
   codes: '<circle cx="7" cy="10" r="3.25"/><path d="M10.25 10H17.5M14.5 10v3M16.5 10v2"/>',
@@ -82,7 +83,7 @@ function shell({ nav, title, content, foot, account, mode, wide }) {
       <ul class="nav">
         ${nav.items
           .map(
-            (i) => `<li><a class="nav-link" href="${i.href}"${i.active ? ' aria-current="page"' : ''}>${icon(i.icon)}${esc(i.label)}${
+            (i) => `<li><a class="nav-link${i.muted ? ' nav-link-muted' : ''}" href="${i.href}"${i.active ? ' aria-current="page"' : ''}>${icon(i.icon)}${esc(i.label)}${
               i.count ? `<span class="nav-count" aria-label="${i.count} ${esc(i.countLabel)}">${i.count}</span>` : ''
             }</a></li>`,
           )
@@ -108,7 +109,8 @@ export function clientShell({ title, active, content, client, counts, hasFormula
     { href: routes.questionnaires, label: 'Questionnaires', icon: 'list', active: active === 'questionnaires', count: counts.outstanding, countLabel: 'to complete' },
     { href: routes.results, label: 'Results', icon: 'results', active: active === 'results' },
   ];
-  if (hasFormulation) items.push({ href: routes.formulation, label: 'Formulation', icon: 'formulation', active: active === 'formulation' });
+  items.push({ href: routes.formulation, label: 'Formulation', icon: 'formulation', active: active === 'formulation', muted: !hasFormulation });
+  items.push({ href: routes.account, label: 'Account and privacy', icon: 'account', active: active === 'account' });
   return shell({
     nav: { home: routes.home, items, markSrc },
     title,
@@ -128,6 +130,7 @@ export function practitionerShell({ title, active, content, counts, wide, markSr
     { key: 'review', href: routes.review, label: 'To review', icon: 'review', active: active === 'review', count: counts.review, countLabel: 'to review', practitionerOnly: true },
     { key: 'codes', href: routes.codes, label: 'Activation codes', icon: 'codes', active: active === 'codes' },
     { key: 'library', href: routes.library, label: 'Questionnaire library', icon: 'library', active: active === 'library' },
+    ...(accountHref ? [{ key: 'account', href: accountHref, label: 'Account', icon: 'account', active: active === 'account' }] : []),
   ];
   const items = all.filter((i) => role === 'practitioner' || !i.practitionerOnly);
   const initial = esc(String(person.name ?? 'S').trim().charAt(0).toUpperCase() || 'S');

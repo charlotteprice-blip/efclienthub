@@ -711,3 +711,8 @@ th .sort:focus-visible {
     text-align: center;
   }
 }
+
+/* A menu item whose page has nothing to show yet */
+.nav-link-muted:not([aria-current]) {
+  opacity: 0.6;
+}

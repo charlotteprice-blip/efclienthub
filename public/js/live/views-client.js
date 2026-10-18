@@ -459,7 +459,7 @@ export function results(s) {
 
 export function formulation(s) {
   const f = s.ctx.formulation;
-  if (!f) return results(s);
+  if (!f) return shell(s, 'formulation', 'Formulation', '<div class="notice reading"><p>Your formulation is the shared picture of what you are working on, what shaped it, what keeps it going and what helps. Sarah builds it with you and shares it here once you have been through it together.</p></div>');
   const responses = s.ctx.formulationResponses ?? {};
   const zones = ZONES.map((z) => {
     const cards = f.factors.filter((x) => zoneOf(x) === z.id);

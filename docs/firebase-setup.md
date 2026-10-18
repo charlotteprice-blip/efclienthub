@@ -84,14 +84,23 @@ npm run measures -- list
 
 Real questionnaires come from the EF Client Hub Codebook (`measures/ef-client-hub-codebook.xlsx`, see measures/README.md). `npm run codebook` rebuilds `measures/library.json` and `measures/cleared.json` from it, and `npm run measures -- upload measures/cleared.json` loads the cleared ones. Only questionnaires marked cleared in the workbook's Hub Library sheet can be assigned.
 
-## 9. Test the journey
+## 9. Test clients
+
+```
+npm run seed:test              5 fake clients at different stages, password printed at the end
+npm run seed:test -- remove    delete them and everything they own
+```
+
+Names end in Test and emails end in @example.com. Remove them before real clients are invited.
+
+## 10. Test the journey
 
 1. Sarah issues a code for a test client from Activation codes.
 2. In a private browser window, sign up as the test client with a different email, enter the code, agree, answer the intake.
 3. Sarah assigns both sample questionnaires; the test client completes them and reaches the booking step.
 4. Sarah reviews the drafts, releases results and a formulation; the test client sees them.
 
-## 10. Connect the domain (DNS is a browser step)
+## 11. Connect the domain (DNS is a browser step)
 
 `npm run setup:check` prints the DNS records for `clients.executiveframe.co.nz`. Add them at the DNS host for executiveframe.co.nz and log the change in the Site Changes Log. Once `setup:check` shows the domain as done, change `authDomain` in `public/js/firebase-config.js` to `clients.executiveframe.co.nz` and run `npm run deploy:hosting`.
 
@@ -103,6 +112,7 @@ Real questionnaires come from the EF Client Hub Codebook (`measures/ef-client-hu
 3. `bookingUrl` in `public/config/app.json` set to Sarah's Splose booking page.
 4. Sarah has approved the consent, intake and journey wording.
 5. `public/sample` and `public/preview` removed or kept deliberately.
+7. Test clients removed: `npm run seed:test -- remove`.
 6. Open questions in docs/decisions.md answered.
 
 ## Working without Firebase

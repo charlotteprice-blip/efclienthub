@@ -11,6 +11,7 @@
     "setup:check": "node scripts/setup.mjs check",
     "setup": "node scripts/setup.mjs",
     "roles": "node scripts/roles.mjs",
+    "seed:test": "node scripts/seed-test-clients.mjs",
     "serve": "node scripts/serve.mjs",
     "build:sample": "node scripts/build-sample.mjs",
     "vendor": "node scripts/vendor.mjs",
