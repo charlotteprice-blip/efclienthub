@@ -100,6 +100,10 @@
 
 55. The client Home shows, in order: the journey ring and stage copy; To do (questionnaires and check ins to complete, booking when the stage calls for it and no session is recorded, formulation cards awaiting a response, results shared in the last 14 days); Next session (set by Sarah on the client record, with a note; otherwise the booking link); report progress under the type's report name (questionnaires, Sarah reviews, feedback session, results shared, formulation shared); and Your resources (links Sarah pins plus the Learning Hub topics from released areas of focus). Links only, never files.
 
+## Questionnaire page (19 October 2026)
+
+56. Each questionnaire in the library opens its own page: about and licence, assign to a client, a test run that walks the questions as a client would and shows the resulting draft without saving anything, averages and band counts across the clients who have completed it (raw scores, not norms), the scoring rules, and the question list with reversed, alerting and own scale items marked. Log out sits top right on every page.
+
 ## Open questions
 
 Answered by Charlotte on 18 October 2026 (see decision 30): 1 (discounted seat), 2 (clinical record, 10 years), 3 (all in the hub), 5 (adults), 9 (email and password only). Still open: 4, 6, 7, 8, 10, plus the discount rate and the email sender address.

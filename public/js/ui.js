@@ -119,7 +119,7 @@ export function clientShell({ title, active, content, client, counts, hasFormula
     foot: mode === 'focus' ? 'Your answers save as you go.' : 'Your information is stored securely in Sydney, Australia.',
     account: mode === 'focus'
       ? `<a class="btn btn-quiet" href="${routes.questionnaires}">Save and exit</a>`
-      : `<a class="account-button" href="${routes.account}"${active === 'account' ? ' aria-current="page"' : ''}><span class="avatar" aria-hidden="true">${initial}</span><span class="account-name">${esc(client?.name ?? 'Account')}</span></a>`,
+      : `<a class="account-button" href="${routes.account}"${active === 'account' ? ' aria-current="page"' : ''}><span class="avatar" aria-hidden="true">${initial}</span><span class="account-name">${esc(client?.name ?? 'Account')}</span></a><button type="button" class="btn btn-quiet btn-inline" data-action="logout">Log out</button>`,
   });
 }
 
@@ -141,7 +141,7 @@ export function practitionerShell({ title, active, content, counts, wide, markSr
     content,
     wide,
     foot: role === 'practitioner' ? 'Practitioner view. Drafts are never shown to clients until you release them.' : 'Admin view. Client records are not shown to admin accounts.',
-    account: accountHref ? `<a class="account-button" href="${accountHref}">${badge}</a>` : `<span class="account-button">${badge}</span>`,
+    account: `${accountHref ? `<a class="account-button" href="${accountHref}">${badge}</a>` : `<span class="account-button">${badge}</span>`}<button type="button" class="btn btn-quiet btn-inline" data-action="logout">Log out</button>`,
   });
 }
 

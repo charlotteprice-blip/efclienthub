@@ -38,6 +38,7 @@ const S = {
   lastIssued: null,
   draftFactors: {},
   draftSummary: {},
+  testRun: null,
   responseDraft: {},
   ready: false,
 };
@@ -135,6 +136,8 @@ async function route() {
       case 'codes':
         return paint(sv.codes(S));
       case 'library':
+        if (parts[2] && parts[3] === 'test') return paint(parts[4] === 'result' ? sv.measureTestResult(S, parts[2]) : sv.measureTest(S, parts[2], Number(parts[4] ?? 0)));
+        if (parts[2]) return paint(sv.measurePage(S, parts[2]));
         return paint(sv.library(S));
       case 'clients':
         return paint(sv.clients(S));
@@ -359,6 +362,28 @@ const handlers = {
     setFlash('Journey stage saved.');
     await reload();
     return route();
+  },
+  async 'assign-to'(data, form) {
+    if (!data.uid) return undefined;
+    await call('assignMeasure', { uid: data.uid, measureId: form.dataset.measure });
+    const who = S.ctx.clients[data.uid]?.name ?? 'the client';
+    setFlash(`Assigned to ${who}. It now shows on their Home.`);
+    await reload();
+    return route();
+  },
+  // Test run answers live only in memory.
+  'test-item'(data, form) {
+    const id = form.dataset.measure;
+    const m = S.ctx.measures[id];
+    const index = Number(form.dataset.index);
+    if (data.answer === undefined) {
+      S.errors = { item: 'Choose an answer to continue.' };
+      return route();
+    }
+    if (S.testRun?.measureId !== id) S.testRun = { measureId: id, responses: {} };
+    S.testRun.responses[m.items[index].id] = Number(data.answer);
+    if (index < m.items.length - 1) return navigate(`/practitioner/library/${id}/test/${index + 1}`);
+    return navigate(`/practitioner/library/${id}/test/result`);
   },
   async assign(data, form) {
     await call('assignMeasure', { uid: form.dataset.uid, measureId: data.measureId });
@@ -643,7 +668,7 @@ document.addEventListener('click', (event) => {
 // Answers save the moment they are chosen.
 document.addEventListener('change', async (event) => {
   const el = event.target;
-  if (el.name === 'answer') {
+  if (el.name === 'answer' && el.closest('[data-form="item"]')) {
     const form = el.closest('[data-form="item"]');
     const a = S.ctx.assignments.find((x) => x.id === form.dataset.assignment);
     const itemId = S.ctx.measures[a.measureId].items[Number(form.dataset.index)].id;
@@ -685,7 +710,7 @@ document.addEventListener('keydown', (event) => {
     const viewer = app.querySelector('.viewer[data-menu="open"]');
     if (viewer) viewer.dataset.menu = 'closed';
   }
-  const form = app.querySelector('[data-form="item"]');
+  const form = app.querySelector('[data-form="item"], [data-form="test-item"]');
   if (!form || event.target.matches('input[type="text"], input[type="email"], textarea, select')) return;
   const n = Number(event.key);
   const radios = [...form.querySelectorAll('input[name="answer"]')];

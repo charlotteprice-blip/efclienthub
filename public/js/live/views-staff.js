@@ -3,6 +3,7 @@
 import { CADENCE_LABELS, STAGE_LABELS, esc, fmtDate, fmtDateTime, fmtDay, practitionerShell, relative, status, toLocalInput } from '../ui.js';
 import { FIT_LABELS, MARK_SRC, ROUTES, ZONES, zoneOf } from './views-client.js';
 import { suggestFactors } from '../formulation.js';
+import { buildDraft, scoreMeasure } from '../scoring.js';
 
 const flashHtml = (flash) => (flash ? `<div class="notice${flash.error ? ' notice-error' : ''}" role="${flash.error ? 'alert' : 'status'}"><p>${esc(flash.text)}</p></div>` : '');
 
@@ -562,7 +563,7 @@ export function library(s) {
       const staffOnly = m.scoringRules?.clientFacing === false;
       const search = [m.name, m.formalName, m.code, m.domain, m.description, (m.scoringRules?.subscales ?? []).map((x) => x.label).join(' ')].filter(Boolean).join(' ').toLowerCase();
       return `<tr data-row data-search="${esc(search)}" data-domain="${esc(m.domain ?? '')}" data-audience="${staffOnly ? 'staff' : 'client'}" data-licence="${esc(m.licenceStatus)}" data-tags="|${esc((m.tags ?? []).join('|'))}|" data-name="${esc(m.name.toLowerCase())}" data-questions="${m.items?.length ?? 0}" data-minutes="${m.minutes ?? 0}" data-subscales="${(m.scoringRules?.subscales ?? []).length}">
-        <td><p class="t-ui-strong">${esc(m.name)}</p>${m.formalName ? `<p class="t-caption">${esc(m.formalName)}${m.code && !m.formalName.includes(m.code) ? ` (${esc(m.code)})` : ''}${staffOnly ? '. For you only; never summarised to the client' : ''}</p>` : ''}</td>
+        <td><p class="t-ui-strong"><a href="/practitioner/library/${esc(m.id)}">${esc(m.name)}</a></p>${m.formalName ? `<p class="t-caption">${esc(m.formalName)}${m.code && !m.formalName.includes(m.code) ? ` (${esc(m.code)})` : ''}${staffOnly ? '. For you only; never summarised to the client' : ''}</p>` : ''}</td>
         <td>${esc(m.domain ?? '')}${m.tags?.length ? `<p class="t-caption">${esc(m.tags.join(', '))}</p>` : ''}</td>
         <td>${m.items?.length ?? 0}${m.minutes ? `<p class="t-caption">${m.minutes} min</p>` : ''}</td>
         <td>${esc((m.scoringRules?.subscales ?? []).map((x) => x.label).join(', '))}</td>
@@ -596,6 +597,186 @@ export function library(s) {
       </tr></thead>
       <tbody>${rows || '<tr><td colspan="5">The library is empty. Charlotte adds questionnaires with npm run measures.</td></tr>'}</tbody>
     </table></div>`,
+    true,
+  );
+}
+
+// ---------- 1 questionnaire: details, assign, test run, questions, averages ----------
+
+const BAND_LABELS = { strength: 'Strength', typical: 'Typical', focus: 'Area of focus', notScored: 'Not scored' };
+const DIRECTION_LABELS = { difficulty: 'Higher means more difficulty', positive: 'Higher means better', none: 'Numbers only, for you' };
+
+function completionsOf(s, measureId) {
+  return Object.values(s.ctx.scoring ?? {}).filter((x) => x.measureId === measureId && x.scores);
+}
+
+export function measurePage(s, id) {
+  const m = s.ctx.measures[id];
+  if (!m) return library({ ...s, flash: { text: 'That questionnaire is not in the library.', error: true } });
+  const staffOnly = m.scoringRules?.clientFacing === false;
+  const rules = m.scoringRules ?? {};
+  const reverse = new Set(rules.reverseItems ?? []);
+  const flags = new Map((rules.flagItems ?? []).map((f) => [f.itemId, f]));
+  const subscaleOf = new Map();
+  for (const sub of rules.subscales ?? []) for (const i of sub.items) subscaleOf.set(i, sub.label);
+  const clients = Object.values(s.ctx.clients).filter((c) => c.activatedAt);
+  const open = new Set(s.ctx.assignments.filter((a) => a.measureId === id && a.status !== 'complete').map((a) => a.uid));
+  const assignable = clients.filter((c) => !open.has(c.uid ?? c.id)).sort((a, b) => (a.name ?? '').localeCompare(b.name ?? ''));
+  const canAssign = m.licenceStatus === 'cleared' || m.licenceStatus === 'sample';
+
+  const done = completionsOf(s, id);
+  const subs = rules.subscales ?? [];
+  const averages = subs.map((sub) => {
+    const scored = done.map((x) => x.scores.subscales?.[sub.id]).filter((r) => r && r.score !== null && r.score !== undefined);
+    const mean = scored.length ? scored.reduce((a, r) => a + r.score, 0) / scored.length : null;
+    const bands = { strength: 0, typical: 0, focus: 0 };
+    for (const r of scored) if (bands[r.band] !== undefined) bands[r.band] += 1;
+    const min = scored.length ? Math.min(...scored.map((r) => r.score)) : null;
+    const max = scored.length ? Math.max(...scored.map((r) => r.score)) : null;
+    return { sub, n: scored.length, mean, min, max, bands };
+  });
+  const fmtScore = (v) => (v === null ? 'n/a' : Math.round(v * 100) / 100);
+
+  const optionList = (opts) => opts.map((o) => `${esc(o.label)} (${o.value})`).join(', ');
+  const questionRows = m.items
+    .map((it, i) => {
+      const own = Array.isArray(it.responseOptions) && it.responseOptions.length;
+      const notes = [reverse.has(it.id) ? 'Reversed' : '', flags.has(it.id) ? `Alerts you at ${flags.get(it.id).atLeast} or more` : '', own ? `Own scale: ${optionList(it.responseOptions)}` : ''].filter(Boolean);
+      return `<tr><td>${i + 1}</td><td>${esc(it.text)}</td><td>${esc(subscaleOf.get(it.id) ?? 'Not scored')}</td><td class="t-caption">${esc(notes.join('. '))}</td></tr>`;
+    })
+    .join('');
+
+  const bandText = (sub) => (sub.bands?.length ? sub.bands.map((b) => (b.upTo !== undefined ? `${BAND_LABELS[b.band]} up to ${b.upTo}` : `${BAND_LABELS[b.band]} above`)).join(', ') : 'No bands, numbers only');
+  const subscaleRows = subs
+    .map((sub) => `<tr><td><p class="t-ui-strong">${esc(sub.label)}</p>${sub.codebookName && sub.codebookName !== sub.label ? `<p class="t-caption">${esc(sub.codebookName)}</p>` : ''}</td><td>${sub.items.length}</td><td>${sub.method === 'sum' ? 'Sum' : 'Mean'}</td><td>${esc(DIRECTION_LABELS[sub.direction] ?? sub.direction ?? '')}</td><td class="t-caption">${esc(bandText(sub))}${sub.topic?.label ? `. Links to ${esc(sub.topic.label)}` : ''}</td></tr>`)
+    .join('');
+
+  const averageRows = averages
+    .map((a) => `<tr><td>${esc(a.sub.label)}</td><td>${a.n}</td><td>${fmtScore(a.mean)}</td><td>${a.n ? `${fmtScore(a.min)} to ${fmtScore(a.max)}` : 'n/a'}</td><td class="t-caption">${a.sub.direction === 'none' || !a.n ? '' : `${a.bands.strength} strength, ${a.bands.typical} typical, ${a.bands.focus} focus`}</td></tr>`)
+    .join('');
+
+  return shell(
+    s,
+    'library',
+    m.name,
+    `<p><a href="/practitioner/library">Questionnaire library</a></p>
+    <div class="split">
+      <section class="panel stack" aria-labelledby="h-about">
+        <h2 id="h-about">About</h2>
+        <dl class="details">
+          <div><dt>Full name</dt><dd>${esc(m.formalName ?? m.name)}${m.code ? ` (${esc(m.code)})` : ''}</dd></div>
+          <div><dt>Domain</dt><dd>${esc(m.domain ?? '')}${m.tags?.length ? `<br><span class="t-caption">${esc(m.tags.join(', '))}</span>` : ''}</dd></div>
+          <div><dt>Length</dt><dd>${m.items.length} questions${m.minutes ? `, about ${m.minutes} minutes` : ''}</dd></div>
+          <div><dt>Results shown to</dt><dd>${staffOnly ? 'You only. Never summarised to the client.' : 'You, then the client once you release.'}</dd></div>
+          <div><dt>Licence</dt><dd>${m.licenceStatus === 'cleared' ? status('done', 'Cleared') : status('attention', esc(m.licenceStatus))}${m.licenceNote ? `<br><span class="t-caption">${esc(m.licenceNote)}</span>` : ''}</dd></div>
+          ${m.source?.citation ? `<div><dt>Source</dt><dd class="t-caption">${esc(m.source.citation)}${m.source.url ? ` <a href="${esc(m.source.url)}" target="_blank" rel="noopener">Link</a>` : ''}</dd></div>` : ''}
+        </dl>
+        ${m.description ? `<p>${esc(m.description)}</p>` : ''}
+        ${m.instructions ? `<p class="t-caption">Instruction shown with each question: "${esc(m.instructions)}"</p>` : ''}
+      </section>
+      <section class="panel stack" aria-labelledby="h-use">
+        <h2 id="h-use">Use it</h2>
+        <div class="actions"><a class="btn btn-secondary btn-inline" href="/practitioner/library/${esc(m.id)}/test/0">Test run</a></div>
+        <p class="t-caption">A test run walks through the questions as a client would and shows how the answers would score. Nothing is saved.</p>
+        ${
+          canAssign
+            ? `<form class="inline-add" data-form="assign-to" data-measure="${esc(m.id)}" novalidate>
+                <label class="field-label" for="assign-uid">Assign to</label>
+                <select class="select" id="assign-uid" name="uid">${assignable.length ? assignable.map((c) => `<option value="${esc(c.uid ?? c.id)}">${esc(c.name || c.email)}</option>`).join('') : '<option value="">No client is free to receive it</option>'}</select>
+                <button type="submit" class="btn btn-primary"${assignable.length ? '' : ' disabled'}>Assign</button>
+              </form>
+              <p class="t-caption">Clients who already have an open copy are not listed.</p>`
+            : `<p>Cannot be assigned until its licence is cleared.</p>`
+        }
+      </section>
+    </div>
+
+    <section class="stack" aria-labelledby="h-avg">
+      <h2 id="h-avg">Across your clients</h2>
+      ${
+        done.length
+          ? `<p class="t-caption">Completed ${done.length} time${done.length === 1 ? '' : 's'}. Averages are of your clients' raw scores and are not norms.</p>
+            <div class="table-wrap"><table class="table"><thead><tr><th scope="col">Subscale</th><th scope="col">Scored</th><th scope="col">Average</th><th scope="col">Range</th><th scope="col">Bands</th></tr></thead><tbody>${averageRows}</tbody></table></div>`
+          : '<p>No client has completed it yet.</p>'
+      }
+    </section>
+
+    <section class="stack" aria-labelledby="h-subs">
+      <h2 id="h-subs">Scoring</h2>
+      <p class="t-caption">Response options: ${optionList(m.responseOptions)}.${rules.minAnswered ? ` A subscale is scored when at least ${Math.round(rules.minAnswered * 100)} percent of its questions are answered.` : ''}</p>
+      <div class="table-wrap"><table class="table"><thead><tr><th scope="col">Subscale</th><th scope="col">Questions</th><th scope="col">Method</th><th scope="col">Direction</th><th scope="col">Bands</th></tr></thead><tbody>${subscaleRows || '<tr><td colspan="5">No subscales.</td></tr>'}</tbody></table></div>
+    </section>
+
+    <section class="stack" aria-labelledby="h-q">
+      <h2 id="h-q">Questions</h2>
+      <div class="table-wrap"><table class="table table-questions"><thead><tr><th scope="col">#</th><th scope="col">Question</th><th scope="col">Subscale</th><th scope="col">Notes</th></tr></thead><tbody>${questionRows}</tbody></table></div>
+    </section>`,
+    true,
+  );
+}
+
+// Test run: the client's question screen, answers held in memory only.
+export function measureTest(s, id, n) {
+  const m = s.ctx.measures[id];
+  if (!m) return library(s);
+  const run = s.testRun?.measureId === id ? s.testRun : { measureId: id, responses: {} };
+  const total = m.items.length;
+  const index = Math.min(Math.max(Number.isInteger(n) ? n : 0, 0), total - 1);
+  const it = m.items[index];
+  const options = Array.isArray(it.responseOptions) && it.responseOptions.length ? it.responseOptions : m.responseOptions;
+  const current = run.responses[it.id];
+  const last = index === total - 1;
+  return shell(
+    s,
+    'library',
+    `Test run: ${m.name}`,
+    `<p><a href="/practitioner/library/${esc(m.id)}">Back to ${esc(m.name)}</a> <span class="t-caption">Nothing you answer here is saved.</span></p>
+    <form class="focus-column stack-lg" data-form="test-item" data-measure="${esc(m.id)}" data-index="${index}" novalidate>
+      <div class="stack">
+        <div class="progress" role="progressbar" aria-label="Question ${index + 1} of ${total}" aria-valuemin="1" aria-valuemax="${total}" aria-valuenow="${index + 1}"><div class="progress-fill" data-progress="${index}" data-total="${total}"></div></div>
+        <p class="t-caption">Question ${index + 1} of ${total}</p>
+      </div>
+      <fieldset class="choices">
+        <legend class="t-title">${esc(it.text)}</legend>
+        ${m.instructions ? `<p class="field-hint">${esc(m.instructions)}</p>` : ''}
+        ${options.map((o, i) => `<label class="choice"><input type="radio" name="answer" value="${esc(o.value)}"${String(current) === String(o.value) ? ' checked' : ''}><span class="choice-dot"></span><span>${esc(o.label)}</span><kbd>${i + 1}</kbd></label>`).join('')}
+      </fieldset>
+      ${s.errors.item ? `<p class="field-error">${esc(s.errors.item)}</p>` : ''}
+      <div class="actions">
+        ${index > 0 ? `<a class="btn btn-secondary" href="/practitioner/library/${esc(m.id)}/test/${index - 1}">Back</a>` : ''}
+        <button type="submit" class="btn btn-primary">${last ? 'See how it scores' : 'Next question'}</button>
+        <p class="t-caption key-hint">Press 1 to ${options.length} to choose, then Enter.</p>
+      </div>
+    </form>`,
+  );
+}
+
+// The scored result of a test run, shown the way the draft appears on a client record.
+export function measureTestResult(s, id) {
+  const m = s.ctx.measures[id];
+  if (!m) return library(s);
+  const run = s.testRun?.measureId === id ? s.testRun : { responses: {} };
+  const scores = scoreMeasure(m, run.responses);
+  const draft = buildDraft(m, scores);
+  const rows = Object.values(scores.subscales)
+    .map((sub) => `<tr><td>${esc(sub.label)}</td><td>${sub.score ?? 'Not scored'}</td><td>${esc(BAND_LABELS[sub.band] ?? sub.band)}</td><td>${sub.answered} of ${sub.of}</td></tr>`)
+    .join('');
+  return shell(
+    s,
+    'library',
+    `Test run: ${m.name}`,
+    `<p><a href="/practitioner/library/${esc(m.id)}">Back to ${esc(m.name)}</a></p>
+    <section class="stack" aria-labelledby="h-tr">
+      <h2 id="h-tr">How these answers would score</h2>
+      <p class="t-caption">${scores.answeredItems} of ${scores.totalItems} answered. This is the draft you would see on the client's record; nothing has been saved.</p>
+      ${scores.flags.length ? `<div class="notice notice-error" role="alert"><p class="t-ui-strong">Answers that would alert you</p><ul class="result-list">${scores.flags.map((f) => `<li><p>${esc(f.text)}</p><p class="t-caption">Answered ${f.value}. ${esc(f.note)}</p></li>`).join('')}</ul></div>` : ''}
+      <div class="table-wrap"><table class="table"><thead><tr><th scope="col">Subscale</th><th scope="col">Score</th><th scope="col">Band</th><th scope="col">Answered</th></tr></thead><tbody>${rows}</tbody></table></div>
+      ${draft.clientFacing ? `<div class="split">
+        <div class="stack"><p class="t-ui-strong">Strengths the client would see</p>${draft.strengths.length ? `<ul class="result-list">${draft.strengths.map((x) => `<li><p>${esc(x.label)}</p><p class="t-caption">${esc(x.reason)}</p></li>`).join('')}</ul>` : '<p class="t-caption">None.</p>'}</div>
+        <div class="stack"><p class="t-ui-strong">Areas of focus the client would see</p>${draft.focus.length ? `<ul class="result-list">${draft.focus.map((x) => `<li><p>${esc(x.label)}</p><p class="t-caption">${esc(x.reason)}${x.topic?.label ? ` Links to ${esc(x.topic.label)}.` : ''}</p></li>`).join('')}</ul>` : '<p class="t-caption">None.</p>'}</div>
+      </div>` : '<p class="t-caption">This questionnaire is for you only; the client never sees a summary of it.</p>'}
+      <div class="actions"><a class="btn btn-secondary btn-inline" href="/practitioner/library/${esc(m.id)}/test/0">Run again</a></div>
+    </section>`,
     true,
   );
 }
