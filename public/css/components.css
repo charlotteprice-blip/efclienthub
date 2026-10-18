@@ -338,7 +338,19 @@
 .formulation-summary {
   padding: var(--space-4) var(--space-5);
   border-radius: var(--radius-lg);
-  background: var(--panel);
+  background: var(--ground);
+  color: var(--ink);
+  margin: var(--space-4) 0;
+}
+
+.formulation-summary h2 {
+  margin: 0 0 var(--space-2);
+  border-bottom: 0;
+}
+
+.formulation-summary p {
+  margin: 0 0 var(--space-2);
+  max-width: var(--reading-max);
 }
 
 @media (max-width: 899px) {
@@ -743,8 +755,12 @@ th .sort:focus-visible {
 .home-grid > section {
   padding: var(--space-5);
   border-radius: var(--radius-lg);
-  background: var(--panel);
-  color: var(--on-panel);
+  background: var(--ground);
+  color: var(--ink);
+}
+
+.home-grid > section h2 {
+  border-bottom: 0;
 }
 
 .home-report {

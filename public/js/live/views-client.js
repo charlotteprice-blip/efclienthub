@@ -454,7 +454,7 @@ export function results(s) {
       </section>`,
     )
     .join('');
-  return shell(s, 'results', 'Results', `<p class="reading">Sarah shared these on ${fmtDate(r.releasedAt)}, after going through them with you. They describe how things were for you when you answered, and they are not a diagnosis.</p>${sections}`);
+  return shell(s, 'results', 'Results', `<p class="t-caption">Shared by Sarah on ${fmtDate(r.releasedAt)}. A description of how things were when you answered, not a diagnosis.</p>${sections}`);
 }
 
 export function formulation(s) {
@@ -494,8 +494,8 @@ export function formulation(s) {
     'formulation',
     'Formulation',
     `${flashHtml(s.flash)}
-    <p class="reading">This is the picture you and Sarah built together, shared on ${fmtDate(f.releasedAt)}. For each card, tell Sarah whether it fits, partly fits or does not fit, and add a comment if you like. Sarah sees your answers and can update the picture with you.</p>
-    ${f.summary ? `<div class="reading formulation-summary">${f.summary.split('\n').filter(Boolean).map((para) => `<p>${esc(para)}</p>`).join('')}</div>` : ''}
+    <p class="t-caption">Shared by Sarah on ${fmtDate(f.releasedAt)}. On each card, say whether it fits and add a comment if you like; Sarah sees your answers.</p>
+    ${f.summary ? `<section class="formulation-summary" aria-labelledby="h-sum"><h2 id="h-sum" class="t-ui-strong">From Sarah</h2>${f.summary.split('\n').filter(Boolean).map((para) => `<p>${esc(para)}</p>`).join('')}</section>` : ''}
     <div class="zones zones-5">${zones}</div>`,
   );
 }
