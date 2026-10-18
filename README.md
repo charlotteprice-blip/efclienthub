@@ -2,7 +2,7 @@
 
 In treatment web app for clients of Sarah Anticich, served at clients.executiveframe.co.nz. Static HTML, CSS and vanilla JavaScript on Firebase, with no front end framework and no build step. Developer: Charlotte Price (hello@charlotteprice.co.nz). Work log: Notion, Executive Frame, App 2.
 
-This app shares Firebase Authentication with the Learning Hub (app.executiveframe.co.nz) in project `executiveframe-app`. It has its own Hosting site, named Firestore database (`clienthub`), Storage bucket and functions codebase, so a Learning Hub deployment cannot touch it.
+This app runs in its own Firebase project, `ef-client-hub`, separate from the Learning Hub (app.executiveframe.co.nz). Accounts, health information and deployments are fully separate. Inside the project it still uses a named Firestore database (`clienthub`), its own Hosting site, Storage bucket and functions codebase.
 
 ## Layout
 
@@ -73,7 +73,7 @@ Never run a bare `firebase deploy` from this repository; the npm scripts name th
 
 ## Still done outside the terminal
 
-1. Creating the `executiveframe-app` project itself under Sarah's Google account, with the Blaze plan, and adding Charlotte as Owner.
+1. Creating the `ef-client-hub` project itself under Sarah's Google account, with the Blaze plan, and adding Charlotte as Owner.
 2. Adding the DNS records that `npm run setup:check` prints, at the DNS host for executiveframe.co.nz, and logging that change in the Site Changes Log.
 3. Approving copy and decisions with Sarah (docs/decisions.md).
 

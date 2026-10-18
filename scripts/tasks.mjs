@@ -3,7 +3,7 @@
 const groups = [
   ['First time on a computer', [
     ['npm install', 'Install the tools this repository uses'],
-    ['npx firebase login', 'Log the Firebase CLI in as an owner of executiveframe-app'],
+    ['npx firebase login', 'Log the Firebase CLI in as an owner of ef-client-hub'],
     ['gcloud auth login', 'Log the Google Cloud CLI in as the same person'],
     ['gcloud auth application-default login', 'Let the role script act as you'],
   ]],

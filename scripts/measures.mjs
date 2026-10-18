@@ -50,7 +50,7 @@ function load(path) {
 async function admin() {
   const { initializeApp, applicationDefault } = await import('firebase-admin/app');
   const { getFirestore } = await import('firebase-admin/firestore');
-  const app = initializeApp({ credential: applicationDefault(), projectId: process.env.CLIENTHUB_PROJECT ?? 'executiveframe-app' });
+  const app = initializeApp({ credential: applicationDefault(), projectId: process.env.CLIENTHUB_PROJECT ?? 'ef-client-hub' });
   return getFirestore(app, 'clienthub');
 }
 

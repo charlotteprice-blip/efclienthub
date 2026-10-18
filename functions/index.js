@@ -26,7 +26,7 @@ initializeApp();
 
 const readJson = (file) => JSON.parse(readFileSync(new URL(`./shared/${file}`, import.meta.url), 'utf8'));
 
-// Set ALLOW_SAMPLE_MEASURES=true in functions/.env.executiveframe-app only
+// Set ALLOW_SAMPLE_MEASURES=true in functions/.env.ef-client-hub only
 // while testing with the invented sample questionnaires.
 const ALLOW_SAMPLE_MEASURES = defineBoolean('ALLOW_SAMPLE_MEASURES', { default: false });
 

@@ -1,4 +1,4 @@
-// Firebase web app settings for project executiveframe-app.
+// Firebase web app settings for project ef-client-hub.
 // These values identify the project and are not secret; access is
 // controlled by Authentication and the security rules.
 // Charlotte: replace the placeholders with the values from the Firebase
@@ -7,7 +7,7 @@
 export const firebaseConfig = {
   apiKey: 'REPLACE_ME',
   authDomain: 'clients.executiveframe.co.nz',
-  projectId: 'executiveframe-app',
+  projectId: 'ef-client-hub',
   storageBucket: 'REPLACE_ME',
   messagingSenderId: 'REPLACE_ME',
   appId: 'REPLACE_ME',

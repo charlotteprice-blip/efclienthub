@@ -1,6 +1,6 @@
 # Data model
 
-Named Firestore database `clienthub` in project `executiveframe-app`, location australia-southeast1. Every write is made by a Cloud Function through the Admin SDK. The read column below is enforced by `firestore.rules` and proved by `tests/rules.test.js`.
+Named Firestore database `clienthub` in project `ef-client-hub`, location australia-southeast1. Every write is made by a Cloud Function through the Admin SDK. The read column below is enforced by `firestore.rules` and proved by `tests/rules.test.js`.
 
 Roles are custom claims set with the Admin SDK: `role: "practitioner"` reads clinical content; `role: "admin"` operates the system without reading clinical content. A client has no role claim.
 

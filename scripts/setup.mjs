@@ -9,7 +9,7 @@
 //   npm run setup -- --only=database,site
 //
 // Needs: Node 20+, the Firebase CLI (installed by npm install), and the
-// Google Cloud CLI (gcloud), each logged in as an owner of executiveframe-app:
+// Google Cloud CLI (gcloud), each logged in as an owner of ef-client-hub:
 //   npx firebase login
 //   gcloud auth login
 //
@@ -25,7 +25,7 @@ const root = join(dirname(new URL(import.meta.url).pathname), '..');
 const firebaseBin = join(root, 'node_modules/.bin/firebase');
 
 const CONFIG = {
-  project: process.env.CLIENTHUB_PROJECT ?? 'executiveframe-app',
+  project: process.env.CLIENTHUB_PROJECT ?? 'ef-client-hub',
   region: 'australia-southeast1',
   database: 'clienthub',
   site: process.env.CLIENTHUB_SITE ?? 'executiveframe-clienthub',

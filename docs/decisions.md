@@ -46,15 +46,19 @@
 27. Google and Microsoft sign in stay off (`socialSignIn: false`) until open question 9 is decided; email and password works now.
 28. Results links to the Learning Hub open in a new tab and need a separate sign in there until the handover in open question 1 is built.
 
+## Separate Firebase project (18 October 2026)
+
+29. The Client Hub runs in its own Firebase project, `ef-client-hub`, created under the charlotteprice.co.nz Google organisation. Health information, accounts and deployments are fully separate from the Learning Hub, which closes earlier concerns about shared console access. Clients have a separate login from the Learning Hub, and results links open the Learning Hub with its own sign in. Ownership: Sarah should be added as Owner and billing should sit with her business, since she is responsible for the health information; to confirm with Sarah.
+
 ## Open questions
 
-1. Learning Hub access. Does activation grant clients a complimentary Learning Hub seat? Without one, results links reach a paywall. A sign in handover between the 2 subdomains also needs building, because Firebase sessions do not carry across origins.
+1. Learning Hub access. Does activation grant clients a complimentary Learning Hub seat? Without one, results links reach a paywall. With separate projects, clients hold a separate Learning Hub login.
 2. Retention. Is the Client Hub part of Sarah's clinical record, or a working copy summarised into Splose? This sets retentionUntil, which the regulations require to run at least 10 years from the last service.
 3. Pilot measures. Will commercial instruments be administered outside the hub? If so, an external assignment type is needed so that booking triggers correctly.
 4. Client type. For the pilot, should Sarah set the type when issuing the code, with intake answers recorded but not acted on?
 5. Age. Is the pilot limited to adults?
 6. App Check. Its reCAPTCHA provider loads a Google script, which conflicts with the no third party scripts rule. Until decided, redeemActivationCode relies on attempt limits.
 7. Accent colours for neurodivergent and health types, and their relationship to the status colours.
-8. Firebase project access. Who else holds Owner or Editor on executiveframe-app?
+8. Firebase project access. Who else holds Owner or Editor on ef-client-hub? Should the project move under Sarah's own Google organisation?
 9. Google and Microsoft sign in. Firebase Authentication loads `https://apis.google.com/js/api.js` into the page for the sign in window. The current Content Security Policy blocks it, so only email and password sign in would work. Options: allow that 1 Google script on the log in and sign up pages only (Google already processes the sign in), or offer email and password only in the Client Hub. Learning Hub members who signed up with Google would need the first option. To decide before stage 3.
 10. Intake wording and rules are drafts for Sarah to approve.

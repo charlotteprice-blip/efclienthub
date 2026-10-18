@@ -1,9 +1,9 @@
 {
   "projects": {
-    "default": "executiveframe-app"
+    "default": "ef-client-hub"
   },
   "targets": {
-    "executiveframe-app": {
+    "ef-client-hub": {
       "hosting": {
         "clienthub": ["executiveframe-clienthub"]
       },

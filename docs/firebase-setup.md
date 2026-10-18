@@ -16,7 +16,7 @@ npm install
 
 ## 2. The Firebase project (browser step)
 
-The project `executiveframe-app` is owned by Sarah's Google account, on the Blaze plan, with Charlotte added as Owner. If the Learning Hub already created it, nothing to do. In the Firebase console, open Authentication once and press Get started so the sign in settings exist.
+The project `ef-client-hub` (EF Client Hub) is created. In the console: upgrade it to the Blaze plan with a NZ$10 monthly budget alert, add Sarah as Owner under Users and permissions, and open Authentication once, press Get started and switch on Email/Password under Sign-in method.
 
 ## 3. Log in
 
@@ -24,7 +24,7 @@ The project `executiveframe-app` is owned by Sarah's Google account, on the Blaz
 npx firebase login
 gcloud auth login
 gcloud auth application-default login
-gcloud config set project executiveframe-app
+gcloud config set project ef-client-hub
 ```
 
 ## 4. Create everything else
@@ -38,7 +38,7 @@ npm run setup
 
 ## 5. Allow the sample questionnaires while testing
 
-Create `functions/.env.executiveframe-app` containing:
+Create `functions/.env.ef-client-hub` containing:
 
 ```
 ALLOW_SAMPLE_MEASURES=true

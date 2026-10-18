@@ -17,7 +17,7 @@ import { initializeApp, applicationDefault } from 'firebase-admin/app';
 import { getAuth } from 'firebase-admin/auth';
 import { FieldValue, getFirestore } from 'firebase-admin/firestore';
 
-const PROJECT = process.env.CLIENTHUB_PROJECT ?? 'executiveframe-app';
+const PROJECT = process.env.CLIENTHUB_PROJECT ?? 'ef-client-hub';
 const ROLES = ['practitioner', 'admin'];
 const [command, email, role] = process.argv.slice(2);
 
