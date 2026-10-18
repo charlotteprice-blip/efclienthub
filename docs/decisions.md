@@ -33,6 +33,10 @@
 20. Clients see strengths and areas of focus with reasons once released; numeric scores are shown only to Sarah.
 21. The 2 sample questionnaires were written for the demonstration, are marked as sample in the library, and must never be used with clients.
 
+## Terminal tasks (18 October 2026)
+
+22. Every setup step that the Firebase CLI, gcloud or a Google API can perform runs from `npm run setup`, which checks before acting, asks before each change and can be rerun safely. Roles are granted with `npm run roles`. Deploys go through named npm scripts only. Creating the project under Sarah's account and adding DNS records at the DNS host stay manual.
+
 ## Open questions
 
 1. Learning Hub access. Does activation grant clients a complimentary Learning Hub seat? Without one, results links reach a paywall. A sign in handover between the 2 subdomains also needs building, because Firebase sessions do not carry across origins.

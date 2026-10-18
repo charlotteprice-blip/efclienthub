@@ -7,20 +7,32 @@
     "node": ">=20"
   },
   "scripts": {
-    "test:unit": "node --test \"tests/unit/*.test.js\"",
-    "test:rules": "firebase emulators:exec --config firebase.test.json --project demo-clienthub --only firestore,storage \"node --test tests/rules.test.js\"",
-    "test": "npm run test:unit && node scripts/check-contrast.mjs && npm run test:rules",
+    "tasks": "node scripts/tasks.mjs",
+    "setup:check": "node scripts/setup.mjs check",
+    "setup": "node scripts/setup.mjs",
+    "roles": "node scripts/roles.mjs",
+    "serve": "node scripts/serve.mjs",
+    "build:sample": "node scripts/build-sample.mjs",
     "vendor": "node scripts/vendor.mjs",
     "tokens": "node scripts/build-tokens.mjs",
     "contrast": "node scripts/check-contrast.mjs",
+    "check": "npm run test:unit && npm run contrast",
+    "test:unit": "node --test \"tests/unit/*.test.js\"",
+    "test:rules": "firebase emulators:exec --config firebase.test.json --project demo-clienthub --only firestore,storage \"node --test tests/rules.test.js\"",
+    "test": "npm run test:unit && node scripts/check-contrast.mjs && npm run test:rules",
     "emulators": "firebase emulators:start --project demo-clienthub",
-    "build:sample": "node scripts/build-sample.mjs"
+    "deploy:rules": "firebase deploy --project executiveframe-app --only firestore,storage:clienthub",
+    "deploy:hosting": "npm run check && firebase deploy --project executiveframe-app --only hosting:clienthub",
+    "deploy:functions": "firebase deploy --project executiveframe-app --only functions:clienthub",
+    "deploy": "npm test && firebase deploy --project executiveframe-app --only hosting:clienthub,firestore,storage:clienthub,functions:clienthub",
+    "worklog": "node scripts/worklog.mjs"
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^6.0.0",
     "@fontsource/figtree": "^5.3.0",
     "esbuild": "^0.28.2",
     "firebase": "^13.0.0",
+    "firebase-admin": "^14.5.0",
     "firebase-tools": "^15.34.0"
   }
 }

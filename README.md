@@ -28,36 +28,57 @@ scripts/               vendor.mjs, build-tokens.mjs, check-contrast.mjs
 docs/                  data model, client journey, decisions, brand notes, intake guide
 ```
 
-## Commands
+## Terminal tasks
+
+Everything for this app runs from the terminal. `npm run tasks` lists every task with a one line description.
+
+First time on a computer:
 
 ```
 npm install
-npm run vendor         copy the Firebase SDK and Figtree into public/assets
-npm run tokens         regenerate public/css/tokens.css from brand/tokens.json
-npm run contrast       check every colour pairing against WCAG 2.2
-npm run test:unit      config and intake rule tests
-npm run test:rules     security rules tests in the emulators (needs Java 21+)
-npm test               all of the above checks
-npm run build:sample   build the clickable sample into dist/client-hub-sample.html
-npm run emulators      local emulators on a demo project
+npx firebase login
+gcloud auth login
+gcloud auth application-default login
 ```
 
-Deploy only this app's parts, always naming them:
+Set up Firebase (replaces the console steps):
 
 ```
-firebase deploy --only hosting:clienthub,firestore,storage:clienthub,functions:clienthub
+npm run setup:check          report what exists and what is missing, changes nothing
+npm run setup -- --plan      print every command setup could run, checks nothing
+npm run setup                create each missing piece, asking before every change
 ```
 
-`firestore` here deploys only the `clienthub` database, the only one named in firebase.json. Create that database in the console first, because the CLI would otherwise create it with default settings. Never run a bare `firebase deploy` from this repository.
+`setup` enables the Google Cloud APIs, creates the `clienthub` Firestore database in Sydney with point in time recovery and delete protection, creates and links the Hosting site and Storage bucket, registers the web app and writes its settings into `public/js/firebase-config.js`, authorises the sign in domains, switches on Firestore read and write audit logs, adds the custom domain and prints the DNS records it needs, and lists who holds broad access to the project. Each step checks first, so running it again is safe.
 
-## Firebase console setup (Charlotte)
+People and roles:
 
-1. Create the Firestore database with id `clienthub`, Native mode, location australia-southeast1, and switch on point in time recovery.
-2. Create a Hosting site, for example `executiveframe-clienthub`, and put its id in `.firebaserc` under hosting.
-3. Create a Storage bucket in australia-southeast1 and put its name in `.firebaserc` under storage.
-4. Authentication: add `clients.executiveframe.co.nz` to authorised domains. Google, Microsoft and email providers are shared with the Learning Hub.
-5. Connect the custom domain and add the DNS records. Record the DNS change in the Site Changes Log.
-6. In Google Cloud, IAM and Admin, Audit Logs: switch on Data Read for Cloud Firestore.
-7. Review who holds Owner or Editor on the project.
+```
+npm run roles -- list
+npm run roles -- set <email> practitioner     Sarah
+npm run roles -- set <email> admin            Charlotte's own account
+npm run roles -- remove <email>
+```
+
+Build, check and deploy:
+
+```
+npm run serve                sample, style guide and previews at localhost:5173
+npm run check                unit tests and colour contrast
+npm test                     check plus the security rules tests (needs Java 21+)
+npm run deploy:rules         rules and indexes
+npm run deploy:hosting       website files
+npm run deploy:functions     Cloud Functions
+npm run deploy               everything, after all tests pass
+npm run worklog              today's commits as a Notion work log entry
+```
+
+Never run a bare `firebase deploy` from this repository; the npm scripts name this app's parts every time.
+
+## Still done outside the terminal
+
+1. Creating the `executiveframe-app` project itself under Sarah's Google account, with the Blaze plan, and adding Charlotte as Owner.
+2. Adding the DNS records that `npm run setup:check` prints, at the DNS host for executiveframe.co.nz, and logging that change in the Site Changes Log.
+3. Approving copy and decisions with Sarah (docs/decisions.md).
 
 See docs/decisions.md for decisions and open questions.

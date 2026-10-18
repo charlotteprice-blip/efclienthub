@@ -5,9 +5,17 @@
       "public": "public",
       "cleanUrls": true,
       "trailingSlash": false,
-      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**",
+        "templates/**"
+      ],
       "rewrites": [
-        { "source": "/measure/**", "destination": "/measure.html" }
+        {
+          "source": "/measure/**",
+          "destination": "/measure.html"
+        }
       ],
       "headers": [
         {
@@ -15,25 +23,52 @@
           "headers": [
             {
               "key": "Content-Security-Policy",
-              "value": "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self' https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firestore.googleapis.com https://australia-southeast1-executiveframe-app.cloudfunctions.net; frame-src https://executiveframe-app.firebaseapp.com https://clients.executiveframe.co.nz; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'"
+              "value": "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self' https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firestore.googleapis.com https://australia-southeast1-executiveframe-app.cloudfunctions.net; frame-src 'self' https://executiveframe-clienthub.web.app https://executiveframe-app.firebaseapp.com https://clients.executiveframe.co.nz; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'"
             },
-            { "key": "X-Content-Type-Options", "value": "nosniff" },
-            { "key": "Referrer-Policy", "value": "no-referrer" },
-            { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=(), interest-cohort=()" },
-            { "key": "Cross-Origin-Opener-Policy", "value": "same-origin-allow-popups" }
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Permissions-Policy",
+              "value": "camera=(), microphone=(), geolocation=(), payment=(), interest-cohort=()"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin-allow-popups"
+            }
           ]
         },
         {
           "source": "**/*.html",
-          "headers": [{ "key": "Cache-Control", "value": "no-store" }]
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            }
+          ]
         },
         {
           "source": "/config/**",
-          "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-cache"
+            }
+          ]
         },
         {
           "source": "/assets/**",
-          "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }]
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=86400"
+            }
+          ]
         }
       ]
     }
@@ -56,16 +91,37 @@
       "source": "functions",
       "codebase": "clienthub",
       "runtime": "nodejs22",
-      "ignore": ["node_modules", ".git", "*.local", "test/**"]
+      "ignore": [
+        "node_modules",
+        ".git",
+        "*.local",
+        "test/**"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" install"
+      ]
     }
   ],
   "emulators": {
-    "auth": { "port": 9099 },
-    "firestore": { "port": 8080 },
-    "storage": { "port": 9199 },
-    "functions": { "port": 5001 },
-    "hosting": { "port": 5000 },
-    "ui": { "enabled": true, "port": 4000 },
+    "auth": {
+      "port": 9099
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "storage": {
+      "port": 9199
+    },
+    "functions": {
+      "port": 5001
+    },
+    "hosting": {
+      "port": 5000
+    },
+    "ui": {
+      "enabled": true,
+      "port": 4000
+    },
     "singleProjectMode": true
   }
 }
