@@ -59,6 +59,8 @@ npm run deploy:hosting
 
 The first functions deploy takes several minutes and may ask to switch on more Google services; answer yes. The deploy also creates the daily check in job in Cloud Scheduler (`runCheckIns`, 7am New Zealand time). When it asks how many days to keep container images, accept 1. The app is then live at https://executiveframe-clienthub.web.app.
 
+If the deploy ends with "Failed to set invoker" or "Failed to set the IAM Policy on the Service", the organisation's domain restricted sharing policy is stopping browsers from calling the functions. Callable functions are designed to be reachable by any browser; each one checks the Firebase login itself and refuses anyone who is not signed in. `npm run setup -- --only=orgpolicy` sets a project level exception to that policy for ef-client-hub only (it needs the Organization Policy Administrator role on the organisation), and `npm run setup -- --only=invokers` then opens every callable function that was deployed while the policy was in force. Run `npm run deploy:functions` again afterwards.
+
 If every function fails with "missing permission on the build service account", the project's default service account has not been given access, which is normal for projects created inside a Google organisation. `npm run setup -- --only=functionsaccess` grants it the 3 roles it needs (build, Firestore access and logging); then run `npm run deploy:functions` again.
 
 ## 7. Staff accounts

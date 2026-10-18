@@ -49,6 +49,7 @@ const APIS = [
   'secretmanager.googleapis.com',
   'cloudscheduler.googleapis.com',
   'pubsub.googleapis.com',
+  'orgpolicy.googleapis.com',
 ];
 
 const args = process.argv.slice(2);
@@ -385,6 +386,39 @@ const steps = [
     },
   },
   {
+    // Google organisations created recently enforce "domain restricted
+    // sharing", which stops a Cloud Run service being opened to allUsers.
+    // Callable functions need exactly that (the browser calls them and the
+    // function checks the Firebase login itself), so the project overrides
+    // the policy. Only this project is affected.
+    id: 'orgpolicy',
+    title: 'Project allows public callers on its Cloud Functions (domain restricted sharing off for this project)',
+    constraint: 'iam.allowedPolicyMemberDomains',
+    async check() {
+      const r = look('gcloud', ['org-policies', 'describe', this.constraint, `--project=${CONFIG.project}`, '--effective', '--format=json']);
+      if (!r.ok) {
+        if (/NOT_FOUND|not found/i.test(r.err)) return { state: 'done' };
+        return { state: 'unknown', detail: [`Could not read the policy: ${why(r)}`] };
+      }
+      let policy = null;
+      try {
+        policy = JSON.parse(r.out);
+      } catch {
+        return { state: 'unknown', detail: ['Could not read the policy'] };
+      }
+      const rules = policy.spec?.rules ?? [];
+      const restricted = rules.some((rule) => rule.values?.allowedValues?.length || rule.denyAll);
+      const open = rules.some((rule) => rule.allowAll);
+      return restricted && !open ? { state: 'missing', detail: ['Domain restricted sharing is enforced, so firebase deploy cannot open callable functions to browsers'] } : { state: 'done' };
+    },
+    async apply() {
+      const file = join(mkdtempSync(join(tmpdir(), 'clienthub-')), 'policy.yaml');
+      writeFileSync(file, `name: projects/${CONFIG.project}/policies/${this.constraint}\nspec:\n  rules:\n  - allowAll: true\n`);
+      return run('gcloud', ['org-policies', 'set-policy', file, '--format=none']);
+    },
+    manual: 'Needs the Organization Policy Administrator role on the charlotteprice.co.nz organisation. If the command is refused, grant yourself that role in the Google Cloud console under IAM for the organisation, then run this again.',
+  },
+  {
     // Newer Google organisations no longer hand the project's default service
     // account broad access, so Cloud Functions cannot build or reach Firestore
     // until it is given exactly what it needs.
@@ -411,6 +445,39 @@ const steps = [
     async apply() {
       for (const role of this.roles) {
         const r = run('gcloud', ['projects', 'add-iam-policy-binding', CONFIG.project, `--member=${this.member()}`, `--role=${role}`, '--condition=None', '--format=none']);
+        if (!r.ok) return r;
+      }
+      return { ok: true };
+    },
+  },
+  {
+    // Each callable function is a Cloud Run service that must accept calls
+    // from anyone; the function itself checks the Firebase login. firebase
+    // deploy sets this on first creation; this step repairs any that were
+    // created while the organisation policy still blocked it.
+    id: 'invokers',
+    title: 'Every callable function accepts calls from browsers',
+    callables() {
+      const src = readFileSync(join(root, 'functions/index.js'), 'utf8');
+      return [...src.matchAll(/export const (\w+) = wrap\(/g)].map((m) => m[1].toLowerCase());
+    },
+    async check() {
+      const list = lookJson('gcloud', ['run', 'services', 'list', `--region=${CONFIG.region}`, `--project=${CONFIG.project}`, '--format=json']);
+      if (!list) return { state: 'unknown', detail: ['Could not list the deployed functions (deploy them first with npm run deploy:functions)'] };
+      const deployed = new Set(list.map((svc) => svc.metadata?.name));
+      const wanted = this.callables().filter((name) => deployed.has(name));
+      if (!wanted.length) return { state: 'missing', detail: ['No callable functions deployed yet; run npm run deploy:functions, then this again'] };
+      this.toOpen = [];
+      for (const name of wanted) {
+        const policy = lookJson('gcloud', ['run', 'services', 'get-iam-policy', name, `--region=${CONFIG.region}`, `--project=${CONFIG.project}`, '--format=json']);
+        const open = (policy?.bindings ?? []).some((b) => b.role === 'roles/run.invoker' && (b.members ?? []).includes('allUsers'));
+        if (!open) this.toOpen.push(name);
+      }
+      return this.toOpen.length ? { state: 'missing', detail: this.toOpen.map((n) => `${n} is not callable from browsers`) } : { state: 'done' };
+    },
+    async apply() {
+      for (const name of this.toOpen ?? []) {
+        const r = run('gcloud', ['run', 'services', 'add-iam-policy-binding', name, `--region=${CONFIG.region}`, `--project=${CONFIG.project}`, '--member=allUsers', '--role=roles/run.invoker', '--format=none']);
         if (!r.ok) return r;
       }
       return { ok: true };
