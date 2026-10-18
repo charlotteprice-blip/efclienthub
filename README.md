@@ -45,7 +45,7 @@ npm run setup -- --plan      print every command setup could run, checks nothing
 npm run setup                create each missing piece, asking before every change
 ```
 
-`setup` enables the Google Cloud APIs, creates the `clienthub` Firestore database in Sydney with point in time recovery and delete protection, creates and links the Hosting site and Storage bucket, registers the web app and writes its settings into `public/js/firebase-config.js`, authorises the sign in domains, switches on Firestore read and write audit logs, adds the custom domain and prints the DNS records it needs, and lists who holds broad access to the project. Each step checks first, so running it again is safe.
+`setup` enables the Google Cloud APIs, creates the `clienthub` Firestore database in Sydney with point in time recovery and delete protection, creates and links the Hosting site and Storage bucket, registers the web app and writes its settings into `public/js/firebase-config.js`, authorises the sign in domains, switches on Firestore read and write audit logs, gives the Cloud Functions service account the access it needs to build and reach the database, adds the custom domain and prints the DNS records it needs, and lists who holds broad access to the project. Each step checks first, so running it again is safe.
 
 People and roles:
 

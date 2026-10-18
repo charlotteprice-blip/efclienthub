@@ -383,6 +383,38 @@ const steps = [
     },
   },
   {
+    // Newer Google organisations no longer hand the project's default service
+    // account broad access, so Cloud Functions cannot build or reach Firestore
+    // until it is given exactly what it needs.
+    id: 'functionsaccess',
+    title: 'Cloud Functions service account can build and read the clienthub database',
+    roles: ['roles/cloudbuild.builds.builder', 'roles/datastore.user', 'roles/logging.logWriter'],
+    member() {
+      if (this.cachedMember) return this.cachedMember;
+      const number = look('gcloud', ['projects', 'describe', CONFIG.project, '--format=value(projectNumber)']);
+      const id = number.ok && number.out ? number.out : 'PROJECT_NUMBER';
+      this.cachedMember = `serviceAccount:${id}-compute@developer.gserviceaccount.com`;
+      return this.cachedMember;
+    },
+    async check() {
+      this.member();
+      if (this.cachedMember.includes('PROJECT_NUMBER')) return { state: 'unknown', detail: ['Could not read the project number'] };
+      const policy = lookJson('gcloud', ['projects', 'get-iam-policy', CONFIG.project, '--format=json']);
+      if (!policy) return { state: 'unknown', detail: ['Could not read the project access policy'] };
+      const member = this.member();
+      const held = new Set((policy.bindings ?? []).filter((b) => (b.members ?? []).includes(member)).map((b) => b.role));
+      const missing = this.roles.filter((r) => !held.has(r));
+      return missing.length ? { state: 'missing', detail: missing.map((r) => `${member.slice(15)} lacks ${r}`) } : { state: 'done' };
+    },
+    async apply() {
+      for (const role of this.roles) {
+        const r = run('gcloud', ['projects', 'add-iam-policy-binding', CONFIG.project, `--member=${this.member()}`, `--role=${role}`, '--condition=None', '--format=none']);
+        if (!r.ok) return r;
+      }
+      return { ok: true };
+    },
+  },
+  {
     id: 'domain',
     title: `Custom domain ${CONFIG.domain} on the Hosting site`,
     async check() {

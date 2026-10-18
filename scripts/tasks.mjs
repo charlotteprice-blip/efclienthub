@@ -14,7 +14,7 @@ const groups = [
     ['npm run setup:check', 'Report what exists and what is missing; changes nothing'],
     ['npm run setup', 'Create each missing piece, asking before every change'],
     ['npm run setup -- --dry-run', 'Show the commands setup would run, change nothing'],
-    ['npm run setup -- --only=domain', 'Run 1 step: tools, project, apis, database, site, bucket, webapp, authdomains, auditlogs, domain, access'],
+    ['npm run setup -- --only=domain', 'Run 1 step: tools, project, apis, database, site, bucket, webapp, authdomains, auditlogs, functionsaccess, domain, access'],
   ]],
   ['People and roles', [
     ['npm run roles -- list', 'Show who holds a Client Hub role'],

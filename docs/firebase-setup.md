@@ -57,7 +57,9 @@ npm run deploy:functions
 npm run deploy:hosting
 ```
 
-The first functions deploy takes several minutes and may ask to switch on more Google services; answer yes. The app is then live at https://executiveframe-clienthub.web.app.
+The first functions deploy takes several minutes and may ask to switch on more Google services; answer yes. When it asks how many days to keep container images, accept 1. The app is then live at https://executiveframe-clienthub.web.app.
+
+If every function fails with "missing permission on the build service account", the project's default service account has not been given access, which is normal for projects created inside a Google organisation. `npm run setup -- --only=functionsaccess` grants it the 3 roles it needs (build, Firestore access and logging); then run `npm run deploy:functions` again.
 
 ## 7. Staff accounts
 
