@@ -532,6 +532,28 @@ document.addEventListener('input', (event) => {
 document.addEventListener('submit', (event) => {
   if (event.target.closest('[data-filters]')) event.preventDefault();
 });
+// Column sort: press a heading to sort, press again to reverse.
+document.addEventListener('click', (event) => {
+  const btn = event.target.closest('button.sort[data-sort]');
+  if (!btn) return;
+  const th = btn.closest('th');
+  const table = btn.closest('table');
+  const dir = th.getAttribute('aria-sort') === 'ascending' ? 'descending' : 'ascending';
+  for (const h of table.querySelectorAll('th')) h.removeAttribute('aria-sort');
+  th.setAttribute('aria-sort', dir);
+  const key = btn.dataset.sort;
+  const numeric = btn.dataset.kind === 'number';
+  const body = table.tBodies[0];
+  const rows = [...body.querySelectorAll('tr[data-row]')];
+  rows.sort((a, b) => {
+    const x = a.dataset[key] ?? '';
+    const y = b.dataset[key] ?? '';
+    const r = numeric ? Number(x) - Number(y) : x.localeCompare(y);
+    return dir === 'ascending' ? r : -r;
+  });
+  for (const row of rows) body.appendChild(row);
+});
+
 // Condition and topic buttons: 1 active at a time; pressing the active one returns to All.
 document.addEventListener('click', (event) => {
   const chip = event.target.closest('.chip[data-tag]');

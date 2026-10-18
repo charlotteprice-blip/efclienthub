@@ -281,6 +281,11 @@
 
 /* ---------- library filters ---------- */
 
+/* Intro on table pages runs the full width of the table rather than the reading measure */
+.intro-wide {
+  max-width: none;
+}
+
 .filters {
   display: grid;
   grid-template-columns: minmax(200px, 2fr) repeat(3, minmax(140px, 1fr));
@@ -326,6 +331,44 @@
 }
 
 .chip:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Sortable column headings */
+th .sort {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+th .sort::after {
+  content: '';
+  display: inline-block;
+  width: 0.6em;
+  margin-left: var(--space-2);
+  opacity: 0.5;
+}
+
+th[aria-sort="ascending"] .sort::after {
+  content: '\2191';
+  opacity: 1;
+}
+
+th[aria-sort="descending"] .sort::after {
+  content: '\2193';
+  opacity: 1;
+}
+
+th .sort:hover {
+  text-decoration: underline;
+}
+
+th .sort:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }

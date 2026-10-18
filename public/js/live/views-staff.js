@@ -380,7 +380,7 @@ export function library(s) {
     .map((m) => {
       const staffOnly = m.scoringRules?.clientFacing === false;
       const search = [m.name, m.formalName, m.code, m.domain, m.description, (m.scoringRules?.subscales ?? []).map((x) => x.label).join(' ')].filter(Boolean).join(' ').toLowerCase();
-      return `<tr data-row data-search="${esc(search)}" data-domain="${esc(m.domain ?? '')}" data-audience="${staffOnly ? 'staff' : 'client'}" data-licence="${esc(m.licenceStatus)}" data-tags="|${esc((m.tags ?? []).join('|'))}|">
+      return `<tr data-row data-search="${esc(search)}" data-domain="${esc(m.domain ?? '')}" data-audience="${staffOnly ? 'staff' : 'client'}" data-licence="${esc(m.licenceStatus)}" data-tags="|${esc((m.tags ?? []).join('|'))}|" data-name="${esc(m.name.toLowerCase())}" data-questions="${m.items?.length ?? 0}" data-minutes="${m.minutes ?? 0}" data-subscales="${(m.scoringRules?.subscales ?? []).length}">
         <td><p class="t-ui-strong">${esc(m.name)}</p>${m.formalName ? `<p class="t-caption">${esc(m.formalName)}${m.code && !m.formalName.includes(m.code) ? ` (${esc(m.code)})` : ''}${staffOnly ? '. For you only; never summarised to the client' : ''}</p>` : ''}</td>
         <td>${esc(m.domain ?? '')}${m.tags?.length ? `<p class="t-caption">${esc(m.tags.join(', '))}</p>` : ''}</td>
         <td>${m.items?.length ?? 0}${m.minutes ? `<p class="t-caption">${m.minutes} min</p>` : ''}</td>
@@ -393,7 +393,7 @@ export function library(s) {
     s,
     'library',
     'Questionnaire library',
-    `<p class="reading">Questionnaires available to assign. They come from the EF Client Hub Codebook; Charlotte adds each one from the terminal once its licence status is cleared. Commercial instruments are never reproduced in the hub.</p>
+    `<p class="intro-wide">Questionnaires available to assign. They come from the EF Client Hub Codebook; Charlotte adds each one from the terminal once its licence status is cleared. Commercial instruments are never reproduced in the hub. Filter with the fields and condition buttons; press a column heading to sort, and again to reverse.</p>
     <form class="filters" data-filters="library" role="search" aria-label="Filter the library" novalidate>
       <div class="field"><label class="field-label" for="lib-q">Search</label><input class="input" id="lib-q" name="q" type="search" placeholder="Name, code, subscale or topic" autocomplete="off"></div>
       <div class="field"><label class="field-label" for="lib-domain">Domain</label><select class="select" id="lib-domain" name="domain"><option value="">All domains</option>${domains.map((d) => `<option value="${esc(d)}">${esc(d)}</option>`).join('')}</select></div>
@@ -407,7 +407,13 @@ export function library(s) {
     </form>
     <p class="t-caption" data-filter-count>${measures.length} questionnaire${measures.length === 1 ? '' : 's'}</p>
     <div class="table-wrap"><table class="table table-library">
-      <thead><tr><th scope="col">Questionnaire</th><th scope="col">Domain</th><th scope="col">Questions</th><th scope="col">Subscales</th><th scope="col">Licence</th></tr></thead>
+      <thead><tr>
+        <th scope="col" aria-sort="ascending"><button type="button" class="sort" data-sort="name" data-kind="text">Questionnaire</button></th>
+        <th scope="col"><button type="button" class="sort" data-sort="domain" data-kind="text">Domain</button></th>
+        <th scope="col"><button type="button" class="sort" data-sort="questions" data-kind="number">Questions</button></th>
+        <th scope="col"><button type="button" class="sort" data-sort="subscales" data-kind="number">Subscales</button></th>
+        <th scope="col"><button type="button" class="sort" data-sort="licence" data-kind="text">Licence</button></th>
+      </tr></thead>
       <tbody>${rows || '<tr><td colspan="5">The library is empty. Charlotte adds questionnaires with npm run measures.</td></tr>'}</tbody>
     </table></div>`,
     true,
