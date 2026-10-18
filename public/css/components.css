@@ -178,6 +178,7 @@
 .inline-add .input {
   flex: 1 1 200px;
   width: auto;
+  min-width: 0;
   min-height: var(--min-touch-target);
 }
 
@@ -840,4 +841,175 @@ th .sort:focus-visible {
 
 .toolbar-top > .reading {
   flex: 1 1 320px;
+}
+
+/* Panels flow into 2 columns and stack without gaps */
+.panel-flow {
+  columns: 2;
+  column-gap: var(--space-5);
+}
+
+.panel-flow > .panel {
+  break-inside: avoid;
+  margin-bottom: var(--space-5);
+}
+
+@media (max-width: 899px) {
+  .panel-flow {
+    columns: 1;
+  }
+}
+
+/* Faint lines between rows of details inside a panel */
+.panel .details {
+  gap: 0;
+}
+
+.panel .details > div {
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid rgba(46, 64, 98, 0.12);
+}
+
+.panel .details > div:last-child {
+  border-bottom: 0;
+}
+
+/* ---------- client record: sub menu and live formulation map ---------- */
+
+.subnav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.subnav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: var(--space-2);
+}
+
+.subnav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 36px;
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.subnav-link:hover {
+  background: var(--panel);
+}
+
+.subnav-link[aria-current="page"] {
+  background: var(--ef-navy);
+  color: #FFFFFF;
+}
+
+.subnav-link .nav-count {
+  margin-left: 0;
+}
+
+.subnav-back {
+  margin-left: auto;
+  order: 2;
+}
+
+/* The map: 3 boxes across the top joined by arrows, perpetuating looping
+   back under presenting, protective across the bottom */
+.map {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  grid-template-areas:
+    'pre a1 pci a2 pst'
+    '.   .  .   lp per'
+    'pro pro pro pro pro';
+  gap: var(--space-3);
+  align-items: stretch;
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--ground);
+}
+
+.map-box {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--reading-ground);
+  color: var(--on-reading);
+  border: 1px solid var(--hairline);
+}
+
+.map-box[data-zone='predisposing'] { grid-area: pre; }
+.map-box[data-zone='precipitating'] { grid-area: pci; }
+.map-box[data-zone='presenting'] { grid-area: pst; border-color: var(--ef-navy); border-width: 2px; }
+.map-box[data-zone='perpetuating'] { grid-area: per; border-color: var(--accent); border-width: 2px; }
+.map-box[data-zone='protective'] { grid-area: pro; background: var(--status-done-tint); border-color: var(--status-done); }
+
+.map-arrow,
+.map-loop {
+  align-self: center;
+  justify-self: center;
+  font-size: 1.5rem;
+  color: var(--ef-slate);
+}
+
+.map-arrow:first-of-type { grid-area: a1; }
+.map-arrow:nth-of-type(2) { grid-area: a2; }
+.map-loop { grid-area: lp; font-size: 1.75rem; color: var(--accent); }
+
+.map-title {
+  margin: 0;
+  font-weight: 500;
+}
+
+.map-hint,
+.map-empty {
+  margin: 0;
+  font-size: var(--type-caption-size);
+  opacity: 0.75;
+}
+
+.map-list {
+  list-style: none;
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: var(--type-caption-size);
+}
+
+.map-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.map-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: var(--hairline);
+}
+
+.map-dot-fits { background: var(--status-done); }
+.map-dot-partly { background: var(--status-attention); }
+.map-dot-no { background: #8A3F34; }
+
+@media (max-width: 899px) {
+  .map {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'pre' 'a1' 'pci' 'a2' 'pst' 'lp' 'per' 'pro';
+  }
+  .map-arrow, .map-loop { transform: rotate(90deg); }
 }

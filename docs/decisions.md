@@ -104,6 +104,10 @@
 
 56. Each questionnaire in the library opens its own page: about and licence, assign to a client, a test run that walks the questions as a client would and shows the resulting draft without saving anything, averages and band counts across the clients who have completed it (raw scores, not norms), the scoring rules, and the question list with reversed, alerting and own scale items marked. Log out sits top right on every page.
 
+## Client record (19 October 2026)
+
+57. The client record is split into tabs under the client's name: Overview (profile, intake, next session, resources), Questionnaires (assigned, check ins, draft results with the release button), Formulation (summary, suggestions, zones, release, and a live 5P map redrawn on every edit with the client's responses as dots), and Requests. Panels flow into 2 columns without gaps and detail rows carry faint lines.
+
 ## Open questions
 
 Answered by Charlotte on 18 October 2026 (see decision 30): 1 (discounted seat), 2 (clinical record, 10 years), 3 (all in the hub), 5 (adults), 9 (email and password only). Still open: 4, 6, 7, 8, 10, plus the discount rate and the email sender address.

@@ -130,7 +130,7 @@ async function route() {
     if (S.role !== 'practitioner' && !['codes', 'library'].includes(parts[1])) return navigate('/practitioner/codes', { replace: true });
     switch (parts[1]) {
       case 'client':
-        return paint(sv.client(S, parts[2]));
+        return paint(sv.client(S, parts[2], parts[3] || 'overview'));
       case 'review':
         return paint(sv.review(S));
       case 'codes':

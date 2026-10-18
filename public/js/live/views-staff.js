@@ -239,7 +239,7 @@ function requestRow(s, r) {
   }${r.status === 'done' ? '<span></span>' : `<button type="button" class="btn btn-secondary" data-action="close-request" data-id="${esc(r.id)}">Mark answered</button>`}</li>`;
 }
 
-export function client(s, uid) {
+export function client(s, uid, tab = 'overview') {
   const c = s.ctx.clients[uid];
   if (!c) return clients({ ...s, flash: { text: 'Client not found.', error: true } });
   const list = assignmentsFor(s, uid);
@@ -330,12 +330,16 @@ export function client(s, uid) {
         .join('')}</ul></div>`
     : '';
 
-  return shell(
-    s,
-    'clients',
-    c.name || c.email || 'Client',
-    `<p><a href="/practitioner">All clients</a></p>
-    <div class="split">
+  const tabs = [
+    ['overview', 'Overview', `/practitioner/client/${uid}`, 0],
+    ['questionnaires', 'Questionnaires', `/practitioner/client/${uid}/questionnaires`, pending],
+    ['formulation', 'Formulation', `/practitioner/client/${uid}/formulation`, 0],
+    ['requests', 'Requests', `/practitioner/client/${uid}/requests`, requests.filter((r) => r.status === 'open').length],
+  ];
+  const subnav = `<nav class="subnav" aria-label="${esc(c.name || 'Client')} sections"><a class="t-caption subnav-back" href="/practitioner">All clients</a><ul>${tabs
+    .map(([key, label, href, n]) => `<li><a class="subnav-link" href="${esc(href)}"${tab === key ? ' aria-current="page"' : ''}>${esc(label)}${n ? `<span class="nav-count">${n}</span>` : ''}</a></li>`)
+    .join('')}</ul></nav>`;
+  const overview = `    <div class="panel-flow">
       <section class="panel stack" aria-labelledby="h-profile">
         <h2 id="h-profile">Profile</h2>
         <dl class="details">
@@ -360,9 +364,6 @@ export function client(s, uid) {
         <h2 id="h-intake">Intake answers</h2>
         ${intakeAnswers ? `<dl class="details">${intakeAnswers}</dl>` : '<p>Not completed yet.</p>'}
       </section>
-    </div>
-
-    <div class="split">
       <section class="panel stack" aria-labelledby="h-session">
         <h2 id="h-session">Next session</h2>
         <p class="t-caption">Shown on the client's Home. Sessions are still booked in Splose; this is the reminder.</p>
@@ -392,13 +393,15 @@ export function client(s, uid) {
       </section>
     </div>
 
-    <section class="stack" aria-labelledby="h-assign">
+`;
+  const questionnaires = `<div class="panel-flow">
+    <section class="panel stack" aria-labelledby="h-assign">
       <h2 id="h-assign">Questionnaires</h2>
       ${list.length ? `<ul class="task-list">${list.map((a) => {
         const m = s.ctx.measures[a.measureId];
         const chip = a.status === 'complete' ? status('done', `Done ${fmtDate(a.completedAt)}`) : a.status === 'inProgress' ? status('progress', 'In progress') : status('attention', 'Not started');
         return `<li class="task"><div><p class="task-name">${esc(m?.name ?? a.measureId)}</p><p class="task-meta">Assigned ${fmtDate(a.assignedAt)}</p></div>${chip}<span></span></li>`;
-      }).join('')}</ul>` : '<p>No questionnaires assigned yet.</p>'}
+      }).join('')}</ul>` : '<p class="t-caption">None assigned yet.</p>'}
       ${
         c.activatedAt && assignable.length
           ? `<form class="inline-add" data-form="assign" data-uid="${esc(uid)}" novalidate>
@@ -410,10 +413,9 @@ export function client(s, uid) {
       }
     </section>
 
-    <section class="stack" aria-labelledby="h-checkin">
+    <section class="panel stack" aria-labelledby="h-checkin">
       <h2 id="h-checkin">Check ins</h2>
-      <p class="reading t-caption">Questionnaires sent again on a schedule during your work together. Each one arrives on the client's Home on the morning of its date, New Zealand time. Finishing a check in does not move the client's stage.</p>
-      ${schedules.length ? `<ul class="task-list">${schedules.map((x) => scheduleRow(s, x)).join('')}</ul>` : '<p>No check ins scheduled.</p>'}
+      ${schedules.length ? `<ul class="task-list">${schedules.map((x) => scheduleRow(s, x)).join('')}</ul>` : '<p class="t-caption">None scheduled. A check in arrives on the client\'s Home on the morning of its date.</p>'}
       ${
         c.activatedAt && schedulable.length
           ? `<form class="schedule-form stack" data-form="schedule" data-uid="${esc(uid)}" novalidate>
@@ -433,21 +435,22 @@ export function client(s, uid) {
       }
     </section>
 
-    <section class="stack" aria-labelledby="h-draft">
+    </div>
+    <section class="panel stack" aria-labelledby="h-draft">
       <h2 id="h-draft">Draft results</h2>
       ${overTime ? `<h3 class="t-ui-strong">Scores over time</h3>${overTime}` : ''}
-      ${draftBlocks || '<p>Draft results appear here when the client finishes a questionnaire.</p>'}
+      ${draftBlocks || '<p class="t-caption">Drafts appear here when the client finishes a questionnaire.</p>'}
       ${drafts.length ? `<div class="actions">${pending > 0 ? `<button type="button" class="btn btn-primary" data-action="release" data-uid="${esc(uid)}">Release results to ${esc(c.name || 'client')}</button>` : ''}${released?.releasedAt ? `<p class="t-caption">Last released ${fmtDate(released.releasedAt)}.</p>` : ''}</div>` : ''}
     </section>
 
-    <section class="stack" aria-labelledby="h-form">
-      <h2 id="h-form">Formulation</h2>
-      <p class="t-caption">5P formulation: presenting, predisposing, precipitating, perpetuating and protective. Changes save as you make them; the client sees nothing until you release, and then sees the latest release only. The client can mark each card as fits, partly or does not fit and leave a comment, which appears under the card here.</p>
+`;
+  const formulation = `    <section class="stack" aria-labelledby="h-form">
+      <h2 id="h-form" class="visually-hidden">Formulation</h2>
       <form class="stack" data-form="formulation-summary" data-uid="${esc(uid)}" novalidate>
         <div class="field">
           <label class="field-label" for="f-summary">Summary the client reads</label>
-          <p class="field-hint">A short paragraph in plain language above the cards. Saves when you leave the box.</p>
-          <textarea class="input textarea" id="f-summary" name="summary" rows="5" maxlength="1500">${esc(fSummary)}</textarea>
+          <p class="field-hint">Plain language, shown above the cards. Saves when you leave the box.</p>
+          <textarea class="input textarea" id="f-summary" name="summary" rows="3" maxlength="1500">${esc(fSummary)}</textarea>
         </div>
       </form>
       ${suggestionList}
@@ -457,8 +460,20 @@ export function client(s, uid) {
         ${fr ? `<p class="t-caption">Version ${fr.version ?? 1} released ${fmtDate(fr.releasedAt)}.${draftChanged ? ' The draft has changed since.' : ''}</p>` : '<p class="t-caption">Not yet released.</p>'}
       </div>
     </section>
+    <section class="stack" aria-labelledby="h-map">
+      <h2 id="h-map">Live map</h2>
+      <p class="t-caption">How the pieces relate, redrawn as you edit. Dots show the client's responses to the released version: green fits, amber partly, red does not fit.</p>
+      ${formulationMap(fd, fResponses)}
+    </section>
 
-    ${requests.length ? `<section class="stack" aria-labelledby="h-req"><h2 id="h-req">Privacy requests</h2><ul class="task-list">${requests.map((r) => requestRow(s, r)).join('')}</ul></section>` : ''}`,
+`;
+  const requestsTab = `<section class="panel stack" aria-labelledby="h-req"><h2 id="h-req">Privacy requests</h2>${requests.length ? `<ul class="task-list">${requests.map((r) => requestRow(s, r)).join('')}</ul>` : '<p class="t-caption">None. Access and correction requests the client raises appear here, with their due dates.</p>'}</section>`;
+  const content = { overview, questionnaires, formulation, requests: requestsTab }[tab] ?? overview;
+  return shell(
+    s,
+    'clients',
+    c.name || c.email || 'Client',
+    `${subnav}${content}`,
     true,
   );
 }
@@ -599,6 +614,35 @@ export function library(s) {
     </table></div>`,
     true,
   );
+}
+
+// ---------- live formulation map ----------
+
+// The 5P pieces as a diagram: what shaped it feeds what set it off, which
+// produces the presenting problem; perpetuating factors loop back into it;
+// protective factors sit underneath as the buffer. Redrawn on every edit.
+function formulationMap(factors, responses = {}) {
+  const inZone = (z) => factors.filter((f) => zoneOf(f) === z);
+  const dot = (f) => {
+    const r = responses[f.id];
+    return r?.fit ? `<i class="map-dot map-dot-${r.fit}" title="${esc(FIT_LABELS[r.fit])}"></i>` : '';
+  };
+  const box = (z, title, hint) => {
+    const list = inZone(z);
+    return `<div class="map-box" data-zone="${z}"><p class="map-title">${esc(title)}</p><p class="map-hint">${esc(hint)}</p>${
+      list.length ? `<ul class="map-list">${list.map((f) => `<li>${dot(f)}${esc(f.text)}</li>`).join('')}</ul>` : '<p class="map-empty">Nothing yet</p>'
+    }</div>`;
+  };
+  return `<div class="map" role="img" aria-label="Formulation map with ${factors.length} factor${factors.length === 1 ? '' : 's'}">
+    ${box('predisposing', 'Predisposing', 'What made this more likely')}
+    <span class="map-arrow" aria-hidden="true">&#8594;</span>
+    ${box('precipitating', 'Precipitating', 'What set it off')}
+    <span class="map-arrow" aria-hidden="true">&#8594;</span>
+    ${box('presenting', 'Presenting', 'What we are working on')}
+    <span class="map-loop" aria-hidden="true">&#8635;</span>
+    ${box('perpetuating', 'Perpetuating', 'What keeps it going')}
+    ${box('protective', 'Protective', 'What helps')}
+  </div>`;
 }
 
 // ---------- 1 questionnaire: details, assign, test run, questions, averages ----------
