@@ -13,8 +13,8 @@
       ],
       "rewrites": [
         {
-          "source": "/measure/**",
-          "destination": "/measure.html"
+          "source": "**",
+          "destination": "/index.html"
         }
       ],
       "headers": [
@@ -98,6 +98,7 @@
         "test/**"
       ],
       "predeploy": [
+        "node scripts/sync-functions.mjs",
         "npm --prefix \"$RESOURCE_DIR\" install"
       ]
     }

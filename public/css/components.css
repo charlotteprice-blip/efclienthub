@@ -1,0 +1,242 @@
+/* Components shared by the live Client Hub and the clickable sample:
+   onboarding, results, formulation zones, practitioner forms and dialogs. */
+
+/* ---------- onboarding ---------- */
+
+.divider-text {
+  text-align: center;
+  font-size: var(--type-caption-size);
+}
+
+.code {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+.code-large {
+  font-size: var(--type-title-size);
+  line-height: var(--type-title-line);
+}
+
+.code-input {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.sample-hint {
+  border-left-color: var(--accent);
+}
+
+.single-card .notice {
+  background: var(--ground);
+  color: var(--ink);
+}
+
+.consent-text h2 {
+  margin-top: var(--space-5);
+}
+
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  min-height: var(--min-touch-target);
+  cursor: pointer;
+}
+
+.check input {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin: 2px 0 0;
+  accent-color: var(--ef-navy);
+}
+
+/* ---------- client screens ---------- */
+
+.done-mark svg {
+  width: 72px;
+  height: 72px;
+  color: var(--ink);
+}
+
+.result-block + .result-block {
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--hairline);
+}
+
+.result-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.result-list li {
+  padding-left: var(--space-4);
+  border-left: 3px solid var(--accent);
+}
+
+.zones {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.zone {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-height: 180px;
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--ground);
+  color: var(--ink);
+}
+
+.zone[data-zone="maintaining"] {
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.zone-cards {
+  list-style: none;
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.factor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--reading-ground);
+  color: var(--on-reading);
+  cursor: grab;
+}
+
+.factor > span:first-child {
+  flex: 1 1 160px;
+}
+
+.target-tag {
+  font-size: var(--type-caption-size);
+  font-weight: 500;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--accent);
+}
+
+.move {
+  min-height: 36px;
+  padding: 0 var(--space-2);
+  border: 1.5px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: var(--type-caption-size);
+}
+
+.details {
+  margin: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.details div {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) 2fr;
+  gap: var(--space-4);
+}
+
+.details dt {
+  font-weight: 500;
+}
+
+.details dd {
+  margin: 0;
+}
+
+/* ---------- practitioner ---------- */
+
+.inline-add {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: flex-end;
+}
+
+.inline-add .field-label {
+  width: 100%;
+}
+
+.inline-add .select,
+.inline-add .input {
+  flex: 1 1 200px;
+  width: auto;
+  min-height: var(--min-touch-target);
+}
+
+.inline-add .btn {
+  width: auto;
+  min-height: var(--min-touch-target);
+}
+
+.zone-edit .factor {
+  cursor: default;
+}
+
+.draft {
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--hairline);
+}
+
+.draft-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.type-dot-empty {
+  border: 1.5px solid currentColor;
+}
+
+.workspace .issued {
+  background: var(--inv-panel);
+  color: var(--inv-on-panel);
+}
+
+/* ---------- dialog ---------- */
+
+.dialog {
+  width: min(480px, calc(100vw - 32px));
+  padding: var(--space-6);
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--reading-ground);
+  color: var(--on-reading);
+}
+
+.dialog::backdrop {
+  background: rgba(46, 64, 98, 0.45);
+}
+
+@media (max-width: 899px) {
+  .zones {
+    grid-template-columns: 1fr;
+  }
+  .details div {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

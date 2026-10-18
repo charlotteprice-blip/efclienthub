@@ -27,7 +27,8 @@ const csp = hosting.headers[0].headers.find((h) => h.key === 'Content-Security-P
 async function resolve(urlPath) {
   const clean = normalize(decodeURIComponent(urlPath.split('?')[0])).replace(/^(\.\.[/\\])+/, '');
   const candidates = [clean, `${clean}.html`, join(clean, 'index.html')];
-  if (clean.startsWith('/measure/')) candidates.push('/measure.html');
+  // Live app routes have no file extension; they all load index.html.
+  if (!extname(clean)) candidates.push('/index.html');
   for (const c of candidates) {
     const file = join(root, c);
     if (!file.startsWith(root)) continue;

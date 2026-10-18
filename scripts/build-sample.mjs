@@ -20,6 +20,7 @@ const inlineFonts = (css) =>
 const css = [
   inlineFonts(readFileSync(pub('css/tokens.css'), 'utf8')),
   readFileSync(pub('css/app.css'), 'utf8'),
+  readFileSync(pub('css/components.css'), 'utf8'),
   readFileSync(pub('sample/sample.css'), 'utf8'),
 ].join('\n');
 

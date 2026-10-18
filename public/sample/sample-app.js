@@ -9,7 +9,7 @@ import { applyAccent, stageCopy } from '../js/client-types.js';
 import { createJourneyRing } from '../js/journey-ring.js';
 import { createMark } from '../js/mark.js';
 import * as store from './sample-store.js';
-import { STAGE_LABELS, clientShell, esc, fieldError, fmtDate, single, status } from './sample-ui.js';
+import { STAGE_LABELS, clientShell, esc, fieldError, fmtDate, single, status } from '../js/ui.js';
 import { renderPractitioner } from './sample-practitioner.js';
 
 export const MARK_SRC = '../assets/brand/mark-slate-small.svg';

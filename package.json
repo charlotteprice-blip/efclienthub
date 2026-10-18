@@ -17,15 +17,19 @@
     "tokens": "node scripts/build-tokens.mjs",
     "contrast": "node scripts/check-contrast.mjs",
     "check": "npm run test:unit && npm run contrast",
-    "test:unit": "node --test \"tests/unit/*.test.js\"",
+    "test:unit": "node scripts/sync-functions.mjs && node --test \"tests/unit/*.test.js\"",
     "test:rules": "firebase emulators:exec --config firebase.test.json --project demo-clienthub --only firestore,storage \"node --test tests/rules.test.js\"",
     "test": "npm run test:unit && node scripts/check-contrast.mjs && npm run test:rules",
-    "emulators": "firebase emulators:start --project demo-clienthub",
+    "emulators": "node scripts/sync-functions.mjs && firebase emulators:start --project demo-clienthub",
     "deploy:rules": "firebase deploy --project executiveframe-app --only firestore,storage:clienthub",
     "deploy:hosting": "npm run check && firebase deploy --project executiveframe-app --only hosting:clienthub",
     "deploy:functions": "firebase deploy --project executiveframe-app --only functions:clienthub",
     "deploy": "npm test && firebase deploy --project executiveframe-app --only hosting:clienthub,firestore,storage:clienthub,functions:clienthub",
-    "worklog": "node scripts/worklog.mjs"
+    "worklog": "node scripts/worklog.mjs",
+    "measures": "node scripts/measures.mjs",
+    "sync": "node scripts/sync-functions.mjs",
+    "postinstall": "npm --prefix functions install --no-audit --no-fund",
+    "harness": "node scripts/sync-functions.mjs && node tests/e2e/server.mjs"
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^6.0.0",

@@ -1,0 +1,8 @@
+{
+  "_note": "Live app settings. bookingUrl is Sarah's Splose online booking page. socialSignIn stays false until Google and Microsoft sign in are approved and the security policy allows Google's sign in script.",
+  "consentVersion": "2026-10-v1",
+  "bookingUrl": "",
+  "learningHubUrl": "https://app.executiveframe.co.nz",
+  "socialSignIn": false,
+  "practitionerName": "Sarah"
+}

@@ -1,5 +1,12 @@
-// Shared building blocks for the clickable sample: escaping, dates, icons,
-// status chips and the 2 viewer shells (client and practitioner).
+// Shared building blocks for the live Client Hub and the clickable sample:
+// escaping, dates, icons, status chips and the viewer shells. Links come
+// from a routes map so the sample (hash links) and the live app (paths)
+// share the same markup.
+
+export const HASH_ROUTES = {
+  home: '#/home', questionnaires: '#/questionnaires', results: '#/results', formulation: '#/formulation', account: '#/account',
+  clients: '#/p/clients', review: '#/p/review', codes: '#/p/codes', library: '#/p/library',
+};
 
 export const esc = (v) =>
   String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -80,40 +87,43 @@ function shell({ nav, title, content, foot, account, mode, wide }) {
   </div>`;
 }
 
-export function clientShell({ title, active, content, client, counts, hasFormulation, mode, markSrc }) {
+export function clientShell({ title, active, content, client, counts, hasFormulation, mode, markSrc, routes = HASH_ROUTES }) {
   const initial = esc((client?.name ?? 'A').trim().charAt(0).toUpperCase());
   const items = [
-    { href: '#/home', label: 'Home', icon: 'home', active: active === 'home' },
-    { href: '#/questionnaires', label: 'Questionnaires', icon: 'list', active: active === 'questionnaires', count: counts.outstanding, countLabel: 'to complete' },
-    { href: '#/results', label: 'Results', icon: 'results', active: active === 'results' },
+    { href: routes.home, label: 'Home', icon: 'home', active: active === 'home' },
+    { href: routes.questionnaires, label: 'Questionnaires', icon: 'list', active: active === 'questionnaires', count: counts.outstanding, countLabel: 'to complete' },
+    { href: routes.results, label: 'Results', icon: 'results', active: active === 'results' },
   ];
-  if (hasFormulation) items.push({ href: '#/formulation', label: 'Formulation', icon: 'formulation', active: active === 'formulation' });
+  if (hasFormulation) items.push({ href: routes.formulation, label: 'Formulation', icon: 'formulation', active: active === 'formulation' });
   return shell({
-    nav: { home: '#/home', items, markSrc },
+    nav: { home: routes.home, items, markSrc },
     title,
     content,
     mode,
     foot: mode === 'focus' ? 'Your answers save as you go.' : 'Your information is stored securely in Sydney, Australia.',
     account: mode === 'focus'
-      ? '<a class="btn btn-quiet" href="#/questionnaires">Save and exit</a>'
-      : `<a class="account-button" href="#/account"${active === 'account' ? ' aria-current="page"' : ''}><span class="avatar" aria-hidden="true">${initial}</span><span class="account-name">${esc(client?.name ?? 'Account')}</span></a>`,
+      ? `<a class="btn btn-quiet" href="${routes.questionnaires}">Save and exit</a>`
+      : `<a class="account-button" href="${routes.account}"${active === 'account' ? ' aria-current="page"' : ''}><span class="avatar" aria-hidden="true">${initial}</span><span class="account-name">${esc(client?.name ?? 'Account')}</span></a>`,
   });
 }
 
-export function practitionerShell({ title, active, content, counts, wide, markSrc }) {
-  const items = [
-    { href: '#/p/clients', label: 'Clients', icon: 'clients', active: active === 'clients' },
-    { href: '#/p/review', label: 'To review', icon: 'review', active: active === 'review', count: counts.review, countLabel: 'to review' },
-    { href: '#/p/codes', label: 'Activation codes', icon: 'codes', active: active === 'codes' },
-    { href: '#/p/library', label: 'Questionnaire library', icon: 'library', active: active === 'library' },
+export function practitionerShell({ title, active, content, counts, wide, markSrc, routes = HASH_ROUTES, role = 'practitioner', person = { name: 'Sarah' }, accountHref = null }) {
+  const all = [
+    { key: 'clients', href: routes.clients, label: 'Clients', icon: 'clients', active: active === 'clients', practitionerOnly: true },
+    { key: 'review', href: routes.review, label: 'To review', icon: 'review', active: active === 'review', count: counts.review, countLabel: 'to review', practitionerOnly: true },
+    { key: 'codes', href: routes.codes, label: 'Activation codes', icon: 'codes', active: active === 'codes' },
+    { key: 'library', href: routes.library, label: 'Questionnaire library', icon: 'library', active: active === 'library' },
   ];
+  const items = all.filter((i) => role === 'practitioner' || !i.practitionerOnly);
+  const initial = esc(String(person.name ?? 'S').trim().charAt(0).toUpperCase() || 'S');
+  const badge = `<span class="avatar" aria-hidden="true">${initial}</span><span class="account-name">${esc(person.name)}</span>`;
   return shell({
-    nav: { home: '#/p/clients', items, markSrc },
+    nav: { home: items[0].href, items, markSrc },
     title,
     content,
     wide,
-    foot: 'Practitioner view. Drafts are never shown to clients until you release them.',
-    account: '<span class="account-button"><span class="avatar" aria-hidden="true">S</span><span class="account-name">Sarah</span></span>',
+    foot: role === 'practitioner' ? 'Practitioner view. Drafts are never shown to clients until you release them.' : 'Admin view. Client records are not shown to admin accounts.',
+    account: accountHref ? `<a class="account-button" href="${accountHref}">${badge}</a>` : `<span class="account-button">${badge}</span>`,
   });
 }
 

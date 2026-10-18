@@ -1,0 +1,330 @@
+// Handlers for every Client Hub Cloud Function, written against an injected
+// database so they run unchanged in production (index.js wraps them with
+// onCall) and in tests (tests/functions uses an in memory database).
+
+import { HttpsError } from 'firebase-functions/v2/https';
+import * as core from './core.js';
+import { deriveClientType, validateIntake } from './shared/intake-rules.js';
+import { buildDraft, scoreMeasure } from './shared/scoring.js';
+
+export function makeHandlers({ db, intakeConfig, clientTypes, allowSample = () => false, now = () => Date.now() }) {
+  const fail = (code, message) => {
+    throw new HttpsError(code, message);
+  };
+
+  function signedIn(request) {
+    if (!request.auth) fail('unauthenticated', 'Please log in again.');
+    return request.auth;
+  }
+
+  function practitioner(request) {
+    const auth = signedIn(request);
+    if (auth.token.role !== 'practitioner') fail('permission-denied', 'Only the practitioner can do this.');
+    return auth;
+  }
+
+  function staff(request) {
+    const auth = signedIn(request);
+    if (!core.ROLES.includes(auth.token.role)) fail('permission-denied', 'Only Executive Frame staff can do this.');
+    return auth;
+  }
+
+  async function audit(actorUid, action, targetUid = null, extra = {}) {
+    await db.collection('auditLog').add({ actorUid, action, targetUid, at: now(), ...extra });
+  }
+
+  async function ownAssignment(auth, assignmentId) {
+    const ref = db.doc(`assignments/${String(assignmentId)}`);
+    const snap = await ref.get();
+    if (!snap.exists || snap.data().uid !== auth.uid) fail('not-found', 'That questionnaire was not found.');
+    return { ref, a: snap.data() };
+  }
+  async function existingClient(uid) {
+    const ref = db.doc(`clients/${String(uid)}`);
+    const snap = await ref.get();
+    if (!snap.exists) fail('not-found', 'Client not found.');
+    return { ref, client: snap.data() };
+  }
+
+  return {
+    // ---------- client ----------
+
+    redeemActivationCode: async (request) => {
+      const auth = signedIn(request);
+      const code = core.normaliseCode(request.data?.code);
+      if (code.length !== core.CODE_LENGTH) fail('invalid-argument', "Activation codes have 12 letters and numbers. Check the code in Sarah's email.");
+      const name = core.cleanName(request.data?.name ?? auth.token.name);
+
+      const limitRef = db.doc(`rateLimits/${auth.uid}`);
+      const codeRef = db.doc(`activationCodes/${core.hashCode(code)}`);
+      const clientRef = db.doc(`clients/${auth.uid}`);
+
+      // Count the attempt in its own transaction so failed attempts still count.
+      const blocked = await db.runTransaction(async (tx) => {
+        const attempt = core.nextAttemptState((await tx.get(limitRef)).data(), now());
+        tx.set(limitRef, attempt.next);
+        return attempt.blocked;
+      });
+      if (blocked) fail('resource-exhausted', 'Too many attempts. Wait an hour, or ask Sarah to check your code.');
+
+      return db
+        .runTransaction(async (tx) => {
+          const [codeSnap, clientSnap] = await Promise.all([tx.get(codeRef), tx.get(clientRef)]);
+          if (clientSnap.exists && clientSnap.data().codeHash) return { ok: true, already: true };
+
+          const record = codeSnap.exists ? codeSnap.data() : null;
+          const problem = core.codeProblem(record, { uid: auth.uid, email: auth.token.email, now: now() });
+          if (problem) fail('failed-precondition', problem);
+
+          tx.update(codeRef, { redeemedByUid: auth.uid, redeemedAt: now() });
+          tx.set(
+            clientRef,
+            {
+              uid: auth.uid,
+              name: name || null,
+              email: auth.token.email ?? null,
+              codeHash: codeRef.id,
+              codeType: record.clientTypeOverride ?? null,
+              clientType: null,
+              journeyStage: null,
+              activatedAt: null,
+              consentAt: null,
+              consentVersion: null,
+              retentionUntil: null,
+              createdAt: now(),
+              lastActive: now(),
+            },
+            { merge: true },
+          );
+          return { ok: true };
+        })
+        .then(async (r) => {
+          await audit(auth.uid, 'redeemed activation code', auth.uid);
+          return r;
+        });
+    },
+
+    recordConsent: async (request) => {
+      const auth = signedIn(request);
+      const version = String(request.data?.version ?? '').slice(0, 40);
+      if (!version) fail('invalid-argument', 'Consent version missing.');
+      const ref = db.doc(`clients/${auth.uid}`);
+      const snap = await ref.get();
+      if (!snap.exists) fail('failed-precondition', 'Enter your activation code first.');
+      await ref.update({ consentAt: now(), consentVersion: version, lastActive: now() });
+      await audit(auth.uid, `recorded consent ${version}`, auth.uid);
+      return { ok: true };
+    },
+
+    submitIntake: async (request) => {
+      const auth = signedIn(request);
+      const answers = request.data?.answers ?? {};
+      const errors = validateIntake(intakeConfig, answers);
+      if (Object.keys(errors).length) fail('invalid-argument', 'Please answer the required questions.');
+      const ref = db.doc(`clients/${auth.uid}`);
+      const snap = await ref.get();
+      const client = snap.data();
+      if (!client?.codeHash) fail('failed-precondition', 'Enter your activation code first.');
+      if (!client.consentAt) fail('failed-precondition', 'Please agree to the privacy notice first.');
+      if (client.activatedAt) return { ok: true, already: true };
+
+      // Keep only answers to enabled questions, trimmed.
+      const kept = {};
+      for (const q of intakeConfig.questions.filter((x) => x.enabled)) {
+        if (answers[q.id] !== undefined && answers[q.id] !== '') kept[q.id] = String(answers[q.id]).slice(0, 1000);
+      }
+      const derived = deriveClientType(intakeConfig, kept, client.codeType ?? null);
+      const batch = db.batch();
+      batch.set(db.doc(`intakeResponses/${auth.uid}`), {
+        uid: auth.uid,
+        answers: kept,
+        derivedType: derived.type,
+        source: derived.source,
+        overriddenBy: null,
+        submittedAt: now(),
+        configVersion: intakeConfig.version,
+      });
+      batch.update(ref, { clientType: derived.type, journeyStage: 'assessment', activatedAt: now(), lastActive: now() });
+
+      // Default questionnaires for the type, if Sarah has listed any.
+      const defaults = clientTypes.types?.[derived.type]?.defaultMeasures ?? [];
+      let order = 1;
+      for (const measureId of defaults) {
+        const m = await db.doc(`measures/${measureId}`).get();
+        if (!core.assignable(m.data(), { allowSample: allowSample() })) continue;
+        batch.set(db.collection('assignments').doc(), { uid: auth.uid, measureId, status: 'notStarted', order: order++, assignedAt: now(), completedAt: null });
+      }
+      await batch.commit();
+      await audit(auth.uid, 'submitted intake', auth.uid);
+      return { ok: true };
+    },
+
+    saveResponse: async (request) => {
+      const auth = signedIn(request);
+      const { assignmentId, itemId, value } = request.data ?? {};
+      const { ref, a } = await ownAssignment(auth, assignmentId);
+      if (a.status === 'complete') fail('failed-precondition', 'You have already finished that questionnaire.');
+      const measure = (await db.doc(`measures/${a.measureId}`).get()).data();
+      if (!core.validResponse(measure, itemId, value)) fail('invalid-argument', 'That answer is not one of the options.');
+      // In progress answers sit on the assignment so the client can resume;
+      // submitMeasure moves them to scoring, which clients cannot read.
+      await ref.update({ [`responses.${itemId}`]: Number(value), status: 'inProgress', updatedAt: now() });
+      await db.doc(`clients/${auth.uid}`).update({ lastActive: now() });
+      return { ok: true };
+    },
+
+    submitMeasure: async (request) => {
+      const auth = signedIn(request);
+      const { ref, a } = await ownAssignment(auth, request.data?.assignmentId);
+      if (a.status === 'complete') return { ok: true, booking: false };
+      const measure = (await db.doc(`measures/${a.measureId}`).get()).data();
+      const responses = a.responses ?? {};
+
+      // scoreMeasure: draft only, never shown to the client before release.
+      const scores = scoreMeasure(measure, responses);
+      if (!scores.complete) fail('failed-precondition', 'Please answer every question before finishing.');
+      const draft = buildDraft(measure, scores);
+
+      const batch = db.batch();
+      batch.set(db.doc(`scoring/${ref.id}`), { uid: auth.uid, assignmentId: ref.id, measureId: a.measureId, responses, scores, draft, scoredAt: now() });
+      batch.update(ref, { status: 'complete', completedAt: now(), responses: null });
+      await batch.commit();
+
+      // triggerBooking: when the last assigned questionnaire is done.
+      const open = await db.collection('assignments').where('uid', '==', auth.uid).where('status', 'in', ['notStarted', 'inProgress']).get();
+      let booking = false;
+      if (open.empty) {
+        await db.doc(`clients/${auth.uid}`).update({ journeyStage: 'booking', bookingTriggeredAt: now(), lastActive: now() });
+        booking = true;
+      }
+      await audit(auth.uid, 'completed questionnaire', auth.uid, { measureId: a.measureId, booking });
+      return { ok: true, booking };
+    },
+
+    createRequest: async (request) => {
+      const auth = signedIn(request);
+      const kind = request.data?.kind;
+      if (!core.REQUEST_KINDS.includes(kind)) fail('invalid-argument', 'Unknown request.');
+      const detail = String(request.data?.detail ?? '')
+        .trim()
+        .slice(0, 1000);
+      if (kind === 'correction' && !detail) fail('invalid-argument', 'Tell Sarah what should be corrected.');
+      await db.collection('requests').add({ uid: auth.uid, kind, detail, createdAt: now(), dueBy: core.addWorkingDays(now(), 20), status: 'open' });
+      await audit(auth.uid, `requested ${kind}`, auth.uid);
+      return { ok: true };
+    },
+
+    // ---------- practitioner ----------
+
+    issueActivationCode: async (request) => {
+      const auth = staff(request);
+      const forName = core.cleanName(request.data?.forName) || 'Unnamed';
+      const type = request.data?.clientTypeOverride || null;
+      if (type && !clientTypes.types[type]) fail('invalid-argument', 'Unknown client type.');
+      const email =
+        String(request.data?.email ?? '')
+          .trim()
+          .toLowerCase() || null;
+      let code;
+      let ref;
+      for (let i = 0; i < 5; i += 1) {
+        code = core.generateCode();
+        ref = db.doc(`activationCodes/${core.hashCode(code)}`);
+        if (!(await ref.get()).exists) break;
+      }
+      await ref.set({
+        forName,
+        email,
+        clientTypeOverride: type,
+        last4: code.slice(-4),
+        issuedBy: auth.uid,
+        issuedAt: now(),
+        expiresAt: core.codeExpiry(now()),
+        redeemedByUid: null,
+        redeemedAt: null,
+      });
+      await audit(auth.uid, 'issued activation code', null, { forName });
+      // The only time the code itself is returned; only its hash is stored.
+      return { code: core.formatCode(code), expiresAt: core.codeExpiry(now()) };
+    },
+
+    setClientType: async (request) => {
+      const auth = practitioner(request);
+      const type = request.data?.type || null;
+      if (type && !clientTypes.types[type]) fail('invalid-argument', 'Unknown client type.');
+      const { ref } = await existingClient(request.data?.uid);
+      await ref.update({ clientType: type });
+      await db.doc(`intakeResponses/${ref.id}`).set({ overriddenBy: auth.uid, overriddenAt: now() }, { merge: true });
+      await audit(auth.uid, `set client type ${type}`, ref.id);
+      return { ok: true };
+    },
+
+    setStage: async (request) => {
+      const auth = practitioner(request);
+      const stage = request.data?.stage;
+      if (!core.STAGES.includes(stage)) fail('invalid-argument', 'Unknown stage.');
+      const { ref } = await existingClient(request.data?.uid);
+      await ref.update({ journeyStage: stage });
+      await audit(auth.uid, `set stage ${stage}`, ref.id);
+      return { ok: true };
+    },
+
+    assignMeasure: async (request) => {
+      const auth = practitioner(request);
+      const { ref, client } = await existingClient(request.data?.uid);
+      const measureId = String(request.data?.measureId ?? '');
+      const measure = (await db.doc(`measures/${measureId}`).get()).data();
+      if (!core.assignable(measure, { allowSample: allowSample() })) fail('failed-precondition', 'That questionnaire is not cleared for use with clients.');
+      const current = await db.collection('assignments').where('uid', '==', ref.id).get();
+      if (current.docs.some((d) => d.data().measureId === measureId && d.data().status !== 'complete')) return { ok: true, already: true };
+      await db.collection('assignments').add({ uid: ref.id, measureId, status: 'notStarted', order: current.size + 1, assignedAt: now(), completedAt: null });
+      if (['booking', 'feedback'].includes(client.journeyStage)) await ref.update({ journeyStage: 'assessment' });
+      await audit(auth.uid, 'assigned questionnaire', ref.id, { measureId });
+      return { ok: true };
+    },
+
+    releaseResults: async (request) => {
+      const auth = practitioner(request);
+      const { ref, client } = await existingClient(request.data?.uid);
+      const scoring = await db.collection('scoring').where('uid', '==', ref.id).get();
+      const drafts = scoring.docs.map((d) => d.data()).filter((d) => d.draft);
+      if (!drafts.length) fail('failed-precondition', 'There are no draft results to release.');
+      const resultsRef = db.doc(`results/${ref.id}`);
+      const existing = (await resultsRef.get()).data()?.items ?? [];
+      const items = core.buildRelease(drafts, existing);
+      await resultsRef.set({ uid: ref.id, releasedAt: now(), releasedBy: auth.uid, items });
+      await ref.update({ journeyStage: core.stageAfterRelease(client.journeyStage) });
+      await audit(auth.uid, 'released results', ref.id, { count: items.length });
+      return { ok: true };
+    },
+
+    saveFormulationDraft: async (request) => {
+      const auth = practitioner(request);
+      const { ref } = await existingClient(request.data?.uid);
+      const factors = core.cleanFactors(request.data?.factors);
+      if (!factors) fail('invalid-argument', 'Each factor needs text and one of the 4 zones.');
+      await db.doc(`formulationDrafts/${ref.id}`).set({ uid: ref.id, factors, updatedAt: now(), updatedBy: auth.uid });
+      return { ok: true };
+    },
+
+    releaseFormulation: async (request) => {
+      const auth = practitioner(request);
+      const { ref } = await existingClient(request.data?.uid);
+      const draft = (await db.doc(`formulationDrafts/${ref.id}`).get()).data();
+      if (!draft?.factors?.length) fail('failed-precondition', 'Add at least 1 factor before releasing.');
+      await db.doc(`formulations/${ref.id}`).set({ uid: ref.id, factors: draft.factors, releasedAt: now(), releasedBy: auth.uid });
+      await audit(auth.uid, 'released formulation', ref.id);
+      return { ok: true };
+    },
+
+    closeRequest: async (request) => {
+      const auth = practitioner(request);
+      const ref = db.doc(`requests/${String(request.data?.requestId)}`);
+      const snap = await ref.get();
+      if (!snap.exists) fail('not-found', 'Request not found.');
+      await ref.update({ status: 'done', closedAt: now(), closedBy: auth.uid });
+      await audit(auth.uid, 'answered privacy request', snap.data().uid);
+      return { ok: true };
+    },
+  };
+}

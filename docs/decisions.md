@@ -37,6 +37,15 @@
 
 22. Every setup step that the Firebase CLI, gcloud or a Google API can perform runs from `npm run setup`, which checks before acting, asks before each change and can be rerun safely. Roles are granted with `npm run roles`. Deploys go through named npm scripts only. Creating the project under Sarah's account and adding DNS records at the DNS host stay manual.
 
+## Live app (18 October 2026)
+
+23. The live app is a path routed single page app at `/` (Hosting rewrites every route to index.html), reusing the sample's screens with live data. Routes: /signup, /login, /reset, /activate, /consent, /intake, /dashboard, /questionnaires, /measure/{id}, /done, /results, /formulation, /account, /practitioner and below.
+24. Function logic lives in `functions/handlers.js` with an injected database, so the same code runs in Firebase and in the in memory tests (11 journey tests) and the end to end harness.
+25. Activation codes are stored only as a SHA 256 hash with the last 4 characters for display; Sarah sees the full code once, when it is issued. A code may optionally be bound to the client's email. Code attempts are limited to 10 an hour per account.
+26. Sample questionnaires are assignable only while `ALLOW_SAMPLE_MEASURES=true`; otherwise only questionnaires marked `cleared` can be assigned.
+27. Google and Microsoft sign in stay off (`socialSignIn: false`) until open question 9 is decided; email and password works now.
+28. Results links to the Learning Hub open in a new tab and need a separate sign in there until the handover in open question 1 is built.
+
 ## Open questions
 
 1. Learning Hub access. Does activation grant clients a complimentary Learning Hub seat? Without one, results links reach a paywall. A sign in handover between the 2 subdomains also needs building, because Firebase sessions do not carry across origins.

@@ -7,26 +7,22 @@ This app shares Firebase Authentication with the Learning Hub (app.executivefram
 ## Layout
 
 ```
-firebase.json          Hosting target, clienthub database, storage target, functions codebase
-.firebaserc            project and target mapping
-firestore.rules        rules for the clienthub database
-storage.rules          bucket closed to browsers
-firebase.test.json     emulator config used only by the rules tests
-brand/                 Levi's tokens.json and the Client Hub status colours
-tests/rules.test.js    security rules tests (emulators)
-tests/unit/            config and intake rule tests (no emulators)
-functions/             Cloud Functions, codebase "clienthub" (stubs until stage 3)
-public/
-  css/tokens.css       generated from brand/tokens.json, shared with the Learning Hub
-  css/app.css          Client Hub styles and overrides
-  config/              client-types.json and intake.json
-  js/                  firebase.js, intake-rules.js, client-types.js, mark.js
-  templates/page.html  base layout to copy for each page
-  styleguide.html      every component, for checking against the brand
-  assets/              brand SVGs, self hosted Figtree and Firebase SDK
-scripts/               vendor.mjs, build-tokens.mjs, check-contrast.mjs
-docs/                  data model, client journey, decisions, brand notes, intake guide
+firebase.json            Hosting, clienthub database, storage target, functions codebase
+firestore.rules          rules for the clienthub database; storage.rules closes the bucket
+functions/               Cloud Functions: index.js connects handlers.js to Firebase; core.js holds the tested rules
+public/index.html        the live app; every route loads it
+public/js/live/          live app: app.js (routes, auth, actions), data.js, views-client.js, views-staff.js
+public/js/               shared: ui.js, scoring.js, intake-rules.js, client-types.js, mark.js, journey-ring.js, firebase.js
+public/config/           app.json, client-types.json, intake.json
+public/css/              tokens.css (generated), app.css, components.css
+public/sample/           clickable sample on invented data
+brand/                   Levi's tokens.json and the status colours
+scripts/                 setup, roles, measures, serve, vendor, tokens, contrast, sample build, worklog
+tests/                   unit tests, rules tests, in memory Firestore, end to end harness
+docs/                    firebase-setup.md, data model, client journey, decisions, brand notes, intake guide
 ```
+
+Start with docs/firebase-setup.md.
 
 ## Terminal tasks
 

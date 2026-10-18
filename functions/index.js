@@ -1,23 +1,72 @@
 // Executive Frame Client Hub Cloud Functions (codebase "clienthub").
 //
-// Every function runs in australia-southeast1 and writes to the named
-// Firestore database `clienthub` through the Admin SDK. Browsers never write
-// to Firestore directly; see firestore.rules.
+// Every write to the named Firestore database `clienthub` happens here,
+// through the Admin SDK. Browsers only read, as firestore.rules allows.
+// Times are stored as milliseconds since 1970 (numbers). The logic lives in
+// handlers.js; this file only connects it to Firebase.
 //
-// Built in later stages (see docs/data-model.md for what each one writes):
-//   stage 3  saveProfile            details and consent record
-//            redeemActivationCode   12 characters, single use, 30 days
-//            submitIntake           stores answers, sets client type
-//   stage 4  submitMeasure          stores responses in scoring/{assignmentId}
-//            scoreMeasure           applies scoringRules, stores a draft only
-//            triggerBooking         returns the Splose booking address
-//   stage 5  issueActivationCode    practitioner only
-//            assignMeasure          practitioner only
-//            setClientType          practitioner only
-//            releaseResults         practitioner only, copies to results/{uid}
-//
-// Nothing is exported yet, so deploying this codebase creates no functions.
+// Client:        redeemActivationCode, recordConsent, submitIntake,
+//                saveResponse, submitMeasure (scores the draft and triggers
+//                booking), createRequest
+// Practitioner:  issueActivationCode (admin too), setClientType, setStage,
+//                assignMeasure, releaseResults, saveFormulationDraft,
+//                releaseFormulation, closeRequest
 
+import { readFileSync } from 'node:fs';
+import { initializeApp } from 'firebase-admin/app';
+import { getFirestore } from 'firebase-admin/firestore';
+import { logger } from 'firebase-functions';
+import { defineBoolean } from 'firebase-functions/params';
 import { setGlobalOptions } from 'firebase-functions/v2';
+import { HttpsError, onCall } from 'firebase-functions/v2/https';
+import { makeHandlers } from './handlers.js';
 
 setGlobalOptions({ region: 'australia-southeast1', maxInstances: 10 });
+initializeApp();
+
+const readJson = (file) => JSON.parse(readFileSync(new URL(`./shared/${file}`, import.meta.url), 'utf8'));
+
+// Set ALLOW_SAMPLE_MEASURES=true in functions/.env.executiveframe-app only
+// while testing with the invented sample questionnaires.
+const ALLOW_SAMPLE_MEASURES = defineBoolean('ALLOW_SAMPLE_MEASURES', { default: false });
+
+const handlers = makeHandlers({
+  db: getFirestore('clienthub'),
+  intakeConfig: readJson('intake.json'),
+  clientTypes: readJson('client-types.json'),
+  allowSample: () => ALLOW_SAMPLE_MEASURES.value(),
+});
+
+const options = {
+  cors: [
+    /^https:\/\/clients\.executiveframe\.co\.nz$/,
+    /^https:\/\/executiveframe-clienthub\.(web\.app|firebaseapp\.com)$/,
+    /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/,
+  ],
+};
+
+const wrap = (handler) =>
+  onCall(options, async (request) => {
+    try {
+      return await handler(request);
+    } catch (e) {
+      if (e instanceof HttpsError) throw e;
+      logger.error(e);
+      throw new HttpsError('internal', 'Something went wrong. Please try again.');
+    }
+  });
+
+export const redeemActivationCode = wrap(handlers.redeemActivationCode);
+export const recordConsent = wrap(handlers.recordConsent);
+export const submitIntake = wrap(handlers.submitIntake);
+export const saveResponse = wrap(handlers.saveResponse);
+export const submitMeasure = wrap(handlers.submitMeasure);
+export const createRequest = wrap(handlers.createRequest);
+export const issueActivationCode = wrap(handlers.issueActivationCode);
+export const setClientType = wrap(handlers.setClientType);
+export const setStage = wrap(handlers.setStage);
+export const assignMeasure = wrap(handlers.assignMeasure);
+export const releaseResults = wrap(handlers.releaseResults);
+export const saveFormulationDraft = wrap(handlers.saveFormulationDraft);
+export const releaseFormulation = wrap(handlers.releaseFormulation);
+export const closeRequest = wrap(handlers.closeRequest);

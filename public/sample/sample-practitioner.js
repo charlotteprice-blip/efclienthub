@@ -4,7 +4,7 @@
 import clientTypes from '../config/client-types.json' with { type: 'json' };
 import intakeConfig from '../config/intake.json' with { type: 'json' };
 import * as store from './sample-store.js';
-import { STAGE_LABELS, esc, fmtDate, practitionerShell, relative, status } from './sample-ui.js';
+import { STAGE_LABELS, esc, fmtDate, practitionerShell, relative, status } from '../js/ui.js';
 import { MARK_SRC, ZONES, closeDialog, go, openDialog, render, setFlash } from './sample-app.js';
 
 let flash = null;

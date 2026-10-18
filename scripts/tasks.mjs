@@ -19,7 +19,13 @@ const groups = [
     ['npm run roles -- set <email> admin', 'Give someone system access without clinical content'],
     ['npm run roles -- remove <email>', 'Take a role away and end their sessions'],
   ]],
+  ['Questionnaires', [
+    ['npm run measures -- list', 'Show the questionnaire library'],
+    ['npm run measures -- check <file.json>', 'Validate a questionnaire file without saving it'],
+    ['npm run measures -- upload <file.json>', 'Add or update questionnaires in the library'],
+  ]],
   ['Build and look', [
+    ['npm run harness', 'Run the live app at localhost:5174 with a stand in for Firebase'],
     ['npm run serve', 'Open the sample, style guide and previews at localhost:5173'],
     ['npm run build:sample', 'Build the clickable sample into 1 shareable file in dist/'],
     ['npm run vendor', 'Refresh the self hosted Firebase SDK and Figtree'],

@@ -283,18 +283,26 @@ const steps = [
   },
   {
     id: 'authdomains',
-    title: `Authentication allows sign in from ${CONFIG.domain} and the site's own addresses`,
+    title: `Authentication: email and password sign in on, sign in allowed from ${CONFIG.domain} and the site's own addresses`,
     async check() {
       const r = await rest('GET', `https://identitytoolkit.googleapis.com/admin/v2/projects/${CONFIG.project}/config`).catch((e) => ({ ok: false, data: { error: e.message } }));
-      if (!r.ok) return { state: 'unknown', detail: ['Could not read the Authentication settings. Is Authentication switched on for the project?'] };
+      if (!r.ok) return { state: 'unknown', detail: ['Could not read the Authentication settings. Open Authentication in the Firebase console once and press Get started, then run this again.'] };
       const current = r.data.authorizedDomains ?? [];
       const wanted = [CONFIG.domain, `${CONFIG.site}.web.app`, `${CONFIG.site}.firebaseapp.com`];
       this.next = [...new Set([...current, ...wanted])];
-      const missing = wanted.filter((d) => !current.includes(d));
-      return missing.length ? { state: 'missing', detail: missing.map((d) => `${d} not authorised`) } : { state: 'done' };
+      const problems = wanted.filter((d) => !current.includes(d)).map((d) => `${d} not authorised`);
+      this.emailOff = !r.data.signIn?.email?.enabled;
+      if (this.emailOff) problems.push('email and password sign in is off');
+      return problems.length ? { state: 'missing', detail: problems } : { state: 'done' };
     },
     async apply() {
-      const r = await rest('PATCH', `https://identitytoolkit.googleapis.com/admin/v2/projects/${CONFIG.project}/config?updateMask=authorizedDomains`, { authorizedDomains: this.next });
+      const body = { authorizedDomains: this.next };
+      const mask = ['authorizedDomains'];
+      if (this.emailOff !== false) {
+        body.signIn = { email: { enabled: true, passwordRequired: true } };
+        mask.push('signIn.email.enabled', 'signIn.email.passwordRequired');
+      }
+      const r = await rest('PATCH', `https://identitytoolkit.googleapis.com/admin/v2/projects/${CONFIG.project}/config?updateMask=${mask.join(',')}`, body);
       return r.ok ? { ok: true } : { ok: false, err: JSON.stringify(r.data) };
     },
   },
@@ -392,7 +400,7 @@ console.log(c.bold(`\nExecutive Frame Client Hub setup  ·  project ${CONFIG.pro
 
 if (plan) {
   // Print every change command as if nothing existed yet.
-  const defaults = { missing: APIS, mode: 'create', exists: false, added: false, linked: false, next: [CONFIG.domain, `${CONFIG.site}.web.app`, `${CONFIG.site}.firebaseapp.com`], policy: { auditConfigs: [] } };
+  const defaults = { missing: APIS, mode: 'create', exists: false, added: false, linked: false, emailOff: true, next: [CONFIG.domain, `${CONFIG.site}.web.app`, `${CONFIG.site}.firebaseapp.com`], policy: { auditConfigs: [] } };
   for (const step of steps) {
     if (!step.apply) continue;
     console.log(c.bold(step.title));
