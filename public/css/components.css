@@ -1030,8 +1030,8 @@ th .sort:focus-visible {
   .map-arrow, .map-loop { transform: rotate(90deg); }
 }
 
-/* Formulation views: the 6 drawings and the layers layout. Colours by class
-   so both themes work and no style attributes are needed. */
+/* Formulation views: the drawings share a frame, card style and motion.
+   Colours by class so both themes work and no style attributes are needed. */
 .fv {
   margin: 0;
 }
@@ -1046,7 +1046,8 @@ th .sort:focus-visible {
 .fv-bg { fill: var(--ground); }
 .fv-card { fill: var(--panel); }
 .fv-faint { opacity: 0.75; }
-.fv-outline { stroke: var(--hairline); stroke-width: 1.5; }
+.fv-faintbg { fill-opacity: 0.55; }
+.fv-water { fill: var(--panel); fill-opacity: 0.7; }
 .fv-navy { fill: var(--inv-ground); }
 .fv-ink { fill: var(--ink); }
 .fv-inv { fill: var(--inv-ink); }
@@ -1054,13 +1055,13 @@ th .sort:focus-visible {
 .fv-arrowhead { fill: var(--ink); }
 .fv-line { fill: none; stroke: var(--ink); stroke-width: 1.5; }
 .fv-dotted { fill: none; stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 3 4; opacity: 0.7; }
-.fv-stem { stroke: var(--ink); stroke-width: 3; }
-.fv-petal { fill: var(--panel); stroke: var(--ink); stroke-width: 1.5; }
+.fv-stem { fill: none; stroke: var(--ink); stroke-width: 3; }
+.fv-petal { fill: var(--panel); fill-opacity: 0.6; stroke: var(--ink); stroke-width: 1.5; }
 .fv-leaf { fill: var(--panel); stroke: #5E7A4F; stroke-width: 1.5; }
 .fv-bank { fill: none; stroke: #5E7A4F; stroke-width: 3; }
 .fv-flow { fill: none; stroke: var(--ink); stroke-width: 2; stroke-dasharray: 6 6; }
 .fv-eddy, .fv-circuit { fill: none; stroke: #9A5A2E; stroke-width: 2.5; }
-.fv-exit { fill: none; stroke: #5E7A4F; stroke-width: 3; }
+.fv-exit { fill: none; stroke: #5E7A4F; stroke-width: 2.5; }
 .fv-keep-edge { stroke: #9A5A2E; stroke-width: 1.5; }
 .fv-help-edge { stroke: #5E7A4F; stroke-width: 1.5; }
 .fv-sector { fill: var(--panel); stroke: var(--ground); stroke-width: 4; }
@@ -1070,6 +1071,73 @@ th .sort:focus-visible {
 .fv-dot-partly { fill: var(--status-attention); }
 .fv-dot-no { fill: #8A3F34; }
 .fv-dot-none { fill: var(--ground); stroke: var(--hairline); stroke-width: 1.5; }
+
+/* Motion: cards rise in one after another, lines draw themselves, the
+   balance beam settles into its tilt. All of it is skipped when the person
+   asks for reduced motion. */
+@keyframes fv-rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fv-draw {
+  from { stroke-dashoffset: 2400; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes fv-settle {
+  from { rotate: 0deg; }
+}
+
+.fv-in {
+  animation: fv-rise 420ms ease-out both;
+}
+
+.fv-dl-0 { animation-delay: 0ms; }
+.fv-dl-1 { animation-delay: 60ms; }
+.fv-dl-2 { animation-delay: 120ms; }
+.fv-dl-3 { animation-delay: 180ms; }
+.fv-dl-4 { animation-delay: 240ms; }
+.fv-dl-5 { animation-delay: 300ms; }
+.fv-dl-6 { animation-delay: 360ms; }
+.fv-dl-7 { animation-delay: 420ms; }
+.fv-dl-8 { animation-delay: 480ms; }
+.fv-dl-9 { animation-delay: 540ms; }
+.fv-dl-10 { animation-delay: 600ms; }
+.fv-dl-11 { animation-delay: 660ms; }
+
+.fv-draw {
+  stroke-dasharray: 2400;
+  animation: fv-draw 900ms ease-out both;
+}
+
+.fv-beam {
+  transform-box: view-box;
+  transform-origin: 480px 0;
+  animation: fv-settle 700ms ease-out both;
+}
+
+.fv-tilt-0 { rotate: 0deg; }
+.fv-tilt-1 { rotate: 1deg; }
+.fv-tilt-2 { rotate: 2deg; }
+.fv-tilt-3 { rotate: 3deg; }
+.fv-tilt-4 { rotate: 4deg; }
+.fv-tilt-5 { rotate: 5deg; }
+.fv-tilt-6 { rotate: 6deg; }
+.fv-tilt-7 { rotate: 7deg; }
+.fv-tilt-8 { rotate: 8deg; }
+.fv-tilt-m1 { rotate: -1deg; }
+.fv-tilt-m2 { rotate: -2deg; }
+.fv-tilt-m3 { rotate: -3deg; }
+.fv-tilt-m4 { rotate: -4deg; }
+.fv-tilt-m5 { rotate: -5deg; }
+.fv-tilt-m6 { rotate: -6deg; }
+.fv-tilt-m7 { rotate: -7deg; }
+.fv-tilt-m8 { rotate: -8deg; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fv-in, .fv-draw, .fv-beam { animation: none; }
+}
 
 .fv-layers {
   display: grid;

@@ -26,7 +26,7 @@ describe('formulation views', () => {
   test('an empty formulation and an unknown view still draw', () => {
     for (const { id } of VIEW_OPTIONS) assert.ok(renderFormulationView(id, [], {}).length > 100, id);
     assert.equal(viewOf('spiral'), 'grid');
-    assert.ok(renderFormulationView('spiral', factors).includes('class="map"'));
+    assert.ok(renderFormulationView('spiral', factors).includes('class="fv map"'));
   });
   test('the radial view names the questionnaire a factor came from', () => {
     assert.ok(renderFormulationView('radial', factors).includes('Procrastination scale'));
