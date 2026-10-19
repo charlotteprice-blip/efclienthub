@@ -1029,3 +1029,83 @@ th .sort:focus-visible {
   }
   .map-arrow, .map-loop { transform: rotate(90deg); }
 }
+
+/* Formulation views: the 6 drawings and the layers layout. Colours by class
+   so both themes work and no style attributes are needed. */
+.fv {
+  margin: 0;
+}
+
+.fv svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: inherit;
+}
+
+.fv-bg { fill: var(--ground); }
+.fv-card { fill: var(--panel); }
+.fv-faint { opacity: 0.75; }
+.fv-outline { stroke: var(--hairline); stroke-width: 1.5; }
+.fv-navy { fill: var(--inv-ground); }
+.fv-ink { fill: var(--ink); }
+.fv-inv { fill: var(--inv-ink); }
+.fv-muted { fill: var(--ink); opacity: 0.7; }
+.fv-arrowhead { fill: var(--ink); }
+.fv-line { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+.fv-dotted { fill: none; stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 3 4; opacity: 0.7; }
+.fv-stem { stroke: var(--ink); stroke-width: 3; }
+.fv-petal { fill: var(--panel); stroke: var(--ink); stroke-width: 1.5; }
+.fv-leaf { fill: var(--panel); stroke: #5E7A4F; stroke-width: 1.5; }
+.fv-bank { fill: none; stroke: #5E7A4F; stroke-width: 3; }
+.fv-flow { fill: none; stroke: var(--ink); stroke-width: 2; stroke-dasharray: 6 6; }
+.fv-eddy, .fv-circuit { fill: none; stroke: #9A5A2E; stroke-width: 2.5; }
+.fv-exit { fill: none; stroke: #5E7A4F; stroke-width: 3; }
+.fv-keep-edge { stroke: #9A5A2E; stroke-width: 1.5; }
+.fv-help-edge { stroke: #5E7A4F; stroke-width: 1.5; }
+.fv-sector { fill: var(--panel); stroke: var(--ground); stroke-width: 4; }
+.fv-sector-help { fill: #EEF2E8; }
+.fv-node { stroke: var(--ink); stroke-width: 1.5; }
+.fv-dot-fits { fill: var(--status-done); }
+.fv-dot-partly { fill: var(--status-attention); }
+.fv-dot-no { fill: #8A3F34; }
+.fv-dot-none { fill: var(--ground); stroke: var(--hairline); stroke-width: 1.5; }
+
+.fv-layers {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: var(--space-3);
+}
+
+.fv-layer-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.fv-layer {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+  color: var(--on-panel);
+}
+
+.fv-layer-now { background: var(--inv-ground); color: var(--inv-ink); }
+.fv-layer-deep { background: var(--panel); opacity: 0.85; }
+.fv-layer-side { border: 2px solid #5E7A4F; }
+
+.fv-layers .map-dot { background: var(--hairline); }
+.fv-layers .map-dot-fits { background: var(--status-done); }
+.fv-layers .map-dot-partly { background: var(--status-attention); }
+.fv-layers .map-dot-no { background: #8A3F34; }
+
+.fv-view-pick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  align-items: center;
+}
+
+@media (max-width: 899px) {
+  .fv-layers { grid-template-columns: 1fr; }
+}

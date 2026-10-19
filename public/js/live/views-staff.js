@@ -3,6 +3,7 @@
 import { CADENCE_LABELS, STAGE_LABELS, esc, fmtDate, fmtDateTime, fmtDay, practitionerShell, relative, status, toLocalInput } from '../ui.js';
 import { FIT_LABELS, MARK_SRC, ROUTES, ZONES, zoneOf } from './views-client.js';
 import { suggestFactors } from '../formulation.js';
+import { VIEW_OPTIONS, renderFormulationView, viewOf } from '../formulation-views.js';
 import { buildDraft, scoreMeasure } from '../scoring.js';
 
 const flashHtml = (flash) => (flash ? `<div class="notice${flash.error ? ' notice-error' : ''}" role="${flash.error ? 'alert' : 'status'}"><p>${esc(flash.text)}</p></div>` : '');
@@ -250,6 +251,7 @@ export function client(s, uid, tab = 'overview') {
   const fdoc = s.ctx.formulationDrafts[uid];
   const fd = s.draftFactors?.[uid] ?? fdoc?.factors ?? [];
   const fSummary = s.draftSummary?.[uid] ?? fdoc?.summary ?? '';
+  const fView = viewOf(s.draftView?.[uid] ?? fdoc?.view);
   const fr = s.ctx.formulations[uid];
   const fResponses = s.ctx.formulationResponses?.[uid]?.responses ?? {};
   const suggestions = suggestFactors(released, fd);
@@ -461,9 +463,14 @@ export function client(s, uid, tab = 'overview') {
       </div>
     </section>
     <section class="stack" aria-labelledby="h-map">
-      <h2 id="h-map">Live map</h2>
-      <p class="t-caption">How the pieces relate, redrawn as you edit. Dots show the client's responses to the released version: green fits, amber partly, red does not fit.</p>
-      ${formulationMap(fd, fResponses)}
+      <h2 id="h-map">Live picture</h2>
+      <div class="fv-view-pick">
+        <label class="field-label" for="f-view">How the client sees it</label>
+        <select class="select select-small" id="f-view" data-formulation-view data-uid="${esc(uid)}">${VIEW_OPTIONS.map((o) => `<option value="${o.id}"${o.id === fView ? ' selected' : ''}>${esc(o.label)}</option>`).join('')}</select>
+        <p class="t-caption">${esc(VIEW_OPTIONS.find((o) => o.id === fView)?.blurb ?? '')}</p>
+      </div>
+      <p class="t-caption">Redrawn as you edit. Dots show the client's responses to the released version: green fits, amber partly, red does not fit.</p>
+      ${renderFormulationView(fView, fd, fResponses)}
     </section>
 
 `;
@@ -617,33 +624,6 @@ export function library(s) {
 }
 
 // ---------- live formulation map ----------
-
-// The 5P pieces as a diagram: what shaped it feeds what set it off, which
-// produces the presenting problem; perpetuating factors loop back into it;
-// protective factors sit underneath as the buffer. Redrawn on every edit.
-function formulationMap(factors, responses = {}) {
-  const inZone = (z) => factors.filter((f) => zoneOf(f) === z);
-  const dot = (f) => {
-    const r = responses[f.id];
-    return r?.fit ? `<i class="map-dot map-dot-${r.fit}" title="${esc(FIT_LABELS[r.fit])}"></i>` : '';
-  };
-  const box = (z, title, hint) => {
-    const list = inZone(z);
-    return `<div class="map-box" data-zone="${z}"><p class="map-title">${esc(title)}</p><p class="map-hint">${esc(hint)}</p>${
-      list.length ? `<ul class="map-list">${list.map((f) => `<li>${dot(f)}${esc(f.text)}</li>`).join('')}</ul>` : '<p class="map-empty">Nothing yet</p>'
-    }</div>`;
-  };
-  return `<div class="map" role="img" aria-label="Formulation map with ${factors.length} factor${factors.length === 1 ? '' : 's'}">
-    ${box('predisposing', 'Predisposing', 'What made this more likely')}
-    <span class="map-arrow" aria-hidden="true">&#8594;</span>
-    ${box('precipitating', 'Precipitating', 'What set it off')}
-    <span class="map-arrow" aria-hidden="true">&#8594;</span>
-    ${box('presenting', 'Presenting', 'What we are working on')}
-    <span class="map-loop" aria-hidden="true">&#8635;</span>
-    ${box('perpetuating', 'Perpetuating', 'What keeps it going')}
-    ${box('protective', 'Protective', 'What helps')}
-  </div>`;
-}
 
 // ---------- 1 questionnaire: details, assign, test run, questions, averages ----------
 

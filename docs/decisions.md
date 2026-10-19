@@ -107,6 +107,7 @@
 ## Client record (19 October 2026)
 
 57. The client record is split into tabs under the client's name: Overview (profile, intake, next session, resources), Questionnaires (assigned, check ins, draft results with the release button), Formulation (summary, suggestions, zones, release, and a live 5P map redrawn on every edit with the client's responses as dots), and Requests. Panels flow into 2 columns without gaps and detail rows carry faint lines.
+58. The formulation can be drawn 7 ways and Sarah picks the drawing per client: the 5 box map (default), flower (maintenance cycles as petals, after Moorey's six cycles model), river (longitudinal timeline with an eddy), layers (Kuyken, Padesky and Dudley's descriptive, cross sectional and longitudinal levels with strengths alongside), balance, radial with questionnaire sources, and a loop with exits. The choice is saved on the draft as `view`, released with the factors, and shown on the client's Formulation page above the cards, with the response controls always on the cards so the drawing is never the only way to answer. The drawings are inline SVG built from classes, so they work in both themes under the strict Content Security Policy and need no library.
 
 ## Open questions
 

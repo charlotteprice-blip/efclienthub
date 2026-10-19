@@ -139,4 +139,9 @@ describe('formulation suggestions', () => {
     assert.notEqual(f[0].id, f[1].id);
     assert.equal(core.cleanSummary('a'.repeat(2000)).length, core.SUMMARY_MAX);
   });
+  test('an unknown drawing falls back to the grid', () => {
+    assert.equal(core.cleanView('river'), 'river');
+    assert.equal(core.cleanView('spiral'), 'grid');
+    assert.equal(core.cleanView(undefined), 'grid');
+  });
 });

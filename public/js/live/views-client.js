@@ -2,6 +2,7 @@
 // wires the forms and buttons to the Cloud Functions.
 
 import { stageCopy } from '../client-types.js';
+import { renderFormulationView } from '../formulation-views.js';
 import { STAGE_LABELS, clientShell, esc, fieldError, fmtDate, fmtDateTime, fmtDay, single, status } from '../ui.js';
 
 export const MARK_SRC = '/assets/brand/mark-slate-small.svg';
@@ -496,6 +497,7 @@ export function formulation(s) {
     `${flashHtml(s.flash)}
     <p class="t-caption">Shared by Sarah on ${fmtDate(f.releasedAt)}. On each card, say whether it fits and add a comment if you like; Sarah sees your answers.</p>
     ${f.summary ? `<section class="formulation-summary" aria-labelledby="h-sum"><h2 id="h-sum" class="t-ui-strong">From Sarah</h2>${f.summary.split('\n').filter(Boolean).map((para) => `<p>${esc(para)}</p>`).join('')}</section>` : ''}
+    ${renderFormulationView(f.view, f.factors, responses)}
     <div class="zones zones-5">${zones}</div>`,
   );
 }

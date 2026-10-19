@@ -311,7 +311,8 @@ export function makeHandlers({ db, intakeConfig, clientTypes, allowSample = () =
       const factors = core.cleanFactors(request.data?.factors);
       if (!factors) fail('invalid-argument', 'Each factor needs text and one of the 5 zones.');
       const summary = core.cleanSummary(request.data?.summary);
-      await db.doc(`formulationDrafts/${ref.id}`).set({ uid: ref.id, factors, summary, updatedAt: now(), updatedBy: auth.uid });
+      const view = core.cleanView(request.data?.view);
+      await db.doc(`formulationDrafts/${ref.id}`).set({ uid: ref.id, factors, summary, view, updatedAt: now(), updatedBy: auth.uid });
       return { ok: true };
     },
 
@@ -322,7 +323,7 @@ export function makeHandlers({ db, intakeConfig, clientTypes, allowSample = () =
       if (!draft?.factors?.length) fail('failed-precondition', 'Add at least 1 factor before releasing.');
       const prior = (await db.doc(`formulations/${ref.id}`).get()).data();
       const version = (prior?.version ?? 0) + 1;
-      await db.doc(`formulations/${ref.id}`).set({ uid: ref.id, factors: draft.factors, summary: draft.summary ?? '', version, releasedAt: now(), releasedBy: auth.uid });
+      await db.doc(`formulations/${ref.id}`).set({ uid: ref.id, factors: draft.factors, summary: draft.summary ?? '', view: core.cleanView(draft.view), version, releasedAt: now(), releasedBy: auth.uid });
       await audit(auth.uid, 'released formulation', ref.id, { version });
       return { ok: true };
     },

@@ -16,6 +16,8 @@ export const REQUEST_KINDS = ['access', 'correction'];
 export const ZONES = ['presenting', 'predisposing', 'precipitating', 'perpetuating', 'protective'];
 export const FITS = ['fits', 'partly', 'no'];
 export const SUMMARY_MAX = 1500;
+// How the formulation is drawn for the client. 'grid' is the 5 box map.
+export const VIEWS = ['grid', 'flower', 'river', 'layers', 'balance', 'radial', 'loop'];
 export const REDEEM_LIMIT = { attempts: 10, windowMs: 60 * 60 * 1000 };
 const DAY = 24 * 60 * 60 * 1000;
 
@@ -154,6 +156,10 @@ export function cleanSession(data) {
   const at = Number(data.at);
   if (!Number.isFinite(at) || at < Date.UTC(2020, 0, 1) || at > Date.UTC(2100, 0, 1)) return null;
   return { at, note: String(data.note ?? '').trim().slice(0, 160) };
+}
+
+export function cleanView(view) {
+  return VIEWS.includes(view) ? view : 'grid';
 }
 
 export function cleanSummary(summary) {

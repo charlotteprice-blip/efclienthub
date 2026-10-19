@@ -11,8 +11,8 @@ Roles are custom claims set with the Admin SDK: `role: "practitioner"` reads cli
 | `assignments` | generated | uid, measureId, status, order, assignedAt, completedAt, responses (only while in progress), source (`scheduled` for check ins), scheduleId, dueOn | own (query must filter on uid) | all | none |
 | `scoring` | assignment id | uid, assignmentId, measureId, responses, scores, scoredAt, reportDraft | never | all | none |
 | `results` | uid | uid, releasedAt, releasedBy, items (strengths, areas of focus, reasons, Learning Hub topic links) | own, only once releasedAt is set | all | none |
-| `formulationDrafts` | uid | uid, summary, factors (id, zone, text, source?), updatedAt, updatedBy | never | all | none |
-| `formulations` | uid | uid, summary, factors, version, releasedAt, releasedBy | own, only once releasedAt is set | all | none |
+| `formulationDrafts` | uid | uid, summary, view, factors (id, zone, text, source?), updatedAt, updatedBy | never | all | none |
+| `formulations` | uid | uid, summary, view, factors, version, releasedAt, releasedBy | own, only once releasedAt is set | all | none |
 | `formulationResponses` | uid | uid, responses { factorId: { fit, comment, at, version } }, updatedAt | own | all | none |
 | `requests` | generated | uid, kind (access or correction), detail, createdAt, dueBy, status | own | all | none |
 | `schedules` | generated | uid, measureId, cadence (weekly, fortnightly, fourWeekly, dates), dates, startsOn, endsOn, nextDue, status (active, paused, ended), runs, lastRunOn, pausedAt, endedAt, createdBy | own | all | none |
@@ -42,7 +42,7 @@ Dates on a schedule are New Zealand calendar days stored as `YYYY-MM-DD` strings
 
 ## Formulation
 
-The formulation is 5P: presenting, predisposing, precipitating, perpetuating and protective (the zone `maintaining` in older drafts is read as perpetuating). A factor added from released results carries `source` (assignment, measure name, subscale, whether it was an area of focus or a strength), so the card can show where it came from. The draft holds a plain language `summary` as well as the cards. Release copies draft and summary into `formulations` with an incrementing `version`; the client sees the latest release only. The client's responses (fits, partly, does not fit, comment) are written by `respondToFormulation` into `formulationResponses`, 1 document per client keyed by factor id, each tagged with the version it answered; Sarah sees them under the card on the client's record and a response to an earlier version is marked as such.
+The formulation is 5P: presenting, predisposing, precipitating, perpetuating and protective (the zone `maintaining` in older drafts is read as perpetuating). A factor added from released results carries `source` (assignment, measure name, subscale, whether it was an area of focus or a strength), so the card can show where it came from. The draft holds a plain language `summary` as well as the cards, and `view` names the drawing the client sees (grid, flower, river, layers, balance, radial or loop; anything else reads as grid). Release copies draft and summary into `formulations` with an incrementing `version`; the client sees the latest release only. The client's responses (fits, partly, does not fit, comment) are written by `respondToFormulation` into `formulationResponses`, 1 document per client keyed by factor id, each tagged with the version it answered; Sarah sees them under the card on the client's record and a response to an earlier version is marked as such.
 
 ## Items with their own scale
 

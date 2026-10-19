@@ -148,13 +148,15 @@ describe('formulation and privacy requests', () => {
     await onboard();
     await rejects(h.releaseFormulation(as(sarah, { uid: 'client-1' })), 'failed-precondition');
     await rejects(h.saveFormulationDraft(as(sarah, { uid: 'client-1', factors: [{ zone: 'elsewhere', text: 'x' }] })), 'invalid-argument');
-    await h.saveFormulationDraft(as(sarah, { uid: 'client-1', factors: [{ id: 'a', zone: 'maintaining', text: 'Working late' }], summary: '  A short picture.  ' }));
+    await h.saveFormulationDraft(as(sarah, { uid: 'client-1', factors: [{ id: 'a', zone: 'maintaining', text: 'Working late' }], summary: '  A short picture.  ', view: 'flower' }));
     assert.equal(db.read('formulations/client-1'), undefined);
+    assert.equal(db.read('formulationDrafts/client-1').view, 'flower');
     assert.equal(db.read('formulationDrafts/client-1').factors[0].zone, 'perpetuating', 'old zone name is mapped');
     await h.releaseFormulation(as(sarah, { uid: 'client-1' }));
     const released = db.read('formulations/client-1');
     assert.equal(released.factors[0].text, 'Working late');
     assert.equal(released.summary, 'A short picture.');
+    assert.equal(released.view, 'flower', 'the chosen drawing is released with the factors');
     assert.equal(released.version, 1);
     await h.releaseFormulation(as(sarah, { uid: 'client-1' }));
     assert.equal(db.read('formulations/client-1').version, 2);

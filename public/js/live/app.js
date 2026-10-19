@@ -38,6 +38,7 @@ const S = {
   lastIssued: null,
   draftFactors: {},
   draftSummary: {},
+  draftView: {},
   testRun: null,
   responseDraft: {},
   ready: false,
@@ -432,13 +433,15 @@ const handlers = {
   },
 };
 
-async function saveFormulation(uid, factors, summary) {
+async function saveFormulation(uid, factors, summary, view) {
   const text = summary ?? S.draftSummary[uid] ?? S.ctx.formulationDrafts[uid]?.summary ?? '';
-  await call('saveFormulationDraft', { uid, factors, summary: text });
+  const pick = view ?? S.draftView[uid] ?? S.ctx.formulationDrafts[uid]?.view ?? 'grid';
+  await call('saveFormulationDraft', { uid, factors, summary: text, view: pick });
   S.draftFactors[uid] = factors;
   S.draftSummary[uid] = text;
-  if (S.ctx.formulationDrafts[uid]) S.ctx.formulationDrafts[uid].updatedAt = Date.now();
-  else S.ctx.formulationDrafts[uid] = { uid, factors, summary: text, updatedAt: Date.now() };
+  S.draftView[uid] = pick;
+  if (S.ctx.formulationDrafts[uid]) Object.assign(S.ctx.formulationDrafts[uid], { view: pick, updatedAt: Date.now() });
+  else S.ctx.formulationDrafts[uid] = { uid, factors, summary: text, view: pick, updatedAt: Date.now() };
 }
 
 async function saveAnswer(a, itemId, value) {
@@ -694,6 +697,15 @@ document.addEventListener('change', async (event) => {
         setFlash(`The move was not saved. ${e.message}`, true);
         route();
       });
+  }
+  // Picking a different drawing saves straight away and redraws.
+  if (el.dataset.formulationView !== undefined) {
+    const uid = el.dataset.uid;
+    const factors = S.draftFactors[uid] ?? S.ctx.formulationDrafts[uid]?.factors ?? [];
+    saveFormulation(uid, factors, undefined, el.value)
+      .then(() => route())
+      .catch((e) => setFlash(`The picture was not saved. ${e.message}`, true));
+    return;
   }
   // The summary saves when Sarah leaves the box.
   if (el.name === 'summary' && el.closest('[data-form="formulation-summary"]')) {
