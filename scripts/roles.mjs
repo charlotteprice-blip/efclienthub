@@ -49,7 +49,12 @@ try {
     console.log(rows.length ? `\n${rows.join('\n')}\n` : '\nNo one holds a Client Hub role yet.\n');
   } else {
     if (!email) usage('Give the email address of an existing account.');
-    const user = await auth.getUserByEmail(email).catch(() => null);
+    // Only a genuinely unknown email counts as no account; anything else,
+    // such as expired credentials, falls through to the error handler below.
+    const user = await auth.getUserByEmail(email).catch((e) => {
+      if (e.code === 'auth/user-not-found') return null;
+      throw e;
+    });
     if (!user) usage(`No account uses ${email}. The person signs up once first, then you grant the role.`);
     const claims = { ...(user.customClaims ?? {}) };
     if (command === 'set') {
@@ -67,8 +72,8 @@ try {
     }
   }
 } catch (e) {
-  if (/credential|ADC|default credentials/i.test(e.message)) {
-    usage('No Google credentials found. Run: gcloud auth application-default login');
+  if (/credential|ADC|default credentials|invalid_grant|reauth/i.test(e.message)) {
+    usage('Your Google credentials are missing or have expired. Run: gcloud auth application-default login');
   }
   console.error(`\n${e.message}\n`);
   process.exit(1);
