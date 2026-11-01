@@ -22,6 +22,11 @@ export function createFakeSplose({ patients = [], appointments = [], forms = [],
       if (!p) throw Object.assign(new Error('Not found in Splose.'), { name: 'SploseError', status: 404 });
       return p;
     },
+    async patients({ firstname, lastname, email } = {}) {
+      count();
+      const has = (v, q) => !q || String(v ?? '').toLowerCase().includes(String(q).toLowerCase());
+      return patients.filter((p) => has(p.firstname, firstname) && has(p.lastname, lastname) && has(p.email, email));
+    },
     async appointments({ patientId, start_gt } = {}) {
       count();
       const since = start_gt ? Date.parse(start_gt) : 0;
@@ -71,9 +76,9 @@ export function sampleSplose(now = Date.now()) {
       { id: 14, name: 'Review' },
     ],
     patients: [
-      { id: 101, firstName: 'Alex', lastName: 'Sample', email: 'alex@example.com' },
-      { id: 102, firstName: 'Sam', lastName: 'Sample', email: 'sam@example.com' },
-      { id: 103, firstName: 'Test', lastName: 'Client', email: 'test1@example.com' },
+      { id: 101, firstname: 'Alex', lastname: 'Sample', email: 'alex@example.com', archived: false },
+      { id: 102, firstname: 'Sam', lastname: 'Sample', preferredName: 'Sammy', email: 'sam@example.com', archived: false },
+      { id: 103, firstname: 'Dev', lastname: 'Test', email: 'dev.test@example.com', archived: false },
     ],
     appointments: [
       appt(1, 101, 11, now - 30 * d, 'Completed'),

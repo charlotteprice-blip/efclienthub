@@ -12,7 +12,8 @@
 //                assignMeasure, releaseResults, saveFormulationDraft,
 //                releaseFormulation, closeRequest, createSchedule,
 //                updateSchedule
-// Splose:        linkSplosePatient, unlinkSplosePatient, syncSploseClient
+// Splose:        searchSplosePatients, linkSplosePatient,
+//                unlinkSplosePatient, syncSploseClient
 // Scheduled:     runCheckIns, every morning at 7am New Zealand time,
 //                assigns the check in questionnaires due that day;
 //                runSploseSync, every 15 minutes in waking hours and hourly
@@ -89,6 +90,7 @@ export const setResources = wrap(handlers.setResources);
 export const closeRequest = wrap(handlers.closeRequest);
 export const createSchedule = wrap(handlers.createSchedule);
 export const updateSchedule = wrap(handlers.updateSchedule);
+export const searchSplosePatients = wrap(handlers.searchSplosePatients);
 export const linkSplosePatient = wrap(handlers.linkSplosePatient);
 export const unlinkSplosePatient = wrap(handlers.unlinkSplosePatient);
 export const syncSploseClient = wrap(handlers.syncSploseClient);

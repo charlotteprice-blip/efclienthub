@@ -557,6 +557,39 @@ export function makeHandlers({ db, intakeConfig, clientTypes, appConfig = {}, al
       return { ok: true };
     },
 
+    // Sarah searches Splose by name or email to find the patient id. The
+    // result is shown once on the Overview tab and nothing is stored.
+    searchSplosePatients: async (request) => {
+      practitioner(request);
+      const query = String(request.data?.query ?? '').trim().replace(/\s+/g, ' ').slice(0, 60);
+      if (query.length < 2) fail('invalid-argument', 'Enter at least 2 letters of a name, or an email address.');
+      const api = sploseApi();
+      const words = query.split(' ');
+      let found = [];
+      try {
+        if (query.includes('@')) found = await api.patients({ email: query });
+        else if (words.length > 1) found = await api.patients({ firstname: words[0], lastname: words.slice(1).join(' ') });
+        else found = [...(await api.patients({ firstname: query })), ...(await api.patients({ lastname: query }))];
+      } catch (e) {
+        fail('unavailable', e.message);
+      }
+      const seen = new Set();
+      const results = [];
+      for (const p of found) {
+        const id = cleanPatientId(p?.id);
+        if (!id || seen.has(id)) continue;
+        seen.add(id);
+        results.push({
+          id,
+          name: [p.preferredName || p.firstname, p.lastname].filter(Boolean).join(' ').slice(0, 120) || 'Unnamed',
+          email: p.email ? String(p.email).slice(0, 120) : null,
+          archived: Boolean(p.archived),
+        });
+      }
+      results.sort((a, b) => a.name.localeCompare(b.name));
+      return { query, results: results.slice(0, 20) };
+    },
+
     unlinkSplosePatient: async (request) => {
       const auth = practitioner(request);
       const { ref, client } = await existingClient(request.data?.uid);

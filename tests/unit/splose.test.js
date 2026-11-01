@@ -186,6 +186,23 @@ describe('handlers', () => {
     assert.equal(db.read('clients/client-2').sploseClientId, 101);
   });
 
+  test('search finds Splose patients by name or email and stores nothing', async () => {
+    await rejects(h.searchSplosePatients(as(client, { query: 'Alex' })), 'permission-denied');
+    await rejects(h.searchSplosePatients(as(sarah, { query: 'A' })), 'invalid-argument');
+    let r = await h.searchSplosePatients(as(sarah, { query: '  sample ' }));
+    assert.deepEqual(r.results.map((x) => x.id), [101, 102]);
+    assert.equal(r.results[0].name, 'Alex Sample');
+    assert.equal(r.results[1].name, 'Sammy Sample', 'preferred name first');
+    r = await h.searchSplosePatients(as(sarah, { query: 'Alex Sample' }));
+    assert.deepEqual(r.results.map((x) => x.id), [101]);
+    r = await h.searchSplosePatients(as(sarah, { query: 'dev.test@example.com' }));
+    assert.deepEqual(r.results.map((x) => x.id), [103]);
+    r = await h.searchSplosePatients(as(sarah, { query: 'nobody' }));
+    assert.deepEqual(r.results, []);
+    assert.equal(db.list('sploseProgress').length, 0);
+    assert.equal(db.list('auditLog').length, 0);
+  });
+
   test('resync runs once a minute per client and unlink removes the record', async () => {
     await rejects(h.syncSploseClient(as(sarah, { uid: 'client-1' })), 'failed-precondition');
     await h.linkSplosePatient(as(sarah, { uid: 'client-1', patientId: 101 }));

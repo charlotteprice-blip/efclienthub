@@ -41,6 +41,7 @@ const S = {
   draftView: {},
   testRun: null,
   responseDraft: {},
+  sploseSearch: {},
   ready: false,
 };
 
@@ -339,17 +340,19 @@ const handlers = {
     return route();
   },
   async 'link-splose'(data, form) {
+    return linkSplose(form.dataset.uid, data.patientId, Boolean(data.confirm));
+  },
+  // Search Splose by name or email; results are held in memory for this page only.
+  async 'search-splose'(data, form) {
     const uid = form.dataset.uid;
+    const query = String(data.query ?? '').trim();
+    if (!query) return undefined;
     try {
-      await call('linkSplosePatient', { uid, patientId: data.patientId, confirm: Boolean(data.confirm) });
+      S.sploseSearch[uid] = await call('searchSplosePatients', { query });
     } catch (e) {
-      S.form.splosePatientId = data.patientId;
+      S.sploseSearch[uid] = { query, results: [] };
       S.errors.splose = e.message;
-      return route();
     }
-    S.form.splosePatientId = '';
-    setFlash('Linked to Splose. Progress refreshes every 15 minutes, or sooner with Resync now.');
-    await reload();
     return route();
   },
   async 'add-resource'(data, form) {
@@ -446,6 +449,23 @@ const handlers = {
     return route();
   },
 };
+
+// Links a hub client to a Splose patient. On an email mismatch the id stays
+// in the form so Sarah can tick Link anyway.
+async function linkSplose(uid, patientId, confirm) {
+  try {
+    await call('linkSplosePatient', { uid, patientId, confirm });
+  } catch (e) {
+    S.form.splosePatientId = patientId;
+    S.errors.splose = e.message;
+    return route();
+  }
+  S.form.splosePatientId = '';
+  delete S.sploseSearch[uid];
+  setFlash('Linked to Splose. Progress refreshes every 15 minutes, or sooner with Resync now.');
+  await reload();
+  return route();
+}
 
 async function saveFormulation(uid, factors, summary, view) {
   const text = summary ?? S.draftSummary[uid] ?? S.ctx.formulationDrafts[uid]?.summary ?? '';
@@ -567,6 +587,9 @@ const actions = {
     setFlash('Next session cleared.');
     await reload();
     return route();
+  },
+  'splose-pick'(t) {
+    return busy(t, () => linkSplose(t.dataset.uid, t.dataset.id, false));
   },
   async 'splose-sync'(t) {
     const r = await busy(t, () => call('syncSploseClient', { uid: t.dataset.uid }));

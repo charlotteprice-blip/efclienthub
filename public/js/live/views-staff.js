@@ -29,11 +29,19 @@ function splosePanel(s, uid, c) {
   if (!s.config.splose?.enabled) return '';
   const cfg = s.config.splose;
   if (!c.sploseClientId) {
+    const search = s.sploseSearch?.[uid];
+    const resultRow = (r) => `<li class="task"><div><p class="task-name">${esc(r.name)}${r.archived ? ' <span class="t-caption">(archived in Splose)</span>' : ''}</p><p class="task-meta">${esc(r.email ?? 'No email in Splose')}. Splose id ${r.id}</p></div><span></span><button type="button" class="btn btn-secondary" data-action="splose-pick" data-uid="${esc(uid)}" data-id="${r.id}">Link</button></li>`;
     return `<section class="panel stack" aria-labelledby="h-splose">
       <h2 id="h-splose">Splose</h2>
       <p class="t-caption">Link ${esc(c.name || 'the client')} to their Splose record and the hub shows their next appointment, sessions attended and any Splose form still to complete. Dates and statuses only; nothing clinical is read.</p>
+      <form class="inline-add" data-form="search-splose" data-uid="${esc(uid)}" novalidate>
+        <label class="visually-hidden" for="sp-q">Search Splose by name or email</label>
+        <input class="input" id="sp-q" name="query" placeholder="Name or email in Splose" maxlength="60" autocomplete="off" value="${esc(search?.query ?? c.email ?? '')}">
+        <button type="submit" class="btn btn-secondary">Search Splose</button>
+      </form>
+      ${search ? (search.results.length ? `<ul class="task-list">${search.results.map(resultRow).join('')}</ul>` : `<p class="t-caption">No one in Splose matches "${esc(search.query)}". Try a first name, a surname, or the email Splose has.</p>`) : ''}
       <form class="stack" data-form="link-splose" data-uid="${esc(uid)}" novalidate>
-        <div class="field"><label class="field-label" for="sp-id">Splose patient id</label><span class="field-hint" id="sp-hint">The number in the address bar on the client's page in Splose.</span><input class="input" id="sp-id" name="patientId" inputmode="numeric" aria-describedby="sp-hint" maxlength="12" value="${esc(s.form.splosePatientId ?? '')}"></div>
+        <div class="field"><label class="field-label" for="sp-id">Or enter the Splose patient id</label><span class="field-hint" id="sp-hint">The number in the address bar on the client's page in Splose.</span><input class="input" id="sp-id" name="patientId" inputmode="numeric" aria-describedby="sp-hint" maxlength="12" value="${esc(s.form.splosePatientId ?? '')}"></div>
         <label class="check"><input type="checkbox" name="confirm" value="1"><span>Link anyway if the email in Splose differs from ${esc(c.email || 'the hub email')}</span></label>
         ${s.errors.splose ? `<p class="field-error">${esc(s.errors.splose)}</p>` : ''}
         <div class="actions-inline"><button type="submit" class="btn btn-secondary">Link to Splose</button></div>

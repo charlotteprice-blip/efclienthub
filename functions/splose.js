@@ -52,10 +52,10 @@ export function createSploseClient({ apiKey, baseUrl = DEFAULT_BASE_URL, fetch =
     return res.json();
   }
 
-  async function list(path, params = {}) {
+  async function list(path, params = {}, maxPages = MAX_PAGES) {
     const out = [];
     let next = null;
-    for (let page = 0; page < MAX_PAGES; page += 1) {
+    for (let page = 0; page < maxPages; page += 1) {
       const body = await get(next ?? path, next ? {} : params);
       out.push(...(body?.data ?? []));
       next = body?.links?.nextPage || null;
@@ -69,6 +69,8 @@ export function createSploseClient({ apiKey, baseUrl = DEFAULT_BASE_URL, fetch =
       return state.calls;
     },
     patient: (id) => get(`/patients/${Number(id)}`),
+    // Search by firstname, lastname or email; 2 pages is plenty for a name.
+    patients: (params) => list('/patients', params, 2),
     appointments: (params) => list('/appointments', params),
     patientForms: (params) => list('/patient-forms', params),
     cases: (params) => list('/cases', params),
