@@ -10,6 +10,7 @@ import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { dirname, extname, join, normalize } from 'node:path';
 import { makeHandlers } from '../../functions/handlers.js';
+import { sampleSplose } from '../support/fake-splose.js';
 import { createMemoryFirestore } from '../support/memory-firestore.js';
 
 const here = dirname(new URL(import.meta.url).pathname);
@@ -22,11 +23,17 @@ const firebaseJson = await readJson('firebase.json');
 const csp = firebaseJson.hosting[0].headers[0].headers.find((h) => h.key === 'Content-Security-Policy').value;
 
 const db = createMemoryFirestore();
+// Splose is a fake practice here (tests/support/fake-splose.js): link a
+// client to patient 101, 102 or 103 on their Overview tab to see it.
+const appConfig = await readJson('public/config/app.json');
+const splose = sampleSplose();
 const handlers = makeHandlers({
   db,
   intakeConfig: await readJson('public/config/intake.json'),
   clientTypes: await readJson('public/config/client-types.json'),
+  appConfig: { ...appConfig, splose: { ...appConfig.splose, enabled: true, showCase: true, services: { firstSession: [11], feedback: [12], intervention: [13], review: [14] } } },
   allowSample: () => true,
+  splose: () => splose,
 });
 for (const m of (await readJson('public/sample/sample-measures.json')).measures) await db.doc(`measures/${m.id}`).set(m);
 // The cleared questionnaires from the codebook, when they have been built.

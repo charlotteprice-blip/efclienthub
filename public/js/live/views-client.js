@@ -66,6 +66,65 @@ function measureRow(s, a) {
   return `<li class="task"><div><p class="task-name">${esc(m?.name ?? 'Questionnaire')}</p><p class="task-meta">${kind}${measureMeta(s, a)}</p></div>${chip}${action}</li>`;
 }
 
+// ---------- Splose: what Sarah's booking system shows ----------
+
+// The progress record runSploseSync wrote, when Splose tracking is on and
+// Sarah has linked this client. Dates, statuses and counts only.
+const sploseOf = (s) => (s.config.splose?.enabled && s.ctx.splose?.patientId ? s.ctx.splose : null);
+const sploseStale = (s, p) => !p?.syncedAt || Date.now() - p.syncedAt > (s.config.splose?.staleAfterMinutes ?? 120) * 60000;
+const openForms = (p) => (p?.forms ?? []).filter((f) => f.status !== 'Completed');
+const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
+
+// 1 line under the journey step, fed from Splose. Copy is draft for Sarah.
+export function sploseStageLine(s) {
+  const p = sploseOf(s);
+  if (!p) return '';
+  const stage = s.ctx.client.journeyStage ?? 'assessment';
+  const next = p.nextAppointment;
+  const last = p.lastAttended;
+  const nextLine = next ? `Your next session with Sarah is on ${fmtDateTime(next.at)}.` : '';
+  const sessions = s.config.splose.showAttendance !== false && p.attended > 0 ? ` You have had ${plural(p.attended, 'session')} so far.` : '';
+  switch (stage) {
+    case 'enquiry':
+      return next ? `Your first session with Sarah is on ${fmtDateTime(next.at)}.` : 'Sarah will be in touch to arrange your first session.';
+    case 'firstSession':
+      if (next?.stage === 'firstSession') return `Your first session with Sarah is on ${fmtDateTime(next.at)}.`;
+      if (last?.stage === 'firstSession') return `You met Sarah on ${fmtDate(last.at)}.${next ? ` ${nextLine}` : ''}`;
+      return nextLine;
+    case 'assessment':
+      return openForms(p).length ? 'Sarah has also sent you a form in Splose to complete before your next session.' : '';
+    case 'booking':
+      if (p.feedbackAttendedAt) return `You and Sarah went through your results on ${fmtDate(p.feedbackAttendedAt)}.`;
+      return p.feedbackBookedAt ? `Your feedback session is on ${fmtDateTime(p.feedbackBookedAt)}.` : '';
+    case 'feedback':
+      if (p.feedbackAttendedAt) return `You and Sarah went through your results on ${fmtDate(p.feedbackAttendedAt)}.`;
+      return p.feedbackBookedAt ? `Your feedback session is on ${fmtDateTime(p.feedbackBookedAt)}.` : '';
+    default:
+      return nextLine ? `${nextLine}${sessions}` : sessions.trim();
+  }
+}
+
+// The Next session panel on Home: Splose's date when there is one, with
+// Sarah's note beside it; otherwise what Sarah typed in.
+function nextSessionPanel(s) {
+  const c = s.ctx.client;
+  const p = sploseOf(s);
+  const next = p?.nextAppointment;
+  if (!next) {
+    return c.nextSessionAt
+      ? `<p class="session-when">${esc(fmtDateTime(c.nextSessionAt))}</p>${c.nextSessionNote ? `<p>${esc(c.nextSessionNote)}</p>` : ''}`
+      : `<p>No session booked yet.</p>${s.config.bookingUrl ? `<div class="actions">${bookingButton(s, 'Book a session')}</div>` : '<p class="t-caption">Sarah will add your next session here once it is arranged.</p>'}`;
+  }
+  const forms = openForms(p);
+  const lines = [];
+  if (s.config.splose.showAttendance !== false && p.attended > 0) lines.push(`You have had ${plural(p.attended, 'session')} so far.`);
+  if (forms.length) lines.push(`Sarah has sent you ${forms.length === 1 ? 'a form' : `${forms.length} forms`} in Splose to complete: ${forms.map((f) => f.title).join(', ')}. The link is in the email from Splose.`);
+  return `<p class="session-when">${esc(fmtDateTime(next.at))}</p>
+    ${c.nextSessionNote ? `<p>${esc(c.nextSessionNote)}</p>` : ''}
+    ${lines.map((l) => `<p>${esc(l)}</p>`).join('')}
+    <p class="t-caption">From Sarah's booking system${sploseStale(s, p) ? `, last updated ${esc(fmtDateTime(p.syncedAt))}` : ''}.</p>`;
+}
+
 // The next check in Sarah has scheduled, if any.
 function nextCheckIn(s) {
   const next = s.ctx.schedules.find((x) => x.status === 'active' && x.nextDue);
@@ -275,8 +334,12 @@ function tasks(s) {
     const label = a.status === 'inProgress' ? 'Continue' : 'Start';
     list.push({ name: `${a.source === 'scheduled' ? 'Check in: ' : ''}${m?.name ?? 'Questionnaire'}`, meta: measureMeta(s, a), chip: a.status === 'inProgress' ? status('progress', 'In progress') : status('attention', 'To do'), action: `<a class="btn btn-primary" href="/measure/${esc(a.id)}">${label}</a>` });
   }
-  if (stage === 'booking' && !c.nextSessionAt) {
+  const splose = sploseOf(s);
+  if (stage === 'booking' && !c.nextSessionAt && !splose?.feedbackBookedAt) {
     list.push({ name: 'Book your feedback session', meta: 'Sarah goes through your results with you before anything is shared here.', chip: status('attention', 'To do'), action: bookingButton(s, 'Book a session') });
+  }
+  for (const f of openForms(splose)) {
+    list.push({ name: `Complete ${f.title} in Splose`, meta: `Sarah sent this ${f.sentAt ? `on ${fmtDate(f.sentAt)}` : 'from her booking system'}. The link is in the email from Splose.`, chip: status(f.status === 'In progress' ? 'progress' : 'attention', f.status === 'In progress' ? 'In progress' : 'To do'), action: '<span></span>' });
   }
   if (ctx.formulation) {
     const waiting = ctx.formulation.factors.filter((f) => !ctx.formulationResponses?.[f.id]).length;
@@ -320,6 +383,7 @@ export function home(s) {
   const reportName = clientTypes.types?.[c.clientType]?.reportName ?? 'Your report';
   const res = resources(s);
   const nextCheck = ctx.schedules.find((x) => x.status === 'active' && x.nextDue);
+  const stageLine = sploseStageLine(s);
   return shell(
     s,
     'home',
@@ -331,6 +395,7 @@ export function home(s) {
         <p class="journey-stage">Step ${index + 1} of ${stages.length}: ${esc(STAGE_LABELS[stage])}</p>
         <h2 class="t-title" id="stage-title">${esc(copy.title)}</h2>
         <p class="reading">${esc(copy.body)}</p>
+        ${stageLine ? `<p class="reading">${esc(stageLine)}</p>` : ''}
       </div>
     </section>
 
@@ -343,11 +408,7 @@ export function home(s) {
 
       <section class="stack home-session" aria-labelledby="h-next">
         <h2 id="h-next">Next session</h2>
-        ${
-          c.nextSessionAt
-            ? `<p class="session-when">${esc(fmtDateTime(c.nextSessionAt))}</p>${c.nextSessionNote ? `<p>${esc(c.nextSessionNote)}</p>` : ''}`
-            : `<p>No session booked yet.</p>${s.config.bookingUrl ? `<div class="actions">${bookingButton(s, 'Book a session')}</div>` : '<p class="t-caption">Sarah will add your next session here once it is arranged.</p>'}`
-        }
+        ${nextSessionPanel(s)}
       </section>
 
       <section class="stack home-report" aria-labelledby="h-rep">

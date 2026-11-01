@@ -338,6 +338,20 @@ const handlers = {
     await reload();
     return route();
   },
+  async 'link-splose'(data, form) {
+    const uid = form.dataset.uid;
+    try {
+      await call('linkSplosePatient', { uid, patientId: data.patientId, confirm: Boolean(data.confirm) });
+    } catch (e) {
+      S.form.splosePatientId = data.patientId;
+      S.errors.splose = e.message;
+      return route();
+    }
+    S.form.splosePatientId = '';
+    setFlash('Linked to Splose. Progress refreshes every 15 minutes, or sooner with Resync now.');
+    await reload();
+    return route();
+  },
   async 'add-resource'(data, form) {
     const uid = form.dataset.uid;
     const title = String(data.title ?? '').trim();
@@ -551,6 +565,23 @@ const actions = {
   async 'clear-session'(t) {
     await busy(t, () => call('setNextSession', { uid: t.dataset.uid, at: null }));
     setFlash('Next session cleared.');
+    await reload();
+    return route();
+  },
+  async 'splose-sync'(t) {
+    const r = await busy(t, () => call('syncSploseClient', { uid: t.dataset.uid }));
+    setFlash(r.already ? 'Refreshed from Splose less than a minute ago.' : 'Refreshed from Splose.');
+    await reload();
+    return route();
+  },
+  'splose-unlink'(t) {
+    const name = S.ctx.clients[t.dataset.uid]?.name || 'the client';
+    dialog(`<div class="stack-lg"><h2>Unlink ${esc(name)} from Splose?</h2><p>The appointment and form details read from Splose are removed from the hub. Nothing changes in Splose. You can link again later.</p><div class="actions"><button type="button" class="btn btn-primary" data-action="splose-unlink-confirm" data-uid="${esc(t.dataset.uid)}">Unlink</button><button type="button" class="btn btn-secondary" data-action="close">Cancel</button></div></div>`);
+  },
+  async 'splose-unlink-confirm'(t) {
+    await busy(t, () => call('unlinkSplosePatient', { uid: t.dataset.uid }));
+    closeDialog();
+    setFlash('Unlinked from Splose.');
     await reload();
     return route();
   },

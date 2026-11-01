@@ -43,17 +43,19 @@ export async function measure(id) {
 
 export async function loadClient(uid) {
   const client = await maybe(doc(db, 'clients', uid));
-  const ctx = { client, assignments: [], measures: {}, results: null, formulation: null, formulationResponses: {}, requests: [], schedules: [] };
+  const ctx = { client, assignments: [], measures: {}, results: null, formulation: null, formulationResponses: {}, requests: [], schedules: [], splose: null };
   if (!client?.activatedAt) return ctx;
-  const [assignments, results, formulation, responses, requests, schedules] = await Promise.all([
+  const [assignments, results, formulation, responses, requests, schedules, splose] = await Promise.all([
     all(query(collection(db, 'assignments'), where('uid', '==', uid), orderBy('order'))),
     maybe(doc(db, 'results', uid)),
     maybe(doc(db, 'formulations', uid)),
     maybe(doc(db, 'formulationResponses', uid)),
     all(query(collection(db, 'requests'), where('uid', '==', uid), orderBy('createdAt', 'desc'))),
     all(query(collection(db, 'schedules'), where('uid', '==', uid))),
+    maybe(doc(db, 'sploseProgress', uid)),
   ]);
   ctx.assignments = assignments;
+  ctx.splose = splose;
   ctx.results = results?.releasedAt ? results : null;
   ctx.formulation = formulation?.releasedAt ? formulation : null;
   ctx.formulationResponses = responses?.responses ?? {};
@@ -70,7 +72,7 @@ export async function loadStaff(role) {
   const [codes, measures] = await Promise.all([all(collection(db, 'activationCodes')), all(collection(db, 'measures'))]);
   const ctx = { codes: codes.sort((a, b) => b.issuedAt - a.issuedAt), measures: byId(measures) };
   if (role !== 'practitioner') return ctx;
-  const [clients, assignments, scoring, results, requests, intake, drafts, formulations, schedules, responses] = await Promise.all([
+  const [clients, assignments, scoring, results, requests, intake, drafts, formulations, schedules, responses, splose] = await Promise.all([
     all(collection(db, 'clients')),
     all(collection(db, 'assignments')),
     all(collection(db, 'scoring')),
@@ -81,6 +83,7 @@ export async function loadStaff(role) {
     all(collection(db, 'formulations')),
     all(collection(db, 'schedules')),
     all(collection(db, 'formulationResponses')),
+    all(collection(db, 'sploseProgress')),
   ]);
   return {
     ...ctx,
@@ -94,5 +97,6 @@ export async function loadStaff(role) {
     formulations: byId(formulations),
     formulationResponses: byId(responses, 'uid'),
     schedules: schedules.sort((a, b) => (b.createdAt ?? 0) - (a.createdAt ?? 0)),
+    splose: byId(splose),
   };
 }

@@ -16,6 +16,7 @@ for (const [from, to] of [
   ['public/js/formulation.js', 'formulation.js'],
   ['public/config/intake.json', 'intake.json'],
   ['public/config/client-types.json', 'client-types.json'],
+  ['public/config/app.json', 'app.json'],
 ]) {
   copyFileSync(join(root, from), join(out, to));
 }

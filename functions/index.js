@@ -12,18 +12,22 @@
 //                assignMeasure, releaseResults, saveFormulationDraft,
 //                releaseFormulation, closeRequest, createSchedule,
 //                updateSchedule
+// Splose:        linkSplosePatient, unlinkSplosePatient, syncSploseClient
 // Scheduled:     runCheckIns, every morning at 7am New Zealand time,
-//                assigns the check in questionnaires due that day
+//                assigns the check in questionnaires due that day;
+//                runSploseSync, every 15 minutes in waking hours and hourly
+//                overnight, reads appointments and forms from Splose
 
 import { readFileSync } from 'node:fs';
 import { initializeApp } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions';
-import { defineBoolean } from 'firebase-functions/params';
+import { defineBoolean, defineSecret } from 'firebase-functions/params';
 import { setGlobalOptions } from 'firebase-functions/v2';
 import { HttpsError, onCall } from 'firebase-functions/v2/https';
 import { onSchedule } from 'firebase-functions/v2/scheduler';
 import { makeHandlers } from './handlers.js';
+import { createSploseClient } from './splose.js';
 
 setGlobalOptions({ region: 'australia-southeast1', maxInstances: 10 });
 initializeApp();
@@ -33,12 +37,17 @@ const readJson = (file) => JSON.parse(readFileSync(new URL(`./shared/${file}`, i
 // Set ALLOW_SAMPLE_MEASURES=true in functions/.env.ef-client-hub only
 // while testing with the invented sample questionnaires.
 const ALLOW_SAMPLE_MEASURES = defineBoolean('ALLOW_SAMPLE_MEASURES', { default: false });
+// Sarah's Splose API key, set once with:
+//   firebase functions:secrets:set SPLOSE_API_KEY --project ef-client-hub
+const SPLOSE_API_KEY = defineSecret('SPLOSE_API_KEY');
 
 const handlers = makeHandlers({
   db: getFirestore('clienthub'),
   intakeConfig: readJson('intake.json'),
   clientTypes: readJson('client-types.json'),
+  appConfig: readJson('app.json'),
   allowSample: () => ALLOW_SAMPLE_MEASURES.value(),
+  splose: () => createSploseClient({ apiKey: SPLOSE_API_KEY.value() }),
 });
 
 const options = {
@@ -47,6 +56,7 @@ const options = {
     /^https:\/\/executiveframe-clienthub\.(web\.app|firebaseapp\.com)$/,
     /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/,
   ],
+  secrets: [SPLOSE_API_KEY],
 };
 
 const wrap = (handler) =>
@@ -79,8 +89,20 @@ export const setResources = wrap(handlers.setResources);
 export const closeRequest = wrap(handlers.closeRequest);
 export const createSchedule = wrap(handlers.createSchedule);
 export const updateSchedule = wrap(handlers.updateSchedule);
+export const linkSplosePatient = wrap(handlers.linkSplosePatient);
+export const unlinkSplosePatient = wrap(handlers.unlinkSplosePatient);
+export const syncSploseClient = wrap(handlers.syncSploseClient);
 
 export const runCheckIns = onSchedule({ schedule: '0 7 * * *', timeZone: 'Pacific/Auckland', retryCount: 2 }, async () => {
   const summary = await handlers.runDueSchedules();
   logger.info('Check in schedules run', summary);
 });
+
+async function sploseRun() {
+  const summary = await handlers.runSploseSync();
+  if (summary.error) logger.error('Splose sync stopped', summary);
+  else logger.info('Splose sync run', summary);
+}
+const sploseOptions = { timeZone: 'Pacific/Auckland', secrets: [SPLOSE_API_KEY], retryCount: 0 };
+export const runSploseSync = onSchedule({ ...sploseOptions, schedule: '*/15 7-21 * * *' }, sploseRun);
+export const runSploseSyncNight = onSchedule({ ...sploseOptions, schedule: '0 22,23,0-6 * * *' }, sploseRun);

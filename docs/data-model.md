@@ -6,7 +6,8 @@ Roles are custom claims set with the Admin SDK: `role: "practitioner"` reads cli
 
 | Collection | Document id | Fields | Client reads | Practitioner | Admin |
 |---|---|---|---|---|---|
-| `clients` | uid | uid, name, email, clientType, journeyStage, activatedAt, consentAt, consentVersion, sploseClientId, retentionUntil, nextSessionAt, nextSessionNote, resources (title, url, note), closedAt | own | all | none |
+| `clients` | uid | uid, name, email, clientType, journeyStage, activatedAt, consentAt, consentVersion, sploseClientId, sploseSyncedAt, retentionUntil, nextSessionAt, nextSessionNote, resources (title, url, note), closedAt | own | all | none |
+| `sploseProgress` | uid | uid, patientId, nextAppointment (at, service, stage), lastAttended, lastOutcome, attended, missed, cancelled, feedbackBookedAt, feedbackAttendedAt, forms (id, title, status, sentAt, submittedAt), case (isOpen, trackType, appointmentCount, hours, expiryDate), syncedAt, error, errorAt | own | all | none |
 | `intakeResponses` | uid | uid, answers, derivedType, overriddenBy, submittedAt | own | all | none |
 | `assignments` | generated | uid, measureId, status, order, assignedAt, completedAt, responses (only while in progress), source (`scheduled` for check ins), scheduleId, dueOn | own (query must filter on uid) | all | none |
 | `scoring` | assignment id | uid, assignmentId, measureId, responses, scores, scoredAt, reportDraft | never | all | none |
@@ -39,6 +40,10 @@ Dates on a schedule are New Zealand calendar days stored as `YYYY-MM-DD` strings
 ## Home: next session and resources
 
 `nextSessionAt` (ms) and `nextSessionNote` are set by Sarah through `setNextSession`; sessions are still booked in Splose and this is the reminder the client sees. `resources` is a list of up to 20 links (title, https url, note) set through `setResources`; the hub stores links only, never files. Both sit on the client document, which the client already reads.
+
+## Splose progress
+
+`sploseProgress` is written only by `runSploseSync` (every 15 minutes 7am to 9pm Pacific/Auckland, hourly overnight), `syncSploseClient` (Resync now, once a minute per client) and `linkSplosePatient`. Sarah links a client by Splose patient id on the Overview tab; the email in Splose must match the hub email unless she ticks Link anyway. The sync reads the client's appointments within `splose.lookbackDays`, their patient forms and, when `splose.showCase` is on, their case, with the key held in the `SPLOSE_API_KEY` secret. It keeps dates, service names, statuses and counts only: no pricing, notes, form answers or invoices. `nextAppointment.stage` and `lastAttended.stage` come from the service to stage map in `app.json` (`splose.services`); an unlisted service is a session with no stage meaning. `feedbackBookedAt` is the first feedback service appointment after `bookingTriggeredAt`. The sync never changes `journeyStage`; the dashboard lists what Splose shows under Needs attention and Sarah decides. A run takes the `clientsPerRun` oldest synced clients (by `sploseSyncedAt` on the client document) and stops at `callsPerRun` calls, so the Splose limit of 60 a minute is never reached. On a failed read the last good record stays with `error` set; a refused key or a rate limit ends the run. The client's Home shows the next appointment in place of `nextSessionAt` when Splose has one, with `nextSessionNote` beside it, and marks a record older than `staleAfterMinutes` with its time. Unlinking deletes the record; closing a client stops the sync and the record is kept until `retentionUntil` like everything else.
 
 ## Formulation
 

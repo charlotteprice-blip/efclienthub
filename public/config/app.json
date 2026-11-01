@@ -10,6 +10,24 @@
     "codeDays": 7,
     "intakeDays": 3,
     "questionnaireDays": 7,
-    "requestWorkingDays": 5
+    "requestWorkingDays": 5,
+    "sploseFormDays": 7
+  },
+  "_sploseNote": "Splose progress tracking. services maps each journey stage to the Splose service ids that mean it (from Settings or GET /services). An appointment whose service is not listed shows as a session with no stage meaning. lookbackDays limits how far back appointments are counted; staleAfterMinutes marks a record as out of date on the client's Home.",
+  "splose": {
+    "enabled": true,
+    "services": {
+      "firstSession": [],
+      "feedback": [],
+      "intervention": [],
+      "review": []
+    },
+    "showForms": true,
+    "showAttendance": true,
+    "showCase": false,
+    "lookbackDays": 180,
+    "staleAfterMinutes": 120,
+    "clientsPerRun": 15,
+    "callsPerRun": 50
   }
 }

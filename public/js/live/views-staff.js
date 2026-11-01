@@ -18,6 +18,50 @@ const draftsFor = (s, uid) => assignmentsFor(s, uid).filter((a) => a.status === 
 const releasedIds = (s, uid) => new Set((s.ctx.results[uid]?.items ?? []).map((i) => i.assignmentId));
 export const unreleased = (s, uid) => draftsFor(s, uid).filter((d) => d.draft.clientFacing !== false && !releasedIds(s, uid).has(d.assignment.id)).length;
 const schedulesFor = (s, uid) => (s.ctx.schedules ?? []).filter((x) => x.uid === uid);
+// The progress record runSploseSync wrote for a client, when tracking is on.
+const sploseFor = (s, uid) => (s.config.splose?.enabled ? s.ctx.splose?.[uid] ?? null : null);
+const sploseStale = (s, p) => !p?.syncedAt || Date.now() - p.syncedAt > (s.config.splose?.staleAfterMinutes ?? 120) * 60000;
+const nextSessionAt = (s, c) => sploseFor(s, c.uid ?? c.id)?.nextAppointment?.at ?? c.nextSessionAt ?? null;
+
+// The Splose panel on a client's Overview tab: link by patient id, or the
+// record with Resync now and Unlink.
+function splosePanel(s, uid, c) {
+  if (!s.config.splose?.enabled) return '';
+  const cfg = s.config.splose;
+  if (!c.sploseClientId) {
+    return `<section class="panel stack" aria-labelledby="h-splose">
+      <h2 id="h-splose">Splose</h2>
+      <p class="t-caption">Link ${esc(c.name || 'the client')} to their Splose record and the hub shows their next appointment, sessions attended and any Splose form still to complete. Dates and statuses only; nothing clinical is read.</p>
+      <form class="stack" data-form="link-splose" data-uid="${esc(uid)}" novalidate>
+        <div class="field"><label class="field-label" for="sp-id">Splose patient id</label><span class="field-hint" id="sp-hint">The number in the address bar on the client's page in Splose.</span><input class="input" id="sp-id" name="patientId" inputmode="numeric" aria-describedby="sp-hint" maxlength="12" value="${esc(s.form.splosePatientId ?? '')}"></div>
+        <label class="check"><input type="checkbox" name="confirm" value="1"><span>Link anyway if the email in Splose differs from ${esc(c.email || 'the hub email')}</span></label>
+        ${s.errors.splose ? `<p class="field-error">${esc(s.errors.splose)}</p>` : ''}
+        <div class="actions-inline"><button type="submit" class="btn btn-secondary">Link to Splose</button></div>
+      </form>
+    </section>`;
+  }
+  const p = sploseFor(s, uid);
+  const when = (x) => (x ? `${fmtDateTime(x.at)}${x.service ? `, ${x.service}` : ''}` : 'None');
+  const formRow = (f) => `<li class="task"><div><p class="task-name">${esc(f.title)}</p><p class="task-meta">${f.sentAt ? `Sent ${fmtDate(f.sentAt)}` : 'In Splose'}${f.submittedAt ? `, submitted ${fmtDate(f.submittedAt)}` : ''}</p></div>${f.status === 'Completed' ? status('done', 'Completed') : f.status === 'In progress' ? status('progress', 'In progress') : status('attention', 'Incomplete')}<span></span></li>`;
+  const details = p?.syncedAt
+    ? `<dl class="details">
+        <div><dt>Next appointment</dt><dd>${esc(when(p.nextAppointment))}</dd></div>
+        <div><dt>Last attended</dt><dd>${esc(when(p.lastAttended))}</dd></div>
+        ${cfg.showAttendance !== false ? `<div><dt>Last ${cfg.lookbackDays ?? 180} days</dt><dd>${p.attended} attended, ${p.missed} did not arrive, ${p.cancelled} cancelled</dd></div>` : ''}
+        ${p.feedbackBookedAt ? `<div><dt>Feedback session</dt><dd>${esc(fmtDateTime(p.feedbackBookedAt))}${p.feedbackAttendedAt ? ', attended' : ''}</dd></div>` : ''}
+        ${p.case ? `<div><dt>Case</dt><dd>${p.case.isOpen ? 'Open' : 'Closed'}${p.case.trackType ? `, tracks ${esc(String(p.case.trackType).toLowerCase())}` : ''}${p.case.appointmentCount ? `, ${p.case.appointmentCount} appointments` : ''}${p.case.hours ? `, ${p.case.hours} hours` : ''}${p.case.expiryDate ? `, expires ${esc(p.case.expiryDate)}` : ''}</dd></div>` : ''}
+        <div><dt>Last updated</dt><dd>${esc(fmtDateTime(p.syncedAt))}${sploseStale(s, p) ? ' (out of date)' : ''}</dd></div>
+      </dl>
+      ${cfg.showForms !== false ? `<h3 class="t-ui-strong">Forms in Splose</h3>${p.forms?.length ? `<ul class="task-list">${p.forms.map(formRow).join('')}</ul>` : '<p class="t-caption">None sent.</p>'}` : ''}`
+    : '<p class="t-caption">Not read from Splose yet. The next run is within 15 minutes, or press Resync now.</p>';
+  return `<section class="panel stack" aria-labelledby="h-splose">
+      <h2 id="h-splose">Splose</h2>
+      <p class="t-caption">Linked to Splose patient ${esc(String(c.sploseClientId))}. The client sees the next appointment${cfg.showAttendance !== false ? ', sessions attended' : ''} and any form still to complete on their Home. Nothing clinical is read.</p>
+      ${p?.error ? `<div class="notice notice-error" role="alert"><p class="t-ui-strong">Splose link needs attention</p><p>${esc(p.error)}</p></div>` : ''}
+      ${details}
+      <div class="actions-inline"><button type="button" class="btn btn-secondary" data-action="splose-sync" data-uid="${esc(uid)}">Resync now</button><button type="button" class="btn btn-quiet" data-action="splose-unlink" data-uid="${esc(uid)}">Unlink</button></div>
+    </section>`;
+}
 
 function scheduleRow(s, x) {
   const m = s.ctx.measures[x.measureId];
@@ -117,6 +161,21 @@ export function attentionItems(s) {
       items.push({ kind: 'questionnaire', who: c.name || c.email, text: `${stale.length} questionnaire${stale.length === 1 ? '' : 's'} assigned ${relative(Math.min(...stale.map((a) => a.assignedAt)))} and not started`, href });
     }
   }
+  // What Splose shows that Sarah may want to act on. The stage never moves
+  // on its own (decision 59).
+  for (const c of Object.values(s.ctx.clients)) {
+    const uid = c.uid ?? c.id;
+    const p = sploseFor(s, uid);
+    if (!p || !c.sploseClientId) continue;
+    const who = c.name || c.email;
+    const href = `/practitioner/client/${uid}`;
+    if (p.error) items.push({ kind: 'splose', who, text: `Splose link needs attention: ${p.error}`, href });
+    if (p.feedbackAttendedAt && c.journeyStage === 'booking') items.push({ kind: 'splose', who, text: `Feedback session attended in Splose on ${fmtDate(p.feedbackAttendedAt)}; stage is still Book feedback`, href });
+    if (p.lastOutcome === 'Did not arrive') items.push({ kind: 'splose', who, text: 'Did not arrive at the last appointment in Splose', href });
+    for (const f of p.forms ?? []) {
+      if (f.status !== 'Completed' && f.sentAt && now - f.sentAt > (t.sploseFormDays ?? 7) * DAY) items.push({ kind: 'splose', who, text: `Splose form "${f.title}" sent ${relative(f.sentAt)} and not completed`, href });
+    }
+  }
   for (const r of s.ctx.requests) {
     if (r.status === 'open' && workingDaysUntil(r.dueBy) <= t.requestWorkingDays) {
       items.push({ kind: 'request', who: s.ctx.clients[r.uid]?.name ?? 'Client', text: `${r.kind === 'access' ? 'Access' : 'Correction'} request due ${fmtDate(r.dueBy)}`, href: '/practitioner/review' });
@@ -148,7 +207,8 @@ function clientRow(s, c) {
   const facts = [];
   if (!c.activatedAt) facts.push(`Signed up ${relative(c.createdAt).toLowerCase()}, consent and intake not yet done`);
   if (initial.length) facts.push(`${done} of ${initial.length} questionnaire${initial.length === 1 ? '' : 's'} done`);
-  if (c.nextSessionAt) facts.push(`Next session ${fmtDateTime(c.nextSessionAt)}`);
+  const nextAt = nextSessionAt(s, c);
+  if (nextAt) facts.push(`Next session ${fmtDateTime(nextAt)}`);
   if (schedule) facts.push(`Check in due ${fmtDay(schedule.nextDue)}`);
   if (formulation?.releasedAt) facts.push(`Formulation shared, ${formulation.factors.filter((f) => responses[f.id]).length} of ${formulation.factors.length} cards answered`);
   else if (results?.releasedAt) facts.push(`Results shared ${fmtDate(results.releasedAt)}`);
@@ -211,10 +271,12 @@ export function clients(s) {
         <td>${esc(STAGE_LABELS[c.journeyStage] ?? 'Setting up')}</td>
         <td>${list.filter((a) => a.status === 'complete').length} of ${list.length}</td>
         <td>${resultsStatus(s, uid)}</td>
+        ${s.config.splose?.enabled ? `<td>${nextSessionAt(s, c) ? esc(fmtDateTime(nextSessionAt(s, c))) : c.sploseClientId ? 'None booked' : '<span class="t-caption">Not linked</span>'}</td>` : ''}
         <td>${relative(c.lastActive)}</td>
       </tr>`;
     })
     .join('');
+  const columns = s.config.splose?.enabled ? 7 : 6;
   const waiting = s.ctx.codes.filter((c) => !c.redeemedByUid && c.expiresAt > Date.now()).length;
   return shell(
     s,
@@ -225,8 +287,8 @@ export function clients(s) {
       <a class="btn btn-primary btn-inline" href="/practitioner/codes">Issue activation code</a>
     </div>
     <div class="table-wrap"><table class="table table-clients">
-      <thead><tr><th scope="col">Client</th><th scope="col">Type</th><th scope="col">Stage</th><th scope="col">Done</th><th scope="col">Results</th><th scope="col">Last active</th></tr></thead>
-      <tbody>${rows || '<tr><td colspan="6">No clients yet. Issue an activation code to invite the first one.</td></tr>'}</tbody>
+      <thead><tr><th scope="col">Client</th><th scope="col">Type</th><th scope="col">Stage</th><th scope="col">Done</th><th scope="col">Results</th>${s.config.splose?.enabled ? '<th scope="col">Next appointment</th>' : ''}<th scope="col">Last active</th></tr></thead>
+      <tbody>${rows || `<tr><td colspan="${columns}">No clients yet. Issue an activation code to invite the first one.</td></tr>`}</tbody>
     </table></div>
     ${waiting ? `<p class="t-caption">${waiting} activation code${waiting === 1 ? '' : 's'} not yet used. <a href="/practitioner/codes">See codes</a></p>` : ''}`,
     true,
@@ -368,7 +430,7 @@ export function client(s, uid, tab = 'overview') {
       </section>
       <section class="panel stack" aria-labelledby="h-session">
         <h2 id="h-session">Next session</h2>
-        <p class="t-caption">Shown on the client's Home. Sessions are still booked in Splose; this is the reminder.</p>
+        <p class="t-caption">${sploseFor(s, uid)?.nextAppointment ? `Splose shows the next appointment on ${esc(fmtDateTime(sploseFor(s, uid).nextAppointment.at))}; the client sees that date, and your note beside it.` : "Shown on the client's Home. Sessions are still booked in Splose; this is the reminder."}</p>
         ${c.nextSessionAt ? `<p class="t-ui-strong">${esc(fmtDateTime(c.nextSessionAt))}</p>${c.nextSessionNote ? `<p class="t-caption">${esc(c.nextSessionNote)}</p>` : ''}` : '<p>No session recorded.</p>'}
         <form class="stack" data-form="next-session" data-uid="${esc(uid)}" novalidate>
           <div class="split">
@@ -379,6 +441,7 @@ export function client(s, uid, tab = 'overview') {
           <div class="actions-inline"><button type="submit" class="btn btn-secondary">Save session</button>${c.nextSessionAt ? `<button type="button" class="btn btn-quiet" data-action="clear-session" data-uid="${esc(uid)}">Clear</button>` : ''}</div>
         </form>
       </section>
+      ${splosePanel(s, uid, c)}
       <section class="panel stack" aria-labelledby="h-res">
         <h2 id="h-res">Resources for ${esc(c.name || 'the client')}</h2>
         <p class="t-caption">Links the client sees under Your resources: Learning Hub pages, handouts hosted elsewhere, recordings. Areas of focus from released results link to their Learning Hub topics automatically.</p>

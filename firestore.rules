@@ -121,6 +121,13 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // Progress read from Splose by runSploseSync: next appointment, sessions
+    // attended, form status, last updated. Dates, statuses and counts only.
+    match /sploseProgress/{uid} {
+      allow read: if isSelf(uid) || isPractitioner();
+      allow write: if false;
+    }
+
     // ---------- operational records ----------
 
     // Activation codes. Stored by hashed code; never readable by clients.

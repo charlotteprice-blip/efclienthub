@@ -4,10 +4,15 @@
 
 import { HttpsError } from 'firebase-functions/v2/https';
 import * as core from './core.js';
+import { buildProgress, cleanPatientId } from './splose.js';
 import { deriveClientType, validateIntake } from './shared/intake-rules.js';
 import { buildDraft, scoreMeasure } from './shared/scoring.js';
 
-export function makeHandlers({ db, intakeConfig, clientTypes, allowSample = () => false, now = () => Date.now() }) {
+const DAY = 24 * 60 * 60 * 1000;
+
+// `splose` returns a Splose API client (functions/splose.js) or throws when
+// the key is not set; `appConfig` is public/config/app.json.
+export function makeHandlers({ db, intakeConfig, clientTypes, appConfig = {}, allowSample = () => false, splose = () => null, now = () => Date.now() }) {
   const fail = (code, message) => {
     throw new HttpsError(code, message);
   };
@@ -44,6 +49,47 @@ export function makeHandlers({ db, intakeConfig, clientTypes, allowSample = () =
     const snap = await ref.get();
     if (!snap.exists) fail('not-found', 'Client not found.');
     return { ref, client: snap.data() };
+  }
+
+  // ---------- Splose helpers ----------
+
+  const sploseConfig = () => appConfig.splose ?? {};
+
+  function sploseApi() {
+    if (!sploseConfig().enabled) fail('failed-precondition', 'Splose tracking is switched off in app.json.');
+    try {
+      const api = splose();
+      if (!api) throw new Error('Splose is not connected.');
+      return api;
+    } catch (e) {
+      return fail('failed-precondition', e.message);
+    }
+  }
+
+  async function serviceNames(api) {
+    const list = await api.services();
+    return Object.fromEntries(list.map((s) => [s.id, String(s.name ?? 'Session').slice(0, 80)]));
+  }
+
+  // Reads 1 client's appointments, forms and case from Splose and writes
+  // their progress record. 2 or 3 calls per client.
+  async function syncClient(api, ref, client, names) {
+    const cfg = sploseConfig();
+    const patientId = client.sploseClientId;
+    const since = new Date(now() - (cfg.lookbackDays ?? 180) * DAY).toISOString();
+    const appointments = await api.appointments({ patientId, start_gt: since });
+    const forms = cfg.showForms === false ? [] : await api.patientForms({ patientId });
+    const cases = cfg.showCase ? await api.cases({ patientId }) : [];
+    const progress = buildProgress({ patientId, appointments, forms, cases, serviceNames: names, config: cfg, client: { ...client, uid: ref.id }, now: now() });
+    await db.doc(`sploseProgress/${ref.id}`).set(progress);
+    await ref.update({ sploseSyncedAt: now() });
+    return progress;
+  }
+
+  // A failed read leaves the last good record in place with the error on it.
+  async function recordSploseError(ref, message) {
+    await db.doc(`sploseProgress/${ref.id}`).set({ uid: ref.id, error: String(message).slice(0, 200), errorAt: now() }, { merge: true });
+    await ref.update({ sploseSyncedAt: now() });
   }
 
   return {
@@ -476,6 +522,117 @@ export function makeHandlers({ db, intakeConfig, clientTypes, allowSample = () =
         await snap.ref.update({ ...next, runs: (s.runs ?? 0) + 1, lastRunOn: today, ...(next.status === 'ended' ? { endedAt: now(), endedBy: 'system' } : {}) });
         if (next.status === 'ended') summary.ended += 1;
       }
+      return summary;
+    },
+
+    // ---------- Splose ----------
+
+    // Sarah links a hub client to their Splose patient record by id. The
+    // email must match unless she confirms; the first sync runs at once.
+    linkSplosePatient: async (request) => {
+      const auth = practitioner(request);
+      const { ref, client } = await existingClient(request.data?.uid);
+      const patientId = cleanPatientId(request.data?.patientId);
+      if (!patientId) fail('invalid-argument', "Enter the Splose patient id: the number in the address bar on the patient's Splose page.");
+      const api = sploseApi();
+      let patient;
+      try {
+        patient = await api.patient(patientId);
+      } catch (e) {
+        if (e.status === 404) fail('not-found', 'No patient in Splose has that id.');
+        fail('unavailable', e.message);
+      }
+      const theirs = String(patient?.email ?? '').trim().toLowerCase();
+      const ours = String(client.email ?? '').trim().toLowerCase();
+      if (theirs && ours && theirs !== ours && !request.data?.confirm) {
+        fail('failed-precondition', `That Splose patient's email does not match ${client.email}. Tick "Link anyway" if you are sure it is the same person.`);
+      }
+      await ref.update({ sploseClientId: patientId, sploseSyncedAt: null });
+      await audit(auth.uid, 'linked Splose patient', ref.id, { emailMatched: !theirs || !ours || theirs === ours });
+      try {
+        await syncClient(api, ref, { ...client, sploseClientId: patientId }, await serviceNames(api));
+      } catch (e) {
+        await recordSploseError(ref, e.message);
+      }
+      return { ok: true };
+    },
+
+    unlinkSplosePatient: async (request) => {
+      const auth = practitioner(request);
+      const { ref, client } = await existingClient(request.data?.uid);
+      if (!client.sploseClientId) return { ok: true, already: true };
+      await ref.update({ sploseClientId: null, sploseSyncedAt: null });
+      await db.doc(`sploseProgress/${ref.id}`).delete();
+      await audit(auth.uid, 'unlinked Splose patient', ref.id);
+      return { ok: true };
+    },
+
+    // Resync now, from the client's Overview tab. Once a minute per client.
+    syncSploseClient: async (request) => {
+      const auth = practitioner(request);
+      const { ref, client } = await existingClient(request.data?.uid);
+      if (!client.sploseClientId) fail('failed-precondition', 'Link this client to Splose first.');
+      const current = (await db.doc(`sploseProgress/${ref.id}`).get()).data();
+      if (current?.syncedAt && now() - current.syncedAt < 60 * 1000) return { ok: true, already: true };
+      const api = sploseApi();
+      try {
+        await syncClient(api, ref, client, await serviceNames(api));
+      } catch (e) {
+        await recordSploseError(ref, e.message);
+        fail('unavailable', e.message);
+      }
+      await audit(auth.uid, 'resynced Splose', ref.id);
+      return { ok: true };
+    },
+
+    // Run on a timer (index.js), never by a browser. Oldest synced clients
+    // first, a fixed number per run, stopping inside the call budget so the
+    // Splose limit of 60 calls a minute is never reached.
+    runSploseSync: async () => {
+      const cfg = sploseConfig();
+      const summary = { synced: 0, failed: 0, deferred: 0, calls: 0, error: null };
+      if (!cfg.enabled) return { ...summary, skipped: 'disabled' };
+      let api;
+      try {
+        api = splose();
+        if (!api) throw new Error('Splose is not connected.');
+      } catch (e) {
+        return { ...summary, error: e.message };
+      }
+      const linked = (await db.collection('clients').where('sploseClientId', '>', 0).get()).docs
+        .map((d) => ({ ref: d.ref, client: d.data() }))
+        .filter((x) => !x.client.closedAt)
+        .sort((a, b) => (a.client.sploseSyncedAt ?? 0) - (b.client.sploseSyncedAt ?? 0));
+      const batch = linked.slice(0, cfg.clientsPerRun ?? 15);
+      summary.deferred = linked.length - batch.length;
+      if (!batch.length) return summary;
+      let names;
+      try {
+        names = await serviceNames(api);
+      } catch (e) {
+        summary.error = e.message;
+        summary.calls = api.calls;
+        return summary;
+      }
+      for (const { ref, client } of batch) {
+        if (api.calls >= (cfg.callsPerRun ?? 50)) {
+          summary.deferred += 1;
+          continue;
+        }
+        try {
+          await syncClient(api, ref, client, names);
+          summary.synced += 1;
+        } catch (e) {
+          await recordSploseError(ref, e.message);
+          summary.failed += 1;
+          // A refused key or a rate limit stops the whole run; the rest wait.
+          if ([401, 403, 429].includes(e.status)) {
+            summary.error = e.message;
+            break;
+          }
+        }
+      }
+      summary.calls = api.calls;
       return summary;
     },
   };

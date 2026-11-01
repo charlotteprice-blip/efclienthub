@@ -45,6 +45,8 @@ Keep chat replies short, in plain language, with bullet points. Whenever a step 
 
 ## Where things stand (1 November 2026)
 
-Built: activation codes, consent, intake, questionnaire library of 68 with 31 cleared, scoring drafts and release, check in schedules, 5P formulation with client responses and 7 selectable drawings, practitioner dashboard, client home, resources and next session, privacy requests. Sarah (consultant@sarahanticich.co.nz) has practitioner access and is reviewing.
+Built: activation codes, consent, intake, questionnaire library of 68 with 31 cleared, scoring drafts and release, check in schedules, 5P formulation with client responses and 7 selectable drawings, practitioner dashboard, client home, resources and next session, privacy requests, Splose progress tracking (decision 59, docs/splose-sync.md). Sarah (consultant@sarahanticich.co.nz) has practitioner access and is reviewing.
+
+Splose: the sync needs the `SPLOSE_API_KEY` secret (`firebase functions:secrets:set SPLOSE_API_KEY --project ef-client-hub`) before `npm run deploy:functions`; without it the scheduled runs log "not connected" and linking a client fails with that message. `splose.services` in public/config/app.json is empty until Sarah names her services. The harness has a fake Splose: link a client to patient 101, 102 or 103.
 
 Still to do, in the order of docs/functionality-plan.md: stage 7 email at key moments, stage 9 Sarah edits config in the hub, stage 10 completion and closure with 10 year retention, stage 11 Learning Hub discount code. Also: licence review for the questionnaires not yet cleared, mapping Learning Hub topics and batteries in the codebook, connecting the custom domain, and the launch steps in rule 8.
