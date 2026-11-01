@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-01T04:30:00.000Z",
+  "title": "Design System: Executive Frame Client Hub",
+  "extensions": {
+    "colorMeta": {
+      "winter-sky": { "role": "neutral", "displayName": "Winter Sky", "canonical": "#CFDAE8", "tonalRamp": ["#1E2A3A", "#33455C", "#4E6684", "#7A92AF", "#A3B6CC", "#CFDAE8", "#E4EAF2", "#F3F6FA"] },
+      "slate-ink": { "role": "primary", "displayName": "Slate Ink", "canonical": "#3E5680", "tonalRamp": ["#1A2437", "#2A3B59", "#3E5680", "#5C729A", "#8194B3", "#A9B6CC", "#D0D8E5", "#EEF1F6"] },
+      "deep-navy": { "role": "primary", "displayName": "Deep Navy", "canonical": "#2E4062", "tonalRamp": ["#121A29", "#1F2C45", "#2E4062", "#475B82", "#6B7FA3", "#97A6C0", "#C6CEDD", "#EAEDF3"] },
+      "warm-paper": { "role": "neutral", "displayName": "Warm Paper", "canonical": "#F5F3EE", "tonalRamp": ["#2B2924", "#4A463F", "#6E6960", "#9B958A", "#C4BFB4", "#E4E0D8", "#F5F3EE", "#FBFAF8"] },
+      "hairline": { "role": "neutral", "displayName": "Hairline", "canonical": "rgba(62,86,128,0.25)", "tonalRamp": ["#3E5680", "#5C729A", "#8194B3", "#A9B6CC", "#C4CEDD", "#D9E0EA", "#E8EDF3", "#F4F6F9"] },
+      "underline": { "role": "neutral", "displayName": "Underline", "canonical": "rgba(62,86,128,0.40)", "tonalRamp": ["#3E5680", "#55699A", "#7589AB", "#97A6C0", "#B5C0D2", "#CFD7E3", "#E5EAF1", "#F3F5F9"] },
+      "brick": { "role": "tertiary", "displayName": "Brick", "canonical": "#8A3F34", "tonalRamp": ["#3A1A15", "#5E2A22", "#8A3F34", "#A95A4E", "#C47E73", "#DBA59C", "#EDCBC5", "#F8ECE9"] },
+      "rose": { "role": "tertiary", "displayName": "Rose", "canonical": "#F2B8AD", "tonalRamp": ["#4A2A24", "#7A463C", "#A96456", "#D48A7B", "#E8A497", "#F2B8AD", "#F8D7D0", "#FCEFEC"] },
+      "paper-hairline": { "role": "neutral", "displayName": "Paper Hairline", "canonical": "rgba(245,243,238,0.25)", "tonalRamp": ["#2E4062", "#4F5F7E", "#707E99", "#929DB3", "#B4BCCC", "#D3D8E2", "#E9ECF1", "#F5F3EE"] },
+      "moss": { "role": "tertiary", "displayName": "Moss", "canonical": "#2F5D3A", "tonalRamp": ["#13271A", "#20412A", "#2F5D3A", "#4A7A55", "#6E9A78", "#98B9A0", "#C3D8C8", "#E3ECE2"] },
+      "moss-tint": { "role": "tertiary", "displayName": "Moss Tint", "canonical": "#E3ECE2", "tonalRamp": ["#2F5D3A", "#4A7A55", "#6E9A78", "#98B9A0", "#B8CFBD", "#D0E0D3", "#E3ECE2", "#F2F6F2"] },
+      "navy-tint": { "role": "tertiary", "displayName": "Navy Tint", "canonical": "#E4E9F1", "tonalRamp": ["#2E4062", "#475B82", "#6B7FA3", "#97A6C0", "#B6C1D4", "#CDD5E3", "#E4E9F1", "#F3F5F9"] },
+      "ochre": { "role": "tertiary", "displayName": "Ochre", "canonical": "#6E4A10", "tonalRamp": ["#2E1F06", "#4D340B", "#6E4A10", "#8E6424", "#AF8448", "#CBA777", "#E2C9A8", "#F2E8D6"] },
+      "sand": { "role": "tertiary", "displayName": "Sand", "canonical": "#F2E8D6", "tonalRamp": ["#6E4A10", "#8E6424", "#AF8448", "#CBA777", "#DBBE95", "#E8D4B8", "#F2E8D6", "#F9F4EC"] },
+      "burnt-amber": { "role": "secondary", "displayName": "Burnt Amber", "canonical": "#A65A1B", "tonalRamp": ["#3E2109", "#6B3A10", "#A65A1B", "#C27A3C", "#D69A66", "#E6BB95", "#F1D9C2", "#FAF0E6"] },
+      "deep-teal": { "role": "secondary", "displayName": "Deep Teal", "canonical": "#2F6E68", "tonalRamp": ["#122E2B", "#1F4C47", "#2F6E68", "#4A8B84", "#6FA8A1", "#9AC4BF", "#C5DEDB", "#E8F2F1"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Reserved by the kit; not used on live screens yet." },
+      "title": { "displayName": "Title", "purpose": "h1: sign in and onboarding headings, the question in a questionnaire, the stage title on Home." },
+      "heading": { "displayName": "Heading", "purpose": "h2: section headings and the desktop top bar title." },
+      "ui-strong": { "displayName": "UI strong", "purpose": "h3, field labels, button labels, task names, table headings, the active nav link." },
+      "body": { "displayName": "Body", "purpose": "Paragraphs, inputs and choice cards; reading copy held to 680px." },
+      "ui": { "displayName": "UI", "purpose": "Nav links, tables, quiet buttons, error messages." },
+      "caption": { "displayName": "Caption", "purpose": "Hints, metadata, status pills, step labels, chips, small inputs." },
+      "wordmark": { "displayName": "Wordmark", "purpose": "Executive Frame beside the mark, set as live text." }
+    },
+    "shadows": [
+      { "name": "workspace-inset", "value": "inset 1px 1px 0 rgba(62,86,128,0.25)", "purpose": "The 1px hairline that lifts the paper workspace from the sky room on desktop." },
+      { "name": "drawer-scrim", "value": "0 0 0 100vmax rgba(46, 64, 98, 0.35)", "purpose": "Dims the page behind the open sidebar drawer below 900px." },
+      { "name": "step-halo", "value": "0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent)", "purpose": "The current tracker step's halo in the client type accent." },
+      { "name": "zone-inset", "value": "inset 0 0 0 2px var(--accent)", "purpose": "Marks the perpetuating zone of the formulation; 1px of hairline marks a suggested factor." }
+    ],
+    "motion": [
+      { "name": "duration", "value": "180ms", "purpose": "Every state transition: background, colour, border, transform, width." },
+      { "name": "easing", "value": "ease-out", "purpose": "The only easing." },
+      { "name": "mark-draw", "value": "1200ms", "purpose": "The mark's ring draws itself on load and the journey ring fills; both skipped under reduced motion." }
+    ],
+    "breakpoints": [
+      { "name": "phone-up", "value": "768px" },
+      { "name": "drawer-below", "value": "899px" },
+      { "name": "split-below", "value": "1199px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one call to action on a view: navy on paper, 52px, hover to slate.",
+      "html": "<button class=\"ds-btn ds-btn-primary\" type=\"button\">Continue</button>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 24px; border: 2px solid transparent; border-radius: 12px; font-family: Figtree, system-ui, sans-serif; font-size: 16px; line-height: 22px; font-weight: 500; cursor: pointer; transition: background-color 180ms ease-out, color 180ms ease-out, border-color 180ms ease-out; } .ds-btn-primary { background: #2E4062; color: #F5F3EE; } .ds-btn-primary:hover { background: #3E5680; } .ds-btn-primary:focus-visible { outline: 2px solid #2E4062; outline-offset: 2px; } .ds-btn[disabled] { opacity: 0.55; cursor: not-allowed; }"
+    },
+    {
+      "name": "Secondary button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Paper with a 2px slate stroke; every other action.",
+      "html": "<button class=\"ds-btn ds-btn-secondary\" type=\"button\">Save session</button>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 24px; border: 2px solid transparent; border-radius: 12px; font-family: Figtree, system-ui, sans-serif; font-size: 16px; line-height: 22px; font-weight: 500; cursor: pointer; transition: background-color 180ms ease-out; } .ds-btn-secondary { background: #F5F3EE; color: #3E5680; border-color: #3E5680; } .ds-btn-secondary:hover { background: #FFFFFF; } .ds-btn-secondary:focus-visible { outline: 2px solid #3E5680; outline-offset: 2px; }"
+    },
+    {
+      "name": "Quiet button",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "Underlined text at 44px for Clear, Remove, End and Log out.",
+      "html": "<button class=\"ds-btn-quiet\" type=\"button\">Clear</button>",
+      "css": ".ds-btn-quiet { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border: 0; background: transparent; color: #3E5680; font-family: Figtree, system-ui, sans-serif; font-size: 16px; line-height: 22px; font-weight: 400; text-decoration: underline; text-decoration-color: rgba(62,86,128,0.40); text-underline-offset: 3px; cursor: pointer; } .ds-btn-quiet:hover { text-decoration-color: currentColor; } .ds-btn-quiet:focus-visible { outline: 2px solid #3E5680; outline-offset: 2px; }"
+    },
+    {
+      "name": "Text field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Label, hint and a 52px paper field with a 2px slate stroke; brick on error.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-field-label\" for=\"ds-email\">Email</label><span class=\"ds-field-hint\">Use the address Sarah emailed your code to.</span><input class=\"ds-input\" id=\"ds-email\" type=\"email\" placeholder=\"name@example.com\"></div>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 8px; font-family: Figtree, system-ui, sans-serif; color: #3E5680; } .ds-field-label { font-size: 16px; line-height: 22px; font-weight: 500; } .ds-field-hint { font-size: 14px; line-height: 20px; } .ds-input { width: 100%; min-height: 52px; padding: 12px 16px; border: 2px solid #3E5680; border-radius: 8px; background: #F5F3EE; color: #3E5680; font: inherit; font-size: 17px; line-height: 26px; } .ds-input::placeholder { color: #3E5680; opacity: 0.75; } .ds-input:focus-visible { outline: 2px solid #3E5680; outline-offset: 2px; } .ds-field-invalid .ds-input { border-color: #8A3F34; }"
+    },
+    {
+      "name": "Choice card",
+      "kind": "input",
+      "refersTo": "choice-card",
+      "description": "A questionnaire answer: full width card with a ring that fills navy on selection.",
+      "html": "<label class=\"ds-choice\"><input type=\"radio\" name=\"ds-a\" checked><span class=\"ds-choice-dot\"></span><span>Often</span><kbd class=\"ds-kbd\">3</kbd></label>",
+      "css": ".ds-choice { position: relative; display: flex; align-items: center; gap: 16px; min-height: 52px; padding: 12px 16px; border: 2px solid #3E5680; border-radius: 12px; background: #F5F3EE; color: #3E5680; font-family: Figtree, system-ui, sans-serif; font-size: 17px; line-height: 26px; cursor: pointer; transition: background-color 180ms ease-out; } .ds-choice input { position: absolute; opacity: 0; pointer-events: none; } .ds-choice-dot { flex: none; width: 22px; height: 22px; border: 2px solid #3E5680; border-radius: 50%; display: grid; place-items: center; } .ds-choice-dot::after { content: ''; width: 10px; height: 10px; border-radius: 50%; background: #2E4062; transform: scale(0); transition: transform 180ms ease-out; } .ds-choice:has(input:checked) { background: #CFDAE8; border-color: #2E4062; } .ds-choice:has(input:checked) .ds-choice-dot { border-color: #2E4062; } .ds-choice:has(input:checked) .ds-choice-dot::after { transform: scale(1); } .ds-choice:has(input:focus-visible) { outline: 2px solid #3E5680; outline-offset: 2px; } .ds-kbd { margin-left: auto; display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 4px; border: 1px solid rgba(62,86,128,0.25); border-radius: 6px; font: inherit; font-size: 12px; font-weight: 500; }"
+    },
+    {
+      "name": "Status pills",
+      "kind": "chip",
+      "refersTo": "status-done",
+      "description": "Done, In progress and Needs attention: icon and word on a tint, never colour alone.",
+      "html": "<span class=\"ds-status ds-status-done\"><svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><circle cx=\"8\" cy=\"8\" r=\"7\" fill=\"currentColor\"/><path d=\"M4.8 8.2l2.1 2.1 4.3-4.6\" stroke=\"#E3ECE2\" stroke-width=\"1.6\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>Done</span> <span class=\"ds-status ds-status-progress\"><svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><circle cx=\"8\" cy=\"8\" r=\"6.25\" stroke=\"currentColor\" stroke-width=\"1.5\" fill=\"none\"/><path d=\"M8 1.75a6.25 6.25 0 0 1 0 12.5z\" fill=\"currentColor\"/></svg>In progress</span> <span class=\"ds-status ds-status-attention\"><svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><circle cx=\"8\" cy=\"8\" r=\"7\" fill=\"currentColor\"/><path d=\"M8 4.2v4.6\" stroke=\"#F2E8D6\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><circle cx=\"8\" cy=\"11.4\" r=\"1\" fill=\"#F2E8D6\"/></svg>Needs attention</span>",
+      "css": ".ds-status { display: inline-flex; align-items: center; gap: 8px; min-height: 28px; padding: 4px 12px 4px 8px; border-radius: 999px; font-family: Figtree, system-ui, sans-serif; font-size: 14px; line-height: 20px; font-weight: 500; white-space: nowrap; } .ds-status svg { width: 16px; height: 16px; flex: none; } .ds-status-done { background: #E3ECE2; color: #2F5D3A; } .ds-status-progress { background: #E4E9F1; color: #2E4062; } .ds-status-attention { background: #F2E8D6; color: #6E4A10; }"
+    },
+    {
+      "name": "Task row",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "The list pattern on Home and every practitioner panel: name and metadata, status pill, action.",
+      "html": "<ul class=\"ds-task-list\"><li class=\"ds-task\"><div><p class=\"ds-task-name\">How you have been feeling this week</p><p class=\"ds-task-meta\">21 questions, about 8 minutes</p></div><span class=\"ds-status ds-status-attention\"><svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><circle cx=\"8\" cy=\"8\" r=\"7\" fill=\"currentColor\"/><path d=\"M8 4.2v4.6\" stroke=\"#F2E8D6\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><circle cx=\"8\" cy=\"11.4\" r=\"1\" fill=\"#F2E8D6\"/></svg>To do</span><button class=\"ds-btn ds-btn-primary\" type=\"button\">Start</button></li></ul>",
+      "css": ".ds-task-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(62,86,128,0.25); font-family: Figtree, system-ui, sans-serif; color: #3E5680; } .ds-task { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: 24px; min-height: 72px; padding: 16px 0; border-bottom: 1px solid rgba(62,86,128,0.25); } .ds-task p { margin: 0; } .ds-task-name { font-size: 16px; line-height: 22px; font-weight: 500; margin-bottom: 4px; } .ds-task-meta { font-size: 14px; line-height: 1.5; } .ds-status { display: inline-flex; align-items: center; gap: 8px; min-height: 28px; padding: 4px 12px 4px 8px; border-radius: 999px; font-size: 14px; line-height: 20px; font-weight: 500; white-space: nowrap; } .ds-status svg { width: 16px; height: 16px; } .ds-status-attention { background: #F2E8D6; color: #6E4A10; } .ds-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 24px; border: 2px solid transparent; border-radius: 12px; font: inherit; font-size: 16px; font-weight: 500; cursor: pointer; } .ds-btn-primary { background: #2E4062; color: #F5F3EE; } .ds-btn-primary:hover { background: #3E5680; }"
+    },
+    {
+      "name": "Sidebar navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Links on the sky room: icon and label, paper fill on the current page, a navy count pill.",
+      "html": "<nav class=\"ds-sidebar\"><ul class=\"ds-nav\"><li><a class=\"ds-nav-link\" href=\"#\" aria-current=\"page\"><svg viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 9.2 10 3.5l7 5.7V16a1 1 0 0 1-1 1h-3.5v-4.5h-5V17H4a1 1 0 0 1-1-1z\"/></svg>Home</a></li><li><a class=\"ds-nav-link\" href=\"#\"><svg viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"4\" y=\"3\" width=\"12\" height=\"14.5\" rx=\"2\"/><path d=\"M7.5 7.5h5M7.5 10.5h5M7.5 13.5h3\"/></svg>Questionnaires<span class=\"ds-nav-count\">4</span></a></li><li><a class=\"ds-nav-link\" href=\"#\"><svg viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"10\" cy=\"10\" r=\"7\"/><path d=\"M10 6v4l2.5 2.5\"/></svg>Results</a></li></ul></nav>",
+      "css": ".ds-sidebar { width: 248px; padding: 24px 16px; background: #CFDAE8; color: #3E5680; font-family: Figtree, system-ui, sans-serif; border-radius: 16px; } .ds-nav { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; } .ds-nav-link { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 12px; border-radius: 12px; color: #3E5680; text-decoration: none; font-size: 16px; line-height: 22px; transition: background-color 180ms ease-out; } .ds-nav-link svg { width: 20px; height: 20px; flex: none; } .ds-nav-link:hover { background: rgba(245, 243, 238, 0.55); } .ds-nav-link[aria-current=\"page\"] { background: #F5F3EE; font-weight: 500; } .ds-nav-link:focus-visible { outline: 2px solid #3E5680; outline-offset: 2px; } .ds-nav-count { margin-left: auto; min-width: 24px; height: 24px; padding: 0 8px; border-radius: 999px; background: #2E4062; color: #F5F3EE; font-size: 14px; line-height: 24px; font-weight: 500; text-align: center; }"
+    },
+    {
+      "name": "Report tracker",
+      "kind": "custom",
+      "refersTo": "panel-on-paper",
+      "description": "The 5 step tracker on Home: moss for done, the accent with a halo for the current step, hairlines between.",
+      "html": "<section class=\"ds-home-section\"><h2 class=\"ds-h2\">Your executive functioning report</h2><ol class=\"ds-tracker\"><li class=\"ds-step ds-step-done\"><span class=\"ds-step-dot\"></span><span class=\"ds-step-label\">Questionnaires<span class=\"ds-step-detail\">4 of 4</span></span></li><li class=\"ds-step ds-step-current\"><span class=\"ds-step-dot\"></span><span class=\"ds-step-label\">Sarah reviews</span></li><li class=\"ds-step ds-step-todo\"><span class=\"ds-step-dot\"></span><span class=\"ds-step-label\">Feedback session</span></li><li class=\"ds-step ds-step-todo\"><span class=\"ds-step-dot\"></span><span class=\"ds-step-label\">Results shared</span></li><li class=\"ds-step ds-step-todo\"><span class=\"ds-step-dot\"></span><span class=\"ds-step-label\">Formulation shared</span></li></ol></section>",
+      "css": ".ds-home-section { --accent: #A65A1B; padding: 24px; border-radius: 16px; background: #CFDAE8; color: #3E5680; font-family: Figtree, system-ui, sans-serif; } .ds-h2 { margin: 0 0 16px; font-size: 22px; line-height: 28px; font-weight: 400; } .ds-tracker { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); } .ds-step { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; font-size: 14px; line-height: 1.25; } .ds-step::before { content: ''; position: absolute; top: 7px; left: 50%; width: 100%; height: 2px; background: rgba(62,86,128,0.25); } .ds-step:last-child::before { display: none; } .ds-step-done::before { background: #2F5D3A; } .ds-step-dot { position: relative; z-index: 1; width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(62,86,128,0.25); background: #CFDAE8; } .ds-step-done .ds-step-dot { border-color: #2F5D3A; background: #2F5D3A; } .ds-step-current .ds-step-dot { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent); } .ds-step-todo .ds-step-label { opacity: 0.6; } .ds-step-current .ds-step-label { font-weight: 500; } .ds-step-detail { display: block; opacity: 0.8; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Calm Clinic Room",
+    "overview": "The hub is a quiet, well lit consulting room on screen. The room is winter sky: the sidebar and top bar are a single flat field of pale blue that frames everything. On the desk sits warm paper, the workspace where the client and Sarah actually read and write, lifted from the room by nothing more than a rounded top corner and a 1px hairline. There are no shadows, no gradients, no pictures, no decoration. Depth is 2 tones of the same light, and the eye rests.\n\nEvery client screen asks for 1 thing. Type is set large (17px body on a 26px line), controls are tall (52px) and full width on a phone, and the whole page is finishable in a single sitting by someone who is tired, distracted or anxious. Sarah's screens keep the same materials but pack more in: panels flow in 2 columns, tables and task rows carry the day's work, and status is always an icon plus a word in a tinted pill. The one spark of colour in the room is the client type accent, a decorative stroke on the journey ring, the progress bar and the current step; it never carries text and never carries meaning on its own.\n\nThe mood is calm, unhurried and clinical in the good sense: orderly, precise, with nothing on the surfaces that does not need to be there. The only motion is a 180ms ease out on state changes and the mark drawing itself in once on load.",
+    "keyCharacteristics": [
+      "4 palette colours do almost everything: winter sky, slate ink, deep navy, warm paper",
+      "Flat by rule: tonal layering and hairlines, never box shadows",
+      "Figtree at 3 weights; body and captions at 400 for readability (the kit's 300 is opt in)",
+      "52px controls, 44px minimum touch targets, 2px slate strokes, 8 to 16px corners",
+      "Status by icon and word in a tinted pill, never by colour alone",
+      "One accent per client type, decorative only, 3:1 against its grounds"
+    ],
+    "rules": [
+      { "name": "The Four Colour Rule", "body": "Sky, slate, navy and paper do every job on every screen. A new colour is a status, an error or a client accent, and each of those already has a value.", "section": "colors" },
+      { "name": "The Icon and Word Rule", "body": "A status is a pill with a 16px icon and a label. Colour is the third cue, never the only one.", "section": "colors" },
+      { "name": "The Earth Not Red Rule", "body": "Needs attention is ochre on sand. Brick red is reserved for a form that cannot be submitted.", "section": "colors" },
+      { "name": "The Regular Heading Rule", "body": "Headings are weight 400. The only 500 is UI strong: labels, buttons, names. Nothing is ever 600 or 700, and the kit's 300 body is opt in via data-weight=\"light\".", "section": "typography" },
+      { "name": "The Seventeen Rule", "body": "Body copy is 17px on a 26px line everywhere a client reads. Do not drop to 14px to fit more in; cut words instead.", "section": "typography" },
+      { "name": "The No Shadow Rule", "body": "Surfaces never cast shadows. If something needs to come forward, change its tone (paper, sky, navy) or give it a hairline.", "section": "elevation" },
+      { "name": "The Hairline Rule", "body": "Dividers are 1px of slate at 25 percent, never a full stroke of ink and never a change of background.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do build every surface from the 4 palette colours and the tokens in public/css/tokens.css; put anything Client Hub specific in app.css or components.css and never edit the generated file.",
+      "Do keep controls 52px tall with 2px slate strokes and 12px corners, full width on phones, with the primary action first.",
+      "Do set client copy at 17px/26px and headings at weight 400; use weight 500 only for labels, buttons and names.",
+      "Do show status as a pill with an icon and a word, using moss, navy or ochre on their tints.",
+      "Do lift surfaces by tone and hairline: paper on sky, sky on paper, 1px slate at 25 percent.",
+      "Do keep the client type accent decorative (ring, progress, current step, left edges, selected fit) at 3:1 or better.",
+      "Do honour reduced motion: the mark draws instantly and transitions drop to 0ms.",
+      "Do style from classes or script only; the Content Security Policy blocks inline styles and style=\"\"."
+    ],
+    "donts": [
+      "Don't add box shadows, gradients, textures, illustrations or photography; the only decoration is the mark.",
+      "Don't use brick red for anything but a form error, and never colour alone for a status.",
+      "Don't introduce a fifth colour, a second typeface, weight 600 or 700, or uppercase labels (the activation code input is the one tracked uppercase exception).",
+      "Don't put a second primary button on a view, shrink body text below 17px to fit, or let a client screen need scrolling past 1 clear next action.",
+      "Don't round a single sided edge, clip a surface, or mix the 8, 12, 16px radius roles (inputs 8, buttons and cards 12, panels 16, pills 999).",
+      "Don't show scores, bold warnings or anything urgent in the client's room; the dashboard's attention rows belong to Sarah."
+    ]
+  }
+}
