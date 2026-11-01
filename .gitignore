@@ -13,3 +13,4 @@ service-account*.json
 dist/
 functions/shared/
 functions/node_modules/
+Figma.zip
