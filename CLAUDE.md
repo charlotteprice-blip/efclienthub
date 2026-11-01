@@ -15,7 +15,12 @@ Static HTML, CSS and vanilla JavaScript, no framework and no build step. Firebas
 5. No analytics and no third party scripts. The Content Security Policy blocks inline styles and `style=""`, so widths and colours are set from classes or from script.
 6. Never put client data or sample health information in commits, the work log, or chat summaries.
 7. Never run a bare `firebase deploy`. Use the npm deploy scripts, which target only this app.
-8. Before launch: Charlotte's own account goes back to `admin` (it is `practitioner` for testing) and the 5 test clients are removed with `npm run seed:test -- remove`.
+8. Before launch:
+   1. Charlotte's own account goes back to `admin` (it is `practitioner` for testing).
+   2. The 5 test clients are removed with `npm run seed:test -- remove`.
+   3. `ALLOW_SAMPLE_MEASURES` is set to `false` in functions/.env.ef-client-hub, then `npm run deploy:functions`. The file is not in git but deploys with the functions, and it is `true` now.
+   4. public/preview/ and public/js/preview.js are deleted (decision 17), with their links in public/styleguide.html and scripts/serve.mjs.
+   5. `bookingUrl` in public/config/app.json is set to Sarah's Splose booking page (it is empty now).
 
 ## Writing and copy
 

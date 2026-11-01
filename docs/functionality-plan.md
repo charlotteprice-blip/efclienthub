@@ -18,9 +18,9 @@ Agreed with Charlotte on 18 October 2026, subject to Sarah's confirmation where 
 
 ## Stage 6: check in schedules (built 18 October 2026)
 
-Sarah sets a schedule on a client's page: a questionnaire, an interval (weekly, fortnightly, every 4 weeks) or a list of dates, and a start date. A scheduled Cloud Function runs each morning (Pacific/Auckland), creates the assignment when a date arrives, moves the client back to the assessment stage if they were past it, and sends the assignment email. Sarah can pause or end a schedule. The client's Home shows the next check in and its date.
+Sarah sets a schedule on a client's page: a questionnaire, an interval (weekly, fortnightly, every 4 weeks) or a list of dates, and a start date. A scheduled Cloud Function runs each morning (Pacific/Auckland), creates the assignment when a date arrives and leaves the client's journey stage where Sarah has it (decision 33). The assignment email waits for stage 7 (decision 35). Sarah can pause or end a schedule. The client's Home shows the next check in and its date.
 
-Data: `schedules/{id}` with uid, measureId, cadence, nextDue, endsAt, pausedAt. Assignments gain `source: scheduled`. Results from repeated questionnaires are kept per assignment so Sarah can see change over time on the client page (a simple table of subscale scores by date; no chart until Sarah asks).
+Data: `schedules/{id}` with uid, measureId, cadence, dates, startsOn, endsOn, nextDue, status, pausedAt; see data-model.md. Assignments gain `source: scheduled`. Results from repeated questionnaires are kept per assignment so Sarah can see change over time on the client page (a simple table of subscale scores by date; no chart until Sarah asks).
 
 ## Stage 7: email
 
@@ -32,7 +32,7 @@ A Dashboard page as the practitioner landing page: counts by stage; a Needs atte
 
 ## Stage 9: Sarah edits config in the hub
 
-An Settings area for the practitioner role with 3 editors: intake questions (text, hint, options, on or off, and the type rules), journey copy per client type, and questionnaire upload with the same validation as `npm run measures -- check`. Edits write to `config/*` and `measures/*` in Firestore through functions; the JSON files in the repo become the defaults for a fresh project. Every edit is audited and the previous version kept, so a mistake can be reverted.
+A Settings area for the practitioner role with 3 editors: intake questions (text, hint, options, on or off, and the type rules), journey copy per client type, and questionnaire upload with the same validation as `npm run measures -- check`. Edits write to `config/*` and `measures/*` in Firestore through functions; the JSON files in the repo become the defaults for a fresh project. Every edit is audited and the previous version kept, so a mistake can be reverted.
 
 ## Stage 10: completion and closure
 
@@ -46,8 +46,10 @@ A discount code field in config, shown on the Results page beside the Learning H
 
 Release gate, hashed activation codes, audit log, 20 working day privacy requests, no analytics, self hosted assets, desktop viewer layout.
 
-## Before stage 6 starts
+## Still open before launch
+
+These were listed before stage 6 and are not yet done (1 November 2026). The full launch list is rule 8 in CLAUDE.md.
 
 1. Sarah confirms decisions 9, 10 and 11 and the thresholds in stage 8.
-2. Real questionnaires loaded with cleared licences; `ALLOW_SAMPLE_MEASURES=false`.
+2. Real questionnaires loaded with cleared licences (31 of 68 so far); `ALLOW_SAMPLE_MEASURES=false` in functions/.env.ef-client-hub (it is `true` now).
 3. DNS for clients.executiveframe.co.nz and the Splose booking link in `app.json`.

@@ -1,6 +1,6 @@
 # Executive Frame Client Hub
 
-In treatment web app for clients of Sarah Anticich, served at clients.executiveframe.co.nz. Static HTML, CSS and vanilla JavaScript on Firebase, with no front end framework and no build step. Developer: Charlotte Price (hello@charlotteprice.co.nz). Work log: Notion, Executive Frame, App 2.
+In treatment web app for clients of Sarah Anticich, live at executiveframe-clienthub.web.app and moving to clients.executiveframe.co.nz once DNS is connected. Static HTML, CSS and vanilla JavaScript on Firebase, with no front end framework and no build step. Developer: Charlotte Price (hello@charlotteprice.co.nz). Work log: Notion, Executive Frame, App 2.
 
 This app runs in its own Firebase project, `ef-client-hub`, separate from the Learning Hub (app.executiveframe.co.nz). Accounts, health information and deployments are fully separate. Inside the project it still uses a named Firestore database (`clienthub`), its own Hosting site, Storage bucket and functions codebase.
 
@@ -12,10 +12,11 @@ firestore.rules          rules for the clienthub database; storage.rules closes 
 functions/               Cloud Functions: index.js connects handlers.js to Firebase; core.js holds the tested rules
 public/index.html        the live app; every route loads it
 public/js/live/          live app: app.js (routes, auth, actions), data.js, views-client.js, views-staff.js
-public/js/               shared: ui.js, scoring.js, intake-rules.js, client-types.js, mark.js, journey-ring.js, firebase.js
+public/js/               shared: ui.js, scoring.js, formulation.js, formulation-views.js, intake-rules.js, client-types.js, mark.js, journey-ring.js, firebase.js
 public/config/           app.json, client-types.json, intake.json
 public/css/              tokens.css (generated), app.css, components.css
 public/sample/           clickable sample on invented data
+public/preview/          static layout previews on sample content; deleted before launch
 brand/                   Levi's tokens.json and the status colours
 measures/                EF Client Hub Codebook workbook and the library files built from it
 scripts/                 setup, roles, measures, serve, vendor, tokens, contrast, sample build, worklog
@@ -74,7 +75,7 @@ Never run a bare `firebase deploy` from this repository; the npm scripts name th
 
 ## Still done outside the terminal
 
-1. Creating the `ef-client-hub` project itself under Sarah's Google account, with the Blaze plan, and adding Charlotte as Owner.
+1. Creating the `ef-client-hub` project itself, with the Blaze plan. It was created under the charlotteprice.co.nz Google organisation (decision 29); adding Sarah as Owner, moving billing to her business, and whether the project moves under her own organisation are still to confirm (open question 8).
 2. Adding the DNS records that `npm run setup:check` prints, at the DNS host for executiveframe.co.nz, and logging that change in the Site Changes Log.
 3. Approving copy and decisions with Sarah (docs/decisions.md).
 
