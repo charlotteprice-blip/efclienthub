@@ -93,6 +93,21 @@ export function makeHandlers({ db, intakeConfig, clientTypes, appConfig = {}, al
   }
 
   return {
+    // ---------- shared sign in ----------
+
+    // Answers the Learning Hub start page, which runs in the same Firebase
+    // project and so shares one login: does this person have a place in the
+    // Client Hub? Reads only the caller's own record and returns 1 boolean,
+    // nothing else, so whether someone is Sarah's client stays between them
+    // and their own browser (decision 60). A closed client is sent to the
+    // Learning Hub like anyone else.
+    hasClientHub: async (request) => {
+      const auth = signedIn(request);
+      if (core.ROLES.includes(auth.token.role)) return { hasHub: true };
+      const snap = await db.doc(`clients/${auth.uid}`).get();
+      return { hasHub: Boolean(snap.exists && !snap.data().closedAt) };
+    },
+
     // ---------- client ----------
 
     redeemActivationCode: async (request) => {

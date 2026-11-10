@@ -205,6 +205,32 @@ describe('formulation and privacy requests', () => {
   });
 });
 
+describe('hasClientHub, the signal for the Learning Hub start page', () => {
+  test('a client with an open record has a hub, from the moment the code is redeemed', async () => {
+    const { code } = await h.issueActivationCode(as(sarah, { forName: 'Alex' }));
+    await h.redeemActivationCode(as(client, { code, name: 'Alex' }));
+    assert.deepEqual(await h.hasClientHub(as(client, {})), { hasHub: true });
+    await onboard(other);
+    assert.deepEqual(await h.hasClientHub(as(other, {})), { hasHub: true });
+  });
+  test('a closed client does not', async () => {
+    await onboard();
+    await db.doc('clients/client-1').update({ closedAt: Date.now() });
+    assert.deepEqual(await h.hasClientHub(as(client, {})), { hasHub: false });
+  });
+  test('staff do, with or without a client record', async () => {
+    assert.deepEqual(await h.hasClientHub(as(sarah, {})), { hasHub: true });
+    assert.deepEqual(await h.hasClientHub(as(admin, {})), { hasHub: true });
+  });
+  test('a login with no record does not, and learns nothing else', async () => {
+    await onboard();
+    assert.deepEqual(await h.hasClientHub(as(other, {})), { hasHub: false });
+  });
+  test('a signed out call is refused', async () => {
+    await rejects(h.hasClientHub({ data: {} }), 'unauthenticated');
+  });
+});
+
 describe('check in schedules', () => {
   const measureId = 'sample-routines';
   async function finishOpen(auth = client) {

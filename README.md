@@ -2,7 +2,7 @@
 
 In treatment web app for clients of Sarah Anticich, live at executiveframe-clienthub.web.app and moving to clients.executiveframe.co.nz once DNS is connected. Static HTML, CSS and vanilla JavaScript on Firebase, with no front end framework and no build step. Developer: Charlotte Price (hello@charlotteprice.co.nz). Work log: Notion, Executive Frame, App 2.
 
-This app runs in its own Firebase project, `ef-client-hub`, separate from the Learning Hub (app.executiveframe.co.nz). Accounts, health information and deployments are fully separate. Inside the project it still uses a named Firestore database (`clienthub`), its own Hosting site, Storage bucket and functions codebase.
+This app runs in the Firebase project `ef-client-hub`, which it now shares with the Learning Hub so 1 login works in both (decision 60). Health information and deployments stay separate: this app has its own named Firestore database (`clienthub`), Hosting site, Storage bucket and functions codebase, and the Learning Hub never reads `clienthub`. The 1 function another site calls is `hasClientHub`, which tells the Learning Hub start page whether the signed in person has a place here.
 
 ## Layout
 

@@ -14,6 +14,8 @@
 //                updateSchedule
 // Splose:        searchSplosePatients, linkSplosePatient,
 //                unlinkSplosePatient, syncSploseClient
+// Shared login:  hasClientHub, called by the Learning Hub start page from
+//                the person's own browser; answers { hasHub } and logs no one
 // Scheduled:     runCheckIns, every morning at 7am New Zealand time,
 //                assigns the check in questionnaires due that day;
 //                runSploseSync, every 15 minutes in waking hours and hourly
@@ -94,6 +96,29 @@ export const searchSplosePatients = wrap(handlers.searchSplosePatients);
 export const linkSplosePatient = wrap(handlers.linkSplosePatient);
 export const unlinkSplosePatient = wrap(handlers.unlinkSplosePatient);
 export const syncSploseClient = wrap(handlers.syncSploseClient);
+
+// hasClientHub is the 1 function another site calls, so it has its own
+// options: the Learning Hub origins are allowed here and nowhere else, it
+// needs no secret, and a failure logs the error code only, never who asked
+// or what the answer was (decision 60).
+const sharedLoginOptions = {
+  cors: [
+    /^https:\/\/learn\.executiveframe\.co\.nz$/,
+    /^https:\/\/executiveframe-learninghub\.(web\.app|firebaseapp\.com)$/,
+    /^https:\/\/clients\.executiveframe\.co\.nz$/,
+    /^https:\/\/executiveframe-clienthub\.(web\.app|firebaseapp\.com)$/,
+    /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/,
+  ],
+};
+export const hasClientHub = onCall(sharedLoginOptions, async (request) => {
+  try {
+    return await handlers.hasClientHub(request);
+  } catch (e) {
+    if (e instanceof HttpsError) throw e;
+    logger.error('hasClientHub failed', { code: e?.code ?? 'unknown' });
+    throw new HttpsError('internal', 'Something went wrong. Please try again.');
+  }
+});
 
 export const runCheckIns = onSchedule({ schedule: '0 7 * * *', timeZone: 'Pacific/Auckland', retryCount: 2 }, async () => {
   const summary = await handlers.runDueSchedules();
