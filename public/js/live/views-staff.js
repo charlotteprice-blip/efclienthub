@@ -1,7 +1,7 @@
 // Live practitioner (Sarah) and admin screens.
 
 import { CADENCE_LABELS, STAGE_LABELS, esc, fmtDate, fmtDateTime, fmtDay, practitionerShell, relative, status, toLocalInput } from '../ui.js';
-import { FIT_LABELS, MARK_SRC, ROUTES, ZONES, zoneOf } from './views-client.js';
+import { FIT_LABELS, MARK_SRC, ROUTES, ZONES, questionForm, zoneOf } from './views-client.js';
 import { suggestFactors } from '../formulation.js';
 import { VIEW_OPTIONS, renderFormulationView, viewOf } from '../formulation-views.js';
 import { buildDraft, scoreMeasure } from '../scoring.js';
@@ -834,7 +834,7 @@ export function measurePage(s, id) {
         ${m.source?.citation ? `<div><dt>Source</dt><dd class="t-caption">${esc(m.source.citation)}${m.source.url ? ` <a href="${esc(m.source.url)}" target="_blank" rel="noopener">Link</a>` : ''}</dd></div>` : ''}
       </dl>
       ${m.description ? `<p>${esc(m.description)}</p>` : ''}
-      ${m.instructions ? `<p class="t-caption">Instruction shown with each question: "${esc(m.instructions)}"</p>` : ''}
+      ${m.instructions ? `<p class="t-caption">${m.instructions.length > 140 ? 'Instructions the client reads before question 1, and can open again on any question' : 'Instruction shown with each question'}: "${esc(m.instructions)}"</p>` : ''}
       <p class="t-caption">A test run walks through the questions as a client would and shows how the answers would score; nothing is saved.${isPractitioner ? ' Clients who already have an open copy are not offered for assignment.' : ''}</p>
     </section>
 
@@ -869,32 +869,20 @@ export function measureTest(s, id, n) {
   const run = s.testRun?.measureId === id ? s.testRun : { measureId: id, responses: {} };
   const total = m.items.length;
   const index = Math.min(Math.max(Number.isInteger(n) ? n : 0, 0), total - 1);
-  const it = m.items[index];
-  const options = Array.isArray(it.responseOptions) && it.responseOptions.length ? it.responseOptions : m.responseOptions;
-  const current = run.responses[it.id];
-  const last = index === total - 1;
   return shell(
     s,
     'library',
     `Test run: ${m.name}`,
     `<p><a href="/practitioner/library/${esc(m.id)}">Back to ${esc(m.name)}</a> <span class="t-caption">Nothing you answer here is saved.</span></p>
-    <form class="focus-column stack-lg" data-form="test-item" data-measure="${esc(m.id)}" data-index="${index}" novalidate>
-      <div class="stack">
-        <div class="progress" role="progressbar" aria-label="Question ${index + 1} of ${total}" aria-valuemin="1" aria-valuemax="${total}" aria-valuenow="${index + 1}"><div class="progress-fill" data-progress="${index}" data-total="${total}"></div></div>
-        <p class="t-caption">Question ${index + 1} of ${total}</p>
-      </div>
-      <fieldset class="choices${s.errors.item ? ' field-invalid' : ''}" role="radiogroup" aria-labelledby="q-legend"${s.errors.item ? ' aria-invalid="true" aria-describedby="err-item"' : ''}>
-        <legend class="t-title" id="q-legend">${esc(it.text)}</legend>
-        ${m.instructions ? `<p class="field-hint">${esc(m.instructions)}</p>` : ''}
-        ${options.map((o, i) => `<label class="choice"><input type="radio" name="answer" value="${esc(o.value)}"${String(current) === String(o.value) ? ' checked' : ''}><span class="choice-dot"></span><span>${esc(o.label)}</span><kbd>${i + 1}</kbd></label>`).join('')}
-      </fieldset>
-      ${s.errors.item ? `<p class="field-error" id="err-item" role="alert">${esc(s.errors.item)}</p>` : ''}
-      <div class="actions">
-        ${index > 0 ? `<a class="btn btn-secondary" href="/practitioner/library/${esc(m.id)}/test/${index - 1}">Back</a>` : ''}
-        <button type="submit" class="btn btn-primary">${last ? 'See how it scores' : 'Next question'}</button>
-        <p class="t-caption key-hint">Press 1 to ${options.length} to choose, then Enter.</p>
-      </div>
-    </form>`,
+    ${questionForm({
+      attrs: `data-form="test-item" data-measure="${esc(m.id)}" data-index="${index}"`,
+      measure: m,
+      index,
+      current: run.responses[m.items[index].id],
+      error: s.errors.item,
+      backHref: index > 0 ? `/practitioner/library/${esc(m.id)}/test/${index - 1}` : '',
+      submitLabel: index === total - 1 ? 'See how it scores' : 'Next question',
+    })}`,
   );
 }
 

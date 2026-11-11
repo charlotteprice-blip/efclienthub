@@ -470,34 +470,76 @@ export function item(s, assignmentId, n) {
   let index = Number.isInteger(n) ? n : m.items.findIndex((it) => responses[it.id] === undefined);
   if (index < 0) index = total - 1;
   index = Math.min(Math.max(index, 0), total - 1);
-  const it = m.items[index];
-  const options = Array.isArray(it.responseOptions) && it.responseOptions.length ? it.responseOptions : m.responseOptions;
-  const last = index === total - 1;
-  const current = responses[it.id];
+  // Long instructions are read once, on their own screen before question 1,
+  // and stay behind Show instructions on every question after that.
+  if (longInstructions(m) && n === undefined && answeredCount(a) === 0) {
+    return shell(
+      s,
+      'questionnaires',
+      m.name,
+      `<section class="focus-column stack-lg">
+        <div class="stack">
+          <p class="t-caption">${esc(measureMeta(s, a))}</p>
+          <h2 class="t-title">Before you start</h2>
+          <p class="reading">${esc(m.instructions)}</p>
+          <p class="t-caption">There are no right or wrong answers. Your answers save as you go, and you can read this again on any question.</p>
+        </div>
+        <div class="actions"><a class="btn btn-primary" href="/measure/${esc(a.id)}/0">Start</a></div>
+      </section>`,
+      'focus',
+    );
+  }
   return shell(
     s,
     'questionnaires',
     m.name,
-    `<form class="focus-column stack-lg" data-form="item" data-assignment="${esc(a.id)}" data-index="${index}" novalidate>
-      ${flashHtml(s.flash)}
+    questionForm({
+      attrs: `data-form="item" data-assignment="${esc(a.id)}" data-index="${index}"`,
+      measure: m,
+      index,
+      current: responses[m.items[index].id],
+      error: s.errors.item,
+      flash: flashHtml(s.flash),
+      backHref: index > 0 ? `/measure/${esc(a.id)}/${index - 1}` : '',
+      submitLabel: index === total - 1 ? 'Finish questionnaire' : 'Next question',
+    }),
+    'focus',
+  );
+}
+
+// Instructions longer than this are too much to repeat under every question.
+const LONG_INSTRUCTIONS = 140;
+const longInstructions = (m) => (m.instructions ?? '').length > LONG_INSTRUCTIONS;
+// A question longer than this steps down from title to heading size.
+const LONG_QUESTION = 90;
+
+// 1 question on 1 screen, shared by the client and Sarah's test run. Short
+// instructions (a stem such as "Over the last 2 weeks...") stay under the
+// question; long ones sit behind Show instructions. The buttons stay in
+// view at the bottom of the screen. Number keys reach the first 9 answers.
+export function questionForm({ attrs, measure: m, index, current, error, flash = '', backHref, submitLabel }) {
+  const total = m.items.length;
+  const it = m.items[index];
+  const options = Array.isArray(it.responseOptions) && it.responseOptions.length ? it.responseOptions : m.responseOptions;
+  const instructions = !m.instructions ? '' : longInstructions(m) ? `<details class="instructions"><summary>Show instructions</summary><p>${esc(m.instructions)}</p></details>` : `<p class="field-hint">${esc(m.instructions)}</p>`;
+  return `<form class="focus-column question stack-lg" ${attrs} novalidate>
+      ${flash}
       <div class="stack">
         <div class="progress" role="progressbar" aria-label="Question ${index + 1} of ${total}" aria-valuemin="1" aria-valuemax="${total}" aria-valuenow="${index + 1}"><div class="progress-fill" data-progress="${index}" data-total="${total}"></div></div>
         <p class="t-caption">Question ${index + 1} of ${total}</p>
       </div>
-      <fieldset class="choices${s.errors.item ? ' field-invalid' : ''}" role="radiogroup" aria-labelledby="q-legend"${s.errors.item ? ' aria-invalid="true" aria-describedby="err-item"' : ''}>
-        <legend class="t-title" id="q-legend">${esc(it.text)}</legend>
-        ${m.instructions ? `<p class="field-hint">${esc(m.instructions)}</p>` : ''}
-        ${options.map((o, i) => `<label class="choice"><input type="radio" name="answer" value="${esc(o.value)}"${String(current) === String(o.value) ? ' checked' : ''}><span class="choice-dot"></span><span>${esc(o.label)}</span><kbd>${i + 1}</kbd></label>`).join('')}
+      <fieldset class="choices${error ? ' field-invalid' : ''}" role="radiogroup" aria-labelledby="q-legend"${error ? ' aria-invalid="true" aria-describedby="err-item"' : ''}>
+        <legend class="${it.text.length > LONG_QUESTION ? 't-heading' : 't-title'}" id="q-legend">${esc(it.text)}</legend>
+        ${instructions}
+        ${options.map((o, i) => `<label class="choice"><input type="radio" name="answer" value="${esc(o.value)}"${String(current) === String(o.value) ? ' checked' : ''}><span class="choice-dot"></span><span>${esc(o.label)}</span>${i < 9 ? `<kbd aria-hidden="true">${i + 1}</kbd>` : ''}</label>`).join('')}
       </fieldset>
-      ${s.errors.item ? `<p class="field-error" id="err-item" role="alert">${esc(s.errors.item)}</p>` : ''}
-      <div class="actions">
-        ${index > 0 ? `<a class="btn btn-secondary" href="/measure/${esc(a.id)}/${index - 1}">Back</a>` : ''}
-        <button type="submit" class="btn btn-primary">${last ? 'Finish questionnaire' : 'Next question'}</button>
-        <p class="t-caption key-hint">Press 1 to ${options.length} to choose, then Enter.</p>
+      ${error ? `<p class="field-error" id="err-item" role="alert">${esc(error)}</p>` : ''}
+      <div class="actions question-actions">
+        ${backHref ? `<a class="btn btn-secondary" href="${backHref}">Back</a>` : ''}
+        <button type="submit" class="btn btn-primary">${esc(submitLabel)}</button>
+        <p class="t-caption key-hint">${options.length > 9 ? 'Press 1 to 9 to choose, or use the arrow keys, then Enter.' : `Press 1 to ${options.length} to choose, then Enter.`}</p>
       </div>
-    </form>`,
-    'focus',
-  );
+    </form>`;
 }
 
 export function allDone(s) {
