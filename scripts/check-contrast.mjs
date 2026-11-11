@@ -96,6 +96,30 @@ for (const file of ['public/css/app.css', 'public/css/components.css']) {
   }
 }
 
+// Brand pack rules the stylesheets must keep: no shadows anywhere, and no
+// colour written into a rule. Every colour is a token (a custom property
+// set once at :root) so the palette cannot drift.
+for (const file of ['public/css/app.css', 'public/css/components.css']) {
+  const css = readFileSync(join(root, file), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+  for (const m of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+    const selector = m[1].trim();
+    for (const decl of m[2].split(';')) {
+      const [prop, ...rest] = decl.split(':');
+      const name = (prop ?? '').trim();
+      const value = rest.join(':').trim();
+      if (!name || !value) continue;
+      if (name === 'box-shadow' && value !== 'none') {
+        failed += 1;
+        console.log(`FAIL  box-shadow on "${selector}" in ${file}: surfaces are flat, use a border or a change of tone`);
+      }
+      if (!name.startsWith('--') && !value.startsWith('url(') && /#[0-9a-fA-F]{3,8}\b|rgba?\(/.test(value)) {
+        failed += 1;
+        console.log(`FAIL  colour written into "${selector}" (${name}: ${value}) in ${file}: use a token`);
+      }
+    }
+  }
+}
+
 for (const [name, fg, bg, min] of checks) {
   const r = ratio(fg, bg);
   const ok = r >= min;

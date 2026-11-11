@@ -13,7 +13,6 @@ import { auth } from '../firebase.js';
 import { applyAccent } from '../client-types.js';
 import { validateIntake } from '../intake-rules.js';
 import { createIdleWatch } from '../idle.js';
-import { createJourneyRing } from '../journey-ring.js';
 import { createMark } from '../mark.js';
 import { esc, fromLocalInput } from '../ui.js';
 import { suggestFactors } from '../formulation.js';
@@ -121,10 +120,12 @@ function paint(html) {
 function afterPaint(keep) {
   document.documentElement.style.removeProperty('--accent');
   if (S.ctx?.client?.clientType) applyAccent(clientTypes, S.ctx.client.clientType);
-  for (const h of app.querySelectorAll('[data-ring]')) {
-    h.replaceWith(createJourneyRing({ stageIndex: Number(h.dataset.stage), stageCount: Number(h.dataset.stages), label: h.dataset.label }));
+  // The mark draws on once, when the app opens. After that it is still:
+  // it never loops, pulses or stands in for a loading spinner.
+  for (const h of app.querySelectorAll('[data-mark]')) {
+    h.replaceWith(createMark({ draw: !S.markDrawn, label: 'Executive Frame' }));
+    S.markDrawn = true;
   }
-  for (const h of app.querySelectorAll('[data-mark]')) h.replaceWith(createMark({ draw: true, small: false, label: 'Executive Frame' }));
   for (const bar of app.querySelectorAll('[data-progress]')) bar.style.width = `${((Number(bar.dataset.progress) + 1) / Number(bar.dataset.total)) * 100}%`;
   for (const dot of app.querySelectorAll('.type-dot')) {
     const accent = clientTypes.types?.[dot.dataset.type]?.accent;

@@ -3,9 +3,11 @@
 
 import { stageCopy } from '../client-types.js';
 import { renderFormulationView } from '../formulation-views.js';
-import { STAGE_LABELS, clientShell, esc, fieldError, fmtDate, fmtDateTime, fmtDay, single, status } from '../ui.js';
+import { STAGE_LABELS, clientShell, esc, fieldError, flashNotice, fmtDate, fmtDateTime, fmtDay, journeySteps, notice, single, status, stepTracker } from '../ui.js';
 
-export const MARK_SRC = '/assets/brand/mark-slate-small.svg';
+// The header lockup from the brand pack (the name is kept from when the
+// header drew the mark and set the wordmark as text).
+export const MARK_SRC = '/assets/brand/ef-lockup-slate.svg';
 export const ROUTES = {
   home: '/dashboard',
   questionnaires: '/questionnaires',
@@ -34,7 +36,7 @@ export const zoneOf = (f) => (f.zone === 'maintaining' ? 'perpetuating' : f.zone
 // The practice contact address from app.json, as a link.
 export const contactLink = (s) => (s.config.contactEmail ? `<a href="mailto:${esc(s.config.contactEmail)}">${esc(s.config.contactEmail)}</a>` : '');
 
-const flashHtml = (flash) => (flash ? `<div class="notice flash${flash.error ? ' notice-error' : ''}" role="${flash.error ? 'alert' : 'status'}"><p>${esc(flash.text)}</p></div>` : '');
+const flashHtml = flashNotice;
 
 function shell(s, active, title, content, mode) {
   const { ctx } = s;
@@ -295,7 +297,7 @@ export function intake(s) {
   return single(
     `${flashHtml(s.flash)}
     <div class="stack"><h1>A few questions to start</h1><p>This helps Sarah set up the Client Hub for you. It takes about a minute.</p></div>
-    ${missing ? `<div class="notice notice-error" role="alert"><p>${missing === 1 ? '1 question still needs an answer.' : `${missing} questions still need an answer.`} We have taken you to the first.</p></div>` : ''}
+    ${missing ? notice('error', `<p>${missing === 1 ? '1 question still needs an answer.' : `${missing} questions still need an answer.`} We have taken you to the first.</p>`, { role: 'alert', word: 'Not finished yet' }) : ''}
     <form class="stack-lg" data-form="intake" novalidate>${blocks}
       <button type="submit" class="btn btn-primary">Finish setting up</button>
     </form>`,
@@ -320,32 +322,26 @@ export function problem(text, signedIn = false) {
 
 // ---------- Home: what to do, report progress, next session, resources ----------
 
-// The 5 steps of a client's report, derived from what has happened so far.
-export function reportSteps(s) {
+// What the journey tracker on Home says under its steps, carried over from
+// the old report tracker: how many questionnaires of the initial assessment
+// are done, and when results and the formulation were shared.
+export function journeyDetails(s) {
   const { ctx } = s;
   const stages = s.clientTypes.stages;
   const stageIndex = Math.max(0, stages.indexOf(ctx.client.journeyStage ?? 'assessment'));
-  // The first step counts the questionnaires of the initial assessment. The
-  // journey never moves back, so once the client is past that stage the
-  // step stays done, and a questionnaire Sarah assigns later is a task in
-  // To do, not a step undone. Later ones are those assigned after the
+  // The journey never moves back, so once the client is past the
+  // Questionnaires step a questionnaire Sarah assigns later is a task in To
+  // do and is not counted here. Later ones are those assigned after the
   // booking step was reached.
   const past = stageIndex > stages.indexOf('assessment');
   const cutOff = ctx.client.bookingTriggeredAt;
   const initial = ctx.assignments.filter((a) => a.source !== 'scheduled' && !(past && cutOff && (a.assignedAt ?? 0) > cutOff));
   const done = initial.filter((a) => a.status === 'complete').length;
-  const qDone = past || (initial.length > 0 && done === initial.length);
-  const resultsOut = Boolean(ctx.results?.releasedAt);
-  const feedbackDone = resultsOut || stageIndex > stages.indexOf('feedback');
-  const steps = [
-    { label: 'Questionnaires', detail: initial.length ? `${done} of ${initial.length}` : past ? '' : 'None yet', done: qDone },
-    { label: 'Sarah reviews', detail: '', done: resultsOut || stageIndex > stages.indexOf('booking') },
-    { label: 'Feedback session', detail: '', done: feedbackDone },
-    { label: 'Results shared', detail: resultsOut ? fmtDate(ctx.results.releasedAt) : '', done: resultsOut },
-    { label: 'Formulation shared', detail: ctx.formulation ? fmtDate(ctx.formulation.releasedAt) : '', done: Boolean(ctx.formulation) },
-  ];
-  const current = steps.findIndex((x) => !x.done);
-  return { steps, current, completed: steps.filter((x) => x.done).length };
+  const details = {};
+  if (initial.length) details.assessment = `${done} of ${initial.length}`;
+  if (ctx.results?.releasedAt) details.feedback = `Results shared ${fmtDate(ctx.results.releasedAt)}`;
+  if (ctx.formulation) details.intervention = `Formulation shared ${fmtDate(ctx.formulation.releasedAt)}`;
+  return details;
 }
 
 function tasks(s) {
@@ -413,8 +409,6 @@ export function home(s) {
   const stages = clientTypes.stages;
   const index = Math.max(0, stages.indexOf(stage));
   const { list, copy } = tasks(s);
-  const report = reportSteps(s);
-  const reportName = clientTypes.types?.[c.clientType]?.reportName ?? 'Your report';
   const res = resources(s);
   const nextCheck = ctx.schedules.find((x) => x.status === 'active' && x.nextDue);
   const stageLine = sploseStageLine(s);
@@ -423,8 +417,7 @@ export function home(s) {
     'home',
     'Home',
     `${flashHtml(s.flash)}
-    <section class="journey-hero journey-hero-compact" aria-labelledby="stage-title">
-      <div data-ring data-stage="${index}" data-stages="${stages.length}" data-label="Step ${index + 1} of ${stages.length}: ${esc(STAGE_LABELS[stage])}"></div>
+    <section class="journey-hero" aria-labelledby="stage-title">
       <div class="stack">
         <p class="journey-stage">Step ${index + 1} of ${stages.length}: ${esc(STAGE_LABELS[stage])}</p>
         <h2 class="t-title" id="stage-title">${esc(copy.title)}</h2>
@@ -446,11 +439,8 @@ export function home(s) {
       </section>
 
       <section class="stack home-report" aria-labelledby="h-rep">
-        <h2 id="h-rep">${esc(reportName)}</h2>
-        <div class="progress" role="progressbar" aria-label="${esc(reportName)}: ${report.completed} of ${report.steps.length} steps" aria-valuemin="0" aria-valuemax="${report.steps.length}" aria-valuenow="${report.completed}"><div class="progress-fill" data-progress="${report.completed - 1}" data-total="${report.steps.length}"></div></div>
-        <ol class="tracker tracker-5" aria-label="Report progress">${report.steps
-          .map((x, i) => `<li class="step step-${x.done ? 'done' : i === report.current ? 'current' : 'todo'}"${!x.done && i === report.current ? ' aria-current="step"' : ''}><span class="step-dot" aria-hidden="true"></span><span class="step-label">${esc(x.label)}<span class="visually-hidden">, ${x.done ? 'done' : i === report.current ? 'the current step' : 'still to come'}</span>${x.detail ? `<span class="step-detail">${esc(x.detail)}</span>` : ''}</span></li>`)
-          .join('')}</ol>
+        <h2 id="h-rep">Your steps</h2>
+        ${stepTracker(journeySteps(stages, index, journeyDetails(s)), { label: `Step ${index + 1} of ${stages.length}: ${STAGE_LABELS[stage]}` })}
         ${ctx.results?.releasedAt ? `<p><a href="/results">See your results</a>${ctx.formulation ? ' or <a href="/formulation">your formulation</a>' : ''}.</p>` : '<p class="t-caption">Nothing is shared here until Sarah has gone through it with you. Scores are never shown on their own.</p>'}
       </section>
 
@@ -580,7 +570,7 @@ export function allDone(s) {
 
 export function results(s) {
   const r = s.ctx.results;
-  if (!r) return shell(s, 'results', 'Results', '<div class="notice reading"><p>Your results will appear here after Sarah has gone through them with you in your feedback session.</p></div>');
+  if (!r) return shell(s, 'results', 'Results', notice('info', '<p>Your results will appear here after Sarah has gone through them with you in your feedback session.</p>', { cls: 'reading', word: 'Not shared yet' }));
   const hub = s.config.learningHubUrl;
   const sections = r.items
     .map(
@@ -598,7 +588,7 @@ export function results(s) {
 
 export function formulation(s) {
   const f = s.ctx.formulation;
-  if (!f) return shell(s, 'formulation', 'Formulation', '<div class="notice reading"><p>Your formulation is the shared picture of what you are working on, what shaped it, what keeps it going and what helps. Sarah builds it with you and shares it here once you have been through it together.</p></div>');
+  if (!f) return shell(s, 'formulation', 'Formulation', notice('info', '<p>Your formulation is the shared picture of what you are working on, what shaped it, what keeps it going and what helps. Sarah builds it with you and shares it here once you have been through it together.</p>', { cls: 'reading', word: 'Not shared yet' }));
   const responses = s.ctx.formulationResponses ?? {};
   const zones = ZONES.map((z) => {
     const cards = f.factors.filter((x) => zoneOf(x) === z.id);

@@ -2,22 +2,11 @@
 // sample content only and are removed before launch.
 
 import { applyAccent, loadClientTypes } from './client-types.js';
-import { createJourneyRing } from './journey-ring.js';
 
 const config = await loadClientTypes();
 const viewer = document.querySelector('.viewer');
 
 if (viewer?.dataset.previewType) applyAccent(config, viewer.dataset.previewType);
-
-for (const holder of document.querySelectorAll('[data-ring]')) {
-  holder.replaceWith(
-    createJourneyRing({
-      stageIndex: Number(holder.dataset.stage),
-      stageCount: Number(holder.dataset.stages),
-      label: holder.dataset.label,
-    }),
-  );
-}
 
 for (const dot of document.querySelectorAll('.type-dot')) {
   const accent = config.types?.[dot.dataset.type]?.accent;

@@ -4,14 +4,14 @@
 import clientTypes from '../config/client-types.json' with { type: 'json' };
 import intakeConfig from '../config/intake.json' with { type: 'json' };
 import * as store from './sample-store.js';
-import { STAGE_LABELS, esc, fmtDate, practitionerShell, relative, status } from '../js/ui.js';
+import { STAGE_LABELS, esc, fmtDate, notice, practitionerShell, relative, status } from '../js/ui.js';
 import { MARK_SRC, ZONES, closeDialog, go, openDialog, render, setFlash } from './sample-app.js';
 
 let flash = null;
 const takeFlash = () => {
   const f = flash;
   flash = null;
-  return f ? `<div class="notice" role="status"><p>${f}</p></div>` : '';
+  return f ? notice('success', `<p>${f}</p>`, { role: 'status' }) : '';
 };
 
 const typeLabel = (t) => clientTypes.types[t]?.practitionerLabel ?? 'Not set';
@@ -175,7 +175,7 @@ function viewClient(uid) {
       <ul class="task-list">${list
         .map((a) => {
           const m = store.measure(a.measureId);
-          const chip = a.status === 'complete' ? status('done', `Done ${fmtDate(a.completedAt)}`) : a.status === 'inProgress' ? status('progress', 'In progress') : status('attention', 'Not started');
+          const chip = a.status === 'complete' ? status('done', `Done ${fmtDate(a.completedAt)}`) : a.status === 'inProgress' ? status('progress', 'In progress') : status('todo', 'Not started');
           return `<li class="task"><div><p class="task-name">${esc(m.name)}</p><p class="task-meta">Assigned ${fmtDate(a.assignedAt)}</p></div>${chip}<span></span></li>`;
         })
         .join('')}</ul>

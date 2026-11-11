@@ -17,7 +17,7 @@ const here = dirname(new URL(import.meta.url).pathname);
 const root = join(here, '..', '..');
 const pub = join(root, 'public');
 const port = Number(process.env.PORT ?? 5174);
-const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.svg': 'image/svg+xml', '.woff2': 'font/woff2' };
+const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.png': 'image/png', '.ico': 'image/x-icon', '.webmanifest': 'application/manifest+json' };
 const readJson = async (p) => JSON.parse(await readFile(join(root, p), 'utf8'));
 const firebaseJson = await readJson('firebase.json');
 const csp = firebaseJson.hosting[0].headers[0].headers.find((h) => h.key === 'Content-Security-Policy').value;

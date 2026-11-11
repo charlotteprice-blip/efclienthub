@@ -19,6 +19,8 @@ const types = {
   '.svg': 'image/svg+xml',
   '.woff2': 'font/woff2',
   '.png': 'image/png',
+  '.ico': 'image/x-icon',
+  '.webmanifest': 'application/manifest+json',
   '.txt': 'text/plain; charset=utf-8',
 };
 const hosting = JSON.parse(await readFile(join(root, '..', 'firebase.json'), 'utf8')).hosting[0];

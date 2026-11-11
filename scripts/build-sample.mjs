@@ -12,7 +12,7 @@ const root = join(dirname(new URL(import.meta.url).pathname), '..');
 const pub = (p) => join(root, 'public', p);
 const dataUri = (path, type) => `data:${type};base64,${readFileSync(path).toString('base64')}`;
 
-const mark = dataUri(pub('assets/brand/mark-slate-small.svg'), 'image/svg+xml');
+const mark = dataUri(pub('assets/brand/ef-lockup-slate.svg'), 'image/svg+xml');
 
 const inlineFonts = (css) =>
   css.replace(/url\("\/assets\/fonts\/([^"]+\.woff2)"\)/g, (_, file) => `url("${dataUri(pub(`assets/fonts/${file}`), 'font/woff2')}")`);
@@ -33,7 +33,7 @@ const result = await build({
   write: false,
   legalComments: 'none',
 });
-let js = result.outputFiles[0].text.replaceAll('../assets/brand/mark-slate-small.svg', mark);
+let js = result.outputFiles[0].text.replaceAll('../assets/brand/ef-lockup-slate.svg', mark);
 js = js.replace(/<\/script/gi, '<\\/script');
 
 const html = readFileSync(pub('sample/index.html'), 'utf8')

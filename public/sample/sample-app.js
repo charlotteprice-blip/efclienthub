@@ -6,13 +6,12 @@ import clientTypes from '../config/client-types.json' with { type: 'json' };
 import intakeConfig from '../config/intake.json' with { type: 'json' };
 import sampleMeasures from './sample-measures.json' with { type: 'json' };
 import { applyAccent, stageCopy } from '../js/client-types.js';
-import { createJourneyRing } from '../js/journey-ring.js';
 import { createMark } from '../js/mark.js';
 import * as store from './sample-store.js';
-import { STAGE_LABELS, clientShell, esc, fieldError, fmtDate, single, status } from '../js/ui.js';
+import { STAGE_LABELS, clientShell, esc, fieldError, fmtDate, journeySteps, notice, single, status, stepTracker } from '../js/ui.js';
 import { renderPractitioner } from './sample-practitioner.js';
 
-export const MARK_SRC = '../assets/brand/mark-slate-small.svg';
+export const MARK_SRC = '../assets/brand/ef-lockup-slate.svg';
 const CONSENT_VERSION = 'sample-2026-10';
 
 store.setMeasures(sampleMeasures.measures);
@@ -35,7 +34,7 @@ export function setFlash(message) {
 function takeFlash() {
   const f = flash;
   flash = null;
-  return f ? `<div class="notice" role="status"><p>${esc(f)}</p></div>` : '';
+  return f ? notice('success', `<p>${esc(f)}</p>`, { role: 'status' }) : '';
 }
 
 // ---------- client helpers ----------
@@ -76,7 +75,7 @@ function measureMeta(a) {
 
 function measureRow(a) {
   const m = store.measure(a.measureId);
-  const chip = a.status === 'complete' ? status('done', 'Done') : a.status === 'inProgress' ? status('progress', 'In progress') : status('attention', 'Not started');
+  const chip = a.status === 'complete' ? status('done', 'Done') : a.status === 'inProgress' ? status('progress', 'In progress') : status('todo', 'Not started');
   const action = a.status === 'complete' ? '<span></span>' : `<a class="btn btn-secondary" href="#/q/${a.id}">${a.status === 'inProgress' ? 'Continue' : 'Start'}</a>`;
   return `<li class="task"><div><p class="task-name">${esc(m.name)}</p><p class="task-meta">${measureMeta(a)}</p></div>${chip}${action}</li>`;
 }
@@ -144,7 +143,7 @@ function viewActivate() {
       <h1>Enter your activation code</h1>
       <p>Your code is in the email from Sarah. It has 12 letters and numbers and can be used once.</p>
     </div>
-    ${demo && !demo.redeemedByUid ? `<div class="notice sample-hint"><p>Sample code: <strong class="code">${store.formatCode(store.DEMO_CODE)}</strong></p></div>` : ''}
+    ${demo && !demo.redeemedByUid ? notice('info', `<p>Sample code: <strong class="code">${store.formatCode(store.DEMO_CODE)}</strong></p>`, { word: 'For the sample' }) : ''}
     <form class="stack-lg" data-form="activate" novalidate>
       <div class="field${errors.code ? ' field-invalid' : ''}">
         <label class="field-label" for="code">Activation code</label>
@@ -250,15 +249,12 @@ function viewHome() {
     'Home',
     `${takeFlash()}
     <section class="journey-hero" aria-labelledby="stage-title">
-      <div data-ring data-stage="${index}" data-stages="${stages.length}" data-label="Step ${index + 1} of ${stages.length}: ${esc(STAGE_LABELS[stage])}"></div>
       <div class="stack">
         <p class="journey-stage">Step ${index + 1} of ${stages.length}</p>
         <h2 class="t-title" id="stage-title">${esc(copy.title)}</h2>
         <p class="reading">${esc(copy.body)}</p>
         ${action ? `<div class="actions">${action}</div>` : ''}
-        <ol class="journey-stages" aria-label="Your journey">
-          ${stages.map((st, i) => `<li data-state="${i < index ? 'done' : i === index ? 'current' : ''}"${i === index ? ' aria-current="step"' : ''}>${esc(STAGE_LABELS[st])}</li>`).join('')}
-        </ol>
+        ${stepTracker(journeySteps(stages, index), { label: `Step ${index + 1} of ${stages.length}: ${STAGE_LABELS[stage]}` })}
       </div>
     </section>
     <section class="stack" aria-labelledby="h-q">
@@ -269,8 +265,8 @@ function viewHome() {
       <h2 id="h-r">Your results</h2>
       ${
         released
-          ? `<div class="notice reading"><p>Sarah shared your results on ${fmtDate(released)}. <a href="#/results">See your results</a></p></div>`
-          : '<div class="notice reading"><p>Your results will appear here after Sarah has gone through them with you in your feedback session.</p></div>'
+          ? notice('success', `<p>Sarah shared your results on ${fmtDate(released)}. <a href="#/results">See your results</a></p>`, { cls: 'reading', word: 'Shared' })
+          : notice('info', '<p>Your results will appear here after Sarah has gone through them with you in your feedback session.</p>', { cls: 'reading', word: 'Not shared yet' })
       }
     </section>`,
   );
@@ -358,7 +354,7 @@ function viewResults() {
     return shellFor(
       'results',
       'Results',
-      `<div class="notice reading"><p>Your results will appear here after Sarah has gone through them with you in your feedback session.</p></div>`,
+      notice('info', '<p>Your results will appear here after Sarah has gone through them with you in your feedback session.</p>', { cls: 'reading', word: 'Not shared yet' }),
     );
   }
   const sections = r.items
@@ -540,13 +536,13 @@ export function render() {
   updateSampleBar();
 }
 
+let markDrawn = false;
+
 function afterRender() {
-  for (const holder of app.querySelectorAll('[data-ring]')) {
-    holder.replaceWith(createJourneyRing({ stageIndex: Number(holder.dataset.stage), stageCount: Number(holder.dataset.stages), label: holder.dataset.label }));
-  }
+  // The mark draws on once, when the sample opens; after that it is still.
   for (const holder of app.querySelectorAll('[data-mark]')) {
-    const svg = createMark({ draw: true, small: false, label: 'Executive Frame' });
-    holder.replaceWith(svg);
+    holder.replaceWith(createMark({ draw: !markDrawn, label: 'Executive Frame' }));
+    markDrawn = true;
   }
   for (const bar of app.querySelectorAll('[data-progress]')) {
     bar.style.width = `${((Number(bar.dataset.progress) + 1) / Number(bar.dataset.total)) * 100}%`;

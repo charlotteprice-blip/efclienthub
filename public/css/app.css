@@ -25,6 +25,8 @@
      brand/app-colours.json, checked by scripts/check-contrast.mjs. */
   --placeholder: #596E91;
   --on-accent: #FFFFFF;
+  /* Pure white, for the hover of a warm white button or chip only. */
+  --white: #FFFFFF;
 
   /* Client type accent, set at runtime from config/client-types.json.
      Decorative and non text only; it never carries meaning on its own. */
@@ -177,7 +179,8 @@ a:hover {
    becomes a menu drawer opened from the top bar. */
 
 :root {
-  --sidebar-width: 248px;
+  /* Wide enough for the lockup at 150px, its hairline and the app's name */
+  --sidebar-width: 280px;
   --topbar-height: 64px;
   --workspace-max: 1040px;
   --reading-max: 680px;
@@ -210,24 +213,29 @@ a:hover {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-3);
   min-height: var(--min-touch-target);
-  padding: 0 var(--space-2);
   text-decoration: none;
   color: var(--ink);
 }
 
-.brand-mark {
-  width: 32px;
-  height: 32px;
+/* The supplied horizontal lockup, 150px wide so its mark is 24px. The
+   minimum for the lockup is 140px and its clear space is 0.4 of the mark
+   box (about 10px), which the 12px before the hairline keeps free. */
+.brand-lockup {
   flex: none;
+  width: 150px;
+  height: 24px;
 }
 
-.brand-name {
-  font-size: var(--type-wordmark-size);
-  line-height: var(--type-wordmark-line);
-  font-weight: var(--type-wordmark-weight);
-  letter-spacing: var(--type-wordmark-tracking);
+/* The app's name: plain interface text beside the lockup, after a hairline */
+.brand-app {
+  margin-left: var(--space-3);
+  padding-left: var(--space-3);
+  border-left: 1px solid var(--hairline);
+  font-size: var(--type-caption-size);
+  line-height: 24px;
+  font-weight: var(--type-ui-weight);
+  white-space: nowrap;
 }
 
 .nav {
@@ -260,7 +268,7 @@ a:hover {
 }
 
 .nav-link:hover {
-  background: rgba(245, 243, 238, 0.55);
+  background: color-mix(in srgb, var(--panel) 55%, transparent);
 }
 
 .nav-link[aria-current="page"] {
@@ -342,7 +350,7 @@ a:hover {
 }
 
 .account-button:hover {
-  background: rgba(245, 243, 238, 0.55);
+  background: color-mix(in srgb, var(--panel) 55%, transparent);
 }
 
 .avatar {
@@ -383,7 +391,9 @@ a:hover {
   background: var(--reading-ground);
   color: var(--on-reading);
   border-top-left-radius: var(--radius-lg);
-  box-shadow: inset 1px 1px 0 var(--hairline);
+  /* A hairline on the 2 edges that meet the frame. No shadows anywhere. */
+  border-top: 1px solid var(--hairline);
+  border-left: 1px solid var(--hairline);
 }
 
 .workspace-inner {
@@ -399,10 +409,9 @@ a:hover {
   max-width: var(--reading-max);
 }
 
-/* Inside the warm white workspace, panels and notices sit on sky so they
-   remain visible. */
-.workspace .panel,
-.workspace .notice {
+/* Inside the warm white workspace, panels sit on sky so they remain
+   visible. Notices carry their own tint on either ground. */
+.workspace .panel {
   background: var(--ground);
   color: var(--ink);
 }
@@ -490,10 +499,18 @@ a:hover {
     z-index: 20;
     width: min(320px, 86vw);
     background: var(--ground);
-    box-shadow: 0 0 0 100vmax rgba(46, 64, 98, 0.35);
     transform: translateX(-110%);
     transition: transform var(--motion-duration) var(--motion-easing);
     visibility: hidden;
+  }
+
+  /* The page behind an open menu is dimmed by a flat navy layer, not a shadow */
+  .viewer[data-menu="open"]::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 15;
+    background: color-mix(in srgb, var(--ef-navy) 35%, transparent);
   }
 
   .viewer[data-menu="open"] .sidebar {
@@ -509,7 +526,7 @@ a:hover {
     height: var(--min-touch-target);
     margin-left: calc(var(--space-2) * -1);
     border: 0;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-pill);
     background: transparent;
     color: var(--ink);
     cursor: pointer;
@@ -532,7 +549,7 @@ a:hover {
 
   .workspace {
     border-top-left-radius: 0;
-    box-shadow: none;
+    border: 0;
   }
 
   .workspace-inner {
@@ -594,7 +611,9 @@ a:hover {
   min-height: var(--button-height);
   padding: 0 var(--space-5);
   border: var(--input-border) solid transparent;
-  border-radius: var(--radius-md);
+  /* Every button is a pill, in both hubs. Fields stay 8px, cards 16px,
+     navigation items and choice cards 12px. */
+  border-radius: var(--radius-pill);
   font-family: inherit;
   font-size: var(--type-ui-strong-size);
   line-height: var(--type-ui-strong-line);
@@ -604,13 +623,27 @@ a:hover {
   cursor: pointer;
   transition: background-color var(--motion-duration) var(--motion-easing),
               color var(--motion-duration) var(--motion-easing),
-              border-color var(--motion-duration) var(--motion-easing);
+              border-color var(--motion-duration) var(--motion-easing),
+              transform var(--motion-duration) var(--motion-easing);
 }
 
-/* Primary uses the inverted theme, as the kit specifies for calls to action. */
+/* Pressed: the button moves down 1px. Off under reduced motion. */
+.btn:active {
+  transform: translateY(1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn:active {
+    transform: none;
+  }
+}
+
+/* Primary is navy (--primary). The brand pack's tokens still say slate; the
+   designer is changing the pack to navy, so the apps do not follow the pack
+   on this 1 value (brand/app-tokens.json). */
 .btn-primary {
-  background: var(--inv-ground);
-  color: var(--inv-ink);
+  background: var(--primary);
+  color: var(--on-primary);
 }
 
 .btn-primary:hover {
@@ -628,7 +661,7 @@ a:hover {
 }
 
 .btn-secondary:hover {
-  background: #FFFFFF;
+  background: var(--white);
 }
 
 .btn-quiet {
@@ -845,6 +878,34 @@ a:hover {
   width: 16px;
   height: 16px;
   flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: var(--icon-stroke);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.status svg .fill {
+  fill: currentColor;
+  stroke: none;
+}
+
+/* The plain tag: a neutral label with no icon. Not started and To do use
+   it everywhere, on client and staff screens. Warm white, with a hairline
+   so it also shows on the warm white workspace. */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-pill);
+  background: var(--panel);
+  color: var(--on-panel);
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line);
+  font-weight: var(--type-ui-strong-weight);
+  white-space: nowrap;
 }
 
 .status-done {
@@ -853,13 +914,6 @@ a:hover {
 }
 
 .status-progress {
-  background: var(--status-progress-tint);
-  color: var(--status-progress);
-}
-
-/* To do and Not started on client screens: navy on navy tint with an empty
-   ring. The attention pill belongs to the practitioner's screens. */
-.status-todo {
   background: var(--status-progress-tint);
   color: var(--status-progress);
 }
@@ -913,43 +967,16 @@ a:hover {
   }
 }
 
-/* ---------- journey ring ----------
-   The mark's incomplete circle doubles as the journey indicator: the track
-   is the full ring, the accent stroke fills it stage by stage, and the
-   triangle sits at the centre. */
+/* ---------- Home: where the client is ----------
+   The step, the title and a few words. The journey ring is retired: the
+   mark keeps 1 meaning and is never a progress meter. Steps are shown by
+   the step tracker (components.css) and nowhere else on Home. */
 
 .journey-hero {
-  display: grid;
-  grid-template-columns: 200px minmax(0, 1fr);
-  gap: var(--space-7);
-  align-items: center;
   padding: var(--space-6);
   border-radius: var(--radius-lg);
   background: var(--ground);
   color: var(--ink);
-}
-
-.journey-ring {
-  width: 200px;
-  height: 200px;
-}
-
-.journey-ring .ring-track {
-  stroke: var(--hairline);
-}
-
-.journey-ring .ring-fill {
-  stroke: var(--accent);
-  stroke-dasharray: 100;
-  transition: stroke-dashoffset var(--mark-draw-on) var(--motion-easing);
-}
-
-.journey-ring .ring-triangle {
-  fill: var(--ink);
-}
-
-.stack > .journey-stages {
-  margin-top: var(--space-6);
 }
 
 .journey-stage {
@@ -957,53 +984,9 @@ a:hover {
   line-height: var(--type-caption-line);
 }
 
-.journey-stages {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2) var(--space-4);
-  font-size: var(--type-caption-size);
-  line-height: var(--type-caption-line);
-}
-
-.journey-stages li {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.journey-stages li::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  border: 1.5px solid var(--ink);
-}
-
-.journey-stages li[data-state="done"]::before {
-  background: var(--ink);
-}
-
-.journey-stages li[data-state="current"] {
-  font-weight: var(--type-ui-strong-weight);
-}
-
-.journey-stages li[data-state="current"]::before {
-  background: var(--accent);
-  border-color: var(--accent);
-}
-
 @media (max-width: 899px) {
   .journey-hero {
-    grid-template-columns: 1fr;
-    gap: var(--space-5);
     padding: var(--space-5);
-  }
-  .journey-ring {
-    width: 152px;
-    height: 152px;
   }
 }
 
@@ -1041,7 +1024,7 @@ a:hover {
 }
 
 .table tbody tr:hover {
-  background: rgba(207, 218, 232, 0.35);
+  background: color-mix(in srgb, var(--ground) 35%, transparent);
 }
 
 .table a {
@@ -1171,8 +1154,7 @@ kbd {
 
 .mark-draw .mark-triangle {
   opacity: 0;
-  animation: mark-fade var(--motion-duration) var(--motion-easing) forwards;
-  animation-delay: calc(var(--mark-draw-on) * 0.7);
+  animation: mark-fade var(--mark-draw-on) var(--motion-easing) forwards;
 }
 
 @keyframes mark-draw {
@@ -1217,16 +1199,49 @@ kbd {
 
 /* ---------- notices ---------- */
 
+/* 1 component for every message: an icon and a word, on the tint of its
+   kind (the brand pack's application colours). Never colour alone. Build
+   it with notice() in ui.js. */
 .notice {
+  --notice-colour: var(--app-info);
   display: flex;
+  align-items: flex-start;
   gap: var(--space-3);
   padding: var(--space-4);
   border-radius: var(--radius-md);
-  background: var(--panel);
-  color: var(--on-panel);
-  border-left: 4px solid var(--ef-slate);
+  background: var(--app-info-tint);
+  color: var(--ink);
 }
 
-.notice-error {
-  border-left-color: var(--error);
+.notice-success { --notice-colour: var(--app-success); background: var(--app-success-tint); }
+.notice-warning { --notice-colour: var(--app-warning); background: var(--app-warning-tint); }
+.notice-error { --notice-colour: var(--app-error); background: var(--app-error-tint); }
+
+.notice-icon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  color: var(--notice-colour);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: var(--icon-stroke);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.notice-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.notice-body > * + * {
+  margin-top: var(--space-2);
+}
+
+.notice-word {
+  color: var(--notice-colour);
+  font-size: var(--type-ui-strong-size);
+  line-height: var(--type-ui-strong-line);
+  font-weight: var(--type-ui-strong-weight);
 }

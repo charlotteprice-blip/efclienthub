@@ -24,15 +24,6 @@
   letter-spacing: 0.12em;
 }
 
-.sample-hint {
-  border-left-color: var(--accent);
-}
-
-.single-card .notice {
-  background: var(--ground);
-  color: var(--ink);
-}
-
 .consent-text h2 {
   margin-top: var(--space-5);
 }
@@ -225,7 +216,7 @@
 }
 
 .dialog::backdrop {
-  background: rgba(46, 64, 98, 0.45);
+  background: color-mix(in srgb, var(--ef-navy) 45%, transparent);
 }
 
 /* 5P layout: presenting spans the top, the 4 factor zones sit below in pairs */
@@ -234,9 +225,15 @@
   min-height: 0;
 }
 
+/* Every zone has a 2px border so they stay the same size; only the zone
+   that is the focus of the work shows it. A border, not a shadow. */
+.zone {
+  border: 2px solid transparent;
+}
+
 .zone[data-zone="perpetuating"],
 .zone[data-zone="maintaining"] {
-  box-shadow: inset 0 0 0 2px var(--accent);
+  border-color: var(--accent);
 }
 
 .factor {
@@ -260,7 +257,7 @@
 
 .factor-suggest {
   background: var(--ground);
-  box-shadow: inset 0 0 0 1px var(--hairline);
+  border: 1px solid var(--hairline);
 }
 
 .suggestions {
@@ -443,7 +440,7 @@
 }
 
 .chip:hover {
-  background: #FFFFFF;
+  background: var(--white);
 }
 
 .chip[aria-pressed="true"] {
@@ -613,25 +610,11 @@ th .sort:focus-visible {
   line-height: 1.5;
 }
 
-.segments {
-  display: flex;
-  gap: 3px;
-  margin: 8px 0 6px;
-}
-
-.segments i {
-  flex: 1;
-  height: 6px;
-  border-radius: var(--radius-pill);
-  background: var(--hairline);
-}
-
-.segments i.done {
-  background: var(--status-done);
-}
-
-.segments i.current {
-  background: var(--accent);
+/* The journey on a dashboard row: the step tracker's dots alone, with the
+   step named in words beside it and for screen readers */
+.tracker-dots {
+  max-width: 280px;
+  margin: var(--space-2) 0 6px;
 }
 
 .client-next {
@@ -710,7 +693,7 @@ th .sort:focus-visible {
 .step-current .step-dot {
   border-color: var(--accent);
   background: var(--accent);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent);
+  outline: 4px solid color-mix(in srgb, var(--accent) 25%, transparent);
 }
 
 .step-current .step-label {
@@ -721,9 +704,9 @@ th .sort:focus-visible {
   display: block;
 }
 
-/* On a phone the 5 steps run down the page so every label stays at
-   caption size and full strength */
-@media (max-width: 599px) {
+/* Where there is not room for 7 labels side by side the steps run down
+   the page, so every label stays at caption size and full strength */
+@container steps (max-width: 759px) {
   .tracker,
   .tracker-5 {
     grid-template-columns: 1fr;
@@ -750,17 +733,6 @@ th .sort:focus-visible {
 
 /* ---------- client Home ---------- */
 
-.journey-hero-compact {
-  grid-template-columns: 140px minmax(0, 1fr);
-  gap: var(--space-5);
-  padding: var(--space-5);
-}
-
-.journey-hero-compact .journey-ring {
-  width: 140px;
-  height: 140px;
-}
-
 .home-grid {
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
@@ -781,10 +753,7 @@ th .sort:focus-visible {
 
 .home-report {
   grid-column: 1 / -1;
-}
-
-.home-report .progress {
-  margin-bottom: var(--space-3);
+  container: steps / inline-size;
 }
 
 .session-when {
@@ -815,22 +784,6 @@ th .sort:focus-visible {
 @media (max-width: 899px) {
   .home-grid {
     grid-template-columns: 1fr;
-  }
-  /* A small ring beside the words, so the first thing to do is close
-     behind it and not a screen away */
-  .journey-hero-compact {
-    grid-template-columns: 64px minmax(0, 1fr);
-    gap: var(--space-4);
-    align-items: start;
-  }
-  .journey-hero-compact .journey-ring {
-    width: 64px;
-    height: 64px;
-  }
-  /* The step and title sit beside the ring (together they are taller than
-     it); the paragraphs below use the full width of the panel. */
-  .journey-hero-compact .stack > .reading {
-    margin-left: calc(-64px - var(--space-4));
   }
 }
 
@@ -905,7 +858,7 @@ th .sort:focus-visible {
 
 .panel .details > div {
   padding: var(--space-2) 0;
-  border-bottom: 1px solid rgba(46, 64, 98, 0.12);
+  border-bottom: 1px solid var(--hairline);
 }
 
 .panel .details > div:last-child {
@@ -1252,19 +1205,24 @@ th .sort:focus-visible {
   align-items: center;
 }
 
-.flagged > .stack {
-  flex: 1 1 auto;
-  min-width: 0;
+.flag-notice .notice-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2) var(--space-3);
 }
 
-/* A message after a save stays in view while the page keeps its place */
+.flag-notice .notice-body > * + * {
+  margin-top: 0;
+}
+
+/* A message after a save stays in view while the page keeps its place.
+   A hairline in its own colour keeps it clear of what it floats over. */
 .workspace .flash {
   position: sticky;
   top: var(--space-3);
   z-index: 2;
-  border-top: 1px solid var(--ef-slate);
-  border-right: 1px solid var(--ef-slate);
-  border-bottom: 1px solid var(--ef-slate);
+  border: 1px solid var(--notice-colour);
 }
 
 /* Formulation card: the comment has a visible label, and the saved line
@@ -1306,7 +1264,8 @@ th .sort:focus-visible {
   .task > :first-child {
     grid-column: 1 / -1;
   }
-  .task > .status {
+  .task > .status,
+  .task > .tag {
     justify-self: start;
     white-space: normal;
   }

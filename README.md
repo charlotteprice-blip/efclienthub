@@ -12,7 +12,7 @@ firestore.rules          rules for the clienthub database; storage.rules closes 
 functions/               Cloud Functions: index.js connects handlers.js to Firebase; core.js holds the tested rules
 public/index.html        the live app; every route loads it
 public/js/live/          live app: app.js (routes, auth, actions), data.js, views-client.js, views-staff.js
-public/js/               shared: ui.js, scoring.js, formulation.js, formulation-views.js, intake-rules.js, client-types.js, mark.js, journey-ring.js, firebase.js
+public/js/               shared: ui.js, scoring.js, formulation.js, formulation-views.js, intake-rules.js, client-types.js, mark.js, mark-paths.js (generated), firebase.js
 public/config/           app.json, client-types.json, intake.json
 public/css/              tokens.css (generated), app.css, components.css
 public/sample/           clickable sample on invented data

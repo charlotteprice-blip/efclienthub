@@ -75,7 +75,7 @@ describe('Today lists work that is waiting', () => {
 
 // ---------- the client's Home ----------
 
-const { home, reportSteps } = await import('../../public/js/live/views-client.js');
+const { home, journeyDetails } = await import('../../public/js/live/views-client.js');
 
 function clientState({ stage = 'assessment', assignments = [], bookingTriggeredAt, resources = [] } = {}) {
   return {
@@ -102,17 +102,17 @@ describe('the journey never moves back on the client\'s Home', () => {
   const later = { id: 'a2', measureId: 'm1', status: 'notStarted', assignedAt: 500 };
   test('a questionnaire assigned after booking is a task, and the first step stays done', () => {
     const s = clientState({ stage: 'feedback', assignments: [first, later], bookingTriggeredAt: 200 });
-    const { steps } = reportSteps(s);
-    assert.equal(steps[0].done, true);
-    assert.equal(steps[0].detail, '1 of 1');
+    assert.equal(journeyDetails(s).assessment, '1 of 1');
     const html = home(s);
     assert.ok(html.includes('href="/measure/a2"'), 'it is in To do');
     assert.ok(html.includes('Step 5 of 7'));
+    assert.match(html, /<li class="step step-done"><span class="step-dot" aria-hidden="true"><\/span><span class="step-label">Questionnaires<span class="visually-hidden">, done<\/span><span class="step-detail">1 of 1<\/span>/);
+    assert.match(html, /<li class="step step-current" aria-current="step">.*?Feedback/);
   });
   test('during the assessment every questionnaire still counts', () => {
-    const { steps } = reportSteps(clientState({ stage: 'assessment', assignments: [first, later] }));
-    assert.equal(steps[0].done, false);
-    assert.equal(steps[0].detail, '1 of 2');
+    const s = clientState({ stage: 'assessment', assignments: [first, later] });
+    assert.equal(journeyDetails(s).assessment, '1 of 2');
+    assert.match(home(s), /<li class="step step-current" aria-current="step">.*?Questionnaires/);
   });
 });
 
@@ -123,5 +123,45 @@ describe('empty sections on Home', () => {
     assert.ok(empty.includes('class="tracker'));
     const withOne = home(clientState({ resources: [{ id: 'r1', title: 'A link', url: 'https://example.com/a', note: '' }] }));
     assert.ok(withOne.includes('Your resources') && withOne.includes('https://example.com/a'));
+  });
+});
+
+describe('the journey ring is retired', () => {
+  test('Home has no ring and no mark used as a meter; the tracker carries the step', () => {
+    const html = home(clientState({ stage: 'booking' }));
+    assert.ok(!html.includes('data-ring') && !html.includes('journey-ring'));
+    assert.equal((html.match(/class="tracker/g) ?? []).length, 1, '1 step tracker');
+    assert.equal((html.match(/class="step /g) ?? []).length, 7, '7 journey steps');
+    assert.ok(html.includes('aria-label="Step 4 of 7: Book feedback"'));
+    assert.ok(!html.includes('role="progressbar"'), 'no second step display on Home');
+  });
+  test('the practitioner dashboard shows the journey with the same tracker', () => {
+    const html = dashboard(state());
+    assert.ok(html.includes('class="tracker tracker-dots"'));
+    assert.ok(!html.includes('class="segments"'));
+  });
+});
+
+describe('status and notices follow the brand pack', () => {
+  test('Not started is the plain tag, with no icon and no attention style, on staff screens too', async () => {
+    const { client } = await import('../../public/js/live/views-staff.js');
+    const s = state();
+    s.ctx.assignments.push({ id: 'a2', uid: 'c1', measureId: 'm1', status: 'notStarted', assignedAt: Date.now() });
+    Object.assign(s.ctx, { intake: {}, formulationDrafts: {}, requests: [] });
+    s.intakeConfig = { questions: [] };
+    s.clientTypes = { types: {}, stages: ['assessment'] };
+    s.errors = {};
+    s.form = {};
+    const html = client(s, 'c1', 'questionnaires');
+    assert.ok(html.includes('<span class="tag">Not started</span>'));
+    assert.ok(!/status-attention[^<]*<svg[^>]*>.*?<\/svg>Not started/.test(html));
+  });
+  test('a notice always has an icon and a word', async () => {
+    const { notice } = await import('../../public/js/ui.js');
+    for (const [kind, word] of [['info', 'Note'], ['success', 'Done'], ['warning', 'Attention'], ['error', 'Problem']]) {
+      const html = notice(kind, '<p>Text</p>');
+      assert.ok(html.includes(`class="notice notice-${kind}"`));
+      assert.ok(html.includes('class="notice-icon"') && html.includes(`<p class="notice-word">${word}</p>`));
+    }
   });
 });

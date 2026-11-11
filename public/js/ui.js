@@ -81,15 +81,43 @@ const ICONS = {
 export const icon = (name) =>
   `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name]}</svg>`;
 
-const STATUS_ICON = {
-  done: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" stroke="#E3ECE2" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-  progress: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"/></svg>',
-  // Not started yet: an empty ring, neutral. Nothing urgent in the client's room.
-  todo: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>',
-  attention: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="M8 4.2v4.6" stroke="#F2E8D6" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="11.4" r="1" fill="#F2E8D6"/></svg>',
+// 16px stroked icons, drawn at the icon stroke token (see .status svg and
+// .notice-icon in app.css). No colour is written here: each takes the
+// colour of its pill or notice.
+const ICON_16 = {
+  success: '<circle cx="8" cy="8" r="6.25"/><path d="M5.1 8.3l2 2 3.8-4.2"/>',
+  info: '<circle cx="8" cy="8" r="6.25"/><path d="M8 7.3v3.6M8 5.1v.01"/>',
+  warning: '<path d="M8 2.3l6.2 10.9H1.8z"/><path d="M8 6.6v3M8 11.3v.01"/>',
+  error: '<circle cx="8" cy="8" r="6.25"/><path d="M5.9 5.9l4.2 4.2M10.1 5.9l-4.2 4.2"/>',
+  progress: '<circle cx="8" cy="8" r="6.25"/><path class="fill" d="M8 1.75a6.25 6.25 0 0 1 0 12.5z"/>',
 };
+const icon16 = (name, cls = '') => `<svg viewBox="0 0 16 16"${cls ? ` class="${cls}"` : ''} aria-hidden="true">${ICON_16[name]}</svg>`;
 
-export const status = (kind, label) => `<span class="status status-${kind}">${STATUS_ICON[kind]}${esc(label)}</span>`;
+// Status pills: an icon and a word on the tint of the status. Done is the
+// pack's success colour, in progress its info colour, attention its warning
+// colour. "todo" (To do, Not started) is the plain tag with no icon: it is
+// neutral everywhere. Attention is for things that need action.
+const STATUS_ICON = { done: 'success', progress: 'progress', attention: 'warning' };
+export const tag = (label) => `<span class="tag">${esc(label)}</span>`;
+export const status = (kind, label) => (kind === 'todo' ? tag(label) : `<span class="status status-${kind}">${icon16(STATUS_ICON[kind])}${esc(label)}</span>`);
+
+// A notice: 1 component for every message. An icon and a word on the tint
+// of its kind, never colour alone. html is trusted markup from the views.
+const NOTICE_WORD = { info: 'Note', success: 'Done', warning: 'Attention', error: 'Problem' };
+export function notice(kind, html, { role = '', cls = '', word = NOTICE_WORD[kind] ?? NOTICE_WORD.info } = {}) {
+  const k = NOTICE_WORD[kind] ? kind : 'info';
+  return `<div class="notice notice-${k}${cls ? ` ${cls}` : ''}"${role ? ` role="${role}"` : ''}>${icon16(k, 'notice-icon')}<div class="notice-body"><p class="notice-word">${esc(word)}</p>${html}</div></div>`;
+}
+// The message after an action: success, or a problem that is announced.
+export const flashNotice = (flash) => (flash ? notice(flash.error ? 'error' : 'success', `<p>${esc(flash.text)}</p>`, { role: flash.error ? 'alert' : 'status', cls: 'flash' }) : '');
+
+// The header lockup: the supplied SVG (mark and "Executive Frame" as drawn,
+// in outlines), never live text, at 150px wide so the mark is 24px, the
+// smallest size for its standard stroke. "Client Hub" sits beside it as
+// plain interface text, past the lockup's clear space and a hairline.
+// src is the horizontal lockup in slate from the brand pack.
+export const LOCKUP_SRC = '/assets/brand/ef-lockup-slate.svg';
+export const lockup = (src = LOCKUP_SRC) => `<img class="brand-lockup" src="${src || LOCKUP_SRC}" alt="Executive Frame" width="150" height="24"><span class="brand-app">Client Hub</span>`;
 
 const MENU = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
 
@@ -98,8 +126,7 @@ function shell({ nav, title, content, foot, account, mode, wide }) {
   <div class="viewer" data-menu="closed"${mode ? ` data-mode="${mode}"` : ''}>
     <nav class="sidebar" id="sidebar" aria-label="Main">
       <a class="brand" href="${nav.home}">
-        <img class="brand-mark" src="${nav.markSrc}" alt="" width="32" height="32">
-        <span class="brand-name">Executive Frame</span>
+        ${lockup(nav.markSrc)}
       </a>
       <button type="button" class="btn btn-quiet drawer-close" data-action="menu">Close menu</button>
       <ul class="nav">
@@ -170,10 +197,33 @@ export function practitionerShell({ title, active, content, counts, wide, markSr
 export function single(content, markSrc) {
   return `<main class="single" id="workspace" tabindex="-1">
     <div class="single-card stack-lg">
-      <span class="brand"><img class="brand-mark" src="${markSrc}" alt="" width="32" height="32"><span class="brand-name">Executive Frame</span></span>
+      <span class="brand">${lockup(markSrc)}</span>
       ${content}
     </div>
   </main>`;
+}
+
+// The step tracker: 1 of the only 2 ways the hub shows steps (the other is
+// the hairline progress bar inside a questionnaire). A row of dots joined
+// by hairlines, each step named, with done, current or still to come said
+// in words for a screen reader. The mark is never used to show progress.
+//   steps: [{ label, state: 'done' | 'current' | 'todo', detail }]
+//   dots: true draws the dots alone (the labels stay for screen readers),
+//         for a compact row such as the practitioner's dashboard.
+const STEP_WORDS = { done: 'done', current: 'the current step', todo: 'still to come' };
+export function stepTracker(steps, { label = 'Steps', dots = false } = {}) {
+  return `<ol class="tracker${dots ? ' tracker-dots' : ''}" aria-label="${esc(label)}">${steps
+    .map((x) => {
+      const words = `<span class="visually-hidden">, ${STEP_WORDS[x.state] ?? STEP_WORDS.todo}</span>`;
+      const text = dots ? `<span class="visually-hidden">${esc(x.label)}${words}</span>` : `<span class="step-label">${esc(x.label)}${words}${x.detail ? `<span class="step-detail">${esc(x.detail)}</span>` : ''}</span>`;
+      return `<li class="step step-${x.state}"${x.state === 'current' ? ' aria-current="step"' : ''}><span class="step-dot" aria-hidden="true"></span>${text}</li>`;
+    })
+    .join('')}</ol>`;
+}
+// The 7 journey stages as tracker steps, given the index of the current one
+// (below 0 when the client is still setting up).
+export function journeySteps(stages, index, details = {}) {
+  return stages.map((stage, i) => ({ label: STAGE_LABELS[stage] ?? stage, state: i < index ? 'done' : i === index ? 'current' : 'todo', detail: details[stage] ?? '' }));
 }
 
 export function fieldError(errors, key) {

@@ -1,12 +1,12 @@
 // Live practitioner (Sarah) and admin screens.
 
-import { CADENCE_LABELS, STAGE_LABELS, esc, fmtDate, fmtDateTime, fmtDay, practitionerShell, relative, status, toLocalInput } from '../ui.js';
+import { CADENCE_LABELS, STAGE_LABELS, esc, flashNotice, fmtDate, fmtDateTime, fmtDay, journeySteps, notice, practitionerShell, relative, status, stepTracker, toLocalInput } from '../ui.js';
 import { FIT_LABELS, MARK_SRC, ROUTES, ZONES, questionForm, zoneOf } from './views-client.js';
 import { suggestFactors } from '../formulation.js';
 import { VIEW_OPTIONS, renderFormulationView, viewOf } from '../formulation-views.js';
 import { buildDraft, scoreMeasure } from '../scoring.js';
 
-const flashHtml = (flash) => (flash ? `<div class="notice flash${flash.error ? ' notice-error' : ''}" role="${flash.error ? 'alert' : 'status'}"><p>${esc(flash.text)}</p></div>` : '');
+const flashHtml = flashNotice;
 
 // A table that can scroll sideways is a named region a keyboard can reach.
 const tableWrap = (label) => `<div class="table-wrap" tabindex="0" role="region" aria-label="${label}, table">`;
@@ -79,7 +79,7 @@ function splosePanel(s, uid, c) {
   return `<section class="panel stack" aria-labelledby="h-splose">
       <h2 id="h-splose">Splose</h2>
       <p class="t-caption">Linked to Splose patient ${esc(String(c.sploseClientId))}. The client sees the next appointment${cfg.showAttendance !== false ? ', sessions attended' : ''} and any form still to complete on their Home. Nothing clinical is read.</p>
-      ${p?.error ? `<div class="notice notice-error" role="alert"><p class="t-ui-strong">Splose link needs attention</p><p>${esc(p.error)}</p></div>` : ''}
+      ${p?.error ? notice('warning', `<p>${esc(p.error)}</p>`, { role: 'alert', word: 'Splose link needs attention' }) : ''}
       ${details}
       <div class="actions-inline"><button type="button" class="btn btn-secondary" data-action="splose-sync" data-uid="${esc(uid)}">Resync now</button><button type="button" class="btn btn-quiet" data-action="splose-unlink" data-uid="${esc(uid)}">Unlink</button></div>
     </section>`;
@@ -194,7 +194,7 @@ export function attentionItems(s) {
     }
     const stale = assignmentsFor(s, uid).filter((a) => a.status === 'notStarted' && now - (a.assignedAt ?? now) > t.questionnaireDays * DAY);
     if (stale.length) {
-      items.push({ kind: 'questionnaire', pill: ['attention', 'Not started'], who: c.name || c.email, text: `${stale.length} questionnaire${stale.length === 1 ? '' : 's'} assigned ${relative(Math.min(...stale.map((a) => a.assignedAt)))} and not started`, href: `${href}/questionnaires` });
+      items.push({ kind: 'questionnaire', pill: ['todo', 'Not started'], who: c.name || c.email, text: `${stale.length} questionnaire${stale.length === 1 ? '' : 's'} assigned ${relative(Math.min(...stale.map((a) => a.assignedAt)))} and not started`, href: `${href}/questionnaires` });
     }
   }
   // What Splose shows that Sarah may want to act on. The stage never moves
@@ -256,7 +256,6 @@ function clientRow(s, c) {
     : drafts > 0
       ? `<a class="btn btn-primary btn-inline" href="/practitioner/client/${esc(uid)}/questionnaires" aria-label="Review ${drafts} draft${drafts === 1 ? '' : 's'} for ${esc(who)}">Review ${drafts} draft${drafts === 1 ? '' : 's'}</a>`
       : `<a class="btn btn-secondary btn-inline" href="/practitioner/client/${esc(uid)}" aria-label="Open ${esc(who)}">Open</a>`;
-  const segments = STAGE_ORDER.map((_, i) => `<i class="${i < current ? 'done' : i === current ? 'current' : ''}"></i>`).join('');
   const stageName = current < 0 ? 'Setting up' : `${STAGE_LABELS[c.journeyStage]} <span class="t-caption">(step ${current + 1} of ${STAGE_ORDER.length})</span>`;
   return `<li class="client-row">
     <div class="client-who">
@@ -265,7 +264,7 @@ function clientRow(s, c) {
     </div>
     <div class="client-stage">
       <p class="t-ui-strong">${stageName}</p>
-      <div class="segments" role="img" aria-label="${esc(current < 0 ? 'Setting up' : `Step ${current + 1} of ${STAGE_ORDER.length}`)}">${segments}</div>
+      ${stepTracker(journeySteps(STAGE_ORDER, current), { label: current < 0 ? 'Setting up' : `Step ${current + 1} of ${STAGE_ORDER.length}: ${STAGE_LABELS[c.journeyStage]}`, dots: true })}
       <p class="t-caption">${esc(facts.join('. '))}${facts.length ? '.' : ''}</p>
       ${flagged.length ? `<p>${status('attention', 'Answers to follow up')}</p>` : ''}
     </div>
@@ -391,11 +390,11 @@ export function client(s, uid, tab = 'overview') {
       const isReleased = released_.has(d.assignment.id);
       const staffOnly = d.draft.clientFacing === false;
       const flags = (d.draft.flags ?? []).length
-        ? `<div class="notice notice-error flagged"><div class="stack"><p class="t-ui-strong">Answers to follow up</p><ul class="result-list">${d.draft.flags.map((f) => `<li><p>${esc(f.text)}</p><p class="t-caption">Answered ${f.value}. ${esc(f.note)}</p></li>`).join('')}</ul>${
+        ? notice('warning', `<ul class="result-list">${d.draft.flags.map((f) => `<li><p>${esc(f.text)}</p><p class="t-caption">Answered ${f.value}. ${esc(f.note)}</p></li>`).join('')}</ul>${
             d.flagsFollowedUpAt
               ? `<p class="t-caption">You marked this as followed up on ${fmtDate(d.flagsFollowedUpAt)}.</p>`
               : `<div class="actions-inline"><button type="button" class="btn btn-secondary btn-inline" data-action="flags-followed-up" data-id="${esc(d.assignment.id)}">Mark as followed up</button></div><p class="t-caption">Stays on your dashboard and in To review until you mark it. The answers stay on this draft either way.</p>`
-          }</div></div>`
+          }`, { word: 'Answers to follow up', cls: 'flagged' })
         : '';
       return `<article class="draft stack" id="draft-${esc(d.assignment.id)}">
         <div class="draft-head"><h3>${esc(d.draft.measureName)}</h3>${staffOnly ? status('progress', 'For you only') : isReleased ? status('done', 'Released') : status('attention', 'Draft')}</div>
@@ -453,7 +452,7 @@ export function client(s, uid, tab = 'overview') {
     .map(([key, label, href, n]) => `<li><a class="subnav-link" href="${esc(href)}"${tab === key ? ' aria-current="page"' : ''}>${esc(label)}${n ? `<span class="nav-count">${n}</span>` : ''}</a></li>`)
     .join('')}</ul></nav>${
     flagged.length && tab !== 'questionnaires'
-      ? `<div class="notice flag-notice"><p>${status('attention', 'Answers to follow up')}</p><p>${answers(flagCount(flagged))} flagged in ${esc([...new Set(flagged.map((d) => d.draft.measureName))].join(', '))}. <a href="/practitioner/client/${esc(uid)}/questionnaires">See them under Questionnaires</a></p></div>`
+      ? notice('warning', `<p>${answers(flagCount(flagged))} flagged in ${esc([...new Set(flagged.map((d) => d.draft.measureName))].join(', '))}. <a href="/practitioner/client/${esc(uid)}/questionnaires">See them under Questionnaires</a></p>`, { word: 'Answers to follow up', cls: 'flag-notice' })
       : ''
   }`;
   const overview = `    <div class="panel-flow">
@@ -517,7 +516,7 @@ export function client(s, uid, tab = 'overview') {
       <h2 id="h-assign">Questionnaires</h2>
       ${list.length ? `<ul class="task-list">${list.map((a) => {
         const m = s.ctx.measures[a.measureId];
-        const chip = a.status === 'complete' ? status('done', `Done ${fmtDate(a.completedAt)}`) : a.status === 'inProgress' ? status('progress', 'In progress') : status('attention', 'Not started');
+        const chip = a.status === 'complete' ? status('done', `Done ${fmtDate(a.completedAt)}`) : a.status === 'inProgress' ? status('progress', 'In progress') : status('todo', 'Not started');
         return `<li class="task"><div><p class="task-name">${esc(m?.name ?? a.measureId)}</p><p class="task-meta">Assigned ${fmtDate(a.assignedAt)}</p></div>${chip}<span></span></li>`;
       }).join('')}</ul>` : '<p class="t-caption">None assigned yet.</p>'}
       ${
@@ -914,7 +913,7 @@ export function measureTestResult(s, id) {
     <section class="stack" aria-labelledby="h-tr">
       <h2 id="h-tr">How these answers would score</h2>
       <p class="t-caption">${scores.answeredItems} of ${scores.totalItems} answered. This is the draft you would see on the client's record; nothing has been saved.</p>
-      ${scores.flags.length ? `<div class="notice notice-error"><p class="t-ui-strong">Answers that would alert you</p><ul class="result-list">${scores.flags.map((f) => `<li><p>${esc(f.text)}</p><p class="t-caption">Answered ${f.value}. ${esc(f.note)}</p></li>`).join('')}</ul></div>` : ''}
+      ${scores.flags.length ? notice('warning', `<ul class="result-list">${scores.flags.map((f) => `<li><p>${esc(f.text)}</p><p class="t-caption">Answered ${f.value}. ${esc(f.note)}</p></li>`).join('')}</ul>`, { word: 'Answers that would alert you' }) : ''}
       ${tableWrap(`Test run scores`)}<table class="table"><thead><tr><th scope="col">Subscale</th><th scope="col">Score</th><th scope="col">Band</th><th scope="col">Answered</th></tr></thead><tbody>${rows}</tbody></table></div>
       ${draft.clientFacing ? `<div class="split">
         <div class="stack"><p class="t-ui-strong">Strengths the client would see</p>${draft.strengths.length ? `<ul class="result-list">${draft.strengths.map((x) => `<li><p>${esc(x.label)}</p><p class="t-caption">${esc(x.reason)}</p></li>`).join('')}</ul>` : '<p class="t-caption">None.</p>'}</div>
