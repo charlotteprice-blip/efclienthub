@@ -504,7 +504,7 @@ export function item(s, assignmentId, n) {
           <p class="t-caption">${esc(measureMeta(s, a))}</p>
           <h2 class="t-title">Before you start</h2>
           <p class="reading">${esc(m.instructions)}</p>
-          <p class="t-caption">There are no right or wrong answers. Your answers save as you go, and you can read this again on any question.</p>
+          <p class="t-caption">Your answers save as you go, and you can read this again on any question.</p>
         </div>
         <div class="actions"><a class="btn btn-primary" href="/measure/${esc(a.id)}/0">Start</a></div>
       </section>`,

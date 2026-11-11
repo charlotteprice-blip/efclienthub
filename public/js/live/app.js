@@ -569,9 +569,12 @@ const handlers = {
     const title = String(data.title ?? '').trim();
     const url = String(data.url ?? '').trim();
     if (!title || !/^https:\/\/\S+$/.test(url)) {
+      // What was typed stays in the form so only the fault needs fixing.
+      S.form.resource = { uid, title, url, note: String(data.note ?? '') };
       S.errors.resource = 'A title and an https link are needed.';
       return route();
     }
+    delete S.form.resource;
     const current = S.ctx.clients[uid]?.resources ?? [];
     await call('setResources', { uid, resources: [...current, { id: `r${Date.now().toString(36)}`, title, url, note: data.note ?? '' }] });
     setFlash('Resource added.');

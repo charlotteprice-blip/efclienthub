@@ -370,6 +370,8 @@ export function client(s, uid, tab = 'overview') {
   const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Pacific/Auckland', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
   const overTime = scoresOverTime(s, uid);
 
+  // A resource typed for this client that failed its check, kept for another try.
+  const typedResource = s.form.resource?.uid === uid ? s.form.resource : {};
   const intakeAnswers = intake
     ? s.intakeConfig.questions
         .filter((q) => intake.answers?.[q.id])
@@ -499,10 +501,10 @@ export function client(s, uid, tab = 'overview') {
         ${(c.resources ?? []).length ? `<ul class="task-list">${c.resources.map((r) => `<li class="task"><div><p class="task-name"><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.title)}</a></p>${r.note ? `<p class="task-meta">${esc(r.note)}</p>` : ''}</div><span></span><button type="button" class="btn btn-quiet" data-action="remove-resource" data-uid="${esc(uid)}" data-resource="${esc(r.id)}">Remove</button></li>`).join('')}</ul>` : '<p>None yet.</p>'}
         <form class="stack" data-form="add-resource" data-uid="${esc(uid)}" novalidate>
           <div class="split">
-            <div class="field"><label class="field-label" for="rs-title">Title</label><input class="input" id="rs-title" name="title" maxlength="80"></div>
-            <div class="field"><label class="field-label" for="rs-url">Link (https)</label><input class="input" id="rs-url" name="url" type="url" maxlength="300" placeholder="https://"></div>
+            <div class="field"><label class="field-label" for="rs-title">Title</label><input class="input" id="rs-title" name="title" maxlength="80" value="${esc(typedResource.title ?? '')}"></div>
+            <div class="field"><label class="field-label" for="rs-url">Link (https)</label><input class="input" id="rs-url" name="url" type="url" maxlength="300" placeholder="https://" value="${esc(typedResource.url ?? '')}"></div>
           </div>
-          <div class="field"><label class="field-label" for="rs-note">Note (optional)</label><input class="input" id="rs-note" name="note" maxlength="200" placeholder="Why this one, or what to look at first"></div>
+          <div class="field"><label class="field-label" for="rs-note">Note (optional)</label><input class="input" id="rs-note" name="note" maxlength="200" placeholder="Why this one, or what to look at first" value="${esc(typedResource.note ?? '')}"></div>
           ${s.errors.resource ? `<p class="field-error">${esc(s.errors.resource)}</p>` : ''}
           <div class="actions-inline"><button type="submit" class="btn btn-secondary">Add resource</button></div>
         </form>
