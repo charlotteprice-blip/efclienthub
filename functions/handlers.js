@@ -440,6 +440,22 @@ export function makeHandlers({ db, intakeConfig, clientTypes, appConfig = {}, al
       return { ok: true };
     },
 
+    // Sarah records that she has followed up the flagged answers on 1
+    // completed questionnaire. The flags stay on the draft with the date;
+    // the questionnaire leaves Today and To review.
+    markFlagsFollowedUp: async (request) => {
+      const auth = practitioner(request);
+      const ref = db.doc(`scoring/${String(request.data?.assignmentId)}`);
+      const snap = await ref.get();
+      if (!snap.exists) fail('not-found', 'That questionnaire was not found.');
+      const scoring = snap.data();
+      if (!(scoring.draft?.flags ?? []).length) fail('failed-precondition', 'That questionnaire has no answers to follow up.');
+      if (scoring.flagsFollowedUpAt) return { ok: true, already: true };
+      await ref.update({ flagsFollowedUpAt: now(), flagsFollowedUpBy: auth.uid });
+      await audit(auth.uid, 'followed up flagged answers', scoring.uid, { measureId: scoring.measureId });
+      return { ok: true };
+    },
+
     // ---------- check in schedules ----------
 
     createSchedule: async (request) => {

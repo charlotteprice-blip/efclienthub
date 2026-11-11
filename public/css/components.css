@@ -1177,3 +1177,14 @@ th .sort:focus-visible {
 @media (max-width: 899px) {
   .fv-layers { grid-template-columns: 1fr; }
 }
+
+/* Flagged answers: the notice on a client record and inside a draft */
+.flag-notice {
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.flagged > .stack {
+  flex: 1 1 auto;
+  min-width: 0;
+}

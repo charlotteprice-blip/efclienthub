@@ -17,6 +17,17 @@ const assignmentsFor = (s, uid) => s.ctx.assignments.filter((a) => a.uid === uid
 const draftsFor = (s, uid) => assignmentsFor(s, uid).filter((a) => a.status === 'complete' && s.ctx.scoring[a.id]?.draft).map((a) => ({ assignment: a, ...s.ctx.scoring[a.id] }));
 const releasedIds = (s, uid) => new Set((s.ctx.results[uid]?.items ?? []).map((i) => i.assignmentId));
 export const unreleased = (s, uid) => draftsFor(s, uid).filter((d) => d.draft.clientFacing !== false && !releasedIds(s, uid).has(d.assignment.id)).length;
+// Completed questionnaires with flagged answers Sarah has not yet marked as
+// followed up. These lead Today, To review and the client's own row.
+export const openFlags = (s, uid) => draftsFor(s, uid).filter((d) => (d.draft.flags ?? []).length && !d.flagsFollowedUpAt);
+// How many of a client's completed questionnaires wait on Sarah: a draft to
+// release, flagged answers to follow up, or both (counted once).
+export const toReview = (s, uid) => {
+  const released = releasedIds(s, uid);
+  return draftsFor(s, uid).filter((d) => (d.draft.clientFacing !== false && !released.has(d.assignment.id)) || ((d.draft.flags ?? []).length && !d.flagsFollowedUpAt)).length;
+};
+const flagCount = (list) => list.reduce((n, d) => n + d.draft.flags.length, 0);
+const answers = (n) => `${n} answer${n === 1 ? '' : 's'}`;
 const schedulesFor = (s, uid) => (s.ctx.schedules ?? []).filter((x) => x.uid === uid);
 // The progress record runSploseSync wrote for a client, when tracking is on.
 const sploseFor = (s, uid) => (s.config.splose?.enabled ? s.ctx.splose?.[uid] ?? null : null);
@@ -106,7 +117,7 @@ function scoresOverTime(s, uid) {
 
 function reviewCount(s) {
   if (s.role !== 'practitioner') return 0;
-  return Object.keys(s.ctx.clients).filter((uid) => unreleased(s, uid) > 0).length + s.ctx.requests.filter((r) => r.status === 'open').length;
+  return Object.keys(s.ctx.clients).reduce((n, uid) => n + toReview(s, uid), 0) + s.ctx.requests.filter((r) => r.status === 'open').length;
 }
 
 function shell(s, active, title, content, wide = false) {
@@ -125,6 +136,7 @@ function shell(s, active, title, content, wide = false) {
 }
 
 function resultsStatus(s, uid) {
+  if (openFlags(s, uid).length) return status('attention', 'Answers to follow up');
   if (unreleased(s, uid) > 0) return status('attention', 'Draft to review');
   if (s.ctx.results[uid]?.releasedAt) return status('done', 'Released');
   if (assignmentsFor(s, uid).some((a) => a.status !== 'complete')) return status('progress', 'Waiting');
@@ -152,9 +164,22 @@ export function attentionItems(s) {
   const t = { codeDays: 7, intakeDays: 3, questionnaireDays: 7, requestWorkingDays: 5, ...(s.config.attention ?? {}) };
   const now = Date.now();
   const items = [];
+  // Flagged answers come first: they are what Sarah most needs to see.
+  for (const c of Object.values(s.ctx.clients)) {
+    const uid = c.uid ?? c.id;
+    const flagged = openFlags(s, uid);
+    if (!flagged.length) continue;
+    const names = [...new Set(flagged.map((d) => d.draft.measureName))].join(', ');
+    items.push({ kind: 'flag', pill: ['attention', 'Follow up'], who: c.name || c.email, text: `${answers(flagCount(flagged))} flagged for follow up in ${names}`, href: `/practitioner/client/${uid}/questionnaires` });
+  }
+  for (const c of Object.values(s.ctx.clients)) {
+    const uid = c.uid ?? c.id;
+    const n = unreleased(s, uid);
+    if (n) items.push({ kind: 'draft', pill: ['attention', 'Draft to review'], who: c.name || c.email, text: `${n} draft result${n === 1 ? '' : 's'} waiting for you to review and release`, href: `/practitioner/client/${uid}/questionnaires` });
+  }
   for (const c of s.ctx.codes) {
     if (!c.redeemedByUid && c.expiresAt > now && now - c.issuedAt > t.codeDays * DAY) {
-      items.push({ kind: 'code', who: c.forName, text: `Activation code issued ${relative(c.issuedAt)} and not yet used`, href: '/practitioner/codes' });
+      items.push({ kind: 'code', pill: ['attention', 'Code not used'], who: c.forName, text: `Activation code issued ${relative(c.issuedAt)} and not yet used`, href: '/practitioner/codes' });
     }
   }
   for (const c of Object.values(s.ctx.clients)) {
@@ -162,11 +187,11 @@ export function attentionItems(s) {
     if (!c.codeHash) continue;
     const href = `/practitioner/client/${uid}`;
     if (!c.activatedAt && now - (c.createdAt ?? now) > t.intakeDays * DAY) {
-      items.push({ kind: 'intake', who: c.name || c.email, text: `Signed up ${relative(c.createdAt)} and has not finished setting up`, href });
+      items.push({ kind: 'intake', pill: ['attention', 'Setting up'], who: c.name || c.email, text: `Signed up ${relative(c.createdAt)} and has not finished setting up`, href });
     }
     const stale = assignmentsFor(s, uid).filter((a) => a.status === 'notStarted' && now - (a.assignedAt ?? now) > t.questionnaireDays * DAY);
     if (stale.length) {
-      items.push({ kind: 'questionnaire', who: c.name || c.email, text: `${stale.length} questionnaire${stale.length === 1 ? '' : 's'} assigned ${relative(Math.min(...stale.map((a) => a.assignedAt)))} and not started`, href });
+      items.push({ kind: 'questionnaire', pill: ['attention', 'Not started'], who: c.name || c.email, text: `${stale.length} questionnaire${stale.length === 1 ? '' : 's'} assigned ${relative(Math.min(...stale.map((a) => a.assignedAt)))} and not started`, href: `${href}/questionnaires` });
     }
   }
   // What Splose shows that Sarah may want to act on. The stage never moves
@@ -177,17 +202,18 @@ export function attentionItems(s) {
     if (!p || !c.sploseClientId) continue;
     const who = c.name || c.email;
     const href = `/practitioner/client/${uid}`;
-    if (p.error) items.push({ kind: 'splose', who, text: `Splose link needs attention: ${p.error}`, href });
-    if (p.feedbackAttendedAt && c.journeyStage === 'booking') items.push({ kind: 'splose', who, text: `Feedback session attended in Splose on ${fmtDate(p.feedbackAttendedAt)}; stage is still Book feedback`, href });
-    if (p.lastOutcome === 'Did not arrive') items.push({ kind: 'splose', who, text: 'Did not arrive at the last appointment in Splose', href });
+    if (p.error) items.push({ kind: 'splose', pill: ['attention', 'Splose'], who, text: `Splose link needs attention: ${p.error}`, href });
+    if (p.feedbackAttendedAt && c.journeyStage === 'booking') items.push({ kind: 'splose', pill: ['attention', 'Splose'], who, text: `Feedback session attended in Splose on ${fmtDate(p.feedbackAttendedAt)}; stage is still Book feedback`, href });
+    if (p.lastOutcome === 'Did not arrive') items.push({ kind: 'splose', pill: ['attention', 'Splose'], who, text: 'Did not arrive at the last appointment in Splose', href });
     for (const f of p.forms ?? []) {
-      if (f.status !== 'Completed' && f.sentAt && now - f.sentAt > (t.sploseFormDays ?? 7) * DAY) items.push({ kind: 'splose', who, text: `Splose form "${f.title}" sent ${relative(f.sentAt)} and not completed`, href });
+      if (f.status !== 'Completed' && f.sentAt && now - f.sentAt > (t.sploseFormDays ?? 7) * DAY) items.push({ kind: 'splose', pill: ['attention', 'Splose'], who, text: `Splose form "${f.title}" sent ${relative(f.sentAt)} and not completed`, href });
     }
   }
+  // Every open privacy request is listed; 1 close to its due date says so.
   for (const r of s.ctx.requests) {
-    if (r.status === 'open' && workingDaysUntil(r.dueBy) <= t.requestWorkingDays) {
-      items.push({ kind: 'request', who: s.ctx.clients[r.uid]?.name ?? 'Client', text: `${r.kind === 'access' ? 'Access' : 'Correction'} request due ${fmtDate(r.dueBy)}`, href: '/practitioner/review' });
-    }
+    if (r.status !== 'open') continue;
+    const soon = workingDaysUntil(r.dueBy) <= t.requestWorkingDays;
+    items.push({ kind: 'request', pill: soon ? ['attention', 'Due soon'] : ['progress', 'Privacy request'], who: s.ctx.clients[r.uid]?.name ?? 'Client', text: `${r.kind === 'access' ? 'Access' : 'Correction'} request due ${fmtDate(r.dueBy)}`, href: s.ctx.clients[r.uid] ? `/practitioner/client/${r.uid}/requests` : '/practitioner/review' });
   }
   return items;
 }
@@ -220,9 +246,13 @@ function clientRow(s, c) {
   if (schedule) facts.push(`Check in due ${fmtDay(schedule.nextDue)}`);
   if (formulation?.releasedAt) facts.push(`Formulation shared, ${formulation.factors.filter((f) => responses[f.id]).length} of ${formulation.factors.length} cards answered`);
   else if (results?.releasedAt) facts.push(`Results shared ${fmtDate(results.releasedAt)}`);
-  const button = drafts > 0
-    ? `<a class="btn btn-primary btn-inline" href="/practitioner/client/${esc(uid)}">Review ${drafts} draft${drafts === 1 ? '' : 's'}</a>`
-    : `<a class="btn btn-secondary btn-inline" href="/practitioner/client/${esc(uid)}">Open</a>`;
+  const flagged = openFlags(s, uid);
+  const who = c.name || c.email || 'Unnamed';
+  const button = flagged.length
+    ? `<a class="btn btn-primary btn-inline" href="/practitioner/client/${esc(uid)}/questionnaires" aria-label="Follow up ${esc(who)}: ${answers(flagCount(flagged))} flagged">Follow up</a>`
+    : drafts > 0
+      ? `<a class="btn btn-primary btn-inline" href="/practitioner/client/${esc(uid)}/questionnaires" aria-label="Review ${drafts} draft${drafts === 1 ? '' : 's'} for ${esc(who)}">Review ${drafts} draft${drafts === 1 ? '' : 's'}</a>`
+      : `<a class="btn btn-secondary btn-inline" href="/practitioner/client/${esc(uid)}" aria-label="Open ${esc(who)}">Open</a>`;
   const segments = STAGE_ORDER.map((_, i) => `<i class="${i < current ? 'done' : i === current ? 'current' : ''}"></i>`).join('');
   const stageName = current < 0 ? 'Setting up' : `${STAGE_LABELS[c.journeyStage]} <span class="t-caption">(step ${current + 1} of ${STAGE_ORDER.length})</span>`;
   return `<li class="client-row">
@@ -234,6 +264,7 @@ function clientRow(s, c) {
       <p class="t-ui-strong">${stageName}</p>
       <div class="segments" role="img" aria-label="${esc(current < 0 ? 'Setting up' : `Step ${current + 1} of ${STAGE_ORDER.length}`)}">${segments}</div>
       <p class="t-caption">${esc(facts.join('. '))}${facts.length ? '.' : ''}</p>
+      ${flagged.length ? `<p>${status('attention', 'Answers to follow up')}</p>` : ''}
     </div>
     <div class="client-next">${button}</div>
   </li>`;
@@ -247,8 +278,8 @@ export function dashboard(s) {
   const rows = clients.sort(byStage).map((c) => clientRow(s, c)).join('');
   const total = clients.length;
   const today = [
-    ...attention.map((x) => ({ who: x.who, text: x.text, href: x.href, label: 'Open' })),
-    ...checkIns.map((x) => ({ who: s.ctx.clients[x.uid]?.name ?? 'Client', text: `Check in: ${s.ctx.measures[x.measureId]?.name ?? x.measureId}, ${fmtDay(x.nextDue)}`, href: `/practitioner/client/${x.uid}`, label: 'Open' })),
+    ...attention.map((x) => ({ pill: x.pill, who: x.who, text: x.text, href: x.href })),
+    ...checkIns.map((x) => ({ pill: ['progress', 'Check in'], who: s.ctx.clients[x.uid]?.name ?? 'Client', text: `${s.ctx.measures[x.measureId]?.name ?? x.measureId}, due ${fmtDay(x.nextDue)}`, href: `/practitioner/client/${x.uid}/questionnaires` })),
   ];
   return shell(
     s,
@@ -256,7 +287,7 @@ export function dashboard(s) {
     'Dashboard',
     `<section class="stack" aria-labelledby="h-today">
       <h2 id="h-today">Today</h2>
-      ${today.length ? `<ul class="task-list">${today.map((x) => `<li class="task"><div><p class="task-name">${esc(x.who)}</p><p class="task-meta">${esc(x.text)}</p></div><span></span><a class="btn btn-secondary" href="${esc(x.href)}">${esc(x.label)}</a></li>`).join('')}</ul>` : '<p class="t-caption">Nothing waiting on you, and no check ins due in the next 7 days.</p>'}
+      ${today.length ? `<ul class="task-list">${today.map((x) => `<li class="task"><div><p class="task-name">${esc(x.who)}</p><p class="task-meta">${esc(x.text)}</p></div>${status(x.pill[0], x.pill[1])}<a class="btn btn-secondary" href="${esc(x.href)}" aria-label="Open ${esc(x.who)}: ${esc(x.text)}">Open</a></li>`).join('')}</ul>` : '<p class="t-caption">Nothing waiting on you, and no check ins due in the next 7 days.</p>'}
     </section>
     <section class="stack" aria-labelledby="h-prog">
       <div class="toolbar"><h2 id="h-prog">Clients${total ? ` <span class="t-caption">${total}</span>` : ''}</h2><a class="btn btn-quiet" href="/practitioner/clients">Table view</a></div>
@@ -317,6 +348,7 @@ export function client(s, uid, tab = 'overview') {
   const drafts = draftsFor(s, uid);
   const released = s.ctx.results[uid];
   const pending = unreleased(s, uid);
+  const flagged = openFlags(s, uid);
   const intake = s.ctx.intake[uid];
   const fdoc = s.ctx.formulationDrafts[uid];
   const fd = s.draftFactors?.[uid] ?? fdoc?.factors ?? [];
@@ -354,9 +386,13 @@ export function client(s, uid, tab = 'overview') {
       const isReleased = released_.has(d.assignment.id);
       const staffOnly = d.draft.clientFacing === false;
       const flags = (d.draft.flags ?? []).length
-        ? `<div class="notice notice-error" role="alert"><p class="t-ui-strong">Answers to follow up</p><ul class="result-list">${d.draft.flags.map((f) => `<li><p>${esc(f.text)}</p><p class="t-caption">Answered ${f.value}. ${esc(f.note)}</p></li>`).join('')}</ul></div>`
+        ? `<div class="notice notice-error flagged" role="alert"><div class="stack"><p class="t-ui-strong">Answers to follow up</p><ul class="result-list">${d.draft.flags.map((f) => `<li><p>${esc(f.text)}</p><p class="t-caption">Answered ${f.value}. ${esc(f.note)}</p></li>`).join('')}</ul>${
+            d.flagsFollowedUpAt
+              ? `<p class="t-caption">You marked this as followed up on ${fmtDate(d.flagsFollowedUpAt)}.</p>`
+              : `<div class="actions-inline"><button type="button" class="btn btn-secondary btn-inline" data-action="flags-followed-up" data-id="${esc(d.assignment.id)}">Mark as followed up</button></div><p class="t-caption">Stays on your dashboard and in To review until you mark it. The answers stay on this draft either way.</p>`
+          }</div></div>`
         : '';
-      return `<article class="draft stack">
+      return `<article class="draft stack" id="draft-${esc(d.assignment.id)}">
         <div class="draft-head"><h3>${esc(d.draft.measureName)}</h3>${staffOnly ? status('progress', 'For you only') : isReleased ? status('done', 'Released') : status('attention', 'Draft')}</div>
         <p class="t-caption">Automated draft scoring for your review. Not a diagnosis. ${staffOnly ? 'This questionnaire is never summarised to the client.' : isReleased ? 'Shared with the client.' : 'Not visible to the client.'} Completed ${fmtDate(d.assignment.completedAt)}.</p>
         ${flags}
@@ -404,13 +440,17 @@ export function client(s, uid, tab = 'overview') {
 
   const tabs = [
     ['overview', 'Overview', `/practitioner/client/${uid}`, 0],
-    ['questionnaires', 'Questionnaires', `/practitioner/client/${uid}/questionnaires`, pending],
+    ['questionnaires', 'Questionnaires', `/practitioner/client/${uid}/questionnaires`, toReview(s, uid)],
     ['formulation', 'Formulation', `/practitioner/client/${uid}/formulation`, 0],
     ['requests', 'Requests', `/practitioner/client/${uid}/requests`, requests.filter((r) => r.status === 'open').length],
   ];
   const subnav = `<nav class="subnav" aria-label="${esc(c.name || 'Client')} sections"><a class="t-caption subnav-back" href="/practitioner">All clients</a><ul>${tabs
     .map(([key, label, href, n]) => `<li><a class="subnav-link" href="${esc(href)}"${tab === key ? ' aria-current="page"' : ''}>${esc(label)}${n ? `<span class="nav-count">${n}</span>` : ''}</a></li>`)
-    .join('')}</ul></nav>`;
+    .join('')}</ul></nav>${
+    flagged.length && tab !== 'questionnaires'
+      ? `<div class="notice flag-notice"><p>${status('attention', 'Answers to follow up')}</p><p>${answers(flagCount(flagged))} flagged in ${esc([...new Set(flagged.map((d) => d.draft.measureName))].join(', '))}. <a href="/practitioner/client/${esc(uid)}/questionnaires">See them under Questionnaires</a></p></div>`
+      : ''
+  }`;
   const overview = `    <div class="panel-flow">
       <section class="panel stack" aria-labelledby="h-profile">
         <h2 id="h-profile">Profile</h2>
@@ -559,16 +599,25 @@ export function client(s, uid, tab = 'overview') {
 export function review(s) {
   const drafts = Object.values(s.ctx.clients).filter((c) => unreleased(s, c.uid ?? c.id) > 0);
   const open = s.ctx.requests.filter((r) => r.status === 'open');
+  const flagged = Object.values(s.ctx.clients).flatMap((c) => openFlags(s, c.uid ?? c.id).map((d) => ({ c, d })));
   return shell(
     s,
     'review',
     'To review',
-    `<section class="stack" aria-labelledby="h-d">
+    `<section class="stack" aria-labelledby="h-f">
+      <h2 id="h-f">Answers to follow up</h2>
+      ${flagged.length ? `<ul class="task-list">${flagged.map(({ c, d }) => {
+        const uid = c.uid ?? c.id;
+        const who = c.name || c.email;
+        return `<li class="task"><div><p class="task-name">${esc(who)}</p><p class="task-meta">${answers(d.draft.flags.length)} flagged in ${esc(d.draft.measureName)}, completed ${fmtDate(d.assignment.completedAt)}</p></div>${status('attention', 'Follow up')}<a class="btn btn-secondary" href="/practitioner/client/${esc(uid)}/questionnaires" aria-label="Open ${esc(who)}: answers to follow up in ${esc(d.draft.measureName)}">Open</a></li>`;
+      }).join('')}</ul>` : '<p>Nothing to follow up. A questionnaire appears here when a client gives an answer it is set to flag.</p>'}
+    </section>
+    <section class="stack" aria-labelledby="h-d">
       <h2 id="h-d">Draft results waiting for release</h2>
       ${drafts.length ? `<ul class="task-list">${drafts.map((c) => {
         const uid = c.uid ?? c.id;
         const n = unreleased(s, uid);
-        return `<li class="task"><div><p class="task-name">${esc(c.name || c.email)}</p><p class="task-meta">${n} questionnaire draft${n === 1 ? '' : 's'}</p></div>${status('attention', 'Draft')}<a class="btn btn-secondary" href="/practitioner/client/${esc(uid)}">Review</a></li>`;
+        return `<li class="task"><div><p class="task-name">${esc(c.name || c.email)}</p><p class="task-meta">${n} questionnaire draft${n === 1 ? '' : 's'}</p></div>${status('attention', 'Draft')}<a class="btn btn-secondary" href="/practitioner/client/${esc(uid)}/questionnaires" aria-label="Review ${n} draft${n === 1 ? '' : 's'} for ${esc(c.name || c.email)}">Review</a></li>`;
       }).join('')}</ul>` : '<p>Nothing waiting. Drafts appear here when a client finishes a questionnaire.</p>'}
     </section>
     <section class="stack" aria-labelledby="h-p">

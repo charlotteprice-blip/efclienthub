@@ -331,4 +331,24 @@ describe('codebook questionnaires', () => {
     await rejects(h.releaseResults(as(sarah, { uid: 'client-1' })), 'failed-precondition');
     assert.equal(db.read('results/client-1'), undefined);
   });
+  test('Sarah marks flagged answers as followed up; clients and admin cannot, and it is audited', async () => {
+    const dass = library.find((m) => m.id === 'dass-21');
+    await db.doc('measures/dass-21').set(dass);
+    await onboard();
+    await h.assignMeasure(as(sarah, { uid: 'client-1', measureId: 'dass-21' }));
+    const a = db.list('assignments').find((x) => x.uid === 'client-1' && x.measureId === 'dass-21');
+    for (const it of dass.items) await h.saveResponse(as(client, { assignmentId: a.id, itemId: it.id, value: it.id === 'dass-21-17' ? 3 : 0 }));
+    await h.submitMeasure(as(client, { assignmentId: a.id }));
+    await rejects(h.markFlagsFollowedUp(as(client, { assignmentId: a.id })), 'permission-denied');
+    await rejects(h.markFlagsFollowedUp(as(admin, { assignmentId: a.id })), 'permission-denied');
+    await rejects(h.markFlagsFollowedUp(as(sarah, { assignmentId: 'missing' })), 'not-found');
+    assert.equal(db.read(`scoring/${a.id}`).flagsFollowedUpAt, undefined);
+    await h.markFlagsFollowedUp(as(sarah, { assignmentId: a.id }));
+    const after = db.read(`scoring/${a.id}`);
+    assert.ok(after.flagsFollowedUpAt);
+    assert.equal(after.flagsFollowedUpBy, 'sarah');
+    assert.equal(after.draft.flags.length, 1, 'the flagged answers stay on the draft');
+    assert.deepEqual(await h.markFlagsFollowedUp(as(sarah, { assignmentId: a.id })), { ok: true, already: true });
+    assert.equal(db.list('auditLog').filter((e) => e.action === 'followed up flagged answers' && e.targetUid === 'client-1').length, 1);
+  });
 });

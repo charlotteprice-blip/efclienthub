@@ -10,7 +10,7 @@ Roles are custom claims set with the Admin SDK: `role: "practitioner"` reads cli
 | `sploseProgress` | uid | uid, patientId, nextAppointment (at, service, stage), lastAttended, lastOutcome, attended, missed, cancelled, feedbackBookedAt, feedbackAttendedAt, forms (id, title, status, sentAt, submittedAt), case (isOpen, trackType, appointmentCount, hours, expiryDate), syncedAt, error, errorAt | own | all | none |
 | `intakeResponses` | uid | uid, answers, derivedType, overriddenBy, submittedAt | own | all | none |
 | `assignments` | generated | uid, measureId, status, order, assignedAt, completedAt, responses (only while in progress), source (`scheduled` for check ins), scheduleId, dueOn | own (query must filter on uid) | all | none |
-| `scoring` | assignment id | uid, assignmentId, measureId, responses, scores, scoredAt, reportDraft | never | all | none |
+| `scoring` | assignment id | uid, assignmentId, measureId, responses, scores, scoredAt, draft (strengths, focus, flags), flagsFollowedUpAt, flagsFollowedUpBy | never | all | none |
 | `results` | uid | uid, releasedAt, releasedBy, items (strengths, areas of focus, reasons, Learning Hub topic links) | own, only once releasedAt is set | all | none |
 | `formulationDrafts` | uid | uid, summary, view, factors (id, zone, text, source?), updatedAt, updatedBy | never | all | none |
 | `formulations` | uid | uid, summary, view, factors, version, releasedAt, releasedBy | own, only once releasedAt is set | all | none |

@@ -90,6 +90,7 @@ export const respondToFormulation = wrap(handlers.respondToFormulation);
 export const setNextSession = wrap(handlers.setNextSession);
 export const setResources = wrap(handlers.setResources);
 export const closeRequest = wrap(handlers.closeRequest);
+export const markFlagsFollowedUp = wrap(handlers.markFlagsFollowedUp);
 export const createSchedule = wrap(handlers.createSchedule);
 export const updateSchedule = wrap(handlers.updateSchedule);
 export const searchSplosePatients = wrap(handlers.searchSplosePatients);

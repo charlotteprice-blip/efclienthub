@@ -631,6 +631,12 @@ const actions = {
     await reload();
     return route();
   },
+  async 'flags-followed-up'(t) {
+    await busy(t, () => call('markFlagsFollowedUp', { assignmentId: t.dataset.id }));
+    setFlash('Marked as followed up. The answers stay on the draft.');
+    await reload();
+    return route();
+  },
   async 'close-request'(t) {
     await busy(t, () => call('closeRequest', { requestId: t.dataset.id }));
     await reload();
