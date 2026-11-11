@@ -195,7 +195,7 @@ components:
 
 The hub is a quiet, well lit consulting room on screen. The room is winter sky: the sidebar and top bar are a single flat field of pale blue that frames everything. On the desk sits warm paper, the workspace where the client and Sarah actually read and write, lifted from the room by nothing more than a rounded top corner and a 1px hairline. There are no shadows, no gradients, no pictures, no decoration. Depth is 2 tones of the same light, and the eye rests.
 
-Every client screen asks for 1 thing. Type is set large (17px body on a 26px line), controls are tall (52px) and full width on a phone, and the whole page is finishable in a single sitting by someone who is tired, distracted or anxious. Sarah's screens keep the same materials but pack more in: panels flow in 2 columns, tables and task rows carry the day's work, and status is always an icon plus a word in a tinted pill. The one spark of colour in the room is the client type accent, a decorative stroke on the journey ring, the progress bar and the current step; it never carries text and never carries meaning on its own.
+Every client screen asks for 1 thing. Type is set large (17px body on a 26px line), controls are tall (52px) and full width on a phone, and the whole page is finishable in a single sitting by someone who is tired, distracted or anxious. Sarah's screens keep the same materials but pack more in: panels flow in 2 columns, tables and task rows carry the day's work, and status is always an icon plus a word in a tinted pill. The one spark of colour in the room is the client type accent, a decorative stroke on the journey ring, the progress bar and the current step; it never carries meaning on its own, and the only text it carries is the white label on a selected fit pill or pressed filter chip, which `npm run contrast` checks at 4.5:1.
 
 The mood is calm, unhurried and clinical in the good sense: orderly, precise, with nothing on the surfaces that does not need to be there. The only motion is a 180ms ease out on state changes and the mark drawing itself in once on load.
 
@@ -231,7 +231,7 @@ A 4 colour kit of pale blue and warm off white with 2 blues for ink, plus a smal
 - **Burnt Amber** (`burnt-amber`): neurodivergent clients.
 - **Deep Teal** (`deep-teal`): health clients, kept away from moss so it never reads as Done.
 - Slate Ink doubles as the accent for corporate and team.
-The accent paints the journey ring fill, the progress fill, the current step dot and its 25 percent halo, the left edge of result items and the accent panel, the perpetuating zone's inset stroke, and the selected fit pill. It needs 3:1 against sky and paper, not 4.5:1, because it never carries text.
+The accent paints the journey ring fill, the progress fill, the current step dot and its 25 percent halo, the left edge of result items and the accent panel, the perpetuating zone's inset stroke, and the selected fit pill. As a stroke or fill it needs 3:1 against sky and paper; where white text sits on it (the selected fit pill, a pressed chip) the pair needs 4.5:1, and both are checked by `npm run contrast`.
 
 ### Named Rules
 **The Four Colour Rule.** Sky, slate, navy and paper do every job on every screen. A new colour is a status, an error or a client accent, and each of those already has a value.

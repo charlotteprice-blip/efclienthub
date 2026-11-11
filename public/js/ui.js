@@ -16,15 +16,34 @@ export const fmtDate = (t) => (t ? dateFmt.format(new Date(t)) : '');
 // A calendar day stored as YYYY-MM-DD (check in dates), shown without any
 // time zone shift.
 export const fmtDay = (d) => (d ? dateFmt.format(new Date(`${d}T12:00:00`)) : '');
-const dateTimeFmt = new Intl.DateTimeFormat('en-NZ', { weekday: 'long', day: 'numeric', month: 'long', hour: 'numeric', minute: '2-digit', timeZone: 'Pacific/Auckland' });
+// Dates with a time carry the year, so a date read months later is not
+// ambiguous, and are always shown in New Zealand time.
+const dateTimeFmt = new Intl.DateTimeFormat('en-NZ', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'Pacific/Auckland' });
 export const fmtDateTime = (t) => (t ? dateTimeFmt.format(new Date(t)) : '');
-// Value for a datetime-local input, in the browser's own time zone.
-export const toLocalInput = (t) => {
-  if (!t) return '';
-  const d = new Date(t);
-  const pad = (n) => String(n).padStart(2, '0');
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+// A datetime-local input is read and written in New Zealand time, the same
+// zone the hub shows, wherever the browser happens to be.
+const nzParts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Pacific/Auckland', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+const nzWallClock = (t) => {
+  const p = Object.fromEntries(nzParts.formatToParts(new Date(t)).map((x) => [x.type, x.value]));
+  return `${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}`;
 };
+// Value for a datetime-local input: the New Zealand wall clock time of t.
+export const toLocalInput = (t) => (t ? nzWallClock(t) : '');
+// The reverse: a datetime-local value read as New Zealand time, in ms.
+// Returns null for an empty value and NaN for one that is not a date.
+export function fromLocalInput(value) {
+  if (!value) return null;
+  const m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(String(value));
+  if (!m) return NaN;
+  const wall = Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3]), Number(m[4]), Number(m[5]));
+  const asUtc = (s) => Date.parse(`${s}:00Z`);
+  // Start from the wall clock as if it were UTC, then correct by the zone
+  // offset at that moment; a second pass settles the hours around a
+  // daylight saving change.
+  let t = wall;
+  for (let i = 0; i < 2; i += 1) t = wall - (asUtc(nzWallClock(t)) - t);
+  return t;
+}
 export const CADENCE_LABELS = { weekly: 'Every week', fortnightly: 'Every 2 weeks', fourWeekly: 'Every 4 weeks', dates: 'On chosen dates' };
 
 export function relative(t) {

@@ -14,7 +14,7 @@ import { applyAccent } from '../client-types.js';
 import { validateIntake } from '../intake-rules.js';
 import { createJourneyRing } from '../journey-ring.js';
 import { createMark } from '../mark.js';
-import { esc } from '../ui.js';
+import { esc, fromLocalInput } from '../ui.js';
 import { suggestFactors } from '../formulation.js';
 import { VIEW_OPTIONS, renderFormulationView, viewOf } from '../formulation-views.js';
 import { call, loadClient, loadStaff } from './data.js';
@@ -423,7 +423,7 @@ const handlers = {
   },
   async 'next-session'(data, form) {
     const uid = form.dataset.uid;
-    const at = data.at ? new Date(data.at).getTime() : null;
+    const at = fromLocalInput(data.at);
     if (data.at && !Number.isFinite(at)) {
       S.errors.session = 'Enter a date and time.';
       return route();

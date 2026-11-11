@@ -5,10 +5,10 @@ Adapted from the Themescape member journey (Notion: Integration Lab, Themescape,
 | Step | Themescape | Client Hub | System |
 |---|---|---|---|
 | 1 | Sign up, step 1: your details | Sign up, step 1: your details (name, email) | Firebase Hosting |
-| 2 | Do you have an activation code? | Activation code is required. Without one, the page explains the hub is for Sarah's clients and links to the Executive Frame intake | Firebase Hosting |
+| 2 | Do you have an activation code? | Activation code is required. Without one, the page explains the hub is for Sarah's clients and gives the practice email (`contactEmail` in app.json) to ask for one | Firebase Hosting |
 | 3 | Step 2: create login (Google, Microsoft, email and password of 8 or more) | Same. Accounts are shared with the Learning Hub, so an existing Learning Hub member logs in instead | Firebase Authentication |
 | 4 | saveProfile: details and consents, Sydney | saveProfile: details and the consent record with notice version, Sydney | Cloud Functions, Firestore |
-| 5 | redeemCode: 12 characters, once, 30 days | redeemActivationCode: 12 characters, once, 30 days, limited attempts. Sets client type, activatedAt and the provisional retention date | Cloud Functions, Firestore |
+| 5 | redeemCode: 12 characters, once, 30 days | redeemActivationCode: 12 characters, once, 30 days, limited attempts. Sets the client type from the code. `retentionUntil` stays empty until the work ends (decision 2 of the open questions; closure is stage 10) | Cloud Functions, Firestore |
 | 6 | Plans, checkout, subscription | Removed. Replaced by the intake questionnaire and submitIntake | Cloud Functions, Firestore |
 | 7 | Checking your membership (logo loader) | Checking your access (mark loader). Not logged in: Log in. Not activated: Activate. Activated: Dashboard | Firebase Hosting |
 | 8 | Account: membership status, manage billing | Account: details, privacy notice, request access to or correction of my information, log out | Firebase Hosting, Cloud Functions |

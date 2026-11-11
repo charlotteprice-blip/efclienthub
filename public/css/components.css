@@ -622,7 +622,7 @@ th .sort:focus-visible {
 .segments i {
   flex: 1;
   height: 6px;
-  border-radius: 3px;
+  border-radius: var(--radius-pill);
   background: var(--hairline);
 }
 

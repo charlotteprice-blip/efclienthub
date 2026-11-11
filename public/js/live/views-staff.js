@@ -389,7 +389,7 @@ export function client(s, uid, tab = 'overview') {
       const isReleased = released_.has(d.assignment.id);
       const staffOnly = d.draft.clientFacing === false;
       const flags = (d.draft.flags ?? []).length
-        ? `<div class="notice notice-error flagged" role="alert"><div class="stack"><p class="t-ui-strong">Answers to follow up</p><ul class="result-list">${d.draft.flags.map((f) => `<li><p>${esc(f.text)}</p><p class="t-caption">Answered ${f.value}. ${esc(f.note)}</p></li>`).join('')}</ul>${
+        ? `<div class="notice notice-error flagged"><div class="stack"><p class="t-ui-strong">Answers to follow up</p><ul class="result-list">${d.draft.flags.map((f) => `<li><p>${esc(f.text)}</p><p class="t-caption">Answered ${f.value}. ${esc(f.note)}</p></li>`).join('')}</ul>${
             d.flagsFollowedUpAt
               ? `<p class="t-caption">You marked this as followed up on ${fmtDate(d.flagsFollowedUpAt)}.</p>`
               : `<div class="actions-inline"><button type="button" class="btn btn-secondary btn-inline" data-action="flags-followed-up" data-id="${esc(d.assignment.id)}">Mark as followed up</button></div><p class="t-caption">Stays on your dashboard and in To review until you mark it. The answers stay on this draft either way.</p>`
@@ -485,7 +485,7 @@ export function client(s, uid, tab = 'overview') {
         ${c.nextSessionAt ? `<p class="t-ui-strong">${esc(fmtDateTime(c.nextSessionAt))}</p>${c.nextSessionNote ? `<p class="t-caption">${esc(c.nextSessionNote)}</p>` : ''}` : '<p>No session recorded.</p>'}
         <form class="stack" data-form="next-session" data-uid="${esc(uid)}" novalidate>
           <div class="split">
-            <div class="field"><label class="field-label" for="ns-at">Date and time</label><input class="input" id="ns-at" name="at" type="datetime-local" value="${esc(toLocalInput(c.nextSessionAt))}"></div>
+            <div class="field"><label class="field-label" for="ns-at">Date and time (New Zealand time)</label><input class="input" id="ns-at" name="at" type="datetime-local" value="${esc(toLocalInput(c.nextSessionAt))}"></div>
             <div class="field"><label class="field-label" for="ns-note">Note (optional)</label><input class="input" id="ns-note" name="note" maxlength="160" placeholder="Online, link by email" value="${esc(c.nextSessionNote ?? '')}"></div>
           </div>
           ${s.errors.session ? `<p class="field-error">${esc(s.errors.session)}</p>` : ''}
@@ -543,7 +543,7 @@ export function client(s, uid, tab = 'overview') {
                 <div class="field"><label class="field-label" for="sch-start">First check in</label><input class="input" id="sch-start" name="startsOn" type="date" min="${esc(today)}"><p class="field-hint">The client sees it on this date.</p></div>
                 <div class="field"><label class="field-label" for="sch-end">Last check in (optional)</label><input class="input" id="sch-end" name="endsOn" type="date" min="${esc(today)}"><p class="field-hint">Leave blank to continue until you end it.</p></div>
               </div>
-              <div class="field" data-cadence-fields="dates" hidden><label class="field-label" for="sch-dates">Dates</label><input class="input" id="sch-dates" name="dates" placeholder="2026-11-03, 2026-12-01"><p class="field-hint">Year-month-day, separated by commas.</p></div>
+              <div class="field" data-cadence-fields="dates" hidden><label class="field-label" for="sch-dates">Dates</label><input class="input" id="sch-dates" name="dates" placeholder="2026-11-03, 2026-12-01"><p class="field-hint">Year, month and day for each date, with a comma between dates.</p></div>
               ${s.errors.schedule ? `<p class="field-error">${esc(s.errors.schedule)}</p>` : ''}
               <div class="actions"><button type="submit" class="btn btn-secondary">Schedule check in</button></div>
             </form>`
@@ -907,7 +907,7 @@ export function measureTestResult(s, id) {
     <section class="stack" aria-labelledby="h-tr">
       <h2 id="h-tr">How these answers would score</h2>
       <p class="t-caption">${scores.answeredItems} of ${scores.totalItems} answered. This is the draft you would see on the client's record; nothing has been saved.</p>
-      ${scores.flags.length ? `<div class="notice notice-error" role="alert"><p class="t-ui-strong">Answers that would alert you</p><ul class="result-list">${scores.flags.map((f) => `<li><p>${esc(f.text)}</p><p class="t-caption">Answered ${f.value}. ${esc(f.note)}</p></li>`).join('')}</ul></div>` : ''}
+      ${scores.flags.length ? `<div class="notice notice-error"><p class="t-ui-strong">Answers that would alert you</p><ul class="result-list">${scores.flags.map((f) => `<li><p>${esc(f.text)}</p><p class="t-caption">Answered ${f.value}. ${esc(f.note)}</p></li>`).join('')}</ul></div>` : ''}
       ${tableWrap(`Test run scores`)}<table class="table"><thead><tr><th scope="col">Subscale</th><th scope="col">Score</th><th scope="col">Band</th><th scope="col">Answered</th></tr></thead><tbody>${rows}</tbody></table></div>
       ${draft.clientFacing ? `<div class="split">
         <div class="stack"><p class="t-ui-strong">Strengths the client would see</p>${draft.strengths.length ? `<ul class="result-list">${draft.strengths.map((x) => `<li><p>${esc(x.label)}</p><p class="t-caption">${esc(x.reason)}</p></li>`).join('')}</ul>` : '<p class="t-caption">None.</p>'}</div>
