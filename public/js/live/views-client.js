@@ -321,17 +321,24 @@ export function problem(text, signedIn = false) {
 // ---------- Home: what to do, report progress, next session, resources ----------
 
 // The 5 steps of a client's report, derived from what has happened so far.
-function reportSteps(s) {
+export function reportSteps(s) {
   const { ctx } = s;
   const stages = s.clientTypes.stages;
   const stageIndex = Math.max(0, stages.indexOf(ctx.client.journeyStage ?? 'assessment'));
-  const initial = ctx.assignments.filter((a) => a.source !== 'scheduled');
+  // The first step counts the questionnaires of the initial assessment. The
+  // journey never moves back, so once the client is past that stage the
+  // step stays done, and a questionnaire Sarah assigns later is a task in
+  // To do, not a step undone. Later ones are those assigned after the
+  // booking step was reached.
+  const past = stageIndex > stages.indexOf('assessment');
+  const cutOff = ctx.client.bookingTriggeredAt;
+  const initial = ctx.assignments.filter((a) => a.source !== 'scheduled' && !(past && cutOff && (a.assignedAt ?? 0) > cutOff));
   const done = initial.filter((a) => a.status === 'complete').length;
-  const qDone = initial.length > 0 && done === initial.length;
+  const qDone = past || (initial.length > 0 && done === initial.length);
   const resultsOut = Boolean(ctx.results?.releasedAt);
   const feedbackDone = resultsOut || stageIndex > stages.indexOf('feedback');
   const steps = [
-    { label: 'Questionnaires', detail: initial.length ? `${done} of ${initial.length}` : 'None yet', done: qDone },
+    { label: 'Questionnaires', detail: initial.length ? `${done} of ${initial.length}` : past ? '' : 'None yet', done: qDone },
     { label: 'Sarah reviews', detail: '', done: resultsOut || stageIndex > stages.indexOf('booking') },
     { label: 'Feedback session', detail: '', done: feedbackDone },
     { label: 'Results shared', detail: resultsOut ? fmtDate(ctx.results.releasedAt) : '', done: resultsOut },
@@ -447,10 +454,10 @@ export function home(s) {
         ${ctx.results?.releasedAt ? `<p><a href="/results">See your results</a>${ctx.formulation ? ' or <a href="/formulation">your formulation</a>' : ''}.</p>` : '<p class="t-caption">Nothing is shared here until Sarah has gone through it with you. Scores are never shown on their own.</p>'}
       </section>
 
-      <section class="stack home-resources" aria-labelledby="h-res">
+      ${res.length ? `<section class="stack home-resources" aria-labelledby="h-res">
         <h2 id="h-res">Your resources</h2>
-        ${res.length ? `<ul class="resource-list">${res.map((r) => `<li><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.title)}</a>${r.note ? `<p class="t-caption">${esc(r.note)}</p>` : ''}</li>`).join('')}</ul>` : '<p>Sarah will add links and resources here as you work together.</p>'}
-      </section>
+        <ul class="resource-list">${res.map((r) => `<li><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.title)}</a>${r.note ? `<p class="t-caption">${esc(r.note)}</p>` : ''}</li>`).join('')}</ul>
+      </section>` : ''}
     </div>`,
   );
 }

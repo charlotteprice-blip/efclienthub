@@ -396,6 +396,21 @@ describe('check in schedules', () => {
     await rejects(h.updateSchedule(as(admin, { scheduleId, action: 'pause' })), 'permission-denied');
   });
 
+  test('the journey never moves back: a questionnaire assigned later leaves the stage where it is', async () => {
+    await onboard();
+    await h.assignMeasure(as(sarah, { uid: 'client-1', measureId }));
+    await finishOpen();
+    assert.equal(db.read('clients/client-1').journeyStage, 'booking');
+    for (const stage of ['booking', 'feedback', 'intervention', 'review']) {
+      await h.setStage(as(sarah, { uid: 'client-1', stage }));
+      await h.assignMeasure(as(sarah, { uid: 'client-1', measureId }));
+      assert.equal(db.read('clients/client-1').journeyStage, stage, `assigned at ${stage}`);
+      assert.ok(db.list('assignments').some((a) => a.uid === 'client-1' && a.status === 'notStarted'), 'the questionnaire is there as a task');
+      await finishOpen();
+      assert.equal(db.read('clients/client-1').journeyStage, stage, `finished at ${stage}`);
+    }
+  });
+
   test('the initial assessment still triggers booking', async () => {
     await onboard();
     await h.assignMeasure(as(sarah, { uid: 'client-1', measureId }));

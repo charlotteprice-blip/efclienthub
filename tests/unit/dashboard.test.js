@@ -72,3 +72,56 @@ describe('Today lists work that is waiting', () => {
     assert.ok(html.includes('aria-label="Open Test Person:'));
   });
 });
+
+// ---------- the client's Home ----------
+
+const { home, reportSteps } = await import('../../public/js/live/views-client.js');
+
+function clientState({ stage = 'assessment', assignments = [], bookingTriggeredAt, resources = [] } = {}) {
+  return {
+    flash: null,
+    errors: {},
+    config: { splose: { enabled: false }, learningHubUrl: 'https://hub.example', bookingUrl: '' },
+    clientTypes: { stages: ['enquiry', 'firstSession', 'assessment', 'booking', 'feedback', 'intervention', 'review'], types: {}, defaultCopy: Object.fromEntries(['enquiry', 'firstSession', 'assessment', 'booking', 'feedback', 'intervention', 'review'].map((s) => [s, { title: 'Title', body: 'Body', nextAction: 'none' }])) },
+    ctx: {
+      client: { uid: 'c1', name: 'Test Person', journeyStage: stage, bookingTriggeredAt, resources },
+      assignments,
+      measures: { m1: { id: 'm1', name: 'Sample questionnaire', items: [{ id: 'a', text: 'A' }] } },
+      results: null,
+      formulation: null,
+      formulationResponses: {},
+      requests: [],
+      schedules: [],
+      splose: null,
+    },
+  };
+}
+
+describe('the journey never moves back on the client\'s Home', () => {
+  const first = { id: 'a1', measureId: 'm1', status: 'complete', assignedAt: 100, completedAt: 150 };
+  const later = { id: 'a2', measureId: 'm1', status: 'notStarted', assignedAt: 500 };
+  test('a questionnaire assigned after booking is a task, and the first step stays done', () => {
+    const s = clientState({ stage: 'feedback', assignments: [first, later], bookingTriggeredAt: 200 });
+    const { steps } = reportSteps(s);
+    assert.equal(steps[0].done, true);
+    assert.equal(steps[0].detail, '1 of 1');
+    const html = home(s);
+    assert.ok(html.includes('href="/measure/a2"'), 'it is in To do');
+    assert.ok(html.includes('Step 5 of 7'));
+  });
+  test('during the assessment every questionnaire still counts', () => {
+    const { steps } = reportSteps(clientState({ stage: 'assessment', assignments: [first, later] }));
+    assert.equal(steps[0].done, false);
+    assert.equal(steps[0].detail, '1 of 2');
+  });
+});
+
+describe('empty sections on Home', () => {
+  test('Your resources appears only once there is a resource; the tracker always shows', () => {
+    const empty = home(clientState());
+    assert.ok(!empty.includes('Your resources'));
+    assert.ok(empty.includes('class="tracker'));
+    const withOne = home(clientState({ resources: [{ id: 'r1', title: 'A link', url: 'https://example.com/a', note: '' }] }));
+    assert.ok(withOne.includes('Your resources') && withOne.includes('https://example.com/a'));
+  });
+});

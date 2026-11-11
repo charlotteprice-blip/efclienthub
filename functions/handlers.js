@@ -374,14 +374,15 @@ export function makeHandlers({ db, intakeConfig, clientTypes, appConfig = {}, al
 
     assignMeasure: async (request) => {
       const auth = practitioner(request);
-      const { ref, client } = await existingClient(request.data?.uid);
+      const { ref } = await existingClient(request.data?.uid);
       const measureId = String(request.data?.measureId ?? '');
       const measure = (await db.doc(`measures/${measureId}`).get()).data();
       if (!core.assignable(measure, { allowSample: allowSample() })) fail('failed-precondition', 'That questionnaire is not cleared for use with clients.');
       const current = await db.collection('assignments').where('uid', '==', ref.id).get();
       if (current.docs.some((d) => d.data().measureId === measureId && d.data().status !== 'complete')) return { ok: true, already: true };
       await db.collection('assignments').add({ uid: ref.id, measureId, status: 'notStarted', order: current.size + 1, assignedAt: now(), completedAt: null });
-      if (['booking', 'feedback'].includes(client.journeyStage)) await ref.update({ journeyStage: 'assessment' });
+      // The journey never moves back. A questionnaire assigned later shows
+      // as a task on the client's Home; the stage stays where Sarah has it.
       await audit(auth.uid, 'assigned questionnaire', ref.id, { measureId });
       return { ok: true };
     },
