@@ -175,6 +175,39 @@ export function cleanResponse(data, formulation) {
   return { factorId, fit, comment };
 }
 
+// What an admin account is given about an activation code: enough to see
+// that it exists and whether it has been used, and nothing that says who
+// the client is. No name, no email, no uid. Being a psychologist's client
+// is health information, so only the practitioner sees who the codes are for.
+export function codeForAdmin(code) {
+  return {
+    last4: code.last4 ?? '',
+    clientTypeOverride: code.clientTypeOverride ?? null,
+    issuedAt: code.issuedAt ?? null,
+    expiresAt: code.expiresAt ?? null,
+    used: Boolean(code.redeemedByUid),
+    redeemedAt: code.redeemedAt ?? null,
+  };
+}
+
+// What a client is given of a questionnaire: what they need to answer it.
+// Scoring rules, bands, flag thresholds, subscales, licence notes and the
+// practitioner only marker stay on the server.
+export function measureForClient(measure) {
+  const options = (list) => (Array.isArray(list) ? list.map((o) => ({ value: o.value, label: o.label })) : []);
+  return {
+    id: measure.id,
+    name: measure.name ?? 'Questionnaire',
+    instructions: measure.instructions ?? '',
+    responseOptions: options(measure.responseOptions),
+    items: (measure.items ?? []).map((item) => ({
+      id: item.id,
+      text: item.text,
+      ...(Array.isArray(item.responseOptions) && item.responseOptions.length ? { responseOptions: options(item.responseOptions) } : {}),
+    })),
+  };
+}
+
 export function cleanName(name) {
   return String(name ?? '').trim().replace(/\s+/g, ' ').slice(0, 80);
 }

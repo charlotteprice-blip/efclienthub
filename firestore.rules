@@ -9,8 +9,12 @@ rules_version = '2';
 // 2. A client reads only documents that carry their own uid.
 // 3. Clinical content (responses, scores, drafts, formulations, client type)
 //    is readable by the practitioner role only. The admin role can operate
-//    the system (codes, measure library, config, audit) without reading
-//    clinical content.
+//    the system (measure library, config) without reading clinical content
+//    and without learning who the clients are: being a psychologist's
+//    client is health information, so activation codes (which carry a name
+//    and an email) and the audit log are practitioner only. An admin
+//    account is handed a list of codes without names by the
+//    listActivationCodes function.
 // 4. Draft scoring lives in `scoring`, which no client can read. Released
 //    content is copied into `results` and `formulations` by releaseResults,
 //    and those documents are readable only once releasedAt is set.
@@ -44,12 +48,6 @@ service cloud.firestore {
       return signedIn() && resource.data.uid == request.auth.uid;
     }
 
-    function isActivatedClient() {
-      return signedIn()
-        && exists(/databases/$(database)/documents/clients/$(request.auth.uid))
-        && get(/databases/$(database)/documents/clients/$(request.auth.uid)).data.get('activatedAt', null) != null;
-    }
-
     function isReleased() {
       return resource.data.get('releasedAt', null) != null;
     }
@@ -68,8 +66,10 @@ service cloud.firestore {
       allow write: if false;
     }
 
-    // Assignment status only: uid, measureId, status, order, assignedAt,
-    // completedAt. Responses and scores are never stored here.
+    // Assignment status: uid, measureId, status, order, assignedAt,
+    // completedAt, and the client's own answers while a questionnaire is in
+    // progress (so they can stop and resume). submitMeasure moves the
+    // answers to `scoring` and clears them here. Scores are never stored here.
     match /assignments/{assignmentId} {
       allow read: if ownsExisting() || isPractitioner();
       allow write: if false;
@@ -131,15 +131,19 @@ service cloud.firestore {
     // ---------- operational records ----------
 
     // Activation codes. Stored by hashed code; never readable by clients.
+    // A code carries the client's name and may carry their email, so only
+    // the practitioner reads them. Admin uses listActivationCodes.
     match /activationCodes/{codeId} {
-      allow read: if isStaff();
+      allow read: if isPractitioner();
       allow write: if false;
     }
 
-    // Measure library. Item text is needed by activated clients to complete
-    // an assigned measure; scoring rules are not sensitive to the client.
+    // Measure library, with scoring rules, bands and flag thresholds. Staff
+    // only. A client is handed the questions and answer options of the
+    // questionnaires assigned to them by the myQuestionnaires function, so
+    // no client can read how an answer is scored.
     match /measures/{measureId} {
-      allow read: if isActivatedClient() || isStaff();
+      allow read: if isStaff();
       allow write: if false;
     }
 
@@ -150,8 +154,10 @@ service cloud.firestore {
     }
 
     // Audit trail of practitioner actions. Written by functions only.
+    // Practitioner only: entries name client uids, and entries written
+    // before 11 November 2026 for issued codes carry the client's name.
     match /auditLog/{entryId} {
-      allow read: if isStaff();
+      allow read: if isPractitioner();
       allow write: if false;
     }
 

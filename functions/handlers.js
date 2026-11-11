@@ -268,6 +268,22 @@ export function makeHandlers({ db, intakeConfig, clientTypes, appConfig = {}, al
       return { ok: true, booking };
     },
 
+    // The questionnaires a client has been asked to complete, with only
+    // what is needed to answer them (core.measureForClient). Clients can no
+    // longer read the `measures` collection, so scoring rules and bands
+    // never reach a browser that is not Sarah's.
+    myQuestionnaires: async (request) => {
+      const auth = signedIn(request);
+      const [assigned, scheduled] = await Promise.all([db.collection('assignments').where('uid', '==', auth.uid).get(), db.collection('schedules').where('uid', '==', auth.uid).get()]);
+      const ids = new Set([...assigned.docs.map((d) => d.data().measureId), ...scheduled.docs.filter((d) => d.data().status !== 'ended').map((d) => d.data().measureId)]);
+      const measures = {};
+      for (const id of ids) {
+        const snap = await db.doc(`measures/${String(id)}`).get();
+        if (snap.exists) measures[id] = core.measureForClient({ id, ...snap.data() });
+      }
+      return { measures };
+    },
+
     createRequest: async (request) => {
       const auth = signedIn(request);
       const kind = request.data?.kind;
@@ -291,13 +307,17 @@ export function makeHandlers({ db, intakeConfig, clientTypes, appConfig = {}, al
 
     issueActivationCode: async (request) => {
       const auth = staff(request);
-      const forName = core.cleanName(request.data?.forName) || 'Unnamed';
+      // An admin account never holds who a client is, so a code it issues
+      // carries no name and no email; Sarah sees it as issued by admin.
+      const isAdmin = auth.token.role !== 'practitioner';
+      const forName = isAdmin ? 'Issued by admin' : core.cleanName(request.data?.forName) || 'Unnamed';
       const type = request.data?.clientTypeOverride || null;
       if (type && !clientTypes.types[type]) fail('invalid-argument', 'Unknown client type.');
-      const email =
-        String(request.data?.email ?? '')
-          .trim()
-          .toLowerCase() || null;
+      const email = isAdmin
+        ? null
+        : String(request.data?.email ?? '')
+            .trim()
+            .toLowerCase() || null;
       let code;
       let ref;
       for (let i = 0; i < 5; i += 1) {
@@ -316,9 +336,19 @@ export function makeHandlers({ db, intakeConfig, clientTypes, appConfig = {}, al
         redeemedByUid: null,
         redeemedAt: null,
       });
-      await audit(auth.uid, 'issued activation code', null, { forName });
+      // The audit entry names the code by its last 4 characters, never the client.
+      await audit(auth.uid, 'issued activation code', null, { last4: code.slice(-4) });
       // The only time the code itself is returned; only its hash is stored.
       return { code: core.formatCode(code), expiresAt: core.codeExpiry(now()) };
+    },
+
+    // The codes list for an admin account, which can no longer read the
+    // `activationCodes` collection: status and dates, no names or emails.
+    // The practitioner reads the collection itself, with names.
+    listActivationCodes: async (request) => {
+      staff(request);
+      const snap = await db.collection('activationCodes').get();
+      return { codes: snap.docs.map((d) => core.codeForAdmin(d.data())).sort((a, b) => (b.issuedAt ?? 0) - (a.issuedAt ?? 0)) };
     },
 
     setClientType: async (request) => {

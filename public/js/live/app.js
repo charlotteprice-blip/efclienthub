@@ -417,7 +417,7 @@ const handlers = {
   },
   async 'issue-code'(data) {
     const r = await call('issueActivationCode', data);
-    S.lastIssued = { ...r, forName: data.forName || 'Unnamed' };
+    S.lastIssued = { ...r, forName: S.role === 'practitioner' ? data.forName || 'Unnamed' : '' };
     await reload();
     return route();
   },

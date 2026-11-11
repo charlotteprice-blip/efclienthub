@@ -35,17 +35,13 @@ async function all(q) {
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
 }
 
-const measureCache = new Map();
-export async function measure(id) {
-  if (!measureCache.has(id)) measureCache.set(id, await maybe(doc(db, 'measures', id)));
-  return measureCache.get(id);
-}
-
 export async function loadClient(uid) {
   const client = await maybe(doc(db, 'clients', uid));
   const ctx = { client, assignments: [], measures: {}, results: null, formulation: null, formulationResponses: {}, requests: [], schedules: [], splose: null };
   if (!client?.activatedAt) return ctx;
-  const [assignments, results, formulation, responses, requests, schedules, splose] = await Promise.all([
+  // Questionnaires come from a function that hands over only what is needed
+  // to answer them; the rules no longer let a client read `measures`.
+  const [assignments, results, formulation, responses, requests, schedules, splose, questionnaires] = await Promise.all([
     all(query(collection(db, 'assignments'), where('uid', '==', uid), orderBy('order'))),
     maybe(doc(db, 'results', uid)),
     maybe(doc(db, 'formulations', uid)),
@@ -53,23 +49,25 @@ export async function loadClient(uid) {
     all(query(collection(db, 'requests'), where('uid', '==', uid), orderBy('createdAt', 'desc'))),
     all(query(collection(db, 'schedules'), where('uid', '==', uid))),
     maybe(doc(db, 'sploseProgress', uid)),
+    call('myQuestionnaires'),
   ]);
   ctx.assignments = assignments;
+  ctx.measures = questionnaires.measures ?? {};
   ctx.splose = splose;
   ctx.results = results?.releasedAt ? results : null;
   ctx.formulation = formulation?.releasedAt ? formulation : null;
   ctx.formulationResponses = responses?.responses ?? {};
   ctx.requests = requests;
   ctx.schedules = schedules.filter((x) => x.status === 'active' || x.status === 'paused').sort((a, b) => String(a.nextDue ?? '') > String(b.nextDue ?? '') ? 1 : -1);
-  for (const a of assignments) ctx.measures[a.measureId] = await measure(a.measureId);
-  for (const x of ctx.schedules) if (!ctx.measures[x.measureId]) ctx.measures[x.measureId] = await measure(x.measureId);
   return ctx;
 }
 
 const byId = (list, key = 'id') => Object.fromEntries(list.map((x) => [x[key], x]));
 
 export async function loadStaff(role) {
-  const [codes, measures] = await Promise.all([all(collection(db, 'activationCodes')), all(collection(db, 'measures'))]);
+  // An admin account is handed the codes by a function, without names or
+  // emails; only the practitioner reads the collection itself.
+  const [codes, measures] = await Promise.all([role === 'practitioner' ? all(collection(db, 'activationCodes')) : call('listActivationCodes').then((r) => r.codes), all(collection(db, 'measures'))]);
   const ctx = { codes: codes.sort((a, b) => b.issuedAt - a.issuedAt), measures: byId(measures) };
   if (role !== 'practitioner') return ctx;
   const [clients, assignments, scoring, results, requests, intake, drafts, formulations, schedules, responses, splose] = await Promise.all([

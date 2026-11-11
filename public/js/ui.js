@@ -162,7 +162,7 @@ export function practitionerShell({ title, active, content, counts, wide, markSr
     title,
     content,
     wide,
-    foot: role === 'practitioner' ? 'Practitioner view. Drafts are never shown to clients until you release them.' : 'Admin view. Client records are not shown to admin accounts.',
+    foot: role === 'practitioner' ? 'Practitioner view. Drafts are never shown to clients until you release them.' : 'Admin view. Client names, emails and records are not shown to admin accounts.',
     account: accountHref ? `<a class="account-button" href="${accountHref}">${badge}</a>` : `<span class="account-button">${badge}</span>`,
   });
 }

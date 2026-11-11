@@ -71,6 +71,8 @@ npm run deploy               everything, after all tests pass
 npm run worklog              today's commits as a Notion work log entry
 ```
 
+Order matters for the rules written on 11 November 2026 (decisions 72 and 73): deploy functions, then hosting, then rules. Those rules stop clients reading the questionnaire library and stop admin reading activation codes, and the pages get both from functions instead (`myQuestionnaires`, `listActivationCodes`). If the rules go live before the pages and functions that match them, clients find no questionnaires.
+
 Never run a bare `firebase deploy` from this repository; the npm scripts name this app's parts every time.
 
 ## Still done outside the terminal

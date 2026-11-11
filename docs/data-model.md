@@ -2,7 +2,7 @@
 
 Named Firestore database `clienthub` in project `ef-client-hub`, location australia-southeast1. Every write is made by a Cloud Function through the Admin SDK. The read column below is enforced by `firestore.rules` and proved by `tests/rules.test.js`.
 
-Roles are custom claims set with the Admin SDK: `role: "practitioner"` reads clinical content; `role: "admin"` operates the system without reading clinical content. A client has no role claim.
+Roles are custom claims set with the Admin SDK: `role: "practitioner"` reads clinical content; `role: "admin"` operates the system without reading clinical content and without seeing client names or emails (decision 72). A client has no role claim.
 
 | Collection | Document id | Fields | Client reads | Practitioner | Admin |
 |---|---|---|---|---|---|
@@ -17,11 +17,11 @@ Roles are custom claims set with the Admin SDK: `role: "practitioner"` reads cli
 | `formulationResponses` | uid | uid, responses { factorId: { fit, comment, at, version } }, updatedAt | own | all | none |
 | `requests` | generated | uid, kind (access or correction), detail, createdAt, dueBy, status | own | all | none |
 | `schedules` | generated | uid, measureId, cadence (weekly, fortnightly, fourWeekly, dates), dates, startsOn, endsOn, nextDue, status (active, paused, ended), runs, lastRunOn, pausedAt, endedAt, createdBy | own | all | none |
-| `activationCodes` | SHA 256 of code | forName, email (optional binding), clientTypeOverride, last4, issuedBy, issuedAt, expiresAt, redeemedByUid, redeemedAt | never | all | all |
+| `activationCodes` | SHA 256 of code | forName, email (optional binding), clientTypeOverride, last4, issuedBy, issuedAt, expiresAt, redeemedByUid, redeemedAt | never | all | none; `listActivationCodes` hands admin last4, type, dates and used, with no name or email |
 | `rateLimits` | uid | windowStart, count (code attempts) | never | never | never |
-| `measures` | measure id | id, name, items, responseOptions, scoringRules, tags (conditions and topics), licenceStatus | activated clients | all | all |
+| `measures` | measure id | id, name, items, responseOptions, scoringRules, tags (conditions and topics), licenceStatus | never; `myQuestionnaires` hands a client the questions and answer options of their own questionnaires, without scoring rules | all | all |
 | `config` | e.g. `intake` | editable questionnaire and copy | any signed in user | all | all |
-| `auditLog` | generated | actorUid, action, targetUid, at | never | all | all |
+| `auditLog` | generated | actorUid, action, targetUid, at | never | all | none |
 
 ## Departures from the brief
 

@@ -245,8 +245,19 @@ describe('operational records', () => {
   test('clients cannot read activation codes', async () => {
     await assertFails(as.user(CLIENT_A).doc('activationCodes/hash-1').get());
   });
-  test('activated client reads the measure library', async () => {
-    await assertSucceeds(as.user(CLIENT_A).doc('measures/sample-measure').get());
+  // Scoring rules, bands and flag thresholds live on the measure document.
+  // Clients get their questions from the myQuestionnaires function instead.
+  test('an activated client cannot read a questionnaire document, where the scoring rules are', async () => {
+    await assertFails(as.user(CLIENT_A).doc('measures/sample-measure').get());
+  });
+  test('an activated client cannot list the measure library', async () => {
+    await assertFails(as.user(CLIENT_A).collection('measures').get());
+  });
+  test('an unrecognised role claim does not open the measure library', async () => {
+    await assertFails(as.spoofed(CLIENT_A).doc('measures/sample-measure').get());
+  });
+  test('clients cannot list activation codes', async () => {
+    await assertFails(as.user(CLIENT_A).collection('activationCodes').get());
   });
   test('signed in user who has not activated cannot read measures', async () => {
     await assertFails(as.user(NOT_ACTIVATED).doc('measures/sample-measure').get());
@@ -315,11 +326,27 @@ describe('admin role operates the system without reading clinical content', () =
       await assertFails(as.admin().doc(path).get());
     });
   }
-  for (const path of ['activationCodes/hash-1', 'measures/sample-measure', 'config/intake', 'auditLog/e1']) {
+  for (const path of ['measures/sample-measure', 'config/intake']) {
     test(`reads ${path}`, async () => {
       await assertSucceeds(as.admin().doc(path).get());
     });
   }
+  // Who the clients are is health information. Activation codes carry a
+  // name and an email, and older audit entries carry a name, so an admin
+  // account reads neither; it is handed codes without names by a function.
+  for (const path of ['activationCodes/hash-1', 'auditLog/e1', `formulationResponses/${CLIENT_A}`]) {
+    test(`cannot read ${path}`, async () => {
+      await assertFails(as.admin().doc(path).get());
+    });
+  }
+  for (const name of ['activationCodes', 'auditLog', 'clients']) {
+    test(`cannot list ${name}`, async () => {
+      await assertFails(as.admin().collection(name).get());
+    });
+  }
+  test('lists the measure library', async () => {
+    await assertSucceeds(as.admin().collection('measures').get());
+  });
   test('cannot write directly', async () => {
     await assertFails(as.admin().doc('measures/new').set({ name: 'x' }));
   });

@@ -222,6 +222,84 @@ describe('formulation and privacy requests', () => {
   });
 });
 
+describe('an admin account never learns who the clients are', () => {
+  test('the codes list for admin has no name, email or uid', async () => {
+    const code = await onboard();
+    await h.issueActivationCode(as(sarah, { forName: 'Sam', email: 'sam@example.com' }));
+    const { codes } = await h.listActivationCodes(as(admin, {}));
+    assert.equal(codes.length, 2);
+    for (const c of codes) assert.deepEqual(Object.keys(c).sort(), ['clientTypeOverride', 'expiresAt', 'issuedAt', 'last4', 'redeemedAt', 'used']);
+    const text = JSON.stringify(codes);
+    for (const secret of ['Alex', 'Sam', 'example.com', 'client-1']) assert.ok(!text.includes(secret), secret);
+    assert.equal(codes.filter((c) => c.used).length, 1);
+    assert.ok(codes.some((c) => c.last4 === code.replace(/-/g, '').slice(-4)));
+  });
+  test('clients and signed out callers cannot list codes', async () => {
+    await rejects(h.listActivationCodes(as(client, {})), 'permission-denied');
+    await rejects(h.listActivationCodes(as(null, {})), 'unauthenticated');
+  });
+  test('a code issued by admin stores no name or email, whatever is sent', async () => {
+    await h.issueActivationCode(as(admin, { forName: 'Alex', email: 'alex@example.com' }));
+    const [stored] = db.list('activationCodes');
+    assert.equal(stored.forName, 'Issued by admin');
+    assert.equal(stored.email, null);
+  });
+  test('the audit entry for an issued code names the code, not the client', async () => {
+    await h.issueActivationCode(as(sarah, { forName: 'Alex' }));
+    const entry = db.list('auditLog').find((e) => e.action === 'issued activation code');
+    assert.equal(entry.forName, undefined);
+    assert.match(entry.last4, /^[A-Z0-9]{4}$/);
+    assert.ok(!JSON.stringify(entry).includes('Alex'));
+  });
+  test('admin still cannot do what only the practitioner can', async () => {
+    await onboard();
+    await rejects(h.assignMeasure(as(admin, { uid: 'client-1', measureId: measures[0].id })), 'permission-denied');
+    await rejects(h.releaseResults(as(admin, { uid: 'client-1' })), 'permission-denied');
+  });
+});
+
+describe('a client is handed questions, never scoring rules', () => {
+  test('myQuestionnaires returns only what is needed to answer', async () => {
+    await onboard();
+    await h.assignMeasure(as(sarah, { uid: 'client-1', measureId: measures[0].id }));
+    const { measures: mine } = await h.myQuestionnaires(as(client, {}));
+    const assigned = db.list('assignments').filter((a) => a.uid === 'client-1').map((a) => a.measureId);
+    assert.deepEqual(Object.keys(mine).sort(), [...new Set(assigned)].sort());
+    for (const m of Object.values(mine)) {
+      assert.deepEqual(Object.keys(m).sort(), ['id', 'instructions', 'items', 'name', 'responseOptions']);
+      for (const item of m.items) assert.ok(Object.keys(item).every((k) => ['id', 'text', 'responseOptions'].includes(k)));
+      const full = db.read(`measures/${m.id}`);
+      assert.equal(m.items.length, full.items.length);
+      assert.deepEqual(m.items.map((i) => i.text), full.items.map((i) => i.text));
+    }
+    const text = JSON.stringify(mine);
+    for (const word of ['scoringRules', 'subscales', 'bands', 'flagItems', 'reverseItems', 'strengthReason', 'focusReason', 'licence', 'clientFacing', 'upTo']) assert.ok(!text.includes(word), word);
+  });
+  test('a questionnaire that was not assigned is not handed over', async () => {
+    await onboard();
+    await db.doc('measures/not-mine').set({ id: 'not-mine', name: 'Other', items: [{ id: 'a', text: 'A' }], responseOptions: [{ value: 0, label: 'No' }], licenceStatus: 'cleared', scoringRules: { subscales: [] } });
+    const { measures: mine } = await h.myQuestionnaires(as(client, {}));
+    assert.equal(mine['not-mine'], undefined);
+  });
+  test('1 client is not handed another client\'s questionnaires, and signed out callers get nothing', async () => {
+    await onboard();
+    await onboard(other, 'health');
+    await db.doc('measures/only-other').set({ id: 'only-other', name: 'Other', items: [{ id: 'a', text: 'A' }], responseOptions: [{ value: 0, label: 'No' }], licenceStatus: 'cleared' });
+    await h.assignMeasure(as(sarah, { uid: 'client-2', measureId: 'only-other' }));
+    assert.equal((await h.myQuestionnaires(as(client, {}))).measures['only-other'], undefined);
+    assert.ok((await h.myQuestionnaires(as(other, {}))).measures['only-other']);
+    await rejects(h.myQuestionnaires(as(null, {})), 'unauthenticated');
+  });
+  test('an item with its own answer scale keeps it', async () => {
+    await onboard();
+    await db.doc('measures/mixed').set({ id: 'mixed', name: 'Mixed', licenceStatus: 'cleared', responseOptions: [{ value: 0, label: 'No' }, { value: 1, label: 'Yes' }], items: [{ id: 'a', text: 'A' }, { id: 'b', text: 'B', responseOptions: [{ value: 1, label: 'Low' }, { value: 5, label: 'High' }], subscale: 'x' }], scoringRules: { subscales: [{ id: 'x', label: 'X', items: ['b'] }] } });
+    await h.assignMeasure(as(sarah, { uid: 'client-1', measureId: 'mixed' }));
+    const m = (await h.myQuestionnaires(as(client, {}))).measures.mixed;
+    assert.deepEqual(m.items[1], { id: 'b', text: 'B', responseOptions: [{ value: 1, label: 'Low' }, { value: 5, label: 'High' }] });
+    assert.deepEqual(m.items[0], { id: 'a', text: 'A' });
+  });
+});
+
 describe('hasClientHub, the signal for the Learning Hub start page', () => {
   test('a client with an open record has a hub, from the moment the code is redeemed', async () => {
     const { code } = await h.issueActivationCode(as(sarah, { forName: 'Alex' }));

@@ -631,12 +631,16 @@ export function review(s) {
 }
 
 export function codes(s) {
+  // Only the practitioner sees who a code is for. An admin account is not
+  // given names or emails at all (functions and rules), so its table and
+  // form have no place for them.
+  const named = s.role === 'practitioner';
   const rows = s.ctx.codes
     .map((c) => {
-      const used = c.redeemedByUid;
+      const used = named ? c.redeemedByUid : c.used;
       const expired = !used && c.expiresAt < Date.now();
       return `<tr>
-        <td>${esc(c.forName)}${c.email ? `<br><span class="t-caption">${esc(c.email)}</span>` : ''}</td>
+        ${named ? `<td>${esc(c.forName)}${c.email ? `<br><span class="t-caption">${esc(c.email)}</span>` : ''}</td>` : ''}
         <td><span class="code">····-····-${esc(c.last4)}</span></td>
         <td>${c.clientTypeOverride ? typeCell(s, c.clientTypeOverride) : 'From intake'}</td>
         <td>${used ? status('done', `Used ${fmtDate(c.redeemedAt)}`) : expired ? status('attention', 'Expired') : status('progress', 'Not used yet')}</td>
@@ -649,12 +653,13 @@ export function codes(s) {
     s,
     'codes',
     'Activation codes',
-    `${issued ? `<div class="panel stack issued"><p class="t-ui-strong">New code for ${esc(issued.forName)}</p><p class="code code-large">${esc(issued.code)}</p><p class="t-caption">Copy it now and send it to the client in your usual email. For security it is not shown again. It works once and expires ${fmtDate(issued.expiresAt)}.</p><div class="actions"><button type="button" class="btn btn-secondary" data-action="copy-code" data-code="${esc(issued.code)}">Copy code</button></div></div>` : ''}
+    `${issued ? `<div class="panel stack issued" role="status"><p class="t-ui-strong">${named ? `New code for ${esc(issued.forName)}` : 'New code'}</p><p class="code code-large">${esc(issued.code)}</p><p class="t-caption">${named ? 'Copy it now and send it to the client in your usual email.' : 'Copy it now and pass it to Sarah, who sends it to the client.'} For security it is not shown again. It works once and expires ${fmtDate(issued.expiresAt)}.</p><div class="actions"><button type="button" class="btn btn-secondary" data-action="copy-code" data-code="${esc(issued.code)}">Copy code</button></div></div>` : ''}
     <section class="panel stack" aria-labelledby="h-issue">
       <h2 id="h-issue">Issue a code</h2>
       <form class="stack" data-form="issue-code" novalidate>
+        ${named ? '' : '<p class="t-caption">An admin account does not hold client names or emails. The code you issue shows in Sarah\'s list as issued by admin, and she sends it on.</p>'}
         <div class="split">
-          <div class="field">
+          ${named ? `<div class="field">
             <label class="field-label" for="for">Client name</label>
             <span class="field-hint" id="for-hint">For your list only.</span>
             <input class="input" id="for" name="forName" aria-describedby="for-hint" maxlength="80">
@@ -663,7 +668,7 @@ export function codes(s) {
             <label class="field-label" for="code-email">Client email (optional)</label>
             <span class="field-hint" id="ce-hint">If given, only this email can use the code.</span>
             <input class="input" id="code-email" name="email" type="email" aria-describedby="ce-hint" maxlength="120">
-          </div>
+          </div>` : ''}
           <div class="field">
             <label class="field-label" for="override">Client type</label>
             <span class="field-hint" id="ov-hint">Leave as intake to let the client's answers decide.</span>
@@ -677,8 +682,8 @@ export function codes(s) {
       </form>
     </section>
     ${tableWrap(`Activation codes`)}<table class="table">
-      <thead><tr><th scope="col">For</th><th scope="col">Code</th><th scope="col">Type</th><th scope="col">Status</th><th scope="col">Expires</th></tr></thead>
-      <tbody>${rows || '<tr><td colspan="5">No codes issued yet.</td></tr>'}</tbody>
+      <thead><tr>${named ? '<th scope="col">For</th>' : ''}<th scope="col">Code</th><th scope="col">Type</th><th scope="col">Status</th><th scope="col">Expires</th></tr></thead>
+      <tbody>${rows || `<tr><td colspan="${named ? 5 : 4}">No codes issued yet.</td></tr>`}</tbody>
     </table></div>`,
     true,
   );
