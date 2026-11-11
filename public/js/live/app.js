@@ -16,6 +16,7 @@ import { createJourneyRing } from '../journey-ring.js';
 import { createMark } from '../mark.js';
 import { esc } from '../ui.js';
 import { suggestFactors } from '../formulation.js';
+import { renderFormulationView } from '../formulation-views.js';
 import { call, loadClient, loadStaff } from './data.js';
 import * as cv from './views-client.js';
 import * as sv from './views-staff.js';
@@ -82,14 +83,41 @@ function setBusy(on) {
   viewer.querySelector('#workspace')?.setAttribute('aria-busy', String(on));
 }
 
-function paint(html) {
-  app.innerHTML = html;
-  S.flash = null;
-  S.errors = {};
-  afterPaint();
+// A selector that finds the same control again after a repaint, so focus
+// can return to what the person was using.
+const cssEsc = (v) => (window.CSS?.escape ? CSS.escape(v) : String(v).replace(/["\\]/g, '\\$&'));
+const dataSel = (el, keys) => keys.filter((k) => el.dataset[k] !== undefined).map((k) => `[data-${k.replace(/[A-Z]/g, (c) => `-${c.toLowerCase()}`)}="${cssEsc(el.dataset[k])}"]`).join('');
+function focusKey(el) {
+  if (!el || !app.contains(el)) return null;
+  if (el.id) return `#${cssEsc(el.id)}`;
+  if (el.dataset.action) return `[data-action="${cssEsc(el.dataset.action)}"]${dataSel(el, ['uid', 'factor', 'id', 'resource', 'index', 'do'])}`;
+  const form = el.closest('[data-form]');
+  if (!form) return null;
+  const f = `[data-form="${cssEsc(form.dataset.form)}"]${dataSel(form, ['uid', 'factor', 'zone', 'measure', 'assignment'])}`;
+  if (el.name) return `${f} [name="${cssEsc(el.name)}"]${el.type === 'radio' ? `[value="${cssEsc(el.value)}"]` : ''}`;
+  return `${f} button[type="submit"]`;
+}
+// Called when a control is used, before any repaint that follows.
+function noteUsed(el) {
+  S.usedKey = focusKey(el);
 }
 
-function afterPaint() {
+// A repaint of the same page (after a save, an error, a change of drawing)
+// keeps the scroll position and returns focus to the control that was
+// used. Only a change of page starts again from the top.
+function paint(html) {
+  const path = location.pathname;
+  const ws = app.querySelector('#workspace');
+  const keep = S.paintedPath === path && ws ? { top: ws.scrollTop, y: window.scrollY, key: S.usedKey ?? focusKey(document.activeElement) } : null;
+  app.innerHTML = html;
+  S.paintedPath = path;
+  S.usedKey = null;
+  S.flash = null;
+  S.errors = {};
+  afterPaint(keep);
+}
+
+function afterPaint(keep) {
   document.documentElement.style.removeProperty('--accent');
   if (S.ctx?.client?.clientType) applyAccent(clientTypes, S.ctx.client.clientType);
   for (const h of app.querySelectorAll('[data-ring]')) {
@@ -102,11 +130,24 @@ function afterPaint() {
     if (accent) dot.style.background = accent;
     else dot.classList.add('type-dot-empty');
   }
+  const ws = app.querySelector('#workspace');
+  if (keep) {
+    if (ws) ws.scrollTop = keep.top;
+    window.scrollTo(0, keep.y);
+  } else {
+    ws?.scrollTo?.(0, 0);
+    window.scrollTo(0, 0);
+  }
+  // An error takes focus and is brought into view; a radio group is
+  // marked on its fieldset, so focus goes to its first choice.
   const invalid = app.querySelector('[aria-invalid="true"]');
-  if (invalid) invalid.focus();
-  else app.querySelector('#workspace')?.focus({ preventScroll: true });
-  app.querySelector('#workspace')?.scrollTo?.(0, 0);
-  window.scrollTo(0, 0);
+  const invalidControl = invalid?.matches('input, textarea, select') ? invalid : invalid?.querySelector('input:checked, input, textarea, select');
+  const used = keep?.key ? app.querySelector(keep.key) : null;
+  if (invalidControl) {
+    invalidControl.focus({ preventScroll: true });
+    (invalidControl.closest('fieldset, .field, .check') ?? invalidControl).scrollIntoView({ block: 'center' });
+  } else if (used && !used.disabled) used.focus({ preventScroll: true });
+  else ws?.focus({ preventScroll: true });
   const title = app.querySelector('h1')?.textContent?.trim();
   document.title = title ? `${title} · Executive Frame` : 'Executive Frame Client Hub';
 }
@@ -487,18 +528,38 @@ const handlers = {
     await saveFormulation(uid, current, String(data.summary ?? ''));
     return undefined;
   },
-  // The client's response to 1 factor on their released formulation.
-  async 'factor-response'(data, form) {
-    const factorId = form.dataset.factor;
-    const fit = String(data.fit ?? '') || null;
-    const comment = String(data.comment ?? '').trim();
-    if (!fit && !comment) return undefined;
-    await call('respondToFormulation', { factorId, fit, comment });
-    S.ctx.formulationResponses[factorId] = { fit, comment, at: Date.now() };
-    setFlash('Saved. Sarah will see this on your formulation.');
-    return route();
+  // The client's response to 1 factor on their released formulation. Save
+  // sends the comment; the fit choice has already saved itself on change.
+  'factor-response'(_data, form) {
+    return saveFactorResponse(form);
   },
 };
+
+// Saves 1 card's fit and comment and says so beside the card. The page is
+// not repainted, so the client keeps their place; only the picture above
+// is redrawn with the new mark.
+async function saveFactorResponse(form) {
+  const factorId = form.dataset.factor;
+  const fit = form.querySelector('input[name="fit"]:checked')?.value ?? null;
+  const comment = String(form.querySelector('[name="comment"]')?.value ?? '').trim();
+  const note = form.querySelector('[data-saved]');
+  if (!fit && !comment) {
+    if (note) note.textContent = 'Choose an answer or write a comment first.';
+    return undefined;
+  }
+  try {
+    await call('respondToFormulation', { factorId, fit, comment });
+  } catch (e) {
+    if (note) note.textContent = `Not saved. ${e.message}`;
+    return undefined;
+  }
+  S.ctx.formulationResponses[factorId] = { fit, comment, at: Date.now() };
+  if (note) note.textContent = 'Saved. Sarah will see this.';
+  const picture = app.querySelector('[data-formulation-picture]');
+  const f = S.ctx.formulation;
+  if (picture && f) picture.innerHTML = renderFormulationView(f.view, f.factors, S.ctx.formulationResponses);
+  return undefined;
+}
 
 // Links a hub client to a Splose patient. On an email mismatch the id stays
 // in the form so Sarah can tick Link anyway.
@@ -540,6 +601,7 @@ document.addEventListener('submit', async (event) => {
   event.preventDefault();
   const handler = handlers[form.dataset.form];
   if (!handler) return;
+  noteUsed(form.contains(document.activeElement) && document.activeElement.matches('input, textarea, select') ? document.activeElement : event.submitter ?? form.querySelector('button[type="submit"]'));
   const data = Object.fromEntries(new FormData(form));
   try {
     await busy(form, () => handler(data, form));
@@ -717,6 +779,7 @@ document.addEventListener('click', async (event) => {
   }
   const t = event.target.closest('[data-action]');
   if (!t || !actions[t.dataset.action]) return undefined;
+  if (app.contains(t)) noteUsed(t);
   try {
     return await actions[t.dataset.action](t);
   } catch (e) {
@@ -785,6 +848,12 @@ document.addEventListener('click', (event) => {
 // Answers save the moment they are chosen.
 document.addEventListener('change', async (event) => {
   const el = event.target;
+  if (app.contains(el)) noteUsed(el);
+  // A fit choice on a formulation card saves the moment it is chosen.
+  if (el.name === 'fit' && el.closest('[data-form="factor-response"]')) {
+    saveFactorResponse(el.closest('form'));
+    return;
+  }
   if (el.name === 'answer' && el.closest('[data-form="item"]')) {
     const form = el.closest('[data-form="item"]');
     const a = S.ctx.assignments.find((x) => x.id === form.dataset.assignment);

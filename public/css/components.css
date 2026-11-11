@@ -1188,3 +1188,24 @@ th .sort:focus-visible {
   flex: 1 1 auto;
   min-width: 0;
 }
+
+/* A message after a save stays in view while the page keeps its place */
+.workspace .flash {
+  position: sticky;
+  top: var(--space-3);
+  z-index: 2;
+  border-top: 1px solid var(--ef-slate);
+  border-right: 1px solid var(--ef-slate);
+  border-bottom: 1px solid var(--ef-slate);
+}
+
+/* Formulation card: the comment has a visible label, and the saved line
+   sits on its own row */
+.factor-comment-label,
+.factor-saved {
+  flex: 1 1 100%;
+}
+
+.factor-saved:empty {
+  display: none;
+}

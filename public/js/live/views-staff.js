@@ -6,7 +6,7 @@ import { suggestFactors } from '../formulation.js';
 import { VIEW_OPTIONS, renderFormulationView, viewOf } from '../formulation-views.js';
 import { buildDraft, scoreMeasure } from '../scoring.js';
 
-const flashHtml = (flash) => (flash ? `<div class="notice${flash.error ? ' notice-error' : ''}" role="${flash.error ? 'alert' : 'status'}"><p>${esc(flash.text)}</p></div>` : '');
+const flashHtml = (flash) => (flash ? `<div class="notice flash${flash.error ? ' notice-error' : ''}" role="${flash.error ? 'alert' : 'status'}"><p>${esc(flash.text)}</p></div>` : '');
 
 function typeLabel(s, t) {
   return s.clientTypes.types[t]?.practitionerLabel ?? 'Not set';
@@ -883,12 +883,12 @@ export function measureTest(s, id, n) {
         <div class="progress" role="progressbar" aria-label="Question ${index + 1} of ${total}" aria-valuemin="1" aria-valuemax="${total}" aria-valuenow="${index + 1}"><div class="progress-fill" data-progress="${index}" data-total="${total}"></div></div>
         <p class="t-caption">Question ${index + 1} of ${total}</p>
       </div>
-      <fieldset class="choices">
-        <legend class="t-title">${esc(it.text)}</legend>
+      <fieldset class="choices${s.errors.item ? ' field-invalid' : ''}" role="radiogroup" aria-labelledby="q-legend"${s.errors.item ? ' aria-invalid="true" aria-describedby="err-item"' : ''}>
+        <legend class="t-title" id="q-legend">${esc(it.text)}</legend>
         ${m.instructions ? `<p class="field-hint">${esc(m.instructions)}</p>` : ''}
         ${options.map((o, i) => `<label class="choice"><input type="radio" name="answer" value="${esc(o.value)}"${String(current) === String(o.value) ? ' checked' : ''}><span class="choice-dot"></span><span>${esc(o.label)}</span><kbd>${i + 1}</kbd></label>`).join('')}
       </fieldset>
-      ${s.errors.item ? `<p class="field-error">${esc(s.errors.item)}</p>` : ''}
+      ${s.errors.item ? `<p class="field-error" id="err-item" role="alert">${esc(s.errors.item)}</p>` : ''}
       <div class="actions">
         ${index > 0 ? `<a class="btn btn-secondary" href="/practitioner/library/${esc(m.id)}/test/${index - 1}">Back</a>` : ''}
         <button type="submit" class="btn btn-primary">${last ? 'See how it scores' : 'Next question'}</button>

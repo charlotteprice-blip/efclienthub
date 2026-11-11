@@ -31,7 +31,7 @@ export const FIT_LABELS = { fits: 'Fits', partly: 'Partly', no: 'Does not fit' }
 // Old drafts used 'maintaining' for the perpetuating zone.
 export const zoneOf = (f) => (f.zone === 'maintaining' ? 'perpetuating' : f.zone);
 
-const flashHtml = (flash) => (flash ? `<div class="notice${flash.error ? ' notice-error' : ''}" role="${flash.error ? 'alert' : 'status'}"><p>${esc(flash.text)}</p></div>` : '');
+const flashHtml = (flash) => (flash ? `<div class="notice flash${flash.error ? ' notice-error' : ''}" role="${flash.error ? 'alert' : 'status'}"><p>${esc(flash.text)}</p></div>` : '');
 
 function shell(s, active, title, content, mode) {
   const { ctx } = s;
@@ -269,25 +269,29 @@ export function intake(s) {
     .filter((q) => q.enabled)
     .map((q) => {
       const err = s.errors[q.id];
+      const id = esc(q.id);
+      const described = [q.hint ? `iq-hint-${id}` : '', err ? `err-${id}` : ''].filter(Boolean).join(' ');
       if (q.type === 'single') {
-        return `<fieldset class="choices${err ? ' field-invalid' : ''}">
-          <legend class="t-heading">${esc(q.text)}${q.required ? '' : ' <span class="t-caption">(optional)</span>'}</legend>
-          ${q.hint ? `<p class="field-hint">${esc(q.hint)}</p>` : ''}
+        return `<fieldset class="choices${err ? ' field-invalid' : ''}" role="radiogroup" aria-labelledby="iq-legend-${id}"${described ? ` aria-describedby="${described}"` : ''}${err ? ' aria-invalid="true"' : ''}>
+          <legend class="t-heading" id="iq-legend-${id}">${esc(q.text)}${q.required ? '' : ' <span class="t-caption">(optional)</span>'}</legend>
+          ${q.hint ? `<p class="field-hint" id="iq-hint-${id}">${esc(q.hint)}</p>` : ''}
           ${q.options.map((o) => `<label class="choice"><input type="radio" name="${esc(q.id)}" value="${esc(o.value)}"${answers[q.id] === o.value ? ' checked' : ''}><span class="choice-dot"></span><span>${esc(o.label)}</span></label>`).join('')}
-          ${err ? `<p class="field-error">${esc(err)}</p>` : ''}
+          ${err ? `<p class="field-error" id="err-${id}">${esc(err)}</p>` : ''}
         </fieldset>`;
       }
       return `<div class="field${err ? ' field-invalid' : ''}">
         <label class="field-label t-heading" for="iq-${esc(q.id)}">${esc(q.text)}${q.required ? '' : ' <span class="t-caption">(optional)</span>'}</label>
-        ${q.hint ? `<span class="field-hint">${esc(q.hint)}</span>` : ''}
-        <textarea class="textarea" id="iq-${esc(q.id)}" name="${esc(q.id)}" maxlength="1000">${esc(answers[q.id])}</textarea>
-        ${err ? `<p class="field-error">${esc(err)}</p>` : ''}
+        ${q.hint ? `<span class="field-hint" id="iq-hint-${id}">${esc(q.hint)}</span>` : ''}
+        <textarea class="textarea" id="iq-${id}" name="${id}" maxlength="1000"${described ? ` aria-describedby="${described}"` : ''}${err ? ' aria-invalid="true"' : ''}>${esc(answers[q.id])}</textarea>
+        ${err ? `<p class="field-error" id="err-${id}">${esc(err)}</p>` : ''}
       </div>`;
     })
     .join('');
+  const missing = s.intakeConfig.questions.filter((q) => q.enabled && s.errors[q.id]).length;
   return single(
     `${flashHtml(s.flash)}
     <div class="stack"><h1>A few questions to start</h1><p>This helps Sarah set up the Client Hub for you. It takes about a minute.</p></div>
+    ${missing ? `<div class="notice notice-error" role="alert"><p>${missing === 1 ? '1 question still needs an answer.' : `${missing} questions still need an answer.`} We have taken you to the first.</p></div>` : ''}
     <form class="stack-lg" data-form="intake" novalidate>${blocks}
       <button type="submit" class="btn btn-primary">Finish setting up</button>
     </form>`,
@@ -480,12 +484,12 @@ export function item(s, assignmentId, n) {
         <div class="progress" role="progressbar" aria-label="Question ${index + 1} of ${total}" aria-valuemin="1" aria-valuemax="${total}" aria-valuenow="${index + 1}"><div class="progress-fill" data-progress="${index}" data-total="${total}"></div></div>
         <p class="t-caption">Question ${index + 1} of ${total}</p>
       </div>
-      <fieldset class="choices">
-        <legend class="t-title">${esc(it.text)}</legend>
+      <fieldset class="choices${s.errors.item ? ' field-invalid' : ''}" role="radiogroup" aria-labelledby="q-legend"${s.errors.item ? ' aria-invalid="true" aria-describedby="err-item"' : ''}>
+        <legend class="t-title" id="q-legend">${esc(it.text)}</legend>
         ${m.instructions ? `<p class="field-hint">${esc(m.instructions)}</p>` : ''}
         ${options.map((o, i) => `<label class="choice"><input type="radio" name="answer" value="${esc(o.value)}"${String(current) === String(o.value) ? ' checked' : ''}><span class="choice-dot"></span><span>${esc(o.label)}</span><kbd>${i + 1}</kbd></label>`).join('')}
       </fieldset>
-      ${s.errors.item ? `<p class="field-error">${esc(s.errors.item)}</p>` : ''}
+      ${s.errors.item ? `<p class="field-error" id="err-item" role="alert">${esc(s.errors.item)}</p>` : ''}
       <div class="actions">
         ${index > 0 ? `<a class="btn btn-secondary" href="/measure/${esc(a.id)}/${index - 1}">Back</a>` : ''}
         <button type="submit" class="btn btn-primary">${last ? 'Finish questionnaire' : 'Next question'}</button>
@@ -548,10 +552,10 @@ export function formulation(s) {
               <fieldset class="fit-choice"><legend class="visually-hidden">Does "${esc(x.text)}" fit?</legend>
                 ${Object.entries(FIT_LABELS).map(([v, label]) => `<label class="fit${r.fit === v ? ' fit-on' : ''}"><input type="radio" name="fit" value="${v}"${r.fit === v ? ' checked' : ''}><span>${esc(label)}</span></label>`).join('')}
               </fieldset>
-              <label class="visually-hidden" for="cm-${esc(x.id)}">Comment for Sarah</label>
-              <input class="input input-small" id="cm-${esc(x.id)}" name="comment" maxlength="500" placeholder="Add a comment for Sarah (optional)" value="${esc(r.comment ?? '')}">
-              <button type="submit" class="btn btn-secondary btn-inline">Save</button>
-              ${r.at ? `<p class="t-caption">Saved ${fmtDate(r.at)}.</p>` : ''}
+              <label class="t-caption factor-comment-label" for="cm-${esc(x.id)}">Comment for Sarah (optional)</label>
+              <input class="input input-small" id="cm-${esc(x.id)}" name="comment" maxlength="500" value="${esc(r.comment ?? '')}">
+              <button type="submit" class="btn btn-secondary btn-inline">Save comment</button>
+              <p class="t-caption factor-saved" data-saved role="status">${r.at ? `Saved ${fmtDate(r.at)}.` : ''}</p>
             </form>
           </li>`;
               })
@@ -565,9 +569,9 @@ export function formulation(s) {
     'formulation',
     'Formulation',
     `${flashHtml(s.flash)}
-    <p class="t-caption">Shared by Sarah on ${fmtDate(f.releasedAt)}. On each card, say whether it fits and add a comment if you like; Sarah sees your answers.</p>
+    <p class="t-caption">Shared by Sarah on ${fmtDate(f.releasedAt)}. On each card, say whether it fits and add a comment if you like. Your choice saves as you make it, and Sarah sees your answers.</p>
     ${f.summary ? `<section class="formulation-summary" aria-labelledby="h-sum"><h2 id="h-sum" class="t-ui-strong">From Sarah</h2>${f.summary.split('\n').filter(Boolean).map((para) => `<p>${esc(para)}</p>`).join('')}</section>` : ''}
-    ${renderFormulationView(f.view, f.factors, responses)}
+    <div data-formulation-picture>${renderFormulationView(f.view, f.factors, responses)}</div>
     <div class="zones zones-5">${zones}</div>`,
   );
 }
