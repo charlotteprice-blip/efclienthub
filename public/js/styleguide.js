@@ -1,7 +1,7 @@
 import { applyAccent, loadClientTypes, stageCopy } from './client-types.js';
 import { mountMarks } from './mark.js';
+import { STAGE_LABELS, journeySteps, notice, status, stepTracker } from './ui.js';
 
-const SKY = '#CFDAE8';
 
 function luminance(hex) {
   const n = hex.replace('#', '');
@@ -15,15 +15,18 @@ function ratio(a, b) {
   return (x + 0.05) / (y + 0.05);
 }
 
+// Colours are read from the generated tokens, so this page cannot drift.
+const css = getComputedStyle(document.documentElement);
+const token = (name) => css.getPropertyValue(name).trim();
 const swatches = [
-  ['Sky, ground', '#CFDAE8'],
-  ['Slate, ink', '#3E5680'],
-  ['Navy, call to action', '#2E4062'],
-  ['Warm white, panel', '#F5F3EE'],
-  ['Error', '#8A3F34'],
-  ['Done', '#2F5D3A'],
-  ['In progress', '#2E4062'],
-  ['Needs attention', '#6E4A10'],
+  ['Sky, ground', token('--ef-sky')],
+  ['Slate, ink', token('--ef-slate')],
+  ['Navy, primary button', token('--ef-navy')],
+  ['Warm white, panel', token('--ef-warm-white')],
+  ['Success, done', token('--app-success')],
+  ['Info, in progress', token('--app-info')],
+  ['Warning, needs attention', token('--app-warning')],
+  ['Error', token('--app-error')],
 ];
 
 function renderSwatches(extra) {
@@ -39,7 +42,7 @@ function renderSwatches(extra) {
     text.className = 'swatch-text';
     const strong = document.createElement('strong');
     strong.textContent = name;
-    text.append(strong, `${hex} · ${ratio(hex, SKY).toFixed(2)}:1`);
+    text.append(strong, `${hex} · ${ratio(hex, token('--ef-sky')).toFixed(2)}:1`);
     li.append(chip, text);
     list.append(li);
   }
@@ -48,7 +51,7 @@ function renderSwatches(extra) {
 const config = await loadClientTypes();
 renderSwatches(
   Object.entries(config.types)
-    .filter(([, t]) => t.accent !== '#3E5680')
+    .filter(([, t]) => t.accent.toUpperCase() !== token('--ef-slate').toUpperCase())
     .map(([name, t]) => [`Accent ${name}${t.accentPlaceholder ? ' (placeholder)' : ''}`, t.accent]),
 );
 
@@ -73,13 +76,30 @@ weight.addEventListener('click', () => {
 
 document.getElementById('progress-fill').style.width = `${(4 / 12) * 100}%`;
 
+// Status, notices, tasks and the step tracker are drawn by the same helpers
+// the live app uses.
+document.getElementById('sg-status').innerHTML = [status('done', 'Done'), status('progress', 'In progress'), status('attention', 'Needs attention'), status('todo', 'Not started')].join(' ');
+document.getElementById('sg-notices').innerHTML = [
+  notice('info', '<p>Your results will appear here after Sarah has gone through them with you.</p>', { word: 'Not shared yet' }),
+  notice('success', '<p>Next session saved.</p>'),
+  notice('warning', '<p>1 answer flagged in a questionnaire.</p>', { word: 'Answers to follow up' }),
+  notice('error', '<p>That code has expired. Ask Sarah for a new one.</p>'),
+].join('');
+const stages = Object.keys(STAGE_LABELS);
+document.getElementById('sg-tracker').innerHTML = stepTracker(journeySteps(stages, 2, { assessment: '2 of 4' }), { label: 'Step 3 of 7: Questionnaires' });
+document.getElementById('sg-tracker-dots').innerHTML = stepTracker(journeySteps(stages, 4), { label: 'Step 5 of 7: Feedback', dots: true });
+document.getElementById('sg-tasks').innerHTML = [
+  ['Questionnaire one', status('done', 'Done')],
+  ['Questionnaire two', status('progress', 'In progress')],
+  ['Questionnaire three', status('todo', 'Not started')],
+].map(([name, pill]) => `<li class="task"><span>${name}</span>${pill}<span></span></li>`).join('');
+
 mountMarks();
 document.getElementById('replay').addEventListener('click', () => {
   const loader = document.getElementById('loader');
   const old = loader.querySelector('svg');
   const fresh = document.createElement('span');
   fresh.dataset.mark = 'draw';
-  fresh.dataset.size = 'large';
   fresh.dataset.label = 'Executive Frame';
   old.replaceWith(fresh);
   mountMarks(loader);

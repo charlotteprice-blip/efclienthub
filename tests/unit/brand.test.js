@@ -81,3 +81,14 @@ describe('logo use in the pages', () => {
     for (const f of ['favicon.svg', 'favicon.ico', 'apple-touch-icon.png', 'android-chrome-192x192.png', 'android-chrome-512x512.png', 'site.webmanifest']) assert.ok(existsSync(`public/${f}`), f);
   });
 });
+
+describe('formulation drawings', () => {
+  test('use palette and status tokens only, never the client type accent or a written colour', () => {
+    const css = readFileSync('public/css/components.css', 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+    for (const m of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+      if (!/\.fv-|\.map-/.test(m[1])) continue;
+      assert.ok(!m[2].includes('--accent'), m[1].trim());
+      assert.ok(!/#[0-9a-fA-F]{3,8}\b/.test(m[2]), m[1].trim());
+    }
+  });
+});

@@ -30,7 +30,7 @@ Each step says what to do, then what you should see.
 ### Setting up a client
 
 1. **Practitioner window: log in as the practitioner.**
-   You should see the Dashboard, with "Nothing waiting on you" under Today and no clients.
+   You should see the Dashboard, with "Nothing waiting on you" under Today and no clients. At the top left you should see the Executive Frame logo as drawn, then a thin line, then Client Hub. Every button should have fully rounded ends.
 
 2. **Open Activation codes. Type a client name, leave the email box empty, choose Neurodivergent as the client type, press Issue code.**
    You should see a new code in large type, shown once, and a row for it in the table below with the name beside it. Copy the code.
@@ -50,10 +50,10 @@ Each step says what to do, then what you should see.
 ### The client's Home and a questionnaire
 
 7. **Look at Home.**
-   You should see Step 3 of 7, a To do list where only the first row has a dark Start button and the rest are outlined, pills that say To do with an empty ring (not the amber warning pill), a Next session panel and the report tracker. There should be no Your resources panel yet.
+   You should see Step 3 of 7, a To do list where only the first row has a dark Start button and the rest are outlined, plain To do tags with no icon (not the amber warning pill), a Next session panel and the Your steps tracker. There should be no Your resources panel yet.
 
 8. **Make the private window narrow, about the width of a phone.**
-   You should see a small ring beside the step and title, and the first Start button without scrolling far. Nothing should need sideways scrolling.
+   You should see the step and title in words with no ring, and the first Start button without scrolling far. Under Your steps the 7 steps should run down the page. Nothing should need sideways scrolling.
 
 9. **Press Start on the first questionnaire.**
    You should see a Before you start screen with the instructions, because this questionnaire's instructions are long. Press Start.
@@ -79,7 +79,7 @@ Each step says what to do, then what you should see.
     You should see the stage still at Book feedback. It no longer moves back to Questionnaires.
 
 16. **Private window: go to Home, start the new questionnaire, and on the last question choose any answer other than the first. Finish it.**
-    You should see it as a task in To do while the tracker still shows the first step as done.
+    You should see it as a task in To do while Your steps still shows Questionnaires as done.
 
 17. **Practitioner window: go to the Dashboard.**
     You should see the client at the top of Today with a Follow up pill, an Answers to follow up pill on their row, and a Follow up button. Press it. On the draft, press Mark as followed up.
@@ -114,6 +114,16 @@ Each step says what to do, then what you should see.
 ## Things you can only see by waiting
 
 - **Idle log out.** Leave either window alone for 29 minutes. You should see "Are you still there?" with Stay logged in. Leave it 1 more minute and you should be logged out, with a message on the log in screen saying why.
+
+## Brand pack 1.1 (branch `brand-pack-1.1` only)
+
+These apply only when the harness is started from the working copy `~/efclienthub-brand-pack`, which holds the brand designer's changes. Steps 1, 7, 8 and 16 above are already written for it.
+
+- **The mark.** When the app first opens, the mark draws itself on once. After that it is still on every loading screen. It never spins or pulses.
+- **The browser tab.** The tab should show the new mark as its icon.
+- **Messages.** Every message box has a small icon and a word (Done, Note, Attention or Problem, or a word for the case such as Not shared yet) on a tint. Open Results before release to see 1.
+- **Formulation pictures.** No picture uses the client type colour. The marks on the cards are a tick, a half, a cross or an empty ring, with a key in words beneath.
+- **The dashboard.** Each client row shows 7 small dots for the journey in place of the old bar.
 
 ## If something looks wrong
 

@@ -11,11 +11,12 @@ colors:
   brick: "#8A3F34"
   rose: "#F2B8AD"
   paper-hairline: "rgba(245,243,238,0.25)"
-  moss: "#2F5D3A"
-  moss-tint: "#E3ECE2"
-  navy-tint: "#E4E9F1"
-  ochre: "#6E4A10"
-  sand: "#F2E8D6"
+  success: "#285E44"
+  success-tint: "#E3EFE8"
+  info-tint: "#E6ECF4"
+  warning: "#73540F"
+  warning-tint: "#F7EDD4"
+  error-tint: "#F6E3DF"
   burnt-amber: "#A65A1B"
   deep-teal: "#2F6E68"
 typography:
@@ -86,7 +87,7 @@ components:
     backgroundColor: "{colors.deep-navy}"
     textColor: "{colors.warm-paper}"
     typography: "{typography.ui-strong}"
-    rounded: "{rounded.md}"
+    rounded: "{rounded.pill}"
     padding: "0 24px"
     height: "52px"
   button-primary-hover:
@@ -96,7 +97,7 @@ components:
     backgroundColor: "{colors.warm-paper}"
     textColor: "{colors.slate-ink}"
     typography: "{typography.ui-strong}"
-    rounded: "{rounded.md}"
+    rounded: "{rounded.pill}"
     padding: "0 24px"
     height: "52px"
   button-secondary-hover:
@@ -126,22 +127,22 @@ components:
     backgroundColor: "{colors.winter-sky}"
     textColor: "{colors.deep-navy}"
   status-done:
-    backgroundColor: "{colors.moss-tint}"
-    textColor: "{colors.moss}"
+    backgroundColor: "{colors.success-tint}"
+    textColor: "{colors.success}"
     typography: "{typography.caption}"
     rounded: "{rounded.pill}"
     padding: "4px 12px 4px 8px"
     height: "28px"
   status-progress:
-    backgroundColor: "{colors.navy-tint}"
-    textColor: "{colors.deep-navy}"
+    backgroundColor: "{colors.info-tint}"
+    textColor: "{colors.slate-ink}"
     typography: "{typography.caption}"
     rounded: "{rounded.pill}"
     padding: "4px 12px 4px 8px"
     height: "28px"
   status-attention:
-    backgroundColor: "{colors.sand}"
-    textColor: "{colors.ochre}"
+    backgroundColor: "{colors.warning-tint}"
+    textColor: "{colors.warning}"
     typography: "{typography.caption}"
     rounded: "{rounded.pill}"
     padding: "4px 12px 4px 8px"
@@ -181,7 +182,7 @@ components:
     padding: "4px 14px"
     height: "36px"
   notice:
-    backgroundColor: "{colors.warm-paper}"
+    backgroundColor: "{colors.info-tint}"
     textColor: "{colors.slate-ink}"
     rounded: "{rounded.md}"
     padding: "16px"
@@ -195,7 +196,7 @@ components:
 
 The hub is a quiet, well lit consulting room on screen. The room is winter sky: the sidebar and top bar are a single flat field of pale blue that frames everything. On the desk sits warm paper, the workspace where the client and Sarah actually read and write, lifted from the room by nothing more than a rounded top corner and a 1px hairline. There are no shadows, no gradients, no pictures, no decoration. Depth is 2 tones of the same light, and the eye rests.
 
-Every client screen asks for 1 thing. Type is set large (17px body on a 26px line), controls are tall (52px) and full width on a phone, and the whole page is finishable in a single sitting by someone who is tired, distracted or anxious. Sarah's screens keep the same materials but pack more in: panels flow in 2 columns, tables and task rows carry the day's work, and status is always an icon plus a word in a tinted pill. The one spark of colour in the room is the client type accent, a decorative stroke on the journey ring, the progress bar and the current step; it never carries meaning on its own, and the only text it carries is the white label on a selected fit pill or pressed filter chip, which `npm run contrast` checks at 4.5:1.
+Every client screen asks for 1 thing. Type is set large (17px body on a 26px line), controls are tall (52px) and full width on a phone, and the whole page is finishable in a single sitting by someone who is tired, distracted or anxious. Sarah's screens keep the same materials but pack more in: panels flow in 2 columns, tables and task rows carry the day's work, and status is always an icon plus a word in a tinted pill. The one spark of colour in the room is the client type accent, a decorative stroke on the progress bar and the current step; it never carries meaning on its own, and the only text it carries is the white label on a selected fit pill or pressed filter chip, which `npm run contrast` checks at 4.5:1.
 
 The mood is calm, unhurried and clinical in the good sense: orderly, precise, with nothing on the surfaces that does not need to be there. The only motion is a 180ms ease out on state changes and the mark drawing itself in once on load.
 
@@ -203,13 +204,14 @@ The mood is calm, unhurried and clinical in the good sense: orderly, precise, wi
 - 4 palette colours do almost everything: winter sky, slate ink, deep navy, warm paper
 - Flat by rule: tonal layering and hairlines, never box shadows
 - Figtree at 3 weights; body and captions at 400 for readability (the kit's 300 is opt in)
-- 52px controls, 44px minimum touch targets, 2px slate strokes, 8 to 16px corners
+- 52px controls, 44px minimum touch targets, 2px slate strokes; buttons are pills, fields 8px, navigation items and choice cards 12px, panels 16px
+- Tokens, the mark, the lockup and the favicons come from the Executive Frame brand pack (`brand/ef-tokens.json`, version 1.1)
 - Status by icon and word in a tinted pill, never by colour alone
 - One accent per client type, decorative only, 3:1 against its grounds
 
 ## Colors
 
-A 4 colour kit of pale blue and warm off white with 2 blues for ink, plus a small status set and a decorative accent per client type; every text pairing passes WCAG AA and is checked by `npm run contrast`.
+A 4 colour kit of pale blue and warm off white with 2 blues for ink, plus the brand pack's 4 application colours for status and messages and a decorative accent per client type; every text pairing passes WCAG AA and is checked by `npm run contrast`, which also fails on a shadow or on a colour written into a rule.
 
 ### Primary
 - **Deep Navy** (`deep-navy`): the inverted ground. Primary buttons, the nav count pill, the active sub navigation pill, the avatar disc, the checked radio dot. The darkest thing on any screen, used sparingly so a primary action is always findable.
@@ -218,27 +220,29 @@ A 4 colour kit of pale blue and warm off white with 2 blues for ink, plus a smal
 ### Neutral
 - **Winter Sky** (`winter-sky`): the room. The page ground behind the viewer frame, the sidebar and top bar, and the panel colour for anything that sits on the paper workspace (Home sections, the journey hero, practitioner panels, table headers, the selected choice card).
 - **Warm Paper** (`warm-paper`): the desk. The workspace reading ground, panels and notices that sit on sky, inputs, secondary buttons, the active nav link, the sign in card, the client row on the dashboard. Also the inverted theme's ink.
-- **Hairline** (`hairline`): slate at 25 percent. Dividers under task rows and table rows, the workspace inset edge, the progress track, step connectors, the journey ring track.
+- **Hairline** (`hairline`): slate at 25 percent. Dividers under task rows and table rows, the workspace's top and left edge, the progress track and step connectors.
 - **Underline** (`underline`): slate at 40 percent for link underlines at rest; they go to full ink on hover.
 
-### Tertiary (status and feedback)
-- **Moss** (`moss`) on **Moss Tint** (`moss-tint`): Done. Also the done segments of the dashboard bar and done steps of the tracker.
-- **Deep Navy** on **Navy Tint** (`navy-tint`): In progress.
-- **Ochre** (`ochre`) on **Sand** (`sand`): Needs attention. Deliberately an earth tone so it never reads as error.
-- **Brick** (`brick`): form errors only. Invalid input borders, the error message and its 20px badge, the error notice edge. **Rose** (`rose`) is its inverted counterpart on navy.
+### Tertiary (status and messages)
+These are the brand pack's application colours, for interfaces only. Each is text and icon on its own tint, always with an icon and a word.
+- **Success** (`success`, #285E44) on **Success Tint** (#E3EFE8): Done. Also the done steps of the tracker and the helping side of the formulation drawings.
+- **Info** (slate ink, #3E5680) on **Info Tint** (#E6ECF4): In progress, and the plain notice.
+- **Warning** (`warning`, #73540F) on **Warning Tint** (#F7EDD4): Needs attention, for things that need action. An earth tone so it never reads as error.
+- **Error** (`brick`, #8A3F34) on **Error Tint** (#F6E3DF): a form that cannot be submitted, and a message that something failed. **Rose** (`rose`) is its counterpart on navy.
+- Not started and To do are not a status colour at all: they are the plain tag, warm white with a hairline, on every screen.
 
 ### Accents (decorative, per client type, placeholders until Levi confirms)
 - **Burnt Amber** (`burnt-amber`): neurodivergent clients.
-- **Deep Teal** (`deep-teal`): health clients, kept away from moss so it never reads as Done.
+- **Deep Teal** (`deep-teal`): health clients, kept away from the success green so it never reads as Done.
 - Slate Ink doubles as the accent for corporate and team.
-The accent paints the journey ring fill, the progress fill, the current step dot and its 25 percent halo, the left edge of result items and the accent panel, the perpetuating zone's inset stroke, and the selected fit pill. As a stroke or fill it needs 3:1 against sky and paper; where white text sits on it (the selected fit pill, a pressed chip) the pair needs 4.5:1, and both are checked by `npm run contrast`.
+The accent paints the progress fill, the current step dot and its 25 percent halo, the left edge of result items and the accent panel, the border of the zone that is the focus of the work, and the selected fit pill. As a stroke or fill it needs 3:1 against sky and paper; where white text sits on it (the selected fit pill, a pressed chip) the pair needs 4.5:1, and both are checked by `npm run contrast`.
 
 ### Named Rules
 **The Four Colour Rule.** Sky, slate, navy and paper do every job on every screen. A new colour is a status, an error or a client accent, and each of those already has a value.
 
 **The Icon and Word Rule.** A status is a pill with a 16px icon and a label. Colour is the third cue, never the only one.
 
-**The Earth Not Red Rule.** Needs attention is ochre on sand. Brick red is reserved for a form that cannot be submitted.
+**The Earth Not Red Rule.** Needs attention is the warning colour on its tint. Brick red is for a form that cannot be submitted or an action that failed.
 
 ## Typography
 
@@ -256,7 +260,7 @@ The accent paints the journey ring fill, the progress fill, the current step dot
 - **Body** (400, 17px/26px): paragraphs, inputs, choice cards. Reading copy is held to 680px (`.reading`), about 70 characters.
 - **UI** (400, 16px/22px): nav links, tables, quiet buttons, error messages.
 - **Caption** (400, 14px/20px): hints, metadata, status pills, step labels, the sidebar foot, chips and small inputs.
-- **Wordmark** (500, 20px/20px): "Executive Frame" beside the mark, set as live text because the lockup SVG cannot carry the font.
+- **Wordmark**: never live text. The header shows the brand pack's horizontal lockup SVG (mark and "Executive Frame" in outlines) at 150px wide, with "Client Hub" beside it as caption text after a hairline.
 
 ### Named Rules
 **The Regular Heading Rule.** Headings are weight 400. The only 500 is UI strong: labels, buttons, names. Nothing is ever 600 or 700, and the kit's 300 body is opt in via `data-weight="light"`.
@@ -265,9 +269,9 @@ The accent paints the journey ring fill, the progress fill, the current step dot
 
 ## Layout
 
-Desktop is a fixed viewer: a 248px sidebar and a 64px top bar on sky, with the workspace in the remaining cell, scrolling independently. The workspace is warm paper with a 16px top left radius and a 1px inset hairline, so it reads as a sheet laid on the room rather than a bordered box. Content inside is capped at 1040px (`.workspace-inner`), or 1280px for the practitioner's wide pages, with 32px top, 48px side and 64px bottom padding. Reading copy is further capped at 680px; the questionnaire's focus column at 640px, centred.
+Desktop is a fixed viewer: a 280px sidebar and a 64px top bar on sky, with the workspace in the remaining cell, scrolling independently. The workspace is warm paper with a 16px top left radius and a 1px hairline on its top and left edges, so it reads as a sheet laid on the room rather than a bordered box. Content inside is capped at 1040px (`.workspace-inner`), or 1280px for the practitioner's wide pages, with 32px top, 48px side and 64px bottom padding. Reading copy is further capped at 680px; the questionnaire's focus column at 640px, centred.
 
-Below 900px the sidebar becomes a drawer: fixed, 320px or 86vw, slid in from the left with a 180ms transform, dimming the page behind with navy at 35 percent, opened from a 44px menu button in the top bar. The workspace loses its radius and inset, side padding drops to the 24px phone margin, buttons in an actions row go full width with the primary first, and the top bar title steps down to UI strong. Between 900 and 1199px the 2 column split collapses to 1. Keyboard hints (number keys for answers) hide on phones.
+Below 900px the sidebar becomes a drawer: fixed, 320px or 86vw, slid in from the left with a 180ms transform, dimming the page behind with a flat layer of navy at 35 percent, opened from a 44px menu button in the top bar. The workspace loses its radius and inset, side padding drops to the 24px phone margin, buttons in an actions row go full width with the primary first, and the top bar title steps down to UI strong. Between 900 and 1199px the 2 column split collapses to 1. Keyboard hints (number keys for answers) hide on phones.
 
 Rhythm comes from an 8 point spacing scale (4, 8, 12, 16, 24, 32, 48, 64) applied through owl selectors: `.stack` puts 16px between siblings, `.stack-lg` 32px. Panels pad 24px. Task rows are a 3 column grid (text, status, action) with a 72px minimum height and 16px vertical padding, collapsing to 2 columns on phones with the button spanning the row. The practitioner's Overview flows panels into 2 CSS columns with a 24px gutter. Home is a 3:2 grid of sky sections with the report tracker spanning both columns.
 
@@ -275,9 +279,9 @@ Single screen pages (sign in, activation, consent, intake) centre a 480px warm p
 
 ## Elevation & Depth
 
-Flat by rule. There are no drop shadows on any surface at rest or on hover. Depth is tonal: paper on sky, sky on paper, navy for the one thing that must come forward. The workspace sheet is lifted from the room by its top left radius and a 1px inset hairline on the top and left edges; panels and the sign in card are lifted only by their change of tone and 16px corners.
+Flat by rule. There are no shadows of any kind, and `box-shadow` is not used at all: `npm run contrast` fails if one appears. Depth is tonal: paper on sky, sky on paper, navy for the one thing that must come forward. The workspace sheet is lifted from the room by its top left radius and a 1px hairline border on its top and left edges; panels and the sign in card are lifted only by their change of tone and 16px corners.
 
-The 3 exceptions are functional, not decorative: the drawer's page dimmer (a 100vmax navy spread at 35 percent), the dialog backdrop (navy at 45 percent), and the current tracker step's 4px halo of the accent at 25 percent. Inset strokes of 1 to 2px mark the perpetuating zone and suggested factors.
+What used to be drawn with shadows is drawn flat: the drawer dims the page behind it with a navy layer at 35 percent, the dialog backdrop is navy at 45 percent, the current tracker step has a 4px outline of the accent at 25 percent, and the zone that is the focus of the work has a 2px border.
 
 ### Named Rules
 **The No Shadow Rule.** Surfaces never cast shadows. If something needs to come forward, change its tone (paper, sky, navy) or give it a hairline.
@@ -286,16 +290,17 @@ The 3 exceptions are functional, not decorative: the drawer's page dimmer (a 100
 
 ## Shapes
 
-Softly rounded, one family. Corners come from a 3 step radius scale plus a pill: 8px for inputs and the skip link, 12px for buttons, nav links, choice cards, notices, factor cards and table wraps, 16px for panels, cards, zones, the journey hero and Home sections, and 999px for status pills, chips, the nav count, sub navigation links and fit choices. Circles are reserved for the avatar, the radio dot, the step dot and the error badge.
+Softly rounded, one family. Corners come from a 3 step radius scale plus a pill: 8px for inputs and the skip link, 12px for nav links, choice cards, notices, factor cards and table wraps, 16px for panels, cards, zones, the Home hero and Home sections, and 999px for every button (primary, secondary, quiet and the menu button), status pills, tags, chips, the nav count, sub navigation links and fit choices. Circles are reserved for the avatar, the radio dot, the step dot and the error badge.
 
-Strokes are 2px slate on inputs, choice cards and secondary buttons, so a control is readable as a control at arm's length; the same 2px in brick marks an invalid field. Single sided edges are 3 to 4px bars of the accent or error colour on result items, the accent panel and notices, never rounded on that side. Nothing is clipped, skewed or masked; the only geometry with character is the mark, an incomplete circle with a triangle at its centre, which doubles as the journey ring.
+Strokes are 2px slate on inputs, choice cards and secondary buttons, so a control is readable as a control at arm's length; the same 2px in brick marks an invalid field. Single sided edges are 3 to 4px bars of the accent on result items and the accent panel, never rounded on that side. Notices have no edge bar: they are tinted. Nothing is clipped, skewed or masked; the only geometry with character is the mark, an incomplete circle with a triangle at its centre, which doubles as the journey ring.
 
 ## Components
 
 ### Buttons
-Solid and easy to hit: tall, full width on phones, 2px strokes, no shadows.
-- **Shape:** gently rounded (12px), 52px tall, 24px side padding, UI strong label, 2px transparent border so every variant is the same size.
-- **Primary:** deep navy on warm paper text; one per view where possible. Hover goes to slate ink; focus ring is 2px navy offset 2px.
+Solid and easy to hit: tall pills, full width on phones, 2px strokes, no shadows. The same in both hubs.
+- **Shape:** a pill (999px), 52px tall, 24px side padding, UI strong label, 2px transparent border so every variant is the same size.
+- **Pressed:** moves down 1px (`transform: translateY(1px)` on `:active`), with the 180ms transition; off under reduced motion.
+- **Primary:** deep navy (`--primary`) with warm paper text; one per view. Hover goes to slate ink; focus ring is 2px navy offset 2px. The brand pack's tokens still say slate for the primary; the designer is changing the pack to navy, so both hubs use navy now (`brand/app-tokens.json`).
 - **Secondary:** warm paper with a 2px slate stroke and slate text; hover goes to pure white.
 - **Quiet:** transparent, slate text at weight 400, underlined with the 40 percent underline, 44px tall and 12px side padding; for Clear, Remove, End, Log out.
 - **Inline (`.btn-inline`):** width auto from 768px; `.actions` rows set every button to auto width on desktop and full width on phones with the primary first.
@@ -313,7 +318,8 @@ The questionnaire answer and the intake radio: a full width warm paper card with
 
 ### Status pills
 - **Style:** 28px pill, caption size at weight 500, 16px icon then word, 4px by 12px padding with 8px on the icon side, never wrapping.
-- **Done:** moss on moss tint, tick in a filled circle. **In progress:** navy on navy tint, half filled circle. **Needs attention:** ochre on sand, exclamation in a filled circle.
+- **Done:** success on its tint, tick in a circle. **In progress:** info (slate) on its tint, half filled circle. **Needs attention:** warning on its tint, exclamation in a triangle; for things that need action, such as Expired or a draft to review. Icons are 16px, stroked at the icon stroke token.
+- **Plain tag (`.tag`):** Not started and To do, on client and staff screens alike. Warm white with a hairline, caption type at 500, no icon. Never the attention style.
 
 ### Chips and fit pills
 - **Filter chip:** 32px pill, 1px slate stroke, paper fill, caption type; hover white; `aria-pressed` carries the state.
@@ -321,9 +327,9 @@ The questionnaire answer and the intake radio: a full width warm paper card with
 
 ### Cards / Containers
 - **Panel:** 16px corners, 24px padding, warm paper on sky; inside the workspace it flips to sky on paper so it stays visible. `.panel-accent` adds a 4px accent left edge; `.panel-inverted` is navy with paper text.
-- **Notice:** 12px corners, 16px padding, a 4px slate left edge (brick for `.notice-error`), paper on sky or sky on paper like the panel.
-- **Home section and journey hero:** sky on the paper workspace, 16px corners, 24px padding; the hero pairs a 140px ring with the stage title.
-- **Client row (dashboard):** paper, 16px corners, 16px by 24px padding, a 200px who column, the stage column with a 7 segment bar (6px tall, 3px gaps, done segments moss, current segment accent), and the action on the right.
+- **Notice:** 1 component for every message, built by `notice()` in `ui.js`: 12px corners, 16px padding, a 16px stroked icon and a word in the colour of its kind, on that kind's tint. 4 kinds: info (Note), success (Done), warning (Attention), error (Problem); the word can be set for the case, such as Not shared yet. Never colour alone, and the same on sky and on paper.
+- **Home section and hero:** sky on the paper workspace, 16px corners, 24px padding; the hero holds the step in words, the stage title and its body. It has no ring: the mark is never a progress meter.
+- **Client row (dashboard):** paper, 16px corners, 16px by 24px padding, a 200px who column, the stage column with the step tracker's dots alone (done steps success, current step accent), and the action on the right.
 - **Dialog:** paper, 16px corners, 32px padding, navy backdrop at 45 percent.
 
 ### Task rows
@@ -335,25 +341,25 @@ The list pattern on Home, Questionnaires and every practitioner panel: a hairlin
 - **Sub navigation (client record tabs):** 36px pills, 4px by 14px padding; hover paper, current navy with white text and a count pill; a quiet "All clients" link pushed to the right.
 - **Tables:** 12px rounded wrap with a hairline border, UI type, 16px cells, sky header row, hairline row dividers, sky at 35 percent on row hover, links in UI strong. Sortable headings are buttons with `aria-sort`.
 
-### Journey ring and trackers (signature)
-The mark's incomplete circle is the journey indicator: a hairline track, an accent stroke that fills stage by stage with a 1200ms ease out, and the slate triangle at the centre. It sits at 200px on the full hero and 140px on Home, 152px on phones. Beside it a caption line gives "Step n of 7" and a title in the stage copy. The 5 step report tracker below is a row of 16px dots joined by 2px hairlines: done dots and lines are moss, the current dot is the accent with a 4px 25 percent halo, every label is full strength at caption size, and on a phone the 5 steps run down the page. A 6px progress bar (hairline track, accent fill) tops each questionnaire.
+### Steps: the tracker and the progress bar
+Steps are shown in 2 ways only. The step tracker shows the journey: a row of 16px dots joined by 2px hairlines, 1 per stage, each named, with done dots and lines in success, the current dot in the accent with a 4px outline at 25 percent, and done, the current step or still to come said in words for a screen reader. On Home it carries what each step holds (questionnaires done, when results and the formulation were shared) and runs down the page where 7 labels will not fit side by side; on the practitioner's dashboard rows it is the dots alone beside the stage in words. The other is the 6px hairline progress bar (hairline track, accent fill) at the top of each questionnaire. The journey ring is retired: the mark has 1 meaning, it is never a progress meter, and it is never a loading spinner. It is still, or it draws on once when the app opens (1200ms, ease out, the triangle fading in), and under reduced motion the finished mark shows at once.
 
 ## Do's and Don'ts
 
 ### Do:
 - **Do** build every surface from the 4 palette colours and the tokens in `public/css/tokens.css`; put anything Client Hub specific in `app.css` or `components.css` and never edit the generated file.
-- **Do** keep controls 52px tall with 2px slate strokes and 12px corners, full width on phones, with the primary action first.
+- **Do** keep controls 52px tall with 2px slate strokes, buttons as pills, full width on phones, with the primary action first.
 - **Do** set client copy at 17px/26px and headings at weight 400; use weight 500 only for labels, buttons and names.
-- **Do** show status as a pill with an icon and a word, using moss, navy or ochre on their tints.
+- **Do** show status as a pill with an icon and a word, using the pack's success, info or warning colour on its tint, and Not started as the plain tag.
 - **Do** lift surfaces by tone and hairline: paper on sky, sky on paper, 1px slate at 25 percent.
-- **Do** keep the client type accent decorative (ring, progress, current step, left edges, selected fit) at 3:1 or better.
+- **Do** keep the client type accent decorative (progress, current step, left edges, selected fit) at 3:1 or better, and out of the formulation drawings. The brand guidelines list a colour per pathway as not part of the brand; whether the accents stay is an open decision for Charlotte and the designer.
 - **Do** honour reduced motion: the mark draws instantly and transitions drop to 0ms.
 - **Do** style from classes or script only; the Content Security Policy blocks inline styles and `style=""`.
 
 ### Don't:
-- **Don't** add box shadows, gradients, textures, illustrations or photography; the only decoration is the mark.
+- **Don't** add shadows of any kind, gradients, textures, illustrations or photography; the only drawn element is the mark, and it is never a meter, a spinner or decoration that loops.
 - **Don't** use brick red for anything but a form error, and never colour alone for a status.
 - **Don't** introduce a fifth colour, a second typeface, weight 600 or 700, or uppercase labels (the activation code input is the one tracked uppercase exception).
 - **Don't** put a second primary button on a view, shrink body text below 17px to fit, or let a client screen need scrolling past 1 clear next action.
-- **Don't** round a single sided edge, clip a surface, or mix the 8, 12, 16px radius roles (inputs 8, buttons and cards 12, panels 16, pills 999).
+- **Don't** round a single sided edge, clip a surface, or mix the radius roles (inputs 8, nav items and choice cards 12, panels 16, buttons and pills 999).
 - **Don't** show scores, bold warnings or anything urgent in the client's room; the dashboard's attention rows belong to Sarah.

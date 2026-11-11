@@ -412,7 +412,8 @@
   align-items: end;
 }
 
-@media (max-width: 899px) {
+/* 2 columns until the workspace has room for all 4 beside the sidebar */
+@media (max-width: 1099px) {
   .filters {
     grid-template-columns: 1fr 1fr;
   }
@@ -941,7 +942,7 @@ th .sort:focus-visible {
 .map-box[data-zone='predisposing'] { grid-area: pre; }
 .map-box[data-zone='precipitating'] { grid-area: pci; }
 .map-box[data-zone='presenting'] { grid-area: pst; border-color: var(--ef-navy); border-width: 2px; }
-.map-box[data-zone='perpetuating'] { grid-area: per; border-color: var(--accent); border-width: 2px; }
+.map-box[data-zone='perpetuating'] { grid-area: per; border-color: var(--ef-slate); border-width: 2px; }
 .map-box[data-zone='protective'] { grid-area: pro; background: var(--status-done-tint); border-color: var(--status-done); }
 
 .map-arrow,
@@ -954,7 +955,7 @@ th .sort:focus-visible {
 
 .map-arrow:first-of-type { grid-area: a1; }
 .map-arrow:nth-of-type(2) { grid-area: a2; }
-.map-loop { grid-area: lp; font-size: 1.75rem; color: var(--accent); }
+.map-loop { grid-area: lp; font-size: 1.75rem; color: var(--ef-slate); }
 
 .map-title {
   margin: 0;
@@ -1058,6 +1059,9 @@ th .sort:focus-visible {
 }
 
 /* Formulation views: the drawings share a frame, card style and motion.
+   Every colour in a drawing is a palette token (sky, slate, navy, warm
+   white) or a status token from the brand pack; the client type accent
+   is not used in them, and nothing is written in.
    Colours by class so both themes work and no style attributes are needed. */
 .fv {
   margin: 0;
@@ -1087,9 +1091,9 @@ th .sort:focus-visible {
 .fv-leaf { fill: var(--panel); stroke: var(--status-done); stroke-width: 1.5; }
 .fv-bank { fill: none; stroke: var(--status-done); stroke-width: 3; }
 .fv-flow { fill: none; stroke: var(--ink); stroke-width: 2; stroke-dasharray: 6 6; }
-.fv-eddy, .fv-circuit { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+.fv-eddy, .fv-circuit { fill: none; stroke: var(--ef-navy); stroke-width: 2.5; }
 .fv-exit { fill: none; stroke: var(--status-done); stroke-width: 2.5; }
-.fv-keep-edge { stroke: var(--accent); stroke-width: 1.5; }
+.fv-keep-edge { stroke: var(--ef-navy); stroke-width: 1.5; }
 .fv-help-edge { stroke: var(--status-done); stroke-width: 1.5; }
 .fv-sector { fill: var(--panel); stroke: var(--ground); stroke-width: 4; }
 .fv-sector-help { fill: var(--status-done-tint); }
@@ -1291,4 +1295,9 @@ th .sort:focus-visible {
     flex: 1 1 100%;
     margin-left: 0;
   }
+}
+
+/* The journey tracker on Home sits a step below its heading */
+.home-report .tracker {
+  margin-top: var(--space-4);
 }

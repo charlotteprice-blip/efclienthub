@@ -50,9 +50,9 @@
     <main class="workspace" id="main" tabindex="-1">
       <div class="workspace-inner stack-lg">
       <section class="stack">
-        <p class="t-caption">Client Hub style guide · interim brand kit, 18 October 2026</p>
+        <p class="t-caption">Client Hub style guide · brand pack 1.1, 11 November 2026</p>
         <h2 class="t-display">Style guide</h2>
-        <p>Every component the Client Hub uses, built from Levi's tokens. Body text is 17/26 at weight 400 in this app. Use the toggle to compare the kit's 300.</p>
+        <p>Every component the Client Hub uses, built from the brand pack's tokens (<code>brand/ef-tokens.json</code>). Body text is 17/26 at weight 400 in this app. Use the toggle to compare the pack's 300.</p>
         <button type="button" class="btn btn-secondary" id="toggle-weight" aria-pressed="false">Show body at weight 300</button>
       </section>
 
@@ -78,20 +78,8 @@
       <section class="stack" aria-labelledby="h-status">
         <h2 id="h-status">Status</h2>
         <p>Always an icon and a word together, never colour alone.</p>
-        <div class="row">
-          <span class="status status-done">
-            <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" stroke="#E3ECE2" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Done
-          </span>
-          <span class="status status-progress">
-            <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"/></svg>
-            In progress
-          </span>
-          <span class="status status-attention">
-            <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="M8 4.2v4.6" stroke="#F2E8D6" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="11.4" r="1" fill="#F2E8D6"/></svg>
-            Needs attention
-          </span>
-        </div>
+        <div class="row" id="sg-status"></div>
+        <p class="t-caption">Done is the pack's success colour, in progress its info colour and needs attention its warning colour, each on its own tint. Not started and To do are the plain tag, with no icon: neutral on every screen.</p>
       </section>
 
       <section class="stack" aria-labelledby="h-dashboard">
@@ -101,30 +89,15 @@
           <button type="button" class="btn btn-secondary btn-small" data-type="health">Type B accent</button>
           <button type="button" class="btn btn-secondary btn-small" data-type="corporate">Type C accent</button>
         </div>
-        <ol class="journey-stages" aria-label="Journey">
-          <li data-state="done">First conversation</li>
-          <li data-state="done">First session</li>
-          <li data-state="current">Questionnaires</li>
-          <li>Book feedback</li>
-          <li>Feedback</li>
-          <li>Working together</li>
-          <li>Review</li>
-        </ol>
+        <p>Steps are shown in 2 ways only: this step tracker for the journey, and the hairline progress bar inside a questionnaire. The mark is never a progress meter.</p>
+        <div id="sg-tracker"></div>
+        <div id="sg-tracker-dots"></div>
         <div class="panel panel-accent stack">
           <p class="t-caption">Step 3 of 7</p>
           <h2 id="stage-title">Your questionnaires</h2>
           <p id="stage-body">Sarah has asked you to complete a few questionnaires.</p>
         </div>
-        <ul class="task-list">
-          <li class="task">
-            <span>Questionnaire one</span>
-            <span class="status status-done"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" stroke="#E3ECE2" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Done</span>
-          </li>
-          <li class="task">
-            <a href="#measure">Questionnaire two</a>
-            <span class="status status-progress"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"/></svg>In progress</span>
-          </li>
-        </ul>
+        <ul class="task-list" id="sg-tasks"></ul>
       </section>
 
       <section class="stack" aria-labelledby="h-measure">
@@ -161,6 +134,7 @@
 
       <section class="stack" aria-labelledby="h-buttons">
         <h2 id="h-buttons">Buttons</h2>
+        <p>Every button is a pill. Pressed, it moves down 1px. The primary is navy.</p>
         <button type="button" class="btn btn-primary">Primary, 1 per screen</button>
         <button type="button" class="btn btn-secondary">Secondary</button>
         <button type="button" class="btn btn-quiet">Quiet</button>
@@ -169,8 +143,8 @@
 
       <section class="stack" aria-labelledby="h-notice">
         <h2 id="h-notice">Notices</h2>
-        <div class="notice"><p>Your results will appear here after Sarah has gone through them with you.</p></div>
-        <div class="notice notice-error" role="alert"><p>That code has expired. Ask Sarah for a new one.</p></div>
+        <p>1 component, 4 kinds, each an icon and a word on its tint. Never colour alone.</p>
+        <div class="stack" id="sg-notices"></div>
         <div class="panel panel-inverted stack">
           <h2>Inverted panel</h2>
           <p>Used sparingly for emphasis, as in the kit's inverted theme.</p>
@@ -180,10 +154,14 @@
       <section class="stack" aria-labelledby="h-mark">
         <h2 id="h-mark">Mark and loader</h2>
         <div class="loader" id="loader">
-          <span data-mark="draw" data-size="large" data-label="Executive Frame"></span>
+          <span data-mark="draw" data-label="Executive Frame"></span>
           <p class="t-ui">Checking your access</p>
         </div>
+        <p class="t-caption">The mark is still, or draws on once when the app opens. It never loops, never pulses and is never a loading spinner. Under reduced motion the finished mark shows at once.</p>
         <button type="button" class="btn btn-secondary" id="replay">Replay the mark</button>
+        <h3>Lockup</h3>
+        <p><img class="brand-lockup" src="/assets/brand/ef-lockup-slate.svg" alt="Executive Frame" width="150" height="24"></p>
+        <p class="t-caption">The supplied horizontal lockup, never live text. 140px is its smallest width; the header draws it at 150px so the mark is 24px. Clear space is 0.4 of the mark box on every side.</p>
       </section>
     </div>
     </main>
