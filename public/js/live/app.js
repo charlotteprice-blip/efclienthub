@@ -16,7 +16,7 @@ import { createJourneyRing } from '../journey-ring.js';
 import { createMark } from '../mark.js';
 import { esc } from '../ui.js';
 import { suggestFactors } from '../formulation.js';
-import { renderFormulationView } from '../formulation-views.js';
+import { VIEW_OPTIONS, renderFormulationView, viewOf } from '../formulation-views.js';
 import { call, loadClient, loadStaff } from './data.js';
 import * as cv from './views-client.js';
 import * as sv from './views-staff.js';
@@ -622,7 +622,13 @@ function dialog(html) {
     document.body.append(d);
   }
   d.innerHTML = html;
-  d.showModal();
+  // The heading names the dialog for a screen reader.
+  const heading = d.querySelector('h2');
+  if (heading) {
+    heading.id = 'dialog-title';
+    d.setAttribute('aria-labelledby', 'dialog-title');
+  } else d.removeAttribute('aria-labelledby');
+  if (!d.open) d.showModal();
 }
 const closeDialog = () => document.getElementById('dialog')?.close();
 
@@ -684,8 +690,23 @@ const actions = {
     await reload();
     return route();
   },
-  async 'release-formulation'(t) {
+  // Release is deliberate: a dialog says who will see it, how many cards
+  // and which drawing, before anything is shared (rule 2).
+  'release-formulation'(t) {
+    const uid = t.dataset.uid;
+    const name = S.ctx.clients[uid]?.name || 'the client';
+    const draft = S.ctx.formulationDrafts[uid];
+    const factors = S.draftFactors[uid] ?? draft?.factors ?? [];
+    const view = VIEW_OPTIONS.find((o) => o.id === viewOf(S.draftView[uid] ?? draft?.view));
+    const again = Boolean(S.ctx.formulations[uid]?.releasedAt);
+    dialog(`<div class="stack-lg"><h2>${again ? 'Release the updated formulation' : 'Release the formulation'} to ${esc(name)}?</h2>
+      <p>${esc(name)} will see ${factors.length} card${factors.length === 1 ? '' : 's'}${(S.draftSummary[uid] ?? draft?.summary) ? ' and your summary' : ''}, drawn as ${esc(view.label)}. It appears in their menu straight away${again ? ' and replaces the version they have now' : ''}.</p>
+      <p class="t-caption">A released formulation cannot be withdrawn from the hub. You can release a corrected version at any time.</p>
+      <div class="actions"><button type="button" class="btn btn-primary" data-action="release-formulation-confirm" data-uid="${esc(uid)}">Release formulation</button><button type="button" class="btn btn-secondary" data-action="close">Cancel</button></div></div>`);
+  },
+  async 'release-formulation-confirm'(t) {
     await busy(t, () => call('releaseFormulation', { uid: t.dataset.uid }));
+    closeDialog();
     setFlash('Formulation released. It now appears in the client\'s menu.');
     await reload();
     delete S.draftFactors[t.dataset.uid];

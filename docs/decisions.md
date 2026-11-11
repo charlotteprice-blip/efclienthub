@@ -125,6 +125,8 @@ Fixes from the 10 November audit (`docs/audits/impeccable-client-hub-2026-11-10.
 62. Today lists everything waiting on Sarah: flagged answers, drafts to review, every open privacy request (marked Due soon inside the `requestWorkingDays` threshold), and the earlier attention rows. Each row leads with a status pill and its link opens the tab where the work is. The To review count is the number of completed questionnaires waiting (a draft to release, flagged answers, or both, counted once) plus open requests.
 63. A save keeps the person's place. Repainting the same page (after a save, an error, a moved factor, a change of drawing) keeps the scroll position and returns focus to the control that was used; only a change of page starts from the top. The message after a save stays in view at the top of the workspace. A form error takes focus and is scrolled into view, and intake shows a short summary that is announced.
 64. On a formulation card the fit choice saves the moment it is chosen, like questionnaire answers; Save comment sends the comment. The card says Saved beside itself and the picture redraws its mark, without repainting the page. This refines decision 52.
+65. Releasing a formulation asks first. Release formulation opens the same kind of dialog as Release results, naming the client, the number of cards, whether a summary goes with them and the drawing chosen; nothing is shared until Sarah confirms. There is no withdraw: Charlotte decided on 11 November 2026 to add the confirmation only, and the dialog says a released formulation cannot be withdrawn and that a corrected version can be released.
+66. Every dialog is named by its heading (`aria-labelledby`), so a screen reader announces what it is.
 
 ## Open questions
 
