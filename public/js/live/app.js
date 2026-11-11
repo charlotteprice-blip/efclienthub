@@ -74,6 +74,14 @@ function needsReload(path) {
   return !stepping && Date.now() - (S.loadedAt ?? 0) > 1500;
 }
 
+// A page change that waits on fresh data shows a line under the top bar.
+function setBusy(on) {
+  const viewer = app.querySelector('.viewer');
+  if (!viewer) return;
+  viewer.toggleAttribute('data-busy', on);
+  viewer.querySelector('#workspace')?.setAttribute('aria-busy', String(on));
+}
+
 function paint(html) {
   app.innerHTML = html;
   S.flash = null;
@@ -103,7 +111,19 @@ function afterPaint() {
   document.title = title ? `${title} · Executive Frame` : 'Executive Frame Client Hub';
 }
 
+// Any error while loading or drawing a screen paints a plain message with a
+// way forward, in place of a loader that never ends.
 async function route() {
+  try {
+    return await draw();
+  } catch (e) {
+    console.error(e);
+    S.loadedAt = 0;
+    return paint(cv.problem(S.user ? 'This page could not be shown. Anything you have already saved is safe.' : 'This page could not be shown.', Boolean(S.user)));
+  }
+}
+
+async function draw() {
   if (!S.ready) return paint(cv.loader('Loading'));
   const path = location.pathname.replace(/\/+$/, '') || '/';
   const parts = path.split('/').filter(Boolean);
@@ -116,10 +136,13 @@ async function route() {
 
   if (needsReload(path)) {
     if (!S.ctx || S.ctxFor !== S.user.uid) paint(cv.loader());
+    else setBusy(true);
     try {
       await reload();
     } catch (e) {
-      return paint(cv.loader(`Could not load your information. ${e.message}`));
+      console.error(e);
+      setBusy(false);
+      return paint(cv.problem('We could not load your information. Check your connection and try again.', true));
     }
   }
   S.lastPath = path;
@@ -204,12 +227,39 @@ function authError(e) {
 
 // ---------- busy buttons ----------
 
+// What a button says while its work is under way, by form or action name.
+const BUSY_LABELS = {
+  login: 'Logging in',
+  signup: 'Creating your account',
+  reset: 'Sending',
+  activate: 'Checking your code',
+  consent: 'Saving',
+  correction: 'Sending',
+  'request-access': 'Sending',
+  'issue-code': 'Issuing',
+  'search-splose': 'Searching',
+  'link-splose': 'Linking',
+  'splose-pick': 'Linking',
+  'splose-sync': 'Refreshing',
+  'splose-unlink-confirm': 'Unlinking',
+  'assign-to': 'Assigning',
+  assign: 'Assigning',
+  schedule: 'Saving',
+  'release-confirm': 'Releasing',
+  'release-formulation-confirm': 'Releasing',
+  'remove-factor': 'Removing',
+  'remove-resource': 'Removing',
+  'add-factor': 'Adding',
+  'add-suggestion': 'Adding',
+  'add-resource': 'Adding',
+};
+
 async function busy(el, fn) {
   const button = el?.matches?.('form') ? el.querySelector('button[type="submit"]') : el;
   const label = button?.textContent;
   if (button) {
     button.disabled = true;
-    button.textContent = 'Saving';
+    button.textContent = BUSY_LABELS[el.dataset.form ?? el.dataset.action] ?? 'Saving';
   }
   try {
     return await fn();
@@ -525,6 +575,10 @@ const actions = {
     dialog('<div class="stack-lg"><h2>Book your feedback session</h2><p>Sarah\'s online booking page is not connected yet. Contact Sarah to book your feedback session.</p><div class="actions"><button type="button" class="btn btn-primary" data-action="close">Close</button></div></div>');
   },
   close: closeDialog,
+  retry() {
+    S.loadedAt = 0;
+    return route();
+  },
   async 'request-access'(t) {
     await busy(t, () => call('createRequest', { kind: 'access' }));
     setFlash('Your request has been sent. Sarah will reply within 20 working days.');

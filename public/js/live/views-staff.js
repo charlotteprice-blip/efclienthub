@@ -763,8 +763,11 @@ export function measurePage(s, id) {
   const flags = new Map((rules.flagItems ?? []).map((f) => [f.itemId, f]));
   const subscaleOf = new Map();
   for (const sub of rules.subscales ?? []) for (const i of sub.items) subscaleOf.set(i, sub.label);
-  const clients = Object.values(s.ctx.clients).filter((c) => c.activatedAt);
-  const open = new Set(s.ctx.assignments.filter((a) => a.measureId === id && a.status !== 'complete').map((a) => a.uid));
+  // An admin account holds the library but no client records (decision 2),
+  // so assigning and the averages across clients are for the practitioner.
+  const isPractitioner = s.role === 'practitioner';
+  const clients = Object.values(s.ctx.clients ?? {}).filter((c) => c.activatedAt);
+  const open = new Set((s.ctx.assignments ?? []).filter((a) => a.measureId === id && a.status !== 'complete').map((a) => a.uid));
   const assignable = clients.filter((c) => !open.has(c.uid ?? c.id)).sort((a, b) => (a.name ?? '').localeCompare(b.name ?? ''));
   const canAssign = m.licenceStatus === 'cleared' || m.licenceStatus === 'sample';
 
@@ -808,7 +811,9 @@ export function measurePage(s, id) {
       <div class="measure-actions">
         <a class="btn btn-secondary btn-inline" href="/practitioner/library/${esc(m.id)}/test/0">Test run</a>
         ${
-          canAssign
+          !isPractitioner
+            ? ''
+            : canAssign
             ? `<form class="inline-add" data-form="assign-to" data-measure="${esc(m.id)}" novalidate>
                 <label class="visually-hidden" for="assign-uid">Assign to</label>
                 <select class="select" id="assign-uid" name="uid">${assignable.length ? `<option value="">Assign to...</option>${assignable.map((c) => `<option value="${esc(c.uid ?? c.id)}">${esc(c.name || c.email)}</option>`).join('')}` : '<option value="">No client free to receive it</option>'}</select>
@@ -830,10 +835,10 @@ export function measurePage(s, id) {
       </dl>
       ${m.description ? `<p>${esc(m.description)}</p>` : ''}
       ${m.instructions ? `<p class="t-caption">Instruction shown with each question: "${esc(m.instructions)}"</p>` : ''}
-      <p class="t-caption">A test run walks through the questions as a client would and shows how the answers would score; nothing is saved. Clients who already have an open copy are not offered for assignment.</p>
+      <p class="t-caption">A test run walks through the questions as a client would and shows how the answers would score; nothing is saved.${isPractitioner ? ' Clients who already have an open copy are not offered for assignment.' : ''}</p>
     </section>
 
-    <section class="stack" aria-labelledby="h-avg">
+    ${isPractitioner ? `<section class="stack" aria-labelledby="h-avg">
       <h2 id="h-avg">Across your clients</h2>
       ${
         done.length
@@ -841,7 +846,7 @@ export function measurePage(s, id) {
             <div class="table-wrap"><table class="table"><thead><tr><th scope="col">Subscale</th><th scope="col">Scored</th><th scope="col">Average</th><th scope="col">Range</th><th scope="col">Bands</th></tr></thead><tbody>${averageRows}</tbody></table></div>`
           : '<p>No client has completed it yet.</p>'
       }
-    </section>
+    </section>` : ''}
 
     <section class="stack" aria-labelledby="h-subs">
       <h2 id="h-subs">Scoring</h2>

@@ -299,6 +299,15 @@ export function loader(text = 'Checking your access') {
   return `<main class="single" id="workspace" tabindex="-1"><div class="loader"><span data-mark></span><p class="t-ui">${esc(text)}</p></div></main>`;
 }
 
+// A plain message when a screen cannot be loaded or drawn, with a way on.
+export function problem(text, signedIn = false) {
+  return single(
+    `<div class="stack"><h1>Something went wrong</h1><p role="alert">${esc(text)}</p></div>
+    <div class="stack"><button type="button" class="btn btn-primary" data-action="retry">Try again</button>${signedIn ? '<button type="button" class="btn btn-secondary" data-action="logout-now">Log out</button>' : ''}</div>`,
+    MARK_SRC,
+  );
+}
+
 // ---------- signed in ----------
 
 // ---------- Home: what to do, report progress, next session, resources ----------

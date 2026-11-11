@@ -340,6 +340,23 @@ a:hover {
   font-weight: var(--type-ui-strong-weight);
 }
 
+/* A page change that is waiting on fresh data: a line under the top bar */
+.topbar {
+  position: relative;
+}
+
+.viewer[data-busy] .topbar::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 3px;
+  background: var(--ink);
+}
+
+.viewer[data-busy] {
+  cursor: progress;
+}
+
 /* workspace */
 
 .workspace {
