@@ -6,7 +6,7 @@ Counts: 25 fixed, 6 partly fixed, 4 left. 35 findings in all.
 
 ## How fixes were checked
 
-- `npm run check` after each group: 143 unit tests pass (102 before this work) and all 35 colour pairings pass (25 before), with a new guard that fails if text is muted with opacity.
+- `npm run check` after each group: 146 unit tests pass (102 before this work) and all 35 colour pairings pass (25 before), with a new guard that fails if text is muted with opacity.
 - `npm run test:rules` on the local Firestore and Storage emulators (project `demo-clienthub`, Java 21): 89 tests pass (81 before).
 - The local harness at localhost:5174, as a client, the practitioner and admin, at 375, 768 and 1280px wide, plus 1024px for the layout findings. "Harness" below means seen there. Measured in the page where a number matters (scroll position, focus, widths).
 - Not checked: the live site, a real phone or tablet, a real screen reader, 200 percent zoom, and the clickable sample in `public/sample/` (see the review list at the end).
@@ -42,7 +42,7 @@ Counts: 25 fixed, 6 partly fixed, 4 left. 35 findings in all.
 | 19 | P2 | Wide tables not reachable by keyboard | Fixed | `6bd5499`. Every scrolling table is a named, focusable region; the Questions table now fits its frame (678 of 678px, was 2,082). |
 | 20 | P2 | Consent notice leaves things out; no way out of onboarding | Left | Sarah approves this wording. The Log out button on consent and intake is small and can follow her wording. |
 | 21 | P2 | Admin can see who the clients are | Fixed | `9348abb`. Charlotte's decision of 11 November. Rules: activation codes and the audit log are practitioner only. Functions: admin's codes list has no name, email or uid; a code issued by admin stores none. Unit tests, rules tests, and the harness as admin. |
-| 22 | P2 | A signed in browser stays signed in for ever | Fixed | `3107a4c`. Charlotte's decision: 30 minutes, a warning 1 minute before, clients and staff. Timing rules are a pure module with 14 unit tests. Harness: the warning, Stay logged in, the log out with its message, a fresh log in, and a kept session reopened after hours. |
+| 22 | P2 | A signed in browser stays signed in for ever | Fixed | `3107a4c`. Charlotte's decision: 30 minutes, a warning 1 minute before, clients and staff. Timing rules are a pure module with 14 unit tests, and 3 more guard that an idle log out never sends anything on a client's behalf (a typed but unsent comment is let go). Harness: the warning, Stay logged in, the log out with its message, a fresh log in, and a kept session reopened after hours. |
 | 23 | P2 | Scoring rules readable by any activated client | Fixed | `9348abb`. Charlotte's decision. Rules: the measure library is staff only. A client is handed questions and answer options by `myQuestionnaires`, for their own questionnaires only. Unit tests, rules tests, and the harness as a client (Home, Questionnaires and a questionnaire all load). |
 | 24 | P2 | Assigning a later questionnaire sends the journey backwards | Left | Charlotte and Sarah. It changes what the journey means; 1 line in `functions/handlers.js` once decided. |
 | 25 | P2 | Clinical terms reach the client | Left | Sarah: whether clients should see the clinical names. |
@@ -95,7 +95,7 @@ For Charlotte:
 ## For review before this is merged
 
 1. `markFlagsFollowedUp` is new behaviour, not only a fix: without it a flag would stay on the dashboard for ever. Sarah should see it.
-2. At an idle log out, a client's typed but unsaved comment on a formulation card is sent to Sarah. That follows the instruction to save what the app already has a save for, but it sends words the client had not chosen to send. It is 1 block in `saveTyped` in `public/js/live/app.js` if Charlotte would sooner drop it.
+2. Resolved on review, 11 November: at an idle log out a client's typed but unsent comment on a formulation card is no longer sent to Sarah. Sending is the client's choice. The comment is let go and is not kept in the browser, which may be a shared computer; the client types it again after logging back in. Only Sarah's own draft summary is saved at an idle log out. A unit test guards this.
 3. A code issued by an admin account has no name and no email, so it cannot be tied to 1 email address.
 4. The menu no longer fades during a questionnaire (it failed contrast and its links still worked). This changes decision 15.
 5. Removing the 2 repeated Splose lines on Home takes out draft copy that Sarah may have seen.

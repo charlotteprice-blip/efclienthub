@@ -298,27 +298,21 @@ function idleWarnText() {
   return seconds % 60 === 0 ? `${seconds / 60} minute${seconds === 60 ? '' : 's'}` : `${seconds} seconds`;
 }
 
-// Before an idle log out, anything typed into a box the app already saves
-// is saved: Sarah's formulation summary and a client's comment on a
-// formulation card. Answers to questionnaires are saved as they are chosen.
+// Before an idle log out the app saves only a person's own working state
+// that it would save anyway: Sarah's formulation summary, which is her
+// private draft and saves whenever she leaves the box. Questionnaire
+// answers are already saved as they are chosen. Nothing is ever sent to
+// the practitioner on a client's behalf: a comment typed on a formulation
+// card but not sent is the client's to send or not, so it is let go, and
+// it is not kept in the browser either, which may be a shared computer.
 async function saveTyped() {
-  if (!S.ctx) return;
-  const jobs = [];
+  if (!S.ctx || S.role !== 'practitioner') return;
   const summary = app.querySelector('[data-form="formulation-summary"] [name="summary"]');
-  if (summary && S.role === 'practitioner') {
-    const form = summary.closest('form');
-    const uid = form.dataset.uid;
-    const saved = S.draftSummary[uid] ?? S.ctx.formulationDrafts?.[uid]?.summary ?? '';
-    if (summary.value !== saved) jobs.push(handlers['formulation-summary']({ summary: summary.value }, form));
-  }
-  if (!STAFF_ROLES.includes(S.role)) {
-    for (const form of app.querySelectorAll('[data-form="factor-response"]')) {
-      const typed = String(form.querySelector('[name="comment"]')?.value ?? '').trim();
-      const saved = S.ctx.formulationResponses?.[form.dataset.factor]?.comment ?? '';
-      if (typed && typed !== saved) jobs.push(saveFactorResponse(form));
-    }
-  }
-  await Promise.allSettled(jobs);
+  if (!summary) return;
+  const form = summary.closest('form');
+  const uid = form.dataset.uid;
+  const saved = S.draftSummary[uid] ?? S.ctx.formulationDrafts?.[uid]?.summary ?? '';
+  if (summary.value !== saved) await handlers['formulation-summary']({ summary: summary.value }, form);
 }
 
 async function idleLogout() {

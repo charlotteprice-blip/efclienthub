@@ -1,6 +1,7 @@
 // Idle sign out timing: 30 minutes with no activity, a warning 1 minute
 // before, and a way to stay.
 
+import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 import { IDLE_DEFAULTS, createIdleWatch, idleState } from '../../public/js/idle.js';
@@ -139,5 +140,25 @@ describe('idle watch', () => {
     c.time += 5000;
     watch.activity();
     assert.equal(c.stored, c.time);
+  });
+});
+
+// Sending something to the practitioner is the client's choice. The idle
+// log out must never do it for them. saveTyped lives in the page script,
+// so this reads its source and checks what it may call.
+describe('idle log out never sends on a client\'s behalf', () => {
+  const app = readFileSync('public/js/live/app.js', 'utf8');
+  const start = app.indexOf('async function saveTyped()');
+  const body = app.slice(start, app.indexOf('async function idleLogout()'));
+  test('saveTyped exists and is what idleLogout calls', () => {
+    assert.ok(start > 0 && body.length > 50);
+    assert.ok(app.includes('await saveTyped();'));
+  });
+  test('it does not send a formulation comment, a request or an answer', () => {
+    for (const call of ['saveFactorResponse', 'respondToFormulation', 'factor-response', 'createRequest', 'submitMeasure', 'submitIntake', 'localStorage', 'sessionStorage']) assert.ok(!body.includes(call), call);
+  });
+  test('it acts for the practitioner only, and only on her own draft summary', () => {
+    assert.ok(body.includes("S.role !== 'practitioner'"));
+    assert.ok(body.includes("handlers['formulation-summary']"));
   });
 });
