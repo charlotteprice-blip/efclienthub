@@ -855,6 +855,13 @@ a:hover {
   color: var(--status-progress);
 }
 
+/* To do and Not started on client screens: navy on navy tint with an empty
+   ring. The attention pill belongs to the practitioner's screens. */
+.status-todo {
+  background: var(--status-progress-tint);
+  color: var(--status-progress);
+}
+
 .status-attention {
   background: var(--status-attention-tint);
   color: var(--status-attention);

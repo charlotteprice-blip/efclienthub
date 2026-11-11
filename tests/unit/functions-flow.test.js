@@ -198,6 +198,23 @@ describe('formulation and privacy requests', () => {
     await h.closeRequest(as(sarah, { requestId: r.id }));
     assert.equal(db.read(`requests/${r.id}`).status, 'done');
   });
+  test('a second request for a copy while 1 is open does not start a second clock', async () => {
+    await onboard();
+    assert.deepEqual(await h.createRequest(as(client, { kind: 'access' })), { ok: true });
+    assert.deepEqual(await h.createRequest(as(client, { kind: 'access' })), { ok: true, already: true });
+    assert.equal(db.list('requests').length, 1);
+    // A correction is a separate matter and is still accepted.
+    await h.createRequest(as(client, { kind: 'correction', detail: 'My name is spelt wrongly.' }));
+    assert.equal(db.list('requests').length, 2);
+    // Another client's open request does not block this one.
+    await onboard(other);
+    assert.deepEqual(await h.createRequest(as(other, { kind: 'access' })), { ok: true });
+    // Once answered, a new request for a copy can be made.
+    const first = db.list('requests').find((r) => r.uid === 'client-1' && r.kind === 'access');
+    await h.closeRequest(as(sarah, { requestId: first.id }));
+    assert.deepEqual(await h.createRequest(as(client, { kind: 'access' })), { ok: true });
+    assert.equal(db.list('requests').filter((r) => r.uid === 'client-1' && r.kind === 'access').length, 2);
+  });
   test('every practitioner action is audited', async () => {
     await onboard();
     await h.setStage(as(sarah, { uid: 'client-1', stage: 'review' }));

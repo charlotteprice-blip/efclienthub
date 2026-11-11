@@ -31,6 +31,9 @@ export const FIT_LABELS = { fits: 'Fits', partly: 'Partly', no: 'Does not fit' }
 // Old drafts used 'maintaining' for the perpetuating zone.
 export const zoneOf = (f) => (f.zone === 'maintaining' ? 'perpetuating' : f.zone);
 
+// The practice contact address from app.json, as a link.
+export const contactLink = (s) => (s.config.contactEmail ? `<a href="mailto:${esc(s.config.contactEmail)}">${esc(s.config.contactEmail)}</a>` : '');
+
 const flashHtml = (flash) => (flash ? `<div class="notice flash${flash.error ? ' notice-error' : ''}" role="${flash.error ? 'alert' : 'status'}"><p>${esc(flash.text)}</p></div>` : '');
 
 function shell(s, active, title, content, mode) {
@@ -60,8 +63,9 @@ function measureMeta(s, a) {
 
 function measureRow(s, a) {
   const m = s.ctx.measures[a.measureId];
-  const chip = a.status === 'complete' ? status('done', 'Done') : a.status === 'inProgress' ? status('progress', 'In progress') : status('attention', 'Not started');
-  const action = a.status === 'complete' ? '<span></span>' : `<a class="btn btn-secondary" href="/measure/${esc(a.id)}">${a.status === 'inProgress' ? 'Continue' : 'Start'}</a>`;
+  const chip = a.status === 'complete' ? status('done', 'Done') : a.status === 'inProgress' ? status('progress', 'In progress') : status('todo', 'Not started');
+  const label = a.status === 'inProgress' ? 'Continue' : 'Start';
+  const action = a.status === 'complete' ? '<span></span>' : `<a class="btn btn-secondary" href="/measure/${esc(a.id)}" aria-label="${label} ${esc(m?.name ?? 'questionnaire')}">${label}</a>`;
   const kind = a.source === 'scheduled' ? 'Check in. ' : '';
   return `<li class="task"><div><p class="task-name">${esc(m?.name ?? 'Questionnaire')}</p><p class="task-meta">${kind}${measureMeta(s, a)}</p></div>${chip}${action}</li>`;
 }
@@ -92,7 +96,8 @@ export function sploseStageLine(s) {
       if (last?.stage === 'firstSession') return `You met Sarah on ${fmtDate(last.at)}.${next ? ` ${nextLine}` : ''}`;
       return nextLine;
     case 'assessment':
-      return openForms(p).length ? 'Sarah has also sent you a form in Splose to complete before your next session.' : '';
+      // A form Sarah has sent is said once, as a row in To do.
+      return '';
     case 'booking':
       if (p.feedbackAttendedAt) return `You and Sarah went through your results on ${fmtDate(p.feedbackAttendedAt)}.`;
       return p.feedbackBookedAt ? `Your feedback session is on ${fmtDateTime(p.feedbackBookedAt)}.` : '';
@@ -115,10 +120,9 @@ function nextSessionPanel(s) {
       ? `<p class="session-when">${esc(fmtDateTime(c.nextSessionAt))}</p>${c.nextSessionNote ? `<p>${esc(c.nextSessionNote)}</p>` : ''}`
       : `<p>No session booked yet.</p>${s.config.bookingUrl ? `<div class="actions">${bookingButton(s, 'Book a session')}</div>` : '<p class="t-caption">Sarah will add your next session here once it is arranged.</p>'}`;
   }
-  const forms = openForms(p);
+  // Forms Sarah has sent are listed once, in To do, not again here.
   const lines = [];
   if (s.config.splose.showAttendance !== false && p.attended > 0) lines.push(`You have had ${plural(p.attended, 'session')} so far.`);
-  if (forms.length) lines.push(`Sarah has sent you ${forms.length === 1 ? 'a form' : `${forms.length} forms`} in Splose to complete: ${forms.map((f) => f.title).join(', ')}. The link is in the email from Splose.`);
   return `<p class="session-when">${esc(fmtDateTime(next.at))}</p>
     ${c.nextSessionNote ? `<p>${esc(c.nextSessionNote)}</p>` : ''}
     ${lines.map((l) => `<p>${esc(l)}</p>`).join('')}
@@ -231,7 +235,7 @@ export function activate(s) {
       </div>
       <button type="submit" class="btn btn-primary">Continue</button>
     </form>
-    <p class="t-caption">No code? The Client Hub is for clients working with Sarah. Contact her and she will send you one. <button type="button" class="btn btn-quiet" data-action="logout-now">Log out</button></p>`,
+    <p class="t-caption">No code? The Client Hub is for clients working with Sarah. Contact her${contactLink(s) ? ` at ${contactLink(s)}` : ''} and she will send you one. <button type="button" class="btn btn-quiet" data-action="logout-now">Log out</button></p>`,
     MARK_SRC,
   );
 }
@@ -345,21 +349,31 @@ function tasks(s) {
   for (const a of ctx.assignments.filter((x) => x.status !== 'complete')) {
     const m = ctx.measures[a.measureId];
     const label = a.status === 'inProgress' ? 'Continue' : 'Start';
-    list.push({ name: `${a.source === 'scheduled' ? 'Check in: ' : ''}${m?.name ?? 'Questionnaire'}`, meta: measureMeta(s, a), chip: a.status === 'inProgress' ? status('progress', 'In progress') : status('attention', 'To do'), action: `<a class="btn btn-primary" href="/measure/${esc(a.id)}">${label}</a>` });
+    list.push({ name: `${a.source === 'scheduled' ? 'Check in: ' : ''}${m?.name ?? 'Questionnaire'}`, meta: measureMeta(s, a), chip: a.status === 'inProgress' ? status('progress', 'In progress') : status('todo', 'To do'), link: { href: `/measure/${a.id}`, label, name: m?.name ?? 'questionnaire' } });
   }
   const splose = sploseOf(s);
   if (stage === 'booking' && !c.nextSessionAt && !splose?.feedbackBookedAt) {
-    list.push({ name: 'Book your feedback session', meta: 'Sarah goes through your results with you before anything is shared here.', chip: status('attention', 'To do'), action: bookingButton(s, 'Book a session') });
+    list.push({ name: 'Book your feedback session', meta: 'Sarah goes through your results with you before anything is shared here.', chip: status('todo', 'To do'), book: true });
   }
   for (const f of openForms(splose)) {
-    list.push({ name: `Complete ${f.title} in Splose`, meta: `Sarah sent this ${f.sentAt ? `on ${fmtDate(f.sentAt)}` : 'from her booking system'}. The link is in the email from Splose.`, chip: status(f.status === 'In progress' ? 'progress' : 'attention', f.status === 'In progress' ? 'In progress' : 'To do'), action: '<span></span>' });
+    list.push({ name: `Complete ${f.title} in Splose`, meta: `Sarah sent this ${f.sentAt ? `on ${fmtDate(f.sentAt)}` : 'from her booking system'}. The link is in the email from Splose.`, chip: status(f.status === 'In progress' ? 'progress' : 'todo', f.status === 'In progress' ? 'In progress' : 'To do') });
   }
   if (ctx.formulation) {
     const waiting = ctx.formulation.factors.filter((f) => !ctx.formulationResponses?.[f.id]).length;
-    if (waiting) list.push({ name: 'Tell Sarah whether your formulation fits', meta: `${waiting} card${waiting === 1 ? '' : 's'} still to answer`, chip: status('attention', 'To do'), action: '<a class="btn btn-primary" href="/formulation">Open</a>' });
+    if (waiting) list.push({ name: 'Tell Sarah whether your formulation fits', meta: `${waiting} card${waiting === 1 ? '' : 's'} still to answer`, chip: status('todo', 'To do'), link: { href: '/formulation', label: 'Open', name: 'your formulation' } });
   }
   if (ctx.results?.releasedAt && Date.now() - ctx.results.releasedAt < 14 * 86400000) {
-    list.push({ name: 'Read your results', meta: `Shared by Sarah on ${fmtDate(ctx.results.releasedAt)}.`, chip: status('done', 'New'), action: '<a class="btn btn-secondary" href="/results">Open</a>' });
+    list.push({ name: 'Read your results', meta: `Shared by Sarah on ${fmtDate(ctx.results.releasedAt)}.`, chip: status('done', 'New'), link: { href: '/results', label: 'Open', name: 'your results' } });
+  }
+  // 1 clear next action: only the first thing that can be pressed is a
+  // primary button; the rest are secondary. Each link says what it opens.
+  let primaryGiven = false;
+  for (const t of list) {
+    const primary = !primaryGiven && Boolean(t.link || t.book);
+    if (primary) primaryGiven = true;
+    if (t.book) t.action = bookingButton(s, 'Book a session', primary);
+    else if (t.link) t.action = `<a class="btn ${primary ? 'btn-primary' : 'btn-secondary'}" href="${esc(t.link.href)}" aria-label="${esc(t.link.label)} ${esc(t.link.name)}">${esc(t.link.label)}</a>`;
+    else t.action = '<span></span>';
   }
   const copy = stageCopy(clientTypes, c.clientType, stage);
   return { list, copy };
@@ -428,7 +442,7 @@ export function home(s) {
         <h2 id="h-rep">${esc(reportName)}</h2>
         <div class="progress" role="progressbar" aria-label="${esc(reportName)}: ${report.completed} of ${report.steps.length} steps" aria-valuemin="0" aria-valuemax="${report.steps.length}" aria-valuenow="${report.completed}"><div class="progress-fill" data-progress="${report.completed - 1}" data-total="${report.steps.length}"></div></div>
         <ol class="tracker tracker-5" aria-label="Report progress">${report.steps
-          .map((x, i) => `<li class="step step-${x.done ? 'done' : i === report.current ? 'current' : 'todo'}"><span class="step-dot" aria-hidden="true"></span><span class="step-label">${esc(x.label)}${x.detail ? `<span class="step-detail">${esc(x.detail)}</span>` : ''}</span></li>`)
+          .map((x, i) => `<li class="step step-${x.done ? 'done' : i === report.current ? 'current' : 'todo'}"${!x.done && i === report.current ? ' aria-current="step"' : ''}><span class="step-dot" aria-hidden="true"></span><span class="step-label">${esc(x.label)}<span class="visually-hidden">, ${x.done ? 'done' : i === report.current ? 'the current step' : 'still to come'}</span>${x.detail ? `<span class="step-detail">${esc(x.detail)}</span>` : ''}</span></li>`)
           .join('')}</ol>
         ${ctx.results?.releasedAt ? `<p><a href="/results">See your results</a>${ctx.formulation ? ' or <a href="/formulation">your formulation</a>' : ''}.</p>` : '<p class="t-caption">Nothing is shared here until Sarah has gone through it with you. Scores are never shown on their own.</p>'}
       </section>
@@ -441,10 +455,11 @@ export function home(s) {
   );
 }
 
-export function bookingButton(s, label) {
+export function bookingButton(s, label, primary = true) {
+  const cls = primary ? 'btn-primary' : 'btn-secondary';
   return s.config.bookingUrl
-    ? `<a class="btn btn-primary" href="${esc(s.config.bookingUrl)}" target="_blank" rel="noopener">${esc(label)}</a>`
-    : `<button type="button" class="btn btn-primary" data-action="book">${esc(label)}</button>`;
+    ? `<a class="btn ${cls}" href="${esc(s.config.bookingUrl)}" target="_blank" rel="noopener">${esc(label)}</a>`
+    : `<button type="button" class="btn ${cls}" data-action="book">${esc(label)}</button>`;
 }
 
 export function questionnaires(s) {
@@ -621,6 +636,9 @@ export function formulation(s) {
 export function account(s) {
   const c = s.ctx.client;
   const mine = s.ctx.requests;
+  const e = s.errors;
+  // 1 open request for a copy at a time, so there is 1 clear due date.
+  const openAccess = mine.find((r) => r.kind === 'access' && r.status !== 'done');
   return shell(
     s,
     'account',
@@ -640,17 +658,23 @@ export function account(s) {
     <section class="stack reading" aria-labelledby="h-privacy">
       <h2 id="h-privacy">Your information</h2>
       <p>Your information is stored securely in Sydney, Australia, and Sarah is responsible for it. You can ask to see it or ask for it to be corrected at any time. Sarah will reply within 20 working days.</p>
-      <div class="actions"><button type="button" class="btn btn-secondary" data-action="request-access">Request a copy of my information</button></div>
+      ${
+        openAccess
+          ? `<p>You asked for a copy of your information on ${fmtDate(openAccess.createdAt)}. Sarah will reply by ${fmtDate(openAccess.dueBy)}.</p>`
+          : '<div class="actions"><button type="button" class="btn btn-secondary" data-action="request-access">Request a copy of my information</button></div>'
+      }
       <form class="stack" data-form="correction" novalidate>
-        <div class="field">
+        <div class="field${e.detail ? ' field-invalid' : ''}">
           <label class="field-label" for="corr">Ask for a correction</label>
           <span class="field-hint" id="corr-hint">Tell Sarah what is wrong and what it should say.</span>
-          <textarea class="textarea" id="corr" name="detail" aria-describedby="corr-hint" maxlength="1000"></textarea>
+          <textarea class="textarea" id="corr" name="detail" aria-describedby="corr-hint${e.detail ? ' err-detail' : ''}"${e.detail ? ' aria-invalid="true"' : ''} maxlength="1000"></textarea>
+          ${fieldError(e, 'detail')}
         </div>
         <div class="actions"><button type="submit" class="btn btn-secondary">Send correction request</button></div>
       </form>
       ${mine.length ? `<ul class="task-list">${mine.map((r) => `<li class="task"><div><p class="task-name">${r.kind === 'access' ? 'Copy of my information' : 'Correction'}</p><p class="task-meta">Sent ${fmtDate(r.createdAt)}, reply due by ${fmtDate(r.dueBy)}</p></div>${r.status === 'done' ? status('done', 'Answered') : status('progress', 'With Sarah')}<span></span></li>`).join('')}</ul>` : ''}
     </section>
+    ${contactLink(s) ? `<section class="stack reading" aria-labelledby="h-contact"><h2 id="h-contact">Contact Sarah</h2><p>For anything about your sessions or the Client Hub, email ${contactLink(s)}.</p></section>` : ''}
 `,
   );
 }

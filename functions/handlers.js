@@ -276,6 +276,12 @@ export function makeHandlers({ db, intakeConfig, clientTypes, appConfig = {}, al
         .trim()
         .slice(0, 1000);
       if (kind === 'correction' && !detail) fail('invalid-argument', 'Tell Sarah what should be corrected.');
+      // 1 open request for a copy at a time: a second press does not start
+      // a second 20 working day clock. Corrections can be raised freely.
+      if (kind === 'access') {
+        const mine = await db.collection('requests').where('uid', '==', auth.uid).get();
+        if (mine.docs.some((d) => d.data().kind === 'access' && d.data().status === 'open')) return { ok: true, already: true };
+      }
       await db.collection('requests').add({ uid: auth.uid, kind, detail, createdAt: now(), dueBy: core.addWorkingDays(now(), 20), status: 'open' });
       await audit(auth.uid, `requested ${kind}`, auth.uid);
       return { ok: true };

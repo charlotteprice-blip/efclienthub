@@ -816,10 +816,21 @@ th .sort:focus-visible {
   .home-grid {
     grid-template-columns: 1fr;
   }
+  /* A small ring beside the words, so the first thing to do is close
+     behind it and not a screen away */
   .journey-hero-compact {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    text-align: center;
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: var(--space-4);
+    align-items: start;
+  }
+  .journey-hero-compact .journey-ring {
+    width: 64px;
+    height: 64px;
+  }
+  /* The step and title sit beside the ring (together they are taller than
+     it); the paragraphs below use the full width of the panel. */
+  .journey-hero-compact .stack > .reading {
+    margin-left: calc(-64px - var(--space-4));
   }
 }
 

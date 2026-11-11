@@ -406,7 +406,10 @@ const handlers = {
     return navigate('/dashboard');
   },
   async correction(data) {
-    if (!String(data.detail ?? '').trim()) return undefined;
+    if (!String(data.detail ?? '').trim()) {
+      S.errors = { detail: 'Tell Sarah what is wrong and what it should say.' };
+      return route();
+    }
     await call('createRequest', { kind: 'correction', detail: data.detail });
     setFlash('Your correction request has been sent to Sarah.');
     await reload();
@@ -652,7 +655,8 @@ const actions = {
     setMenu(app.querySelector('.viewer')?.dataset.menu !== 'open');
   },
   book() {
-    dialog('<div class="stack-lg"><h2>Book your feedback session</h2><p>Sarah\'s online booking page is not connected yet. Contact Sarah to book your feedback session.</p><div class="actions"><button type="button" class="btn btn-primary" data-action="close">Close</button></div></div>');
+    const contact = cv.contactLink(S);
+    dialog(`<div class="stack-lg"><h2>Book your feedback session</h2><p>Sarah's online booking page is not connected yet. To book your feedback session, ${contact ? `email Sarah at ${contact}` : 'contact Sarah'}.</p><div class="actions"><button type="button" class="btn btn-primary" data-action="close">Close</button></div></div>`);
   },
   close: closeDialog,
   retry() {
@@ -660,8 +664,8 @@ const actions = {
     return route();
   },
   async 'request-access'(t) {
-    await busy(t, () => call('createRequest', { kind: 'access' }));
-    setFlash('Your request has been sent. Sarah will reply within 20 working days.');
+    const r = await busy(t, () => call('createRequest', { kind: 'access' }));
+    setFlash(r?.already ? 'You have already asked for a copy. Sarah will reply by the date shown.' : 'Your request has been sent. Sarah will reply within 20 working days.');
     await reload();
     return route();
   },
