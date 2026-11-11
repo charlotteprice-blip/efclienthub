@@ -319,7 +319,7 @@
 .fit:has(input:checked) {
   background: var(--accent);
   border-color: var(--accent);
-  color: #FFFFFF;
+  color: var(--on-accent);
 }
 
 .fit:has(input:focus-visible) {
@@ -449,7 +449,7 @@
 .chip[aria-pressed="true"] {
   background: var(--accent);
   border-color: var(--accent);
-  color: #FFFFFF;
+  color: var(--on-accent);
 }
 
 .chip:focus-visible {
@@ -713,22 +713,38 @@ th .sort:focus-visible {
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent);
 }
 
-.step-todo .step-label {
-  opacity: 0.6;
-}
-
 .step-current .step-label {
   font-weight: 500;
 }
 
 .step-detail {
   display: block;
-  opacity: 0.8;
 }
 
-@media (max-width: 899px) {
-  .step-label {
-    font-size: 11px;
+/* On a phone the 5 steps run down the page so every label stays at
+   caption size and full strength */
+@media (max-width: 599px) {
+  .tracker,
+  .tracker-5 {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+  .step {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-3);
+    text-align: left;
+    line-height: var(--type-caption-line);
+  }
+  .step::before {
+    top: 16px;
+    left: 7px;
+    width: 2px;
+    height: calc(100% - 16px + var(--space-3));
+  }
+  .step-dot {
+    flex: none;
+    margin-top: 2px;
   }
 }
 
@@ -805,11 +821,6 @@ th .sort:focus-visible {
     justify-items: center;
     text-align: center;
   }
-}
-
-/* A menu item whose page has nothing to show yet */
-.nav-link-muted:not([aria-current]) {
-  opacity: 0.6;
 }
 
 /* Actions pushed to the right edge of their section */
@@ -927,7 +938,7 @@ th .sort:focus-visible {
 
 .subnav-link[aria-current="page"] {
   background: var(--ef-navy);
-  color: #FFFFFF;
+  color: var(--on-accent);
 }
 
 .subnav-link .nav-count {

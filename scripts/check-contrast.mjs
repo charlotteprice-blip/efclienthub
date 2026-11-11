@@ -28,6 +28,7 @@ const L = t.themes.light;
 const I = t.themes.inverted;
 const grounds = { 'sky ground': L.ground, 'warm white panel': L.panel };
 
+let failed = 0;
 const checks = [
   ['ink on sky ground', L.ink, L.ground, 4.5],
   ['ink on warm white panel', L.onPanel, L.panel, 4.5],
@@ -47,7 +48,34 @@ for (const [name, a] of Object.entries(app.accents)) {
   for (const [gName, g] of Object.entries(grounds)) checks.push([`accent ${name} (non text) on ${gName}`, a.accent, g, 3]);
 }
 
-let failed = 0;
+// Text that used to be muted with opacity, which this script cannot see.
+// Each is now a solid colour, or full strength ink, and is checked here.
+checks.push(['placeholder text on warm white field', app.text.placeholder.colour, L.panel, 4.5]);
+checks.push(['menu link before its page has content (full ink) on sky', L.ink, L.ground, 4.5]);
+checks.push(['tracker label for a step not yet done (full ink) on sky', L.ink, L.ground, 4.5]);
+checks.push(['menu and foot line during a questionnaire (full ink) on sky', L.ink, L.ground, 4.5]);
+checks.push(['map box hint (full ink) on warm white', L.onPanel, L.panel, 4.5]);
+// Text on the accent: the selected fit pill and the pressed filter chip.
+for (const [name, a] of Object.entries(app.accents)) checks.push([`text on accent ${name} (selected fit pill)`, app.text.onAccent.colour, a.accent, 4.5]);
+checks.push(['text on navy (current sub navigation pill)', app.text.onAccent.colour, I.ground, 4.5]);
+
+// The stylesheets must not bring opacity back for text: any opacity below 1
+// has to be on this list of places that carry no readable text.
+const OPACITY_ALLOWED = [/\.btn\[disabled\]/, /\.choice input/, /\.fit input/, /mark-triangle/, /th \.sort::after/, /fv-rise|from \{|to \{/, /\.fv-faint\b/, /\.fv-dotted/];
+for (const file of ['public/css/app.css', 'public/css/components.css']) {
+  const css = readFileSync(join(root, file), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+  for (const m of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+    const o = m[2].match(/(?:^|[;\s])opacity:\s*([\d.]+)/);
+    if (!o || Number(o[1]) >= 1) continue;
+    const selector = m[1].trim();
+    const allowed = Number(o[1]) === 0 || OPACITY_ALLOWED.some((re) => re.test(selector));
+    if (!allowed) {
+      failed += 1;
+      console.log(`FAIL  opacity ${o[1]} on "${selector}" in ${file}: muted text must use a solid colour that is checked here`);
+    }
+  }
+}
+
 for (const [name, fg, bg, min] of checks) {
   const r = ratio(fg, bg);
   const ok = r >= min;

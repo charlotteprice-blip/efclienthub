@@ -302,7 +302,7 @@ Solid and easy to hit: tall, full width on phones, 2px strokes, no shadows.
 - **Disabled:** 55 percent opacity, not allowed cursor.
 
 ### Inputs / Fields
-- **Style:** warm paper field, 2px slate stroke, 8px corners, 52px tall, 12px by 16px padding, body type. Placeholder is slate at 75 percent. Selects draw their own navy chevron in a 20px slot on the right. Textareas start at 3 input heights and resize vertically.
+- **Style:** warm paper field, 2px slate stroke, 8px corners, 52px tall, 12px by 16px padding, body type. Placeholder is a solid softened slate (`--placeholder`, 4.66:1 on paper); text is never muted with opacity, because the contrast check cannot see it. Selects draw their own navy chevron in a 20px slot on the right. Textareas start at 3 input heights and resize vertically.
 - **Label:** UI strong above, with an optional caption hint between label and field.
 - **Focus:** 2px slate outline offset 2px (the global ring).
 - **Error:** border turns brick; a brick message below in UI type, led by a 20px round brick badge with a white exclamation mark. Focus moves to the first invalid field on paint.
@@ -330,13 +330,13 @@ The questionnaire answer and the intake radio: a full width warm paper card with
 The list pattern on Home, Questionnaires and every practitioner panel: a hairline above the list and below each row, 72px minimum height, name in UI strong with caption metadata beneath, a status pill, and an action button at touch target height. Empty states are a caption sentence, not an illustration.
 
 ### Navigation
-- **Sidebar:** on sky, 32px between the brand, the list and the foot. Links are 44px tall with 12px side padding, 12px corners, a 20px line icon and UI type; hover is paper at 55 percent; the current page is paper fill, slate text and weight 500. A count sits at the right as a 24px navy pill. In the questionnaire's focus mode the list and foot fade to 45 percent.
+- **Sidebar:** on sky, 32px between the brand, the list and the foot. Links are 44px tall with 12px side padding, 12px corners, a 20px line icon and UI type; hover is paper at 55 percent; the current page is paper fill, slate text and weight 500. A count sits at the right as a 24px navy pill. In the questionnaire's focus mode the list keeps full strength (its links still work) and the top bar swaps the account button for Save and exit.
 - **Top bar:** 64px, heading type title (ellipsised), menu button on phones, the account button (36px navy avatar disc with the initial, name hidden on phones) on the right.
 - **Sub navigation (client record tabs):** 36px pills, 4px by 14px padding; hover paper, current navy with white text and a count pill; a quiet "All clients" link pushed to the right.
 - **Tables:** 12px rounded wrap with a hairline border, UI type, 16px cells, sky header row, hairline row dividers, sky at 35 percent on row hover, links in UI strong. Sortable headings are buttons with `aria-sort`.
 
 ### Journey ring and trackers (signature)
-The mark's incomplete circle is the journey indicator: a hairline track, an accent stroke that fills stage by stage with a 1200ms ease out, and the slate triangle at the centre. It sits at 200px on the full hero and 140px on Home, 152px on phones. Beside it a caption line gives "Step n of 7" and a title in the stage copy. The 5 step report tracker below is a row of 16px dots joined by 2px hairlines: done dots and lines are moss, the current dot is the accent with a 4px 25 percent halo, to do labels sit at 60 percent. A 6px progress bar (hairline track, accent fill) tops each questionnaire.
+The mark's incomplete circle is the journey indicator: a hairline track, an accent stroke that fills stage by stage with a 1200ms ease out, and the slate triangle at the centre. It sits at 200px on the full hero and 140px on Home, 152px on phones. Beside it a caption line gives "Step n of 7" and a title in the stage copy. The 5 step report tracker below is a row of 16px dots joined by 2px hairlines: done dots and lines are moss, the current dot is the accent with a 4px 25 percent halo, every label is full strength at caption size, and on a phone the 5 steps run down the page. A 6px progress bar (hairline track, accent fill) tops each questionnaire.
 
 ## Do's and Don'ts
 

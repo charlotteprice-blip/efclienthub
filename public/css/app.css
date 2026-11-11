@@ -19,6 +19,11 @@
   --status-attention: #6E4A10;
   --status-attention-tint: #F2E8D6;
 
+  /* Text that must pass 4.5:1 without leaning on opacity; see
+     brand/app-colours.json, checked by scripts/check-contrast.mjs. */
+  --placeholder: #596E91;
+  --on-accent: #FFFFFF;
+
   /* Client type accent, set at runtime from config/client-types.json.
      Decorative and non text only; it never carries meaning on its own. */
   --accent: var(--ink);
@@ -423,12 +428,9 @@ a:hover {
   width: auto;
 }
 
-/* focused task mode, used by questionnaires: the sidebar steps back */
-
-.viewer[data-mode="focus"] .sidebar .nav,
-.viewer[data-mode="focus"] .sidebar-foot {
-  opacity: 0.45;
-}
+/* Focused task mode, used by questionnaires. The menu keeps its full
+   strength: its links still work, so they must stay readable. The top bar
+   swaps the account button for Save and exit. */
 
 .focus-column {
   max-width: 640px;
@@ -697,8 +699,8 @@ a:hover {
 
 .input::placeholder,
 .textarea::placeholder {
-  color: var(--ef-slate);
-  opacity: 0.75;
+  color: var(--placeholder);
+  opacity: 1;
 }
 
 .input:focus-visible,

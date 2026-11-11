@@ -46,8 +46,8 @@ function splosePanel(s, uid, c) {
       <h2 id="h-splose">Splose</h2>
       <p class="t-caption">Link ${esc(c.name || 'the client')} to their Splose record and the hub shows their next appointment, sessions attended and any Splose form still to complete. Dates and statuses only; nothing clinical is read.</p>
       <form class="inline-add" data-form="search-splose" data-uid="${esc(uid)}" novalidate>
-        <label class="visually-hidden" for="sp-q">Search Splose by name or email</label>
-        <input class="input" id="sp-q" name="query" placeholder="Name or email in Splose" maxlength="60" autocomplete="off" value="${esc(search?.query ?? c.email ?? '')}">
+        <label class="field-label" for="sp-q">Search Splose by name or email</label>
+        <input class="input" id="sp-q" name="query" maxlength="60" autocomplete="off" value="${esc(search?.query ?? c.email ?? '')}">
         <button type="submit" class="btn btn-secondary">Search Splose</button>
       </form>
       ${search ? (search.results.length ? `<ul class="task-list">${search.results.map(resultRow).join('')}</ul>` : `<p class="t-caption">No one in Splose matches "${esc(search.query)}". Try a first name, a surname, or the email Splose has.</p>`) : ''}
