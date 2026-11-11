@@ -1,26 +1,29 @@
 {
-  "_note": "Client Hub status colours, which Levi's kit does not define. Text colour passes 4.5:1 on the sky ground, the warm white panel and its own tint. Each status is always shown with an icon and a word, never by colour alone. Checked by scripts/check-contrast.mjs. Client type accents live in public/config/client-types.json.",
+  "_note": "How the Client Hub uses the brand pack's application colours (brand/ef-tokens.json, application). Each status is text and icon on its own tint, always with an icon and a word, never colour alone. The values themselves come from the pack through brand/tokens.json; this file only maps the app's statuses onto them. Checked by scripts/check-contrast.mjs. Client type accents live in public/config/client-types.json.",
   "status": {
     "done": {
-      "text": "#2F5D3A",
-      "tint": "#E3ECE2",
+      "application": "success",
       "label": "Done",
       "icon": "tick"
     },
     "inProgress": {
-      "text": "#2E4062",
-      "tint": "#E4E9F1",
+      "application": "info",
       "label": "In progress",
       "icon": "half filled circle"
     },
     "needsAttention": {
-      "text": "#6E4A10",
-      "tint": "#F2E8D6",
+      "application": "warning",
       "label": "Needs attention",
       "icon": "exclamation mark"
     }
   },
-  "_textNote": "Text colours that are not in Levi's kit. placeholder is slate softened to a solid colour that still passes 4.5:1 on the warm white field (opacity is never used to mute text, because the contrast check cannot see it). onAccent is the text on a selected fit pill, a pressed filter chip and the current sub navigation pill.",
+  "notice": {
+    "info": "info",
+    "success": "success",
+    "warning": "warning",
+    "error": "error"
+  },
+  "_textNote": "Text colours that are not in the pack. placeholder is slate softened to a solid colour that still passes 4.5:1 on the warm white field (opacity is never used to mute text, because the contrast check cannot see it). onAccent is the text on a selected fit pill, a pressed filter chip and the current sub navigation pill.",
   "text": {
     "placeholder": {
       "colour": "#596E91",

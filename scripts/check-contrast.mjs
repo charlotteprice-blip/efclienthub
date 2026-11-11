@@ -40,10 +40,30 @@ const checks = [
   ['navy on sky (inverted panel)', I.onPanel, I.panel, 4.5],
 ];
 
-for (const [name, s] of Object.entries(app.status)) {
-  for (const [gName, g] of Object.entries(grounds)) checks.push([`status ${name} on ${gName}`, s.text, g, 4.5]);
-  checks.push([`status ${name} on its own tint`, s.text, s.tint, 4.5]);
+// The pack's application colours: every one as text on its own tint (status
+// pills and notices) and on the 2 grounds, and each status the app maps
+// onto them. The tint is a fill, so it needs no ratio against its ground;
+// the icon and word carry the meaning.
+for (const [name, a] of Object.entries(t.application)) {
+  checks.push([`application ${name} on its own tint`, a.text, a.tint, 4.5]);
+  for (const [gName, g] of Object.entries(grounds)) checks.push([`application ${name} on ${gName}`, a.text, g, 4.5]);
+  checks.push([`application ${name} on navy`, a.onNavy, I.ground, 4.5]);
 }
+for (const [name, s] of Object.entries(app.status)) {
+  const a = t.application[s.application];
+  if (!a) throw new Error(`Status ${name} maps to an unknown application colour ${s.application}`);
+  checks.push([`status ${name} (${s.application}) on its own tint`, a.text, a.tint, 4.5]);
+}
+for (const [kind, name] of Object.entries(app.notice)) {
+  const a = t.application[name];
+  checks.push([`notice ${kind}: ink on its tint`, L.ink, a.tint, 4.5]);
+  checks.push([`notice ${kind}: icon and word on its tint`, a.text, a.tint, 4.5]);
+}
+checks.push(['primary button: text on navy', L.onPrimary, L.primary, 4.5]);
+checks.push(['primary button (non text) on sky', L.primary, L.ground, 3]);
+checks.push(['primary button (non text) on warm white', L.primary, L.panel, 3]);
+checks.push(['primary button hover: text on slate', L.onPrimary, t.palette.slate, 4.5]);
+checks.push(['plain tag: ink on warm white', L.onPanel, L.panel, 4.5]);
 for (const [name, a] of Object.entries(app.accents)) {
   for (const [gName, g] of Object.entries(grounds)) checks.push([`accent ${name} (non text) on ${gName}`, a.accent, g, 3]);
 }

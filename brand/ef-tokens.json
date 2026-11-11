@@ -1,0 +1,261 @@
+{
+  "brand": "Executive Frame",
+  "version": "1.1",
+  "date": "2026-11-11",
+  "palette": {
+    "sky": {
+      "hex": "#CFDAE8",
+      "role": "The light ground. Provisional value; lighter candidates #DCE4EE, #D6E6F2, #E4EDF5"
+    },
+    "slate": {
+      "hex": "#3E5680",
+      "role": "All type and the logo on light grounds"
+    },
+    "navy": {
+      "hex": "#2E4062",
+      "role": "The dark ground of the inverted theme"
+    },
+    "warmWhite": {
+      "hex": "#F5F3EE",
+      "role": "Panels, forms and reading sections on light; all type and the logo on navy"
+    }
+  },
+  "themes": {
+    "light": {
+      "ground": "#CFDAE8",
+      "ink": "#3E5680",
+      "panel": "#F5F3EE",
+      "onPanel": "#3E5680",
+      "readingGround": "#F5F3EE",
+      "onReading": "#3E5680",
+      "primary": "#3E5680",
+      "onPrimary": "#F5F3EE",
+      "hairline": "rgba(62, 86, 128, 0.25)",
+      "underline": "rgba(62, 86, 128, 0.40)",
+      "focus": "#3E5680"
+    },
+    "inverted": {
+      "ground": "#2E4062",
+      "ink": "#F5F3EE",
+      "panel": "#CFDAE8",
+      "onPanel": "#2E4062",
+      "readingGround": "#3E5680",
+      "onReading": "#F5F3EE",
+      "primary": "#CFDAE8",
+      "onPrimary": "#2E4062",
+      "hairline": "rgba(245, 243, 238, 0.25)",
+      "underline": "rgba(245, 243, 238, 0.45)",
+      "focus": "#F5F3EE"
+    }
+  },
+  "application": {
+    "note": "Interface only, never on brand surfaces. Light values sit on warm white or their tint; dark values on navy",
+    "error": {
+      "light": "#8A3F34",
+      "tint": "#F6E3DF",
+      "dark": "#F2B8AD"
+    },
+    "success": {
+      "light": "#285E44",
+      "tint": "#E3EFE8",
+      "dark": "#A9D9BF"
+    },
+    "warning": {
+      "light": "#73540F",
+      "tint": "#F7EDD4",
+      "dark": "#EBCB82"
+    },
+    "info": {
+      "light": "#3E5680",
+      "tint": "#E6ECF4",
+      "dark": "#CFDAE8"
+    }
+  },
+  "contrast": {
+    "slateOnSky": 5.2,
+    "slateOnWarmWhite": 6.7,
+    "warmWhiteOnNavy": 9.3,
+    "navyOnSky": 7.3,
+    "warmWhiteOnSlate": 6.7,
+    "slateOnWhite": 7.4,
+    "note": "Every text pair in both themes is 5.2 to 1 or better. There is no muted text colour: slate at reduced opacity falls below 4.5 to 1 on sky, so captions are slate at the light weight instead"
+  },
+  "type": {
+    "family": "Figtree",
+    "source": "Google Fonts",
+    "weights": [
+      300,
+      400,
+      500
+    ],
+    "fallback": "system-ui, sans-serif",
+    "case": "sentence everywhere, no capitals, no bold above 500, no italics for emphasis",
+    "scale": {
+      "display": {
+        "size": 96,
+        "mobile": 56,
+        "lineHeight": 0.98,
+        "weight": 400,
+        "tracking": "-0.03em"
+      },
+      "h1": {
+        "size": 64,
+        "mobile": 44,
+        "lineHeight": 1.02,
+        "weight": 400,
+        "tracking": "-0.03em"
+      },
+      "h2": {
+        "size": 48,
+        "mobile": 36,
+        "lineHeight": 1.05,
+        "weight": 400,
+        "tracking": "-0.02em"
+      },
+      "h3": {
+        "size": 40,
+        "mobile": 32,
+        "lineHeight": 1.1,
+        "weight": 400,
+        "tracking": "-0.02em"
+      },
+      "h4": {
+        "size": 32,
+        "mobile": 26,
+        "lineHeight": 1.15,
+        "weight": 400,
+        "tracking": "-0.01em"
+      },
+      "h5": {
+        "size": 24,
+        "mobile": 22,
+        "lineHeight": 1.25,
+        "weight": 400,
+        "tracking": "0"
+      },
+      "h6": {
+        "size": 20,
+        "mobile": 18,
+        "lineHeight": 1.3,
+        "weight": 500,
+        "tracking": "0"
+      },
+      "lead": {
+        "size": 22,
+        "mobile": 20,
+        "lineHeight": 1.5,
+        "weight": 300
+      },
+      "body": {
+        "size": 18,
+        "mobile": 17,
+        "lineHeight": 1.6,
+        "weight": 300
+      },
+      "ui": {
+        "size": 16,
+        "lineHeight": 1.4,
+        "weight": 400
+      },
+      "uiStrong": {
+        "size": 16,
+        "lineHeight": 1.4,
+        "weight": 500
+      },
+      "caption": {
+        "size": 14,
+        "lineHeight": 1.5,
+        "weight": 300
+      }
+    }
+  },
+  "logo": {
+    "mark": {
+      "grid": 100,
+      "loop": {
+        "type": "open circle",
+        "centre": [
+          50,
+          50
+        ],
+        "radius": 40,
+        "startAngle": 118,
+        "endAngle": 142,
+        "sweep": 336,
+        "direction": "anticlockwise on screen; the end sits above the start",
+        "path": "M31.22 85.32 A40 40 0 1 0 18.48 74.63"
+      },
+      "triangle": "M44 34.3 Q50 24.3 56 34.3 L69 57.3 Q74 66.3 64 66.3 L36 66.3 Q26 66.3 31 57.3 Z",
+      "strokes": {
+        "standard": 5,
+        "display": 2.4,
+        "favicon": 8
+      },
+      "use": {
+        "display": "240 px and above",
+        "standard": "24 px to 240 px",
+        "favicon": "16 px to 24 px"
+      }
+    },
+    "wordmark": {
+      "text": "Executive Frame",
+      "family": "Figtree",
+      "weight": 500,
+      "letterSpacing": "-0.01em",
+      "case": "sentence",
+      "capHeight": 0.7
+    },
+    "lockup": {
+      "markBox": "1.5 × wordmark font size",
+      "gap": "0.5 × font size",
+      "alignment": "mark centred on the middle of the cap height",
+      "widthAt100px": 935.6
+    },
+    "stacked": {
+      "markBox": "2.2 × font size",
+      "line": "Human first. Then performance., Figtree Regular at 0.30 × font size, 0.95 × font size below the wordmark baseline",
+      "alignment": "centred"
+    },
+    "clearSpace": "0.4 × the mark box on every side",
+    "minimum": {
+      "markPx": 16,
+      "markMm": 4,
+      "lockupPx": 140,
+      "lockupMm": 35,
+      "stackedPx": 180
+    },
+    "colours": "slate on sky, warm white and white; warm white on navy and slate. Never any other colour"
+  },
+  "spacing": [
+    4,
+    8,
+    12,
+    16,
+    24,
+    32,
+    48,
+    64,
+    96
+  ],
+  "radius": {
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "pill": 999
+  },
+  "motion": {
+    "durationMs": 180,
+    "easing": "ease-out",
+    "markDrawOnMs": 1200,
+    "reducedMotion": "show the finished mark, skip transitions"
+  },
+  "language": {
+    "english": "New Zealand",
+    "dashes": "none, use commas or full stops",
+    "exclamation": "none",
+    "headings": "sentence case",
+    "audiences": "pathways in public copy; arms is internal only",
+    "place": "New Zealand, not Aotearoa, in professional material",
+    "loop": "C3 Loop: Centre, Clarify, Choose, then return"
+  }
+}

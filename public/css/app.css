@@ -11,13 +11,15 @@
   --type-body-weight: 400;
   --type-caption-weight: 400;
 
-  /* Status colours: see brand/app-colours.json and docs/brand-notes.md. */
-  --status-done: #2F5D3A;
-  --status-done-tint: #E3ECE2;
-  --status-progress: #2E4062;
-  --status-progress-tint: #E4E9F1;
-  --status-attention: #6E4A10;
-  --status-attention-tint: #F2E8D6;
+  /* Status colours are the brand pack's application colours (tokens.css):
+     done is success, in progress is info, needs attention is warning.
+     See brand/app-colours.json and docs/brand-notes.md. */
+  --status-done: var(--app-success);
+  --status-done-tint: var(--app-success-tint);
+  --status-progress: var(--app-info);
+  --status-progress-tint: var(--app-info-tint);
+  --status-attention: var(--app-warning);
+  --status-attention-tint: var(--app-warning-tint);
 
   /* Text that must pass 4.5:1 without leaning on opacity; see
      brand/app-colours.json, checked by scripts/check-contrast.mjs. */

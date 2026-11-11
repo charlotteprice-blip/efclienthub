@@ -1,0 +1,71 @@
+{
+  "_note": "What the Client Hub adds to the brand pack tokens (brand/ef-tokens.json), which is the single source for colour, radius, motion and the mark. scripts/build-tokens.mjs joins the 2 into brand/tokens.json and public/css/tokens.css. The pack's type scale is for the website; the app keeps its own sizes here.",
+  "_primaryNote": "The pack's tokens give the light theme's primary button as slate. The designer is changing the pack to navy, so the apps use navy now. Remove this override once the pack says navy.",
+  "primaryOverride": {
+    "light": {
+      "primary": "#2E4062",
+      "onPrimary": "#F5F3EE"
+    }
+  },
+  "fontFallback": "system",
+  "type": {
+    "display": {
+      "size": 40,
+      "lineHeight": 42,
+      "weight": 400,
+      "tracking": -0.02
+    },
+    "title": {
+      "size": 28,
+      "lineHeight": 32,
+      "weight": 400,
+      "tracking": -0.01
+    },
+    "heading": {
+      "size": 22,
+      "lineHeight": 28,
+      "weight": 400,
+      "tracking": 0
+    },
+    "body": {
+      "size": 17,
+      "lineHeight": 26,
+      "weight": 300,
+      "tracking": 0
+    },
+    "ui": {
+      "size": 16,
+      "lineHeight": 22,
+      "weight": 400,
+      "tracking": 0
+    },
+    "uiStrong": {
+      "size": 16,
+      "lineHeight": 22,
+      "weight": 500,
+      "tracking": 0
+    },
+    "caption": {
+      "size": 14,
+      "lineHeight": 20,
+      "weight": 300,
+      "tracking": 0
+    },
+    "wordmark": {
+      "size": 20,
+      "lineHeight": 20,
+      "weight": 500,
+      "tracking": 0
+    }
+  },
+  "sizes": {
+    "buttonHeight": 52,
+    "pillHeight": 44,
+    "inputHeight": 52,
+    "minTouchTarget": 44,
+    "screenMarginPhone": 24,
+    "screenMarginTablet": 48,
+    "focusRing": 2,
+    "iconStroke": 1.5
+  }
+}
