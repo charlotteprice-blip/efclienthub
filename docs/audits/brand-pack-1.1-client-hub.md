@@ -38,7 +38,7 @@ Date: 12 November 2026. Branch: `brand-pack-1.1`, in the working copy `~/efclien
   - No sideways overflow on any main route. The library filters overflowed between 900 and about 1040px beside the wider sidebar; fixed.
   - No element on any page checked has a computed box shadow.
   - The header lockup measures 150 by 24px and Client Hub sits inside the 280px sidebar. The tab icon, manifest and touch icon load from this origin.
-- Not checked: a real phone, a real screen reader, the favicon in a real browser tab in dark mode, the installed app icon on a phone, the clickable sample and the 3 preview pages in a browser (their code was updated and the unit tests pass), and the live site.
+- Not checked: a real phone, a real screen reader, the favicon in a real browser tab in dark mode, the installed app icon on a phone, the clickable sample, the style guide page and the 3 preview pages in a browser (their code was updated and the unit tests pass), and the live site.
 
 ## 3. What still conflicts with the guidelines
 
@@ -78,5 +78,5 @@ The Learning Hub needs to match these.
 ## 5. Before this is merged
 
 1. Sarah has not seen Home without the ring, or the new Your steps heading and its wording (Results shared, Formulation shared, with dates).
-2. The 3 launch steps that touch these files still stand: the preview pages are deleted before launch, and they were updated here only so they do not break.
+2. The preview pages are still to be deleted before launch (rule 8, step 4 in `CLAUDE.md`). They were updated here only so they do not break.
 3. Deploy needs hosting only. No function, rule or config that the functions read was changed.
