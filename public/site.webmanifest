@@ -1,6 +1,6 @@
 {
-  "name": "Executive Frame",
-  "short_name": "Executive Frame",
+  "name": "Executive Frame Client Hub",
+  "short_name": "Client Hub",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
