@@ -1,12 +1,12 @@
 # Fix log: Client Hub audit of 10 November 2026
 
-Date: 11 November 2026. Branch: `audit-fixes-2026-11-10`, cut from `main`, not merged and not pushed. Audit: `docs/audits/impeccable-client-hub-2026-11-10.md`. Every fix was made and checked on invented clients in the local harness only. Nothing here comes from the live site or a real record.
+Date: 11 November 2026. Branch: `audit-fixes-2026-11-10`, cut from `main`. It was merged into `main` (fast forward) and pushed on Charlotte's instruction on 11 November; the later commits named below were made on `main` and are not pushed. Audit: `docs/audits/impeccable-client-hub-2026-11-10.md`. Every fix was made and checked on invented clients in the local harness only. Nothing here comes from the live site or a real record.
 
-Counts: 25 fixed, 6 partly fixed, 4 left. 35 findings in all.
+Counts: 27 fixed, 5 partly fixed, 3 left. 35 findings in all. (25, 6 and 4 before Charlotte's decisions on findings 24, 12 and 28 late on 11 November.)
 
 ## How fixes were checked
 
-- `npm run check` after each group: 146 unit tests pass (102 before this work) and all 35 colour pairings pass (25 before), with a new guard that fails if text is muted with opacity.
+- `npm run check` after each group: 150 unit tests pass (102 before this work) and all 35 colour pairings pass (25 before), with a new guard that fails if text is muted with opacity.
 - `npm run test:rules` on the local Firestore and Storage emulators (project `demo-clienthub`, Java 21): 89 tests pass (81 before).
 - The local harness at localhost:5174, as a client, the practitioner and admin, at 375, 768 and 1280px wide, plus 1024px for the layout findings. "Harness" below means seen there. Measured in the page where a number matters (scroll position, focus, widths).
 - Not checked: the live site, a real phone or tablet, a real screen reader, 200 percent zoom, and the clickable sample in `public/sample/` (see the review list at the end).
@@ -32,7 +32,7 @@ Counts: 25 fixed, 6 partly fixed, 4 left. 35 findings in all.
 | 9 | P1 | Releasing a formulation in 1 click | Fixed | `ba8e191`. A dialog names the client, the number of cards and the drawing before anything is shared. Harness: nothing is released until Confirm. No withdraw, by Charlotte's decision of 11 November. |
 | 10 | P1 | Task rows collapse at 900 to 1150px | Fixed | `6bd5499`. Rows wrap by the room they have (container query) and Home goes to 1 column below 1200px. Harness at 1024 (text column 417px, was 55 to 130px) and 375. |
 | 11 | P1 | `jds` answer scale may not match its questions | Left | Charlotte's to check against the instrument and the codebook. Questionnaire content was out of bounds. |
-| 12 | P1 | Home does not offer 1 clear next action | Partly fixed | `50cf09b`. 1 primary button, the rest secondary, each link named; a small ring beside the title on phones so the first Start is on the first screen (measured at 375); a Splose form is said once, as a To do row. Left for Charlotte and Sarah: folding later tasks into 1 line, an action inside the hero, and the wording that names Splose. |
+| 12 | P1 | Home does not offer 1 clear next action | Partly fixed | `50cf09b`. 1 primary button, the rest secondary, each link named; a small ring beside the title on phones so the first Start is on the first screen (measured at 375); a Splose form is said once, as a To do row. The empty Resources panel is hidden until there is a resource (`94b1e12`, decision 76). Left for Charlotte and Sarah: folding later tasks into 1 line, an action inside the hero, and the wording that names Splose. |
 | 13 | P2 | Today leaves out waiting work | Fixed | `fc1acf3`. Drafts and every open privacy request are in Today; each row has a status pill and a named link to the right tab; the To review count matches what is listed. Unit test and harness. |
 | 14 | P2 | A fit answer is lost unless Save is pressed | Fixed | `5227aa7`. The fit choice saves as it is chosen, the card says Saved, and the picture redraws its mark without repainting the page. Harness at 375: scroll unchanged at the ninth card. |
 | 15 | P2 | Privacy requests fail silently or twice | Fixed | `50cf09b`. An empty correction shows a field error. A second request for a copy while 1 is open is not created (function and unit test) and Account shows the dates in place of the button. |
@@ -44,11 +44,11 @@ Counts: 25 fixed, 6 partly fixed, 4 left. 35 findings in all.
 | 21 | P2 | Admin can see who the clients are | Fixed | `9348abb`. Charlotte's decision of 11 November. Rules: activation codes and the audit log are practitioner only. Functions: admin's codes list has no name, email or uid; a code issued by admin stores none. Unit tests, rules tests, and the harness as admin. |
 | 22 | P2 | A signed in browser stays signed in for ever | Fixed | `3107a4c`. Charlotte's decision: 30 minutes, a warning 1 minute before, clients and staff. Timing rules are a pure module with 14 unit tests, and 3 more guard that an idle log out never sends anything on a client's behalf (a typed but unsent comment is let go). Harness: the warning, Stay logged in, the log out with its message, a fresh log in, and a kept session reopened after hours. |
 | 23 | P2 | Scoring rules readable by any activated client | Fixed | `9348abb`. Charlotte's decision. Rules: the measure library is staff only. A client is handed questions and answer options by `myQuestionnaires`, for their own questionnaires only. Unit tests, rules tests, and the harness as a client (Home, Questionnaires and a questionnaire all load). |
-| 24 | P2 | Assigning a later questionnaire sends the journey backwards | Left | Charlotte and Sarah. It changes what the journey means; 1 line in `functions/handlers.js` once decided. |
+| 24 | P2 | Assigning a later questionnaire sends the journey backwards | Fixed | `94b1e12`. Charlotte's decision of 11 November: the journey never moves back (decision 75). `assignMeasure` leaves the stage alone, the questionnaire shows as a task, and the tracker's first step stays done. Unit tests for the function and for Home; harness: assigned and finished at Book feedback and at Feedback, stage unchanged. |
 | 25 | P2 | Clinical terms reach the client | Left | Sarah: whether clients should see the clinical names. |
 | 26 | P2 | Loading and error states are thin | Partly fixed | `24469bd`. Error screen with Try again and Log out, buttons name their own work, a line under the top bar while a page waits on data. Left: staff pages still reload every collection on each page change. |
 | 27 | P2 | Number keys cannot reach options 10 and 11 | Fixed | `20c6c14`. Key caps and the hint cover the first 9 answers and name the arrow keys for the rest. |
-| 28 | P2 | Tracker semantics and empty sections | Partly fixed | `50cf09b`. The tracker marks the current step and says done or still to come in words. Left for Charlotte: whether to hide the empty resources panel and the tracker early in the journey (decision 55 sets what Home shows). |
+| 28 | P2 | Tracker semantics and empty sections | Fixed | `50cf09b`, `94b1e12`. The tracker marks the current step and says done or still to come in words. By Charlotte's decision of 11 November the Resources panel appears once there is a resource and the tracker stays, since it shows what is coming (decision 76). Unit test and harness. |
 | 29 | P2 | Neutral states use the Needs attention pill | Fixed | `50cf09b`. To do and Not started on client screens are a neutral pill with an empty ring. |
 | 30 | P3 | Focus ring round the whole workspace | Fixed | `6bd5499`. |
 | 31 | P3 | Client record tabs run off a phone | Fixed | `6bd5499`. Harness at 375: nothing past the right edge. |
@@ -65,7 +65,7 @@ Counts: 25 fixed, 6 partly fixed, 4 left. 35 findings in all.
 | P1: hero fills the first phone screen | Fixed: a small ring beside the title, and the first Start is on the first screen at 375px. |
 | P1: Splose form said 3 times, no action | Partly: said once, in To do. It still names Splose and has nothing to press, because the link is in Splose's own email; the wording is Sarah's. |
 | P2: tracker unreadable to a screen reader, 11px labels | Fixed: states in words, the current step marked, labels at 14px and full strength. |
-| P2: 2 empty sections | Open: a decision for Charlotte (decision 55). |
+| P2: 2 empty sections | Fixed: the Resources panel is hidden until there is a resource; the tracker stays by Charlotte's decision (decision 76). |
 
 ## Decisions still waiting
 
@@ -77,8 +77,8 @@ For Sarah:
 
 For Charlotte:
 5. The `jds` answer scale against the instrument (finding 11).
-6. Whether assigning a later questionnaire should move the journey back (finding 24), with Sarah.
-7. Hiding empty sections on Home and folding later tasks (findings 12 and 28).
+6. Decided 11 November: the journey never moves back (finding 24).
+7. Decided 11 November: hide the empty Resources panel, keep the tracker (findings 12 and 28). Folding later tasks into 1 line is still open.
 8. `bookingUrl`, launch step 5 (finding 16).
 9. Whether a withdraw for released results or a formulation is wanted later (finding 9).
 
@@ -101,3 +101,19 @@ For Charlotte:
 5. Removing the 2 repeated Splose lines on Home takes out draft copy that Sarah may have seen.
 6. The clickable sample shares `public/js/ui.js`, which gained a Close menu button, a To do pill and the year on dates. The sample was not opened.
 7. The Notion work log entry for this session has not been written.
+
+## Test pass of 11 November (evening)
+
+A full walk through in the local harness after the fixes: the client journey at 375 and 1280, the practitioner at 1280 and 768, and admin. The guide for Charlotte's own run is `docs/testing/test-guide-2026-11-12.md`. `npm run check` (150 unit tests, 35 colour pairings) and `npm run test:rules` (89) pass.
+
+Defects found and fixed:
+1. A resource that failed its check lost what had been typed. It now keeps the title, link and note for that client.
+2. The Before you start screen repeated a sentence that some questionnaires' own instructions already say. Removed.
+
+Found and listed, not changed:
+1. A questionnaire completed twice shows twice in the client's Results with the same name and no date to tell them apart.
+2. Each time a fit choice saves, the picture above redraws with its entrance motion. On a phone it is off screen; on a wide screen it can catch the eye.
+3. On the Before you start screen a keyboard user presses Tab once to reach Start; Enter alone does nothing.
+4. The error for a missing check in date reads "Enter the first check in date as YYYY-MM-DD", which shows a format with hyphens to Sarah.
+5. An unanswered intake question shows its message under the group but the answer cards do not change colour.
+6. The harness's own fake Splose reports "Did not arrive at the last appointment" beside a last attended date. That is the invented data, not the app.
