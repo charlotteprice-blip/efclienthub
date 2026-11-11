@@ -90,6 +90,13 @@ a:hover {
   outline-offset: 2px;
 }
 
+/* The main region takes focus after a page change so a screen reader
+   starts there; it is not a control, so it shows no ring round the sheet. */
+#workspace:focus,
+#workspace:focus-visible {
+  outline: none;
+}
+
 [hidden] {
   display: none !important;
 }
@@ -312,7 +319,8 @@ a:hover {
   gap: var(--space-3);
 }
 
-.menu-button {
+.menu-button,
+.sidebar .drawer-close {
   display: none;
 }
 
@@ -507,6 +515,13 @@ a:hover {
 
   .topbar {
     padding: 0 var(--space-4);
+  }
+
+  /* A way to close the drawer from inside it */
+  .sidebar .drawer-close {
+    display: inline-flex;
+    align-self: flex-start;
+    margin: calc(var(--space-5) * -1) 0 calc(var(--space-4) * -1);
   }
 
   .account-name {

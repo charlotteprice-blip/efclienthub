@@ -8,6 +8,9 @@ import { buildDraft, scoreMeasure } from '../scoring.js';
 
 const flashHtml = (flash) => (flash ? `<div class="notice flash${flash.error ? ' notice-error' : ''}" role="${flash.error ? 'alert' : 'status'}"><p>${esc(flash.text)}</p></div>` : '');
 
+// A table that can scroll sideways is a named region a keyboard can reach.
+const tableWrap = (label) => `<div class="table-wrap" tabindex="0" role="region" aria-label="${label}, table">`;
+
 function typeLabel(s, t) {
   return s.clientTypes.types[t]?.practitionerLabel ?? 'Not set';
 }
@@ -108,7 +111,7 @@ function scoresOverTime(s, uid) {
       const subs = Object.entries(s.ctx.scoring[sorted[0].id].scores.subscales);
       return `<article class="draft stack">
         <h3>${esc(m?.name ?? measureId)}</h3>
-        <div class="table-wrap"><table class="table"><thead><tr><th scope="col">Subscale</th>${sorted.map((a) => `<th scope="col">${esc(fmtDate(a.completedAt))}</th>`).join('')}</tr></thead>
+        ${tableWrap(`Scores over time for ${esc(m?.name ?? measureId)}`)}<table class="table"><thead><tr><th scope="col">Subscale</th>${sorted.map((a) => `<th scope="col">${esc(fmtDate(a.completedAt))}</th>`).join('')}</tr></thead>
         <tbody>${subs.map(([id, first]) => `<tr><td>${esc(first.label)}</td>${sorted.map((a) => `<td>${s.ctx.scoring[a.id].scores.subscales[id]?.score ?? 'Not scored'}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
       </article>`;
     });
@@ -325,7 +328,7 @@ export function clients(s) {
       <p class="reading">Everyone who has used an activation code. Select a name to see their questionnaires, draft results and formulation.</p>
       <a class="btn btn-primary btn-inline" href="/practitioner/codes">Issue activation code</a>
     </div>
-    <div class="table-wrap"><table class="table table-clients">
+    ${tableWrap(`Clients`)}<table class="table table-clients">
       <thead><tr><th scope="col">Client</th><th scope="col">Type</th><th scope="col">Stage</th><th scope="col">Done</th><th scope="col">Results</th>${s.config.splose?.enabled ? '<th scope="col">Next appointment</th>' : ''}<th scope="col">Last active</th></tr></thead>
       <tbody>${rows || `<tr><td colspan="${columns}">No clients yet. Issue an activation code to invite the first one.</td></tr>`}</tbody>
     </table></div>
@@ -396,7 +399,7 @@ export function client(s, uid, tab = 'overview') {
         <div class="draft-head"><h3>${esc(d.draft.measureName)}</h3>${staffOnly ? status('progress', 'For you only') : isReleased ? status('done', 'Released') : status('attention', 'Draft')}</div>
         <p class="t-caption">Automated draft scoring for your review. Not a diagnosis. ${staffOnly ? 'This questionnaire is never summarised to the client.' : isReleased ? 'Shared with the client.' : 'Not visible to the client.'} Completed ${fmtDate(d.assignment.completedAt)}.</p>
         ${flags}
-        <div class="table-wrap"><table class="table"><thead><tr><th scope="col">Subscale</th><th scope="col">Score</th><th scope="col">Band</th><th scope="col">Answered</th></tr></thead><tbody>${rows}</tbody></table></div>
+        ${tableWrap(`Draft scores for ${esc(d.draft.measureName)}`)}<table class="table"><thead><tr><th scope="col">Subscale</th><th scope="col">Score</th><th scope="col">Band</th><th scope="col">Answered</th></tr></thead><tbody>${rows}</tbody></table></div>
         ${staffOnly ? '' : `<div class="split">
           <div class="stack"><p class="t-ui-strong">Strengths the client would see</p>${d.draft.strengths.length ? `<ul class="result-list">${d.draft.strengths.map((x) => `<li><p>${esc(x.label)}</p><p class="t-caption">${esc(x.reason)}</p></li>`).join('')}</ul>` : '<p class="t-caption">None.</p>'}</div>
           <div class="stack"><p class="t-ui-strong">Areas of focus the client would see</p>${d.draft.focus.length ? `<ul class="result-list">${d.draft.focus.map((x) => `<li><p>${esc(x.label)}</p><p class="t-caption">${esc(x.reason)} Links to ${esc(x.topic?.label ?? 'no topic')}.</p></li>`).join('')}</ul>` : '<p class="t-caption">None.</p>'}</div>
@@ -673,7 +676,7 @@ export function codes(s) {
         <div class="actions"><button type="submit" class="btn btn-primary">Issue code</button></div>
       </form>
     </section>
-    <div class="table-wrap"><table class="table">
+    ${tableWrap(`Activation codes`)}<table class="table">
       <thead><tr><th scope="col">For</th><th scope="col">Code</th><th scope="col">Type</th><th scope="col">Status</th><th scope="col">Expires</th></tr></thead>
       <tbody>${rows || '<tr><td colspan="5">No codes issued yet.</td></tr>'}</tbody>
     </table></div>`,
@@ -729,7 +732,7 @@ export function library(s) {
       </div>` : ''}
     </form>
     <p class="t-caption" data-filter-count>${measures.length} questionnaire${measures.length === 1 ? '' : 's'}</p>
-    <div class="table-wrap"><table class="table table-library">
+    ${tableWrap(`Questionnaire library`)}<table class="table table-library">
       <thead><tr>
         <th scope="col" aria-sort="ascending"><button type="button" class="sort" data-sort="name" data-kind="text">Questionnaire</button></th>
         <th scope="col"><button type="button" class="sort" data-sort="domain" data-kind="text">Domain</button></th>
@@ -843,7 +846,7 @@ export function measurePage(s, id) {
       ${
         done.length
           ? `<p class="t-caption">Completed ${done.length} time${done.length === 1 ? '' : 's'}. Averages are of your clients' raw scores and are not norms.</p>
-            <div class="table-wrap"><table class="table"><thead><tr><th scope="col">Subscale</th><th scope="col">Scored</th><th scope="col">Average</th><th scope="col">Range</th><th scope="col">Bands</th></tr></thead><tbody>${averageRows}</tbody></table></div>`
+            ${tableWrap(`Averages across your clients`)}<table class="table"><thead><tr><th scope="col">Subscale</th><th scope="col">Scored</th><th scope="col">Average</th><th scope="col">Range</th><th scope="col">Bands</th></tr></thead><tbody>${averageRows}</tbody></table></div>`
           : '<p>No client has completed it yet.</p>'
       }
     </section>` : ''}
@@ -851,12 +854,12 @@ export function measurePage(s, id) {
     <section class="stack" aria-labelledby="h-subs">
       <h2 id="h-subs">Scoring</h2>
       <p class="t-caption">Response options: ${optionList(m.responseOptions)}.${rules.minAnswered ? ` A subscale is scored when at least ${Math.round(rules.minAnswered * 100)} percent of its questions are answered.` : ''}</p>
-      <div class="table-wrap"><table class="table"><thead><tr><th scope="col">Subscale</th><th scope="col">Questions</th><th scope="col">Method</th><th scope="col">Direction</th><th scope="col">Bands</th></tr></thead><tbody>${subscaleRows || '<tr><td colspan="5">No subscales.</td></tr>'}</tbody></table></div>
+      ${tableWrap(`Scoring by subscale`)}<table class="table"><thead><tr><th scope="col">Subscale</th><th scope="col">Questions</th><th scope="col">Method</th><th scope="col">Direction</th><th scope="col">Bands</th></tr></thead><tbody>${subscaleRows || '<tr><td colspan="5">No subscales.</td></tr>'}</tbody></table></div>
     </section>
 
     <section class="stack" aria-labelledby="h-q">
       <h2 id="h-q">Questions</h2>
-      <div class="table-wrap"><table class="table table-questions"><thead><tr><th scope="col">#</th><th scope="col">Question</th><th scope="col">Subscale</th><th scope="col">Notes</th></tr></thead><tbody>${questionRows}</tbody></table></div>
+      ${tableWrap(`Questions`)}<table class="table table-questions"><thead><tr><th scope="col">#</th><th scope="col">Question</th><th scope="col">Subscale</th><th scope="col">Notes</th></tr></thead><tbody>${questionRows}</tbody></table></div>
     </section>`,
     true,
   );
@@ -905,7 +908,7 @@ export function measureTestResult(s, id) {
       <h2 id="h-tr">How these answers would score</h2>
       <p class="t-caption">${scores.answeredItems} of ${scores.totalItems} answered. This is the draft you would see on the client's record; nothing has been saved.</p>
       ${scores.flags.length ? `<div class="notice notice-error" role="alert"><p class="t-ui-strong">Answers that would alert you</p><ul class="result-list">${scores.flags.map((f) => `<li><p>${esc(f.text)}</p><p class="t-caption">Answered ${f.value}. ${esc(f.note)}</p></li>`).join('')}</ul></div>` : ''}
-      <div class="table-wrap"><table class="table"><thead><tr><th scope="col">Subscale</th><th scope="col">Score</th><th scope="col">Band</th><th scope="col">Answered</th></tr></thead><tbody>${rows}</tbody></table></div>
+      ${tableWrap(`Test run scores`)}<table class="table"><thead><tr><th scope="col">Subscale</th><th scope="col">Score</th><th scope="col">Band</th><th scope="col">Answered</th></tr></thead><tbody>${rows}</tbody></table></div>
       ${draft.clientFacing ? `<div class="split">
         <div class="stack"><p class="t-ui-strong">Strengths the client would see</p>${draft.strengths.length ? `<ul class="result-list">${draft.strengths.map((x) => `<li><p>${esc(x.label)}</p><p class="t-caption">${esc(x.reason)}</p></li>`).join('')}</ul>` : '<p class="t-caption">None.</p>'}</div>
         <div class="stack"><p class="t-ui-strong">Areas of focus the client would see</p>${draft.focus.length ? `<ul class="result-list">${draft.focus.map((x) => `<li><p>${esc(x.label)}</p><p class="t-caption">${esc(x.reason)}${x.topic?.label ? ` Links to ${esc(x.topic.label)}.` : ''}</p></li>`).join('')}</ul>` : '<p class="t-caption">None.</p>'}</div>

@@ -632,12 +632,24 @@ function dialog(html) {
 }
 const closeDialog = () => document.getElementById('dialog')?.close();
 
+// The phone menu drawer. 1 place opens and closes it, so its state, its
+// name and focus always agree: open moves focus into the drawer and takes
+// the page behind out of reach; close hands focus back to the menu button.
+function setMenu(open, { returnFocus = true } = {}) {
+  const viewer = app.querySelector('.viewer');
+  if (!viewer || (viewer.dataset.menu === 'open') === open) return;
+  const button = viewer.querySelector('.menu-button');
+  viewer.dataset.menu = open ? 'open' : 'closed';
+  button?.setAttribute('aria-expanded', String(open));
+  button?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  for (const el of viewer.querySelectorAll('.topbar, .workspace')) el.inert = open;
+  if (open) viewer.querySelector('.sidebar .nav-link[aria-current="page"], .sidebar .nav-link')?.focus();
+  else if (returnFocus) button?.focus();
+}
+
 const actions = {
-  menu(t) {
-    const viewer = app.querySelector('.viewer');
-    const open = viewer.dataset.menu !== 'open';
-    viewer.dataset.menu = open ? 'open' : 'closed';
-    t.setAttribute('aria-expanded', String(open));
+  menu() {
+    setMenu(app.querySelector('.viewer')?.dataset.menu !== 'open');
   },
   book() {
     dialog('<div class="stack-lg"><h2>Book your feedback session</h2><p>Sarah\'s online booking page is not connected yet. Contact Sarah to book your feedback session.</p><div class="actions"><button type="button" class="btn btn-primary" data-action="close">Close</button></div></div>');
@@ -790,8 +802,7 @@ const actions = {
 };
 
 document.addEventListener('click', async (event) => {
-  const openViewer = app.querySelector('.viewer[data-menu="open"]');
-  if (openViewer && !event.target.closest('.sidebar, .menu-button')) openViewer.dataset.menu = 'closed';
+  if (app.querySelector('.viewer[data-menu="open"]') && !event.target.closest('.sidebar, .menu-button')) setMenu(false);
 
   const link = event.target.closest('a[href^="/"]');
   if (link && !link.target && !event.metaKey && !event.ctrlKey && !/^\/(sample|preview|styleguide|assets)/.test(link.getAttribute('href'))) {
@@ -922,10 +933,7 @@ document.addEventListener('change', async (event) => {
 });
 
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') {
-    const viewer = app.querySelector('.viewer[data-menu="open"]');
-    if (viewer) viewer.dataset.menu = 'closed';
-  }
+  if (event.key === 'Escape') setMenu(false);
   const form = app.querySelector('[data-form="item"], [data-form="test-item"]');
   if (!form || event.target.matches('input[type="text"], input[type="email"], textarea, select')) return;
   const n = Number(event.key);

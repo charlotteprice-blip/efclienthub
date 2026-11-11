@@ -1266,3 +1266,59 @@ th .sort:focus-visible {
 .factor-saved:empty {
   display: none;
 }
+
+/* Questions table on a questionnaire page: the question and its notes wrap,
+   so the table fits its frame */
+.table-questions th,
+.table-questions td {
+  white-space: normal;
+  vertical-align: top;
+}
+
+.table-questions th:nth-child(1) { width: 6%; }
+.table-questions th:nth-child(2) { width: 48%; }
+.table-questions th:nth-child(3) { width: 20%; }
+.table-questions th:nth-child(4) { width: 26%; }
+
+/* Task rows size themselves to the room they are given, not the screen:
+   in a narrow panel or column the text takes the full row and the pill
+   and action sit beneath it */
+.task-list {
+  container-type: inline-size;
+}
+
+@container (max-width: 519px) {
+  .task {
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: var(--space-3);
+  }
+  .task > :first-child {
+    grid-column: 1 / -1;
+  }
+  .task > .status {
+    justify-self: start;
+    white-space: normal;
+  }
+}
+
+/* Home goes to 1 column before its task rows are squeezed */
+@media (max-width: 1199px) {
+  .home-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Client record tabs on a phone: All clients first, tabs wrap beneath */
+@media (max-width: 899px) {
+  .subnav {
+    gap: var(--space-2);
+  }
+  .subnav ul {
+    flex-wrap: wrap;
+  }
+  .subnav-back {
+    order: 0;
+    flex: 1 1 100%;
+    margin-left: 0;
+  }
+}

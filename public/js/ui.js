@@ -80,6 +80,7 @@ function shell({ nav, title, content, foot, account, mode, wide }) {
         <img class="brand-mark" src="${nav.markSrc}" alt="" width="32" height="32">
         <span class="brand-name">Executive Frame</span>
       </a>
+      <button type="button" class="btn btn-quiet drawer-close" data-action="menu">Close menu</button>
       <ul class="nav">
         ${nav.items
           .map(
