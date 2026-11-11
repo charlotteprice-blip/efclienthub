@@ -12,6 +12,7 @@ import {
 import { auth } from '../firebase.js';
 import { applyAccent } from '../client-types.js';
 import { validateIntake } from '../intake-rules.js';
+import { createIdleWatch } from '../idle.js';
 import { createJourneyRing } from '../journey-ring.js';
 import { createMark } from '../mark.js';
 import { esc, fromLocalInput } from '../ui.js';
@@ -239,6 +240,112 @@ async function draw() {
 
 // ---------- auth ----------
 
+// ---------- idle sign out ----------
+//
+// Clients and staff are logged out after 30 minutes with no activity
+// (app.json `idle`), with a warning 1 minute before. The timing rules are
+// in ../idle.js. Only the time of the last activity is stored.
+
+const IDLE_KEY = 'ef-hub-last-activity';
+function forgetActivity() {
+  try {
+    localStorage.removeItem(IDLE_KEY);
+  } catch {
+    // Storage is unavailable; the clock then runs in this tab only.
+  }
+}
+let idleMemory = null;
+const idle = createIdleWatch({
+  limitMs: (config.idle?.minutes ?? 30) * 60000,
+  warnMs: (config.idle?.warnSeconds ?? 60) * 1000,
+  read() {
+    try {
+      return localStorage.getItem(IDLE_KEY) ?? idleMemory;
+    } catch {
+      return idleMemory;
+    }
+  },
+  write(t) {
+    idleMemory = t;
+    try {
+      localStorage.setItem(IDLE_KEY, String(t));
+    } catch {
+      // Kept in memory instead.
+    }
+  },
+  onWarn() {
+    dialog(`<div class="stack-lg"><h2>Are you still there?</h2><p>Nothing has happened here for a while, so you will be logged out in ${idleWarnText()} to keep your information private.</p><div class="actions"><button type="button" class="btn btn-primary" data-action="stay">Stay logged in</button><button type="button" class="btn btn-secondary" data-action="logout-now">Log out</button></div></div>`);
+    const d = document.getElementById('dialog');
+    d.setAttribute('role', 'alertdialog');
+    S.idleWarning = true;
+    // Closing the warning with Escape also means "I am here".
+    d.addEventListener('close', () => {
+      if (!S.idleWarning) return;
+      S.idleWarning = false;
+      idle.stay();
+    }, { once: true });
+  },
+  onActive() {
+    if (S.idleWarning) closeDialog();
+    S.idleWarning = false;
+  },
+  onExpire() {
+    idleLogout();
+  },
+});
+function idleWarnText() {
+  const seconds = config.idle?.warnSeconds ?? 60;
+  return seconds % 60 === 0 ? `${seconds / 60} minute${seconds === 60 ? '' : 's'}` : `${seconds} seconds`;
+}
+
+// Before an idle log out, anything typed into a box the app already saves
+// is saved: Sarah's formulation summary and a client's comment on a
+// formulation card. Answers to questionnaires are saved as they are chosen.
+async function saveTyped() {
+  if (!S.ctx) return;
+  const jobs = [];
+  const summary = app.querySelector('[data-form="formulation-summary"] [name="summary"]');
+  if (summary && S.role === 'practitioner') {
+    const form = summary.closest('form');
+    const uid = form.dataset.uid;
+    const saved = S.draftSummary[uid] ?? S.ctx.formulationDrafts?.[uid]?.summary ?? '';
+    if (summary.value !== saved) jobs.push(handlers['formulation-summary']({ summary: summary.value }, form));
+  }
+  if (!STAFF_ROLES.includes(S.role)) {
+    for (const form of app.querySelectorAll('[data-form="factor-response"]')) {
+      const typed = String(form.querySelector('[name="comment"]')?.value ?? '').trim();
+      const saved = S.ctx.formulationResponses?.[form.dataset.factor]?.comment ?? '';
+      if (typed && typed !== saved) jobs.push(saveFactorResponse(form));
+    }
+  }
+  await Promise.allSettled(jobs);
+}
+
+async function idleLogout() {
+  if (!S.user) return;
+  const minutes = config.idle?.minutes ?? 30;
+  try {
+    await saveTyped();
+  } catch {
+    // Logging out matters more than a save that will not go through.
+  }
+  closeDialog();
+  S.idleWarning = false;
+  S.lastIssued = null;
+  S.form = {};
+  await signOut(auth);
+  setFlash(`You were logged out after ${minutes} minutes of no activity, to keep your information private. Everything you saved is still here. Log in to carry on.`);
+  navigate('/login');
+}
+
+for (const type of ['pointerdown', 'keydown', 'wheel', 'touchstart']) document.addEventListener(type, () => idle.activity(), { capture: true, passive: true });
+document.addEventListener('scroll', () => idle.activity(), { capture: true, passive: true });
+setInterval(() => idle.check(), 5000);
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) idle.check();
+});
+window.addEventListener('focus', () => idle.check());
+
 onAuthStateChanged(auth, async (user) => {
   S.user = user;
   S.role = null;
@@ -248,6 +355,16 @@ onAuthStateChanged(auth, async (user) => {
     S.role = token.claims.role ?? null;
   }
   S.ready = true;
+  // The idle clock runs only while someone is signed in. A fresh log in
+  // starts it; a session the browser kept is judged by its last activity.
+  if (user) {
+    const fresh = S.freshLogin;
+    S.freshLogin = false;
+    if (idle.start({ fresh }) === 'expired') return;
+  } else {
+    idle.stop();
+    forgetActivity();
+  }
   route();
 });
 
@@ -326,10 +443,12 @@ const handlers = {
       return route();
     }
     try {
+      S.freshLogin = true;
       const cred = await createUserWithEmailAndPassword(auth, data.email.trim(), data.password);
       await updateProfile(cred.user, { displayName: data.name.trim() });
       S.form = {};
     } catch (e) {
+      S.freshLogin = false;
       S.errors = authError(e);
       return route();
     }
@@ -338,9 +457,11 @@ const handlers = {
   async login(data) {
     S.form.login = { email: data.email };
     try {
+      S.freshLogin = true;
       await signInWithEmailAndPassword(auth, String(data.email ?? '').trim(), String(data.password ?? ''));
       S.form = {};
     } catch (e) {
+      S.freshLogin = false;
       S.errors = authError(e);
       return route();
     }
@@ -625,6 +746,7 @@ function dialog(html) {
     document.body.append(d);
   }
   d.innerHTML = html;
+  d.removeAttribute('role');
   // The heading names the dialog for a screen reader.
   const heading = d.querySelector('h2');
   if (heading) {
@@ -659,6 +781,9 @@ const actions = {
     dialog(`<div class="stack-lg"><h2>Book your feedback session</h2><p>Sarah's online booking page is not connected yet. To book your feedback session, ${contact ? `email Sarah at ${contact}` : 'contact Sarah'}.</p><div class="actions"><button type="button" class="btn btn-primary" data-action="close">Close</button></div></div>`);
   },
   close: closeDialog,
+  stay() {
+    idle.stay();
+  },
   retry() {
     S.loadedAt = 0;
     return route();
@@ -692,6 +817,8 @@ const actions = {
     return navigate('/login');
   },
   async 'logout-now'() {
+    S.idleWarning = false;
+    closeDialog();
     await signOut(auth);
     return navigate('/login');
   },
