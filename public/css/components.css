@@ -990,7 +990,6 @@ th .sort:focus-visible {
 .map-empty {
   margin: 0;
   font-size: var(--type-caption-size);
-  opacity: 0.75;
 }
 
 .map-list {
@@ -1009,18 +1008,71 @@ th .sort:focus-visible {
   gap: 6px;
 }
 
-.map-dot {
+/* Response marks: a shape for each answer as well as a colour. Fits is a
+   moss tick, partly an ochre half, does not fit a slate cross, and not
+   answered an empty ring. Brick stays for form errors only. */
+.map-mark {
   flex: none;
-  width: 8px;
-  height: 8px;
-  margin-top: 5px;
-  border-radius: 50%;
-  background: var(--hairline);
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
 }
 
-.map-dot-fits { background: var(--status-done); }
-.map-dot-partly { background: var(--status-attention); }
-.map-dot-no { background: #8A3F34; }
+.fv-mark .m-line { fill: none; stroke: var(--panel); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.fv-mark .m-ring { fill: var(--panel); stroke: var(--ink); stroke-width: 1.5; }
+.fv-mark-fits .m-fill { fill: var(--status-done); }
+.fv-mark-partly .m-fill { fill: var(--status-attention); }
+.fv-mark-partly .m-ring { stroke: var(--status-attention); }
+.fv-mark-no .m-fill { fill: var(--ink); }
+
+.fv-key {
+  list-style: none;
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line);
+}
+
+.fv-key li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.fv-key .map-mark {
+  margin-top: 0;
+}
+
+/* An SVG drawing is a fixed 960 unit canvas. Where its container is too
+   narrow for the text to be read, the map is shown in its place. */
+.fv-wrap {
+  container-type: inline-size;
+}
+
+.fv-narrow {
+  display: none;
+}
+
+.fv-narrow > .t-caption {
+  margin-top: var(--space-2);
+}
+
+@container (max-width: 799px) {
+  .fv-wide { display: none; }
+  .fv-narrow { display: block; }
+}
+
+@container (max-width: 599px) {
+  .map {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'pre' 'a1' 'pci' 'a2' 'pst' 'lp' 'per' 'pro';
+  }
+  .map-arrow, .map-loop { transform: rotate(90deg); }
+  .fv-layers { grid-template-columns: 1fr; }
+}
 
 @media (max-width: 899px) {
   .map {
@@ -1036,7 +1088,7 @@ th .sort:focus-visible {
   margin: 0;
 }
 
-.fv svg {
+.fv > svg {
   display: block;
   width: 100%;
   height: auto;
@@ -1051,26 +1103,22 @@ th .sort:focus-visible {
 .fv-navy { fill: var(--inv-ground); }
 .fv-ink { fill: var(--ink); }
 .fv-inv { fill: var(--inv-ink); }
-.fv-muted { fill: var(--ink); opacity: 0.7; }
+.fv-muted { fill: var(--ink); }
 .fv-arrowhead { fill: var(--ink); }
 .fv-line { fill: none; stroke: var(--ink); stroke-width: 1.5; }
 .fv-dotted { fill: none; stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 3 4; opacity: 0.7; }
 .fv-stem { fill: none; stroke: var(--ink); stroke-width: 3; }
 .fv-petal { fill: var(--panel); fill-opacity: 0.6; stroke: var(--ink); stroke-width: 1.5; }
-.fv-leaf { fill: var(--panel); stroke: #5E7A4F; stroke-width: 1.5; }
-.fv-bank { fill: none; stroke: #5E7A4F; stroke-width: 3; }
+.fv-leaf { fill: var(--panel); stroke: var(--status-done); stroke-width: 1.5; }
+.fv-bank { fill: none; stroke: var(--status-done); stroke-width: 3; }
 .fv-flow { fill: none; stroke: var(--ink); stroke-width: 2; stroke-dasharray: 6 6; }
-.fv-eddy, .fv-circuit { fill: none; stroke: #9A5A2E; stroke-width: 2.5; }
-.fv-exit { fill: none; stroke: #5E7A4F; stroke-width: 2.5; }
-.fv-keep-edge { stroke: #9A5A2E; stroke-width: 1.5; }
-.fv-help-edge { stroke: #5E7A4F; stroke-width: 1.5; }
+.fv-eddy, .fv-circuit { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+.fv-exit { fill: none; stroke: var(--status-done); stroke-width: 2.5; }
+.fv-keep-edge { stroke: var(--accent); stroke-width: 1.5; }
+.fv-help-edge { stroke: var(--status-done); stroke-width: 1.5; }
 .fv-sector { fill: var(--panel); stroke: var(--ground); stroke-width: 4; }
-.fv-sector-help { fill: #EEF2E8; }
-.fv-node { stroke: var(--ink); stroke-width: 1.5; }
-.fv-dot-fits { fill: var(--status-done); }
-.fv-dot-partly { fill: var(--status-attention); }
-.fv-dot-no { fill: #8A3F34; }
-.fv-dot-none { fill: var(--ground); stroke: var(--hairline); stroke-width: 1.5; }
+.fv-sector-help { fill: var(--status-done-tint); }
+.fv-node { fill: var(--panel); stroke: var(--ink); stroke-width: 1.5; }
 
 /* Motion: cards rise in one after another, lines draw themselves, the
    balance beam settles into its tilt. All of it is skipped when the person
@@ -1159,13 +1207,11 @@ th .sort:focus-visible {
 }
 
 .fv-layer-now { background: var(--inv-ground); color: var(--inv-ink); }
-.fv-layer-deep { background: var(--panel); opacity: 0.85; }
-.fv-layer-side { border: 2px solid #5E7A4F; }
+.fv-layer-deep { background: var(--panel); }
+.fv-layer-side { border: 2px solid var(--status-done); }
 
-.fv-layers .map-dot { background: var(--hairline); }
-.fv-layers .map-dot-fits { background: var(--status-done); }
-.fv-layers .map-dot-partly { background: var(--status-attention); }
-.fv-layers .map-dot-no { background: #8A3F34; }
+/* On the navy layer the marks keep their paper ground so they stay clear */
+.fv-layer-now .fv-mark-none .m-ring { stroke: var(--inv-ground); }
 
 .fv-view-pick {
   display: flex;

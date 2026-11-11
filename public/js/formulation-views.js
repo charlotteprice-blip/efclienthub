@@ -3,9 +3,17 @@
 // layers are HTML, the other 5 are inline SVG that scales with its container.
 //
 // Shared rules so the drawings feel like one set: a 40px frame, factors as
-// cream cards with the response dot at the left and the same inner padding,
+// cream cards with the response mark at the left and the same inner padding,
 // card heights measured from the wrapped text so nothing overlaps, and
 // positions computed from the number of factors rather than fixed slots.
+//
+// The client's response to a card is a mark with its own shape as well as
+// its colour (tick, half, cross, empty ring), a key in words sits under
+// every drawing, and the text alternative counts the responses.
+//
+// The SVG drawings are a fixed 960 unit canvas, so below 800px of container
+// width their text would be too small to read. Each one therefore carries
+// the map as well, and CSS shows the map in its place on a narrow container.
 // Colours and motion come from classes in components.css (no style
 // attributes, so the strict CSP holds and both themes work).
 
@@ -27,8 +35,9 @@ const W = 960;
 const PAD = 40;
 const GAP = 16;
 const CARD_PAD = 14;
-const DOT = 7;
-const TEXT = 13;
+const DOT = 8;
+const TEXT = 14;
+const SMALL = 12; // the smallest text in any drawing
 const LINE = TEXT + 5;
 const CHAR = 0.52; // average glyph width as a share of the font size
 
@@ -39,7 +48,10 @@ const fitOf = (responses, f) => responses?.[f.id]?.fit ?? null;
 const deg = (d) => (d * Math.PI) / 180;
 const r1 = (n) => Math.round(n * 10) / 10;
 
-function wrap(str, widthPx, size = TEXT, maxLines = 3) {
+// Wraps text to a width. Cards in a measured column pass no limit, so a
+// factor is never cut short there; cards placed on a curve (flower petals,
+// the loop) keep a limit of 3 lines because their neighbours are fixed.
+function wrap(str, widthPx, size = TEXT, maxLines = Infinity) {
   const perLine = Math.max(6, Math.floor(widthPx / (size * CHAR)));
   const words = String(str).split(/\s+/).filter(Boolean);
   const lines = [];
@@ -61,25 +73,47 @@ function wrap(str, widthPx, size = TEXT, maxLines = 3) {
 
 // A block of text. Returns the markup and its height. x is the left edge
 // (anchor start), the centre (middle) or the right edge (end).
-function textBlock(x, y, str, { width, size = TEXT, cls = 'fv-ink', anchor = 'start', weight = 400, max = 3 } = {}) {
+function textBlock(x, y, str, { width, size = TEXT, cls = 'fv-ink', anchor = 'start', weight = 400, max = Infinity } = {}) {
   const lines = wrap(str, width, size, max);
   const lh = size + 5;
   const svg = lines.map((l, i) => `<text x="${r1(x)}" y="${r1(y + size + i * lh)}" font-size="${size}" class="${cls}" text-anchor="${anchor}" font-weight="${weight}">${esc(l)}</text>`).join('');
   return { svg, h: lines.length * lh };
 }
 
-const dot = (x, y, fit) => `<circle cx="${r1(x)}" cy="${r1(y)}" r="${DOT}" class="fv-dot fv-dot-${fit ?? 'none'}"><title>${esc(fit ? FIT_LABELS[fit] : 'Not answered yet')}</title></circle>`;
+// The response marks, drawn in a 16 unit box: a different shape for each
+// answer so the meaning never rests on colour.
+const NOT_ANSWERED = 'Not answered yet';
+const MARKS = {
+  fits: '<circle cx="8" cy="8" r="7" class="m-fill"/><path d="M4.8 8.2l2.1 2.1 4.3-4.6" class="m-line"/>',
+  partly: '<circle cx="8" cy="8" r="6.25" class="m-ring"/><path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" class="m-fill"/>',
+  no: '<circle cx="8" cy="8" r="7" class="m-fill"/><path d="M5.4 5.4l5.2 5.2M10.6 5.4l-5.2 5.2" class="m-line"/>',
+  none: '<circle cx="8" cy="8" r="6.25" class="m-ring"/>',
+};
+const markKind = (fit) => (MARKS[fit] && fit !== 'none' ? fit : 'none');
+const markLabel = (fit) => FIT_LABELS[fit] ?? NOT_ANSWERED;
+// Inside an SVG drawing, centred on x, y.
+const dot = (x, y, fit) => `<g class="fv-mark fv-mark-${markKind(fit)}" transform="translate(${r1(x - DOT)},${r1(y - DOT)})"><title>${esc(markLabel(fit))}</title>${MARKS[markKind(fit)]}</g>`;
+// In the HTML map, layers and key.
+const markHtml = (fit) => `<svg class="fv-mark map-mark fv-mark-${markKind(fit)}" viewBox="0 0 16 16" aria-hidden="true">${MARKS[markKind(fit)]}</svg>`;
+// Built when asked for: this file and views-client.js import each other.
+const key = () => `<ul class="fv-key" aria-label="Key to the marks">${['fits', 'partly', 'no', 'none'].map((k) => `<li>${markHtml(k)}${esc(markLabel(k))}</li>`).join('')}</ul>`;
+// The responses in words, for the text alternative of every drawing.
+function responseSummary(factors, responses) {
+  const n = { fits: 0, partly: 0, no: 0, none: 0 };
+  for (const f of factors) n[markKind(fitOf(responses, f))] += 1;
+  return `${factors.length} factor${factors.length === 1 ? '' : 's'}. Responses: ${n.fits} marked fits, ${n.partly} partly, ${n.no} does not fit, ${n.none} not answered yet`;
+}
 const rect = (x, y, w, h, cls = 'fv-card') => `<rect x="${r1(x)}" y="${r1(y)}" width="${r1(w)}" height="${r1(h)}" rx="12" class="${cls}"/>`;
-const heading = (x, y, str, anchor = 'start', cls = 'fv-ink') => `<text x="${r1(x)}" y="${r1(y)}" font-size="13" class="${cls}" text-anchor="${anchor}" font-weight="500">${esc(str)}</text>`;
+const heading = (x, y, str, anchor = 'start', cls = 'fv-ink') => `<text x="${r1(x)}" y="${r1(y)}" font-size="${TEXT}" class="${cls}" text-anchor="${anchor}" font-weight="500">${esc(str)}</text>`;
 const DEFS = '<defs><marker id="fv-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="fv-arrowhead"/></marker></defs>';
 let seq = 0;
 const enter = (inner, i = seq++) => `<g class="fv-in fv-dl-${Math.min(i, 11)}">${inner}</g>`;
 
 // Measures a factor card without drawing it.
-const cardHeight = (f, w, { max = 3, withDot = true, size = TEXT } = {}) => CARD_PAD * 2 + wrap(f.text, w - CARD_PAD * 2 - (withDot ? DOT * 2 + 10 : 0), size, max).length * (size + 5);
+const cardHeight = (f, w, { max = Infinity, withDot = true, size = TEXT } = {}) => CARD_PAD * 2 + wrap(f.text, w - CARD_PAD * 2 - (withDot ? DOT * 2 + 10 : 0), size, max).length * (size + 5);
 
 // A factor as a card: dot at the left, text beside it, height from the text.
-function card(x, y, w, f, fit, { cls = 'fv-card', textCls = 'fv-ink', max = 3, withDot = true, size = TEXT } = {}) {
+function card(x, y, w, f, fit, { cls = 'fv-card', textCls = 'fv-ink', max = Infinity, withDot = true, size = TEXT } = {}) {
   const inset = withDot ? DOT * 2 + 10 : 0;
   const tb = textBlock(x + CARD_PAD + inset, y + CARD_PAD, f.text, { width: w - CARD_PAD * 2 - inset, size, cls: textCls, max });
   const h = CARD_PAD * 2 + tb.h;
@@ -89,7 +123,7 @@ function card(x, y, w, f, fit, { cls = 'fv-card', textCls = 'fv-ink', max = 3, w
 
 // A column of factor cards with an optional heading; returns the markup and
 // the total height. Empty lists show a quiet placeholder.
-function column(x, y, w, list, responses, { title, edge = '', max = 3, empty = 'Nothing here yet' } = {}) {
+function column(x, y, w, list, responses, { title, edge = '', max = Infinity, empty = 'Nothing here yet' } = {}) {
   let svg = '';
   let cy = y;
   if (title) {
@@ -97,7 +131,7 @@ function column(x, y, w, list, responses, { title, edge = '', max = 3, empty = '
     cy += 13 + GAP / 2 + 4;
   }
   if (!list.length) {
-    const tb = textBlock(x, cy, empty, { width: w, cls: 'fv-muted', size: 12 });
+    const tb = textBlock(x, cy, empty, { width: w, cls: 'fv-muted', size: SMALL });
     return { svg: svg + tb.svg, h: cy + tb.h - y };
   }
   list.forEach((f) => {
@@ -111,13 +145,13 @@ function column(x, y, w, list, responses, { title, edge = '', max = 3, empty = '
 // Background and trigger as 2 equal cards across the bottom.
 function footer(z, y, responses) {
   const w = (W - PAD * 2 - GAP) / 2;
-  const left = column(PAD, y, w, z.predisposing, responses, { title: titleOf('predisposing'), max: 2 });
-  const right = column(PAD + w + GAP, y, w, z.precipitating, responses, { title: titleOf('precipitating'), max: 2 });
+  const left = column(PAD, y, w, z.predisposing, responses, { title: titleOf('predisposing') });
+  const right = column(PAD + w + GAP, y, w, z.precipitating, responses, { title: titleOf('precipitating') });
   return { svg: left.svg + right.svg, h: Math.max(left.h, right.h) };
 }
 
-const frame = (view, h, body, factors) =>
-  `<figure class="fv fv-${view}"><svg viewBox="0 0 ${W} ${r1(h)}" role="img" aria-label="${esc(`Formulation drawn as ${VIEW_OPTIONS.find((o) => o.id === view)?.label.toLowerCase()} with ${factors.length} factor${factors.length === 1 ? '' : 's'}`)}">${DEFS}<rect width="${W}" height="${r1(h)}" rx="18" class="fv-bg"/>${body}</svg></figure>`;
+const frame = (view, h, body, factors, responses) =>
+  `<figure class="fv fv-${view}"><svg viewBox="0 0 ${W} ${r1(h)}" role="img" aria-label="${esc(`Formulation drawn as ${VIEW_OPTIONS.find((o) => o.id === view)?.label.toLowerCase()} with ${responseSummary(factors, responses)}`)}">${DEFS}<rect width="${W}" height="${r1(h)}" rx="18" class="fv-bg"/>${body}</svg></figure>`;
 
 const problem = (z) => ({ id: 'presenting', text: z.presenting.map((f) => f.text).join('. ') || titleOf('presenting') });
 
@@ -126,9 +160,9 @@ function grid(factors, responses) {
   const z = byZone(factors);
   const box = (id, hint, i) =>
     `<div class="map-box fv-in fv-dl-${i}" data-zone="${id}"><p class="map-title">${esc(titleOf(id))}</p><p class="map-hint">${esc(hint)}</p>${
-      z[id].length ? `<ul class="map-list">${z[id].map((f) => `<li><i class="map-dot map-dot-${fitOf(responses, f) ?? 'none'}" title="${esc(fitOf(responses, f) ? FIT_LABELS[fitOf(responses, f)] : 'Not answered yet')}"></i>${esc(f.text)}</li>`).join('')}</ul>` : '<p class="map-empty">Nothing here yet</p>'
+      z[id].length ? `<ul class="map-list">${z[id].map((f) => `<li title="${esc(markLabel(fitOf(responses, f)))}">${markHtml(fitOf(responses, f))}${esc(f.text)}</li>`).join('')}</ul>` : '<p class="map-empty">Nothing here yet</p>'
     }</div>`;
-  return `<div class="fv map" role="img" aria-label="Formulation map with ${factors.length} factor${factors.length === 1 ? '' : 's'}">
+  return `<div class="fv map" role="img" aria-label="${esc(`Formulation map with ${responseSummary(factors, responses)}`)}">
     ${box('predisposing', 'Predisposing', 0)}<span class="map-arrow" aria-hidden="true">&#8594;</span>
     ${box('precipitating', 'Precipitating', 1)}<span class="map-arrow" aria-hidden="true">&#8594;</span>
     ${box('presenting', 'Presenting', 2)}<span class="map-loop" aria-hidden="true">&#8635;</span>
@@ -139,9 +173,9 @@ function grid(factors, responses) {
 // ---------- layers (HTML) ----------
 function layers(factors, responses) {
   const z = byZone(factors);
-  const item = (f) => `<li><i class="map-dot map-dot-${fitOf(responses, f) ?? 'none'}" title="${esc(fitOf(responses, f) ? FIT_LABELS[fitOf(responses, f)] : 'Not answered yet')}"></i>${esc(f.text)}</li>`;
+  const item = (f) => `<li title="${esc(markLabel(fitOf(responses, f)))}">${markHtml(fitOf(responses, f))}${esc(f.text)}</li>`;
   const block = (cls, hd, list, i) => `<div class="fv-layer ${cls} fv-in fv-dl-${i}"><p class="map-title">${esc(hd)}</p>${list.length ? `<ul class="map-list">${list.map(item).join('')}</ul>` : '<p class="map-empty">Nothing here yet</p>'}</div>`;
-  return `<div class="fv fv-layers" role="img" aria-label="Formulation drawn as layers with ${factors.length} factor${factors.length === 1 ? '' : 's'}">
+  return `<div class="fv fv-layers" role="img" aria-label="${esc(`Formulation drawn as layers with ${responseSummary(factors, responses)}`)}">
     <div class="fv-layer-stack">
       ${block('fv-layer-now', 'What is happening now', z.presenting, 0)}
       ${block('fv-layer-mid', 'Triggers and what keeps it going', [...z.precipitating, ...z.perpetuating], 1)}
@@ -160,7 +194,8 @@ function flower(factors, responses) {
   const R = 84; // centre
   const TIP = 250; // distance from centre to the middle of a petal card
   const CW = 172; // petal card width
-  const petalH = petals.length ? Math.max(...petals.map((f) => cardHeight(f, CW))) : 0;
+  const ON_CURVE = { max: 3 }; // petals sit at fixed points round the centre
+  const petalH = petals.length ? Math.max(...petals.map((f) => cardHeight(f, CW, ON_CURVE))) : 0;
   const cy = PAD + 13 + GAP + (petals.length ? TIP + petalH / 2 + 34 : R + 20);
   let b = heading(cx, PAD + 13, titleOf('perpetuating'), 'middle');
   const n = petals.length;
@@ -171,10 +206,10 @@ function flower(factors, responses) {
     const tx = cx + Math.cos(am) * TIP, ty = cy + Math.sin(am) * TIP;
     const reach = TIP + 70;
     const loop = `<path d="M${r1(cx + Math.cos(a1) * R)},${r1(cy + Math.sin(a1) * R)} C${r1(cx + Math.cos(a1) * reach * 1.35)},${r1(cy + Math.sin(a1) * reach * 1.35)} ${r1(cx + Math.cos(a2) * reach * 1.35)},${r1(cy + Math.sin(a2) * reach * 1.35)} ${r1(cx + Math.cos(a2) * R)},${r1(cy + Math.sin(a2) * R)}" class="fv-petal fv-draw" marker-end="url(#fv-arrow)"/>`;
-    const c = card(tx - CW / 2, ty - cardHeight(f, CW) / 2, CW, f, fitOf(responses, f), { cls: 'fv-card fv-keep-edge' });
+    const c = card(tx - CW / 2, ty - cardHeight(f, CW, ON_CURVE) / 2, CW, f, fitOf(responses, f), { cls: 'fv-card fv-keep-edge', ...ON_CURVE });
     b += enter(loop + c.svg, i);
   });
-  if (!n) b += textBlock(cx, cy - R - 40, 'Nothing here yet', { width: 300, anchor: 'middle', cls: 'fv-muted', size: 12 }).svg;
+  if (!n) b += textBlock(cx, cy - R - 40, 'Nothing here yet', { width: 300, anchor: 'middle', cls: 'fv-muted', size: SMALL }).svg;
   const core = textBlock(cx, 0, problem(z).text, { width: R * 2 - 24, anchor: 'middle', cls: 'fv-inv', weight: 500, max: 4 });
   b += enter(`<g><title>${esc(problem(z).text)}</title><circle cx="${cx}" cy="${r1(cy)}" r="${R}" class="fv-navy"/>${textBlock(cx, cy - core.h / 2, problem(z).text, { width: R * 2 - 24, anchor: 'middle', cls: 'fv-inv', weight: 500, max: 4 }).svg}</g>`, n);
   // stem and leaves
@@ -193,7 +228,7 @@ function flower(factors, responses) {
     ly += h + GAP / 2;
   });
   if (!leaves.length) {
-    const tb = textBlock(cx + 14, ly, 'Nothing here yet', { width: 300, cls: 'fv-muted', size: 12 });
+    const tb = textBlock(cx + 14, ly, 'Nothing here yet', { width: 300, cls: 'fv-muted', size: SMALL });
     b += tb.svg;
     ly += tb.h;
   }
@@ -201,7 +236,7 @@ function flower(factors, responses) {
   b += `<path d="M${cx},${r1(cy + R)} L${cx},${r1(stemEnd)}" class="fv-stem fv-draw"/>` + leafSvg.join('');
   const foot = footer(z, stemEnd + GAP, responses);
   b += foot.svg;
-  return frame('flower', stemEnd + GAP + foot.h + PAD, b, factors);
+  return frame('flower', stemEnd + GAP + foot.h + PAD, b, factors, responses);
 }
 
 // ---------- river ----------
@@ -224,7 +259,7 @@ function river(factors, responses) {
       b += enter(c.svg, i);
       top = Math.max(top, y + c.h);
     } else {
-      const col = column(x, PAD, colW, list, responses, { title: hd, max: 2 });
+      const col = column(x, PAD, colW, list, responses, { title: hd });
       b += col.svg;
       top = Math.max(top, PAD + col.h);
     }
@@ -250,11 +285,11 @@ function river(factors, responses) {
   // below the river: the banks (protective) and the eddy list (perpetuating)
   const by = ry + bandH + GAP * 2;
   const half = (W - PAD * 2 - GAP) / 2;
-  const banks = column(PAD, by, half, z.protective, responses, { title: `${titleOf('protective')}: the banks`, edge: 'fv-help-edge', max: 2 });
-  const keep = column(PAD + half + GAP, by, half, z.perpetuating, responses, { title: `${titleOf('perpetuating')}: the eddy`, edge: 'fv-keep-edge', max: 2 });
+  const banks = column(PAD, by, half, z.protective, responses, { title: `${titleOf('protective')}: the banks`, edge: 'fv-help-edge' });
+  const keep = column(PAD + half + GAP, by, half, z.perpetuating, responses, { title: `${titleOf('perpetuating')}: the eddy`, edge: 'fv-keep-edge' });
   b += `<path d="M${ex},${ey + 46} L${ex},${by - 6}" class="fv-dotted"/>`;
   b += banks.svg + keep.svg;
-  return frame('river', by + Math.max(banks.h, keep.h) + PAD, b, factors);
+  return frame('river', by + Math.max(banks.h, keep.h) + PAD, b, factors, responses);
 }
 
 // ---------- balance ----------
@@ -266,7 +301,7 @@ function balance(factors, responses) {
   // the problem at the top
   let b = '';
   const pw = 440;
-  const p = card(cx - pw / 2, PAD, pw, problem(z), null, { cls: 'fv-navy', textCls: 'fv-inv', withDot: false, max: 2 });
+  const p = card(cx - pw / 2, PAD, pw, problem(z), null, { cls: 'fv-navy', textCls: 'fv-inv', withDot: false });
   b += enter(p.svg, 0);
   const beamY = PAD + p.h + GAP * 3;
   const half = 330, panW = 300;
@@ -277,7 +312,7 @@ function balance(factors, responses) {
     const ex = cx + side * half, ey = beamY + Math.sin(deg(tilt)) * side * half;
     const py = ey + 70;
     const x = ex - panW / 2;
-    const col = column(x + CARD_PAD, py + CARD_PAD, panW - CARD_PAD * 2, list, responses, { title: hd, edge, max: 2 });
+    const col = column(x + CARD_PAD, py + CARD_PAD, panW - CARD_PAD * 2, list, responses, { title: hd, edge });
     const h = col.h + CARD_PAD * 2;
     bottom = Math.max(bottom, py + h);
     return enter(`<path d="M${r1(ex)},${r1(ey)} L${r1(x + 20)},${r1(py)} M${r1(ex)},${r1(ey)} L${r1(x + panW - 20)},${r1(py)}" class="fv-line fv-draw"/>${rect(x, py, panW, h, `fv-card fv-faintbg ${edge}`)}${col.svg}`, 1 + i);
@@ -290,8 +325,8 @@ function balance(factors, responses) {
   const foot = footer(z, fy, responses);
   b += foot.svg;
   const noteY = fy + foot.h + GAP;
-  b += textBlock(cx, noteY, 'The beam tilts towards whichever side has more marked as fitting.', { width: 600, anchor: 'middle', cls: 'fv-muted', size: 12, max: 1 }).svg;
-  return frame('balance', noteY + 17 + PAD, b, factors);
+  b += textBlock(cx, noteY, 'The beam tilts towards whichever side has more marked as fitting.', { width: 600, anchor: 'middle', cls: 'fv-muted', size: SMALL, max: 1 }).svg;
+  return frame('balance', noteY + 17 + PAD, b, factors, responses);
 }
 
 // ---------- radial ----------
@@ -305,7 +340,7 @@ function radial(factors, responses) {
   const right = [['presenting', -90, -18], ['predisposing', -18, 54], ['precipitating', 54, 126]];
   const start = { presenting: -90, predisposing: -18, precipitating: 54, perpetuating: 126, protective: 198 };
   // measure both columns first so the ring can sit in the middle of them
-  const measure = (zones) => zones.reduce((a, [id]) => a + 13 + GAP / 2 + 4 + (z[id].length ? z[id].reduce((s, f) => s + cardHeight(f, colW) + (f.source?.measureName ? 16 : 0) + GAP / 2, 0) - GAP / 2 : 17) + GAP, 0) - GAP;
+  const measure = (zones) => zones.reduce((a, [id]) => a + 13 + GAP / 2 + 4 + (z[id].length ? z[id].reduce((s, f) => s + cardHeight(f, colW) + (f.source?.measureName ? 18 : 0) + GAP / 2, 0) - GAP / 2 : 17) + GAP, 0) - GAP;
   const hL = measure(left), hR = measure(right);
   const colH = Math.max(hL, hR, R2 * 2 + 40);
   const cy = PAD + colH / 2;
@@ -313,8 +348,8 @@ function radial(factors, responses) {
   ZONES.forEach((zone) => {
     const a0 = deg(start[zone.id]), a1 = deg(start[zone.id] + 72), am = (a0 + a1) / 2;
     b += `<path d="M${r1(cx + Math.cos(a0) * R1)},${r1(cy + Math.sin(a0) * R1)} A${R1},${R1} 0 0,1 ${r1(cx + Math.cos(a1) * R1)},${r1(cy + Math.sin(a1) * R1)} L${r1(cx + Math.cos(a1) * R2)},${r1(cy + Math.sin(a1) * R2)} A${R2},${R2} 0 0,0 ${r1(cx + Math.cos(a0) * R2)},${r1(cy + Math.sin(a0) * R2)} Z" class="fv-sector${zone.id === 'protective' ? ' fv-sector-help' : ''}"/>`;
-    const lbl = wrap(zone.title, 104, 11, 2);
-    lbl.forEach((l, i) => { b += `<text x="${r1(cx + Math.cos(am) * 132)}" y="${r1(cy + Math.sin(am) * 132 + 4 + (i - (lbl.length - 1) / 2) * 14)}" font-size="11" class="fv-ink" text-anchor="middle" font-weight="500">${esc(l)}</text>`; });
+    const lbl = wrap(zone.title, 108, SMALL, 3);
+    lbl.forEach((l, i) => { b += `<text x="${r1(cx + Math.cos(am) * 132)}" y="${r1(cy + Math.sin(am) * 132 + 4 + (i - (lbl.length - 1) / 2) * 15)}" font-size="${SMALL}" class="fv-ink" text-anchor="middle" font-weight="500">${esc(l)}</text>`; });
   });
   b += `<circle cx="${cx}" cy="${r1(cy)}" r="40" class="fv-navy"/><text x="${cx}" y="${r1(cy + 5)}" font-size="14" class="fv-inv" text-anchor="middle" font-weight="500">You</text>`;
   const drawColumn = (zones, x, anchorX) => {
@@ -324,7 +359,7 @@ function radial(factors, responses) {
       y += 13 + GAP / 2 + 4;
       const list = z[id];
       if (!list.length) {
-        b += textBlock(x, y, 'Nothing here yet', { width: colW, cls: 'fv-muted', size: 12 }).svg;
+        b += textBlock(x, y, 'Nothing here yet', { width: colW, cls: 'fv-muted', size: SMALL }).svg;
         y += 17 + GAP;
         return;
       }
@@ -333,9 +368,9 @@ function radial(factors, responses) {
         const nx = cx + Math.cos(a) * R2, ny = cy + Math.sin(a) * R2;
         const h = cardHeight(f, colW);
         const c = card(x, y, colW, f, fitOf(responses, f));
-        const src = f.source?.measureName ? `<text x="${r1(x + CARD_PAD)}" y="${r1(y + h + 12)}" font-size="10.5" class="fv-muted">${esc(`From ${f.source.measureName}`)}</text>` : '';
-        b += enter(`<path d="M${r1(nx)},${r1(ny)} L${r1(anchorX)},${r1(y + h / 2)}" class="fv-dotted"/><circle cx="${r1(nx)}" cy="${r1(ny)}" r="8" class="fv-node fv-dot-${fitOf(responses, f) ?? 'none'}"/>${c.svg}${src}`);
-        y += h + (src ? 16 : 0) + GAP / 2;
+        const src = f.source?.measureName ? `<text x="${r1(x + CARD_PAD)}" y="${r1(y + h + 13)}" font-size="${SMALL}" class="fv-muted">${esc(`From ${f.source.measureName}`)}</text>` : '';
+        b += enter(`<path d="M${r1(nx)},${r1(ny)} L${r1(anchorX)},${r1(y + h / 2)}" class="fv-dotted"/><circle cx="${r1(nx)}" cy="${r1(ny)}" r="10" class="fv-node"/>${dot(nx, ny, fitOf(responses, f))}${c.svg}${src}`);
+        y += h + (src ? 18 : 0) + GAP / 2;
       });
       y += GAP - GAP / 2;
     });
@@ -343,7 +378,7 @@ function radial(factors, responses) {
   seq = 0;
   drawColumn(left, PAD, PAD + colW);
   drawColumn(right, W - PAD - colW, W - PAD - colW);
-  return frame('radial', PAD + colH + PAD, b, factors);
+  return frame('radial', PAD + colH + PAD, b, factors, responses);
 }
 
 // ---------- loop with exits ----------
@@ -353,7 +388,8 @@ function loop(factors, responses) {
   const exits = z.protective;
   const CW = 180;
   const n = items.length;
-  const hs = items.map((f) => cardHeight(f, CW, { withDot: !f.presenting }));
+  const ON_CURVE = { max: 3 }; // cards sit at fixed points round the circuit
+  const hs = items.map((f) => cardHeight(f, CW, { withDot: !f.presenting, ...ON_CURVE }));
   const maxH = Math.max(...hs);
   const r = Math.max(150, (n * (CW + 36)) / (2 * Math.PI));
   const cx = PAD + CW / 2 + r + 10;
@@ -365,13 +401,13 @@ function loop(factors, responses) {
   let ex = heading(colX, ey + 13, `Exits: ${titleOf('protective').toLowerCase()}`);
   ey += 13 + GAP / 2 + 4;
   if (!exits.length) {
-    ex += textBlock(colX, ey, 'Nothing here yet', { width: colW, cls: 'fv-muted', size: 12 }).svg;
+    ex += textBlock(colX, ey, 'Nothing here yet', { width: colW, cls: 'fv-muted', size: SMALL }).svg;
     ey += 17;
   }
   exits.forEach((f, i) => {
-    const h = cardHeight(f, colW, { max: 2 });
+    const h = cardHeight(f, colW);
     const a = deg(-60 + (exits.length > 1 ? (i * 120) / (exits.length - 1) : 0));
-    ex += enter(`<path d="M${r1(cx + Math.cos(a) * r)},${r1(cy + Math.sin(a) * r)} L${r1(colX - 8)},${r1(ey + h / 2)}" class="fv-exit fv-draw" marker-end="url(#fv-arrow)"/>${card(colX, ey, colW, f, fitOf(responses, f), { cls: 'fv-card fv-help-edge', max: 2 }).svg}`, n + i);
+    ex += enter(`<path d="M${r1(cx + Math.cos(a) * r)},${r1(cy + Math.sin(a) * r)} L${r1(colX - 8)},${r1(ey + h / 2)}" class="fv-exit fv-draw" marker-end="url(#fv-arrow)"/>${card(colX, ey, colW, f, fitOf(responses, f), { cls: 'fv-card fv-help-edge' }).svg}`, n + i);
     ey += h + GAP / 2;
   });
   b += ex + `<circle cx="${r1(cx)}" cy="${r1(cy)}" r="${r1(r)}" class="fv-circuit fv-draw"/>`;
@@ -379,18 +415,26 @@ function loop(factors, responses) {
     const a = deg(-90 + (i * 360) / n), am = deg(-90 + ((i + 0.5) * 360) / n);
     const x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r;
     if (n > 1) b += `<path d="M${r1(cx + Math.cos(am - 0.05) * r)},${r1(cy + Math.sin(am - 0.05) * r)} L${r1(cx + Math.cos(am + 0.05) * r)},${r1(cy + Math.sin(am + 0.05) * r)}" class="fv-circuit" marker-end="url(#fv-arrow)"/>`;
-    const c = card(x - CW / 2, y - hs[i] / 2, CW, f, fitOf(responses, f), f.presenting ? { cls: 'fv-navy', textCls: 'fv-inv', withDot: false } : { cls: 'fv-card fv-keep-edge' });
+    const c = card(x - CW / 2, y - hs[i] / 2, CW, f, fitOf(responses, f), f.presenting ? { cls: 'fv-navy', textCls: 'fv-inv', withDot: false, ...ON_CURVE } : { cls: 'fv-card fv-keep-edge', ...ON_CURVE });
     b += enter(c.svg, i);
   });
   const bottom = Math.max(cy + r + maxH / 2, ey) + GAP * 2;
   const foot = footer(z, bottom, responses);
   b += foot.svg;
-  return frame('loop', bottom + foot.h + PAD, b, factors);
+  return frame('loop', bottom + foot.h + PAD, b, factors, responses);
 }
 
 const RENDER = { grid, flower, river, layers, balance, radial, loop };
 
+const HTML_VIEWS = ['grid', 'layers'];
+
+// The drawing, its narrow screen stand in when it is an SVG, and the key.
 export function renderFormulationView(view, factors, responses = {}) {
   seq = 0;
-  return RENDER[viewOf(view)](factors ?? [], responses ?? {});
+  const v = viewOf(view);
+  const list = factors ?? [];
+  const answers = responses ?? {};
+  const drawing = RENDER[v](list, answers);
+  if (HTML_VIEWS.includes(v)) return `<div class="fv-wrap">${drawing}${key()}</div>`;
+  return `<div class="fv-wrap"><div class="fv-wide">${drawing}</div><div class="fv-narrow">${grid(list, answers)}<p class="t-caption">Shown as a map on a small screen. The full drawing appears on a wider screen.</p></div>${key()}</div>`;
 }

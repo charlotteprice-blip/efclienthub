@@ -580,7 +580,7 @@ export function client(s, uid, tab = 'overview') {
         <select class="select select-small" id="f-view" data-formulation-view data-uid="${esc(uid)}">${VIEW_OPTIONS.map((o) => `<option value="${o.id}"${o.id === fView ? ' selected' : ''}>${esc(o.label)}</option>`).join('')}</select>
         <p class="t-caption">${esc(VIEW_OPTIONS.find((o) => o.id === fView)?.blurb ?? '')}</p>
       </div>
-      <p class="t-caption">Redrawn as you edit. Dots show the client's responses to the released version: green fits, amber partly, red does not fit.</p>
+      <p class="t-caption">Redrawn as you edit. The mark on each card shows the client's response to the released version; the key is under the picture.</p>
       ${renderFormulationView(fView, fd, fResponses)}
     </section>
 
